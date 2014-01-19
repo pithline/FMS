@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Eqstra.VehicleInspection.Views.CustomerDetailUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.VehicleInspection.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Details" Margin="0 0 0 5" Style="{StaticResource SubheaderTextBlockStyle}"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Source="ms-appx:///Assets/StoreLogo.png" Grid.RowSpan="2" Stretch="None"/>
+                <StackPanel Grid.Column="1" Grid.Row="0">
+                    <TextBlock  >Case Number</TextBlock>
+                    <TextBlock Text="E89873"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <TextBlock>Case Type</TextBlock>
+                    <TextBlock Text="Case Type"/>
+                </StackPanel>
+
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Customer Name"/>
+                <TextBlock Text="Peter Johnson"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="Contact Number"/>
+                <TextBlock Text="+91987268378"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3">
+                <TextBlock Text="Address"/>
+                <TextBlock Text="277, Alberton, Gauteng"/>
+            </StackPanel>
+
+            <DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False"/>
+
+            <StackPanel Grid.Row="5">
+                <TextBlock Text="Status"/>
+                <TextBlock Text="Awaiting Inspection"/>
+            </StackPanel>
+            <StackPanel Grid.Row="6">
+                <TextBlock Text="Allocated To"/>
+                <TextBlock Text="Role center"/>
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
