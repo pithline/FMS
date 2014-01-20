@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection.UILogic", "Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj", "{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection.BusinessLogic", "Eqstra.VehicleInspection.BusinessLogic\Eqstra.VehicleInspection.BusinessLogic.csproj", "{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,22 @@ Global
 		{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}.Release|x64.Build.0 = Release|x64
 		{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}.Release|x86.ActiveCfg = Release|x86
 		{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}.Release|x86.Build.0 = Release|x86
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|ARM.Build.0 = Debug|ARM
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|x64.ActiveCfg = Debug|x64
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|x64.Build.0 = Debug|x64
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|x86.ActiveCfg = Debug|x86
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Debug|x86.Build.0 = Debug|x86
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|ARM.ActiveCfg = Release|ARM
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|ARM.Build.0 = Release|ARM
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|x64.ActiveCfg = Release|x64
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|x64.Build.0 = Release|x64
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|x86.ActiveCfg = Release|x86
+		{E4247D83-FFA8-4B56-A03D-6DF6EDBCE095}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
