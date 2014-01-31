@@ -137,8 +137,14 @@
     </AppxManifest>
     <None Include="Eqstra.VehicleInspection_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <Content Include="SqliteDB\eqstramobility.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Eqstra_logo.png" />
+    <Content Include="Assets\Left_Image.png" />
+    <Content Include="Assets\loginIcon.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -185,6 +191,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
+      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
+      <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>
       <Name>Eqstra.VehicleInspection.UILogic</Name>
@@ -205,9 +215,7 @@
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SqliteDB\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

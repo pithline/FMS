@@ -5,6 +5,7 @@
     xmlns:local="using:Eqstra.VehicleInspection.Views"
     xmlns:common="using:Eqstra.VehicleInspection.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Name="pageRoot"
@@ -74,5 +75,17 @@
                 
             </local:ProfileUserControl>
 		</Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <grid:SfDataGrid ItemsSource="{Binding PoolofTasks}" >
+                
+            </grid:SfDataGrid>
+        </Grid>
 	</Grid>
 </prism:VisualStateAwarePage>
