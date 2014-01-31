@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:local="using:Eqstra.VehicleInspection"
-    RequestedTheme="Dark"
+    RequestedTheme="Light"
     
     >
     

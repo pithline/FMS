@@ -30,12 +30,12 @@
             </TransitionCollection>
         </Grid.Transitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
-        <Grid>
+        <!--<Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
@@ -48,16 +48,42 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-        </Grid>
-        <Grid Grid.Row="1" Width="500" Height="Auto">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBox Header="UserId :" PlaceholderText="Enter AX User Id"/>
-            <PasswordBox Header="Password :" Grid.Row="1" PlaceholderText="Enter Password" />
-            <Button Command="{Binding LoginCommand}" Grid.Row="2" Content="Login" HorizontalAlignment="Center" Margin="15" Width="200"/>
-        </Grid>
+        </Grid>-->
+        <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Auto" x:Name="mainView">
+            <Grid Style="{StaticResource LeftImageGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="ms-appx:///Assets/Eqstra_logo.png" Width="350" Height="95" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 40 40 0"/>
+                <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Username" Grid.Row="0" Grid.Column="0" Style="{StaticResource LoginTextBlockStyle}"/>
+                    <TextBlock Text="Password" Grid.Row="0" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}"/>
+                    <TextBox PlaceholderText="Enter AX User Id" Grid.Row="1" Grid.Column="0" Margin="0 0 20 0" Width="180"/>
+                    <PasswordBox PlaceholderText="Enter Password"  Grid.Row="1" Grid.Column="1" Width="180"/>
+                    <Button Command="{Binding LoginCommand}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="ms-appx:///Assets/loginIcon.png" Width="26" Height="26"/>
+                                <TextBlock Text="Login" Margin="10 5"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </prism:VisualStateAwarePage>
