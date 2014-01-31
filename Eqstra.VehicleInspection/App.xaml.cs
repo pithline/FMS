@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Practices.Unity;
 
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
+using Eqstra.BusinessLogic.Helpers;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -48,9 +50,17 @@ namespace Eqstra.VehicleInspection
             return Task.FromResult<object>(null);
         }
 
-        protected override void OnInitialize(IActivatedEventArgs args)
+      async  protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
+            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+            if (db ==null)
+            {
+                var packDb  =await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+               // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
+            }
+            SqliteHelper.Instance.ConnectionDatabaseAsync();
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(SessionStateService);
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
