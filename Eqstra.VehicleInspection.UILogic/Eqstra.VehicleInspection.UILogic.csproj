@@ -119,6 +119,12 @@
     <Folder Include="ViewModels\Commercial\" />
     <Folder Include="ViewModels\Passenger\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
+      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
+      <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
