@@ -1,7 +1,7 @@
-﻿<Page
+﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
     x:Class="Eqstra.VehicleInspection.Views.InspectionDetailsPage"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Eqstra.VehicleInspection.Views"
@@ -110,4 +110,4 @@
             <local:CustomerDetailUserControl Grid.Column="1" Margin="10"/>
         </Grid>
     </Grid>
-</Page>
+</prism:VisualStateAwarePage>
