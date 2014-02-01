@@ -60,7 +60,7 @@ namespace Eqstra.VehicleInspection
                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
-            SqliteHelper.Instance.ConnectionDatabaseAsync();
+            SqliteHelper.Storage.ConnectionDatabaseAsync();
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(SessionStateService);
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>

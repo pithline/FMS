@@ -19,7 +19,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
            GetDirectionsCommand = new DelegateCommand(async () => 
            {
-               await Launcher.LaunchUriAsync(new Uri("bingmap:"));
+               await Launcher.LaunchUriAsync(new Uri("bingmaps:"));
            });
        }
 

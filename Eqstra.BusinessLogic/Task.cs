@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Enums;
 using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   public class Task : ValidatableBindableBase
+    public class Task : ValidatableBindableBase
     {
         private string caseNumber;
 
@@ -25,6 +26,7 @@ namespace Eqstra.BusinessLogic
             get { return cellNumber; }
             set { SetProperty(ref cellNumber, value); }
         }
+
 
         private DateTime statusDueDate;
 
@@ -50,12 +52,12 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref allocatedTo, value); }
         }
 
-        private DateTime confirmedDateTime;
+        private DateTime confirmedDate;
 
-        public DateTime ConfirmedDateTime
+        public DateTime ConfirmedDate
         {
-            get { return confirmedDateTime; }
-            set { SetProperty(ref confirmedDateTime, value); }
+            get { return confirmedDate; }
+            set { SetProperty(ref confirmedDate, value); }
         }
 
         private string customerId;
@@ -74,9 +76,30 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref registrationNumber, value); }
         }
 
+        private string customerName;
+        [Ignore]
+        public string CustomerName
+        {
+            get { return customerName; }
+            set { SetProperty(ref customerName, value); }
+        }
 
-      
-      
+        private string address;
+        [Ignore]
+        public string Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
+
+        private DateTime confirmedTime;
+
+        public DateTime ConfirmedTime
+        {
+            get { return confirmedTime; }
+            set { SetProperty(ref confirmedTime, value); }
+        }
+
 
     }
 }

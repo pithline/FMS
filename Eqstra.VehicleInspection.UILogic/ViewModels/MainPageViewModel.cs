@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,12 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            var list = await SqliteHelper.Instance.LoadTableAsync<Eqstra.BusinessLogic.Task>();
+            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
+                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
+                item.CustomerName = cust.Name;
+                item.Address = cust.Address;
                 this.poolofTasks.Add(item);
             }
 

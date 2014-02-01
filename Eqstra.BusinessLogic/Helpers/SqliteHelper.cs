@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -18,7 +19,7 @@ namespace Eqstra.BusinessLogic.Helpers
 
         private static readonly SqliteHelper instance = new SqliteHelper();
 
-        public static SqliteHelper Instance
+        public static SqliteHelper Storage
         {
             get { return instance; }
 
@@ -52,6 +53,12 @@ namespace Eqstra.BusinessLogic.Helpers
             
         {
             return this.Connection.Table<T>().ToListAsync();
+        }
+
+        public Task<T> GetSingleRecordAsync<T>(Expression<Func<T,bool>> criteria)
+            where T:ValidatableBindableBase,new()
+        {
+           return this.connection.Table<T>().Where(criteria).FirstOrDefaultAsync();
         }
 
         public async void InsertAllAsync<T>(IEnumerable<T> items) where T : new()

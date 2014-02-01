@@ -41,7 +41,7 @@ namespace Eqstra.VehicleInspection.Views
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,new DispatchedHandler(()=>
             {
-                var location = new Location(args.Position.Coordinate.Latitude,args.Position.Coordinate.Longitude);
+                var location = new Location(args.Position.Coordinate.Point.Position.Latitude,args.Position.Coordinate.Point.Position.Longitude);
                 
                 MapLayer.SetPosition(pushpin,location);
                 pushpin.Visibility = Windows.UI.Xaml.Visibility.Visible;
