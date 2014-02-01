@@ -76,7 +76,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="10">
                 <TextBlock Text="Inspections" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0 10"/>
-                <grid:SfDataGrid  ItemsSource="{Binding InspectionList}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Multiple" AllowEditing="True">
+                <grid:SfDataGrid  ItemsSource="{Binding InspectionList}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Multiple" >
                     <grid:SfDataGrid.Columns>
                         <grid:GridTextColumn MappingName="CaseNumber" HeaderText="Case Number" AllowEditing="False"/>
                         <grid:GridTextColumn MappingName="CaseType" HeaderText="Case Type" AllowEditing="False"/>

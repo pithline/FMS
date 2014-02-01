@@ -11,7 +11,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Name="pageRoot"
     x:Class="Eqstra.VehicleInspection.Views.DrivingDirectionPage"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    
     mc:Ignorable="d">
     <prism:VisualStateAwarePage.Resources>
         <x:String x:Key="BingMapsApiKey">AkjXEdr_kqaXOMmwBdob0dSykNVdliqwxEufZJrzotABsNfEkkDFuiqSTbzPxZgs</x:String>
