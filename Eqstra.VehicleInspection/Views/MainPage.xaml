@@ -44,7 +44,7 @@
 			</TransitionCollection>
 		</Grid.ChildrenTransitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="140"/>
+			<RowDefinition Height="120"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
@@ -64,7 +64,7 @@
 			<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
             
-            <local:ProfileUserControl Grid.Column="2"/>
+            <local:ProfileUserControl Grid.Column="2" VerticalAlignment="Bottom"/>
 
 
         </Grid>

@@ -106,6 +106,7 @@
     <Compile Include="ViewModels\InspectionDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\VehicleDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Commercial\" />
-    <Folder Include="ViewModels\Passenger\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">

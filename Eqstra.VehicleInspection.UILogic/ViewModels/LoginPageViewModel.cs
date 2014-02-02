@@ -15,7 +15,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public LoginPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            LoginCommand = new DelegateCommand(() => { navigationService.Navigate("Main",null); });
+            LoginCommand = new DelegateCommand(() => 
+            { navigationService.Navigate("Main",null); });
 
         }
         public ICommand LoginCommand { get;private set; }

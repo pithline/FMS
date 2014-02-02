@@ -26,6 +26,11 @@
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Start Inspection">
+            	<Interactivity:Interaction.Behaviors>
+            		<Core:EventTriggerBehavior EventName="Click">
+            			<Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.PsgrVhcInspecPage"/>
+            		</Core:EventTriggerBehavior>
+            	</Interactivity:Interaction.Behaviors>
                 <AppBarButton.Icon>
                     <SymbolIcon/>
                 </AppBarButton.Icon>
@@ -41,7 +46,7 @@
             </TransitionCollection>
         </Grid.Transitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -50,6 +55,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -59,6 +65,7 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="Eqstra - Driving Direction" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <local:ProfileUserControl Grid.Column="2" VerticalAlignment="Bottom"/>
         </Grid>
         
         <Grid Grid.Row="1">

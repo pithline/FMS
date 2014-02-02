@@ -1,7 +1,6 @@
 ﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
-    x:Class="Eqstra.VehicleInspection.Views.InspectionDetailsPage"
-    
+    x:Class="Eqstra.VehicleInspection.Views.InspectionDetailsPage"    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Eqstra.VehicleInspection.Views"
@@ -47,7 +46,7 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -66,7 +65,7 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-            <local:ProfileUserControl Grid.Column="2"/>
+            <local:ProfileUserControl Grid.Column="2" VerticalAlignment="Bottom"/>
         </Grid>
 
         <Grid Grid.Row="1">
