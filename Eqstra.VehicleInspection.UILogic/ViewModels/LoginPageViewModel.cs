@@ -15,10 +15,33 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public LoginPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            LoginCommand = new DelegateCommand(() => 
-            { navigationService.Navigate("Main",null); });
+            LoginCommand = DelegateCommand.FromAsyncHandler(
+                () => { navigationService.Navigate("Main", null); return Task.FromResult<object>(null); },
+                () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
-        public ICommand LoginCommand { get;private set; }
+        public DelegateCommand LoginCommand { get;private set; }
+
+        private string username;
+        [RestorableState]
+        public string UserName
+        {
+            get { return username; }
+            set {
+                if(SetProperty(ref username, value))
+                    LoginCommand.RaiseCanExecuteChanged(); }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set { 
+                if(SetProperty(ref password, value))
+                    LoginCommand.RaiseCanExecuteChanged(); }
+        }
+
+
     }
 }
