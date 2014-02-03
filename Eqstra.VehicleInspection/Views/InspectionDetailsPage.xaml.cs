@@ -22,8 +22,10 @@ namespace Eqstra.VehicleInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class LoginPage : VisualStateAwarePage
+    public sealed partial class InspectionDetailsPage : VisualStateAwarePage
     {
+
+        private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         /// <summary>
@@ -34,15 +36,22 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.defaultViewModel; }
         }
 
-      
+        /// <summary>
+        /// NavigationHelper is used on each page to aid in navigation and 
+        /// process lifetime management
+        /// </summary>
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
 
 
-        public LoginPage()
+        public InspectionDetailsPage()
         {
             this.InitializeComponent();
-            //this.navigationHelper = new NavigationHelper(this);
-            //this.navigationHelper.LoadState += navigationHelper_LoadState;
-            //this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
         /// <summary>
@@ -83,15 +92,15 @@ namespace Eqstra.VehicleInspection.Views
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        //protected override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    navigationHelper.OnNavigatedTo(e);
-        //}
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedTo(e);
+        }
 
-        //protected override void OnNavigatedFrom(NavigationEventArgs e)
-        //{
-        //    navigationHelper.OnNavigatedFrom(e);
-        //}
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
+        }
 
         #endregion
     }

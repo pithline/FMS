@@ -7,17 +7,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class MainPageViewModel : ViewModel
+    public class InspectionDetailsPageViewModel : ViewModel
     {
+        private ObservableCollection<Eqstra.BusinessLogic.Task> inspectionList;
 
-        public MainPageViewModel()
+        public ObservableCollection<Eqstra.BusinessLogic.Task> InspectionList
         {
-            this.poolofTasks = new ObservableCollection<BusinessLogic.Task>();
+            get { return inspectionList; }
+            set { SetProperty(ref inspectionList, value); }
         }
 
+        public InspectionDetailsPageViewModel()
+        {
+            this.inspectionList = new ObservableCollection<BusinessLogic.Task>();
+        }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
@@ -27,19 +34,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.Name;
                 item.Address = cust.Address;
-                this.poolofTasks.Add(item);
+                this.inspectionList.Add(item);
             }
-
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
-
-        public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
+        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
         {
-            get { return poolofTasks; }
-            set { SetProperty(ref poolofTasks, value); }
+            base.OnNavigatedFrom(viewModelState, suspending);
         }
-
-
     }
 }

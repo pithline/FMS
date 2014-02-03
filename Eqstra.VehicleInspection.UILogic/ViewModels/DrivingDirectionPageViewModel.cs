@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Bing.Maps;
+using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        {
            _navigationService = navigationService;
 
-           GetDirectionsCommand = new DelegateCommand(async () => 
+           GetDirectionsCommand =DelegateCommand<Location>.FromAsyncHandler(async (location) =>
            {
-               await Launcher.LaunchUriAsync(new Uri("bingmap:"));
+               var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
+               stringBuilder.Append(location.Latitude);
+               stringBuilder.Append("_");
+               stringBuilder.Append(location.Longitude);
+               stringBuilder.Append("~adr.Chanchalguda,Hyderabad");
+               await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
            });
        }
 

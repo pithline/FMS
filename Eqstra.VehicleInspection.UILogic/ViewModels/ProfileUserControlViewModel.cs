@@ -9,13 +9,18 @@ using System.Windows.Input;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class ProfileUserControlViewModel :ViewModel
+    public class ProfileUserControlViewModel : ViewModel
     {
         INavigationService _navigationService;
         public ProfileUserControlViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            LogoutCommand = new DelegateCommand(() => { _navigationService.Navigate("Login",null); });
+
+            LogoutCommand = new DelegateCommand(() =>
+            {
+                _navigationService.Navigate("Login", null);
+                _navigationService.ClearHistory();
+            });
         }
 
         public ICommand LogoutCommand { get; private set; }

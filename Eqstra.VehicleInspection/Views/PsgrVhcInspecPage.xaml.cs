@@ -22,8 +22,10 @@ namespace Eqstra.VehicleInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class LoginPage : VisualStateAwarePage
+    public sealed partial class PsgrVhcInspecPage : VisualStateAwarePage
     {
+
+        private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         /// <summary>
@@ -34,15 +36,22 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.defaultViewModel; }
         }
 
-      
+        /// <summary>
+        /// NavigationHelper is used on each page to aid in navigation and 
+        /// process lifetime management
+        /// </summary>
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
 
 
-        public LoginPage()
+        public PsgrVhcInspecPage()
         {
             this.InitializeComponent();
-            //this.navigationHelper = new NavigationHelper(this);
-            //this.navigationHelper.LoadState += navigationHelper_LoadState;
-            //this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
         /// <summary>

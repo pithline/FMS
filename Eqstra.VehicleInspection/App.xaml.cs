@@ -21,6 +21,8 @@ using Microsoft.Practices.Unity;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.Views;
+using Eqstra.VehicleInspection.ViewModels;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -60,14 +62,20 @@ namespace Eqstra.VehicleInspection
                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
-            SqliteHelper.Instance.ConnectionDatabaseAsync();
+            SqliteHelper.Storage.ConnectionDatabaseAsync();
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(SessionStateService);
+            ViewModelLocator.Register(typeof(PsgrVhcInspecPage).ToString(), () => new PsgrVhcInspecPageViewModel());
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
                 return Type.GetType(viewModelTypeName);
-            });           
+            });
+            //ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+            //    {
+            //        var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.Passenger.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
+            //        return Type.GetType(viewModelTypeName);
+            //    });
         }
 
         protected override object Resolve(Type type)
