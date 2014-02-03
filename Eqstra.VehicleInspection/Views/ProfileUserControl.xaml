@@ -9,12 +9,15 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="140">
+    d:DesignWidth="250">
 
     <Grid Tapped="Grid_Tapped">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="Michael Vander" VerticalAlignment="Center" Margin="5 0"/>
-            <Image Source="ms-appx:///Assets/StoreLogo.png" Stretch="None"/>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                <TextBlock Text="Michael Vander" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserNameStyle}"/>
+                <TextBlock Text="The South African Brewaries" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserCompanyStyle}"/>
+            </StackPanel>
+            <Image Source="ms-appx:///Assets/User_profile.png" Stretch="None" Width="52" Height="56"/>
         </StackPanel>
         <FlyoutBase.AttachedFlyout>
             <MenuFlyout Placement="Bottom">
