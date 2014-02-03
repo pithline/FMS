@@ -105,7 +105,9 @@
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Enums\TaskStatusEnum.cs" />
     <Compile Include="Helpers\SqliteHelper.cs" />
+    <Compile Include="ImageCapture.cs" />
     <Compile Include="InspectionHistory.cs" />
+    <Compile Include="Passenger\TrimInterior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
@@ -118,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commercial\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

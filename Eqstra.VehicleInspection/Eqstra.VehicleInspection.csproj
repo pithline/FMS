@@ -116,11 +116,17 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PsgrVhcInspecPageViewModel.cs" />
+    <Compile Include="Views\BodyworkUserControl.xaml.cs">
+      <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerDetailUserControl.xaml.cs">
       <DependentUpon>CustomerDetailUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DrivingDirectionPage.xaml.cs">
       <DependentUpon>DrivingDirectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GlassUserControl.xaml.cs">
+      <DependentUpon>GlassUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InspectionDetailsPage.xaml.cs">
       <DependentUpon>InspectionDetailsPage.xaml</DependentUpon>
@@ -174,11 +180,19 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Views\BodyworkUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerDetailUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DrivingDirectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GlassUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
