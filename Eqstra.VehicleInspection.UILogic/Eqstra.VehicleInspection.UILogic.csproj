@@ -101,11 +101,15 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DrivingDirectionPageViewModel.cs" />
     <Compile Include="ViewModels\InspectionDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\BodyworkUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\GlassUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\TrimIntUserControlViewModel.cs" />
     <Compile Include="ViewModels\Passenger\VehicleDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
   </ItemGroup>

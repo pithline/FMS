@@ -26,9 +26,11 @@ namespace Eqstra.VehicleInspection.ViewModels
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
             };
-            
-           this.InspectionUserControls.Add(new VehicleDetailsUserControl());
-           this.InspectionUserControls.Add(new TrimIntUserControl());
+
+            this.InspectionUserControls.Add(new VehicleDetailsUserControl());
+            this.InspectionUserControls.Add(new TrimIntUserControl());
+            this.InspectionUserControls.Add(new BodyworkUserControl());
+            this.InspectionUserControls.Add(new GlassUserControl());
         }
 
         private ObservableCollection<UserControl> inpectionUserControls;
