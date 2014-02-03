@@ -156,6 +156,14 @@
     </AppxManifest>
     <None Include="Eqstra.VehicleInspection_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <Content Include="Assets\bing_blue.png" />
+    <Content Include="Assets\calendar_blue.png" />
+    <Content Include="Assets\Eqstra_headerlogo.png" />
+    <Content Include="Assets\grayBG.png" />
+    <Content Include="Assets\message_blue.png" />
+    <Content Include="Assets\skype_blue.png" />
+    <Content Include="Assets\skype_gray.png" />
+    <Content Include="Assets\user_profile.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
