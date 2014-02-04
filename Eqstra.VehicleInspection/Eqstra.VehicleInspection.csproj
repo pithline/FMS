@@ -116,6 +116,9 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PsgrVhcInspecPageViewModel.cs" />
+    <Compile Include="Views\AccessoriesUserControl.xaml.cs">
+      <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BodyworkUserControl.xaml.cs">
       <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\AccessoriesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BodyworkUserControl.xaml">
       <SubType>Designer</SubType>
