@@ -14,6 +14,7 @@
     <Style TargetType="TextBlock" x:Key="FontFamilyStyle">
         <Setter Property="FontFamily" Value="Century Gothic"/>
         <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#FF666666"/>
     </Style>
     <Style TargetType="TextBox">
         <Setter Property="BorderBrush" Value="#FF949494"/>
@@ -93,5 +94,11 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="0 0 0 0"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+    <Style x:Key="TextHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    <Style x:Key="TextContentStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
+        <Setter Property="FontSize" Value="20"/>
     </Style>
 </ResourceDictionary>

@@ -5,74 +5,83 @@
     xmlns:local="using:Eqstra.VehicleInspection.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Details" Margin="0 0 0 5" Style="{StaticResource SubheaderTextBlockStyle}"/>
-        <Grid Grid.Row="1">
+    mc:Ignorable="d">
+    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Margin="20" VerticalAlignment="Top" Width="350">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Image Source="ms-appx:///Assets/StoreLogo.png" Grid.RowSpan="2" Stretch="None"/>
-                <StackPanel Grid.Column="1" Grid.Row="0">
-                    <TextBlock  >Case Number</TextBlock>
-                    <TextBlock Text="E89873"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Source="ms-appx:///Assets/details_image.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
+                        <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="E89873" Style="{StaticResource TextContentStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
+                        <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="Case Type" Style="{StaticResource TextContentStyle}"/>
+                    </StackPanel>
+
+                </Grid>
+
+                <StackPanel Grid.Row="1" Margin="0 10 0 0">
+                    <TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="Peter Johnson" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <TextBlock>Case Type</TextBlock>
-                    <TextBlock Text="Case Type"/>
+                <StackPanel Grid.Row="2" Margin="0 15 0 0">
+                    <TextBlock Text="Contact Number" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="+91987268378" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
+                <StackPanel Grid.Row="3" Margin="0 15 0 0">
+                    <TextBlock Text="Address" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="277, Alberton, Gauteng" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Margin="0 15 0 0">
+                    <TextBlock Text="Status Due Date" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="02-03-2014" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+
+                <!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>-->
+
+                <StackPanel Grid.Row="5" Margin="0 15 0 0">
+                    <TextBlock Text="Status" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="Awaiting Inspection" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="0 15 0 0">
+                    <TextBlock Text="Allocated To" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="Role center" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="0 15 0 0">
+                    <Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
+                    <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                    <Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                    <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                </StackPanel>
+
 
             </Grid>
-
-            <StackPanel Grid.Row="1">
-                <TextBlock Text="Customer Name"/>
-                <TextBlock Text="Peter Johnson"/>
-            </StackPanel>
-            <StackPanel Grid.Row="2">
-                <TextBlock Text="Contact Number"/>
-                <TextBlock Text="+91987268378"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3">
-                <TextBlock Text="Address"/>
-                <TextBlock Text="277, Alberton, Gauteng"/>
-            </StackPanel>
-
-            <DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False"/>
-
-            <StackPanel Grid.Row="5">
-                <TextBlock Text="Status"/>
-                <TextBlock Text="Awaiting Inspection"/>
-            </StackPanel>
-            <StackPanel Grid.Row="6">
-                <TextBlock Text="Allocated To"/>
-                <TextBlock Text="Role center"/>
-            </StackPanel>
-
-
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>
