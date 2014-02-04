@@ -1,0 +1,2 @@
+MainPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\bin\ARM\Release\Eqstra.VehicleInspection_1.0.0.0_Bundle\Eqstra.VehicleInspection_1.0.0.0_ARM.appx
+SymbolPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\AppPackages\Eqstra.VehicleInspection_1.0.0.0_Test\Eqstra.VehicleInspection_1.0.0.0_ARM.appxsym

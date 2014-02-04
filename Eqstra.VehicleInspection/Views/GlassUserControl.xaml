@@ -1,0 +1,164 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.VehicleInspection.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    x:Class="Eqstra.VehicleInspection.Views.GlassUserControl"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+
+
+    <UserControl.Resources>
+
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    </UserControl.Resources>
+
+
+    <StackPanel>
+        <TextBlock Text="Glass" Style="{StaticResource SubheaderTextBlockStyle}"/>
+        <Grid Margin="0 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <ToggleSwitch x:Name="Windscreen" Header="Windscreen" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVWindscreen}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Windscreen}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVWindscreen" ItemsSource="{Binding Model.InternalTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Windscreen}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <ToggleSwitch x:Name="RearGlass" Header="Rear Glass" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRearGlass}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearGlass}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVRearGlass" ItemsSource="{Binding Model.RFDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorTrim}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <ToggleSwitch x:Name="SideGlassToggle" Header="Side Glass" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVSideGlass}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SideGlassToggle}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVSideGlass" ItemsSource="{Binding Model.LFDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SideGlassToggle}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <ToggleSwitch x:Name="HeadLightsToggle" Header="Head Lights" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVHeadLights}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HeadLightsToggle}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVHeadLights" ItemsSource="{Binding Model.RRDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HeadLightsToggle}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                <ToggleSwitch x:Name="TailLightsToggle" Header="Tail Lights" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVTailLights}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TailLightsToggle}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVTailLights" ItemsSource="{Binding Model.LRDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TailLightsToggle}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                <ToggleSwitch x:Name="InductorLensesToggle" Header="Inductor Lenses" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVInductorLenses}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InductorLensesToggle}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVInductorLenses" ItemsSource="{Binding Model.DriverSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InductorLensesToggle}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                <ToggleSwitch x:Name="ExtRearViewMirrorToggle" Header="Ex. Rear View Mirror" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVPassengerSeat}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExtRearViewMirrorToggle}" Margin="5 0"/>
+                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                <GridView x:Name="GVExtRearViewMirrorToggle" ItemsSource="{Binding Model.PassengerSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExtRearViewMirrorToggle}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>
