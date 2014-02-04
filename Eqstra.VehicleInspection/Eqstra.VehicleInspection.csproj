@@ -134,11 +134,17 @@
     <Compile Include="Views\InspectionDetailsPage.xaml.cs">
       <DependentUpon>InspectionDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InspectionProofUserControl.xaml.cs">
+      <DependentUpon>InspectionProofUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MechanicalCondUserControl.xaml.cs">
+      <DependentUpon>MechanicalCondUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileUserControl.xaml.cs">
       <DependentUpon>ProfileUserControl.xaml</DependentUpon>
@@ -148,6 +154,9 @@
     </Compile>
     <Compile Include="Views\TrimIntUserControl.xaml.cs">
       <DependentUpon>TrimIntUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TyreConditionUserControl.xaml.cs">
+      <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehicleDetailsUserControl.xaml.cs">
       <DependentUpon>VehicleDetailsUserControl.xaml</DependentUpon>
@@ -216,11 +225,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InspectionProofUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MechanicalCondUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,12 +253,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TyreConditionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VehicleDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Mazik.WinRT.Components">
+      <HintPath>..\packages\Mzk.WinRT.Components.1.0.0.3\lib\netcore45\Mazik.WinRT.Components.winmd</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.StoreApps">
       <HintPath>..\packages\Prism.StoreApps.1.1.0\lib\windows8\Microsoft.Practices.Prism.StoreApps.dll</HintPath>
     </Reference>

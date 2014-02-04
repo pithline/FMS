@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-   public class GlassUserControlViewModel : BaseViewModel
+   public class MechanicalCondUserControlViewModel : BaseViewModel
     {
     }
 }

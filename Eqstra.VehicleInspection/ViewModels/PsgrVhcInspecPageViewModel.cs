@@ -32,6 +32,9 @@ namespace Eqstra.VehicleInspection.ViewModels
             this.InspectionUserControls.Add(new BodyworkUserControl());
             this.InspectionUserControls.Add(new GlassUserControl());
             this.InspectionUserControls.Add(new AccessoriesUserControl());
+            this.InspectionUserControls.Add(new TyreConditionUserControl());
+            this.InspectionUserControls.Add(new MechanicalCondUserControl());
+            this.InspectionUserControls.Add(new InspectionProofUserControl());
         }
 
         private ObservableCollection<UserControl> inpectionUserControls;

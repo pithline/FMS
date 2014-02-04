@@ -107,9 +107,13 @@
     <Compile Include="ViewModels\InspectionDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\AccessoriesUserControlViewModel.cs" />
     <Compile Include="ViewModels\Passenger\BodyworkUserControlViewModel.cs" />
     <Compile Include="ViewModels\Passenger\GlassUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\InspectionProofUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\MechanicalCondUserControlViewModel.cs" />
     <Compile Include="ViewModels\Passenger\TrimIntUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Passenger\TyreConditionUserControlViewModel.cs" />
     <Compile Include="ViewModels\Passenger\VehicleDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
   </ItemGroup>
