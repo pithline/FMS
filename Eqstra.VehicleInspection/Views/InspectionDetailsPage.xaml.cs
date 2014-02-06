@@ -1,4 +1,5 @@
 ﻿using Eqstra.VehicleInspection.Common;
+using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -103,5 +105,19 @@ namespace Eqstra.VehicleInspection.Views
         }
 
         #endregion
+
+        async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
+        {
+            try
+            {
+                var dc = (InspectionDetailsPageViewModel)this.DataContext;
+                await dc.GetCustomerDetailsAsync();
+            }
+            catch (Exception ex)
+            {
+                new MessageDialog(ex.Message);
+            }
+
+        }
     }
 }

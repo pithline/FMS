@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +50,8 @@ namespace Eqstra.BusinessLogic
             get { return emailId; }
             set { SetProperty(ref emailId, value); }
         }
+
+   
 
     }
 }

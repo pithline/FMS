@@ -1,12 +1,15 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
@@ -15,7 +18,29 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public MainPageViewModel()
         {
-            this.poolofTasks = new ObservableCollection<BusinessLogic.Task>();
+            this.poolofTasks = new ObservableCollection<BusinessLogic.Task>(); this.appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from engine",
+                    Location = "Cape Town",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+
+                },
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from differential",
+                    Location = "Cape Town",
+                     ReadOnly = true,
+                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+                },                    
+            };
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -33,11 +58,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
-
         public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
         {
             get { return poolofTasks; }
             set { SetProperty(ref poolofTasks, value); }
+        }
+
+
+        private ScheduleAppointmentCollection appointments;
+        public ScheduleAppointmentCollection Appointments
+        {
+            get { return appointments; }
+            set { SetProperty(ref appointments, value); }
         }
 
 

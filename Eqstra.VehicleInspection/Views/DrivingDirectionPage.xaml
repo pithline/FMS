@@ -19,18 +19,14 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Start Driving">
+                <AppBarButton Label="Start Driving" >
                     <AppBarButton.Icon>
                         <SymbolIcon/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Start Inspection">
-            	<Interactivity:Interaction.Behaviors>
-            		<Core:EventTriggerBehavior EventName="Click">
-            			<Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.PsgrVhcInspecPage"/>
-            		</Core:EventTriggerBehavior>
-            	</Interactivity:Interaction.Behaviors>
+            <AppBarButton Label="Start Inspection" Command="{Binding GoToVehicleInspectionCommand}">
+            	
                 <AppBarButton.Icon>
                     <SymbolIcon/>
                 </AppBarButton.Icon>

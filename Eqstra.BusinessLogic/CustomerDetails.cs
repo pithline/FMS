@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Enums;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,48 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-    public class Task : ValidatableBindableBase
+    public class CustomerDetails : ValidatableBindableBase
     {
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty(ref name, value); }
+        }
+
+        private string contactNumber;
+
+        public string ContactNumber
+        {
+            get { return contactNumber; }
+            set { SetProperty(ref contactNumber, value); }
+        }
+
+        private string address;
+
+        public string Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
+
+        private string emailId;
+
+        public string EmailId
+        {
+            get { return emailId; }
+            set { SetProperty(ref emailId, value); }
+        }
+
+        private ScheduleAppointmentCollection appointments;
+        [Ignore]
+        public ScheduleAppointmentCollection Appointments
+        {
+            get { return appointments; }
+            set { SetProperty(ref appointments, value); }
+        }
+
         private string caseNumber;
 
         public string CaseNumber
@@ -26,7 +67,8 @@ namespace Eqstra.BusinessLogic
             get { return caseType; }
             set { SetProperty(ref caseType, value); }
         }
-        
+
+
         private long cellNumber;
 
         public long CellNumber
@@ -59,55 +101,5 @@ namespace Eqstra.BusinessLogic
             get { return allocatedTo; }
             set { SetProperty(ref allocatedTo, value); }
         }
-
-        private DateTime confirmedDate;
-
-        public DateTime ConfirmedDate
-        {
-            get { return confirmedDate; }
-            set { SetProperty(ref confirmedDate, value); }
-        }
-
-        private string customerId;
-
-        public string CustomerId
-        {
-            get { return customerId; }
-            set { SetProperty(ref customerId, value); }
-        }
-
-        private string registrationNumber;
-
-        public string RegistrationNumber
-        {
-            get { return registrationNumber; }
-            set { SetProperty(ref registrationNumber, value); }
-        }
-
-        private string customerName;
-        [Ignore]
-        public string CustomerName
-        {
-            get { return customerName; }
-            set { SetProperty(ref customerName, value); }
-        }
-
-        private string address;
-        [Ignore]
-        public string Address
-        {
-            get { return address; }
-            set { SetProperty(ref address, value); }
-        }
-
-        private DateTime confirmedTime;
-
-        public DateTime ConfirmedTime
-        {
-            get { return confirmedTime; }
-            set { SetProperty(ref confirmedTime, value); }
-        }
-
-
     }
 }

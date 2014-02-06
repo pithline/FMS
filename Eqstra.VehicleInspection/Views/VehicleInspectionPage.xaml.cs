@@ -22,7 +22,7 @@ namespace Eqstra.VehicleInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class PsgrVhcInspecPage : VisualStateAwarePage
+    public sealed partial class VehicleInspectionPage : VisualStateAwarePage
     {
 
         private NavigationHelper navigationHelper;
@@ -46,7 +46,7 @@ namespace Eqstra.VehicleInspection.Views
         }
 
 
-        public PsgrVhcInspecPage()
+        public VehicleInspectionPage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);

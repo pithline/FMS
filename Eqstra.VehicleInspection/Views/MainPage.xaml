@@ -13,6 +13,7 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
 
     <prism:VisualStateAwarePage.Resources>
@@ -102,7 +103,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <ListView Grid.Column="1" ItemsSource="{Binding PoolofTasks}" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left">
+                            <local:SchedulerUserControl Grid.Column="1" DataContext="{Binding ElementName=pageRoot, Path=DataContext}"/>
+                            <!--<ListView Grid.Column="1" ItemsSource="{Binding PoolofTasks}" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -117,7 +119,7 @@
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>
+                            </ListView>-->
                         </Grid>
                     </Border>
                 </Grid>

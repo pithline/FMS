@@ -73,9 +73,9 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Username" Grid.Row="0" Grid.Column="0" Style="{StaticResource LoginTextBlockStyle}"/>
                     <TextBlock Text="Password" Grid.Row="0" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}"/>
-                    <TextBox PlaceholderText="Enter AX User Id" Text="{Binding UserName,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" Margin="0 0 20 0" Width="180"/>
-                    <PasswordBox PlaceholderText="Enter Password" Password="{Binding Password,Mode=TwoWay}"  Grid.Row="1" Grid.Column="1" Width="180"/>
-                    <Button Command="{Binding LoginCommand}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}">
+                    <TextBox PlaceholderText="Enter AX User Id" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0 0 20 0" Width="180" />
+                    <PasswordBox PlaceholderText="Enter Password" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1" Width="180"/>
+                    <Button Command="{Binding LoginCommand, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/loginIcon.png" Width="26" Height="26"/>

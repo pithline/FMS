@@ -65,7 +65,7 @@ namespace Eqstra.VehicleInspection
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(SessionStateService);
-            ViewModelLocator.Register(typeof(PsgrVhcInspecPage).ToString(), () => new PsgrVhcInspecPageViewModel());
+            ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel());
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);

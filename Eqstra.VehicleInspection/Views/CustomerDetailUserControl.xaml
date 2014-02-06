@@ -36,48 +36,55 @@
                     <Image Source="ms-appx:///Assets/details_image.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
                         <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="E89873" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
                         <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="Case Type" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                 </Grid>
 
                 <StackPanel Grid.Row="1" Margin="0 10 0 0">
                     <TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="Peter Johnson" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="0 15 0 0">
                     <TextBlock Text="Contact Number" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="+91987268378" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding CellNumber}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="0 15 0 0">
                     <TextBlock Text="Address" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="277, Alberton, Gauteng" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Margin="0 15 0 0">
                     <TextBlock Text="Status Due Date" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="02-03-2014" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding StatusDueDate}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
 
                 <!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>-->
 
                 <StackPanel Grid.Row="5" Margin="0 15 0 0">
                     <TextBlock Text="Status" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="Awaiting Inspection" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding Status}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Margin="0 15 0 0">
                     <TextBlock Text="Allocated To" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="Role center" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding AllocatedTo}" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="0 15 0 0">
                     <Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
                     <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
                     <Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
-                    <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                    <Button>
+                        <Button.Flyout>
+                            <Flyout>
+                                <local:SchedulerUserControl DataContext="{Binding Appointments}"/>
+                            </Flyout>
+                        </Button.Flyout>
+                        <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                    </Button>
                 </StackPanel>
 
 

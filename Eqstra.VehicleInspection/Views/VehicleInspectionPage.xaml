@@ -1,6 +1,6 @@
 ﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
-    x:Class="Eqstra.VehicleInspection.Views.PsgrVhcInspecPage"
+    x:Class="Eqstra.VehicleInspection.Views.VehicleInspectionPage"
    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
