@@ -47,7 +47,14 @@ namespace Eqstra.VehicleInspection.ViewModels
             }
             else
             {
-                this.InspectionUserControls.Add(new VehicleDetailsUserControl());
+                this.InspectionUserControls.Add(new CommercialVehicleDetailsUserControl());
+                this.InspectionUserControls.Add(new CabTrimInterUserControl());
+                this.InspectionUserControls.Add(new ChassisBodyUserControl());
+                this.InspectionUserControls.Add(new CGlassUserControl());
+                this.InspectionUserControls.Add(new CAccessariesUserControl());
+                this.InspectionUserControls.Add(new CTyresUserControl());
+                this.InspectionUserControls.Add(new CMechanicalCondUserControl());
+                this.InspectionUserControls.Add(new CPOIUserControl());
             }
         }
 
