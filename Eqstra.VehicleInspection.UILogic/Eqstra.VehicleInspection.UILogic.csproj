@@ -103,6 +103,14 @@
   <ItemGroup>
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Commercial\CabTrimInterUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CAccessariesUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CGlassUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\ChassisBodyUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CMechanicalCondUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CommercialVehicleDetailsUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CPOIUserControlViewModel.cs" />
+    <Compile Include="ViewModels\Commercial\CTyresUserControlViewModel.cs" />
     <Compile Include="ViewModels\DrivingDirectionPageViewModel.cs" />
     <Compile Include="ViewModels\InspectionDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
@@ -125,9 +133,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Commercial\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
