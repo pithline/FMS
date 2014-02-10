@@ -55,8 +55,7 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" HorizontalAlignment="Left"/>
             <local:ProfileUserControl Grid.Column="2" VerticalAlignment="Bottom"/>
         </Grid>
         
@@ -66,7 +65,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <local:CustomerDetailUserControl Margin="10 0" />
+            <local:CustomerDetailUserControl Margin="10 0" DataContext="{Binding CustomerDetails}"/>
             <FlipView UseTouchAnimationsForAllNavigation="True" ItemsSource="{Binding InspectionUserControls}" Grid.Column="1" Margin="10 0 ">
                 <FlipView.ItemTemplate>
                     <DataTemplate>

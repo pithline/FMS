@@ -1,4 +1,5 @@
 ﻿using Eqstra.VehicleInspection.Common;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace Eqstra.VehicleInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class SchedulerPage : Page
+    public sealed partial class SchedulerPage : VisualStateAwarePage
     {
 
         private NavigationHelper navigationHelper;

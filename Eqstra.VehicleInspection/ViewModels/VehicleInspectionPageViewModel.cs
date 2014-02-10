@@ -19,6 +19,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         public VehicleInspectionPageViewModel()
         {
             this.InspectionUserControls = new ObservableCollection<UserControl>();
+            this.customerDetails = new CustomerDetails();
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -30,10 +31,10 @@ namespace Eqstra.VehicleInspection.ViewModels
             };
 
             _task = (Eqstra.BusinessLogic.Task)navigationParameter;
-            
-            var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
-            var vehicle= await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
 
+            var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+            var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
+            await GetCustomerDetailsAsync();
             if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
             {
                 this.InspectionUserControls.Add(new VehicleDetailsUserControl());
@@ -43,7 +44,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.InspectionUserControls.Add(new AccessoriesUserControl());
                 this.InspectionUserControls.Add(new TyreConditionUserControl());
                 this.InspectionUserControls.Add(new MechanicalCondUserControl());
-                this.InspectionUserControls.Add(new InspectionProofUserControl()); 
+                this.InspectionUserControls.Add(new InspectionProofUserControl());
             }
             else
             {
@@ -74,5 +75,47 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref inspectionHistList, value); }
         }
 
+        private CustomerDetails customerDetails;
+
+        public CustomerDetails CustomerDetails
+        {
+            get { return customerDetails; }
+            set { SetProperty(ref customerDetails, value); }
+        }
+
+
+        private Customer customer;
+
+        public Customer Customer
+        {
+            get { return customer; }
+            set { SetProperty(ref customer, value); }
+        }
+
+
+        async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
+        {
+            try
+            {
+                if (this._task != null)
+                {
+                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
+                    this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
+                    this.customerDetails.CaseNumber = this._task.CaseNumber;
+                    this.customerDetails.Status = this._task.Status;
+                    this.customerDetails.StatusDueDate = this._task.StatusDueDate;
+                    this.customerDetails.Address = this.customer.Address;
+                    this.customerDetails.AllocatedTo = this._task.AllocatedTo;
+                    this.customerDetails.Name = this.customer.Name;
+                    this.customerDetails.CellNumber = this._task.CellNumber;
+                    this.customerDetails.CaseType = this._task.CaseType;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

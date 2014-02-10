@@ -1,4 +1,4 @@
-﻿<Page
+﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
     x:Class="Eqstra.VehicleInspection.Views.SchedulerPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
@@ -8,18 +8,15 @@
     xmlns:common="using:Eqstra.VehicleInspection.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
-        <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="Button">
-        	<Grid Background="{TemplateBinding Background}">
-        		<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Height="35" Width="100" Background="{TemplateBinding Background}">
-        			<ContentPresenter Foreground="White" RequestedTheme="Dark" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        		</Border>
-        	</Grid>
-        </ControlTemplate>
+       
     </Page.Resources>
 
     <!--
@@ -34,7 +31,7 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -43,16 +40,19 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+            <Button x:Name="backButton" Margin="39 0 0 0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.AutomationId="BackButton" 
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <local:ProfileUserControl Grid.Column="2" Margin="10 0" VerticalAlignment="Bottom"/>
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="426,234,0,0" Grid.Row="1" VerticalAlignment="Top" Template="{StaticResource ButtonControlTemplate1}"/>
+        <schedule:SfSchedule AllowEditing="True" Grid.Row="1"  ScheduleType="Day" ContextMenuType="RadialMenu" EnableReminderTimer="True"  Appointments="{Binding CustomerDetails.Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour">
+
+        </schedule:SfSchedule>
     </Grid>
-</Page>
+</prism:VisualStateAwarePage>

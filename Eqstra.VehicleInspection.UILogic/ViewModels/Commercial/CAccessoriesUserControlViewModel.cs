@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels.Commercial
 {
-   public class CAccessariesUserControlViewModel : ViewModel
+   public class CAccessoriesUserControlViewModel : BaseViewModel
     {
     }
 }

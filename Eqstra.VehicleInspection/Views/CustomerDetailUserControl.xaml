@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Eqstra.VehicleInspection.Views.CustomerDetailUserControl"
+    x:Name="custDetailsUserControl"
     mc:Ignorable="d">
 	<Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
 		<Grid HorizontalAlignment="Left" Margin="20" VerticalAlignment="Top" Width="350">
@@ -82,7 +83,7 @@
                         
 						<Interactivity:Interaction.Behaviors>
 							<Core:EventTriggerBehavior EventName="Click">
-                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.SchedulerPage"/>
+                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.SchedulerPage" Parameter="{Binding Path=DataContext , ElementName=custDetailsUserControl}"/>
 							</Core:EventTriggerBehavior>
 						</Interactivity:Interaction.Behaviors>
                         
