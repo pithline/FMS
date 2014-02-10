@@ -4,6 +4,18 @@
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:local="using:Eqstra.VehicleInspection.Styles"
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid">
+    <Style TargetType="AppBar">
+        <Setter Property="RequestedTheme" Value="Default"/>
+    </Style>   
+    <Style TargetType="AppBarButton">
+        <Setter Property="RequestedTheme" Value="Dark"/>
+    </Style>
+    <Style TargetType="AppBarSeparator">
+        <Setter Property="RequestedTheme" Value="Dark"/>
+    </Style>
+    <Style TargetType="AppBarToggleButton">
+        <Setter Property="RequestedTheme" Value="Dark"/>
+    </Style>
     <Style TargetType="Button">
         <Setter Property="Background" Value="YellowGreen"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -28,7 +40,8 @@
         <Setter Property="Height" Value="32"/>
     </Style>
     <Style TargetType="CommandBar">
-        <Setter Property="Background" Value="#FF35a3dc"/>
+        <Setter Property="Background" Value="#FF35a3dc"/>  
+        
     </Style>
     <Style x:Key="LeftImageGridStyle" TargetType="Grid">
         <Setter Property="Background">
