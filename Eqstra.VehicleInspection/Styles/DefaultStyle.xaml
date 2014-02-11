@@ -114,4 +114,17 @@
     <Style x:Key="TextContentStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
         <Setter Property="FontSize" Value="20"/>
     </Style>
+    <Style TargetType="ToggleSwitch">
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Foreground" Value="#FF666666"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="0 0 0 0"/>
+        <Setter Property="Margin" Value="-5 -15 0 -15"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+    </Style>
+    <Style x:Key="FormTextStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
 </ResourceDictionary>

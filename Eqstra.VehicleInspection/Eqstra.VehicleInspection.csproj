@@ -205,6 +205,7 @@
     <Content Include="Assets\car_left.png" />
     <Content Include="Assets\car_marks.png" />
     <Content Include="Assets\car_right.png" />
+    <Content Include="Assets\car_top.png" />
     <Content Include="Assets\details_image.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />

@@ -59,11 +59,12 @@
             <local:ProfileUserControl Grid.Column="2"/>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="30">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
+            <Grid Margin="30">
             <Grid.ColumnDefinitions> 
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
@@ -71,16 +72,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
-                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}" Margin="0 0 0 30"/>
             </Grid>
-            <FlipView UseTouchAnimationsForAllNavigation="True" ItemsSource="{Binding InspectionUserControls}" Grid.Column="1" Margin="10 0 ">
+            <FlipView UseTouchAnimationsForAllNavigation="True" ItemsSource="{Binding InspectionUserControls}" Grid.Column="1" Margin="10 -1 10 30">
                 <FlipView.ItemTemplate>
                     <DataTemplate>
                         <Frame Content="{Binding}"/>
                     </DataTemplate>
                 </FlipView.ItemTemplate>
             </FlipView>
-            <Grid Grid.Column="2">
+            <Grid Grid.Column="2" Margin="20 0 0 30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -89,8 +90,8 @@
                 <ListView SelectionMode="None" ItemsSource="{Binding InspectionHistList}" Grid.Row="1">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#FFE0E0E0" Grid.Row="1" BorderThickness="1" Background="White">
-                                <Grid Width="200" Background="White" Grid.Row="1">
+                            <Border BorderBrush="#FFE0E0E0" Grid.Row="1" BorderThickness="1" Background="White" HorizontalAlignment="Stretch">
+                                <Grid Width="300" Background="White" Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="5"/>
                                         <ColumnDefinition Width="*"/>
@@ -105,17 +106,17 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <StackPanel Margin="10 0" HorizontalAlignment="Center">
+                                        <StackPanel Margin="10 10">
                                             <TextBlock Text="Inspection Date" Style="{StaticResource TextHeaderStyle}"/>
                                             <TextBlock Text="{Binding InspectedOn}" Style="{StaticResource TextContentStyle}"/>
                                         </StackPanel>
-                                        <StackPanel Margin="10 0" HorizontalAlignment="Center" Grid.Row="1">
+                                        <StackPanel Margin="10 10" Grid.Row="1">
                                             <TextBlock Text="Inspected By" Style="{StaticResource TextHeaderStyle}"/>
-                                            <TextBlock Text="{Binding InspectedBy}" Style="{StaticResource TextContentStyle}"/>
+                                            <TextBlock Text="{Binding InspectedBy}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
                                         </StackPanel>
-                                        <StackPanel Margin="10 0" HorizontalAlignment="Center" Grid.Row="2">
+                                        <StackPanel Margin="10 10" Grid.Row="2">
                                             <TextBlock Text="Inspection Result" Style="{StaticResource TextHeaderStyle}"/>
-                                            <TextBlock Text="{Binding InspectionResult}" Style="{StaticResource TextContentStyle}"/>
+                                            <TextBlock Text="{Binding InspectionResult}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
@@ -126,5 +127,6 @@
                 </ListView>
             </Grid>
         </Grid>
+        </ScrollViewer>
     </Grid>
 </prism:VisualStateAwarePage>
