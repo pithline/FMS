@@ -9,7 +9,7 @@
     x:Name="custDetailsUserControl"
     mc:Ignorable="d">
 	<Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-		<Grid HorizontalAlignment="Left" Margin="20" VerticalAlignment="Top" Width="350">
+		<Grid HorizontalAlignment="Left" Margin="20" VerticalAlignment="Top" Width="310">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition/>
@@ -57,7 +57,7 @@
 				</StackPanel>
 				<StackPanel Grid.Row="3" Margin="0 15 0 0">
 					<TextBlock Text="Address" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}"/>
+					<TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
 				</StackPanel>
 
 				<StackPanel Grid.Row="4" Margin="0 15 0 0">

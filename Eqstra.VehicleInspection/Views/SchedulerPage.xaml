@@ -24,7 +24,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
-        <Grid>
+        <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
@@ -49,9 +49,9 @@
                         AutomationProperties.AutomationId="BackButton" 
                         AutomationProperties.ItemType="Navigation Button"/>
             <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <local:ProfileUserControl Grid.Column="2" Margin="10 0" VerticalAlignment="Bottom"/>
+            <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
         </Grid>
-        <schedule:SfSchedule AllowEditing="True" Grid.Row="1"  ScheduleType="Day" ContextMenuType="RadialMenu" EnableReminderTimer="True"  Appointments="{Binding CustomerDetails.Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour">
+        <schedule:SfSchedule AllowEditing="True" Grid.Row="1"  ScheduleType="Day" ContextMenuType="RadialMenu" EnableReminderTimer="True"  Appointments="{Binding CustomerDetails.Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour" Margin="30">
 
         </schedule:SfSchedule>
     </Grid>

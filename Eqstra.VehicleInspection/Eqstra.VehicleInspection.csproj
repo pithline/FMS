@@ -200,10 +200,17 @@
     <None Include="packages.config" />
     <Content Include="Assets\bing_blue.png" />
     <Content Include="Assets\calendar_blue.png" />
+    <Content Include="Assets\car_back.png" />
+    <Content Include="Assets\car_front.png" />
+    <Content Include="Assets\car_left.png" />
+    <Content Include="Assets\car_marks.png" />
+    <Content Include="Assets\car_right.png" />
     <Content Include="Assets\details_image.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
+    <Content Include="Assets\license_disc.png" />
     <Content Include="Assets\message_blue.png" />
+    <Content Include="Assets\odo_meter.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
     <Content Include="Assets\user_profile.png" />
