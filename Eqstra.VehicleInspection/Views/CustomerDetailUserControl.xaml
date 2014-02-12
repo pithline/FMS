@@ -79,7 +79,7 @@
 					<Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
 					<Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
 					<Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
-					<Button Style="{StaticResource LoginButtonStyle}" >
+                    <Button Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">
                         
 						<Interactivity:Interaction.Behaviors>
 							<Core:EventTriggerBehavior EventName="Click">

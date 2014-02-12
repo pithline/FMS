@@ -6,7 +6,7 @@
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid">
     <Style TargetType="AppBar">
         <Setter Property="RequestedTheme" Value="Default"/>
-    </Style>   
+    </Style>
     <Style TargetType="AppBarButton">
         <Setter Property="RequestedTheme" Value="Dark"/>
     </Style>
@@ -17,8 +17,105 @@
         <Setter Property="RequestedTheme" Value="Dark"/>
     </Style>
     <Style TargetType="Button">
-        <Setter Property="Background" Value="YellowGreen"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style TargetType="Button" x:Key="TransparentBtn">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#FF1e8ac2"/>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="2,2,2,2" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Century Gothic" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver"/>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Border">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Thickness>4,4,2,2</Thickness>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Margin="3">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              AutomationProperties.AccessibilityView="Raw"/>
+                        </Border>
+                        <Rectangle x:Name="FocusVisualWhite"
+                                   IsHitTestVisible="False"
+                                   Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   Opacity="0"
+                                   StrokeDashOffset="1.5" />
+                        <Rectangle x:Name="FocusVisualBlack"
+                                   IsHitTestVisible="False"
+                                   Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   Opacity="0"
+                                   StrokeDashOffset="0.5" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style TargetType="prism:VisualStateAwarePage">
         <Setter Property="Background" Value="White"></Setter>
@@ -40,8 +137,8 @@
         <Setter Property="Height" Value="32"/>
     </Style>
     <Style TargetType="CommandBar">
-        <Setter Property="Background" Value="#FF35a3dc"/>  
-        
+        <Setter Property="Background" Value="#FF35a3dc"/>
+
     </Style>
     <Style x:Key="LeftImageGridStyle" TargetType="Grid">
         <Setter Property="Background">
@@ -54,10 +151,7 @@
         <Setter Property="Foreground" Value="#FF666666"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
-    <Style x:Key="LoginButtonStyle" TargetType="Button">
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#FF1e8ac2"/>
+    <Style x:Key="LoginButtonStyle" TargetType="Button" BasedOn="{StaticResource TransparentBtn}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
@@ -127,4 +221,8 @@
     <Style x:Key="FormTextStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
         <Setter Property="FontSize" Value="16"/>
     </Style>
+
+   
+
+
 </ResourceDictionary>
