@@ -51,7 +51,9 @@
 
                     <TextBlock Text="Internal Trim" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="InternalTrimSwitch" Grid.Row="1" Grid.Column="1"/>
-                    <Button Grid.Row="1" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVIT}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}" Margin="5 0"/>
+                    <Button Grid.Row="1" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVIT}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
                     <GridView Grid.Row="1" Grid.Column="4" x:Name="GVIT" ItemsSource="{Binding Model.InternalTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}">
                         <GridView.ItemsPanel>
@@ -68,7 +70,9 @@
 
                     <TextBlock Text="RR Door Trim" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="RFDoorTrim" Grid.Row="2" Grid.Column="1"/>
-                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRFDoorTrim}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorTrim}" Margin="5 0"/>
+                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRFDoorTrim}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorTrim}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
                     <GridView Grid.Row="2" Grid.Column="4" x:Name="GVRFDoorTrim" ItemsSource="{Binding Model.RFDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorTrim}">
                         <GridView.ItemsPanel>
@@ -85,7 +89,9 @@
 
                     <TextBlock Text="LF Door Trim" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="LFDoorTrim" Grid.Row="3" Grid.Column="1"/>
-                    <Button Grid.Row="3" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFDoorTrim}" Margin="5 0"/>
+                    <Button Grid.Row="3" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFDoorTrim}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
                     <GridView Grid.Row="3" Grid.Column="4" x:Name="GVLFDoorTrim" ItemsSource="{Binding Model.LFDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFDoorTrim}">
                         <GridView.ItemsPanel>
@@ -103,7 +109,9 @@
 
                     <TextBlock Text="RR Door Trim" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="RRDoorTrim" Grid.Row="4" Grid.Column="1"/>
-                    <Button Grid.Row="4" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRDoorTrim}" Margin="5 0"/>
+                    <Button Grid.Row="4" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRDoorTrim}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
                     <GridView Grid.Row="4" Grid.Column="4" x:Name="GVRRDoorTrim" ItemsSource="{Binding Model.RRDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRDoorTrim}">
                         <GridView.ItemsPanel>
@@ -121,7 +129,9 @@
 
                     <TextBlock Text="LR Door Trim" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="LRDoorTrim" Grid.Row="5" Grid.Column="1"/>
-                    <Button Grid.Row="5" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRDoorTrim}" Margin="5 0"/>
+                    <Button Grid.Row="5" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRDoorTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRDoorTrim}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
                     <GridView Grid.Row="5" Grid.Column="4" x:Name="GVLRDoorTrim" ItemsSource="{Binding Model.LRDoorTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRDoorTrim}">
                         <GridView.ItemsPanel>
@@ -139,7 +149,9 @@
 
                     <TextBlock Text="Driver Seat" Grid.Row="6" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="DriverSeat" Grid.Row="6" Grid.Column="1"/>
-                    <Button Grid.Row="6" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDriverSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DriverSeat}" Margin="5 0"/>
+                    <Button Grid.Row="6" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDriverSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DriverSeat}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
                     <GridView Grid.Row="6" Grid.Column="4" x:Name="GVDriverSeat" ItemsSource="{Binding Model.DriverSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DriverSeat}">
                         <GridView.ItemsPanel>
@@ -157,7 +169,9 @@
 
                     <TextBlock Text="Passenger Seat" Grid.Row="7" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="PassengerSeat" Grid.Row="7" Grid.Column="1"/>
-                    <Button Grid.Row="7" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVPassengerSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PassengerSeat}" Margin="5 0"/>
+                    <Button Grid.Row="7" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVPassengerSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PassengerSeat}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
                     <GridView Grid.Row="7" Grid.Column="4" x:Name="GVPassengerSeat" ItemsSource="{Binding Model.PassengerSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PassengerSeat}">
                         <GridView.ItemsPanel>
@@ -175,7 +189,9 @@
 
                     <TextBlock Text="Rear Seat" Grid.Row="8" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="RearSeat" Grid.Row="8" Grid.Column="1"/>
-                    <Button Grid.Row="8" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSeat}" Margin="5 0"/>
+                    <Button Grid.Row="8" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSeat}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
                     <GridView Grid.Row="8" Grid.Column="4" x:Name="GVRearSeat" ItemsSource="{Binding Model.RearSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSeat}">
                         <GridView.ItemsPanel>
@@ -193,7 +209,9 @@
 
                     <TextBlock Text="Dash" Grid.Row="9" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="Dash" Grid.Row="9" Grid.Column="1"/>
-                    <Button Grid.Row="9" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDash,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Dash}" Margin="5 0"/>
+                    <Button Grid.Row="9" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDash,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Dash}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="3"/>
                     <GridView Grid.Row="9" Grid.Column="4" x:Name="GVDash" ItemsSource="{Binding Model.DashImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Dash}">
                         <GridView.ItemsPanel>
@@ -211,7 +229,9 @@
 
                     <TextBlock Text="Carpet" Grid.Row="10" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="Carpet" Grid.Row="10" Grid.Column="1"/>
-                    <Button Grid.Row="10" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVCarpet,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Carpet}" Margin="5 0"/>
+                    <Button Grid.Row="10" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVCarpet,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Carpet}" Margin="5 0">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
                     <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="10" Grid.Column="3"/>
                     <GridView Grid.Row="10" Grid.Column="4" x:Name="GVCarpet" ItemsSource="{Binding Model.CarpetImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Carpet}">
                         <GridView.ItemsPanel>

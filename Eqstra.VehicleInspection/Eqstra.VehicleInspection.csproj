@@ -200,6 +200,7 @@
     <None Include="packages.config" />
     <Content Include="Assets\bing_blue.png" />
     <Content Include="Assets\calendar_blue.png" />
+    <Content Include="Assets\camera_icon.png" />
     <Content Include="Assets\car_back.png" />
     <Content Include="Assets\car_front.png" />
     <Content Include="Assets\car_left.png" />
