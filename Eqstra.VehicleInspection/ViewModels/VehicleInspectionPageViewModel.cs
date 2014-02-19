@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.ViewModels
 {
@@ -19,15 +22,38 @@ namespace Eqstra.VehicleInspection.ViewModels
         public VehicleInspectionPageViewModel()
         {
             this.InspectionUserControls = new ObservableCollection<UserControl>();
-            this.customerDetails = new CustomerDetails();
+            this.CustomerDetails = new CustomerDetails();
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from engine",
+                    Location = "Cape Town",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+
+                },
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from differential",
+                    Location = "Cape Town",
+                     ReadOnly = true,
+                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+                },                    
+            };
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             this.inspectionHistList = new ObservableCollection<InspectionHistory>{
                 new InspectionHistory{InspectionResult=new List<string>{"Engine and brake oil replacement","Wheel alignment"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
-                new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
-                new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
+                new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Robert Green",InspectedOn = DateTime.Now},
+                new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Christopher",InspectedOn = DateTime.Now},
             };
 
             _task = (Eqstra.BusinessLogic.Task)navigationParameter;
