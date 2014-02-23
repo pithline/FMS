@@ -8,13 +8,10 @@
     mc:Ignorable="d"
     xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     >
-
+  
     <Grid>
-        <!--<schedule:SfSchedule  ScheduleType="Day"  EnableReminderTimer="True"  Appointments="{Binding Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour">
+        <schedule:SfSchedule  ScheduleType="Day"  EnableReminderTimer="True"  Appointments="{Binding Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour">
 
-        </schedule:SfSchedule>-->
-        
-        <TextBlock Text="Booom" Style="{StaticResource HeaderTextBlockStyle}"/>
-
+        </schedule:SfSchedule>
     </Grid>
 </UserControl>

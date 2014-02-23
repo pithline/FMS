@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.ViewModels
 {
@@ -19,21 +22,45 @@ namespace Eqstra.VehicleInspection.ViewModels
         public VehicleInspectionPageViewModel()
         {
             this.InspectionUserControls = new ObservableCollection<UserControl>();
+            this.CustomerDetails = new CustomerDetails();
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from engine",
+                    Location = "Cape Town",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+
+                },
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from differential",
+                    Location = "Cape Town",
+                     ReadOnly = true,
+                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+                },                    
+            };
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             this.inspectionHistList = new ObservableCollection<InspectionHistory>{
                 new InspectionHistory{InspectionResult=new List<string>{"Engine and brake oil replacement","Wheel alignment"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
-                new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
-                new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
+                new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Robert Green",InspectedOn = DateTime.Now},
+                new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Christopher",InspectedOn = DateTime.Now},
             };
 
             _task = (Eqstra.BusinessLogic.Task)navigationParameter;
-            
-            var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
-            var vehicle= await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
 
+            var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+            var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
+            await GetCustomerDetailsAsync();
             if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
             {
                 this.InspectionUserControls.Add(new VehicleDetailsUserControl());
@@ -43,11 +70,18 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.InspectionUserControls.Add(new AccessoriesUserControl());
                 this.InspectionUserControls.Add(new TyreConditionUserControl());
                 this.InspectionUserControls.Add(new MechanicalCondUserControl());
-                this.InspectionUserControls.Add(new InspectionProofUserControl()); 
+                this.InspectionUserControls.Add(new InspectionProofUserControl());
             }
             else
             {
-                this.InspectionUserControls.Add(new VehicleDetailsUserControl());
+                this.InspectionUserControls.Add(new CommercialVehicleDetailsUserControl());
+                this.InspectionUserControls.Add(new CabTrimInterUserControl());
+                this.InspectionUserControls.Add(new ChassisBodyUserControl());
+                this.InspectionUserControls.Add(new CGlassUserControl());
+                this.InspectionUserControls.Add(new CAccessariesUserControl());
+                this.InspectionUserControls.Add(new CTyresUserControl());
+                this.InspectionUserControls.Add(new CMechanicalCondUserControl());
+                this.InspectionUserControls.Add(new CPOIUserControl());
             }
         }
 
@@ -67,5 +101,47 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref inspectionHistList, value); }
         }
 
+        private CustomerDetails customerDetails;
+
+        public CustomerDetails CustomerDetails
+        {
+            get { return customerDetails; }
+            set { SetProperty(ref customerDetails, value); }
+        }
+
+
+        private Customer customer;
+
+        public Customer Customer
+        {
+            get { return customer; }
+            set { SetProperty(ref customer, value); }
+        }
+
+
+        async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
+        {
+            try
+            {
+                if (this._task != null)
+                {
+                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
+                    this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
+                    this.customerDetails.CaseNumber = this._task.CaseNumber;
+                    this.customerDetails.Status = this._task.Status;
+                    this.customerDetails.StatusDueDate = this._task.StatusDueDate;
+                    this.customerDetails.Address = this.customer.Address;
+                    this.customerDetails.AllocatedTo = this._task.AllocatedTo;
+                    this.customerDetails.Name = this.customer.Name;
+                    this.customerDetails.CellNumber = this._task.CellNumber;
+                    this.customerDetails.CaseType = this._task.CaseType;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

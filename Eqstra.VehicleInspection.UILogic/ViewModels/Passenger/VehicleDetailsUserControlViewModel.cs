@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class VehicleDetailsUserControlViewModel : ViewModel
+    public class VehicleDetailsUserControlViewModel : BaseViewModel
     {
         public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {

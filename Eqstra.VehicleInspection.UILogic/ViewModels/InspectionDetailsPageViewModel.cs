@@ -21,7 +21,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public InspectionDetailsPageViewModel(INavigationService navigationService)
         {
             this.inspectionList = new ObservableCollection<BusinessLogic.Task>();
-            this.customerDetails = new CustomerDetails();
+            this.CustomerDetails = new CustomerDetails();
             this.inspection = null;
             _navigationService = navigationService;
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
@@ -35,7 +35,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }, () =>
                 { return this.inspection != null; }
             );
-            this.customerDetails.Appointments = new ScheduleAppointmentCollection
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
                     Subject = "Inspection at Peter Johnson",
@@ -71,7 +71,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 item.Address = cust.Address;
                 this.inspectionList.Add(item);
             }
-
         }
 
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)

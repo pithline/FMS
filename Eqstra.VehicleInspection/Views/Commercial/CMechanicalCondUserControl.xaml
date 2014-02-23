@@ -1,0 +1,303 @@
+﻿<UserControl
+    x:Class="Eqstra.VehicleInspection.Views.CMechanicalCondUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.VehicleInspection.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <TextBlock Text="Mechanical Condition" Style="{StaticResource GroupHeaderStyle}" />
+        <Grid Margin="0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ToggleSwitch OnContent="Yes" OffContent="No" Header="Is the vehicle in the running condition"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="Type of Engine" Style="{StaticResource TitleTextBlockStyle}" />
+                <RadioButton Content="Petrol"/>
+                <RadioButton Content="Diesel"/>
+                <RadioButton Content="Liquid Petroleum Gas"/>
+                <RadioButton Content="Main's Battery"/>
+            </StackPanel>
+
+            <Grid Margin="0 10" Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleSwitch x:Name="EngineToggle" Header="Engine" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVEngine}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EngineToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVEngine" ItemsSource="{Binding Model.EngineImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EngineToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <ToggleSwitch x:Name="FrontSuspToggle" Header="Front Suspension" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVFrontSusp}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontSuspToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVFrontSusp" ItemsSource="{Binding Model.FrontSuspImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontSuspToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <ToggleSwitch x:Name="RearSuspToggle" Header="Rear Suspension" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearSusp,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSuspToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVRearSusp" ItemsSource="{Binding Model.RearSuspImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSuspToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="3">
+                        <ToggleSwitch x:Name="SteeringToggle" Header="Steering" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVSteering,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SteeringToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVSteering" ItemsSource="{Binding Model.SteeringImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SteeringToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="4">
+                        <ToggleSwitch x:Name="ExhaustToggle" Header="Exhaust" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVExhaust,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExhaustToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVExhaust" ItemsSource="{Binding Model.ExhaustImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExhaustToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="5">
+                        <ToggleSwitch x:Name="BatteryToggle" Header="Battery" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVBattery,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BatteryToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVBattery" ItemsSource="{Binding Model.BatteryImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BatteryToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="6">
+                        <ToggleSwitch x:Name="HandBrakeToggle" Header="Hand Brake" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHandBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HandBrakeToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVHandBrake" ItemsSource="{Binding Model.HandBrakeImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HandBrakeToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="7">
+                        <ToggleSwitch x:Name="FootBrakeToggle" Header="Foot Brake" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVFootBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FootBrakeToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVFootBrake" ItemsSource="{Binding Model.FootBrakeImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FootBrakeToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="8">
+                        <ToggleSwitch x:Name="GearboxToggle" Header="Gearbox" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVGearbox,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=GearboxToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVGearbox" ItemsSource="{Binding Model.GearboxImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=GearboxToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                 
+                </Grid>
+                <Grid Margin="0 10" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" >
+                        <ToggleSwitch x:Name="DifferentialToggle" Header="Differencial" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDifferencial,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DifferentialToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVDifferencial" ItemsSource="{Binding Model.DifferentialImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DifferentialToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <ToggleSwitch x:Name="AutoTransmissionToggle" Header="Auto Transmission" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVChevron,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AutoTransmissionToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVAutoTransmission" ItemsSource="{Binding Model.AutoTransmissionImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AutoTransmissionToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <ToggleSwitch x:Name="OilLeaksToggle" Header="Oil Leaks" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVOilLeaks,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=OilLeaksToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVOilLeaks" ItemsSource="{Binding Model.OilLeaksImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=OilLeaksToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="3">
+                        <ToggleSwitch x:Name="HPSToggle" Header="Hydraulic Power Steering" Grid.Row="1" VerticalAlignment="Center" Margin="5 0"/>
+                        <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHPS,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HPSToggle}" Margin="5 0"/>
+                        <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
+                        <GridView x:Name="GVHPS" ItemsSource="{Binding Model.HPSImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HPSToggle}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </StackPanel>
+   
+</UserControl>

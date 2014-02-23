@@ -104,6 +104,150 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return isInternalTrim; }
             set { SetProperty(ref isInternalTrim, value); }
         }
-        
+
+        private bool isRRDoorTrim;
+
+        public bool IsRRDoorTrim
+        {
+            get { return isRRDoorTrim; }
+            set { SetProperty(ref isRRDoorTrim, value); }
+        }
+
+        private string rrDoorTrimComment;
+
+        public string RRDoorTrimComment
+        {
+            get { return rrDoorTrimComment; }
+            set { SetProperty(ref rrDoorTrimComment, value); }
+        }
+
+        private bool isLFDoorTrim;
+
+        public bool IsLFDoorTrim
+        {
+            get { return isLFDoorTrim; }
+            set { SetProperty(ref isLFDoorTrim, value); }
+        }
+
+        private string lfDoorTrimComment;
+
+        public string LFDoorTrimComment
+        {
+            get { return lfDoorTrimComment; }
+            set { SetProperty(ref lfDoorTrimComment, value); }
+        }
+
+        private string rfDoorTrimComment;
+
+        public string RFDoorTrimComment
+        {
+            get { return rfDoorTrimComment; }
+            set { SetProperty(ref rfDoorTrimComment, value); }
+        }
+
+        private bool isRFDoorTrim;
+
+        public bool IsRFDoorTrim
+        {
+            get { return isRFDoorTrim; }
+            set { SetProperty(ref isRFDoorTrim, value); }
+        }
+
+        private string lrDoorTrimComment;
+
+        public string LRDoorTrimComment
+        {
+            get { return lrDoorTrimComment; }
+            set { SetProperty(ref lrDoorTrimComment, value); }
+        }
+
+        private bool isLRDoorTrim;
+
+        public bool IsLRDoorTrim
+        {
+            get { return isLRDoorTrim; }
+            set { SetProperty(ref isLRDoorTrim, value); }
+        }
+
+        private bool isDriverSeat;
+
+        public bool IsDriverSeat
+        {
+            get { return isDriverSeat; }
+            set { SetProperty(ref isDriverSeat, value); }
+        }
+
+        private string driverSeatComment;
+
+        public string DriverSeatComment
+        {
+            get { return driverSeatComment; }
+            set { SetProperty(ref driverSeatComment, value); }
+        }
+
+        private bool isPassengerSeat;
+
+        public bool IsPassengerSeat
+        {
+            get { return isPassengerSeat; }
+            set { SetProperty(ref isPassengerSeat, value); }
+        }
+
+        private string passengerSeatComment;
+
+        public string PassengerSeatComment
+        {
+            get { return passengerSeatComment; }
+            set { SetProperty(ref passengerSeatComment, value); }
+        }
+
+        private bool isRearSeat;
+
+        public bool IsRearSeat
+        {
+            get { return isRearSeat; }
+            set { SetProperty(ref isRearSeat, value); }
+        }
+
+        private string rearSeatComment;
+
+        public string RearSeatComment
+        {
+            get { return rearSeatComment; }
+            set { SetProperty(ref rearSeatComment, value); }
+        }
+
+        private bool isDash;
+
+        public bool IsDash
+        {
+            get { return isDash; }
+            set { SetProperty(ref isDash, value); }
+        }
+
+        private string dashComment;
+
+        public string DashComment
+        {
+            get { return dashComment; }
+            set { SetProperty(ref dashComment, value); }
+        }
+
+        private bool isCarpet;
+
+        public bool IsCarpet
+        {
+            get { return isCarpet; }
+            set { SetProperty(ref isCarpet, value); }
+        }
+        private string carpetComment;
+
+        public string CarpetComment
+        {
+            get { return carpetComment; }
+            set { SetProperty(ref carpetComment, value); }
+        }
+
+
     }
 }

@@ -116,10 +116,34 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs" />
-    <Compile Include="Views\AccessoriesUserControl.xaml.cs">
+    <Compile Include="Views\Commercial\CAccessariesUserControl.xaml.cs">
+      <DependentUpon>CAccessariesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
+      <DependentUpon>CGlassUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CMechanicalCondUserControl.xaml.cs">
+      <DependentUpon>CMechanicalCondUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CabTrimInterUserControl.xaml.cs">
+      <DependentUpon>CabTrimInterUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\ChassisBodyUserControl.xaml.cs">
+      <DependentUpon>ChassisBodyUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CommercialVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>CommercialVehicleDetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CPOIUserControl.xaml.cs">
+      <DependentUpon>CPOIUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commercial\CTyresUserControl.xaml.cs">
+      <DependentUpon>CTyresUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Passenger\AccessoriesUserControl.xaml.cs">
       <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BodyworkUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\BodyworkUserControl.xaml.cs">
       <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerDetailUserControl.xaml.cs">
@@ -128,13 +152,13 @@
     <Compile Include="Views\DrivingDirectionPage.xaml.cs">
       <DependentUpon>DrivingDirectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GlassUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\GlassUserControl.xaml.cs">
       <DependentUpon>GlassUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InspectionDetailsPage.xaml.cs">
       <DependentUpon>InspectionDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InspectionProofUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\InspectionProofUserControl.xaml.cs">
       <DependentUpon>InspectionProofUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
@@ -143,11 +167,14 @@
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MechanicalCondUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\MechanicalCondUserControl.xaml.cs">
       <DependentUpon>MechanicalCondUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileUserControl.xaml.cs">
       <DependentUpon>ProfileUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SchedulerPage.xaml.cs">
+      <DependentUpon>SchedulerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SchedulerUserControl.xaml.cs">
       <DependentUpon>SchedulerUserControl.xaml</DependentUpon>
@@ -155,13 +182,13 @@
     <Compile Include="Views\VehicleInspectionPage.xaml.cs">
       <DependentUpon>VehicleInspectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrimIntUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\TrimIntUserControl.xaml.cs">
       <DependentUpon>TrimIntUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TyreConditionUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\TyreConditionUserControl.xaml.cs">
       <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\VehicleDetailsUserControl.xaml.cs">
+    <Compile Include="Views\Passenger\VehicleDetailsUserControl.xaml.cs">
       <DependentUpon>VehicleDetailsUserControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -173,10 +200,19 @@
     <None Include="packages.config" />
     <Content Include="Assets\bing_blue.png" />
     <Content Include="Assets\calendar_blue.png" />
+    <Content Include="Assets\camera_icon.png" />
+    <Content Include="Assets\car_back.png" />
+    <Content Include="Assets\car_front.png" />
+    <Content Include="Assets\car_left.png" />
+    <Content Include="Assets\car_marks.png" />
+    <Content Include="Assets\car_right.png" />
+    <Content Include="Assets\car_top.png" />
     <Content Include="Assets\details_image.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
+    <Content Include="Assets\license_disc.png" />
     <Content Include="Assets\message_blue.png" />
+    <Content Include="Assets\odo_meter.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
     <Content Include="Assets\user_profile.png" />
@@ -204,11 +240,43 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\AccessoriesUserControl.xaml">
+    <Page Include="Views\Commercial\CAccessariesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BodyworkUserControl.xaml">
+    <Page Include="Views\Commercial\CGlassUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\CMechanicalCondUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\CabTrimInterUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\ChassisBodyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\CommercialVehicleDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\CPOIUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commercial\CTyresUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\AccessoriesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\BodyworkUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,7 +288,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GlassUserControl.xaml">
+    <Page Include="Views\Passenger\GlassUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,7 +296,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InspectionProofUserControl.xaml">
+    <Page Include="Views\Passenger\InspectionProofUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,11 +308,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MechanicalCondUserControl.xaml">
+    <Page Include="Views\Passenger\MechanicalCondUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProfileUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SchedulerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -256,15 +328,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrimIntUserControl.xaml">
+    <Page Include="Views\Passenger\TrimIntUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TyreConditionUserControl.xaml">
+    <Page Include="Views\Passenger\TyreConditionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\VehicleDetailsUserControl.xaml">
+    <Page Include="Views\Passenger\VehicleDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

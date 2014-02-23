@@ -109,6 +109,9 @@
     <Compile Include="Helpers\SqliteHelper.cs" />
     <Compile Include="ImageCapture.cs" />
     <Compile Include="InspectionHistory.cs" />
+    <Compile Include="Passenger\PAccessories.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Passenger\TrimInterior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite.cs" />

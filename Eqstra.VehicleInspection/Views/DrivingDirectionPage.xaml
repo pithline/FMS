@@ -17,7 +17,7 @@
         <x:String x:Key="BingMapsApiKey">AkjXEdr_kqaXOMmwBdob0dSykNVdliqwxEufZJrzotABsNfEkkDFuiqSTbzPxZgs</x:String>
     </prism:VisualStateAwarePage.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
+        <CommandBar >
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Start Driving" >
                     <AppBarButton.Icon>
@@ -73,7 +73,7 @@
         <Grid Grid.Row="1" Margin="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -83,16 +83,25 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
-                <local:CustomerDetailUserControl Grid.Row="1"/>
+                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
             </Grid>
-            <StackPanel Grid.Column="1" Margin="10 0">
-                <TextBlock Text="Task Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 5"/>
-				<bing:Map  Credentials="{StaticResource BingMapsApiKey}" Width="600" Height="400" x:Name="MyMap" Grid.Column="1">
-					
-				</bing:Map>
-                <HyperlinkButton Content="Get Directions" Command="{Binding GetDirectionsCommand}" CommandParameter="{Binding ElementName=pageRoot, Path=Location, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            </StackPanel>
-
+            <Grid Grid.Column="1" Margin="20 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Driving Directions" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
+                <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <bing:Map  Credentials="{StaticResource BingMapsApiKey}" x:Name="MyMap" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <HyperlinkButton Content="Get Directions" Command="{Binding GetDirectionsCommand}" CommandParameter="{Binding ElementName=pageRoot, Path=Location, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Foreground="#FF35a3dc" Margin="-15 0 0 0"/>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 
