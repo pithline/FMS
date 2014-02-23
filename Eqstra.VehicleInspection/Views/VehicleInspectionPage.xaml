@@ -18,9 +18,22 @@
     </Page.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
-            <AppBarButton Label="Complete">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Previous" Command="{Binding PreviousCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Previous"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+            <AppBarButton Label="Complete" Command="{Binding CompleteCommand}">
                 <AppBarButton.Icon>
-                    <SymbolIcon/>
+                    <SymbolIcon Symbol="Accept"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarSeparator/>
+            <AppBarButton Label="Next" Command="{Binding NextCommand}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Next"/>
                 </AppBarButton.Icon>
             </AppBarButton>
         </CommandBar>
@@ -74,13 +87,14 @@
                 <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
                 <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}" Margin="0 0 0 30"/>
             </Grid>
-            <FlipView UseTouchAnimationsForAllNavigation="True" ItemsSource="{Binding InspectionUserControls}" Grid.Column="1" Margin="10 0 10 29" Width="Auto">
+                <Frame Content="{Binding FrameContent}" Width="Auto" HorizontalAlignment="Left" Grid.Column="1" Margin="10 0 10 29"/>
+                <!--<FlipView UseTouchAnimationsForAllNavigation="True" ItemsSource="{Binding InspectionUserControls}" Grid.Column="1" Margin="10 0 10 29" Width="Auto">
                 <FlipView.ItemTemplate>
                     <DataTemplate>
                         <Frame Content="{Binding}" Width="Auto" HorizontalAlignment="Left"/>
                     </DataTemplate>
                 </FlipView.ItemTemplate>
-            </FlipView>
+            </FlipView>-->
             <Grid Grid.Column="2" Margin="20 0 0 30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

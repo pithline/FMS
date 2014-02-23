@@ -21,8 +21,48 @@ namespace Eqstra.VehicleInspection.ViewModels
         private Eqstra.BusinessLogic.Task _task;
         public VehicleInspectionPageViewModel()
         {
-            this.InspectionUserControls = new ObservableCollection<UserControl>();
-            this.CustomerDetails = new CustomerDetails();
+            try
+            {
+                this.InspectionUserControls = new ObservableCollection<UserControl>();
+                this.CustomerDetails = new CustomerDetails();
+                this.PrevViewStack = new Stack<UserControl>();
+                LoadDemoAppointments();
+                this.CompleteCommand = new DelegateCommand(() => { }, () => { return this.NextViewStack.Count == 1; });
+                this.NextCommand = new DelegateCommand(() =>
+                {
+
+                    this.PrevViewStack.Push(this.NextViewStack.Pop());
+                    this.FrameContent = this.NextViewStack.Peek();
+                    CompleteCommand.RaiseCanExecuteChanged();
+                    NextCommand.RaiseCanExecuteChanged();
+                    PreviousCommand.RaiseCanExecuteChanged();
+                }, () =>
+                {
+                    return this.NextViewStack.Count > 1;
+                });
+
+                this.PreviousCommand = new DelegateCommand(() =>
+                {
+                    var item = this.PrevViewStack.Pop();
+                    this.FrameContent = item;
+                    this.NextViewStack.Push(item);
+                    CompleteCommand.RaiseCanExecuteChanged();
+                    PreviousCommand.RaiseCanExecuteChanged();
+                    NextCommand.RaiseCanExecuteChanged();
+                }, () =>
+                {
+                    return this.PrevViewStack.Count > 0;
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        private void LoadDemoAppointments()
+        {
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
@@ -83,7 +123,71 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.InspectionUserControls.Add(new CMechanicalCondUserControl());
                 this.InspectionUserControls.Add(new CPOIUserControl());
             }
+            NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
+            this.FrameContent = this.inpectionUserControls[0];
         }
+
+        private UserControl frameContent;
+
+        public UserControl FrameContent
+        {
+            get { return frameContent; }
+            set { SetProperty(ref frameContent, value); }
+        }
+
+        private DelegateCommand completeCommand;
+
+        public DelegateCommand CompleteCommand
+        {
+            get { return completeCommand; }
+            set { SetProperty(ref completeCommand, value); }
+        }
+
+
+        private DelegateCommand nextCommand;
+
+        public DelegateCommand NextCommand
+        {
+            get { return nextCommand; }
+            set
+            {
+                SetProperty(ref nextCommand, value);
+            }
+        }
+
+        private DelegateCommand previousCommand;
+
+        public DelegateCommand PreviousCommand
+        {
+            get { return previousCommand; }
+            set { SetProperty(ref previousCommand, value); }
+        }
+
+
+        private Stack<UserControl> nextViewStack;
+
+        public Stack<UserControl> NextViewStack
+        {
+            get { return nextViewStack; }
+            set
+            {
+                SetProperty(ref nextViewStack, value);
+                //NextCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private Stack<UserControl> prevViewStack;
+
+        public Stack<UserControl> PrevViewStack
+        {
+            get { return prevViewStack; }
+            set
+            {
+                SetProperty(ref prevViewStack, value);
+                //PreviousCommand.RaiseCanExecuteChanged();
+            }
+        }
+
 
         private ObservableCollection<UserControl> inpectionUserControls;
 
