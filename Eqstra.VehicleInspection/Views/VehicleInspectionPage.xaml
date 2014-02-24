@@ -130,7 +130,13 @@
                                         </StackPanel>
                                         <StackPanel Margin="10 10" Grid.Row="2">
                                             <TextBlock Text="Inspection Result" Style="{StaticResource TextHeaderStyle}"/>
-                                            <TextBlock Text="{Binding InspectionResult}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
+                                                <ListView SelectionMode="None" ItemsSource="{Binding InspectionResult}" >
+                                                    <ListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding}" TextWrapping="WrapWholeWords"/>
+                                                        </DataTemplate>
+                                                    </ListView.ItemTemplate>
+                                                </ListView>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>

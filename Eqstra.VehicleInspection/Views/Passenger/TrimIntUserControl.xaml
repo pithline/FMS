@@ -8,9 +8,7 @@
     x:Class="Eqstra.VehicleInspection.Views.TrimIntUserControl"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d"
-    d:DesignHeight="900"
-    d:DesignWidth="900" >
+    mc:Ignorable="d" >
 
     <UserControl.Resources>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
