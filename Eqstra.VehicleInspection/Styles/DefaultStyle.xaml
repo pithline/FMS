@@ -16,6 +16,9 @@
     <Style TargetType="AppBarToggleButton">
         <Setter Property="RequestedTheme" Value="Dark"/>
     </Style>
+    <Style x:Key="SnapshotButtonStyle" TargetType="Button" BasedOn="{StaticResource TransparentBtn}">
+        
+    </Style>
     <Style TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
