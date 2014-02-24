@@ -207,9 +207,10 @@
     </Style>
     <Style x:Key="TextHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#FFA6A6A6"/>
     </Style>
     <Style x:Key="TextContentStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
     <Style TargetType="ToggleSwitch">
         <Setter Property="FontFamily" Value="Century Gothic"/>
@@ -431,9 +432,9 @@
                                 <VisualState x:Name="PointerFocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid HorizontalAlignment="Stretch">
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="0" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <ContentPresenter x:Name="HeaderContentPresenter"
@@ -445,7 +446,7 @@
                                           FontWeight="Light"
                                           VerticalAlignment="Center"
                                           AutomationProperties.AccessibilityView="Raw" />
-                            <Grid Grid.Column="1" Margin="{TemplateBinding Padding}" HorizontalAlignment="Right">
+                            <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="7" />
@@ -453,20 +454,20 @@
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter x:Name="OffContentPresenter"
                                               MinWidth="65"
-                                              Margin="6,5,0,16"
+                                              Margin="0,5,0,16"
                                               Opacity="0"
                                               IsHitTestVisible="False"
-                                              Content="{TemplateBinding OffContent}"
+                                              Content="No"
                                               ContentTemplate="{TemplateBinding OffContentTemplate}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               AutomationProperties.AccessibilityView="Raw" />
                                 <ContentPresenter x:Name="OnContentPresenter"
                                               MinWidth="65"
-                                              Margin="6,5,0,16"
+                                              Margin="0,5,0,16"
                                               Opacity="0"
                                               IsHitTestVisible="False"
-                                              Content="{TemplateBinding OnContent}"
+                                              Content="Yes"
                                               ContentTemplate="{TemplateBinding OnContentTemplate}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
