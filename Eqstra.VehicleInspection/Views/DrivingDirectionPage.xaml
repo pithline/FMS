@@ -82,7 +82,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
+                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
             </Grid>
             <Grid Grid.Column="1" Margin="20 0 0 0">
@@ -90,7 +90,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Driving Directions" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
+                <TextBlock Text="Driving Directions" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
