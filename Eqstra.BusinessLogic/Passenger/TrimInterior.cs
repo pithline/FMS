@@ -10,6 +10,19 @@ namespace Eqstra.BusinessLogic.Passenger
 {
     public class TrimInterior : ValidatableBindableBase
     {
+        public TrimInterior()
+        {
+            this.InternalTrimImgList = new ObservableCollection<ImageCapture>();
+            this.RRDoorTrimImgList = new ObservableCollection<ImageCapture>();
+            this.LRDoorTrimImgList = new ObservableCollection<ImageCapture>();
+            this.RFDoorTrimImgList = new ObservableCollection<ImageCapture>();
+            this.LFDoorTrimImgList = new ObservableCollection<ImageCapture>();
+            this.DriverSeatImgList = new ObservableCollection<ImageCapture>();
+            this.PassengerSeatImgList = new ObservableCollection<ImageCapture>();
+            this.RearSeatImgList = new ObservableCollection<ImageCapture>();
+            this.DashImgList = new ObservableCollection<ImageCapture>();
+            this.CarpetImgList = new ObservableCollection<ImageCapture>();
+        }
         private ObservableCollection<ImageCapture> internalTrimImgList;
         public ObservableCollection<ImageCapture> InternalTrimImgList
         {
@@ -86,8 +99,6 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return carpetImgList; }
             set { SetProperty(ref carpetImgList, value); }
         }
-
-
 
         private string internalTrimComment;
 
