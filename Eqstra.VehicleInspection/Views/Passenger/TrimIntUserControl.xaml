@@ -60,7 +60,7 @@
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
                     <TextBox Text="{Binding Path=InternalTrimComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
-                    <GridView Grid.Row="1" Grid.Column="4" x:Name="GVIT" ItemsSource="{Binding Model.InternalTrimImgList,Mode=TwoWay}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}">
+                    <GridView Grid.Row="1" Grid.Column="4" x:Name="GVIT" ItemsSource="{Binding Model.InternalTrimImgList,Mode=TwoWay}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}" Height="40" Width="140">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Orientation="Horizontal"/>
@@ -68,7 +68,7 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Width="90" Height="90"/>
+                                <Image Source="{Binding ImagePath,Mode=TwoWay}"/>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

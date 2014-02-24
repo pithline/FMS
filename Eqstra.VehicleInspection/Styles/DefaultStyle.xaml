@@ -230,12 +230,14 @@
         <Setter Property="Foreground" Value="#FF666666" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="FontFamily" Value="Century Gothic" />
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="FontSize" Value="20" />
+        <Setter Property="Height" Value="40"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="Padding" Value="0,10,0,0"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleSwitch">
