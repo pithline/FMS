@@ -106,16 +106,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 if (this._inspection != null)
                 {
-                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                    this.customerDetails.CaseNumber = this._inspection.CaseNumber;
-                    this.customerDetails.Status = this._inspection.Status;
-                    this.customerDetails.StatusDueDate = this._inspection.StatusDueDate;
-                    this.customerDetails.Address = this.customer.Address;
-                    this.customerDetails.AllocatedTo = this._inspection.AllocatedTo;
-                    this.customerDetails.Name = this.customer.Name;
-                    this.customerDetails.CellNumber = this._inspection.CellNumber;
-                    this.customerDetails.CaseType = this._inspection.CaseType;
+                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
+                    this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
+                    this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
+                    this.CustomerDetails.Status = this._inspection.Status;
+                    this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
+                    this.CustomerDetails.Address = this.Customer.Address;
+                    this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
+                    this.CustomerDetails.Name = this.Customer.Name;
+                    this.CustomerDetails.CellNumber = this._inspection.CellNumber;
+                    this.CustomerDetails.CaseType = this._inspection.CaseType;
+                    this.CustomerDetails.EmailId = this.Customer.EmailId;
                 }
             }
             catch (Exception)

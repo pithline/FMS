@@ -57,7 +57,7 @@ namespace Eqstra.BusinessLogic
         public string CaseNumber
         {
             get { return caseNumber; }
-            set { caseNumber = value; }
+            set { SetProperty(ref caseNumber, value); }
         }
 
         private CaseTypeEnum caseType;

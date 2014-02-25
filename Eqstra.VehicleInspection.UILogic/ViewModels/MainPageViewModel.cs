@@ -41,6 +41,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
                 },                    
             };
+
+            this.BingWeatherCommand = new DelegateCommand(() =>
+            {
+                    
+            });
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -72,6 +77,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref appointments, value); }
         }
 
+        public DelegateCommand BingWeatherCommand { get; set; }
 
     }
 }

@@ -216,6 +216,11 @@
                 </Border>
 
                 <Border BorderBrush="#FFE0E0E0" Grid.Row="3" Margin="0 20 0 0" BorderThickness="1" Background="White">
+                	<Interactivity:Interaction.Behaviors>
+                		<Core:EventTriggerBehavior EventName="PointerPressed" >
+                			<Core:CallMethodAction MethodName="BingWeatherCommand"  />
+                		</Core:EventTriggerBehavior>
+                	</Interactivity:Interaction.Behaviors>
                     <Grid Width="200" VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>

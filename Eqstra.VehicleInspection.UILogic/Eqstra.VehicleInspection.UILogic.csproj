@@ -102,6 +102,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Popups\SnapshotsViewer.xaml.cs">
+      <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Commercial\CabTrimInterUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CAccessoriesUserControlViewModel.cs" />
@@ -135,7 +138,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Popups\SnapshotsViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>

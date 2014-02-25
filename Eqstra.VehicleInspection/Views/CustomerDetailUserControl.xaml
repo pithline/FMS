@@ -84,9 +84,12 @@
 					<Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
                     </Button>
                     <Button Command="{Binding MakeIMCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding EmailId}" Style="{StaticResource TransparentBtn}">
-					<Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                        <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
                     </Button>
-                    <Button Style="{StaticResource TransparentBtn}">
+                    <Button Style="{StaticResource TransparentBtn}" Command="{Binding MailToCommand,Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding EmailId}">
+                        <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                    </Button>
+                    <Button Command="{Binding LocateCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding Address}" Style="{StaticResource TransparentBtn}">
 					<Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
                     </Button>
                     <Button Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">

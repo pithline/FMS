@@ -19,13 +19,30 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
            this.MakeSkypeCallCommand = DelegateCommand<string>.FromAsyncHandler(async (number) =>
                {
-                   await Launcher.LaunchUriAsync(new Uri("skype:" + number + "?call"));
+                   await Launcher.LaunchUriAsync(new Uri("audiocall-skype-com:" + number));
                }, (number) => { return !string.IsNullOrEmpty(number); });
-          
+
+           this.MailToCommand = DelegateCommand<string>.FromAsyncHandler(async (email) =>
+               {
+                   await Launcher.LaunchUriAsync(new Uri("mailto:"+email));
+               }, (email) => { return !string.IsNullOrEmpty(email); });
+
+           this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
+               {
+                   await Launcher.LaunchUriAsync(new Uri("bingmaps:?where="+address));
+               }, (address) =>
+               {
+                   return !string.IsNullOrEmpty(address);
+               });
        }
+       public DelegateCommand<string> MailToCommand { get; set; }
 
        public DelegateCommand<string> MakeIMCommand { get; set; }
 
+       public DelegateCommand<string> LocateCommand { get; set; }
+
        public DelegateCommand<string> MakeSkypeCallCommand { get; set; }
+
+       
     }
 }

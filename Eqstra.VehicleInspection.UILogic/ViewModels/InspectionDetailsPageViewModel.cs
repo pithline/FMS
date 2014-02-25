@@ -138,6 +138,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.customerDetails.Name = this.customer.Name;
                     this.customerDetails.CellNumber = this.inspection.CellNumber;
                     this.customerDetails.CaseType = this.inspection.CaseType;
+                    this.customerDetails.EmailId = this.customer.EmailId;
                 }
             }
             catch (Exception)
