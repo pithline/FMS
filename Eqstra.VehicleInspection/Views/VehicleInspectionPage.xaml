@@ -84,7 +84,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
+                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}" Margin="0 0 0 30"/>
             </Grid>
                 <Frame Content="{Binding FrameContent}" Width="Auto" HorizontalAlignment="Left" Grid.Column="1" Margin="10 0 10 29"/>
@@ -95,12 +95,12 @@
                     </DataTemplate>
                 </FlipView.ItemTemplate>
             </FlipView>-->
-            <Grid Grid.Column="2" Margin="20 0 0 30">
+            <Grid Grid.Column="2" Margin="0 0 0 30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Inspection History" Style="{StaticResource GroupHeaderStyle}" Margin="0 10"/>
+                <TextBlock Text="Inspection History" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <ListView SelectionMode="None" ItemsSource="{Binding InspectionHistList}" Grid.Row="1">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -133,7 +133,7 @@
                                                 <ListView SelectionMode="None" ItemsSource="{Binding InspectionResult}" >
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
-                                                            <TextBlock Text="{Binding}" TextWrapping="WrapWholeWords"/>
+                                                            <TextBlock Text="{Binding}" TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
                                                         </DataTemplate>
                                                     </ListView.ItemTemplate>
                                                 </ListView>
