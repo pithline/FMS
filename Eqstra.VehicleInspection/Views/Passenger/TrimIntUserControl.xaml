@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="160"/>
                         <ColumnDefinition Width="60"/><!--Button Column-->
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
@@ -51,11 +51,6 @@
                     <TextBlock Text="Internal Trim" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch x:Name="InternalTrimSwitch" IsOn="{Binding Path=Model.IsInternalTrim,Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Grid.Row="1" Grid.Column="2" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVIT}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimSwitch}" Margin="5 0" Style="{StaticResource TransparentBtn}">
-                    	<Button.Transitions>
-                    		<TransitionCollection>
-                    			<EdgeUIThemeTransition/>
-                    		</TransitionCollection>
-                    	</Button.Transitions>
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
                     <TextBox Text="{Binding Path=InternalTrimComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
@@ -67,7 +62,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -86,7 +83,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -105,7 +104,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -125,7 +126,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -145,7 +148,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -165,7 +170,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -185,7 +192,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -205,7 +214,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -225,7 +236,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -245,7 +258,9 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform"/>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

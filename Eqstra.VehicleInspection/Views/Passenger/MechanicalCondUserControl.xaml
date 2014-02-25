@@ -9,10 +9,23 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <TextBlock Text="Mechanical Condition" Style="{StaticResource SubheaderTextBlockStyle}" />
-        
-            <TextBox Margin="0 20 0 0" AcceptsReturn="True" Height="500"/>
-        
-    </StackPanel>
+    <Grid HorizontalAlignment="Stretch" MinWidth="800">
+        <Grid Grid.Column="0" Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Mechanical Condition" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" HorizontalAlignment="Stretch">
+                <Grid Margin="20 10" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Remarks" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBox Margin="0 20 0 0" AcceptsReturn="True" Height="500" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

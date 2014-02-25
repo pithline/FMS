@@ -30,7 +30,7 @@
                     <SymbolIcon Symbol="Accept"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarSeparator/>
+            <!--<AppBarSeparator/>-->
             <AppBarButton Label="Next" Command="{Binding NextCommand}">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Next"/>
@@ -62,9 +62,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
