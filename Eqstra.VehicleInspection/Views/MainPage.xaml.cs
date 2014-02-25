@@ -56,17 +56,6 @@ namespace Eqstra.VehicleInspection.Views
            
         }
 
-        void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
-        {
-            SettingsCommand command = new SettingsCommand("resetpassword", "Reset Password", (handler) =>
-            {
-                ResetPasswordPage page = new ResetPasswordPage();
-                page.Show();
-            });
-
-            args.Request.ApplicationCommands.Add(command); 
-        }
-
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -108,13 +97,13 @@ namespace Eqstra.VehicleInspection.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
-            SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
-            SettingsPane.GetForCurrentView().CommandsRequested -= MainPage_CommandsRequested;
+            
         }
 
         #endregion
