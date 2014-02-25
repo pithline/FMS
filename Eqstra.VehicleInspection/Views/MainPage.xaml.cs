@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -52,6 +53,18 @@ namespace Eqstra.VehicleInspection.Views
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+           
+        }
+
+        void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand command = new SettingsCommand("resetpassword", "Reset Password", (handler) =>
+            {
+                ResetPasswordPage page = new ResetPasswordPage();
+                page.Show();
+            });
+
+            args.Request.ApplicationCommands.Add(command); 
         }
 
         /// <summary>
@@ -95,11 +108,13 @@ namespace Eqstra.VehicleInspection.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
+            SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
+            SettingsPane.GetForCurrentView().CommandsRequested -= MainPage_CommandsRequested;
         }
 
         #endregion
