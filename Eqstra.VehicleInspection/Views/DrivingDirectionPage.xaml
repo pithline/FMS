@@ -21,17 +21,17 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Start Driving" >
                     <AppBarButton.Icon>
-                        <SymbolIcon/>
+                        <SymbolIcon Symbol="Directions"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Start Inspection" Command="{Binding GoToVehicleInspectionCommand}">
             	
                 <AppBarButton.Icon>
-                    <SymbolIcon/>
+                    <SymbolIcon Symbol="SetLockScreen"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton Label="Arrived" Icon="Bullets"/>
+            <AppBarButton Label="Arrived" Icon="Flag"/>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
     <Grid Style="{StaticResource LayoutRootStyle}">
