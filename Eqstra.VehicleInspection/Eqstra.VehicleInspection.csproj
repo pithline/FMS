@@ -141,6 +141,9 @@
     <Compile Include="Views\Commercial\CTyresUserControl.xaml.cs">
       <DependentUpon>CTyresUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ImageMarkupPage.xaml.cs">
+      <DependentUpon>ImageMarkupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Passenger\AccessoriesUserControl.xaml.cs">
       <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
     </Compile>
@@ -274,6 +277,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ImageMarkupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Passenger\AccessoriesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -352,6 +359,9 @@
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.NetCore">
       <HintPath>..\packages\Unity.3.0.1304.1\lib\NetCore45\Microsoft.Practices.Unity.NetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="WriteableBitmapEx.WinRT">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
