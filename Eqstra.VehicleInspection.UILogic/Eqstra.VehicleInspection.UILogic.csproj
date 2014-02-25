@@ -111,6 +111,7 @@
     <Compile Include="ViewModels\Commercial\CommercialVehicleDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CPOIUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CTyresUserControlViewModel.cs" />
+    <Compile Include="ViewModels\CustomerDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\DrivingDirectionPageViewModel.cs" />
     <Compile Include="ViewModels\InspectionDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
