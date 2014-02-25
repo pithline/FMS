@@ -10,136 +10,181 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     >
 
-    <StackPanel>
-        <TextBlock Text="Tyre Condition" Style="{StaticResource SubheaderTextBlockStyle}" />
-        <Grid>
+    <Grid HorizontalAlignment="Stretch" MinWidth="1150">
+        <Grid Grid.Column="0" Margin="0 0 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="0 10">
-                <TextBlock Text="RF" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5 0"/>
-                <StackPanel Orientation="Horizontal" Margin="5 0">
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </StackPanel>
-                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <GridView x:Name="GVRadio" ItemsSource="{Binding Model.RadioImgList}" Margin="5 0">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 10">
-                <TextBlock Text="LR" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5 0"/>
-                <StackPanel Orientation="Horizontal" Margin="5 0">
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </StackPanel>
-                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <GridView ItemsSource="{Binding Model.RadioImgList}" Margin="5 0">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 10">
-                <TextBlock Text="RR" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5 0"/>
-                <StackPanel Orientation="Horizontal" Margin="5 0">
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </StackPanel>
-                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <GridView ItemsSource="{Binding Model.RadioImgList}" Margin="5 0">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0 10">
-                <TextBlock Text="LR" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5 0"/>
-                <StackPanel Orientation="Horizontal" Margin="5 0">
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </StackPanel>
-                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <GridView  ItemsSource="{Binding Model.RadioImgList}" Margin="5 0">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0 10">
-                <TextBlock Text="Spare" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5 0"/>
-                <StackPanel Orientation="Horizontal" Margin="5 0">
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </StackPanel>
-                <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <TextBox Width="200" VerticalAlignment="Center" Margin="5 0"/>
-                <GridView  ItemsSource="{Binding Model.RadioImgList}" Margin="5 0">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
+            <TextBlock Text="Tyre Condition" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" HorizontalAlignment="Stretch">
+                <Grid Margin="20 10" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="60"/>
+                        <!--Button Column-->
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Good/Fair/Poor" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="Tread Depth" Grid.Row="0" Grid.Column="3" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+                    <TextBlock Text="Make" Grid.Row="0" Grid.Column="4" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+                    <TextBlock Text="Comment" Grid.Row="0" Grid.Column="5" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="RF" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="1" Grid.Column="1">
+                        <RadioButton Content="G" Margin="0 0 10 0"/>
+                        <RadioButton Content="F" Margin="0 0 10 0"/>
+                        <RadioButton Content="P" Margin="0 0 10 0"/>
+                    </StackPanel>
+                    <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3" />
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="4"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="5"/>
+                    <GridView x:Name="GVRadio" ItemsSource="{Binding Model.RadioImgList}" Grid.Row="1" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <TextBlock Text="LR" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="2" Grid.Column="1">
+                        <RadioButton Content="G" Margin="0 0 10 0"/>
+                        <RadioButton Content="F" Margin="0 0 10 0"/>
+                        <RadioButton Content="P" Margin="0 0 10 0"/>
+                    </StackPanel>
+                    <Button Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Center" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="4"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="5"/>
+                    <GridView ItemsSource="{Binding Model.RadioImgList}" Grid.Row="2" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <TextBlock Text="RR" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="3" Grid.Column="1">
+                        <RadioButton Content="G" Margin="0 0 10 0"/>
+                        <RadioButton Content="F" Margin="0 0 10 0"/>
+                        <RadioButton Content="P" Margin="0 0 10 0"/>
+                    </StackPanel>
+                    <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"  Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="4"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="5"/>
+                    <GridView ItemsSource="{Binding Model.RadioImgList}" Grid.Row="3" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <TextBlock Text="LR" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="4" Grid.Column="1">
+                        <RadioButton Content="G" Margin="0 0 10 0"/>
+                        <RadioButton Content="F" Margin="0 0 10 0"/>
+                        <RadioButton Content="P" Margin="0 0 10 0"/>
+                    </StackPanel>
+                    <Button Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="4"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="5"/>
+                    <GridView  ItemsSource="{Binding Model.RadioImgList}" Grid.Row="4" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <TextBlock Text="Spare" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="5" Grid.Column="1">
+                        <RadioButton Content="G" Margin="0 0 10 0"/>
+                        <RadioButton Content="F" Margin="0 0 10 0"/>
+                        <RadioButton Content="P" Margin="0 0 10 0"/>
+                    </StackPanel>
+                    <Button Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVRadio}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="4"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="5"/>
+                    <GridView  ItemsSource="{Binding Model.RadioImgList}" Grid.Row="5" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
+                                    <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </Border>
         </Grid>
-    </StackPanel>
+    </Grid>
+
 </UserControl>
