@@ -102,7 +102,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150">
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150" Command="{Binding GoToImageMarkupPageCommand}">
                                 <Image Source="ms-appx:///Assets/car_marks.png" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>

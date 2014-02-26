@@ -65,9 +65,7 @@
             <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Center"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
+                       />
             <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" HorizontalAlignment="Left"/>
             <local:ProfileUserControl Grid.Column="2"/>
         </Grid>

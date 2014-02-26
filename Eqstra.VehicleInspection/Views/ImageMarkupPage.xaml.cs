@@ -1,4 +1,6 @@
-﻿using Eqstra.VehicleInspection.Common;
+﻿using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.Common;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,8 +12,11 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Input;
 using Windows.UI.Input.Inking;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,11 +34,25 @@ namespace Eqstra.VehicleInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class ImageMarkupPage : Page
+    public sealed partial class ImageMarkupPage : VisualStateAwarePage
     {
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        #region Private Vars
+        private InkManager _inkManager;
+        private uint _penID;
+        private uint _touchID;
+        private Windows.Foundation.Point _previousContactPt;
+        private Windows.Foundation.Point currentContactPt;
+        private double x1;
+        private double y1;
+        private double x2;
+        private double y2;
+        private WriteableBitmap _image;
+        private string _fileName;
+        private Windows.UI.Color _brushColor;
+        #endregion
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -59,14 +78,15 @@ namespace Eqstra.VehicleInspection.Views
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            
+
             this._inkManager = new InkManager();
 
             //#FF003f82
-            this._brushColor = Windows.UI.Color.FromArgb(0xFF, 0xFF, 0x00, 0x00);
+            this._brushColor = Colors.Blue;
             this.Loaded += DrawImageView_Loaded;
         }
 
+        #region NavHelper Handlers
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -93,6 +113,7 @@ namespace Eqstra.VehicleInspection.Views
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
+        #endregion
 
         #region NavigationHelper registration
 
@@ -108,23 +129,8 @@ namespace Eqstra.VehicleInspection.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
-            this.DefaultViewModel["AppTitle"] = string.Empty;
-            if ("ms-appx:///Assets/physical_report.png".Equals( e.Parameter))
-            {
-                this.DefaultViewModel["AppTitle"] = "MasculoSkeletol Details";
-            }
-            else
-            {
-                this.DefaultViewModel["AppTitle"] = "Cardio Respiratory Report";
-            }
-            //var page = ("ms-appx-web:///Data/" + (string)navigationParameter);
-            //this.wView.Navigate(new Uri(page));       
-            this._fileName = (string)e.Parameter;
-            this.PanelCanvas.Background = new ImageBrush()
-            {
-                ImageSource = new BitmapImage(new Uri(this._fileName)),
-                Stretch = Stretch.Fill
-            };
+
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -134,29 +140,22 @@ namespace Eqstra.VehicleInspection.Views
 
         #endregion
 
-          #region Private Vars
-        private InkManager _inkManager;
-        private uint _penID;
-        private uint _touchID;
-        private Windows.Foundation.Point _previousContactPt;
-        private Windows.Foundation.Point currentContactPt;
-        private double x1;
-        private double y1;
-        private double x2;
-        private double y2;
-        private WriteableBitmap _image;
-        private string _fileName;
-        private Windows.UI.Color _brushColor;
-        #endregion
-    
+
 
         void DrawImageView_Loaded(object sender, RoutedEventArgs e)
         {
-            var height = Convert.ToInt32(this.PanelCanvas.ActualHeight);
-            var width = Convert.ToInt32(this.PanelCanvas.ActualWidth);
+            try
+            {
+                var height = Convert.ToInt32(this.PanelCanvas.ActualHeight);
+                var width = Convert.ToInt32(this.PanelCanvas.ActualWidth);
 
-            this._image = BitmapFactory.New(width, height);
-            this._image.GetBitmapContext();
+                this._image = BitmapFactory.New(width, height);
+                this._image.GetBitmapContext();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
@@ -187,12 +186,12 @@ namespace Eqstra.VehicleInspection.Views
             }
         }
 
-        private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+     async   private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             if (e.Pointer.PointerId == _penID)
             {
                 Windows.UI.Input.PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
-                
+
 
                 // Pass the pointer information to the InkManager. 
                 _inkManager.ProcessPointerUp(pt);
@@ -202,7 +201,7 @@ namespace Eqstra.VehicleInspection.Views
             {
                 // Process touch input
                 PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
-                
+
 
                 // Pass the pointer information to the InkManager. 
                 _inkManager.ProcessPointerUp(pt);
@@ -210,6 +209,17 @@ namespace Eqstra.VehicleInspection.Views
 
             _touchID = 0;
             _penID = 0;
+
+            if (_inkManager.GetStrokes().Count > 0)
+            {
+                var backMarkup = await ApplicationData.Current.RoamingFolder.CreateFileAsync("markupimage_" + this.listView.SelectedIndex, CreationCollisionOption.ReplaceExisting);
+
+                //buffer.Seek(0);
+                using (var os = await backMarkup.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    await _inkManager.SaveAsync(os);
+                }
+            }
 
             // Call an application-defined function to render the ink strokes.
             e.Handled = true;
@@ -238,7 +248,7 @@ namespace Eqstra.VehicleInspection.Views
                         Y1 = y1,
                         X2 = x2,
                         Y2 = y2,
-                        StrokeThickness = 5,
+                        StrokeThickness = 3.0,
                         Stroke = new SolidColorBrush(this._brushColor)
                     };
                     _previousContactPt = currentContactPt;
@@ -279,7 +289,7 @@ namespace Eqstra.VehicleInspection.Views
                         Y1 = y1,
                         X2 = x2,
                         Y2 = y2,
-                        StrokeThickness = 4.0,
+                        StrokeThickness = 3.0,
                         Stroke = new SolidColorBrush(this._brushColor)
                     };
                     _previousContactPt = currentContactPt;
@@ -338,23 +348,121 @@ namespace Eqstra.VehicleInspection.Views
                     WriteableBitmapExtensions.BlendMode.Alpha
                     );
                 //}
+
+
+                var filename = Guid.NewGuid() + ".jpg";
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             }
-
-            var filename = Guid.NewGuid() + ".jpg";
-            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
-           // await background.SaveToFile(file, BitmapEncoder.JpegEncoderId);
-
-            var app = (App)Application.Current;
-            //   app.SettingsData.DrawImages.Add(file); //save the file in the list
-
-            //  this.Frame.Navigate(typeof(WorkOrderDetails));
-
-            //var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("sign.png", CreationCollisionOption.ReplaceExisting);
-            //await this._image.SaveToFile(file, BitmapEncoder.PngEncoderId);
-            //await Launcher.LaunchFileAsync(file);
-
+            //await background.SaveToFile(file, BitmapEncoder.JpegEncoderId);
         }
 
+      
+
+        async private void Snapshot_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                //save image to buffer
+                this.Progress.Opacity = 1;
+                
+                //var buffer = new InMemoryRandomAccessStream();
+                //await this._inkManager.SaveAsync(buffer);
+               
+
+                ClearCanvas();
+
+                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + this.listView.SelectedIndex) as StorageFile;
+                if (bf != null)
+                {
+                    using (var inputStream = await bf.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        if (inputStream.Size > 0)
+                        {
+                            await _inkManager.LoadAsync(inputStream);
+                            foreach (var item in _inkManager.GetStrokes())
+                            {
+                                RenderStroke(item);
+                            }
+                        }
+                    }
+                }
+
+                this.Progress.Opacity = 0;
+            }
+            catch (Exception ex)
+            {
+                this.Progress.Opacity = 0;
+
+                new MessageDialog(ex.Message, "Error").ShowAsync();
+            }
+        }
+
+        private void ClearCanvas()
+        {
+            try
+            {
+                _inkManager.Mode = Windows.UI.Input.Inking.InkManipulationMode.Erasing;
+                var strokes = _inkManager.GetStrokes();
+                for (int i = 0; i < strokes.Count; i++)
+                {
+                    strokes[i].Selected = true;
+                }
+                _inkManager.DeleteSelected();
+                PanelCanvas.Children.Clear();
+                _inkManager.Mode = InkManipulationMode.Inking;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void RenderStroke(InkStroke stroke, double width = 3.0, double opacity = 1)
+        {
+            // Each stroke might have more than one segments
+            var renderingStrokes = stroke.GetRenderingSegments();
+
+            //
+            // Set up the Path to insert the segments
+            var path = new Windows.UI.Xaml.Shapes.Path();
+            path.Data = new PathGeometry();
+            ((PathGeometry)path.Data).Figures = new PathFigureCollection();
+
+            var pathFigure = new PathFigure();
+            pathFigure.StartPoint = renderingStrokes.First().Position;
+            ((PathGeometry)path.Data).Figures.Add(pathFigure);
+
+            //
+            // Foreach segment, we add a BezierSegment
+            foreach (var renderStroke in renderingStrokes)
+            {
+                pathFigure.Segments.Add(new BezierSegment()
+                {
+                    Point1 = renderStroke.BezierControlPoint1,
+                    Point2 = renderStroke.BezierControlPoint2,
+                    Point3 = renderStroke.Position
+                });
+            }
+
+            // Set the general options (i.e. Width and Color)
+            path.StrokeThickness = width;
+            path.Stroke = new SolidColorBrush(Colors.Blue);
+
+            // Opacity is used for highlighter
+            path.Opacity = opacity;
+
+            PanelCanvas.Children.Add(path);
+        }
+
+        async private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCanvas();
+           var file =await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + this.listView.SelectedIndex);
+           if (file !=null)
+           {
+              await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
+           }
+        }
 
     }
 }
