@@ -23,6 +23,9 @@ using Windows.Storage;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.Views;
 using Eqstra.VehicleInspection.ViewModels;
+using Windows.UI.ApplicationSettings;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Eqstra.VehicleInspection.UILogic.Services;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -34,6 +37,7 @@ namespace Eqstra.VehicleInspection
     sealed partial class App : MvvmAppBase
     {
         private readonly IUnityContainer _container = new UnityContainer();
+        public IEventAggregator EventAggregator { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -52,19 +56,25 @@ namespace Eqstra.VehicleInspection
             return Task.FromResult<object>(null);
         }
 
-      async  protected override void OnInitialize(IActivatedEventArgs args)
+        async protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
+            EventAggregator = new EventAggregator();
+
             var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-            if (db ==null)
+            if (db == null)
             {
-                var packDb  =await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-               // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             _container.RegisterInstance(NavigationService);
+            _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
+
+            _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
+
             ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel());
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
@@ -81,6 +91,32 @@ namespace Eqstra.VehicleInspection
         protected override object Resolve(Type type)
         {
             return _container.Resolve(type);
+        }
+
+        protected override IList<Windows.UI.ApplicationSettings.SettingsCommand> GetSettingsCommands()
+        {
+            var settingsCommands = new List<SettingsCommand>();
+            var accountService = _container.Resolve<IAccountService>();
+            if (accountService.SignedInUser != null)
+            {
+                settingsCommands.Add(new SettingsCommand("resetpassword", "Reset Password", (handler) =>
+                            {
+                                ResetPasswordPage page = new ResetPasswordPage();
+                                page.Show();
+                            }));
+            }
+
+            settingsCommands.Add(new SettingsCommand("privacypolicy", "Privacy Policy", (handler) =>
+                {
+
+                }));
+            settingsCommands.Add(new SettingsCommand("help", "Help", (handler) =>
+                {
+
+                }));
+            // args.Request.ApplicationCommands.Add(command); 
+
+            return settingsCommands;
         }
     }
 }

@@ -362,6 +362,9 @@
     <Reference Include="Mazik.WinRT.Components">
       <HintPath>..\packages\Mzk.WinRT.Components.1.0.0.3\lib\netcore45\Mazik.WinRT.Components.winmd</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
+      <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.StoreApps">
       <HintPath>..\packages\Prism.StoreApps.1.1.0\lib\windows8\Microsoft.Practices.Prism.StoreApps.dll</HintPath>
     </Reference>
