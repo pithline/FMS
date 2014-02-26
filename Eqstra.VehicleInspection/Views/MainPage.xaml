@@ -23,7 +23,11 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Assign"/>
+                <AppBarButton Label="Assign">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Accept"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
