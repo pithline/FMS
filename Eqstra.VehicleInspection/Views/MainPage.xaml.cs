@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -53,7 +54,7 @@ namespace Eqstra.VehicleInspection.Views
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-           
+
         }
 
         /// <summary>
@@ -97,13 +98,13 @@ namespace Eqstra.VehicleInspection.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
-            
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
-            
+
         }
 
         #endregion
@@ -111,10 +112,15 @@ namespace Eqstra.VehicleInspection.Views
         private void ProfileUserControl_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var element = sender as FrameworkElement;
-            if (element!=null)
+            if (element != null)
             {
                 FlyoutBase.ShowAttachedFlyout(element);
             }
+        }
+
+        async private void WeatherInfo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("bingweather:"));
         }
     }
 }

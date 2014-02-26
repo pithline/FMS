@@ -691,30 +691,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="schedule:HeaderTitleBarView">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="schedule:HeaderTitleBarView">
-                    <Grid Visibility="{TemplateBinding Visibility}"
-                          x:Name="Header_Grid"
-                          HorizontalAlignment="Left" 
-                          Margin="0,-5,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="70"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="txtBlock1"  DataContext="{TemplateBinding SelectedDates}" 
-                                   FontWeight="ExtraLight"
-                                   FontSize="34" 
-                                   Foreground="Red"
-                                   VerticalAlignment="Bottom"
-                                   Visibility="Collapsed"
-                                   Grid.Column="1"
-                                   Margin="0,2,0,0" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+   
 </ResourceDictionary>

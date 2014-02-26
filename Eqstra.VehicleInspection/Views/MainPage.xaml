@@ -219,7 +219,7 @@
                     </Grid>
                 </Border>
 
-                <Border BorderBrush="#FFE0E0E0" Grid.Row="3" Margin="0 20 0 0" BorderThickness="1" Background="White">
+                <Border BorderBrush="#FFE0E0E0" Grid.Row="3" Margin="0 20 0 0" BorderThickness="1" Background="White" Tapped="WeatherInfo_Tapped">
                 	<Interactivity:Interaction.Behaviors>
                 		<Core:EventTriggerBehavior EventName="PointerPressed" >
                 			<Core:CallMethodAction MethodName="BingWeatherCommand"  />
