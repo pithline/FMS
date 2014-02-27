@@ -58,10 +58,10 @@ namespace Eqstra.ServiceScheduling
             base.OnInitialize(args);
             EventAggregator = new EventAggregator();
 
-            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstraservicescheduling.sqlite") as StorageFile;
+            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
             if (db == null)
             {
-                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstraservicescheduling.sqlite");
+                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
                 // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
