@@ -75,7 +75,7 @@ namespace Eqstra.VehicleInspection
 
             _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
 
-            ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel());
+            ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);

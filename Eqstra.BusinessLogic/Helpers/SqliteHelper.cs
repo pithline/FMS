@@ -66,6 +66,10 @@ namespace Eqstra.BusinessLogic.Helpers
             await this.Connection.InsertAllAsync(items);
         }
 
+        async public Task<int> UpdateSingleRecordAsync<T>(T obj)
+        {
+           return await this.Connection.UpdateAsync(obj);
+        }
 
     }
 }

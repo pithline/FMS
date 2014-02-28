@@ -46,29 +46,30 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         private void LoadDemoAppointments()
         {
-            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            {
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from engine",
-                    Location = "Cape Town",
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddHours(2),
-                    ReadOnly = true,
-                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+            this.CustomerDetails.Appointments = AppSettingData.Appointments;
+            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            //{
+            //    new ScheduleAppointment(){
+            //        Subject = "Inspection at Peter Johnson",
+            //        Notes = "some noise from engine",
+            //        Location = "Cape Town",
+            //        StartTime = DateTime.Now,
+            //        EndTime = DateTime.Now.AddHours(2),
+            //        ReadOnly = true,
+            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-                },
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from differential",
-                    Location = "Cape Town",
-                     ReadOnly = true,
-                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-                },                    
-            };
+            //    },
+            //    new ScheduleAppointment(){
+            //        Subject = "Inspection at Peter Johnson",
+            //        Notes = "some noise from differential",
+            //        Location = "Cape Town",
+            //         ReadOnly = true,
+            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+            //    },                    
+            //};
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)

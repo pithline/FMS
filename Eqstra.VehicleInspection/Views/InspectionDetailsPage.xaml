@@ -103,12 +103,12 @@
                                 </grid:GridTemplateColumn>
                                 <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="AllotedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridDateTimeColumn MappingName="ConfirmedDate" HeaderText="CONFIRMED DATE" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CONFIRMED TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="mm/dd/yyyy" HeaderText="CONFIRMED DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn HeaderText="CONFIRMED TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}"/>
+                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
                                 </grid:GridTemplateColumn>

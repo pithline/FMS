@@ -11,8 +11,10 @@ namespace Eqstra.BusinessLogic
 {
     public class Task : ValidatableBindableBase
     {
+
         private string caseNumber;
 
+        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }

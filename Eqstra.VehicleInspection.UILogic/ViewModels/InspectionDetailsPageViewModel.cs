@@ -33,7 +33,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.Navigate("DrivingDirection", inspection);
                 return System.Threading.Tasks.Task.FromResult<object>(null);
             }, () =>
-                { return this.inspection != null; }
+                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.Completed); }
             );
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
@@ -63,13 +63,25 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
+            IEnumerable<Eqstra.BusinessLogic.Task> list = null;
+            if (navigationParameter.Equals("AwaitingInspections"))
+            {
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
+            }
+            else if (navigationParameter.Equals("Total"))
+            {
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ConfirmedDate.Date == DateTime.Today);
+            }
+            else if (navigationParameter.Equals("InProgress"))
+            {
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+            }
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.Name;
                 item.Address = cust.Address;
-                this.inspectionList.Add(item);
+                this.InspectionList.Add(item);
             }
         }
 

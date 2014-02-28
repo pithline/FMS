@@ -3,6 +3,7 @@ using Eqstra.ServiceScheduling.UILogic.Services;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Unity;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -36,6 +37,9 @@ namespace Eqstra.ServiceScheduling
 
         private readonly IUnityContainer _container = new UnityContainer();
         public IEventAggregator EventAggregator { get; set; }
+
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
