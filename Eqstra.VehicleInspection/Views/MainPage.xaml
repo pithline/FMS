@@ -100,7 +100,7 @@
                             <TextBlock Text="{Binding TotalCount}" Style="{StaticResource TotalNumberStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                         </Grid>
                         <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="PointerPressed">
+                            <Core:EventTriggerBehavior EventName="Tapped">
                                 <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="Total"/>
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
@@ -200,12 +200,12 @@
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
                         <TextBlock Text="{Binding AwaitingInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="Tasks awaiting confirmation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="PointerPressed">
-                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspections"/>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
                     </Grid>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspections"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                 </Border>
 
                 <Border BorderBrush="#FFE0E0E0" Grid.Row="2" Margin="0 20 0 0" BorderThickness="1" Background="White">
@@ -221,20 +221,20 @@
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
                         <TextBlock Text="{Binding MyInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="My Collection Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="PointerPressed">
-                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="InProgress"/>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
                     </Grid>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="InProgress"/>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                 </Border>
 
                 <Border BorderBrush="#FFE0E0E0" Grid.Row="3" Margin="0 20 0 0" BorderThickness="1" Background="White" Tapped="WeatherInfo_Tapped">
-                	<Interactivity:Interaction.Behaviors>
-                		<Core:EventTriggerBehavior EventName="PointerPressed" >
-                			<Core:CallMethodAction MethodName="BingWeatherCommand"  />
-                		</Core:EventTriggerBehavior>
-                	</Interactivity:Interaction.Behaviors>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="PointerPressed" >
+                            <Core:CallMethodAction MethodName="BingWeatherCommand"  />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                     <Grid Width="200" VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
