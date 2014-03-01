@@ -34,7 +34,7 @@ namespace Eqstra.VehicleInspection
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : MvvmAppBase
+    sealed partial class App : MvvmAppBase,IDisposable
     {
         private readonly IUnityContainer _container = new UnityContainer();
         public IEventAggregator EventAggregator { get; set; }
@@ -117,6 +117,11 @@ namespace Eqstra.VehicleInspection
             // args.Request.ApplicationCommands.Add(command); 
 
             return settingsCommands;
+        }
+
+        public void Dispose()
+        {
+            this._container.Dispose();
         }
     }
 }
