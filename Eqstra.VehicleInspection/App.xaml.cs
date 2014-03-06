@@ -26,6 +26,7 @@ using Eqstra.VehicleInspection.ViewModels;
 using Windows.UI.ApplicationSettings;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Eqstra.VehicleInspection.UILogic.Services;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -49,11 +50,20 @@ namespace Eqstra.VehicleInspection
         }
 
 
-        protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
+      async  protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate("Login", args.Arguments);
+            var accountService = _container.Resolve<IAccountService>();
+            var result = await accountService.VerifyUserCredentialsAsync();
+            if (result != null)
+            {
+               NavigationService .Navigate("Main", result);
+            }
+            else
+            {
+                NavigationService.Navigate("Login", args.Arguments); 
+            }
             Window.Current.Activate();
-            return Task.FromResult<object>(null);
+          
         }
 
         async protected override void OnInitialize(IActivatedEventArgs args)
@@ -74,6 +84,9 @@ namespace Eqstra.VehicleInspection
             _container.RegisterInstance(SessionStateService);
 
             _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IIdentityService,IdentityServiceProxy>(new ContainerControlledLifetimeManager());
+
 
             ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>

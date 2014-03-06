@@ -109,6 +109,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\IdentityServiceProxy.cs" />
+    <Compile Include="Services\IIdentityService.cs" />
+    <Compile Include="Services\RoamingCredentialStore.cs" />
     <Compile Include="ViewModels\Commercial\CabTrimInterUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CAccessoriesUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CGlassUserControlViewModel.cs" />

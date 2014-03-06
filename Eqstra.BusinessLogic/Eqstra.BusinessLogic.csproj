@@ -106,9 +106,12 @@
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Enums\TaskStatusEnum.cs" />
     <Compile Include="Enums\VehicleTypeEnum.cs" />
+    <Compile Include="EventArgs\UserChangedEventArgs.cs" />
     <Compile Include="Helpers\SqliteHelper.cs" />
     <Compile Include="ImageCapture.cs" />
     <Compile Include="InspectionHistory.cs" />
+    <Compile Include="LoggedInUser.cs" />
+    <Compile Include="LogonResult.cs" />
     <Compile Include="Passenger\PAccessories.cs">
       <SubType>Code</SubType>
     </Compile>

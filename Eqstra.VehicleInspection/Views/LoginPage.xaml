@@ -65,6 +65,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -83,6 +85,8 @@
                             </StackPanel>
                         </Button.Content>
                     </Button>
+                    <CheckBox IsChecked="{Binding ShouldSaveCredential,Mode=TwoWay}" Grid.Row="2" Content="Save Credentials"/>
+                    <TextBlock Text="{Binding ErrorMessage}" TextWrapping="WrapWholeWords" Width="470" Grid.ColumnSpan="3"  Grid.Row="3" Foreground="Crimson"  Style="{StaticResource InfoBoxTitleStyle}"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

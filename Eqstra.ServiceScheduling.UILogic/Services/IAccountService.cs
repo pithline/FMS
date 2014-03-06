@@ -10,7 +10,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
   public  interface IAccountService
     {
          UserInfo SignedInUser { get; }
-         void SignInAsync();
+         Task<Tuple<bool,string>> SignInAsync(string userId, string password, bool isCredentialStore);
 
     }
 }

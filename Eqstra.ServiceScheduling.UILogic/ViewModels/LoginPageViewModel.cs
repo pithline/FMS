@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.ServiceScheduling.UILogic.Services;
+using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,41 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
     public class LoginPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
-        public LoginPageViewModel(INavigationService navigationService)
+        private IAccountService _accountService;
+        public LoginPageViewModel(INavigationService navigationService,IAccountService accountService)
         {
             _navigationService = navigationService;
+            _accountService = accountService;
+
             LoginCommand = DelegateCommand.FromAsyncHandler(
-                () => { navigationService.Navigate("Main", null); return Task.FromResult<object>(null); },
+                async () =>
+                {
+                    var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
+                    if (result.Item1)
+                    {
+                        navigationService.Navigate("Main", null); 
+                    }
+                    else
+                    {
+                        ErrorMessage = result.Item2;
+                    }
+                },
+
                 () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
-        public DelegateCommand LoginCommand { get;private set; }
+        public DelegateCommand LoginCommand { get; private set; }
 
         private string username;
         [RestorableState]
         public string UserName
         {
             get { return username; }
-            set {
-                if(SetProperty(ref username, value))
-                    LoginCommand.RaiseCanExecuteChanged(); }
+            set
+            {
+                if (SetProperty(ref username, value))
+                    LoginCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private string password;
@@ -37,9 +55,27 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public string Password
         {
             get { return password; }
-            set { 
-                if(SetProperty(ref password, value))
-                    LoginCommand.RaiseCanExecuteChanged(); }
+            set
+            {
+                if (SetProperty(ref password, value))
+                    LoginCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private bool shouldSaveCredential;
+
+        public bool ShouldSaveCredential
+        {
+            get { return shouldSaveCredential; }
+            set { SetProperty(ref shouldSaveCredential, value); }
+        }
+
+        private string errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { SetProperty(ref errorMessage, value); }
         }
 
 
