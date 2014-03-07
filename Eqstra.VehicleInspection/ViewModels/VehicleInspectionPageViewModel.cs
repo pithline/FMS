@@ -240,7 +240,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 if (this._task != null)
                 {
-                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
+                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
                     this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
                     this.CustomerDetails.CaseNumber = this._task.CaseNumber;
                     this.CustomerDetails.Status = this._task.Status;

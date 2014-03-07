@@ -15,6 +15,9 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Eqstra.ServiceScheduling_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -110,6 +113,9 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Views\ConfirmationPage.xaml.cs">
+      <DependentUpon>ConfirmationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerDetailUserControl.xaml.cs">
       <DependentUpon>CustomerDetailUserControl.xaml</DependentUpon>
     </Compile>
@@ -128,6 +134,9 @@
     </Compile>
     <Compile Include="Views\ServiceSchedulingPage.xaml.cs">
       <DependentUpon>ServiceSchedulingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplierSelectionPage.xaml.cs">
+      <DependentUpon>SupplierSelectionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ConfirmationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerDetailUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +213,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ServiceSchedulingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplierSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

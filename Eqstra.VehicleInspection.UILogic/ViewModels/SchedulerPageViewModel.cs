@@ -12,7 +12,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
        public SchedulerPageViewModel()
        {
-
+         
        }
 
        private CustomerDetails customerDetails;
@@ -27,8 +27,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
        {
            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           this.customerDetails = navigationParameter as CustomerDetails;    
+           this.CustomerDetails = navigationParameter as CustomerDetails;    
           
        }
+
     }
 }

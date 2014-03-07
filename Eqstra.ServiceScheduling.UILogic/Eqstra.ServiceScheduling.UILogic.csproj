@@ -113,9 +113,13 @@
     <Compile Include="Services\IdentityServiceProxy.cs" />
     <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\RoamingCredentialStore.cs" />
+    <Compile Include="ViewModels\ConfirmationPageViewModel.cs" />
     <Compile Include="ViewModels\CustomerDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
+    <Compile Include="ViewModels\ServiceSchedulingViewModel.cs" />
+    <Compile Include="ViewModels\SupplierSelectionPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.StoreApps">

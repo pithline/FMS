@@ -51,11 +51,20 @@ namespace Eqstra.ServiceScheduling
 
         }
 
-        protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
+        async protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate("Login", args.Arguments);
+            var accountService = _container.Resolve<IAccountService>();
+            var result = await accountService.VerifyUserCredentialsAsync();
+            if (result != null)
+            {
+                NavigationService.Navigate("Main", result);
+            }
+            else
+            {
+                NavigationService.Navigate("Login", args.Arguments);
+            }
             Window.Current.Activate();
-            return Task.FromResult<object>(null);
+
         }
 
         async protected override void OnInitialize(IActivatedEventArgs args)
@@ -101,7 +110,7 @@ namespace Eqstra.ServiceScheduling
         {
             var settingsCommands = new List<SettingsCommand>();
             var accountService = _container.Resolve<IAccountService>();
-           
+
             if (accountService.SignedInUser != null)
             {
                 //settingsCommands.Add(new SettingsCommand("resetpassword", "Reset Password", (handler) =>
