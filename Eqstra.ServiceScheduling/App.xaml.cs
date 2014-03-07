@@ -2,6 +2,7 @@
 using Eqstra.ServiceScheduling.UILogic.Services;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
@@ -74,7 +75,9 @@ namespace Eqstra.ServiceScheduling
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
 
-            //_container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
 
             //ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel());
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
@@ -98,6 +101,7 @@ namespace Eqstra.ServiceScheduling
         {
             var settingsCommands = new List<SettingsCommand>();
             var accountService = _container.Resolve<IAccountService>();
+           
             if (accountService.SignedInUser != null)
             {
                 //settingsCommands.Add(new SettingsCommand("resetpassword", "Reset Password", (handler) =>

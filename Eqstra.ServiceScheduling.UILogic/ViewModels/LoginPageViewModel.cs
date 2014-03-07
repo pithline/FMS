@@ -20,20 +20,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             _accountService = accountService;
 
             LoginCommand = DelegateCommand.FromAsyncHandler(
-                async () =>
-                {
-                    var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
-                    if (result.Item1)
-                    {
-                        navigationService.Navigate("Main", null); 
-                    }
-                    else
-                    {
-                        ErrorMessage = result.Item2;
-                    }
-                },
+                 async () =>
+                 {
+                     var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
+                     if (result.Item1 != null)
+                     {
+                         navigationService.Navigate("Main", result.Item1);
+                     }
+                     else
+                     {
+                         ErrorMessage = result.Item2;
+                     }
+                 },
 
-                () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
         public DelegateCommand LoginCommand { get; private set; }

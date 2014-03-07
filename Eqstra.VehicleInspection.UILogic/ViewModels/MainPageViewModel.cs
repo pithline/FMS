@@ -139,8 +139,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref myInspectionCount, value); }
         }
 
-
-
         private Eqstra.BusinessLogic.Task task;
 
         public Eqstra.BusinessLogic.Task InspectionTask

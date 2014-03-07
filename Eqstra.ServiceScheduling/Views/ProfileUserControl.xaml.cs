@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,23 +13,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Eqstra.ServiceScheduling.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : VisualStateAwarePage
+    public sealed partial class ProfileUserControl : UserControl
     {
-        public MainPage()
+        public ProfileUserControl()
         {
             this.InitializeComponent();
         }
 
-        private void WeatherInfo_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            var element = sender as FrameworkElement;
+            if (element!=null)
+            {
+                FlyoutBase.ShowAttachedFlyout(element); 
+            }
         }
     }
 }
