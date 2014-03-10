@@ -35,13 +35,14 @@ namespace Eqstra.VehicleInspection.BackgroundTask
                                CloudCover = item["cloudcover"].ToString(),
                                Humidity = item["humidity"].ToString(),
                                PrecipMM = item["precipMM"].ToString(),
-                               Temp_C = item["item_C"].ToString(),
+                               Temp_C = item["temp_C"].ToString(),
                                Temp_F = item["temp_F"].ToString(),
                                WeatherIconUrl = item["weatherIconUrl"][0]["value"].ToString(),
                                WeatherDesc = item["weatherDesc"][0]["value"].ToString(),
                            }).First();
 
             await SqliteHelper.Storage.DropTableAsync<WeatherInfo>();
+            await SqliteHelper.Storage.CreateTableAsync<WeatherInfo>();
             await SqliteHelper.Storage.InsertSingleRecordAsync(weather);
         }
     }
