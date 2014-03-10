@@ -41,6 +41,7 @@ namespace Eqstra.VehicleInspection.UILogic
             try
             {
                 CameraCaptureUI cam = new CameraCaptureUI();
+                
                 var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
                 if (file != null)
                 {

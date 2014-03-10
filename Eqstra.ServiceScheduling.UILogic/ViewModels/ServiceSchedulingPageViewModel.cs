@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Capture;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -22,6 +23,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             _navigationService = navigationService;
             _settingsFlyout = settingsFlyout;
+
             this.CustomerDetails = new CustomerDetails();
 
             this.GoToSupplierSelectionCommand = new DelegateCommand(() =>
@@ -33,6 +35,16 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 settingsFlyout.Title = x + " Address";
                 settingsFlyout.ShowIndependent();
+            });
+
+            this.ODOReadingPictureCommand = new DelegateCommand(async () =>
+            {
+                CameraCaptureUI cam = new CameraCaptureUI();
+                var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (file != null)
+                {
+                    ODOReadingImagePath = file.Path;
+                }
             });
 
         }
