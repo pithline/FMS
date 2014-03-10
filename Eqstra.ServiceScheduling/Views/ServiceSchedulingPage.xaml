@@ -142,9 +142,9 @@
                             <ComboBox Header="Select Destination" Grid.Row="5" Margin="0 20" Width="250" HorizontalAlignment="Left"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="6">
-                                <TextBox AcceptsReturn="True" Height="200" Header="Address" Width="250" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True"/>
-                                <Button Content="Add" VerticalAlignment="Top"/>
-                                <Button Content="Edit" VerticalAlignment="Top"/>
+                                <TextBox AcceptsReturn="True" Text="{Binding Address}" Height="200" Header="Address" Width="250" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True"/>
+                                <AppBarButton  VerticalAlignment="Top" Icon="Add" RequestedTheme="Light" Command="{Binding AddAddressCommand}" CommandParameter="Add"/>
+                                <AppBarButton  VerticalAlignment="Top" Icon="Edit" RequestedTheme="Light" Command="{Binding AddAddressCommand}" CommandParameter="Edit"/>
                             </StackPanel>
 
                             <TextBlock Style="{StaticResource FormTextStyle}" Text="Please Provide Delivery Requirements" Grid.Row="7" Margin="0 20" Grid.ColumnSpan="2"/>

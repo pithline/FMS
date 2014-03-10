@@ -1,5 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Helpers;
 using Eqstra.ServiceScheduling.UILogic.Services;
+using Eqstra.ServiceScheduling.UILogic.ViewModels;
+using Eqstra.ServiceScheduling.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -88,7 +90,9 @@ namespace Eqstra.ServiceScheduling
             _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
 
-            //ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel());
+            _container.RegisterType<SettingsFlyout, AddAddressFlyoutPage>(new ContainerControlledLifetimeManager());
+
+            ViewModelLocator.Register(typeof(ServiceSchedulingPage).ToString(), () => new ServiceSchedulingPageViewModel(this.NavigationService,new AddAddressFlyoutPage()));
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.ViewModels.{0}ViewModel,Eqstra.ServiceScheduling.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
@@ -105,6 +109,8 @@ namespace Eqstra.ServiceScheduling
         {
             return _container.Resolve(type);
         }
+
+        
 
         protected override IList<Windows.UI.ApplicationSettings.SettingsCommand> GetSettingsCommands()
         {

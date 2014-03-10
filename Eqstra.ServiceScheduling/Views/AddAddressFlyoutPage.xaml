@@ -1,0 +1,33 @@
+﻿<SettingsFlyout
+    x:Class="Eqstra.ServiceScheduling.Views.AddAddressFlyoutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.ServiceScheduling.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"    
+    IconSource="/Assets/StoreLogo.scale-100.png"
+    Title="Add Address"
+    d:DesignWidth="346">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ComboBox Header="Country :" Width="250"/>
+        <TextBox Header="Street/Post Box :" AcceptsReturn="True" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True" Grid.Row="1" Height="200" Margin="0 10"/>
+        <ComboBox Header="Zip/Postcode :" Grid.Row="2" Margin="0 10"/>
+        <ComboBox Header="Suburb :" Grid.Row="3" Margin="0 10"/>
+        <ComboBox Header="City :" Grid.Row="4" Margin="0 10"/>
+        <ComboBox Header="Province :" Grid.Row="5" Margin="0 10"/>
+        
+    </Grid>
+    
+</SettingsFlyout>

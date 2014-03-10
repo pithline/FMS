@@ -118,7 +118,7 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
-    <Compile Include="ViewModels\ServiceSchedulingViewModel.cs" />
+    <Compile Include="ViewModels\ServiceSchedulingPageViewModel.cs" />
     <Compile Include="ViewModels\SupplierSelectionPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
