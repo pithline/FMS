@@ -1,0 +1,125 @@
+﻿<prism:VisualStateAwarePage
+    x:Name="pageRoot"
+    x:Class="Eqstra.ServiceScheduling.Views.SupplierSelectionPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.ServiceScheduling.Views"
+    xmlns:common="using:Eqstra.ServiceScheduling.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">My Application</x:String>
+    </Page.Resources>
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="Next" Command="{Binding GoToConfirmationCommand}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Next"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back button, Logo, Page Title and User Profile -->
+
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+				Style="{StaticResource NavigationBackButtonNormalStyle}"
+				VerticalAlignment="Center"
+				AutomationProperties.Name="Back"
+				AutomationProperties.AutomationId="BackButton"
+				AutomationProperties.ItemType="Navigation Button"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
+            </StackPanel>
+            <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
+        </Grid>
+
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="20 0">
+                    <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Details"/>
+                    <local:CustomerDetailUserControl DataContext="{Binding CustomerDetails}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="20 0">
+                    <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Preferred Supplier Selection"/>
+                    <Grid>
+                        
+                        <Grid Margin="20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Please Select Preferred Supplier" Grid.ColumnSpan="2" Margin="0 5" Style="{StaticResource TextContentStyle}"/>
+                            <ComboBox Header="Country" Grid.Row="1" Height="50" Width="250" HorizontalAlignment="Left">
+                            </ComboBox>
+                            <ComboBox Header="Provice" Grid.Row="2" Height="50" HorizontalAlignment="Left" Width="250" Margin="0 10"/>
+                            <ComboBox Header="City" Grid.Row="1" Grid.Column="1" Height="50" HorizontalAlignment="Left" Width="250" Margin="10 10"/>
+                            <ComboBox Header="Suburb" Grid.Row="2" Grid.Column="1" Height="50" HorizontalAlignment="Left" Width="250" Margin="10 10"/>
+                            <ComboBox Header="Region" Grid.Row="3" Height="50" HorizontalAlignment="Left" Width="250" Margin="0 10"/>
+                            
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Preferred Suppliers" Grid.Row="4" Grid.ColumnSpan="2"/>
+
+                            <TextBox PlaceholderText="Type to filter..." Grid.Row="5" Grid.ColumnSpan="2" Margin="10 10 0 10" Width="180" HorizontalAlignment="Left" />
+                            <grid:SfDataGrid ItemsSource="{Binding Suppliers}" ColumnSizer="Star" AutoGenerateColumns="False" Grid.Row="6" Margin="0 20" Grid.ColumnSpan="2" Height="300">
+                                <grid:SfDataGrid.Columns>
+                                    <grid:GridTextColumn MappingName="Name" HeaderText="Name"/>
+                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="Contact Name"/>
+                                    <grid:GridTextColumn MappingName="ContactNumber" HeaderText="Contact Number"/>
+                                </grid:SfDataGrid.Columns>
+                            </grid:SfDataGrid>
+                           
+                        </Grid>
+            
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer >
+
+    </Grid>
+</prism:VisualStateAwarePage>
