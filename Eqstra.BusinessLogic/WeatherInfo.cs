@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-    public class WeatherInfo : BindableBase
+    public class WeatherInfo : ValidatableBindableBase
     {
         private int id;
         [PrimaryKey, Unique]

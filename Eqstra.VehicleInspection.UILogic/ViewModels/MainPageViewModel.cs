@@ -87,8 +87,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             SyncData();
 
-            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
+            var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
+             this.WeatherInfo = weather.First();
 
+            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
@@ -140,6 +142,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
 
         }
+
+        private WeatherInfo weatherInfo;
+
+        public WeatherInfo WeatherInfo
+        {
+            get { return weatherInfo; }
+            set { SetProperty(ref weatherInfo, value); }
+        }
+
 
         private int total;
 
