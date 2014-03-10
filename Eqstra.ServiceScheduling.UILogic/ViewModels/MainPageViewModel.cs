@@ -65,7 +65,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-            SyncData();
+          
 
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
 
@@ -121,17 +121,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
         }
 
-        async private void SyncData()
-        {
-            await BackgroundExecutionManager.RequestAccessAsync();
-            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
-            builder.TaskEntryPoint = "Eqstra.VehicleInspection.BackgroundTask.SilentSync";
-            builder.SetTrigger( new TimeTrigger(15, false));
-            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-            builder.Name = "SilentSync";
-            var task = builder.Register();            
-            
-        }
+       
 
 
 

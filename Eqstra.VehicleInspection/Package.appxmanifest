@@ -16,6 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.VehicleInspection.App">
       <m2:VisualElements DisplayName="Eqstra Vehicle Inspection" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Eqstra Vehicle Inspection" ForegroundText="dark" BackgroundColor="#FFFFFF" ToastCapable="true">
+        <m2:LockScreen Notification="badge" BadgeLogo="Assets\eqstra_badge_logo.png" />
         <m2:DefaultTile ShortName="Eqstra">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
@@ -30,6 +31,14 @@
         </m2:InitialRotationPreference>
         <m2:ApplicationView MinWidth="default" />
       </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Eqstra.VehicleInspection.BackgroundTask.SilentSync">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

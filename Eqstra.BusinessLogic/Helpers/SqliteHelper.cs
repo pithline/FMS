@@ -42,34 +42,38 @@ namespace Eqstra.BusinessLogic.Helpers
             }
         }
 
-        public async void DropTable<T>() where T : new()
+        public async Task<int> DropTableAsync<T>() where T : new()
         {
-
-            await this.Connection.DropTableAsync<T>();
+            return await this.Connection.DropTableAsync<T>();
         }
 
         public Task<List<T>> LoadTableAsync<T>()
-            where T : ValidatableBindableBase,new()
-            
+            where T : ValidatableBindableBase, new()
         {
             return this.Connection.Table<T>().ToListAsync();
         }
 
-        public Task<T> GetSingleRecordAsync<T>(Expression<Func<T,bool>> criteria)
-            where T:ValidatableBindableBase,new()
+        public Task<T> GetSingleRecordAsync<T>(Expression<Func<T, bool>> criteria)
+            where T : ValidatableBindableBase, new()
         {
-           return this.connection.Table<T>().Where(criteria).FirstOrDefaultAsync();
+            return this.connection.Table<T>().Where(criteria).FirstOrDefaultAsync();
         }
 
-        public async void InsertAllAsync<T>(IEnumerable<T> items) where T : new()
+        public async Task<int> InsertAllAsync<T>(IEnumerable<T> items) where T : new()
         {
-            await this.Connection.InsertAllAsync(items);
+            return await this.Connection.InsertAllAsync(items);
+        }
+
+        public async Task<int> InsertSingleRecordAsync<T>(T obj)
+        {
+            return await this.Connection.InsertAsync(obj);
         }
 
         async public Task<int> UpdateSingleRecordAsync<T>(T obj)
         {
-           return await this.Connection.UpdateAsync(obj);
+            return await this.Connection.UpdateAsync(obj);
         }
+
 
     }
 }

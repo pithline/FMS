@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
@@ -78,6 +79,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+
+            SyncData();
+
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
           
             foreach (Eqstra.BusinessLogic.Task item in list)
@@ -113,6 +117,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
             this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals( DateTime.Today));
+        }
+        async private void SyncData()
+        {
+            await BackgroundExecutionManager.RequestAccessAsync();
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.TaskEntryPoint = "Eqstra.VehicleInspection.BackgroundTask.SilentSync";
+            builder.SetTrigger(new TimeTrigger(15, false));
+            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            builder.Name = "SilentSync";
+            var task = builder.Register();
+
         }
 
         private int total;

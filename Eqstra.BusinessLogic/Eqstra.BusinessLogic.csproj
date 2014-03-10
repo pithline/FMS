@@ -125,6 +125,7 @@
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleDetails.cs" />
+    <Compile Include="WeatherInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.StoreApps">
