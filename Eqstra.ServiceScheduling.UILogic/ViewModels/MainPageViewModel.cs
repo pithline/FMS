@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
@@ -54,7 +55,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             this.StartSchedulingCommand = new DelegateCommand<object>((obj) =>
             {
-                _navigationService.Navigate("ServiceScheduling",this.InspectionTask);
+                _navigationService.Navigate("ServiceScheduling", this.InspectionTask);
             });
 
 
@@ -63,7 +64,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            
+
+            SyncData();
+
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
 
             foreach (Eqstra.BusinessLogic.Task item in list)
@@ -96,7 +99,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 var vehicleDetails = await SqliteHelper.Storage.GetSingleRecordAsync<VehicleDetails>(x => x.RegistrationNumber == item.RegistrationNumber);
                 var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == item.RegistrationNumber);
 
-                this.PoolofTasks.Add(new DriverTask { 
+                this.PoolofTasks.Add(new DriverTask
+                {
                     CellNumber = item.CellNumber,
                     RegistrationNumber = item.RegistrationNumber,
                     CaseNumber = item.CaseNumber,
@@ -114,10 +118,22 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     ModelYear = vehicle.ModelYear
                 });
             }
-        
+
         }
 
-       
+        async private void SyncData()
+        {
+            await BackgroundExecutionManager.RequestAccessAsync();
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.TaskEntryPoint = "Eqstra.VehicleInspection.BackgroundTask.SilentSync";
+            builder.SetTrigger( new TimeTrigger(15, false));
+            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            builder.Name = "SilentSync";
+            var task = builder.Register();            
+            
+        }
+
+
 
 
 
