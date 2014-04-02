@@ -225,6 +225,10 @@
     <Content Include="Assets\odo_meter.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
+    <Content Include="Assets\truck_front.png" />
+    <Content Include="Assets\truck_left.png" />
+    <Content Include="Assets\truck_marks.png" />
+    <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

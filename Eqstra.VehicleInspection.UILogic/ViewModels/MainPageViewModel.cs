@@ -88,7 +88,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
-             this.WeatherInfo = weather.First();
+             this.WeatherInfo = weather.FirstOrDefault();
 
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
             foreach (Eqstra.BusinessLogic.Task item in list)
