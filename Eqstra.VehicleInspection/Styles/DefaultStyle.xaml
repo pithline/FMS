@@ -227,6 +227,11 @@
     <Style x:Key="FormTextStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
         <Setter Property="FontSize" Value="16"/>
     </Style>
+    <Style x:Key="FormItalicTextStyle" TargetType="TextBlock" BasedOn="{StaticResource FontFamilyStyle}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="Margin" Value="5 2 0 0"/>
+    </Style>
 
     <Style TargetType="ToggleSwitch" x:Key="DamagedToggleSwitch">
         <Setter Property="Foreground" Value="#FF666666" />
