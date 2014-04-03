@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic;
+using Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy;
 
 namespace Eqstra.VehicleInspection.BackgroundTask
 {
@@ -44,6 +45,13 @@ namespace Eqstra.VehicleInspection.BackgroundTask
             await SqliteHelper.Storage.DropTableAsync<WeatherInfo>();
             await SqliteHelper.Storage.CreateTableAsync<WeatherInfo>();
             await SqliteHelper.Storage.InsertSingleRecordAsync(weather);
+
+            //VIServiceProxy.VehicleInspectionServiceClient client = new VIServiceProxy.VehicleInspectionServiceClient();
+            //client.createAccessoriesAsync(new System.Collections.ObjectModel.ObservableCollection<VIServiceProxy.MzkAccessoryContract>
+            //{
+            //   new MzkAccessoryContract{  parmVehicleInsRecID = 5637144576},
+               
+            //});
         }
     }
 }
