@@ -35,14 +35,14 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -66,119 +66,115 @@
             <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Margin="20 0">
-                <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Details"/>
-                <local:CustomerDetailUserControl DataContext="{Binding CustomerDetails}"/>
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+            </Grid>
 
-            <StackPanel Grid.Column="1" Margin="20 0">
-                <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Confirmation"/>
-                <Grid>                    
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid >
+            <Grid Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Left" MinWidth="800">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Confirmation" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" HorizontalAlignment="Stretch">
+                    <Grid Margin="20 20 0 10" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.7*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel >
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="ODO Reading"/>
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="ODO Reading"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="ODO Reading"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="ODO Reading Date"/>
+                        <StackPanel Grid.Row="1" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="ODO Reading Date"/>
                             <input:SfDatePicker BorderThickness="0"  Foreground="Gray" IsHitTestVisible="False"/>
                         </StackPanel>
 
 
-                        <StackPanel Grid.Row="2" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Type"/>
+                        <StackPanel Grid.Row="2" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Type"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Service Type"/>
                         </StackPanel>
 
 
-                        <StackPanel Grid.Row="3" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Delivery Option"/>
+                        <StackPanel Grid.Row="3" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Delivery Option"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Delivery Option"/>
                         </StackPanel>
 
 
-                        <StackPanel Grid.Row="4" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Type"/>
+                        <StackPanel Grid.Row="4" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Type"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Service Type"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="5" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Address"/>
+                        <StackPanel Grid.Row="5" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Address"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Address"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="6" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Location Type"/>
+                        <StackPanel Grid.Row="6" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Location Type"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Location Type"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="7" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Additional Work"/>
+                        <StackPanel Grid.Row="7" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Additional Work"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Additional Work"/>
                         </StackPanel>
-                    </Grid>
+                        
 
-                    <Grid Margin="30 0 0 0" Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Margin="0 10">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 10">
                             <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Name"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Name"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Margin="0 10">
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10">
                             <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Contact Name"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Name"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Margin="0 10">
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 10">
                             <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Contact Number"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Number"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="3" Margin="0 10">
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 10">
                             <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Date &amp; Time"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Date &amp; Time"/>                          
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Date &amp; Time"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="4" Margin="0 10">
-                            <DatePicker Header="Service Date (Option 2)" Grid.Row="9" Margin="0 20" />
+                        <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="0 10">
+                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Date (Option 1)"/>
+                            <DatePicker Grid.Row="9" Margin="0 20" />
                         </StackPanel>
-                        <StackPanel Grid.Row="5" Margin="0 10">
-                            <DatePicker Header="Service Date (Option 2)" Grid.Row="9" Margin="0 20" />
+                        <StackPanel Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Margin="0 10" VerticalAlignment="Top">
+                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Date (Option 2)"/>
+                            <DatePicker Grid.Row="9" Margin="0 20" />
                         </StackPanel>
                     </Grid>
-
-                </Grid>
-
-            </StackPanel>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 </prism:VisualStateAwarePage>
