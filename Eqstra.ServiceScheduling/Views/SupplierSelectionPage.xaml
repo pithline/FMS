@@ -32,14 +32,14 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid  Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -66,58 +66,77 @@
         </Grid>
 
 
-        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
-            <Grid Grid.Row="1">
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Auto" VerticalScrollMode="Disabled">
+            <Grid Grid.Row="1" Margin="30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Margin="20 0">
-                    <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Details"/>
-                    <local:CustomerDetailUserControl DataContext="{Binding CustomerDetails}"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                    <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+                </Grid>
 
-                <StackPanel Grid.Column="1" Margin="20 0">
-                    <TextBlock Style="{StaticResource GroupHeaderStyle}" Text="Preferred Supplier Selection"/>
-                    <Grid>
-                        
-                        <Grid Margin="20 0">
+                <Grid Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Left" MinWidth="800">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Preferred Supplier Selection" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                    <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" HorizontalAlignment="Stretch">
+                        <Grid Margin="20 20 0 10" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Please Select Preferred Supplier" Grid.ColumnSpan="2" Margin="0 5" Style="{StaticResource TextContentStyle}"/>
-                            <ComboBox Header="Country" Grid.Row="1" Height="50" Width="250" HorizontalAlignment="Left">
-                            </ComboBox>
-                            <ComboBox Header="Provice" Grid.Row="2" Height="50" HorizontalAlignment="Left" Width="250" Margin="0 10"/>
-                            <ComboBox Header="City" Grid.Row="1" Grid.Column="1" Height="50" HorizontalAlignment="Left" Width="250" Margin="10 10"/>
-                            <ComboBox Header="Suburb" Grid.Row="2" Grid.Column="1" Height="50" HorizontalAlignment="Left" Width="250" Margin="10 10"/>
-                            <ComboBox Header="Region" Grid.Row="3" Height="50" HorizontalAlignment="Left" Width="250" Margin="0 10"/>
-                            
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Preferred Suppliers" Grid.Row="4" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="Please Select the Preferred Suppliers" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4" VerticalAlignment="Top"/>
 
-                            <TextBox PlaceholderText="Type to filter..." Grid.Row="5" Grid.ColumnSpan="2" Margin="10 10 0 10" Width="180" HorizontalAlignment="Left" />
-                            <grid:SfDataGrid ItemsSource="{Binding Suppliers}" ColumnSizer="Star" AutoGenerateColumns="False" Grid.Row="6" Margin="0 20" Grid.ColumnSpan="2" Height="300">
+                            <TextBlock Text="Country" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Provice" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="250" Margin="0 10" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Region" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="250" Margin="0 10" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="City" Grid.Row="1" Grid.Column="3" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Width="250" Margin="10 10" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Suburb" Grid.Row="2" Grid.Column="3" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" Width="250" Margin="10 10" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Preferred Suppliers" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4" Grid.Row="5" VerticalAlignment="Top"/>
+                            <grid:SfDataGrid ItemsSource="{Binding Suppliers}"  AutoGenerateColumns="False" Grid.Row="6" Grid.ColumnSpan="6" Grid.RowSpan="5" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                                 <grid:SfDataGrid.Columns>
-                                    <grid:GridTextColumn MappingName="Name" HeaderText="Name"/>
-                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="Contact Name"/>
-                                    <grid:GridTextColumn MappingName="ContactNumber" HeaderText="Contact Number"/>
+                                    <grid:GridTextColumn MappingName="Name" HeaderText="NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="200" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="200" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="ContactNumber" HeaderText="CONTACT NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="200" HorizontalHeaderContentAlignment="Left"/>
                                 </grid:SfDataGrid.Columns>
                             </grid:SfDataGrid>
-                           
                         </Grid>
-            
-                    </Grid>
-                </StackPanel>
+                    </Border>
+                </Grid>
             </Grid>
         </ScrollViewer >
 
