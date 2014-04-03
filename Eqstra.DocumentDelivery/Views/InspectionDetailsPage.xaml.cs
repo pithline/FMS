@@ -106,7 +106,7 @@ namespace Eqstra.DocumentDelivery.Views
 
         #endregion
 
-        async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
+        private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             try
             {

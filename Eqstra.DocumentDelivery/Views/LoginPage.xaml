@@ -1,16 +1,14 @@
 ﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
-    x:Class="Eqstra.ServiceScheduling.Views.LoginPage"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    x:Class="Eqstra.DocumentDelivery.Views.LoginPage"    
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.ServiceScheduling.Views"
-    
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:local="using:Eqstra.DocumentDelivery.Views"    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"    
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
     <Page.Resources>

@@ -59,7 +59,7 @@ namespace Eqstra.DocumentDelivery
             }
             Window.Current.Activate();
         }
-
+        
         async protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
@@ -89,6 +89,13 @@ namespace Eqstra.DocumentDelivery
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.DocumentDelivery.UILogic.ViewModels.{0}ViewModel,Eqstra.DocumentDelivery.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
                 return Type.GetType(viewModelTypeName);
             });
+
+            
+        }
+
+        protected override object Resolve(Type type)
+        {
+            return _container.Resolve(type);
         }
     }
 }
