@@ -46,7 +46,7 @@ namespace Eqstra.VehicleInspection
         public App()
         {
             this.InitializeComponent();
-
+            
         }
 
 
