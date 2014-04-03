@@ -19,9 +19,9 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Refresh" Click="Refresh_Click">
+                <AppBarButton Label="Undo All" Click="Refresh_Click">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh"/>
+                        <SymbolIcon Symbol="Undo"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
@@ -33,14 +33,14 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -65,31 +65,42 @@
             <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <ListView x:Name="listView" SelectionMode="Single" ItemsSource="{Binding Snapshots}" SelectionChanged="Snapshot_Changed">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding ImagePath}" Width="200" Height="200"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+        <Grid Grid.Row="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Vehicle Markings" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="listView" SelectionMode="Single" ItemsSource="{Binding Snapshots}" SelectionChanged="Snapshot_Changed">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <ProgressBar x:Name="Progress"  IsIndeterminate="True" Margin="0 0 0 10" Opacity="0"/>
-                <Canvas Grid.Row="1" x:Name="PanelCanvas" Margin="10 10 10 90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" PointerPressed="panelcanvas_PointerPressed" PointerReleased="panelcanvas_PointerReleased" PointerMoved="panelcanvas_PointerMoved" PointerExited="panelcanvas_PointerReleased">
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="{Binding SelectedItem.ImagePath, ElementName=listView}" Stretch="UniformToFill"/>
-                    </Canvas.Background>
-                </Canvas>
-            </Grid >
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ProgressBar x:Name="Progress"  IsIndeterminate="True" Margin="0 0 0 10" Opacity="0"/>
+                        <Canvas Grid.Row="1" x:Name="PanelCanvas" Margin="10 10 10 90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" PointerPressed="panelcanvas_PointerPressed" PointerReleased="panelcanvas_PointerReleased" PointerMoved="panelcanvas_PointerMoved" PointerExited="panelcanvas_PointerReleased">
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="{Binding SelectedItem.ImagePath, ElementName=listView}" Stretch="UniformToFill"/>
+                            </Canvas.Background>
+                        </Canvas>
+                    </Grid >
+                </Grid>
+            </Border>
         </Grid>
+        
+       
     </Grid>
 </prism:VisualStateAwarePage>
