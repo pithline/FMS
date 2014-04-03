@@ -17,9 +17,9 @@ namespace Eqstra.VehicleInspection.BackgroundTask
     public sealed class SilentSync : IBackgroundTask
     {
         private const string worldWeatherAPI = "http://api.worldweatheronline.com/free/v1/weather.ashx?format=json&num_of_days=1&key=n5v69mv2e2kmyq93u2m494wt&q=";
-        async public void Run(IBackgroundTaskInstance taskInstance)
+         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            await GetWeatherInfoAsync();
+            //await GetWeatherInfoAsync();
         }
 
         private static async System.Threading.Tasks.Task GetWeatherInfoAsync()
@@ -36,13 +36,14 @@ namespace Eqstra.VehicleInspection.BackgroundTask
                                CloudCover = item["cloudcover"].ToString(),
                                Humidity = item["humidity"].ToString(),
                                PrecipMM = item["precipMM"].ToString(),
-                               Temp_C = item["item_C"].ToString(),
+                               Temp_C = item["temp_C"].ToString(),
                                Temp_F = item["temp_F"].ToString(),
                                WeatherIconUrl = item["weatherIconUrl"][0]["value"].ToString(),
                                WeatherDesc = item["weatherDesc"][0]["value"].ToString(),
                            }).First();
 
             await SqliteHelper.Storage.DropTableAsync<WeatherInfo>();
+            await SqliteHelper.Storage.CreateTableAsync<WeatherInfo>();
             await SqliteHelper.Storage.InsertSingleRecordAsync(weather);
 
             //VIServiceProxy.VehicleInspectionServiceClient client = new VIServiceProxy.VehicleInspectionServiceClient();

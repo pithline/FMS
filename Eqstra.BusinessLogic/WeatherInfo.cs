@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   public class WeatherInfo : BindableBase
+    public class WeatherInfo : ValidatableBindableBase
     {
+        private int id;
+        [PrimaryKey, Unique]
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         private string cloudCover;
 
         public string CloudCover

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,11 @@ namespace Eqstra.BusinessLogic.Helpers
         async public Task<int> UpdateSingleRecordAsync<T>(T obj)
         {
             return await this.Connection.UpdateAsync(obj);
+        }
+
+        public async Task<CreateTablesResult> CreateTableAsync<T>() where T:new()
+        {
+           return await this.Connection.CreateTableAsync<T>();
         }
 
 
