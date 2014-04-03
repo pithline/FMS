@@ -109,7 +109,7 @@
 
                         <StackPanel Grid.Row="1" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="ODO Reading Date"/>
-                            <input:SfDatePicker BorderThickness="0"  Foreground="Gray" IsHitTestVisible="False"/>
+                            <input:SfDatePicker BorderThickness="0"  Foreground="#FF666666" FontSize="18" Margin="-10 0 0 0" IsHitTestVisible="False"/>
                         </StackPanel>
 
 
@@ -144,32 +144,32 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Additional Work"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Additional Work"/>
                         </StackPanel>
-                        
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Name"/>
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" >
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Name"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Name"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Contact Name"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Contact Name"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Name"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Contact Number"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Contact Number"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Number"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Supplier Date &amp; Time"/>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Date &amp; Time"/>
                             <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Date &amp; Time"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="0 10">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Date (Option 1)"/>
+                        <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="0 20 20 0">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Date (Option 1)"/>
                             <DatePicker Grid.Row="9" Margin="0 20" />
                         </StackPanel>
-                        <StackPanel Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Margin="0 10" VerticalAlignment="Top">
-                            <TextBlock Style="{StaticResource FormTextStyle}" Text="Service Date (Option 2)"/>
+                        <StackPanel Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Margin="0 0 20 0" VerticalAlignment="Top">
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Date (Option 2)"/>
                             <DatePicker Grid.Row="9" Margin="0 20" />
                         </StackPanel>
                     </Grid>
