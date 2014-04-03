@@ -122,7 +122,7 @@ xmlns:local="using:Eqstra.ServiceScheduling.Views"
                 </Border>
             </Grid>
 
-            <Border BorderBrush="#FFE0E0E0" Grid.Column="2"  Margin="20 60 20 30" Height="500" VerticalAlignment="Top" BorderThickness="1" Background="White" Tapped="WeatherInfo_Tapped">
+            <Border BorderBrush="#FFE0E0E0" Grid.Column="2"  Margin="20 60 20 30" VerticalAlignment="Stretch" BorderThickness="1" Background="White" Tapped="WeatherInfo_Tapped">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="PointerPressed" >
                         <Core:CallMethodAction MethodName="BingWeatherCommand"  />

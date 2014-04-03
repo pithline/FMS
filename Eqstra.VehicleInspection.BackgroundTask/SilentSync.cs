@@ -16,9 +16,9 @@ namespace Eqstra.VehicleInspection.BackgroundTask
     public sealed class SilentSync : IBackgroundTask
     {
         private const string worldWeatherAPI = "http://api.worldweatheronline.com/free/v1/weather.ashx?format=json&num_of_days=1&key=n5v69mv2e2kmyq93u2m494wt&q=";
-        async public void Run(IBackgroundTaskInstance taskInstance)
+         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            await GetWeatherInfoAsync();
+            //await GetWeatherInfoAsync();
         }
 
         private static async System.Threading.Tasks.Task GetWeatherInfoAsync()
