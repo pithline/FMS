@@ -70,7 +70,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
             else if (navigationParameter.Equals("Total"))
             {
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ConfirmedDate.Date == DateTime.Today);
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ConfirmedDate.Date.Date.Equals( DateTime.Today));
             }
             else if (navigationParameter.Equals("InProgress"))
             {
