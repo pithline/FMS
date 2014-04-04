@@ -21,12 +21,14 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Driving Direction" Icon="Directions" Command="{Binding DrivingDirectionCommand}">
+            <CommandBar.PrimaryCommands>
+
+                
+                    <AppBarButton Label="Save" Icon="Save" Command="{Binding SaveTaskCommand}" Visibility="{Binding SaveVisibility}"/>
+                <AppBarButton Label="Next Step" Command="{Binding NextStepCommand}" Visibility="{Binding NextStepVisibility}"/>
 
 
-                </AppBarButton>
-            </CommandBar.SecondaryCommands>
+            </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -85,7 +87,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <grid:SfDataGrid x:Name="sfDataGrid" ShowBusyIndicator="True" NavigationMode="Row" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid x:Name="sfDataGrid" AllowSorting="False" ShowBusyIndicator="True" NavigationMode="Cell" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>

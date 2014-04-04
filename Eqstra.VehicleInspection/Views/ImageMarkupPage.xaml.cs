@@ -188,41 +188,48 @@ namespace Eqstra.VehicleInspection.Views
 
      async   private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            if (e.Pointer.PointerId == _penID)
+            try
             {
-                Windows.UI.Input.PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
-
-
-                // Pass the pointer information to the InkManager. 
-                _inkManager.ProcessPointerUp(pt);
-            }
-
-            else if (e.Pointer.PointerId == _touchID)
-            {
-                // Process touch input
-                PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
-
-
-                // Pass the pointer information to the InkManager. 
-                _inkManager.ProcessPointerUp(pt);
-            }
-
-            _touchID = 0;
-            _penID = 0;
-
-            if (_inkManager.GetStrokes().Count > 0)
-            {
-                var backMarkup = await ApplicationData.Current.RoamingFolder.CreateFileAsync("markupimage_" + this.listView.SelectedIndex, CreationCollisionOption.ReplaceExisting);
-
-                //buffer.Seek(0);
-                using (var os = await backMarkup.OpenAsync(FileAccessMode.ReadWrite))
+                if (e.Pointer.PointerId == _penID)
                 {
-                    await _inkManager.SaveAsync(os);
-                }
-            }
+                    Windows.UI.Input.PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
 
-            // Call an application-defined function to render the ink strokes.
-            e.Handled = true;
+
+                    // Pass the pointer information to the InkManager. 
+                    _inkManager.ProcessPointerUp(pt);
+                }
+
+                else if (e.Pointer.PointerId == _touchID)
+                {
+                    // Process touch input
+                    PointerPoint pt = e.GetCurrentPoint(PanelCanvas);
+
+
+                    // Pass the pointer information to the InkManager. 
+                    _inkManager.ProcessPointerUp(pt);
+                }
+
+                _touchID = 0;
+                _penID = 0;
+
+                var backMarkup = await ApplicationData.Current.RoamingFolder.CreateFileAsync("markupimage_" + App.Task.CaseNumber + this.listView.SelectedIndex, CreationCollisionOption.ReplaceExisting);
+                if (_inkManager.GetStrokes().Count > 0)
+                {
+
+                    //buffer.Seek(0);
+                    using (var os = await backMarkup.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await _inkManager.SaveAsync(os);
+                    }
+                }
+
+                // Call an application-defined function to render the ink strokes.
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                 //new MessageDialog(ex.Message,"Error").ShowAsync();
+            }
         }
 
         private void panelcanvas_PointerMoved(object sender, PointerRoutedEventArgs e)
@@ -371,7 +378,8 @@ namespace Eqstra.VehicleInspection.Views
 
                 ClearCanvas();
 
-                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + this.listView.SelectedIndex) as StorageFile;
+                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex) as StorageFile;
+                
                 if (bf != null)
                 {
                     using (var inputStream = await bf.OpenAsync(FileAccessMode.ReadWrite))
@@ -457,7 +465,7 @@ namespace Eqstra.VehicleInspection.Views
         async private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             ClearCanvas();
-           var file =await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + this.listView.SelectedIndex);
+           var file =await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex);
            if (file !=null)
            {
               await file.DeleteAsync(StorageDeleteOption.PermanentDelete);

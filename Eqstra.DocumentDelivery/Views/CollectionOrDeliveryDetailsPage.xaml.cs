@@ -1,4 +1,5 @@
 ﻿using Eqstra.DocumentDelivery.Common;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace Eqstra.DocumentDelivery.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class CollectionOrDeliveryDetailsPage : Page
+    public sealed partial class CollectionOrDeliveryDetailsPage : VisualStateAwarePage
     {
 
         private NavigationHelper navigationHelper;

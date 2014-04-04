@@ -1,5 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Services;
+using Eqstra.DocumentDelivery.UILogic.ViewModels;
+using Eqstra.DocumentDelivery.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -81,7 +83,9 @@ namespace Eqstra.DocumentDelivery
             _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
 
-           
+            _container.RegisterType<SettingsFlyout, AddCustomerPage>(new ContainerControlledLifetimeManager());
+
+            ViewModelLocator.Register(typeof(CollectionOrDeliveryDetailsPage).ToString(), () =>  new CollectionOrDeliveryDetailsPageViewModel(this.NavigationService, new AddCustomerPage()) );
 
            
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>

@@ -1,2 +1,3 @@
-MainPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\bin\ARM\Release\Eqstra.VehicleInspection_1.0.0.0_Bundle\Eqstra.VehicleInspection_1.0.0.0_ARM.appx
-SymbolPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\AppPackages\Eqstra.VehicleInspection_1.0.0.0_Test\Eqstra.VehicleInspection_1.0.0.0_ARM.appxsym
+MainPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\bin\ARM\Release\Eqstra.VehicleInspection_1.0.0.1_Bundle\Eqstra.VehicleInspection_1.0.0.1_ARM.appx
+SymbolPackage=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\AppPackages\Eqstra.VehicleInspection_1.0.0.1_Test\Eqstra.VehicleInspection_1.0.0.1_ARM.appxsym
+ResourcePack=E:\WinApp\Eqstra.Mobility\Eqstra.VehicleInspection\bin\ARM\Release\Eqstra.VehicleInspection_1.0.0.1_Bundle\Eqstra.VehicleInspection_1.0.0.1_scale-140.appx

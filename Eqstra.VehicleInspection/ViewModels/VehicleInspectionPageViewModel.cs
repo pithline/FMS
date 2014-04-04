@@ -108,7 +108,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             };
 
             _task = (Eqstra.BusinessLogic.Task)navigationParameter;
-
+            App.Task = _task;
             var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
             var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
             await GetCustomerDetailsAsync();

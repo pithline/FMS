@@ -44,7 +44,6 @@
                             <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Model.LeftSnapshot}">
                                 <Image Margin="-10" Source="{Binding Model.LeftSnapshot.ImagePath}"   Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Height="150"/>
                             </Button>
-
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
@@ -52,8 +51,8 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Model.BackSnapshot}" Width="175" Height="150">
-                                <Image Source="{Binding Model.BackSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Model.FrontSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Model.FrontSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0 20 20 0">

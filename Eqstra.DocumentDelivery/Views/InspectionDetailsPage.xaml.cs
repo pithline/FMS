@@ -1,8 +1,10 @@
-﻿using Eqstra.DocumentDelivery.Common;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.DocumentDelivery.Common;
 using Eqstra.DocumentDelivery.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -110,6 +112,17 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
+                if (e.AddedItems !=null && e.AddedItems.Count>0)
+                {
+                    var dc = (InspectionDetailsPageViewModel)this.DataContext;
+                    dc.SelectedTaskList.Clear();
+                    foreach (Task item in e.AddedItems)
+                    {
+                        dc.SelectedTaskList.Add(item);
+                    }
+
+                    dc.SaveTaskCommand.RaiseCanExecuteChanged(); 
+                }
                 //var dc = (InspectionDetailsPageViewModel)this.DataContext;
                 //await dc.GetCustomerDetailsAsync();
             }

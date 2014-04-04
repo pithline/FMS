@@ -1,0 +1,27 @@
+﻿<SettingsFlyout
+    x:Class="Eqstra.DocumentDelivery.Views.AddCustomerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.DocumentDelivery.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Add Contact"
+    d:DesignWidth="346">
+
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox Header="First Name" Margin="0 10" Grid.Row="0" Height="50"/>
+        <TextBox Header="Sur Name" Margin="0 10" Grid.Row="1" Height="50"/>
+        <TextBox Header="Cell Phone" Margin="0 10" Grid.Row="2" Height="50"/>
+        <TextBox Header="Email" Margin="0 10" Grid.Row="3" Height="50"/>
+        <TextBox Header="Position" Margin="0 10" Grid.Row="4" Height="50"/>
+    </Grid>
+</SettingsFlyout>

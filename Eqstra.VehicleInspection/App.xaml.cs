@@ -37,6 +37,7 @@ namespace Eqstra.VehicleInspection
     /// </summary>
     sealed partial class App : MvvmAppBase,IDisposable
     {
+        public static Eqstra.BusinessLogic.Task Task { get; set; }
         private readonly IUnityContainer _container = new UnityContainer();
         public IEventAggregator EventAggregator { get; set; }
         /// <summary>

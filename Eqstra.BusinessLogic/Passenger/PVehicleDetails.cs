@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
- public   class PVehicleDetails : ValidatableBindableBase
+ public   class PVehicleDetails :  ValidatableBindableBase, IVehicleDetails
     {
 
      public PVehicleDetails()

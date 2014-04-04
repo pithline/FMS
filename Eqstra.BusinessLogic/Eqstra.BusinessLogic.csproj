@@ -101,6 +101,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commercial\CVehicleDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Helpers\SqliteHelper.cs" />
     <Compile Include="ImageCapture.cs" />
     <Compile Include="InspectionHistory.cs" />
+    <Compile Include="IVehicleDetails.cs" />
     <Compile Include="LoggedInUser.cs" />
     <Compile Include="LogonResult.cs" />
     <Compile Include="Passenger\PAccessories.cs">
@@ -135,9 +139,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commercial\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>

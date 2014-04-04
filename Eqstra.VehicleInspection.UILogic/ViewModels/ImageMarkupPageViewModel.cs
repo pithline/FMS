@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Passenger;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
@@ -14,6 +15,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
    public class ImageMarkupPageViewModel : ViewModel
     {
+       private IVehicleDetails _model;
        public ImageMarkupPageViewModel()
        {
            this.Snapshots = new ObservableCollection<ImageCapture>();
@@ -21,15 +23,27 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
        {
            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           var model = (PVehicleDetails)navigationParameter;
-           this.Snapshots.Add(model.FrontSnapshot);
-           this.Snapshots.Add(model.BackSnapshot);
-           this.Snapshots.Add(model.LeftSnapshot);
-           this.Snapshots.Add(model.RightSnapshot);
-           this.Snapshots.Add(model.TopSnapshot);
+
+           if (navigationParameter is PVehicleDetails)
+           {
+               _model = (PVehicleDetails)navigationParameter;
+               this.Snapshots.Add(_model.FrontSnapshot);
+           this.Snapshots.Add(_model.BackSnapshot);
+           this.Snapshots.Add(_model.LeftSnapshot);
+           this.Snapshots.Add(_model.RightSnapshot);
+           this.Snapshots.Add(_model.TopSnapshot);
+           }
+           else
+           {
+               _model = (CVehicleDetails)navigationParameter;
+               this.Snapshots.Add(_model.FrontSnapshot);
+               this.Snapshots.Add(_model.RightSnapshot);
+               this.Snapshots.Add(_model.LeftSnapshot);
+           }
+           
            PanelBackground = new ImageBrush()
            {
-               ImageSource = new BitmapImage(new Uri(model.BackSnapshot.ImagePath)),
+               ImageSource = new BitmapImage(new Uri(_model.BackSnapshot.ImagePath)),
                Stretch = Stretch.Fill
            };
 
