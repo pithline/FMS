@@ -4,18 +4,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection", "Eqstra.VehicleInspection\Eqstra.VehicleInspection.csproj", "{8CAD1A1E-727E-49B9-A530-1B3A1F12E8F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{790AD967-F93D-402A-8857-E4C0B64D00E7} = {790AD967-F93D-402A-8857-E4C0B64D00E7}
+		{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2} = {76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}
+		{F71B8AC9-5305-402F-ADA8-C75FFE09EE24} = {F71B8AC9-5305-402F-ADA8-C75FFE09EE24}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection.UILogic", "Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj", "{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{790AD967-F93D-402A-8857-E4C0B64D00E7} = {790AD967-F93D-402A-8857-E4C0B64D00E7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.BusinessLogic", "Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj", "{790AD967-F93D-402A-8857-E4C0B64D00E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.ServiceScheduling", "Eqstra.ServiceScheduling\Eqstra.ServiceScheduling.csproj", "{1DCF6F96-5004-45F0-B422-302184AD60B9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2} = {4641B43D-AC24-4C3A-97E2-1DDE5950C0A2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.ServiceScheduling.UILogic", "Eqstra.ServiceScheduling.UILogic\Eqstra.ServiceScheduling.UILogic.csproj", "{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection.BackgroundTask", "Eqstra.VehicleInspection.BackgroundTask\Eqstra.VehicleInspection.BackgroundTask.csproj", "{F71B8AC9-5305-402F-ADA8-C75FFE09EE24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.DocumentDelivery", "Eqstra.DocumentDelivery\Eqstra.DocumentDelivery.csproj", "{E1946A10-CD58-4AC4-9EB9-83E84784111C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A729BBB4-DBBB-46B0-9198-FB757B68AF3B} = {A729BBB4-DBBB-46B0-9198-FB757B68AF3B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.DocumentDelivery.UILogic", "Eqstra.DocumentDelivery.UILogic\Eqstra.DocumentDelivery.UILogic.csproj", "{A729BBB4-DBBB-46B0-9198-FB757B68AF3B}"
 EndProject
