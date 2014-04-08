@@ -127,12 +127,12 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BriefDetailsUserControl.xaml.cs">
+      <DependentUpon>BriefDetailsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CollectionOrDeliveryDetailsPage.xaml.cs">
       <DependentUpon>CollectionOrDeliveryDetailsPage.xaml</DependentUpon>
@@ -208,16 +208,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Styles\DefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\AddCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BriefDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

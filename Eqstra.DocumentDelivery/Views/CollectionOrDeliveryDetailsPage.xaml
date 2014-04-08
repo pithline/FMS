@@ -20,9 +20,14 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Label="Collect">
+            <AppBarButton Label="Collect" Visibility="{Binding CollectVisibility}" Command="{Binding CollectCommand}">
                 <AppBarButton.Icon>
-                    <SymbolIcon/>
+                    <SymbolIcon Symbol="Download"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Complete" Visibility="{Binding CompleteVisibility}" Command="{Binding CompleteCommand}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Accept"/>
                 </AppBarButton.Icon>
             </AppBarButton>
         </CommandBar>
@@ -54,7 +59,7 @@
             <local:ProfileUserControl Grid.Column="2"/>
         </Grid>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
             <Grid Margin="30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -82,26 +87,14 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <grid:SfDataGrid x:Name="sfDataGrid" ShowBusyIndicator="True" NavigationMode="Cell"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                            <grid:SfDataGrid x:Name="sfDataGrid" AllowEditing="False"  ShowBusyIndicator="True" NavigationMode="Row"  ItemsSource="{Binding DocumentList}"  ColumnSizer="Auto" AutoGenerateColumns="False" SelectionMode="Multiple" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                                 <grid:SfDataGrid.Columns>
-                                    <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="Make" HeaderText="MAKE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn HeaderText="MODEl" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
-
-
-
-                                    <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridComboBoxColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="mm/dd/yyyy" HeaderText="CONFIRMED DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTemplateColumn HeaderText="CONFIRMED TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
-                                        <grid:GridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
-                                            </DataTemplate>
-                                        </grid:GridTemplateColumn.CellTemplate>
-                                    </grid:GridTemplateColumn>
+                                    <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="Make" HeaderText="MAKE" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="Model" HeaderText="MODEl" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                 </grid:SfDataGrid.Columns>
                             </grid:SfDataGrid>
                         </Grid>
@@ -113,7 +106,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Proof of Collection" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                    <TextBlock Text="{Binding ProofTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                     <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
                         <Grid Margin="10">
                             <Grid.RowDefinitions>
@@ -126,14 +119,17 @@
                                 <RowDefinition Height="Auto"/>
                                 
                             </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
                             <ComboBox>
                                 <ComboBox.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Contact Name" Margin="0 0 10 0"/>
-                                        <Button Content="Add" Margin="10 0 0 0" />
+                                       
                                     </StackPanel>
                                 </ComboBox.Header>
                             </ComboBox>
+                                <Button Content="Add" Margin="10 0 0 0" Command="{Binding AddContactCommand}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            </StackPanel>
                             <TextBox AcceptsReturn="True" Height="200" Grid.Row="1" Margin="0 20"/>
                             <Grid Grid.Row="2" Margin="0 20">
                                 <Grid.ColumnDefinitions>
@@ -146,15 +142,20 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Customer/Representative Signature" VerticalAlignment="Center"/>
                                 <input:SfDatePicker IsHitTestVisible="False" BorderThickness="0" Grid.Column="1" Margin="10 0 0 0"/>
-                                <StackPanel Grid.Row="1">
+                                <StackPanel Grid.Row="1" Visibility="{Binding CompleteVisibility}">
                                     <TextBlock Text="Delivery Person" Style="{StaticResource TitleTextBlockStyle}"/>
                                     <TextBlock Text="Delivery Person" Style="{StaticResource CaptionTextBlockStyle}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Grid.Column="1">
+                                <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
                                     <TextBlock Text="Delivered At" Style="{StaticResource TitleTextBlockStyle}"/>
                                     <TextBlock Text="Delivery at Location" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                </StackPanel>                               
-                               
+                                </StackPanel>  
+                                
+                                <ComboBox Grid.Row="1" Header="Collected From" Visibility="{Binding CollectVisibility}"/>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
+                                    <TextBlock Text="Collected At" Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <input:SfDatePicker Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" />
+                                </StackPanel>
                             </Grid>
                             
                             <TextBox Grid.Row="3" Margin="0 20" Height="200" Header="Comment"></TextBox>

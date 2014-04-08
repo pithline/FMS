@@ -25,10 +25,9 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Start Inspection" Command="{Binding GoToDocumentDeliveryCommand}">
-            	
+            <AppBarButton Label="Deliver Document(s)" Command="{Binding GoToDocumentDeliveryCommand}">            	
                 <AppBarButton.Icon>
-                    <SymbolIcon Symbol="SetLockScreen"/>
+                    <SymbolIcon Symbol="Document"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Arrived" Icon="Flag"/>

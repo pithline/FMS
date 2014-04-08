@@ -17,11 +17,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox Header="First Name" Margin="0 10" Grid.Row="0" Height="50"/>
         <TextBox Header="Sur Name" Margin="0 10" Grid.Row="1" Height="50"/>
         <TextBox Header="Cell Phone" Margin="0 10" Grid.Row="2" Height="50"/>
         <TextBox Header="Email" Margin="0 10" Grid.Row="3" Height="50"/>
         <TextBox Header="Position" Margin="0 10" Grid.Row="4" Height="50"/>
+        <Button Content="Add" Grid.Row="5"/>
     </Grid>
 </SettingsFlyout>

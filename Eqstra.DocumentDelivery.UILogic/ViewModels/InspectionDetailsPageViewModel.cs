@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -21,7 +22,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         INavigationService _navigationService;
         public InspectionDetailsPageViewModel(INavigationService navigationService)
         {
-            this.InspectionList = new ObservableCollection<BusinessLogic.Task>();
+            this.InspectionList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
             this.SaveVisibility = Visibility.Collapsed;
             this.NextStepVisibility = Visibility.Collapsed;
             this.CustomerDetails = new CustomerDetails();
@@ -40,12 +41,20 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.Completed); }
             );
 
-            this.SaveTaskCommand = new DelegateCommand(() =>
+            this.SaveTaskCommand = new DelegateCommand(async () =>
             {
                 foreach (var item in this.SelectedTaskList)
                 {
-                    item.Status = BusinessLogic.Enums.TaskStatusEnum.InProgress;
-                    this.InspectionList.Remove(item);
+                    //this.InspectionList.Remove(item);
+                    if (item.TaskType == CDTaskTypeEnum.Delivery)
+                    {
+                        item.CDTaskStatus = CDTaskStatusEnum.AwaitingDelivery; 
+                    }
+                    else
+                    {
+                        item.CDTaskStatus = CDTaskStatusEnum.AwaitingDriverCollection; 
+                    }
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<Eqstra.BusinessLogic.CollectDeliveryTask>(item);
                     this._navigationService.Navigate("Main",null);
                 }
             }, 
@@ -56,8 +65,20 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.NextStepCommand = new DelegateCommand(() =>
             {
 
-                this._navigationService.Navigate("CollectionOrDeliveryDetails", null);
-            });
+                if (this.Inspection.TaskType == CDTaskTypeEnum.Collection)
+                {
+                    this._navigationService.Navigate("CollectionOrDeliveryDetails", this.Inspection); 
+                }
+                else
+                {
+                    _navigationService.Navigate("DrivingDirection", Inspection);
+                }
+            },
+            () =>
+            {
+                return (this.Inspection != null);
+            }
+            );
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
@@ -86,27 +107,27 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            this.SelectedTaskList = new ObservableCollection<BusinessLogic.Task>();
-            IEnumerable<Eqstra.BusinessLogic.Task> list = null;
+            this.SelectedTaskList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
+            IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> list = null;
             if (navigationParameter.Equals("AwaitingInspections"))
             {
                 this.SaveVisibility = Visibility.Visible;
                 this.NextStepVisibility = Visibility.Collapsed;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.CDTaskStatus == CDTaskStatusEnum.AwaitingConfirmation);
             }
             else if (navigationParameter.Equals("Total"))
             {
                 this.SaveVisibility = Visibility.Collapsed;
                 this.NextStepVisibility = Visibility.Collapsed;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ConfirmedDate.Date.Date.Equals(DateTime.Today));
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.ConfirmedDate.Date.Date.Equals(DateTime.Today));
             }
             else if (navigationParameter.Equals("InProgress"))
             {
                 this.SaveVisibility = Visibility.Collapsed;
                 this.NextStepVisibility = Visibility.Visible;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => (x.CDTaskStatus != CDTaskStatusEnum.AwaitingConfirmation && x.CDTaskStatus != CDTaskStatusEnum.Complete));
             }
-            foreach (Eqstra.BusinessLogic.Task item in list)
+            foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.Name;
@@ -140,26 +161,26 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
 
-        private ObservableCollection<Eqstra.BusinessLogic.Task> inspectionList;
+        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> inspectionList;
 
-        public ObservableCollection<Eqstra.BusinessLogic.Task> InspectionList
+        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> InspectionList
         {
             get { return inspectionList; }
             set { SetProperty(ref inspectionList, value); }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Task> selectedTaskList;
+        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> selectedTaskList;
 
-        public ObservableCollection<Eqstra.BusinessLogic.Task> SelectedTaskList
+        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> SelectedTaskList
         {
             get { return selectedTaskList; }
             set { SetProperty(ref selectedTaskList, value); }
         }
 
 
-        private Eqstra.BusinessLogic.Task inspection;
+        private Eqstra.BusinessLogic.CollectDeliveryTask inspection;
 
-        public Eqstra.BusinessLogic.Task Inspection
+        public Eqstra.BusinessLogic.CollectDeliveryTask Inspection
         {
             get { return inspection; }
             set

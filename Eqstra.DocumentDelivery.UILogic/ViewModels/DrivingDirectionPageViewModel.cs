@@ -19,7 +19,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
     public class DrivingDirectionPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
-        private Eqstra.BusinessLogic.Task _inspection;
+        private Eqstra.BusinessLogic.CollectDeliveryTask _inspection;
 
         public DrivingDirectionPageViewModel(INavigationService navigationService)
         {
@@ -36,9 +36,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             });
 
-            this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
+            this.GoToDocumentDeliveryCommand = new DelegateCommand(() =>
             {
-                _navigationService.Navigate("VehicleInspection", _inspection);
+                _navigationService.Navigate("CollectionOrDeliveryDetails", _inspection);
             });
 
 
@@ -75,7 +75,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _inspection = (Eqstra.BusinessLogic.Task)navigationParameter;
+            _inspection = (Eqstra.BusinessLogic.CollectDeliveryTask)navigationParameter;
             await GetCustomerDetailsAsync();
         }
 
@@ -88,7 +88,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
         public ICommand GetDirectionsCommand { get; set; }
-        public DelegateCommand GoToVehicleInspectionCommand { get; set; }
+        public DelegateCommand GoToDocumentDeliveryCommand { get; set; }
 
 
 

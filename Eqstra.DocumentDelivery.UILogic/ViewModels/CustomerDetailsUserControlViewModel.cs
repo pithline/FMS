@@ -44,5 +44,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
        public DelegateCommand<string> MakeSkypeCallCommand { get; set; }
 
        
+        
+
+       
     }
 }

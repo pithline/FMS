@@ -89,8 +89,8 @@
                         </Grid.RowDefinitions>
                         <grid:SfDataGrid x:Name="sfDataGrid" AllowSorting="False" ShowBusyIndicator="True" NavigationMode="Cell" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
-                                <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
+                                <!--<grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>-->
+                                <!--<grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>-->
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
@@ -103,14 +103,16 @@
                                     </grid:GridTemplateColumn.CellTemplate>
 
                                 </grid:GridTemplateColumn>
+                                <grid:GridTextColumn MappingName="DocumentCount" HeaderText="NO OF DOCUMENTS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTextColumn MappingName="TaskType" HeaderText="TASK TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridComboBoxColumn MappingName="CDTaskStatus" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="mm/dd/yyyy" HeaderText="CONFIRMED DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CONFIRMED TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridDateTimeColumn MappingName="DeliveryDate" FormatString="mm/dd/yyyy" HeaderText="DELIVERY DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn HeaderText="DELIVERY TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
+                                            <input:SfTimePicker Value="{Binding DeliveryTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
                                 </grid:GridTemplateColumn>
@@ -126,7 +128,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+                <local:BriefDetailsUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
             </Grid>
         </Grid>
     </Grid>

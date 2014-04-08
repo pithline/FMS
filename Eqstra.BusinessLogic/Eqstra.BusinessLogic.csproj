@@ -101,12 +101,16 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollectDeliveryTask.cs" />
     <Compile Include="Commercial\CVehicleDetails.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDetails.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
+    <Compile Include="Enums\CDTaskStatus.cs" />
+    <Compile Include="Enums\CDTaskTypeEnum.cs" />
     <Compile Include="Enums\TaskStatusEnum.cs" />
     <Compile Include="Enums\VehicleTypeEnum.cs" />
     <Compile Include="EventArgs\UserChangedEventArgs.cs" />

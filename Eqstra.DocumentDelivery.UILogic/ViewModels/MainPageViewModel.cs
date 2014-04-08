@@ -22,7 +22,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         public MainPageViewModel()
         {
-            this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
+            this.PoolofTasks = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
             //{
@@ -88,8 +88,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
              this.WeatherInfo = weather.FirstOrDefault();
 
-            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
-            foreach (Eqstra.BusinessLogic.Task item in list)
+            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>();
+            foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.Name;
@@ -104,7 +104,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
                 }
                 item.Address = cust.Address;
-                if (item.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection)
+                if (item.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.AwaitingDelivery)
                 {
                     this.Appointments.Add(new ScheduleAppointment
                            {
@@ -119,8 +119,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-            this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.CDTaskStatus == BusinessLogic.Enums.CDTaskStatusEnum.AwaitingConfirmation);
+            this.MyInspectionCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.AwaitingConfirmation));
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
   
@@ -163,9 +163,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref myInspectionCount, value); }
         }
 
-        private Eqstra.BusinessLogic.Task task;
+        private Eqstra.BusinessLogic.CollectDeliveryTask task;
 
-        public Eqstra.BusinessLogic.Task InspectionTask
+        public Eqstra.BusinessLogic.CollectDeliveryTask InspectionTask
         {
             get { return task; }
             set
@@ -178,8 +178,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
 
-        private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
+        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> poolofTasks;
+        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> PoolofTasks
         {
             get { return poolofTasks; }
             set

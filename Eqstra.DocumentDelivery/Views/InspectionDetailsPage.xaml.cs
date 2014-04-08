@@ -116,12 +116,13 @@ namespace Eqstra.DocumentDelivery.Views
                 {
                     var dc = (InspectionDetailsPageViewModel)this.DataContext;
                     dc.SelectedTaskList.Clear();
-                    foreach (Task item in e.AddedItems)
+                    foreach (CollectDeliveryTask item in e.AddedItems)
                     {
                         dc.SelectedTaskList.Add(item);
                     }
 
-                    dc.SaveTaskCommand.RaiseCanExecuteChanged(); 
+                    dc.SaveTaskCommand.RaiseCanExecuteChanged();
+                    dc.NextStepCommand.RaiseCanExecuteChanged();
                 }
                 //var dc = (InspectionDetailsPageViewModel)this.DataContext;
                 //await dc.GetCustomerDetailsAsync();
