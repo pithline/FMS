@@ -167,6 +167,7 @@
     </AppxManifest>
     <None Include="Eqstra.DocumentDelivery_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <Content Include="Assets\add_icon.png" />
     <Content Include="Assets\bing_blue.png" />
     <Content Include="Assets\calendar_blue.png" />
     <Content Include="Assets\camera_icon.png" />
