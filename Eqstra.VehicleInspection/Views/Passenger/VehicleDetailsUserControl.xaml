@@ -159,17 +159,17 @@
                             <TextBlock Text="{Binding Path= Model.Make}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <StackPanel Grid.Column="0" Grid.Row="5" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Spare Keys Shown" Style="{StaticResource TextHeaderStyle}"/>
                             <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysShown,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <StackPanel Grid.Column="1" Grid.Row="5" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Spare Keys Tested" Style="{StaticResource TextHeaderStyle}"/>
                             <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysTested,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="2" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Year" Style="{StaticResource TextHeaderStyle}"/>
                             <TextBlock Text="{Binding Path= Model.Year}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>

@@ -102,11 +102,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\VIServiceProxy\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="SilentSync.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,126 +115,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditAccessoryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceEditVehicleInspectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceGetCustDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy.VehicleInspectionServiceReadVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIServiceProxy\RoutingService.wsdl" />
-    <None Include="Service References\VIServiceProxy\xppservice.wsdl" />
-    <None Include="Service References\VIServiceProxy\xppservice.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice1.wsdl" />
-    <None Include="Service References\VIServiceProxy\xppservice1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIServiceProxy\xppservice7.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\VIServiceProxy\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VIServiceProxy\xppservice.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VIServiceProxy\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VIServiceProxy\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VIServiceProxy\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">

@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -60,6 +61,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
+            VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
+            client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
+            var res = await client.createTyreConditionAsync(new ObservableCollection<VIService.MzkTyreConditionContract> { new MzkTyreConditionContract { parmPassengerTyreType = MzkPassengerTyreCondition.RR, parmRecID = 0, parmTableId = 0, parmVehicleInsRecID = 5637144576, parmComments = "tested by noor", parmCondition = MZKConditionEnum.Fair } });
+          
             SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();

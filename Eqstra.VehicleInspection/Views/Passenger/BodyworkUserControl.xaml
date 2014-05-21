@@ -8,7 +8,7 @@
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:common="using:Eqstra.VehicleInspection.Common"
-    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -282,7 +282,7 @@
 
 
 
-                    <TextBlock Text="Internal" Grid.Row="1" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    <TextBlock Text="Bonnet" Grid.Row="1" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch  IsOn="{Binding Path=Model.IsBonnetToggle,Mode=TwoWay}" x:Name="BonnetToggle" Grid.Row="1" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVBonnet}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BonnetToggle}" Margin="5 0" Grid.Column="8" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>

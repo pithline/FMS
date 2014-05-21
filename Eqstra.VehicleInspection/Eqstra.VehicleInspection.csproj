@@ -408,10 +408,6 @@
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Eqstra.VehicleInspection.BackgroundTask\Eqstra.VehicleInspection.BackgroundTask.csproj">
-      <Project>{f71b8ac9-5305-402f-ada8-c75ffe09ee24}</Project>
-      <Name>Eqstra.VehicleInspection.BackgroundTask</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>
       <Name>Eqstra.VehicleInspection.UILogic</Name>

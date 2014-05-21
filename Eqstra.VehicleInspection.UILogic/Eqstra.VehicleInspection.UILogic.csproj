@@ -108,6 +108,11 @@
       <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\VIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IdentityServiceProxy.cs" />
@@ -150,6 +155,115 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateAccessoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateBodyworkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateGlassResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateMechConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateTrimInteriorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateTyreConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateVehicleCollectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateVehicleDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditAccessoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditBodyworkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditGlassResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditMechConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditTrimInteriorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditTyreConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditVehicleDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceEditVehicleInspectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceGetCustDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceGetTasksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadAccessoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadBodyworkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadGlassResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadMechConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadTrimInteriorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadTyreConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadVehicleDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceUpdateStatusListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\RoutingService.wsdl" />
+    <None Include="Service References\VIService\xppservice.wsdl" />
+    <None Include="Service References\VIService\xppservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice1.wsdl" />
+    <None Include="Service References\VIService\xppservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VIService\xppservice7.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Popups\SnapshotsViewer.xaml">
@@ -173,6 +287,24 @@
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\VIService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VIService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VIService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
