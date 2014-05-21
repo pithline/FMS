@@ -88,7 +88,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Today's Inspections" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <TextBlock Text="Today's Tasks" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -152,7 +152,7 @@
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTemplateColumn HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -220,7 +220,7 @@
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
                         <TextBlock Text="{Binding MyInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
-                        <TextBlock Text="My Collection Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        <TextBlock Text="My Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
