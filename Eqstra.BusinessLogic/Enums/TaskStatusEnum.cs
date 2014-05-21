@@ -9,10 +9,10 @@ namespace Eqstra.BusinessLogic.Enums
 {
     public enum TaskStatusEnum
     {
-        [Display(Name = "Awaiting Inspection")]
-        AwaitingInspection,
         [Display(Name = "Awaiting Confirmation")]
         AwaitingConfirmation,
+        [Display(Name = "Awaiting Inspection")]
+        AwaitingInspection,
         InProgress,
         Completed
     }

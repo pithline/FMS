@@ -96,7 +96,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingConfirmation = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
             this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
@@ -134,13 +135,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref total, value); }
         }
 
-        private int awaitingConfirmation;
+        private int awaitingConfirmationCount;
 
-        public int AwaitingConfirmation
+        public int AwaitingConfirmationCount
         {
-            get { return awaitingConfirmation; }
-            set { SetProperty(ref awaitingConfirmation, value); }
+            get { return awaitingConfirmationCount; }
+            set { SetProperty(ref awaitingConfirmationCount, value); }
         }
+
+        private int awaitingInspectionCount;
+
+        public int AwaitingInspectionCount
+        {
+            get { return awaitingInspectionCount; }
+            set { SetProperty(ref awaitingInspectionCount, value); }
+        }
+
 
         private int myInspectionCount;
 

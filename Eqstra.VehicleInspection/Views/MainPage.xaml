@@ -186,7 +186,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding AwaitingConfirmation}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="{Binding AwaitingConfirmationCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="Tasks awaiting confirmation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
@@ -207,12 +207,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding MyInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="{Binding AwaitingInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="My Collection Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="InProgress"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspection"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>
