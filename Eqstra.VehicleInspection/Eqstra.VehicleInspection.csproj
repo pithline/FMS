@@ -117,8 +117,8 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs" />
-    <Compile Include="Views\Commercial\CAccessariesUserControl.xaml.cs">
-      <DependentUpon>CAccessariesUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Commercial\CAccessoriesUserControl.xaml.cs">
+      <DependentUpon>CAccessoriesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
       <DependentUpon>CGlassUserControl.xaml</DependentUpon>
@@ -230,6 +230,7 @@
     <Content Include="Assets\truck_marks.png" />
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
+    <Content Include="Images\images.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -254,7 +255,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Commercial\CAccessariesUserControl.xaml">
+    <Page Include="Views\Commercial\CAccessoriesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -392,8 +393,8 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.3.1">
-      <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.4.3">
+      <Name>SQLite for Windows Runtime %28Windows 8.1%291</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=11.4.0.26">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>

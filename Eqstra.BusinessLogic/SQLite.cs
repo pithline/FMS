@@ -2025,37 +2025,54 @@ namespace SQLite
 
 		public int ExecuteNonQuery (object[] source)
 		{
-			if (Connection.Trace) {
-				Debug.WriteLine ("Executing: " + CommandText);
-			}
+            try
+            {
+                if (Connection.Trace)
+                {
+                    Debug.WriteLine("Executing: " + CommandText);
+                }
 
-			var r = SQLite3.Result.OK;
+                var r = SQLite3.Result.OK;
 
-			if (!Initialized) {
-				Statement = Prepare ();
-				Initialized = true;
-			}
+                if (!Initialized)
+                {
+                    Statement = Prepare();
+                    Initialized = true;
+                }
 
-			//bind the values.
-			if (source != null) {
-				for (int i = 0; i < source.Length; i++) {
-					SQLiteCommand.BindParameter (Statement, i + 1, source [i], Connection.StoreDateTimeAsTicks);
-				}
-			}
-			r = SQLite3.Step (Statement);
+                //bind the values.
+                if (source != null)
+                {
+                    for (int i = 0; i < source.Length; i++)
+                    {
+                        SQLiteCommand.BindParameter(Statement, i + 1, source[i], Connection.StoreDateTimeAsTicks);
+                    }
+                }
+                r = SQLite3.Step(Statement);
 
-			if (r == SQLite3.Result.Done) {
-				int rowsAffected = SQLite3.Changes (Connection.Handle);
-				SQLite3.Reset (Statement);
-				return rowsAffected;
-			} else if (r == SQLite3.Result.Error) {
-				string msg = SQLite3.GetErrmsg (Connection.Handle);
-				SQLite3.Reset (Statement);
-				throw SQLiteException.New (r, msg);
-			} else {
-				SQLite3.Reset (Statement);
-				throw SQLiteException.New (r, r.ToString ());
-			}
+                if (r == SQLite3.Result.Done)
+                {
+                    int rowsAffected = SQLite3.Changes(Connection.Handle);
+                    SQLite3.Reset(Statement);
+                    return rowsAffected;
+                }
+                else if (r == SQLite3.Result.Error)
+                {
+                    string msg = SQLite3.GetErrmsg(Connection.Handle);
+                    SQLite3.Reset(Statement);
+                    throw SQLiteException.New(r, msg);
+                }
+                else
+                {
+                    SQLite3.Reset(Statement);
+                    throw SQLiteException.New(r, r.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                throw SQLiteException.New(SQLite3.Result.Abort, SQLite3.Result.Abort.ToString());
+            }
+           
 		}
 
 		protected virtual Sqlite3Statement Prepare ()

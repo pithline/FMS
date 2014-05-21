@@ -9,7 +9,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
   public  class DriverTask : Task
     {
         private string registrationNumber;        
-        public string RegistrationNumber
+        public  string RegistrationNumber
         {
             get { return registrationNumber; }
             set { SetProperty(ref registrationNumber, value); }

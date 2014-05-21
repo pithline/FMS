@@ -41,7 +41,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.Navigate("VehicleInspection", _inspection);
             });
 
-
         }
 
         private void LoadDemoAppointments()

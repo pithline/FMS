@@ -12,7 +12,7 @@
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     prism:ViewModelLocator.AutoWireViewModel="True"    
-    mc:Ignorable="d">
+    mc:Ignorable="d" d:DesignWidth="3000">
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
@@ -92,7 +92,7 @@
                                     <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="Make" HeaderText="MAKE" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="Model" HeaderText="MODEl" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="Model" HeaderText="MODEL" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                 </grid:SfDataGrid.Columns>
@@ -101,7 +101,7 @@
                     </Border>
                 </Grid>
 
-                <Grid Grid.Column="2" Margin="0 0 0 30">
+                <Grid Grid.Column="2" Margin="0 0 0 30" MinWidth="420">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -123,15 +123,17 @@
                             <ComboBox>
                                 <ComboBox.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Contact Name" Margin="0 0 10 0"/>
+                                            <TextBlock Text="Contact Name" Margin="0 0 10 0" Style="{StaticResource TextHeaderStyle}"/>
                                        
                                     </StackPanel>
                                 </ComboBox.Header>
                             </ComboBox>
-                                <Button Content="Add" Margin="10 0 0 0" Command="{Binding AddContactCommand}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                                <Button  Margin="5 0 0 -2" Command="{Binding AddContactCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource TransparentBtn}">
+                                    <Image Source="ms-appx:///Assets/add_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                                </Button>
                             </StackPanel>
-                            <TextBox AcceptsReturn="True" Height="200" Grid.Row="1" Margin="0 20"/>
-                            <Grid Grid.Row="2" Margin="0 20">
+                            <TextBox AcceptsReturn="True" Height="140" Grid.Row="1" Margin="0 20 0 0"/>
+                            <Grid Grid.Row="2" Margin="0 0 0 20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
@@ -140,25 +142,33 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Customer/Representative Signature" VerticalAlignment="Center"/>
-                                <input:SfDatePicker IsHitTestVisible="False" BorderThickness="0" Grid.Column="1" Margin="10 0 0 0"/>
+                                <TextBlock Text="Customer/Representative Signature" VerticalAlignment="Center" Style="{StaticResource TextHeaderStyle}"/>
+                                <input:SfDatePicker IsHitTestVisible="False" BorderThickness="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10 0 0 0" Foreground="#FF666666" FontSize="12"/>
                                 <StackPanel Grid.Row="1" Visibility="{Binding CompleteVisibility}">
-                                    <TextBlock Text="Delivery Person" Style="{StaticResource TitleTextBlockStyle}"/>
-                                    <TextBlock Text="Delivery Person" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
+                                    <TextBlock Text="Delivery Person" Style="{StaticResource TextContentStyle}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
-                                    <TextBlock Text="Delivered At" Style="{StaticResource TitleTextBlockStyle}"/>
-                                    <TextBlock Text="Delivery at Location" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                </StackPanel>  
+                                    <TextBlock Text="Delivered At" Style="{StaticResource TextHeaderStyle}"/>
+                                    <TextBlock Text="Delivery at Location" Style="{StaticResource TextContentStyle}"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
+                                    <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
+                                    <ComboBox Grid.Row="1" Width="200" HorizontalAlignment="Left"/>
+                                </StackPanel>
                                 
-                                <ComboBox Grid.Row="1" Header="Collected From" Visibility="{Binding CollectVisibility}"/>
                                 <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
-                                    <TextBlock Text="Collected At" Style="{StaticResource TitleTextBlockStyle}"/>
-                                    <input:SfDatePicker Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" />
+                                    <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}" Margin="10 0 0 0"/>
+                                    <input:SfDatePicker Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
                                 </StackPanel>
                             </Grid>
+
+                            <StackPanel Grid.Row="3">
+                                <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
+                                <TextBox Grid.Row="3" Margin="0" Height="150"></TextBox>
+                            </StackPanel>
                             
-                            <TextBox Grid.Row="3" Margin="0 20" Height="200" Header="Comment"></TextBox>
                         </Grid>
                     </Border>
                 </Grid>

@@ -10,23 +10,19 @@
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"    
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d">
-
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
-        
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Driving Direction" Icon="Directions" Command="{Binding DrivingDirectionCommand}">
-
-
-                </AppBarButton>
+                <AppBarButton Label="Save" Icon="Save" IsEnabled="True" HorizontalAlignment="Left" Command="{Binding SaveCommand}"/>
             </CommandBar.SecondaryCommands>
+            <AppBarButton Label="Next" Icon="Next" HorizontalAlignment="Right" Command="{Binding DrivingDirectionCommand}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -85,7 +81,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <grid:SfDataGrid x:Name="sfDataGrid" ShowBusyIndicator="True" NavigationMode="Row" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid x:Name="sfDataGrid" ShowBusyIndicator="True" NavigationMode="Row" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>

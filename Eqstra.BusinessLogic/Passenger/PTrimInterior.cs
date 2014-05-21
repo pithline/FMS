@@ -1,4 +1,7 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class TrimInterior : ValidatableBindableBase
+    public class PTrimInterior : VIBase
     {
-        public TrimInterior()
+        public PTrimInterior()
         {
             this.InternalTrimImgList = new ObservableCollection<ImageCapture>();
             this.RRDoorTrimImgList = new ObservableCollection<ImageCapture>();
@@ -22,8 +25,16 @@ namespace Eqstra.BusinessLogic.Passenger
             this.RearSeatImgList = new ObservableCollection<ImageCapture>();
             this.DashImgList = new ObservableCollection<ImageCapture>();
             this.CarpetImgList = new ObservableCollection<ImageCapture>();
+            // this.CarpetImgList.Add(new ImageCapture() { ImagePath = "ms-appx:///Images/images.png" });
         }
+
+        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        {
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PTrimInterior>(x => x.CaseNumber == caseNumber);
+        }
+
         private ObservableCollection<ImageCapture> internalTrimImgList;
+        [Ignore]
         public ObservableCollection<ImageCapture> InternalTrimImgList
         {
             get { return internalTrimImgList; }
@@ -31,6 +42,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rrDoorTrimiImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> RRDoorTrimImgList
         {
@@ -39,6 +51,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lrDoorTrimImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> LRDoorTrimImgList
         {
@@ -47,6 +60,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rfDoorTrimImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> RFDoorTrimImgList
         {
@@ -55,6 +69,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lfDoorTrimImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> LFDoorTrimImgList
         {
@@ -62,6 +77,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref lfDoorTrimImgList, value); }
         }
         private ObservableCollection<ImageCapture> driverSeatImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> DriverSeatImgList
         {
@@ -70,6 +86,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> passengerSeatImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> PassengerSeatImgList
         {
@@ -77,6 +94,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref passengerSeatImgList, value); }
         }
         private ObservableCollection<ImageCapture> rearSeatImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> RearSeatImgList
         {
@@ -85,6 +103,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> dashImgList;
+        [Ignore]
 
         public ObservableCollection<ImageCapture> DashImgList
         {
@@ -93,12 +112,88 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> carpetImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> CarpetImgList
         {
             get { return carpetImgList; }
+
             set { SetProperty(ref carpetImgList, value); }
         }
+
+
+        public string internalTrimImgPathList;
+        public string InternalTrimImgPathList
+        {
+            get { return string.Join("~", InternalTrimImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref internalTrimImgPathList, value); }
+        }
+
+        public string rRDoorTrimImgPathList;
+        public string RRDoorTrimImgPathList
+        {
+            get { return string.Join("~", RRDoorTrimImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref rRDoorTrimImgPathList, value); }
+        }
+
+        public string lRDoorTrimImgPathList;
+        public string LRDoorTrimImgPathList
+        {
+            get { return string.Join("~", LRDoorTrimImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref lRDoorTrimImgPathList, value); }
+        }
+
+        public string rFDoorTrimImgPathList;
+        public string RFDoorTrimImgPathList
+        {
+            get { return string.Join("~", RFDoorTrimImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref rFDoorTrimImgPathList, value); }
+        }
+
+        public string lFDoorTrimImgPathList;
+        public string LFDoorTrimImgPathList
+        {
+            get { return string.Join("~", LFDoorTrimImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref lFDoorTrimImgPathList, value); }
+        }
+
+
+        public string driverSeatImgPathList;
+        public string DriverSeatImgPathList
+        {
+            get { return string.Join("~", DriverSeatImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref driverSeatImgPathList, value); }
+        }
+
+        public string passengerSeatImgPathList;
+        public string PassengerSeatImgPathList
+        {
+            get { return string.Join("~", PassengerSeatImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref passengerSeatImgPathList, value); }
+        }
+
+        public string rearSeatImgPathList;
+        public string RearSeatImgPathList
+        {
+            get { return string.Join("~", RearSeatImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref rearSeatImgPathList, value); }
+        }
+
+
+        public string dashImgPathList;
+        public string DashImgPathList
+        {
+            get { return string.Join("~", DashImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref dashImgPathList, value); }
+        }
+
+
+        public string carpetImgPathList;
+        public string CarpetImgPathList
+        {
+            get { return string.Join("~", CarpetImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref carpetImgPathList, value); }
+        }
+
 
         private string internalTrimComment;
 

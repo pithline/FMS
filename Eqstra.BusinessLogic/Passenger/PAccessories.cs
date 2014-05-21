@@ -1,4 +1,7 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +11,33 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-   public class PAccessories : ValidatableBindableBase
+    public class PAccessories : VIBase
     {
+        public PAccessories()
+        {
+
+            this.RadioImgList = new ObservableCollection<ImageCapture>();
+            this.CDShuffleImgList = new ObservableCollection<ImageCapture>();
+            this.KeyImgList = new ObservableCollection<ImageCapture>();
+            this.NavigationImgList = new ObservableCollection<ImageCapture>();
+            this.AirconImgList = new ObservableCollection<ImageCapture>();
+            this.AlarmImgList = new ObservableCollection<ImageCapture>();
+
+            this.MagsImgList = new ObservableCollection<ImageCapture>();
+            this.TrackingUnitImgList = new ObservableCollection<ImageCapture>();
+            this.CanopyImgList = new ObservableCollection<ImageCapture>();
+            this.JackImgList = new ObservableCollection<ImageCapture>();
+            this.ToolsImgList = new ObservableCollection<ImageCapture>();
+
+            this.SpareKeysImgList = new ObservableCollection<ImageCapture>();
+            this.ServicesBookImgList = new ObservableCollection<ImageCapture>();
+            this.SpareTyreImgList = new ObservableCollection<ImageCapture>();
+        }
+
+        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        {
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.CaseNumber == caseNumber);
+        } 
         private bool hasRadio;
 
         public bool HasRadio
@@ -35,7 +63,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> radioImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> RadioImgList
         {
             get { return radioImgList; }
@@ -66,7 +94,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref cdShuffleComment, value); }
         }
         private ObservableCollection<ImageCapture> cdShuffleImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> CDShuffleImgList
         {
             get { return cdShuffleImgList; }
@@ -98,7 +126,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> navigationImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> NavigationImgList
         {
             get { return navigationImgList; }
@@ -130,7 +158,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> airconImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> AirconImgList
         {
             get { return airconImgList; }
@@ -161,7 +189,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref alarmComment, value); }
         }
         private ObservableCollection<ImageCapture> alarmImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> AlarmImgList
         {
             get { return alarmImgList; }
@@ -192,7 +220,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref keyComment, value); }
         }
         private ObservableCollection<ImageCapture> keyImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> KeyImgList
         {
             get { return keyImgList; }
@@ -223,7 +251,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> spareKeysImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> SpareKeysImgList
         {
             get { return spareKeysImgList; }
@@ -252,7 +280,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref servicesBookComment, value); }
         }
         private ObservableCollection<ImageCapture> servicesBookImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> ServicesBookImgList
         {
             get { return servicesBookImgList; }
@@ -284,7 +312,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> spareTyreImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> SpareTyreImgList
         {
             get { return spareTyreImgList; }
@@ -316,7 +344,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> toolsImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> ToolsImgList
         {
             get { return toolsImgList; }
@@ -348,7 +376,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> jackImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> JackImgList
         {
             get { return jackImgList; }
@@ -380,7 +408,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> canopyImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> CanopyImgList
         {
             get { return canopyImgList; }
@@ -412,7 +440,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> trackingUnitImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> TrackingUnitImgList
         {
             get { return trackingUnitImgList; }
@@ -444,7 +472,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> magsImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> MagsImgList
         {
             get { return magsImgList; }
@@ -467,6 +495,102 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref othersComment, value); }
         }
 
+        public string radioImgPathList;
+        public string RadioImgPathList
+        {
+            get { return string.Join("~", RadioImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref radioImgPathList, value); }
+        }
 
+        public string cDShuffleImgPathList;
+        public string CDShuffleImgPathList
+        {
+            get { return string.Join("~", CDShuffleImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref cDShuffleImgPathList, value); }
+        }
+
+        public string keyImgPathList;
+        public string KeyImgPathList
+        {
+            get { return string.Join("~", KeyImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref keyImgPathList, value); }
+        }
+
+        public string navigationImgPathList;
+        public string NavigationImgPathList
+        {
+            get { return string.Join("~", NavigationImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref navigationImgPathList, value); }
+        }
+
+        public string airconImgPathList;
+        public string AirconImgPathList
+        {
+            get { return string.Join("~", AirconImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref airconImgPathList, value); }
+        }
+
+        public string alarmImgPathList;
+        public string AlarmImgPathList
+        {
+            get { return string.Join("~", AlarmImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref alarmImgPathList, value); }
+        }
+
+        public string magsImgPathList;
+        public string MagsImgPathList
+        {
+            get { return string.Join("~", MagsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref magsImgPathList, value); }
+        }
+
+        public string trackingUnitImgPathList;
+        public string TrackingUnitImgPathList
+        {
+            get { return string.Join("~", TrackingUnitImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref trackingUnitImgPathList, value); }
+        }
+
+        public string canopyImgPathList;
+        public string CanopyImgPathList
+        {
+            get { return string.Join("~", CanopyImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref canopyImgPathList, value); }
+        }
+
+        public string jackImgPathList;
+        public string JackImgPathList
+        {
+            get { return string.Join("~", JackImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref jackImgPathList, value); }
+        }
+
+        public string toolsImgPathList;
+        public string ToolsImgPathList
+        {
+            get { return string.Join("~", ToolsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref toolsImgPathList, value); }
+        }
+
+        public string spareKeysImgPathList;
+        public string SpareKeysImgPathList
+        {
+            get { return string.Join("~", SpareKeysImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref spareKeysImgPathList, value); }
+        }
+
+        public string servicesBookImgPathList;
+        public string ServicesBookImgPathList
+        {
+            get { return string.Join("~", ServicesBookImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref servicesBookImgPathList, value); }
+        }
+
+        public string spareTyreImgPathList;
+        public string SpareTyreImgPathList
+        {
+            get { return string.Join("~", SpareTyreImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref spareTyreImgPathList, value); }
+        }
     }
 }

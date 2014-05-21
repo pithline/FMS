@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="AppSettingData.cs" />
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Common\VIExtension.cs" />
     <Compile Include="Popups\SnapshotsViewer.xaml.cs">
       <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
     </Compile>
