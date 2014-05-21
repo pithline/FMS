@@ -20,18 +20,6 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Eqstra</x:String>
     </prism:VisualStateAwarePage.Resources>
-    <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Assign" Command="{Binding AssignCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Accept"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
-    </prism:VisualStateAwarePage.BottomAppBar>
-
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
@@ -198,12 +186,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding AwaitingInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="{Binding AwaitingConfirmation}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="Tasks awaiting confirmation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspections"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingConfirmation"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>

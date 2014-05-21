@@ -54,31 +54,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
-            this.AssignCommand = new DelegateCommand(async () =>
-                {
-                    this.InspectionTask.Status = BusinessLogic.Enums.TaskStatusEnum.InProgress;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
-                    var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
-                            this.InspectionTask.ConfirmedTime.Second);
-                    this.Appointments.Add(new ScheduleAppointment
-                    {
-                        Subject = "Inspection at " + this.InspectionTask.CustomerName,
-                        StartTime = startTime,
-                        Location = this.InspectionTask.Address,
-                        EndTime = startTime.AddHours(1),
-                        Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.DarkMagenta), Status = "Free" },
-                    });
-                    this.AssignCommand.RaiseCanExecuteChanged();
-
-                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
-                    this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date == DateTime.Today);
-                }, () =>
-                {
-                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-                }
-            );
-
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -88,7 +63,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
-             this.WeatherInfo = weather.FirstOrDefault();
+            this.WeatherInfo = weather.FirstOrDefault();
 
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
             foreach (Eqstra.BusinessLogic.Task item in list)
@@ -121,7 +96,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
+            this.AwaitingConfirmation = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
             this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
@@ -151,7 +126,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref weatherInfo, value); }
         }
 
-
         private int total;
 
         public int TotalCount
@@ -160,12 +134,12 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref total, value); }
         }
 
-        private int awaitingTaskCount;
+        private int awaitingConfirmation;
 
-        public int AwaitingInspectionCount
+        public int AwaitingConfirmation
         {
-            get { return awaitingTaskCount; }
-            set { SetProperty(ref awaitingTaskCount, value); }
+            get { return awaitingConfirmation; }
+            set { SetProperty(ref awaitingConfirmation, value); }
         }
 
         private int myInspectionCount;
@@ -174,20 +148,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             get { return myInspectionCount; }
             set { SetProperty(ref myInspectionCount, value); }
-        }
-
-        private Eqstra.BusinessLogic.Task task;
-
-        public Eqstra.BusinessLogic.Task InspectionTask
-        {
-            get { return task; }
-            set
-            {
-                if (SetProperty(ref task, value))
-                {
-                    AssignCommand.RaiseCanExecuteChanged();
-                }
-            }
         }
 
 
@@ -199,11 +159,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 SetProperty(ref poolofTasks, value);
 
-
-
             }
         }
-
 
         private ScheduleAppointmentCollection appointments;
         public ScheduleAppointmentCollection Appointments
@@ -211,7 +168,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return appointments; }
             set { SetProperty(ref appointments, value); }
         }
-
         public DelegateCommand BingWeatherCommand { get; set; }
 
         public DelegateCommand AssignCommand { get; set; }

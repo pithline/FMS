@@ -1,4 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
@@ -15,7 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.VehicleInspection.UILogic
 {
-    public class BaseViewModel : ViewModel
+     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
         public BaseViewModel()
@@ -30,18 +32,18 @@ namespace Eqstra.VehicleInspection.UILogic
                     await TakePictureAsync(param);
                 });
 
-            this.OpenSnapshotViewerCommand = DelegateCommand<dynamic>.FromAsyncHandler(async (param) =>
+            this.OpenSnapshotViewerCommand = new  DelegateCommand<dynamic>((param) =>
             {
-                OpenPopup(param);
+                OpenPopup(param);              
             });
         }
 
-        async public System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
         {
             try
             {
                 CameraCaptureUI cam = new CameraCaptureUI();
-                
+
                 var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
                 if (file != null)
                 {
@@ -83,10 +85,9 @@ namespace Eqstra.VehicleInspection.UILogic
 
         public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
 
-      public  void OpenPopup(dynamic dc)
+        public void OpenPopup(dynamic dc)
         {
             CoreWindow currentWindow = Window.Current.CoreWindow;
-
             Popup popup = new Popup();
             popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
@@ -103,15 +104,20 @@ namespace Eqstra.VehicleInspection.UILogic
             }
             _snapShotsPopup.DataContext = dc;
 
-          
+
             popup.Child = _snapShotsPopup;
             this._snapShotsPopup.Tag = popup;
-            
+
             this._snapShotsPopup.Height = currentWindow.Bounds.Height;
-            this._snapShotsPopup.Width = currentWindow.Bounds.Width;            
-            
+            this._snapShotsPopup.Width = currentWindow.Bounds.Width;
+
             popup.IsOpen = true;
 
         }
+        public virtual System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        {
+            return null;
+        }
+      
     }
 }

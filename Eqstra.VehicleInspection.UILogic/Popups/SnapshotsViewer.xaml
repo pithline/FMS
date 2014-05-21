@@ -54,6 +54,10 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
+
+                <Button Content="Delete" Grid.Row="0" Grid.Column="1"  x:Name="DeleteButton" VerticalAlignment="Center" Click="DeleteButton_Click"
+                        AutomationProperties.Name="Delete" AutomationProperties.AutomationId="DeleteAppBarButton" 
+                         />
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" />-->
             </Grid>
@@ -62,9 +66,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
-                        <FlipView  ItemsSource="{Binding Snapshots}"  SelectedValue="{Binding SelectedItem}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+                        <FlipView x:Name="fvSnaps" ItemsSource="{Binding Snapshots}"   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding ImagePath}"/>

@@ -101,7 +101,17 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Base\VIBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CollectDeliveryTask.cs" />
+    <Compile Include="Commercial\CAccessories.cs" />
+    <Compile Include="Commercial\CCabTrimInter.cs" />
+    <Compile Include="Commercial\CChassisBody.cs" />
+    <Compile Include="Commercial\CGlass.cs" />
+    <Compile Include="Commercial\CMechanicalCond.cs" />
+    <Compile Include="Commercial\CPOI.cs" />
+    <Compile Include="Commercial\CTyres.cs" />
     <Compile Include="Commercial\CVehicleDetails.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -123,8 +133,13 @@
     <Compile Include="Passenger\PAccessories.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Passenger\PBodywork.cs" />
+    <Compile Include="Passenger\PGlass.cs" />
+    <Compile Include="Passenger\PInspectionProof.cs" />
+    <Compile Include="Passenger\PMechanicalCond.cs" />
+    <Compile Include="Passenger\PTyreCondition.cs" />
     <Compile Include="Passenger\PVehicleDetails.cs" />
-    <Compile Include="Passenger\TrimInterior.cs" />
+    <Compile Include="Passenger\PTrimInterior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceSchedule\DriverTask.cs" />
     <Compile Include="SQLite.cs" />

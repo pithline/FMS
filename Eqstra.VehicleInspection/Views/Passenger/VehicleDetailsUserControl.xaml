@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
             <TextBlock Text="Vehicle Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
             <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0">
-                <ScrollViewer VerticalScrollMode="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20 20 0 10">
+                <ScrollViewer VerticalScrollMode="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20 20 0 10" ZoomMode="Disabled">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -41,8 +41,8 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Model.LeftSnapshot}">
-                                <Image Margin="-10" Source="{Binding Model.LeftSnapshot.ImagePath}"   Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Height="150"/>
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Path= Model.LeftSnapshot}">
+                                <Image Margin="-10" Source="{Binding Path= Model.LeftSnapshot.ImagePath}"   Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Height="150"/>
                             </Button>
 
                         </Grid>
@@ -52,8 +52,8 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Model.BackSnapshot}" Width="175" Height="150">
-                                <Image Source="{Binding Model.BackSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Path= Model.BackSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path= Model.BackSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
@@ -120,13 +120,13 @@
 
                         <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="License Disc Current" Style="{StaticResource TextHeaderStyle}"/>
-                            <ToggleSwitch IsOn="{Binding IsLicenseDiscCurrent,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsLicenseDiscCurrent,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
                         </StackPanel>
 
 
                         <StackPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="ODO Reading" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.ODOReading}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.ODOReading}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
@@ -136,42 +136,42 @@
 
                         <StackPanel Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Engine Number" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.EngineNumber}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.EngineNumber}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="License Disc Expiry Date" Style="{StaticResource TextHeaderStyle}"/>
-                            <input:SfDatePicker IsHitTestVisible="False" BorderThickness="0" Value="{Binding Model.LicenseDiscExpireDate}"/>
+                            <input:SfDatePicker IsHitTestVisible="False" BorderThickness="0" Value="{Binding Path= Model.LicenseDiscExpireDate}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Color" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.Color}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Color}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Chasis Number" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.ChassisNumber}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.ChassisNumber}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Make/Model" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.Make}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Make}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Spare Keys Shown" Style="{StaticResource TextHeaderStyle}"/>
-                            <ToggleSwitch IsOn="{Binding Model.IsSpareKeysShown,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysShown,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Spare Keys Tested" Style="{StaticResource TextHeaderStyle}"/>
-                            <ToggleSwitch IsOn="{Binding Model.IsSpareKeysTested,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysTested,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="Year" Style="{StaticResource TextHeaderStyle}"/>
-                            <TextBlock Text="{Binding Model.Year}" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Year}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
                         <!--<Rectangle Fill="#FFE6E6E6" Grid.Column="0" Grid.Row="1" Width="175" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
                     </Grid>

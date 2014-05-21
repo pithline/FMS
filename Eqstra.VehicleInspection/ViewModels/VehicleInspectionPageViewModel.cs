@@ -1,17 +1,25 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic;
+using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using SQLite;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -26,39 +34,62 @@ namespace Eqstra.VehicleInspection.ViewModels
         {
             try
             {
+                CreateTableAsync();
                 _navigationService = navigationService;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
                 this.PrevViewStack = new Stack<UserControl>();
                 LoadDemoAppointments();
 
-                this.CompleteCommand = new DelegateCommand(async () => {
-                   this._task.Status = BusinessLogic.Enums.TaskStatusEnum.Completed;
+                this.CompleteCommand = new DelegateCommand(async () =>
+                {
+                    this._task.Status = BusinessLogic.Enums.TaskStatusEnum.Completed;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
-                    _navigationService.Navigate("Main",null);
+                    var currentModel = ((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model;
+                    this.SaveCurrentUIDataAsync(currentModel);
+                    _navigationService.Navigate("Main", null);
+                    this.IsCommandBarOpen = false;
                 }, () => { return this.NextViewStack.Count == 1; });
 
-                this.NextCommand = new DelegateCommand(() =>
+                this.NextCommand = new DelegateCommand(async () =>
                 {
-
                     this.PrevViewStack.Push(this.NextViewStack.Pop());
+                    var currentModel = ((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model;
+                    this.SaveCurrentUIDataAsync(currentModel);
                     this.FrameContent = this.NextViewStack.Peek();
                     CompleteCommand.RaiseCanExecuteChanged();
                     NextCommand.RaiseCanExecuteChanged();
                     PreviousCommand.RaiseCanExecuteChanged();
+                    this.IsCommandBarOpen = false;
+                    if (this.NextViewStack.FirstOrDefault() != null)
+                    {
+                        BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                        await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                    }
+
                 }, () =>
                 {
                     return this.NextViewStack.Count > 1;
                 });
 
-                this.PreviousCommand = new DelegateCommand(() =>
+                this.PreviousCommand = new DelegateCommand(async () =>
                 {
                     var item = this.PrevViewStack.Pop();
                     this.FrameContent = item;
                     this.NextViewStack.Push(item);
+                    //((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model = await (((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model as VIBase).GetDataAsync(this._task.CaseNumber);
                     CompleteCommand.RaiseCanExecuteChanged();
                     PreviousCommand.RaiseCanExecuteChanged();
                     NextCommand.RaiseCanExecuteChanged();
+                    var currentModel = ((BaseViewModel)this.NextViewStack.ElementAt(1).DataContext).Model;
+                    this.SaveCurrentUIDataAsync(currentModel);
+                    this.IsCommandBarOpen = false;
+                    if (this.PrevViewStack.FirstOrDefault() != null)
+                    {
+                        BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                        await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                    }
+
                 }, () =>
                 {
                     return this.PrevViewStack.Count > 0;
@@ -110,6 +141,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             _task = (Eqstra.BusinessLogic.Task)navigationParameter;
             App.Task = _task;
             var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+            ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
             var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
             await GetCustomerDetailsAsync();
             if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
@@ -129,7 +161,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.InspectionUserControls.Add(new CabTrimInterUserControl());
                 this.InspectionUserControls.Add(new ChassisBodyUserControl());
                 this.InspectionUserControls.Add(new CGlassUserControl());
-                this.InspectionUserControls.Add(new CAccessariesUserControl());
+                this.InspectionUserControls.Add(new CAccessoriesUserControl());
                 this.InspectionUserControls.Add(new CTyresUserControl());
                 this.InspectionUserControls.Add(new CMechanicalCondUserControl());
                 this.InspectionUserControls.Add(new CPOIUserControl());
@@ -152,6 +184,13 @@ namespace Eqstra.VehicleInspection.ViewModels
         {
             get { return completeCommand; }
             set { SetProperty(ref completeCommand, value); }
+        }
+        private bool isCommandBarOpen;
+
+        public bool IsCommandBarOpen
+        {
+            get { return isCommandBarOpen; }
+            set { SetProperty(ref isCommandBarOpen, value); }
         }
 
 
@@ -251,12 +290,86 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.CustomerDetails.CellNumber = this._task.CellNumber;
                     this.CustomerDetails.CaseType = this._task.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    
                 }
             }
             catch (Exception)
             {
                 throw;
             }
+
+        }
+
+        async private void SaveCurrentUIDataAsync(Object model)
+        {
+            try
+            {
+                if (this._task != null)
+                {
+                    var viobj = await (model as VIBase).GetDataAsync(this._task.CaseNumber);
+                    if (viobj != null)
+                    {
+                        var successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(model);
+                    }
+                    else
+                    {
+                        ((VIBase)model).CaseNumber = this._task.CaseNumber;
+                        var successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(model);
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// This function is to create table Only it should run only once.
+        /// </summary>
+        private async void CreateTableAsync()
+        {
+
+            ////Drop Existing tables
+
+            //await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
+            //await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
+            //await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
+            //await SqliteHelper.Storage.DropTableAsync<PGlass>();
+            //await SqliteHelper.Storage.DropTableAsync<PBodywork>();
+            //await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
+            //await SqliteHelper.Storage.DropTableAsync<PAccessories>();
+
+            //await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<CTyres>();
+            //await SqliteHelper.Storage.DropTableAsync<CAccessories>();
+            //await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
+            //await SqliteHelper.Storage.DropTableAsync<CGlass>();
+            //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
+            //await SqliteHelper.Storage.DropTableAsync<CPOI>();
+            //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
+
+            ////create new  tables
+
+            //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
+            //await SqliteHelper.Storage.CreateTableAsync<PMechanicalCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<PInspectionProof>();
+            //await SqliteHelper.Storage.CreateTableAsync<PGlass>();
+            //await SqliteHelper.Storage.CreateTableAsync<PBodywork>();
+            //await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
+            //await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
+
+            //await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<CTyres>();
+            //await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
+            //await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
+            //await SqliteHelper.Storage.CreateTableAsync<CGlass>();
+            //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
+            //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
 
         }
     }

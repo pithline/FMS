@@ -23,5 +23,10 @@ namespace Eqstra.VehicleInspection.Views
         {
             this.InitializeComponent();
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -17,7 +17,7 @@
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Previous" Command="{Binding PreviousCommand}">
                     <AppBarButton.Icon>
@@ -31,7 +31,7 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <!--<AppBarSeparator/>-->
-            <AppBarButton Label="Next" Command="{Binding NextCommand}">
+            <AppBarButton Label="Next" Command="{Binding NextCommand}" >
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Next"/>
                 </AppBarButton.Icon>
@@ -70,7 +70,7 @@
             <local:ProfileUserControl Grid.Column="2"/>
         </Grid>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
             <Grid Margin="30">
             <Grid.ColumnDefinitions> 
                 <ColumnDefinition Width="Auto"/>

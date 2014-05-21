@@ -27,6 +27,7 @@ using Windows.UI.ApplicationSettings;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Eqstra.VehicleInspection.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Windows.UI.Popups;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -69,37 +70,44 @@ namespace Eqstra.VehicleInspection
 
         async protected override void OnInitialize(IActivatedEventArgs args)
         {
-            base.OnInitialize(args);
-            EventAggregator = new EventAggregator();
-
-            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-            if (db == null)
+            try
             {
-                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
-                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
+                base.OnInitialize(args);
+                EventAggregator = new EventAggregator();
+
+                var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+                if (db == null)
+                {
+                    var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                    // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                    await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
+                }
+                SqliteHelper.Storage.ConnectionDatabaseAsync();
+                _container.RegisterInstance(NavigationService);
+                _container.RegisterInstance(EventAggregator);
+                _container.RegisterInstance(SessionStateService);
+
+                _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
+
+
+                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
+                ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+                {
+                    var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
+                    return Type.GetType(viewModelTypeName);
+                });
+                //ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+                //    {
+                //        var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.Passenger.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
+                //        return Type.GetType(viewModelTypeName);
+                //    });
             }
-            SqliteHelper.Storage.ConnectionDatabaseAsync();
-            _container.RegisterInstance(NavigationService);
-            _container.RegisterInstance(EventAggregator);
-            _container.RegisterInstance(SessionStateService);
-
-            _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IIdentityService,IdentityServiceProxy>(new ContainerControlledLifetimeManager());
-
-
-            ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
-            ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+            catch ( Exception ex)
             {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
-                return Type.GetType(viewModelTypeName);
-            });
-            //ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
-            //    {
-            //        var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.Passenger.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
-            //        return Type.GetType(viewModelTypeName);
-            //    });
+                new MessageDialog(ex.Message).ShowAsync();
+            }
         }
 
         protected override object Resolve(Type type)
