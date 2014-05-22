@@ -8,6 +8,7 @@ using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,11 +16,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class MainPageViewModel : ViewModel
+    public class MainPageViewModel : BaseViewModel
     {
 
         public MainPageViewModel()
@@ -60,12 +62,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            Synchronize(async () =>
+            {
 
-            VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
-            client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
-            var res = await client.createTyreConditionAsync(new ObservableCollection<VIService.MzkTyreConditionContract> { new MzkTyreConditionContract { parmPassengerTyreType = MzkPassengerTyreCondition.RR, parmRecID = 0, parmTableId = 0, parmVehicleInsRecID = 5637144576, parmComments = "tested by noor", parmCondition = MZKConditionEnum.Fair } });
-          
-            SyncData();
+                VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
+                var res = await client.getTasksAsync("rchivukula");
+                if (res != null && res.response.Count>0)
+                {
+                    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+                   
+                    foreach (var item in res.response)
+                    {
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task { });
+                    } 
+                }
+
+            });
+            //SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
             this.WeatherInfo = weather.FirstOrDefault();
@@ -101,7 +115,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
             this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
             this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));

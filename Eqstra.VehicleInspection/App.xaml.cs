@@ -54,7 +54,16 @@ namespace Eqstra.VehicleInspection
 
       async  protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-            var accountService = _container.Resolve<IAccountService>();
+            
+                var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+                if (db == null)
+                {
+                    var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                    // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                    var destinationFolder = await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB",CreationCollisionOption.ReplaceExisting);
+                    await packDb.MoveAsync(destinationFolder);
+                }
+          var accountService = _container.Resolve<IAccountService>();
             var result = await accountService.VerifyUserCredentialsAsync();
             if (result != null)
             {
@@ -75,13 +84,6 @@ namespace Eqstra.VehicleInspection
                 base.OnInitialize(args);
                 EventAggregator = new EventAggregator();
 
-                var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-                if (db == null)
-                {
-                    var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                    // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
-                    await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
-                }
                 SqliteHelper.Storage.ConnectionDatabaseAsync();
                 _container.RegisterInstance(NavigationService);
                 _container.RegisterInstance(EventAggregator);
@@ -140,6 +142,8 @@ namespace Eqstra.VehicleInspection
 
             return settingsCommands;
         }
+
+        
 
         public void Dispose()
         {
