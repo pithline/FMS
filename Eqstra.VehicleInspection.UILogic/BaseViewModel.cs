@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
+using Windows.Networking.Connectivity;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -20,6 +21,8 @@ namespace Eqstra.VehicleInspection.UILogic
      public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
+        ConnectionProfile _connectionProfile;
+        Action _syncExecute;
         public BaseViewModel()
         {
             TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
@@ -119,5 +122,23 @@ namespace Eqstra.VehicleInspection.UILogic
             return null;
         }
       
+         public void Synchronize(Action syncExecute)
+        {
+            _syncExecute = syncExecute;
+            _connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+            if (_connectionProfile!= null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            {                
+                _syncExecute.Invoke();               
+            }
+        }
+
+         void NetworkInformation_NetworkStatusChanged(object sender)
+         {
+             if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+             {
+                 _syncExecute.Invoke();
+             }
+         }
     }
 }
