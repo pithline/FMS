@@ -86,8 +86,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;
                     this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                    this.CustomerDetails.Name = this.Customer.Name;
-                    this.CustomerDetails.CellNumber = this._task.CellNumber;
+                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                    this.CustomerDetails.ContactName = this.Customer.ContactName;
                     this.CustomerDetails.CaseType = this._task.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
                 }

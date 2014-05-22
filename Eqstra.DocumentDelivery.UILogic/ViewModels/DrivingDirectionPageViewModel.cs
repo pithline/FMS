@@ -114,8 +114,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;
                     this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
-                    this.CustomerDetails.Name = this.Customer.Name;
-                    this.CustomerDetails.CellNumber = this._inspection.CellNumber;
+                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                    this.CustomerDetails.ContactName = this.Customer.ContactName;
                     this.CustomerDetails.CaseType = this._inspection.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
                 }

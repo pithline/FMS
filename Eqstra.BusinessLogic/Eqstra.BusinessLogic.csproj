@@ -118,6 +118,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Enums\CDTaskStatus.cs" />
     <Compile Include="Enums\CDTaskTypeEnum.cs" />

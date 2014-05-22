@@ -72,7 +72,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.Name;
+                item.CustomerName = cust.CustomerName;
                 if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
@@ -101,7 +101,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
                 this.PoolofTasks.Add(new DriverTask
                 {
-                    CellNumber = item.CellNumber,
                     RegistrationNumber = item.RegistrationNumber,
                     CaseNumber = item.CaseNumber,
                     CaseType = item.CaseType,

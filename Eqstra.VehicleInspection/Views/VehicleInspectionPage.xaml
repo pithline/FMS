@@ -66,7 +66,11 @@
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Center"
                        />
-            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" HorizontalAlignment="Left"/>
+            <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}" Grid.Column="1" HorizontalAlignment="Left">
+                <Button.Content>
+                    <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                </Button.Content>
+            </Button>
             <local:ProfileUserControl Grid.Column="2"/>
         </Grid>
 

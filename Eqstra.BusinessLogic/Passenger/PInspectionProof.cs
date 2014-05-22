@@ -71,5 +71,22 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return eQRTime; }
             set { SetProperty(ref eQRTime, value); }
         }
+
+        private string cRSignComment;
+
+        public string CRSignComment
+        {
+            get { return cRSignComment; }
+            set { SetProperty(ref cRSignComment, value); }
+        }
+
+        private string eQRSignComment;
+
+        public string EQRSignComment
+        {
+            get { return eQRSignComment; }
+            set { SetProperty(ref eQRSignComment, value); }
+        }
+        
     }
 }

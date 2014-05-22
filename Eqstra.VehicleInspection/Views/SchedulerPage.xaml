@@ -48,7 +48,11 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton" 
                         AutomationProperties.ItemType="Navigation Button"/>
-            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Button.Content>
+                    <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                </Button.Content>
+            </Button>
             <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
         </Grid>
         <schedule:SfSchedule AllowEditing="True" Grid.Row="1"  ScheduleType="Day" ContextMenuType="RadialMenu" EnableReminderTimer="True"  Appointments="{Binding CustomerDetails.Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour" Margin="30">

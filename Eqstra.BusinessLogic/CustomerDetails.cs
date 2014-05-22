@@ -12,13 +12,22 @@ namespace Eqstra.BusinessLogic
 {
     public class CustomerDetails : ValidatableBindableBase
     {
-        private string name;
+        private string customerName;
 
-        public string Name
+        public string CustomerName
         {
-            get { return name; }
-            set { SetProperty(ref name, value); }
+            get { return customerName; }
+            set { SetProperty(ref customerName, value); }
         }
+
+        private string contactName;
+
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
+        }
+
 
         private string contactNumber;
 
@@ -67,16 +76,6 @@ namespace Eqstra.BusinessLogic
             get { return caseType; }
             set { SetProperty(ref caseType, value); }
         }
-
-
-        private long cellNumber;
-
-        public long CellNumber
-        {
-            get { return cellNumber; }
-            set { SetProperty(ref cellNumber, value); }
-        }
-
 
         private DateTime statusDueDate;
 

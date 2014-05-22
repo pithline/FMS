@@ -48,14 +48,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+            <!--<Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand}"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
 				VerticalAlignment="Center"
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
-				AutomationProperties.ItemType="Navigation Button"/>
+				AutomationProperties.ItemType="Navigation Button"/>-->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                <Button Command="{Binding GoHomeCommand}"  Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
             </StackPanel>
@@ -135,17 +139,18 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBox PlaceholderText="Type to filter..." Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" HorizontalAlignment="Left"/>
-                        <grid:SfDataGrid Grid.Row="1" NavigationMode="Cell" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="True" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+                        <grid:SfDataGrid Grid.Row="1"   SelectedIndex="0"  NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="True" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn  HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Image />
-                                                <TextBlock Text="{Binding CellNumber}"/>
+                                                <TextBlock Text="{Binding ContactNumber}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
@@ -207,12 +212,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding MyInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="{Binding MyTasksCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="My Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspection"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitInspectionAcceptance,AwaitInspectionDataCapture"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>
