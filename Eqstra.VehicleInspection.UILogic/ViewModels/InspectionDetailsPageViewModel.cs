@@ -36,7 +36,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.Navigate("DrivingDirection", InspectionTask);
                 return System.Threading.Tasks.Task.FromResult<object>(null);
             }, () =>
-                { return (this.InspectionTask != null && this.InspectionTask.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection && this.InspectionTask.Status != BusinessLogic.Enums.TaskStatusEnum.Completed); }
+                { return (this.InspectionTask != null && (this.InspectionTask.Status== BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection || this.InspectionTask.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)); }
             );
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
@@ -64,7 +64,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             this.SaveCommand = new DelegateCommand(async () =>
             {
-                this.InspectionTask.Status = BusinessLogic.Enums.TaskStatusEnum.InProgress;
+                this.InspectionTask.Status = BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection;
                 await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                 var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                         this.InspectionTask.ConfirmedTime.Second);
@@ -79,7 +79,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.SaveCommand.RaiseCanExecuteChanged();
 
                 this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
-                this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+                this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
                 this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date == DateTime.Today);
                 this.IsCommandBarOpen = false;
             }
@@ -96,7 +96,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             IEnumerable<Eqstra.BusinessLogic.Task> list = null;
-            if (navigationParameter.Equals("AwaitingInspections"))
+            if (navigationParameter.Equals("AwaitingInspection"))
             {
                 list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
             }
@@ -178,14 +178,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 SetProperty(ref poolofTasks, value);
             }
-        }
-
-        private int myInspectionCount;
-
-        public int MyInspectionCount
-        {
-            get { return myInspectionCount; }
-            set { SetProperty(ref myInspectionCount, value); }
         }
 
         private Customer customer;
