@@ -9,29 +9,30 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     x:Name="pageRoot"
     x:Class="Eqstra.VehicleInspection.Views.DrivingDirectionPage"
     
     mc:Ignorable="d">
     <prism:VisualStateAwarePage.Resources>
         <x:String x:Key="BingMapsApiKey">AkjXEdr_kqaXOMmwBdob0dSykNVdliqwxEufZJrzotABsNfEkkDFuiqSTbzPxZgs</x:String>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </prism:VisualStateAwarePage.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar >
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Start Driving" >
+                <AppBarButton Label="Start Driving" Command="{Binding StartDrivingCommand}" Visibility="{Binding IsStartDriving,Converter={StaticResource BooleanToVisibilityConverter}}">
                     <AppBarButton.Icon>
                         <SymbolIcon Symbol="Directions"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Start Inspection" Command="{Binding GoToVehicleInspectionCommand}">
-            	
+            <AppBarButton Label="Start Inspection" Command="{Binding GoToVehicleInspectionCommand}" Visibility="{Binding IsStartInspection,Converter={StaticResource BooleanToVisibilityConverter}}">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="SetLockScreen"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton Label="Arrived" Icon="Flag"/>
+            <AppBarButton Label="Arrived" Icon="Flag" Command="{Binding ArrivedCommand}" Visibility="{Binding IsArrived,Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
     <Grid Style="{StaticResource LayoutRootStyle}">
@@ -60,7 +61,11 @@
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
             </StackPanel>

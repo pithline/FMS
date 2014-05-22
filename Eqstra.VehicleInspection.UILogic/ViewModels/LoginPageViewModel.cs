@@ -18,7 +18,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             _navigationService = navigationService;
             _accountService = accountService;
-
+           
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {

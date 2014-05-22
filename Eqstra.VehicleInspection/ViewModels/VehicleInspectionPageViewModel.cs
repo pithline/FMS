@@ -26,11 +26,11 @@ using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.ViewModels
 {
-    public class VehicleInspectionPageViewModel : ViewModel
+    public class VehicleInspectionPageViewModel : BaseViewModel
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
-        public VehicleInspectionPageViewModel(INavigationService navigationService)
+        public VehicleInspectionPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             try
             {
@@ -286,8 +286,8 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;
                     this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                    this.CustomerDetails.Name = this.Customer.Name;
-                    this.CustomerDetails.CellNumber = this._task.CellNumber;
+                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                    this.CustomerDetails.ContactName = this.Customer.ContactName;
                     this.CustomerDetails.CaseType = this._task.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
                     
@@ -313,6 +313,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     }
                     else
                     {
+
                         ((VIBase)model).CaseNumber = this._task.CaseNumber;
                         var successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(model);
                     }
@@ -350,7 +351,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.DropTableAsync<CPOI>();
             //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
-
+            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
             ////create new  tables
 
             //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
@@ -370,7 +371,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-
+           // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+           // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
         }
     }
 }

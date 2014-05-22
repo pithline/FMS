@@ -1,5 +1,6 @@
 ﻿using Eqstra.VehicleInspection.Common;
 using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Xaml.Interactions.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,9 +35,6 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.defaultViewModel; }
         }
 
-      
-
-
         public LoginPage()
         {
             this.InitializeComponent();
@@ -70,6 +68,14 @@ namespace Eqstra.VehicleInspection.Views
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if(e.Key == Windows.System.VirtualKey.Enter)
+            {
+                this.btnLogin.Command.Execute(null);
+            }
         }
 
         #region NavigationHelper registration

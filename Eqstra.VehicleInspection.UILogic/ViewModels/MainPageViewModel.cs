@@ -77,7 +77,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                         await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task { });
                     } 
                 }
-
+          
             });
             //SyncData();
 
@@ -88,7 +88,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.Name;
+                item.CustomerName = cust.CustomerName;
                 if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
@@ -115,9 +115,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-            this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
+            
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
         async private void SyncData()
@@ -161,23 +161,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return awaitingConfirmationCount; }
             set { SetProperty(ref awaitingConfirmationCount, value); }
         }
+        private int myTasksCount;
 
-        private int awaitingInspectionCount;
-
-        public int AwaitingInspectionCount
+        public int MyTasksCount
         {
-            get { return awaitingInspectionCount; }
-            set { SetProperty(ref awaitingInspectionCount, value); }
+            get { return myTasksCount; }
+            set { SetProperty(ref myTasksCount, value); }
         }
 
 
-        private int myInspectionCount;
-
-        public int MyInspectionCount
-        {
-            get { return myInspectionCount; }
-            set { SetProperty(ref myInspectionCount, value); }
-        }
 
 
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;

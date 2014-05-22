@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-  xmlns:common="using:Eqstra.VehicleInspection.Common"
+    xmlns:common="using:Eqstra.VehicleInspection.Common"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 

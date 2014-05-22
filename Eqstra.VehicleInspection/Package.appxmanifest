@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="9d0a55c6-1a6b-4abe-a16d-a385fd8db613" Publisher="CN=devuser" Version="1.0.0.1" />
+  <Identity Name="Eqstra.VehicleInspection" Publisher="CN=devuser" Version="1.0.0.1" />
   <Properties>
-    <DisplayName>Eqstra.VehicleInspection</DisplayName>
+    <DisplayName>Eqstra Vehicle Inspection</DisplayName>
     <PublisherDisplayName>syed.noor</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
