@@ -20,6 +20,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6376442D1D10D4A7925EB760AF0135E4972BE63A</PackageCertificateThumbprint>
+    <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -204,6 +205,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="C:\Program Files %28x86%29\MSBuild\Microsoft\.NetNative\NextSteps.mht">
+      <Link>NextSteps.mht</Link>
+    </None>
     <None Include="Eqstra.VehicleInspection_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <Content Include="Assets\bing_blue.png" />
@@ -230,6 +234,7 @@
     <Content Include="Assets\truck_marks.png" />
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
+    <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -394,7 +399,7 @@
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
     <SDKReference Include="SQLite.WinRT81, Version=3.8.4.3">
-      <Name>SQLite for Windows Runtime %28Windows 8.1%291</Name>
+      <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=11.4.0.26">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
