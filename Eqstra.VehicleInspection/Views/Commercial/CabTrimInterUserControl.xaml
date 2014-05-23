@@ -5,7 +5,7 @@
     xmlns:local="using:Eqstra.VehicleInspection.Views.Commercial"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:common="using:Eqstra.VehicleInspection.Common"
     prism:ViewModelLocator.AutoWireViewModel="True"

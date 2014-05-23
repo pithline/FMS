@@ -61,8 +61,9 @@ namespace Eqstra.VehicleInspection
                     var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
                     // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
                     var destinationFolder = await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB",CreationCollisionOption.ReplaceExisting);
-                    await packDb.MoveAsync(destinationFolder);
+                    await packDb.CopyAsync(destinationFolder);
                 }
+                SqliteHelper.Storage.ConnectionDatabaseAsync();
           var accountService = _container.Resolve<IAccountService>();
             var result = await accountService.VerifyUserCredentialsAsync();
             if (result != null)
@@ -77,14 +78,13 @@ namespace Eqstra.VehicleInspection
           
         }
 
-        async protected override void OnInitialize(IActivatedEventArgs args)
+         protected override void OnInitialize(IActivatedEventArgs args)
         {
             try
             {
                 base.OnInitialize(args);
                 EventAggregator = new EventAggregator();
 
-                SqliteHelper.Storage.ConnectionDatabaseAsync();
                 _container.RegisterInstance(NavigationService);
                 _container.RegisterInstance(EventAggregator);
                 _container.RegisterInstance(SessionStateService);

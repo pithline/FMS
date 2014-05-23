@@ -23,6 +23,8 @@ namespace Eqstra.VehicleInspection.UILogic
     {
         SnapshotsViewer _snapShotsPopup;
         ConnectionProfile _connectionProfile;
+        INavigationService _navigationService;
+         
         Action _syncExecute;
         public BaseViewModel()
         {
@@ -148,6 +150,9 @@ namespace Eqstra.VehicleInspection.UILogic
              {
                  _syncExecute.Invoke();
              }
+           
          }
+
+         
     }
 }
