@@ -63,22 +63,30 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+
             Synchronize(async () =>
             {
-
+                this.IsSynchronizing = true;
                 VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
-                //var res = await client.getTasksAsync("rchivukula");
-                //if (res != null && res.response.Count>0)
-                //{
-                //    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
-                   
-                //    foreach (var item in res.response)
-                //    {
-                //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task { });
-                //    } 
-                //}
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { });
+                var res = await client.getTasksAsync("rchivukula");
+                if (res != null && res.response.Count > 0)
+                {
+                    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+
+                    foreach (var item in res.response)
+                    {
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task {
+                             Address = item.parmCustAddress,
+                             CaseNumber = item.parmCaseID,
+                             CaseCategory = item.parmCaseCategory,
+                             StatusDueDate = item.parmStatusDueDate,
+                             ConfirmedDate = item.parmConfirmedDueDate,
+                             CustomerName = item.parmCustName
+                        });
+                    }
+                }
+                this.IsSynchronizing = false; 
           
             });
             //SyncData();

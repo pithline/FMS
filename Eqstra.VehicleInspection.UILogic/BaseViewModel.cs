@@ -19,12 +19,12 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.VehicleInspection.UILogic
 {
-     public class BaseViewModel : ViewModel
+    public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
         ConnectionProfile _connectionProfile;
         INavigationService _navigationService;
-         
+
         Action _syncExecute;
         public BaseViewModel()
         {
@@ -40,7 +40,7 @@ namespace Eqstra.VehicleInspection.UILogic
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
             {
-                OpenPopup(param);              
+                OpenPopup(param);
             });
 
         }
@@ -52,13 +52,21 @@ namespace Eqstra.VehicleInspection.UILogic
                 _navigationService.ClearHistory();
                 _navigationService.Navigate("Main", null);
             });
-                }
+        }
 
         private Object model;
         public Object Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }
+        }
+
+        private bool isSynchronizing;
+
+        public bool IsSynchronizing
+        {
+            get { return isSynchronizing; }
+            set { SetProperty(ref isSynchronizing, value); }
         }
 
         public DelegateCommand GoHomeCommand { get; set; }
@@ -132,27 +140,27 @@ namespace Eqstra.VehicleInspection.UILogic
         {
             return null;
         }
-      
-         public void Synchronize(Action syncExecute)
+
+        public void Synchronize(Action syncExecute)
         {
             _syncExecute = syncExecute;
             _connectionProfile = NetworkInformation.GetInternetConnectionProfile();
             NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
-            if (_connectionProfile!= null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-            {                
-                _syncExecute.Invoke();               
+            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            {
+                _syncExecute.Invoke();
             }
         }
 
-         void NetworkInformation_NetworkStatusChanged(object sender)
-         {
-             if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-             {
-                 _syncExecute.Invoke();
-             }
-           
-         }
+        void NetworkInformation_NetworkStatusChanged(object sender)
+        {
+            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            {
+                _syncExecute.Invoke();
+            }
 
-         
+        }
+
+
     }
 }
