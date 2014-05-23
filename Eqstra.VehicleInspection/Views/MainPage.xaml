@@ -13,11 +13,12 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
 
     <prism:VisualStateAwarePage.Resources>
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+            <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <x:String x:Key="AppName">Eqstra</x:String>
     </prism:VisualStateAwarePage.Resources>
     <!--
@@ -64,8 +65,13 @@
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
             </StackPanel>
             <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
-
-
+            <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#BFFFFFFF" Height="60"  Visibility="{Binding IsSyncProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ProgressBar  Name="SyncProgress" HorizontalAlignment="Stretch"  IsIndeterminate="True"  VerticalAlignment="Stretch" Margin="0 10"/>
+                <Viewbox Margin="0 10">
+                    <TextBlock Text="Synchronizing....." FontSize="15" />
+                </Viewbox>
+            </StackPanel>
+            
         </Grid>
 
         <Grid Grid.Row="1" Margin="30">
