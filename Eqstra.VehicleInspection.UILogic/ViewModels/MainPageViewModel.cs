@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media;
 
@@ -67,16 +68,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
                 VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
-                var res = await client.getTasksAsync("rchivukula");
-                if (res != null && res.response.Count>0)
-                {
-                    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+                //var res = await client.getTasksAsync("rchivukula");
+                //if (res != null && res.response.Count>0)
+                //{
+                //    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
                    
-                    foreach (var item in res.response)
-                    {
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task { });
-                    } 
-                }
+                //    foreach (var item in res.response)
+                //    {
+                //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task { });
+                //    } 
+                //}
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { });
           
             });
             //SyncData();
