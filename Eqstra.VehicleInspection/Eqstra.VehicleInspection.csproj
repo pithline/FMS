@@ -20,6 +20,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6376442D1D10D4A7925EB760AF0135E4972BE63A</PackageCertificateThumbprint>
+    <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -117,8 +118,8 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs" />
-    <Compile Include="Views\Commercial\CAccessariesUserControl.xaml.cs">
-      <DependentUpon>CAccessariesUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Commercial\CAccessoriesUserControl.xaml.cs">
+      <DependentUpon>CAccessoriesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
       <DependentUpon>CGlassUserControl.xaml</DependentUpon>
@@ -204,6 +205,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="C:\Program Files %28x86%29\MSBuild\Microsoft\.NetNative\NextSteps.mht">
+      <Link>NextSteps.mht</Link>
+    </None>
     <None Include="Eqstra.VehicleInspection_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <Content Include="Assets\bing_blue.png" />
@@ -230,6 +234,8 @@
     <Content Include="Assets\truck_marks.png" />
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
+    <Content Include="default.rd.xml" />
+    <Content Include="Images\images.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -254,7 +260,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Commercial\CAccessariesUserControl.xaml">
+    <Page Include="Views\Commercial\CAccessoriesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -406,10 +412,6 @@
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Eqstra.VehicleInspection.BackgroundTask\Eqstra.VehicleInspection.BackgroundTask.csproj">
-      <Project>{f71b8ac9-5305-402f-ada8-c75ffe09ee24}</Project>
-      <Name>Eqstra.VehicleInspection.BackgroundTask</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>

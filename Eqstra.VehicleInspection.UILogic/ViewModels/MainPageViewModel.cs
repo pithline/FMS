@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -7,6 +8,7 @@ using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,11 +16,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class MainPageViewModel : ViewModel
+    public class MainPageViewModel : BaseViewModel
     {
 
         public MainPageViewModel()
@@ -54,47 +58,47 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
-            this.AssignCommand = new DelegateCommand(async () =>
-                {
-                    this.InspectionTask.Status = BusinessLogic.Enums.TaskStatusEnum.InProgress;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
-                    var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
-                            this.InspectionTask.ConfirmedTime.Second);
-                    this.Appointments.Add(new ScheduleAppointment
-                    {
-                        Subject = "Inspection at " + this.InspectionTask.CustomerName,
-                        StartTime = startTime,
-                        Location = this.InspectionTask.Address,
-                        EndTime = startTime.AddHours(1),
-                        Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.DarkMagenta), Status = "Free" },
-                    });
-                    this.AssignCommand.RaiseCanExecuteChanged();
-
-                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
-                    this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date == DateTime.Today);
-                }, () =>
-                {
-                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-                }
-            );
-
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-            SyncData();
+            Synchronize(async () =>
+            {
+                this.IsSynchronizing = true;
+                VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
+                var res = await client.getTasksAsync("rchivukula");
+                if (res != null && res.response.Count > 0)
+                {
+                    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+
+                    foreach (var item in res.response)
+                    {
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task {
+                             Address = item.parmCustAddress,
+                             CaseNumber = item.parmCaseID,
+                             CaseCategory = item.parmCaseCategory,
+                             StatusDueDate = item.parmStatusDueDate,
+                             ConfirmedDate = item.parmConfirmedDueDate,
+                             CustomerName = item.parmCustName
+                        });
+                    }
+                }
+                this.IsSynchronizing = false; 
+          
+            });
+            //SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
-             this.WeatherInfo = weather.FirstOrDefault();
+            this.WeatherInfo = weather.FirstOrDefault();
 
             var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.Name;
+                item.CustomerName = cust.CustomerName;
                 if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
@@ -121,8 +125,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-            this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
+            
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
         async private void SyncData()
@@ -151,7 +156,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref weatherInfo, value); }
         }
 
-
         private int total;
 
         public int TotalCount
@@ -160,35 +164,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref total, value); }
         }
 
-        private int awaitingTaskCount;
+        private int awaitingConfirmationCount;
 
-        public int AwaitingInspectionCount
+        public int AwaitingConfirmationCount
         {
-            get { return awaitingTaskCount; }
-            set { SetProperty(ref awaitingTaskCount, value); }
+            get { return awaitingConfirmationCount; }
+            set { SetProperty(ref awaitingConfirmationCount, value); }
+        }
+        private int myTasksCount;
+
+        public int MyTasksCount
+        {
+            get { return myTasksCount; }
+            set { SetProperty(ref myTasksCount, value); }
         }
 
-        private int myInspectionCount;
 
-        public int MyInspectionCount
-        {
-            get { return myInspectionCount; }
-            set { SetProperty(ref myInspectionCount, value); }
-        }
-
-        private Eqstra.BusinessLogic.Task task;
-
-        public Eqstra.BusinessLogic.Task InspectionTask
-        {
-            get { return task; }
-            set
-            {
-                if (SetProperty(ref task, value))
-                {
-                    AssignCommand.RaiseCanExecuteChanged();
-                }
-            }
-        }
 
 
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
@@ -199,11 +190,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 SetProperty(ref poolofTasks, value);
 
-
-
             }
         }
-
 
         private ScheduleAppointmentCollection appointments;
         public ScheduleAppointmentCollection Appointments
@@ -211,7 +199,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return appointments; }
             set { SetProperty(ref appointments, value); }
         }
-
         public DelegateCommand BingWeatherCommand { get; set; }
 
         public DelegateCommand AssignCommand { get; set; }

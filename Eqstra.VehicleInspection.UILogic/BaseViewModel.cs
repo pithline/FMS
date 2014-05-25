@@ -1,6 +1,9 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
+using Windows.Networking.Connectivity;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -18,6 +22,10 @@ namespace Eqstra.VehicleInspection.UILogic
     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
+        ConnectionProfile _connectionProfile;
+        INavigationService _navigationService;
+
+        Action _syncExecute;
         public BaseViewModel()
         {
             TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
@@ -30,38 +38,42 @@ namespace Eqstra.VehicleInspection.UILogic
                     await TakePictureAsync(param);
                 });
 
-            this.OpenSnapshotViewerCommand = DelegateCommand<dynamic>.FromAsyncHandler(async (param) =>
+            this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
             {
                 OpenPopup(param);
             });
-        }
 
-        async public System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        }
+        public BaseViewModel(INavigationService navigationService)
         {
-            try
+            _navigationService = navigationService;
+            this.GoHomeCommand = new DelegateCommand(() =>
             {
-                CameraCaptureUI cam = new CameraCaptureUI();
-                
-                var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
-                {
-                    param.ImagePath = file.Path;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                _navigationService.ClearHistory();
+                _navigationService.Navigate("Main", null);
+            });
         }
-        private Object model;
 
+        private Object model;
         public Object Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }
         }
 
+        private bool isSynchronizing;
+
+        public bool IsSynchronizing
+        {
+            get { return isSynchronizing; }
+            set { SetProperty(ref isSynchronizing, value); }
+        }
+
+        public DelegateCommand GoHomeCommand { get; set; }
+
         public DelegateCommand<ObservableCollection<ImageCapture>> TakeSnapshotCommand { get; set; }
+        public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
+        public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
         protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
         {
             try
@@ -78,15 +90,26 @@ namespace Eqstra.VehicleInspection.UILogic
                 throw;
             }
         }
+        async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        {
+            try
+            {
+                CameraCaptureUI cam = new CameraCaptureUI();
 
-        public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
-
-        public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
-
-      public  void OpenPopup(dynamic dc)
+                var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (file != null)
+                {
+                    param.ImagePath = file.Path;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void OpenPopup(dynamic dc)
         {
             CoreWindow currentWindow = Window.Current.CoreWindow;
-
             Popup popup = new Popup();
             popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
@@ -103,15 +126,41 @@ namespace Eqstra.VehicleInspection.UILogic
             }
             _snapShotsPopup.DataContext = dc;
 
-          
+
             popup.Child = _snapShotsPopup;
             this._snapShotsPopup.Tag = popup;
-            
+
             this._snapShotsPopup.Height = currentWindow.Bounds.Height;
-            this._snapShotsPopup.Width = currentWindow.Bounds.Width;            
-            
+            this._snapShotsPopup.Width = currentWindow.Bounds.Width;
+
             popup.IsOpen = true;
 
         }
+        public virtual System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        {
+            return null;
+        }
+
+        public void Synchronize(Action syncExecute)
+        {
+            _syncExecute = syncExecute;
+            _connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            {
+                _syncExecute.Invoke();
+            }
+        }
+
+        void NetworkInformation_NetworkStatusChanged(object sender)
+        {
+            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+            {
+                _syncExecute.Invoke();
+            }
+
+        }
+
+
     }
 }

@@ -28,14 +28,15 @@ namespace Eqstra.BusinessLogic
             get { return caseType; }
             set { SetProperty(ref caseType, value); }
         }
-        
-        private long cellNumber;
 
-        public long CellNumber
+        private string caseCategory;
+
+        public string CaseCategory
         {
-            get { return cellNumber; }
-            set { SetProperty(ref cellNumber, value); }
+            get { return caseCategory; }
+            set { SetProperty(ref caseCategory, value); }
         }
+
 
 
         private DateTime statusDueDate;

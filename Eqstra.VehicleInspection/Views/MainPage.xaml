@@ -13,25 +13,14 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
 
     <prism:VisualStateAwarePage.Resources>
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+            <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <x:String x:Key="AppName">Eqstra</x:String>
     </prism:VisualStateAwarePage.Resources>
-    <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Assign" Command="{Binding AssignCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Accept"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
-    </prism:VisualStateAwarePage.BottomAppBar>
-
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
@@ -57,22 +46,33 @@
         <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+            <!--<Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand}"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
 				VerticalAlignment="Center"
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
-				AutomationProperties.ItemType="Navigation Button"/>
+				AutomationProperties.ItemType="Navigation Button"/>-->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                <Button Command="{Binding GoHomeCommand}"  Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
             </StackPanel>
-            <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
-
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="10 0">
+                <StackPanel Orientation="Horizontal" Background="#BFFFFFFF" Margin="0 5"  Visibility="{Binding IsSynchronizing,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    
+                        <TextBlock Text="Synchronizing" VerticalAlignment="Center" Margin="0 0 15 0" FontSize="15" />
+                     <ProgressBar  Name="SyncProgress" Width="300" Height="15"  IsIndeterminate="True" />
+                    
+                </StackPanel>
+                <local:ProfileUserControl HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </StackPanel>
 
         </Grid>
 
@@ -88,7 +88,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Today's Inspections" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <TextBlock Text="Today's Tasks" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -147,17 +147,18 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBox PlaceholderText="Type to filter..." Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" HorizontalAlignment="Left"/>
-                        <grid:SfDataGrid Grid.Row="1" NavigationMode="Cell" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="True" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+                        <grid:SfDataGrid Grid.Row="1"   SelectedIndex="0"  NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="True" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn  HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Image />
-                                                <TextBlock Text="{Binding CellNumber}"/>
+                                                <TextBlock Text="{Binding ContactNumber}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
@@ -198,12 +199,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding AwaitingInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="{Binding AwaitingConfirmationCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
                         <TextBlock Text="Tasks awaiting confirmation" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingInspections"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingConfirmation"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>
@@ -219,12 +220,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Fill="#FF35a3dc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                        <TextBlock Text="{Binding MyInspectionCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
-                        <TextBlock Text="My Collection Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        <TextBlock Text="{Binding MyTasksCount}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource InfoNumberStyle}"/>
+                        <TextBlock Text="My Tasks" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource InfoBoxTitleStyle}"/>
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="InProgress"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitInspectionAcceptance,AwaitInspectionDataCapture"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>

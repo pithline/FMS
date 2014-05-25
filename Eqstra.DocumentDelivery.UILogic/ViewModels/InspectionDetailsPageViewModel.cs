@@ -130,7 +130,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.Name;
+                item.CustomerName = cust.CustomerName;
                 item.Address = cust.Address;
                 this.InspectionList.Add(item);
             }
@@ -227,8 +227,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.customerDetails.StatusDueDate = this.inspection.StatusDueDate;
                     this.customerDetails.Address = this.customer.Address;
                     this.customerDetails.AllocatedTo = this.inspection.AllocatedTo;
-                    this.customerDetails.Name = this.customer.Name;
-                    this.customerDetails.CellNumber = this.inspection.CellNumber;
+                    this.customerDetails.CustomerName = this.customer.CustomerName;
                     this.customerDetails.CaseType = this.inspection.CaseType;
                     this.customerDetails.EmailId = this.customer.EmailId;
                 }

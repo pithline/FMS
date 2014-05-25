@@ -92,7 +92,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.Name;
+                item.CustomerName = cust.CustomerName;
                 if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);

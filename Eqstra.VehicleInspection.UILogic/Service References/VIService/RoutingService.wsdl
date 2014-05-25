@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://schemas.microsoft.com/netfx/2009/05/routing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:i1="http://tempuri.org" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RoutingService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="reqReplyEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:NegotiateAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BasicHttpBinding_MzkVehicleInspectionService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:NegotiateAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://schemas.microsoft.com/netfx/2009/05/routing" location="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?wsdl=wsdl0" />
+  <wsdl:import namespace="http://tempuri.org" location="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?wsdl=wsdl1" />
+  <wsdl:types />
+  <wsdl:binding name="reqReplyEndpoint" type="i0:IRequestReplyRouter">
+    <wsp:PolicyReference URI="#reqReplyEndpoint_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_MzkVehicleInspectionService" type="i1:MzkVehicleInspectionService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_MzkVehicleInspectionService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createVehicleDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleDetails" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateVehicleDetailsRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateVehicleDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateVehicleDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editGlass">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editGlass" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditGlassRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditGlassRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditGlassResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editVehicleInspection">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditVehicleInspectionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditVehicleInspectionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditVehicleInspectionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCustDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetails" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceGetCustDetailsRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceGetCustDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceGetCustDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readBodywork">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readBodywork" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadBodyworkRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadBodyworkRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadBodyworkResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readGlass">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readGlass" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadGlassRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadGlassRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadGlassResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readMechCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readMechCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadMechConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadMechConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadMechConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readTrimInterior">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readTrimInterior" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadTrimInteriorRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadTrimInteriorRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadTrimInteriorResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTasks">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/getTasks" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceGetTasksRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceGetTasksRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceGetTasksResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readVehicleDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetails" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadVehicleDetailsRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadVehicleDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadVehicleDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readTyreCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readTyreCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadTyreConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadTyreConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadTyreConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateStatusList">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusList" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceUpdateStatusListRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceUpdateStatusListRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceUpdateStatusListResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createAccessories">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createAccessories" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateAccessoriesRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateAccessoriesRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateAccessoriesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createTyreCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createTyreCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateTyreConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateTyreConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateTyreConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createBodywork">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createBodywork" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateBodyworkRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateBodyworkRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateBodyworkResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createGlass">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createGlass" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateGlassRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateGlassRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateGlassResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editTrimInterior">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editTrimInterior" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditTrimInteriorRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditTrimInteriorRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditTrimInteriorResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editVehicleDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditVehicleDetailsRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditVehicleDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditVehicleDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createVehicleInspectionTable">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTable" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editAccessory">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editAccessory" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditAccessoryRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditAccessoryRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditAccessoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editTyreCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editTyreCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditTyreConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditTyreConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditTyreConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editBodywork">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editBodywork" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditBodyworkRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditBodyworkRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditBodyworkResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createTrimInterior">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createTrimInterior" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateTrimInteriorRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateTrimInteriorRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateTrimInteriorResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editMechCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/editMechCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceEditMechConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceEditMechConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceEditMechConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createMechCondition">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createMechCondition" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateMechConditionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateMechConditionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateMechConditionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="readAccessories">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/readAccessories" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceReadAccessoriesRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceReadAccessoriesRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceReadAccessoriesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createVehicleCollection">
+      <soap:operation soapAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleCollection" style="document" />
+      <wsdl:input name="MzkVehicleInspectionServiceCreateVehicleCollectionRequest">
+        <soap:header message="i1:MzkVehicleInspectionServiceCreateVehicleCollectionRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkVehicleInspectionServiceCreateVehicleCollectionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RoutingService">
+    <wsdl:port name="reqReplyEndpoint" binding="tns:reqReplyEndpoint">
+      <soap:address location="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_MzkVehicleInspectionService" binding="tns:BasicHttpBinding_MzkVehicleInspectionService">
+      <soap:address location="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -19,12 +19,20 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref id, value); }
         }
 
-        private string name;
+        private string customerName;
 
-        public string Name
+        public string CustomerName
         {
-            get { return name; }
-            set { SetProperty(ref name, value); }
+            get { return customerName; }
+            set { SetProperty(ref customerName, value); }
+        }
+
+        private string contactName;
+
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
         }
 
         private string contactNumber;
@@ -50,8 +58,6 @@ namespace Eqstra.BusinessLogic
             get { return emailId; }
             set { SetProperty(ref emailId, value); }
         }
-
-   
 
     }
 }

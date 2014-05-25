@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Enums
 {
-   public enum TaskStatusEnum
+    public enum TaskStatusEnum
     {
-       [Display(Name="Awaiting Inspection")]
-       AwaitingInspection,
-       InProgress,
-       Completed
+        [Display(Name = "Await Inspection Data Capture")]
+        AwaitInspectionDataCapture,
+        [Display(Name = "Await Inspection Confirmation ")]
+        AwaitingConfirmation,
+        [Display(Name = "Await Inspection Acceptance")]
+        AwaitInspectionAcceptance,
+        [Display(Name = "Awaiting Inspection")]
+        AwaitingInspection,
+        [Display(Name = "Await Damage Confirmation")]
+        AwaitDamageConfirmation,
+        InProgress,
+        Completed
     }
 }

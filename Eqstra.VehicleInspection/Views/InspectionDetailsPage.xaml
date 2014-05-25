@@ -10,23 +10,24 @@
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"    
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d">
-
     <Page.Resources>
+       
+            <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+       
+        
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
-        
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Driving Direction" Icon="Directions" Command="{Binding DrivingDirectionCommand}">
-
-
-                </AppBarButton>
+                <AppBarButton Label="Save" Icon="Save" Visibility="{Binding IsSave,Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" Command="{Binding SaveCommand}"/>
             </CommandBar.SecondaryCommands>
+            <AppBarButton Label="Next" Icon="Next"  Visibility="{Binding IsNext,Converter={StaticResource BooleanToVisibilityConverter}}"  HorizontalAlignment="Right" Command="{Binding DrivingDirectionCommand}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -60,7 +61,11 @@
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
             </StackPanel>
@@ -85,30 +90,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <grid:SfDataGrid x:Name="sfDataGrid" ShowBusyIndicator="True" NavigationMode="Row" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid SelectedIndex="0" ShowBusyIndicator="True" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn  HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Image />
-                                                <TextBlock Text="{Binding CellNumber}"/>
+                                                <TextBlock Text="{Binding ContactNumber}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
 
                                 </grid:GridTemplateColumn>
-                                <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="mm/dd/yyyy" HeaderText="CONFIRMED DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CONFIRMED TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridDateTimeColumn MappingName="ConfirmedDate" AllowEditing="{Binding AllowEditing,Mode=OneTime}" FormatString="mm/dd/yyyy" HeaderText="CONFIRMED DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn HeaderText="CONFIRMED TIME" AllowEditing="{Binding AllowEditing,Mode=OneTime}"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
+                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing,Mode=OneTime}" Background="Transparent"/>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
                                 </grid:GridTemplateColumn>

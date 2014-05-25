@@ -6,26 +6,31 @@ using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-    public class DrivingDirectionPageViewModel : ViewModel
+    public class DrivingDirectionPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
         private Eqstra.BusinessLogic.Task _inspection;
-
+        
+      
         public DrivingDirectionPageViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
             _navigationService = navigationService;
             this.CustomerDetails = new BusinessLogic.CustomerDetails();
             LoadDemoAppointments();
+           
             GetDirectionsCommand = DelegateCommand<Location>.FromAsyncHandler(async (location) =>
             {
                 var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
@@ -39,6 +44,26 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
             {
                 _navigationService.Navigate("VehicleInspection", _inspection);
+            });
+
+            this.StartDrivingCommand = new DelegateCommand(async () =>
+            {
+                this.IsStartDriving = false;
+                this.IsArrived = true;               
+                    await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now,CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString()});              
+            });
+            this.ArrivedCommand = new DelegateCommand(async () =>
+            {
+                if (this._inspection != null)
+                {
+                    string caseNumber= (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
+                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == caseNumber);
+                    dd.StopDateTime = DateTime.Now;
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync(dd);
+                }
+                this.IsStartInspection = true;
+                this.IsStartDriving = false;
+                this.IsArrived = false;
             });
 
 
@@ -77,6 +102,20 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             _inspection = (Eqstra.BusinessLogic.Task)navigationParameter;
             await GetCustomerDetailsAsync();
+
+            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == _inspection.CaseNumber);
+            if (dd != null)
+            {
+                this.IsArrived = dd.StopDateTime == DateTime.MinValue;
+                this.IsStartInspection = !this.IsArrived; 
+            }
+            else
+            {
+                this.IsStartDriving = true;
+                this.IsArrived = false;
+                this.IsStartInspection = false;
+            }
+
         }
 
         private CustomerDetails customerDetails;
@@ -89,8 +128,29 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public ICommand GetDirectionsCommand { get; set; }
         public DelegateCommand GoToVehicleInspectionCommand { get; set; }
+        public DelegateCommand StartDrivingCommand { get; set; }
+        public DelegateCommand ArrivedCommand { get; set; }
 
+        private bool isStartInspection;
+        public bool IsStartInspection
+        {
+            get { return isStartInspection; }
+            set { SetProperty(ref isStartInspection, value); }
+        }
 
+        private bool isStartDriving;
+        public bool IsStartDriving
+        {
+            get { return isStartDriving; }
+            set { SetProperty(ref isStartDriving, value); }
+        }
+
+        private bool isArrived;
+        public bool IsArrived
+        {
+            get { return isArrived; }
+            set { SetProperty(ref isArrived, value); }
+        }
 
 
         private Customer customer;
@@ -114,8 +174,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;
                     this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
-                    this.CustomerDetails.Name = this.Customer.Name;
-                    this.CustomerDetails.CellNumber = this._inspection.CellNumber;
+                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                    this.CustomerDetails.ContactName = this.Customer.ContactName;
                     this.CustomerDetails.CaseType = this._inspection.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
                 }

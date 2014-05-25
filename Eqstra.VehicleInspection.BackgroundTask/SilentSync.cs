@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic;
-using Eqstra.VehicleInspection.BackgroundTask.VIServiceProxy;
+
 
 namespace Eqstra.VehicleInspection.BackgroundTask
 {

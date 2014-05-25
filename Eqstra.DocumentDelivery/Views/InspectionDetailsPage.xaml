@@ -25,7 +25,7 @@
 
                 
                     <AppBarButton Label="Save" Icon="Save" Command="{Binding SaveTaskCommand}" Visibility="{Binding SaveVisibility}"/>
-                <AppBarButton Label="Next Step" Command="{Binding NextStepCommand}" Visibility="{Binding NextStepVisibility}"/>
+                <AppBarButton Label="Next Step" Icon="Forward" Command="{Binding NextStepCommand}" Visibility="{Binding NextStepVisibility}"/>
 
 
             </CommandBar.PrimaryCommands>
