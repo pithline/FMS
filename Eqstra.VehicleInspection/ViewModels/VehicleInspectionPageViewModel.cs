@@ -30,7 +30,8 @@ namespace Eqstra.VehicleInspection.ViewModels
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
-        public VehicleInspectionPageViewModel(INavigationService navigationService) : base(navigationService)
+        public VehicleInspectionPageViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
             try
             {
@@ -38,6 +39,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 _navigationService = navigationService;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
+                
                 this.PrevViewStack = new Stack<UserControl>();
                 LoadDemoAppointments();
 
@@ -53,18 +55,29 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.NextCommand = new DelegateCommand(async () =>
                 {
-                    this.PrevViewStack.Push(this.NextViewStack.Pop());
-                    var currentModel = ((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model;
-                    this.SaveCurrentUIDataAsync(currentModel);
-                    this.FrameContent = this.NextViewStack.Peek();
-                    CompleteCommand.RaiseCanExecuteChanged();
-                    NextCommand.RaiseCanExecuteChanged();
-                    PreviousCommand.RaiseCanExecuteChanged();
+
                     this.IsCommandBarOpen = false;
-                    if (this.NextViewStack.FirstOrDefault() != null)
+                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
+
+                    if (currentModel.ValidateModel())
                     {
-                        BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                        await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                        this.PrevViewStack.Push(this.NextViewStack.Pop());
+                        this.SaveCurrentUIDataAsync(currentModel);
+                        this.FrameContent = this.NextViewStack.Peek();
+                        CompleteCommand.RaiseCanExecuteChanged();
+                        NextCommand.RaiseCanExecuteChanged();
+                        PreviousCommand.RaiseCanExecuteChanged();
+                        if (this.NextViewStack.FirstOrDefault() != null)
+                        {
+                            BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                            await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                        }
+                    }
+                    else
+                    {
+                        Errors = currentModel.Errors;
+                        OnPropertyChanged("Errors");
+                        ShowValidationSummary = true;
                     }
 
                 }, () =>
@@ -74,20 +87,33 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.PreviousCommand = new DelegateCommand(async () =>
                 {
-                    var item = this.PrevViewStack.Pop();
-                    this.FrameContent = item;
-                    this.NextViewStack.Push(item);
+
                     //((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model = await (((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model as VIBase).GetDataAsync(this._task.CaseNumber);
-                    CompleteCommand.RaiseCanExecuteChanged();
-                    PreviousCommand.RaiseCanExecuteChanged();
-                    NextCommand.RaiseCanExecuteChanged();
-                    var currentModel = ((BaseViewModel)this.NextViewStack.ElementAt(1).DataContext).Model;
-                    this.SaveCurrentUIDataAsync(currentModel);
+
+
                     this.IsCommandBarOpen = false;
-                    if (this.PrevViewStack.FirstOrDefault() != null)
+                    //var currentModel = ((BaseViewModel)this.NextViewStack.ElementAt(1).DataContext).Model as VIBase;
+                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
+                    if (currentModel.ValidateModel())
                     {
-                        BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                        await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                        var item = this.PrevViewStack.Pop();
+                        this.FrameContent = item;
+                        this.NextViewStack.Push(item);
+                        CompleteCommand.RaiseCanExecuteChanged();
+                        PreviousCommand.RaiseCanExecuteChanged();
+                        NextCommand.RaiseCanExecuteChanged();
+                        this.SaveCurrentUIDataAsync(currentModel);
+                        if (this.PrevViewStack.FirstOrDefault() != null)
+                        {
+                            BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                            await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                        }
+                    }
+                    else
+                    {
+                        Errors = currentModel.Errors;
+                        OnPropertyChanged("Errors");
+                        ShowValidationSummary = true;
                     }
 
                 }, () =>
@@ -193,6 +219,22 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref isCommandBarOpen, value); }
         }
 
+        private bool showValidationSummary;
+
+        public bool ShowValidationSummary
+        {
+            get { return showValidationSummary; }
+            set { SetProperty(ref showValidationSummary, value); }
+        }
+
+        private ObservableCollection<ValidationError> errors;
+
+        public ObservableCollection<ValidationError> Errors
+        {
+            get { return errors; }
+            set { SetProperty(ref errors, value); }
+        }
+
 
         private DelegateCommand nextCommand;
 
@@ -290,7 +332,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.CustomerDetails.ContactName = this.Customer.ContactName;
                     this.CustomerDetails.CaseType = this._task.CaseType;
                     this.CustomerDetails.EmailId = this.Customer.EmailId;
-                    
+
                 }
             }
             catch (Exception)
@@ -371,8 +413,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-           // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-           // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
         }
     }
 }
