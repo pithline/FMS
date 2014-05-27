@@ -3,11 +3,13 @@ using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Microsoft.Practices.Unity;
 using SQLite;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
@@ -21,7 +23,9 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.ViewModels
@@ -30,16 +34,18 @@ namespace Eqstra.VehicleInspection.ViewModels
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
-        public VehicleInspectionPageViewModel(INavigationService navigationService)
+        private IUnityContainer _container;
+        public VehicleInspectionPageViewModel(INavigationService navigationService,IUnityContainer container)
             : base(navigationService)
         {
             try
             {
                 CreateTableAsync();
+                _container = container;
                 _navigationService = navigationService;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
-                
+
                 this.PrevViewStack = new Stack<UserControl>();
                 LoadDemoAppointments();
 
@@ -55,8 +61,8 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.NextCommand = new DelegateCommand(async () =>
                 {
-
-                    this.IsCommandBarOpen = false;
+                    //this.IsCommandBarOpen = false;
+                    //this.IsFlyoutOpen = true;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
 
                     if (currentModel.ValidateModel())
@@ -78,6 +84,10 @@ namespace Eqstra.VehicleInspection.ViewModels
                         Errors = currentModel.Errors;
                         OnPropertyChanged("Errors");
                         ShowValidationSummary = true;
+                        var page = _container.Resolve<VehicleInspectionPage>();
+
+                        //await Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { FlyoutBase.ShowAttachedFlyout(page); });
+                        
                     }
 
                 }, () =>
@@ -87,12 +97,7 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.PreviousCommand = new DelegateCommand(async () =>
                 {
-
-                    //((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model = await (((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model as VIBase).GetDataAsync(this._task.CaseNumber);
-
-
                     this.IsCommandBarOpen = false;
-                    //var currentModel = ((BaseViewModel)this.NextViewStack.ElementAt(1).DataContext).Model as VIBase;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
                     if (currentModel.ValidateModel())
                     {
@@ -125,6 +130,10 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 throw;
             }
+            CloseCommand = new RelayCommand(() =>
+        {
+            IsFlyoutOpen = false;
+        });
 
         }
 
@@ -313,7 +322,14 @@ namespace Eqstra.VehicleInspection.ViewModels
             get { return customer; }
             set { SetProperty(ref customer, value); }
         }
+        public RelayCommand CloseCommand { get; set; }
 
+        private bool isFlyoutOpen;
+        public bool IsFlyoutOpen
+        {
+            get { return isFlyoutOpen; }
+            set { this.SetProperty(ref isFlyoutOpen, value); }
+        }
 
         async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
         {
@@ -393,7 +409,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.DropTableAsync<CPOI>();
             //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
-            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+           // await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+
             ////create new  tables
 
             //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
@@ -413,8 +430,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-            // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-            // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
         }
     }
 }

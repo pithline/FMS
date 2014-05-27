@@ -42,17 +42,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  doorsComment, value); }
         }
-        private bool isDoors;
+        private bool isDoorsDmg;
 
-        public bool IsDoors
+        public bool IsDoorsDmg
         {
-            get { return isDoors; }
+            get { return isDoorsDmg; }
 
-            set { SetProperty(ref  isDoors, value); }
+            set { SetProperty(ref  isDoorsDmg, value); }
         }
         private ObservableCollection<ImageCapture> doorsImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Doors snapshot(s) required", "IsDoorsDmg")]
         public ObservableCollection<ImageCapture> DoorsImgList
         {
             get { return doorsImgList; }
@@ -68,17 +68,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  chassisComment, value); }
         }
-        private bool isChassis;
+        private bool isChassisDmg;
 
-        public bool IsChassis
+        public bool IsChassisDmg
         {
-            get { return isChassis; }
+            get { return isChassisDmg; }
 
-            set { SetProperty(ref  isChassis, value); }
+            set { SetProperty(ref  isChassisDmg, value); }
         }
         private ObservableCollection<ImageCapture> chassisImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Chassis snapshot(s) required", "IsChassisDmg")]
         public ObservableCollection<ImageCapture> ChassisImgList
         {
             get { return chassisImgList; }
@@ -95,17 +95,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  floorComment, value); }
         }
-        private bool isFloor;
+        private bool isFloorDmg;
 
-        public bool IsFloor
+        public bool IsFloorDmg
         {
-            get { return isFloor; }
+            get { return isFloorDmg; }
 
-            set { SetProperty(ref  isFloor, value); }
+            set { SetProperty(ref  isFloorDmg, value); }
         }
         private ObservableCollection<ImageCapture> floorImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Floor snapshot(s) required", "IsFloorDmg")]
         public ObservableCollection<ImageCapture> FloorImgList
         {
             get { return floorImgList; }
@@ -121,17 +121,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  headboardComment, value); }
         }
-        private bool isHeadboard;
+        private bool isHeadboardDmg;
 
-        public bool IsHeadboard
+        public bool IsHeadboardDmg
         {
-            get { return isHeadboard; }
+            get { return isHeadboardDmg; }
 
-            set { SetProperty(ref  isHeadboard, value); }
+            set { SetProperty(ref  isHeadboardDmg, value); }
         }
         private ObservableCollection<ImageCapture> headboardImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Headboard snapshot(s) required", "IsHeadboardDmg")]
         public ObservableCollection<ImageCapture> HeadboardImgList
         {
             get { return headboardImgList; }
@@ -146,17 +146,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  dropSideLeftComment, value); }
         }
-        private bool isDropSideLeft;
+        private bool isDropSideLeftDmg;
 
-        public bool IsDropSideLeft
+        public bool IsDropSideLeftDmg
         {
-            get { return isDropSideLeft; }
+            get { return isDropSideLeftDmg; }
 
-            set { SetProperty(ref  isDropSideLeft, value); }
+            set { SetProperty(ref  isDropSideLeftDmg, value); }
         }
         private ObservableCollection<ImageCapture> dropSideLeftImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Drop side left snapshot(s) required", "IsDropSideLeftDmg")]
         public ObservableCollection<ImageCapture> DropSideLeftImgList
         {
             get { return dropSideLeftImgList; }
@@ -172,17 +172,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  dropSideRightComment, value); }
         }
-        private bool isDropSideRight;
+        private bool isDropSideRightDmg;
 
-        public bool IsDropSideRight
+        public bool IsDropSideRightDmg
         {
-            get { return isDropSideRight; }
+            get { return isDropSideRightDmg; }
 
-            set { SetProperty(ref  isDropSideRight, value); }
+            set { SetProperty(ref  isDropSideRightDmg, value); }
         }
         private ObservableCollection<ImageCapture> dropSideRightImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Drop side right snapshot(s) required", "IsDropSideRightDmg")]
         public ObservableCollection<ImageCapture> DropSideRightImgList
         {
             get { return dropSideRightImgList; }
@@ -198,17 +198,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  dropSideFrontComment, value); }
         }
-        private bool isDropSideFront;
+        private bool isDropSideFrontDmg;
 
-        public bool IsDropSideFront
+        public bool IsDropSideFrontDmg
         {
-            get { return isDropSideFront; }
+            get { return isDropSideFrontDmg; }
 
-            set { SetProperty(ref  isDropSideFront, value); }
+            set { SetProperty(ref  isDropSideFrontDmg, value); }
         }
         private ObservableCollection<ImageCapture> dropSideFrontImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Drop side front snapshot(s) required", "IsDropSideFrontDmg")]
         public ObservableCollection<ImageCapture> DropSideFrontImgList
         {
             get { return dropSideFrontImgList; }
@@ -224,17 +224,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  dropSideRearComment, value); }
         }
-        private bool isDropSideRear;
+        private bool isDropSideRearDmg;
 
-        public bool IsDropSideRear
+        public bool IsDropSideRearDmg
         {
-            get { return isDropSideRear; }
+            get { return isDropSideRearDmg; }
 
-            set { SetProperty(ref  isDropSideRear, value); }
+            set { SetProperty(ref  isDropSideRearDmg, value); }
         }
         private ObservableCollection<ImageCapture> dropSideRearImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Drop side rear snapshot(s) required", "IsDropSideRearDmg")]
         public ObservableCollection<ImageCapture> DropSideRearImgList
         {
             get { return dropSideRearImgList; }
@@ -250,17 +250,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  fuelTankComment, value); }
         }
-        private bool isFuelTank;
+        private bool isFuelTankDmg;
 
-        public bool IsFuelTank
+        public bool IsFuelTankDmg
         {
-            get { return isFuelTank; }
+            get { return isFuelTankDmg; }
 
-            set { SetProperty(ref  isFuelTank, value); }
+            set { SetProperty(ref  isFuelTankDmg, value); }
         }
         private ObservableCollection<ImageCapture> fuelTankImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("FuelTank snapshot(s) required", "IsFuelTankDmg")]
         public ObservableCollection<ImageCapture> FuelTankImgList
         {
             get { return fuelTankImgList; }
@@ -276,17 +276,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  spareWheelCarrierComment, value); }
         }
-        private bool isSpareWheelCarrier;
+        private bool isSpareWheelCarrierDmg;
 
-        public bool IsSpareWheelCarrier
+        public bool IsSpareWheelCarrierDmg
         {
-            get { return isSpareWheelCarrier; }
+            get { return isSpareWheelCarrierDmg; }
 
-            set { SetProperty(ref  isSpareWheelCarrier, value); }
+            set { SetProperty(ref  isSpareWheelCarrierDmg, value); }
         }
         private ObservableCollection<ImageCapture> spareWheelCarrierImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Spare wheel snapshot(s) required", "IsSpareWheelCarrierDmg")]
         public ObservableCollection<ImageCapture> SpareWheelCarrierImgList
         {
             get { return spareWheelCarrierImgList; }
@@ -302,17 +302,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  underRunBumperComment, value); }
         }
-        private bool isUnderRunBumper;
+        private bool isUnderRunBumperDmg;
 
-        public bool IsUnderRunBumper
+        public bool IsUnderRunBumperDmg
         {
-            get { return isUnderRunBumper; }
+            get { return isUnderRunBumperDmg; }
 
-            set { SetProperty(ref  isUnderRunBumper, value); }
+            set { SetProperty(ref  isUnderRunBumperDmg, value); }
         }
         private ObservableCollection<ImageCapture> underRunBumperImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Under run bumper snapshot(s) required", "IsUnderRunBumperDmg")]
         public ObservableCollection<ImageCapture> UnderRunBumperImgList
         {
             get { return underRunBumperImgList; }
@@ -328,17 +328,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  chevronComment, value); }
         }
-        private bool isChevron;
+        private bool isChevronDmg;
 
-        public bool IsChevron
+        public bool IsChevronDmg
         {
-            get { return isChevron; }
+            get { return isChevronDmg; }
 
-            set { SetProperty(ref  isChevron, value); }
+            set { SetProperty(ref  isChevronDmg, value); }
         }
         private ObservableCollection<ImageCapture> chevronImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Chevron snapshot(s) required", "IsChevronDmg")]
         public ObservableCollection<ImageCapture> ChevronImgList
         {
             get { return chevronImgList; }
@@ -354,17 +354,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  landingLegsComment, value); }
         }
-        private bool isLandingLegs;
+        private bool isLandingLegsDmg;
 
-        public bool IsLandingLegs
+        public bool IsLandingLegsDmg
         {
-            get { return isLandingLegs; }
+            get { return isLandingLegsDmg; }
 
-            set { SetProperty(ref  isLandingLegs, value); }
+            set { SetProperty(ref  isLandingLegsDmg, value); }
         }
         private ObservableCollection<ImageCapture> landingLegsImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Landing legs snapshot(s) required", "IsLandingLegsDmg")]
         public ObservableCollection<ImageCapture> LandingLegsImgList
         {
             get { return landingLegsImgList; }

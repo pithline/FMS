@@ -80,7 +80,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> lFImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF  snapshot(s) required", "HasPLF")]
         public ObservableCollection<ImageCapture> LFImgList
         {
             get { return lFImgList; }
@@ -139,7 +139,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> lRInnerImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LRInner  snapshot(s) required", "HasPLRInner")]
         public ObservableCollection<ImageCapture> LRInnerImgList
         {
             get { return lRInnerImgList; }
@@ -198,7 +198,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> lROuterImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LROuter  snapshot(s) required", "HasPLROuter")]
         public ObservableCollection<ImageCapture> LROuterImgList
         {
             get { return lROuterImgList; }
@@ -256,14 +256,14 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> lInnerAxleInImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LInnerAxleIn  snapshot(s) required", "HasPLInnerAxleIn")]
         public ObservableCollection<ImageCapture> LInnerAxleInImgList
         {
             get { return lInnerAxleInImgList; }
 
             set { SetProperty(ref  lInnerAxleInImgList, value); }
         }
-      
+
         private string lInnerAxleOutComment;
 
         public string LInnerAxleOutComment
@@ -314,14 +314,14 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> lInnerAxleOutImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LInnerAxleOut  snapshot(s) required", "HasPLInnerAxleOut")]
         public ObservableCollection<ImageCapture> LInnerAxleOutImgList
         {
             get { return lInnerAxleOutImgList; }
 
             set { SetProperty(ref  lInnerAxleOutImgList, value); }
         }
-     
+
         private string rFComment;
 
         public string RFComment
@@ -372,7 +372,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rFImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF  snapshot(s) required", "HasPRF")]
         public ObservableCollection<ImageCapture> RFImgList
         {
             get { return rFImgList; }
@@ -430,7 +430,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rRInnerImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RRInner  snapshot(s) required", "HasPRRInner")]
         public ObservableCollection<ImageCapture> RRInnerImgList
         {
             get { return rRInnerImgList; }
@@ -488,14 +488,14 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rROuterImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RROuter  snapshot(s) required", "HasPRROuter")]
         public ObservableCollection<ImageCapture> RROuterImgList
         {
             get { return rROuterImgList; }
 
             set { SetProperty(ref  rROuterImgList, value); }
         }
-   
+
         private string rInnerAxleInComment;
 
         public string RInnerAxleInComment
@@ -546,7 +546,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rInnerAxleInImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RInnerAxleIn  snapshot(s) required", "HasPRInnerAxleIn")]
         public ObservableCollection<ImageCapture> RInnerAxleInImgList
         {
             get { return rInnerAxleInImgList; }
@@ -604,7 +604,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rInnerAxleOutImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RInnerAxleOut  snapshot(s) required", "HasPRInnerAxleOut")]
         public ObservableCollection<ImageCapture> RInnerAxleOutImgList
         {
             get { return rInnerAxleOutImgList; }
@@ -612,7 +612,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  rInnerAxleOutImgList, value); }
         }
 
-  
+
         private string spareComment;
 
         public string SpareComment
@@ -663,7 +663,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> spareImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Spare  snapshot(s) required", "HasPSpare")]
         public ObservableCollection<ImageCapture> SpareImgList
         {
             get { return spareImgList; }

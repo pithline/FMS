@@ -25,19 +25,22 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="160"/>
-                        <ColumnDefinition Width="60"/><!--Button Column-->
+                        <ColumnDefinition Width="60"/>
+                        <!--Button Column-->
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="160"/>
-                        <ColumnDefinition Width="60"/><!--Button Column-->
+                        <ColumnDefinition Width="60"/>
+                        <!--Button Column-->
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="160"/>
-                        <ColumnDefinition Width="60"/><!--Button Column-->
+                        <ColumnDefinition Width="60"/>
+                        <!--Button Column-->
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
@@ -67,7 +70,7 @@
                     <TextBlock Text="Comment" Grid.Row="0" Grid.Column="15" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
 
                     <TextBlock Text="Hail Damage" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsHailDamageToggle,Mode=TwoWay}" x:Name="HailDamageToggle" Grid.Row="1" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsHailDmg,Mode=TwoWay}" x:Name="HailDamageToggle" Grid.Row="1" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVHailDamage}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HailDamageToggle}" Margin="5 0" Grid.Column="2" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -88,7 +91,7 @@
                     </GridView>
 
                     <TextBlock Text="RF Door" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRFDoorToggle,Mode=TwoWay}" x:Name="RFDoorToggle" Grid.Row="2" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRFDoorDmg,Mode=TwoWay}" x:Name="RFDoorToggle" Grid.Row="2" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRFDoor}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -109,7 +112,7 @@
                     </GridView>
 
                     <TextBlock Text="LF Door" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLFDoorToggle,Mode=TwoWay}" x:Name="LFDoorToggle" Grid.Row="3" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLFDoorDmg,Mode=TwoWay}" x:Name="LFDoorToggle" Grid.Row="3" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFDoor,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="3" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -130,7 +133,7 @@
                     </GridView>
 
                     <TextBlock Text="RR Door" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRRDoorToggle,Mode=TwoWay}" x:Name="RRDoorToggle" Grid.Row="4" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRRDoorDmg,Mode=TwoWay}" x:Name="RRDoorToggle" Grid.Row="4" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRDoor,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="4" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -151,7 +154,7 @@
                     </GridView>
 
                     <TextBlock Text="LR Door" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsLRDoorToggle,Mode=TwoWay}" x:Name="LRDoorToggle" Grid.Row="5" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsLRDoorDmg,Mode=TwoWay}" x:Name="LRDoorToggle" Grid.Row="5" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRDoor,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="5" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -172,7 +175,7 @@
                     </GridView>
 
                     <TextBlock Text="Roof" Grid.Row="6" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRoofToggle,Mode=TwoWay}" x:Name="RoofToggle" Grid.Row="6" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRoofDmg,Mode=TwoWay}" x:Name="RoofToggle" Grid.Row="6" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRoof,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RoofToggle}" Margin="5 0" Grid.Column="2" Grid.Row="6" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -193,7 +196,7 @@
                     </GridView>
 
                     <TextBlock Text="RF Bumper" Grid.Row="7" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRFBumperToggle,Mode=TwoWay}"  x:Name="RFBumperToggle" Grid.Row="7" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRFBumperDmg,Mode=TwoWay}"  x:Name="RFBumperToggle" Grid.Row="7" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRFBumper,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFBumperToggle}" Margin="5 0" Grid.Column="2" Grid.Row="7" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -214,7 +217,7 @@
                     </GridView>
 
                     <TextBlock Text="LF Bumper" Grid.Row="8" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLFBumperToggle,Mode=TwoWay}"  x:Name="LFBumperToggle" Grid.Row="8" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLFBumperDmg,Mode=TwoWay}"  x:Name="LFBumperToggle" Grid.Row="8" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFBumper,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFBumperToggle}" Margin="5 0" Grid.Column="2" Grid.Row="8" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -235,7 +238,7 @@
                     </GridView>
 
                     <TextBlock Text="RR Bumper" Grid.Row="9" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRRBumperToggle,Mode=TwoWay}"  x:Name="RRBumperToggle" Grid.Row="9" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRRBumperDmg,Mode=TwoWay}"  x:Name="RRBumperToggle" Grid.Row="9" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRBumper,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRBumperToggle}" Margin="5 0" Grid.Column="2" Grid.Row="9" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -256,7 +259,7 @@
                     </GridView>
 
                     <TextBlock Text="LR Bumper" Grid.Row="10" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch   IsOn="{Binding Path=Model.IsLRBumperToggle,Mode=TwoWay}"  x:Name="LRBumperToggle" Grid.Row="10" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
+                    <ToggleSwitch   IsOn="{Binding Path=Model.IsLRBumperDmg,Mode=TwoWay}"  x:Name="LRBumperToggle" Grid.Row="10" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRBumper,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRBumperToggle}" Margin="5 0" Grid.Column="2" Grid.Row="10" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -283,7 +286,7 @@
 
 
                     <TextBlock Text="Bonnet" Grid.Row="1" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsBonnetToggle,Mode=TwoWay}" x:Name="BonnetToggle" Grid.Row="1" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsBonnetDmg,Mode=TwoWay}" x:Name="BonnetToggle" Grid.Row="1" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVBonnet}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BonnetToggle}" Margin="5 0" Grid.Column="8" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -305,7 +308,7 @@
 
 
                     <TextBlock Text="Boot/Tailgate" Grid.Row="2" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsBootTailgateToggle,Mode=TwoWay}" x:Name="BootTailgateToggle" Grid.Row="2" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}" />
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsBootTailgateDmg,Mode=TwoWay}" x:Name="BootTailgateToggle" Grid.Row="2" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}" />
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVBootTailgate}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BootTailgateToggle}" Margin="5 0" Grid.Column="8" Grid.Row="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -327,7 +330,7 @@
 
 
                     <TextBlock Text="Door Handles" Grid.Row="3" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsDoorHandleToggle,Mode=TwoWay}"  x:Name="DoorHandleToggle"  Grid.Row="3" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsDoorHandleDmg,Mode=TwoWay}"  x:Name="DoorHandleToggle"  Grid.Row="3" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFDoorHandle,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DoorHandleToggle}" Margin="5 0" Grid.Column="8" Grid.Row="3" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -349,7 +352,7 @@
 
 
                     <TextBlock Text="Hubcaps" Grid.Row="4" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsHubcapsToggle,Mode=TwoWay}"  x:Name="HubcapsToggle" Grid.Row="4" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsHubcapsDmg,Mode=TwoWay}"  x:Name="HubcapsToggle" Grid.Row="4" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHubcaps,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HubcapsToggle}" Margin="5 0" Grid.Column="8" Grid.Row="4" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -371,7 +374,7 @@
 
 
                     <TextBlock Text="Right Side" Grid.Row="5" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRightSideToggle,Mode=TwoWay}" x:Name="RightSideToggle" Grid.Row="5" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsRightSideDmg,Mode=TwoWay}" x:Name="RightSideToggle" Grid.Row="5" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRightSide,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RightSideToggle}" Margin="5 0" Grid.Column="8" Grid.Row="5" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -393,7 +396,7 @@
 
 
                     <TextBlock Text="Left Side" Grid.Row="6" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLeftSideToggle,Mode=TwoWay}"  x:Name="LeftSideToggle" Grid.Row="6" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}" />
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLeftSideDmg,Mode=TwoWay}"  x:Name="LeftSideToggle" Grid.Row="6" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}" />
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLeftSide,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LeftSideToggle}" Margin="5 0" Grid.Column="8" Grid.Row="6" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -415,7 +418,7 @@
 
 
                     <TextBlock Text="RF Wheel Arch" Grid.Row="7" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRFWheelArchToggle,Mode=TwoWay}" x:Name="RFWheelArchToggle" Grid.Row="7" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRFWheelArchDmg,Mode=TwoWay}" x:Name="RFWheelArchToggle" Grid.Row="7" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRFWheelArch,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFWheelArchToggle}" Margin="5 0" Grid.Column="8" Grid.Row="7" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -437,7 +440,7 @@
 
 
                     <TextBlock Text="LF Wheel Arch" Grid.Row="8" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsLFWheelArchToggle,Mode=TwoWay}" x:Name="LFWheelArchToggle" Grid.Row="8" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsLFWheelArchDmg,Mode=TwoWay}" x:Name="LFWheelArchToggle" Grid.Row="8" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFWheelArchToggle,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFWheelArchToggle}" Margin="5 0" Grid.Column="8" Grid.Row="8" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -459,7 +462,7 @@
 
 
                     <TextBlock Text="RR Wheel Arch" Grid.Row="9" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRRWheelArchToggle,Mode=TwoWay}" x:Name="RRWheelArchToggle" Grid.Row="9" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRRWheelArchDmg,Mode=TwoWay}" x:Name="RRWheelArchToggle" Grid.Row="9" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRWheelArch,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRWheelArchToggle}" Margin="5 0" Grid.Column="8" Grid.Row="9" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -481,7 +484,7 @@
 
 
                     <TextBlock Text="LR Wheel Arch" Grid.Row="10" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLRWheelArchToggle,Mode=TwoWay}" x:Name="LRWheelArchToggle" Grid.Row="10" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsLRWheelArchDmg,Mode=TwoWay}" x:Name="LRWheelArchToggle" Grid.Row="10" Grid.Column="7" Style="{StaticResource DamagedToggleSwitch}"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRWheelArch,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRWheelArchToggle}" Margin="5 0" Grid.Column="8" Grid.Row="10" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -503,7 +506,7 @@
 
 
                     <TextBlock Text="LR Wheel Arch" Grid.Row="1" Grid.Column="12" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsWipersToggle,Mode=TwoWay}" x:Name="WipersToggle" Grid.Row="1" Grid.Column="13" Style="{StaticResource DamagedToggleSwitch}" />
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsWipersDmg,Mode=TwoWay}" x:Name="WipersToggle" Grid.Row="1" Grid.Column="13" Style="{StaticResource DamagedToggleSwitch}" />
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVWipers,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WipersToggle}" Margin="5 0" Grid.Column="14" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>

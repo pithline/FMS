@@ -66,7 +66,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             Synchronize(async () =>
             {
-                this.IsSynchronizing = true;
+                //this.IsSynchronizing = true;
                 //VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
                 //client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
                 //var res = await client.getTasksAsync("rchivukula");
@@ -76,13 +76,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
                 //    foreach (var item in res.response)
                 //    {
-                //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task {
-                //             Address = item.parmCustAddress,
-                //             CaseNumber = item.parmCaseID,
-                //             CaseCategory = item.parmCaseCategory,
-                //             StatusDueDate = item.parmStatusDueDate,
-                //             ConfirmedDate = item.parmConfirmedDueDate,
-                //             CustomerName = item.parmCustName
+                //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task
+                //        {
+                //            Address = item.parmCustAddress,
+                //            CaseNumber = item.parmCaseID,
+                //            CaseCategory = item.parmCaseCategory,
+                //            StatusDueDate = item.parmStatusDueDate,
+                //            ConfirmedDate = item.parmConfirmedDueDate,
+                //            CustomerName = item.parmCustName
                 //        });
                 //    }
                 //}

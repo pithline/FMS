@@ -37,7 +37,7 @@ namespace Eqstra.BusinessLogic.Passenger
         public async override Task<VIBase> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.CaseNumber == caseNumber);
-        } 
+        }
         private bool hasRadio;
 
         public bool HasRadio
@@ -63,7 +63,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> radioImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Radio snapshot(s) required", "IsRadioDmg")]
         public ObservableCollection<ImageCapture> RadioImgList
         {
             get { return radioImgList; }
@@ -94,7 +94,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref cdShuffleComment, value); }
         }
         private ObservableCollection<ImageCapture> cdShuffleImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("CD shuffle snapshot(s) required", "IsCDShuffleDmg")]
         public ObservableCollection<ImageCapture> CDShuffleImgList
         {
             get { return cdShuffleImgList; }
@@ -126,7 +126,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> navigationImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Navigation snapshot(s) required", "IsNavigationDmg")]
         public ObservableCollection<ImageCapture> NavigationImgList
         {
             get { return navigationImgList; }
@@ -158,7 +158,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> airconImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Aircon snapshot(s) required", "IsAirconDmg")]
         public ObservableCollection<ImageCapture> AirconImgList
         {
             get { return airconImgList; }
@@ -189,7 +189,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref alarmComment, value); }
         }
         private ObservableCollection<ImageCapture> alarmImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Alarm snapshot(s) required", "IsAlarmDmg")]
         public ObservableCollection<ImageCapture> AlarmImgList
         {
             get { return alarmImgList; }
@@ -220,7 +220,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref keyComment, value); }
         }
         private ObservableCollection<ImageCapture> keyImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Key snapshot(s) required", "IsKeyDmg")]
         public ObservableCollection<ImageCapture> KeyImgList
         {
             get { return keyImgList; }
@@ -251,7 +251,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> spareKeysImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Spare keys snapshot(s) required", "IsSpareKeysDmg")]
         public ObservableCollection<ImageCapture> SpareKeysImgList
         {
             get { return spareKeysImgList; }
@@ -280,7 +280,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref servicesBookComment, value); }
         }
         private ObservableCollection<ImageCapture> servicesBookImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Services book snapshot(s) required", "IsServicesBookDmg")]
         public ObservableCollection<ImageCapture> ServicesBookImgList
         {
             get { return servicesBookImgList; }
@@ -312,7 +312,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> spareTyreImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Spare tyre snapshot(s) required", "IsSpareTyreDmg")]
         public ObservableCollection<ImageCapture> SpareTyreImgList
         {
             get { return spareTyreImgList; }
@@ -344,7 +344,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> toolsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tools snapshot(s) required", "IsToolsDmg")]
         public ObservableCollection<ImageCapture> ToolsImgList
         {
             get { return toolsImgList; }
@@ -376,7 +376,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> jackImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Jack snapshot(s) required", "IsJackDmg")]
         public ObservableCollection<ImageCapture> JackImgList
         {
             get { return jackImgList; }
@@ -408,7 +408,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> canopyImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Canopy snapshot(s) required", "IsCanopyDmg")]
         public ObservableCollection<ImageCapture> CanopyImgList
         {
             get { return canopyImgList; }
@@ -440,7 +440,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> trackingUnitImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("TrackingUnit snapshot(s) required", "IsTrackingUnitDmg")]
         public ObservableCollection<ImageCapture> TrackingUnitImgList
         {
             get { return trackingUnitImgList; }
@@ -472,7 +472,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> magsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Mags snapshot(s) required", "IsMagsDmg")]
         public ObservableCollection<ImageCapture> MagsImgList
         {
             get { return magsImgList; }

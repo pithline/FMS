@@ -45,7 +45,6 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.navigationHelper; }
         }
 
-
         public VehicleInspectionPage()
         {
             this.InitializeComponent();

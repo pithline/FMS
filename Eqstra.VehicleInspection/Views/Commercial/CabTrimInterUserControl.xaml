@@ -62,11 +62,11 @@
 
 
                     <TextBlock Text="Left Door" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="LeftDoorToggle"  IsOn="{Binding Path=Model.IsLeftDoor,Mode=TwoWay}"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="LeftDoorToggle"  IsOn="{Binding Path=Model.IsLeftDoorDmg ,Mode=TwoWay}"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVLeftDoor}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LeftDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.LeftDoorComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="3" Grid.Row="1"/>
+                    <TextBox Text="{Binding Path=Model.LeftDoorComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="3" Grid.Row="1"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVLeftDoor" ItemsSource="{Binding Path=Model.LeftDoorImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LeftDoorToggle}" Grid.Row="1" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -81,11 +81,11 @@
                     </GridView>
 
                     <TextBlock Text="Right Door" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="RightDoorToggle"  IsOn="{Binding Path=Model.IsRightDoor,Mode=TwoWay}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="RightDoorToggle"  IsOn="{Binding Path=Model.IsRightDoorDmg ,Mode=TwoWay}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRightDoor}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RightDoorToggle}" Margin="5 0" Grid.Row="2" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RightDoorComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.RightDoorComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVRightDoor" ItemsSource="{Binding Path=Model.RightDoorImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RightDoorToggle}" Grid.Row="2" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -100,11 +100,11 @@
                     </GridView>
 
                     <TextBlock Text="LF Quater Panel" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="LFQuatPanelToggle"  IsOn="{Binding Path=Model.IsLFQuatPanel,Mode=TwoWay}" Grid.Row="3" VerticalAlignment="Center" Margin="5 0" Grid.Column="1"/>
+                    <ToggleSwitch x:Name="LFQuatPanelToggle"  IsOn="{Binding Path=Model.IsLFQuatPanelDmg ,Mode=TwoWay}" Grid.Row="3" VerticalAlignment="Center" Margin="5 0" Grid.Column="1"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLFQuatPanel,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFQuatPanelToggle}" Margin="5 0" Grid.Row="3" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.LFQuatPanelComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.LFQuatPanelComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVLFQuatPanel" ItemsSource="{Binding Path=Model.LFQuaterPanelImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LFQuatPanelToggle}" Grid.Row="3" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -119,11 +119,11 @@
                     </GridView>
 
                     <TextBlock Text="RF Quater Panel" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="RFQuatPanelToggle"  IsOn="{Binding Path=Model.IsRFQuatPanel,Mode=TwoWay}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="RFQuatPanelToggle"  IsOn="{Binding Path=Model.IsRFQuatPanelDmg ,Mode=TwoWay}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRFQuatPanel,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFQuatPanelToggle}" Margin="5 0" Grid.Row="4" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RFQuatPanelComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.RFQuatPanelComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVRFQuatPanel" ItemsSource="{Binding Path=Model.RFQuaterPanelImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFQuatPanelToggle}" Grid.Row="4" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -138,11 +138,11 @@
                     </GridView>
 
                     <TextBlock Text="LR Quater Panel" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="LRQuatPanelToggle"  IsOn="{Binding Path=Model.IsLRQuatPanel,Mode=TwoWay}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="LRQuatPanelToggle"  IsOn="{Binding Path=Model.IsLRQuatPanelDmg ,Mode=TwoWay}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVLRQuatPanel,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRQuatPanelToggle}" Margin="5 0" Grid.Row="5" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.LRQuatPanelComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.LRQuatPanelComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVLRQuatPanel" ItemsSource="{Binding Path=Model.LRQuaterPanelImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LRQuatPanelToggle}" Grid.Row="5" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -157,11 +157,11 @@
                     </GridView>
 
                     <TextBlock Text="RR Quater Panel" Grid.Row="6" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="RRQuatPanelToggle"  IsOn="{Binding Path=Model.IsRRQuatPanel,Mode=TwoWay}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="RRQuatPanelToggle"  IsOn="{Binding Path=Model.IsRRQuatPanelDmg ,Mode=TwoWay}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRRQuatPanel,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRQuatPanelToggle}" Margin="5 0" Grid.Row="6" Grid.Column="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RRQuatPanelComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.RRQuatPanelComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVRRQuatPanel" ItemsSource="{Binding Path=Model.RRQuaterPanelImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RRQuatPanelToggle}" Grid.Row="6" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -176,11 +176,11 @@
                     </GridView>
 
                     <TextBlock Text="Front View" Grid.Row="7" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="FrontViewToggle"  IsOn="{Binding Path=Model.IsFrontView,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="FrontViewToggle"  IsOn="{Binding Path=Model.IsFrontViewDmg ,Mode=TwoWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVFrontView,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontViewToggle}" Margin="5 0" Grid.Row="7" Grid.Column="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.FrontViewComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.FrontViewComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="GVFrontView" ItemsSource="{Binding Path=Model.FrontViewImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontViewToggle}" Grid.Row="7" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -195,11 +195,11 @@
                     </GridView>
 
                     <TextBlock Text="Bumper" Grid.Row="8" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="BumperToggle"  IsOn="{Binding Path=Model.IsBumper,Mode=TwoWay}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="BumperToggle"  IsOn="{Binding Path=Model.IsBumperDmg ,Mode=TwoWay}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVBumper,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BumperToggle}" Margin="5 0" Grid.Row="8" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.BumperComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.BumperComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVBumper" ItemsSource="{Binding Path=Model.BumperImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BumperToggle}" Grid.Row="8" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -214,11 +214,11 @@
                     </GridView>
 
                     <TextBlock Text="Grill" Grid.Row="9" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="GrillToggle"  IsOn="{Binding Path=Model.IsGrill,Mode=TwoWay}" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="GrillToggle"  IsOn="{Binding Path=Model.IsGrillDmg ,Mode=TwoWay}" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVGrill,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=GrillToggle}" Margin="5 0" Grid.Row="9" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.GrillComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.GrillComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="GVGrill" ItemsSource="{Binding Path=Model.GrillImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=GrillToggle}" Grid.Row="9" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -233,11 +233,11 @@
                     </GridView>
 
                     <TextBlock Text="Rear View Mirror" Grid.Row="10" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="RearMirrorToggle"  IsOn="{Binding Path=Model.IsRearMirror,Mode=TwoWay}" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="RearMirrorToggle"  IsOn="{Binding Path=Model.IsRearMirrorDmg ,Mode=TwoWay}" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearMirror,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearMirrorToggle}" Margin="5 0" Grid.Row="10" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RearMirrorComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="10" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.RearMirrorComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="10" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVRearMirror" ItemsSource="{Binding Path=Model.RearMirrorImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearMirrorToggle}" Grid.Row="10" Grid.Column="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -252,11 +252,11 @@
                     </GridView>
 
                     <TextBlock Text="Wheel Arches Left" Grid.Row="1" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="WheelArchLeftToggle"  IsOn="{Binding Path=Model.IsWheelArchLeft,Mode=TwoWay}" Grid.Row="1" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="WheelArchLeftToggle"  IsOn="{Binding Path=Model.IsWheelArchLeftDmg ,Mode=TwoWay}" Grid.Row="1" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVWheelArchLeft}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WheelArchLeftToggle}" Margin="5 0" Grid.Row="1" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.WheelArchLeftComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.WheelArchLeftComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVWheelArchLeft" ItemsSource="{Binding Path=Model.WheelArchLeftImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WheelArchLeftToggle}" Grid.Column="10" Grid.Row="1" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -271,11 +271,11 @@
                     </GridView>
 
                     <TextBlock Text="Wheel Arches Right" Grid.Row="2" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="WheelArchRightToggle"  IsOn="{Binding Path=Model.IsWheelArchRight,Mode=TwoWay}" Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="WheelArchRightToggle"  IsOn="{Binding Path=Model.IsWheelArchRightDmg ,Mode=TwoWay}" Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVWheelArchRight}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WheelArchRightToggle}" Margin="5 0" Grid.Row="2" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.WheelArchRightComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.WheelArchRightComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVWheelArchRight" ItemsSource="{Binding Path=Model.WheelArchRightImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WheelArchRightToggle}" Grid.Column="10" Grid.Row="2" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -290,11 +290,11 @@
                     </GridView>
 
                     <TextBlock Text="Roof" Grid.Row="3" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="RoofToggle"  IsOn="{Binding Path=Model.IsRoof,Mode=TwoWay}" Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="RoofToggle"  IsOn="{Binding Path=Model.IsRoofDmg ,Mode=TwoWay}" Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRoof,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RoofToggle}" Margin="5 0" Grid.Row="3" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RoofComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.RoofComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="GVRoof" ItemsSource="{Binding Path=Model.RoofImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RoofToggle}" Grid.Column="10" Grid.Row="3" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -309,11 +309,11 @@
                     </GridView>
 
                     <TextBlock Text="Door Handle Left" Grid.Row="4" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="DoorHandleLeftToggle"  IsOn="{Binding Path=Model.IsDoorHandleLeft,Mode=TwoWay}" Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="DoorHandleLeftToggle"  IsOn="{Binding Path=Model.IsDoorHandleLeftDmg ,Mode=TwoWay}" Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDoorHandleLeft,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DoorHandleLeftToggle}" Margin="5 0" Grid.Row="4" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.DoorHandleLeftComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.DoorHandleLeftComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVDoorHandleLeft" ItemsSource="{Binding Path=Model.DoorHandleLeftImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DoorHandleLeftToggle}" Grid.Column="10" Grid.Row="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -328,11 +328,11 @@
                     </GridView>
 
                     <TextBlock Text="Door Handle Right" Grid.Row="5" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="DoorHandleRightToggle"  IsOn="{Binding Path=Model.IsDoorHandleRight,Mode=TwoWay}" Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="DoorHandleRightToggle"  IsOn="{Binding Path=Model.IsDoorHandleRightDmg ,Mode=TwoWay}" Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDoorHandleRight,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DoorHandleRightToggle}" Margin="5 0" Grid.Row="5" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.DoorHandleRightComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.DoorHandleRightComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVDoorHandleRight" ItemsSource="{Binding Path=Model.DoorHandleRightImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DoorHandleRightToggle}" Grid.Column="10" Grid.Row="5" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -347,11 +347,11 @@
                     </GridView>
 
                     <TextBlock Text="Wipers" Grid.Row="6" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="WipersToggle"  IsOn="{Binding Path=Model.IsWipers,Mode=TwoWay}" Grid.Row="6" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="WipersToggle"  IsOn="{Binding Path=Model.IsWipersDmg ,Mode=TwoWay}" Grid.Row="6" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVWipers,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WipersToggle}" Margin="5 0" Grid.Row="6" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.WipersComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.WipersComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="9"/>
                     <GridView  common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" ItemsSource="{Binding Path=Model.WipersImgList}" x:Name="GVWipers" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=WipersToggle}" Grid.Column="10" Grid.Row="6" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -366,11 +366,11 @@
                     </GridView>
 
                     <TextBlock Text="Internal Trim" Grid.Row="7" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  x:Name="InternalTrimToggle"  IsOn="{Binding Path=Model.IsInternalTrim,Mode=TwoWay}" Grid.Row="7" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch  x:Name="InternalTrimToggle"  IsOn="{Binding Path=Model.IsInternalTrimDmg ,Mode=TwoWay}" Grid.Row="7" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVInternalTrim,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimToggle}" Margin="5 0" Grid.Row="7" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.InternalTrimComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.InternalTrimComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVInternalTrim" ItemsSource="{Binding Path=Model.InternalTrimImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InternalTrimToggle}" Grid.Column="10" Grid.Row="7" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -385,11 +385,11 @@
                     </GridView>
 
                     <TextBlock Text="Mats" Grid.Row="8" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="MatsToggle"  IsOn="{Binding Path=Model.IsMats,Mode=TwoWay}" Grid.Row="8" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="MatsToggle"  IsOn="{Binding Path=Model.IsMatsDmg ,Mode=TwoWay}" Grid.Row="8" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVMats,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=MatsToggle}" Margin="5 0" Grid.Row="8" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.MatsComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.MatsComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVMats" ItemsSource="{Binding Path=Model.MatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=MatsToggle}" Grid.Column="10" Grid.Row="8" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -404,11 +404,11 @@
                     </GridView>
 
                     <TextBlock Text="Driver Seat" Grid.Row="9" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="DriverSeatToggle"  IsOn="{Binding Path=Model.IsDriverSeat,Mode=TwoWay}" Grid.Row="9" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="DriverSeatToggle"  IsOn="{Binding Path=Model.IsDriverSeatDmg ,Mode=TwoWay}" Grid.Row="9" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDriverSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DriverSeatToggle}" Margin="5 0" Grid.Row="9" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.DriverSeatComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.DriverSeatComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVDriverSeat" ItemsSource="{Binding Path=Model.DriverSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DriverSeatToggle}" Grid.Column="10" Grid.Row="9" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -423,11 +423,11 @@
                     </GridView>
 
                     <TextBlock Text="Passenger Seat" Grid.Row="10" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch x:Name="PassengerSeatToggle"  IsOn="{Binding Path=Model.IsPassengerSeat,Mode=TwoWay}" Grid.Row="10" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="PassengerSeatToggle"  IsOn="{Binding Path=Model.IsPassengerSeatDmg ,Mode=TwoWay}" Grid.Row="10" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVPassengerSeat,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PassengerSeatToggle}" Margin="5 0" Grid.Row="10" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.PassengerSeatComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="10" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.PassengerSeatComment ,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="10" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVPassengerSeat" ItemsSource="{Binding Path=Model.PassengerSeatImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PassengerSeatToggle}" Grid.Column="10" Grid.Row="10" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

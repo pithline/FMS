@@ -39,7 +39,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> gVRearGlassImgList;
-        [Ignore,DamageSnapshotRequired("Rear glass snapshot(s) required","IsRearGlass")]
+        [Ignore, DamageSnapshotRequired("Rear glass snapshot(s) required", "IsRearGlass")]
         public ObservableCollection<ImageCapture> GVRearGlassImgList
         {
             get { return gVRearGlassImgList; }
@@ -47,35 +47,35 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> gVSideGlassImgList;
-        [Ignore,DamageSnapshotRequired("Side glass snapshot(s) required","IsSideGlass")]
+        [Ignore, DamageSnapshotRequired("Side glass snapshot(s) required", "IsSideGlass")]
         public ObservableCollection<ImageCapture> GVSideGlassImgList
         {
             get { return gVSideGlassImgList; }
             set { SetProperty(ref  gVSideGlassImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVHeadLightsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Head Lights snapshot(s) required", "IsHeadLights")]
         public ObservableCollection<ImageCapture> GVHeadLightsImgList
         {
             get { return gVHeadLightsImgList; }
             set { SetProperty(ref  gVHeadLightsImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVTailLightsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tail Lights snapshot(s) required", "IsTailLights")]
         public ObservableCollection<ImageCapture> GVTailLightsImgList
         {
             get { return gVTailLightsImgList; }
             set { SetProperty(ref  gVTailLightsImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVInductorLensesImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Inductor Lenses snapshot(s) required", "IsInductorLenses")]
         public ObservableCollection<ImageCapture> GVInductorLensesImgList
         {
             get { return gVInductorLensesImgList; }
             set { SetProperty(ref  gVInductorLensesImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVExtRearViewMirrorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Ext Rear View Mirror snapshot(s) required", "IsExtRearViewMirror")]
         public ObservableCollection<ImageCapture> GVExtRearViewMirrorImgList
         {
             get { return gVExtRearViewMirrorImgList; }
