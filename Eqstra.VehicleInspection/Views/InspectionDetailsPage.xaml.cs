@@ -112,6 +112,7 @@ namespace Eqstra.VehicleInspection.Views
             {
                 var dc = (InspectionDetailsPageViewModel)this.DataContext;
                 await dc.GetCustomerDetailsAsync();
+                
             }
             catch (Exception ex)
             {

@@ -31,7 +31,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> gVWindscreenImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Windscreen snapshot(s) required", "IsWindscreen")]
         public ObservableCollection<ImageCapture> GVWindscreenImgList
         {
             get { return gVWindscreenImgList; }
@@ -39,7 +39,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> gVRearGlassImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Rear glass snapshot(s) required", "IsRearGlass")]
         public ObservableCollection<ImageCapture> GVRearGlassImgList
         {
             get { return gVRearGlassImgList; }
@@ -47,35 +47,35 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> gVSideGlassImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Side glass snapshot(s) required", "IsSideGlass")]
         public ObservableCollection<ImageCapture> GVSideGlassImgList
         {
             get { return gVSideGlassImgList; }
             set { SetProperty(ref  gVSideGlassImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVHeadLightsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Head lights snapshot(s) required", "IsHeadLights")]
         public ObservableCollection<ImageCapture> GVHeadLightsImgList
         {
             get { return gVHeadLightsImgList; }
             set { SetProperty(ref  gVHeadLightsImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVTailLightsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tail lights snapshot(s) required", "IsTailLights")]
         public ObservableCollection<ImageCapture> GVTailLightsImgList
         {
             get { return gVTailLightsImgList; }
             set { SetProperty(ref  gVTailLightsImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVInductorLensesImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Inductor lenses snapshot(s) required", "IsInductorLenses")]
         public ObservableCollection<ImageCapture> GVInductorLensesImgList
         {
             get { return gVInductorLensesImgList; }
             set { SetProperty(ref  gVInductorLensesImgList, value); }
         }
         private ObservableCollection<ImageCapture> gVExtRearViewMirrorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Ext rear view mirror snapshot(s) required", "IsExtRearViewMirror")]
         public ObservableCollection<ImageCapture> GVExtRearViewMirrorImgList
         {
             get { return gVExtRearViewMirrorImgList; }
@@ -156,45 +156,45 @@ namespace Eqstra.BusinessLogic.Passenger
 
             set { SetProperty(ref  isRearGlass, value); }
         }
-        private bool isSideGlassToggle;
+        private bool isSideGlass;
 
-        public bool IsSideGlassToggle
+        public bool IsSideGlass
         {
-            get { return isSideGlassToggle; }
+            get { return isSideGlass; }
 
-            set { SetProperty(ref  isSideGlassToggle, value); }
+            set { SetProperty(ref  isSideGlass, value); }
         }
-        private bool isHeadLightsToggle;
+        private bool isHeadLights;
 
-        public bool IsHeadLightsToggle
+        public bool IsHeadLights
         {
-            get { return isHeadLightsToggle; }
+            get { return isHeadLights; }
 
-            set { SetProperty(ref  isHeadLightsToggle, value); }
+            set { SetProperty(ref  isHeadLights, value); }
         }
-        private bool isTailLightsToggle;
+        private bool isTailLights;
 
-        public bool IsTailLightsToggle
+        public bool IsTailLights
         {
-            get { return isTailLightsToggle; }
+            get { return isTailLights; }
 
-            set { SetProperty(ref  isTailLightsToggle, value); }
+            set { SetProperty(ref  isTailLights, value); }
         }
-        private bool isInductorLensesToggle;
+        private bool isInductorLenses;
 
-        public bool IsInductorLensesToggle
+        public bool IsInductorLenses
         {
-            get { return isInductorLensesToggle; }
+            get { return isInductorLenses; }
 
-            set { SetProperty(ref  isInductorLensesToggle, value); }
+            set { SetProperty(ref  isInductorLenses, value); }
         }
-        private bool isExtRearViewMirrorToggle;
+        private bool isExtRearViewMirror;
 
-        public bool IsExtRearViewMirrorToggle
+        public bool IsExtRearViewMirror
         {
-            get { return isExtRearViewMirrorToggle; }
+            get { return isExtRearViewMirror; }
 
-            set { SetProperty(ref  isExtRearViewMirrorToggle, value); }
+            set { SetProperty(ref  isExtRearViewMirror, value); }
         }
 
 

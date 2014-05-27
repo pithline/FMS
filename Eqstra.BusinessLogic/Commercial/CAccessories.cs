@@ -31,17 +31,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  serviceBlockComment, value); }
         }
-        private bool isServiceBlock;
+        private bool isServiceBlockDmg;
 
-        public bool IsServiceBlock
+        public bool IsServiceBlockDmg
         {
-            get { return isServiceBlock; }
+            get { return isServiceBlockDmg; }
 
-            set { SetProperty(ref  isServiceBlock, value); }
+            set { SetProperty(ref  isServiceBlockDmg, value); }
         }
         private ObservableCollection<ImageCapture> serviceBlockImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Service block snapshot(s) required", "IsServiceBlockDmg")]
         public ObservableCollection<ImageCapture> ServiceBlockImgList
         {
             get { return serviceBlockImgList; }
@@ -57,17 +57,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  toolsComment, value); }
         }
-        private bool isTools;
+        private bool isToolsDmg;
 
-        public bool IsTools
+        public bool IsToolsDmg
         {
-            get { return isTools; }
+            get { return isToolsDmg; }
 
-            set { SetProperty(ref  isTools, value); }
+            set { SetProperty(ref  isToolsDmg, value); }
         }
         private ObservableCollection<ImageCapture> toolsImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tools snapshot(s) required", "IsToolsDmg")]
         public ObservableCollection<ImageCapture> ToolsImgList
         {
             get { return toolsImgList; }
@@ -75,7 +75,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  toolsImgList, value); }
         }
 
-    
+
         private string jackComment;
 
         public string JackComment
@@ -84,17 +84,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  jackComment, value); }
         }
-        private bool isJack;
+        private bool isJackDmg;
 
-        public bool IsJack
+        public bool IsJackDmg
         {
-            get { return isJack; }
+            get { return isJackDmg; }
 
-            set { SetProperty(ref  isJack, value); }
+            set { SetProperty(ref  isJackDmg, value); }
         }
         private ObservableCollection<ImageCapture> jackImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Jack snapshot(s) required", "IsJackDmg")]
         public ObservableCollection<ImageCapture> JackImgList
         {
             get { return jackImgList; }
@@ -110,17 +110,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  bullBarComment, value); }
         }
-        private bool isBullBar;
+        private bool isBullBarDmg;
 
-        public bool IsBullBar
+        public bool IsBullBarDmg
         {
-            get { return isBullBar; }
+            get { return isBullBarDmg; }
 
-            set { SetProperty(ref  isBullBar, value); }
+            set { SetProperty(ref  isBullBarDmg, value); }
         }
         private ObservableCollection<ImageCapture> bullBarImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Bull bar snapshot(s) required", "IsBullBarDmg")]
         public ObservableCollection<ImageCapture> BullBarImgList
         {
             get { return bullBarImgList; }
@@ -136,17 +136,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  trackingDeviceComment, value); }
         }
-        private bool isTrackingDevice;
+        private bool isTrackingDeviceDmg;
 
-        public bool IsTrackingDevice
+        public bool IsTrackingDeviceDmg
         {
-            get { return isTrackingDevice; }
+            get { return isTrackingDeviceDmg; }
 
-            set { SetProperty(ref  isTrackingDevice, value); }
+            set { SetProperty(ref  isTrackingDeviceDmg, value); }
         }
         private ObservableCollection<ImageCapture> trackingDeviceImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tracking device snapshot(s) required", "IsTrackingDeviceDmg")]
         public ObservableCollection<ImageCapture> TrackingDeviceImgList
         {
             get { return trackingDeviceImgList; }
@@ -161,24 +161,24 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  engineProtectionUnitComment, value); }
         }
-        private bool isEngineProtectionUnit;
+        private bool isEngineProtectionUnitDmg;
 
-        public bool IsEngineProtectionUnit
+        public bool IsEngineProtectionUnitDmg
         {
-            get { return isEngineProtectionUnit; }
+            get { return isEngineProtectionUnitDmg; }
 
-            set { SetProperty(ref  isEngineProtectionUnit, value); }
+            set { SetProperty(ref  isEngineProtectionUnitDmg, value); }
         }
         private ObservableCollection<ImageCapture> engineProtectionUnitImgList;
 
-        [Ignore]
-        public ObservableCollection<ImageCapture> EngineProtectionUnitImgList 
+        [Ignore, DamageSnapshotRequired("Engine protection unit snapshot(s) required", "IsEngineProtectionUnitDmg")]
+        public ObservableCollection<ImageCapture> EngineProtectionUnitImgList
         {
             get { return engineProtectionUnitImgList; }
 
             set { SetProperty(ref  engineProtectionUnitImgList, value); }
         }
-      
+
         private string decalSignWritingComment;
 
         public string DecalSignWritingComment
@@ -187,24 +187,24 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  decalSignWritingComment, value); }
         }
-        private bool isDecalSignWriting;
+        private bool isDecalSignWritingDmg;
 
-        public bool IsDecalSignWriting
+        public bool IsDecalSignWritingDmg
         {
-            get { return isDecalSignWriting; }
+            get { return isDecalSignWritingDmg; }
 
-            set { SetProperty(ref  isDecalSignWriting, value); }
+            set { SetProperty(ref  isDecalSignWritingDmg, value); }
         }
         private ObservableCollection<ImageCapture> decalSignWritingImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Decal sign writing snapshot(s) required", "IsDecalSignWritingDmg")]
         public ObservableCollection<ImageCapture> DecalSignWritingImgList
         {
             get { return decalSignWritingImgList; }
 
             set { SetProperty(ref  decalSignWritingImgList, value); }
         }
-     
+
         private string reflectiveTapeComment;
 
         public string ReflectiveTapeComment
@@ -213,17 +213,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  reflectiveTapeComment, value); }
         }
-        private bool isReflectiveTape;
+        private bool isReflectiveTapeDmg;
 
-        public bool IsReflectiveTape
+        public bool IsReflectiveTapeDmg
         {
-            get { return isReflectiveTape; }
+            get { return isReflectiveTapeDmg; }
 
-            set { SetProperty(ref  isReflectiveTape, value); }
+            set { SetProperty(ref  isReflectiveTapeDmg, value); }
         }
         private ObservableCollection<ImageCapture> reflectiveTapeImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Reflective tape snapshot(s) required", "IsReflectiveTapeDmg")]
         public ObservableCollection<ImageCapture> ReflectiveTapeImgList
         {
             get { return reflectiveTapeImgList; }
@@ -287,73 +287,73 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref reflectiveTapeImgPathList, value); }
         }
 
-        private bool hasServiceBlock;
-        public bool HasServiceBlock
+        private bool hasServiceBlockDmg;
+        public bool HasServiceBlockDmg
         {
-            get { return hasServiceBlock; }
+            get { return hasServiceBlockDmg; }
 
-            set { SetProperty(ref  hasServiceBlock, value); }
+            set { SetProperty(ref  hasServiceBlockDmg, value); }
         }
 
-        private bool hasTools;
-        public bool HasTools
+        private bool hasToolsDmg;
+        public bool HasToolsDmg
         {
-            get { return hasTools; }
+            get { return hasToolsDmg; }
 
-            set { SetProperty(ref  hasTools, value); }
+            set { SetProperty(ref  hasToolsDmg, value); }
         }
 
-        private bool hasJack;
-        public bool HasJack
+        private bool hasJackDmg;
+        public bool HasJackDmg
         {
-            get { return hasJack; }
+            get { return hasJackDmg; }
 
-            set { SetProperty(ref  hasJack, value); }
+            set { SetProperty(ref  hasJackDmg, value); }
         }
 
-        private bool hasBullBar;
-        public bool HasBullBar
+        private bool hasBullBarDmg;
+        public bool HasBullBarDmg
         {
-            get { return hasBullBar; }
+            get { return hasBullBarDmg; }
 
-            set { SetProperty(ref  hasBullBar, value); }
+            set { SetProperty(ref  hasBullBarDmg, value); }
         }
 
-        private bool hasTrackingDevice;
-        public bool HasTrackingDevice
+        private bool hasTrackingDeviceDmg;
+        public bool HasTrackingDeviceDmg
         {
-            get { return hasTrackingDevice; }
+            get { return hasTrackingDeviceDmg; }
 
-            set { SetProperty(ref  hasTrackingDevice, value); }
+            set { SetProperty(ref  hasTrackingDeviceDmg, value); }
         }
 
-        private bool hasEngineProtectionUnit;
+        private bool hasEngineProtectionUnitDmg;
 
-        public bool HasEngineProtectionUnit
+        public bool HasEngineProtectionUnitDmg
         {
-            get { return hasEngineProtectionUnit; }
+            get { return hasEngineProtectionUnitDmg; }
 
-            set { SetProperty(ref  hasEngineProtectionUnit, value); }
+            set { SetProperty(ref  hasEngineProtectionUnitDmg, value); }
         }
 
-        private bool hasDecalSignWriting;
-        public bool HasDecalSignWriting
+        private bool hasDecalSignWritingDmg;
+        public bool HasDecalSignWritingDmg
         {
-            get { return hasDecalSignWriting; }
+            get { return hasDecalSignWritingDmg; }
 
-            set { SetProperty(ref  hasDecalSignWriting, value); }
+            set { SetProperty(ref  hasDecalSignWritingDmg, value); }
         }
 
-        private bool hasReflectiveTape;
-        public bool HasReflectiveTape
+        private bool hasReflectiveTapeDmg;
+        public bool HasReflectiveTapeDmg
         {
-            get { return hasReflectiveTape; }
+            get { return hasReflectiveTapeDmg; }
 
-            set { SetProperty(ref  hasReflectiveTape, value); }
+            set { SetProperty(ref  hasReflectiveTapeDmg, value); }
         }
         public async override Task<VIBase> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CAccessories>(x => x.CaseNumber == caseNumber);
-        } 
+        }
     }
 }

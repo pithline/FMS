@@ -34,7 +34,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> internalTrimImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Internal snapshot(s) required", "IsInternalTrimDmg")]
         public ObservableCollection<ImageCapture> InternalTrimImgList
         {
             get { return internalTrimImgList; }
@@ -42,7 +42,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rrDoorTrimiImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RR door snapshot(s) required", "IsRRDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> RRDoorTrimImgList
         {
@@ -51,7 +51,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lrDoorTrimImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LR door snapshot(s) required", "IsLRDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> LRDoorTrimImgList
         {
@@ -60,7 +60,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rfDoorTrimImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF door snapshot(s) required", "IsRFDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> RFDoorTrimImgList
         {
@@ -69,7 +69,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lfDoorTrimImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF door snapshot(s) required", "IsLFDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> LFDoorTrimImgList
         {
@@ -77,16 +77,16 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref lfDoorTrimImgList, value); }
         }
         private ObservableCollection<ImageCapture> driverSeatImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Driver seat snapshot(s) required", "IsDriverSeatDmg")]
 
         public ObservableCollection<ImageCapture> DriverSeatImgList
-        {
+        {                           
             get { return driverSeatImgList; }
             set { SetProperty(ref driverSeatImgList, value); }
         }
 
         private ObservableCollection<ImageCapture> passengerSeatImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Passenger seat snapshot(s) required", "IsPassengerSeatDmg")]
 
         public ObservableCollection<ImageCapture> PassengerSeatImgList
         {
@@ -94,7 +94,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref passengerSeatImgList, value); }
         }
         private ObservableCollection<ImageCapture> rearSeatImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Rear seat snapshot(s) required", "IsRearSeatDmg")]
 
         public ObservableCollection<ImageCapture> RearSeatImgList
         {
@@ -103,7 +103,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> dashImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Dash snapshot(s) required", "IsDashDmg")]
 
         public ObservableCollection<ImageCapture> DashImgList
         {
@@ -112,7 +112,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> carpetImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Carpet snapshot(s) required", "IsCarpetDmg")]
         public ObservableCollection<ImageCapture> CarpetImgList
         {
             get { return carpetImgList; }
@@ -203,20 +203,20 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref internalTrimComment, value); }
         }
 
-        private bool isInternalTrim;
+        private bool isInternalTrimDmg;
 
-        public bool IsInternalTrim
+        public bool IsInternalTrimDmg
         {
-            get { return isInternalTrim; }
-            set { SetProperty(ref isInternalTrim, value); }
+            get { return isInternalTrimDmg; }
+            set { SetProperty(ref isInternalTrimDmg, value); }
         }
 
-        private bool isRRDoorTrim;
+        private bool isRRDoorTrimDmg;
 
-        public bool IsRRDoorTrim
+        public bool IsRRDoorTrimDmg
         {
-            get { return isRRDoorTrim; }
-            set { SetProperty(ref isRRDoorTrim, value); }
+            get { return isRRDoorTrimDmg; }
+            set { SetProperty(ref isRRDoorTrimDmg, value); }
         }
 
         private string rrDoorTrimComment;
@@ -227,12 +227,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref rrDoorTrimComment, value); }
         }
 
-        private bool isLFDoorTrim;
+        private bool isLFDoorTrimDmg;
 
-        public bool IsLFDoorTrim
+        public bool IsLFDoorTrimDmg
         {
-            get { return isLFDoorTrim; }
-            set { SetProperty(ref isLFDoorTrim, value); }
+            get { return isLFDoorTrimDmg; }
+            set { SetProperty(ref isLFDoorTrimDmg, value); }
         }
 
         private string lfDoorTrimComment;
@@ -251,12 +251,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref rfDoorTrimComment, value); }
         }
 
-        private bool isRFDoorTrim;
+        private bool isRFDoorTrimDmg;
 
-        public bool IsRFDoorTrim
+        public bool IsRFDoorTrimDmg
         {
-            get { return isRFDoorTrim; }
-            set { SetProperty(ref isRFDoorTrim, value); }
+            get { return isRFDoorTrimDmg; }
+            set { SetProperty(ref isRFDoorTrimDmg, value); }
         }
 
         private string lrDoorTrimComment;
@@ -267,20 +267,20 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref lrDoorTrimComment, value); }
         }
 
-        private bool isLRDoorTrim;
+        private bool isLRDoorTrimDmg;
 
-        public bool IsLRDoorTrim
+        public bool IsLRDoorTrimDmg
         {
-            get { return isLRDoorTrim; }
-            set { SetProperty(ref isLRDoorTrim, value); }
+            get { return isLRDoorTrimDmg; }
+            set { SetProperty(ref isLRDoorTrimDmg, value); }
         }
 
-        private bool isDriverSeat;
+        private bool isDriverSeatDmg;
 
-        public bool IsDriverSeat
+        public bool IsDriverSeatDmg
         {
-            get { return isDriverSeat; }
-            set { SetProperty(ref isDriverSeat, value); }
+            get { return isDriverSeatDmg; }
+            set { SetProperty(ref isDriverSeatDmg, value); }
         }
 
         private string driverSeatComment;
@@ -291,12 +291,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref driverSeatComment, value); }
         }
 
-        private bool isPassengerSeat;
+        private bool isPassengerSeatDmg;
 
-        public bool IsPassengerSeat
+        public bool IsPassengerSeatDmg
         {
-            get { return isPassengerSeat; }
-            set { SetProperty(ref isPassengerSeat, value); }
+            get { return isPassengerSeatDmg; }
+            set { SetProperty(ref isPassengerSeatDmg, value); }
         }
 
         private string passengerSeatComment;
@@ -307,12 +307,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref passengerSeatComment, value); }
         }
 
-        private bool isRearSeat;
+        private bool isRearSeatDmg;
 
-        public bool IsRearSeat
+        public bool IsRearSeatDmg
         {
-            get { return isRearSeat; }
-            set { SetProperty(ref isRearSeat, value); }
+            get { return isRearSeatDmg; }
+            set { SetProperty(ref isRearSeatDmg, value); }
         }
 
         private string rearSeatComment;
@@ -323,12 +323,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref rearSeatComment, value); }
         }
 
-        private bool isDash;
+        private bool isDashDmg;
 
-        public bool IsDash
+        public bool IsDashDmg
         {
-            get { return isDash; }
-            set { SetProperty(ref isDash, value); }
+            get { return isDashDmg; }
+            set { SetProperty(ref isDashDmg, value); }
         }
 
         private string dashComment;
@@ -339,12 +339,12 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref dashComment, value); }
         }
 
-        private bool isCarpet;
+        private bool isCarpetDmg;
 
-        public bool IsCarpet
+        public bool IsCarpetDmg
         {
-            get { return isCarpet; }
-            set { SetProperty(ref isCarpet, value); }
+            get { return isCarpetDmg; }
+            set { SetProperty(ref isCarpetDmg, value); }
         }
         private string carpetComment;
 

@@ -59,10 +59,10 @@
 
                     <TextBlock Text="Type of Engine" Grid.Row="0" Grid.Column="4" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="20 0 0 0"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="5">
-                        <RadioButton Content="Petrol" Margin="0 0 10 0" IsChecked="{Binding HasPetrol,Mode=TwoWay}"/>
-                        <RadioButton Content="Diesel" Margin="0 0 10 0" IsChecked="{Binding HasDiesel,Mode=TwoWay}"/>
-                        <RadioButton Content="Liquid Petroleum Gas" Margin="0 0 10 0" IsChecked="{Binding HasLPG,Mode=TwoWay}"/>
-                        <RadioButton Content="Main's Battery" Margin="0 0 10 0" IsChecked="{Binding HasMainBattery,Mode=TwoWay}"/>
+                        <RadioButton Content="Petrol" Margin="0 0 10 0" IsChecked="{Binding Path= Model.HasPetrol,Mode=TwoWay}"/>
+                        <RadioButton Content="Diesel" Margin="0 0 10 0" IsChecked="{Binding Path= Model.HasDiesel,Mode=TwoWay}"/>
+                        <RadioButton Content="Liquid Petroleum Gas" Margin="0 0 10 0" IsChecked="{Binding Path= Model.HasLPG,Mode=TwoWay}"/>
+                        <RadioButton Content="Main's Battery" Margin="0 0 10 0" IsChecked="{Binding Path= Model.HasMainBattery,Mode=TwoWay}"/>
                     </StackPanel>
 
                     <TextBlock Text="Damaged" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -74,7 +74,7 @@
                     <TextBlock Text="Comment" Grid.Row="1" Grid.Column="9" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
 
                     <TextBlock Text="Engine" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsEngine,Mode=TwoWay}" x:Name="EngineToggle" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsEngineDmg,Mode=TwoWay}" x:Name="EngineToggle" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVEngine}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EngineToggle}" Grid.Row="2" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -93,7 +93,7 @@
                     </GridView>
 
                     <TextBlock Text="Front Suspension" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsFrontSusp,Mode=TwoWay}" x:Name="FrontSuspToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsFrontSuspDmg,Mode=TwoWay}" x:Name="FrontSuspToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVFrontSusp}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontSuspToggle}" Grid.Row="3" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -112,7 +112,7 @@
                     </GridView>
 
                     <TextBlock Text="Rear Suspension" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearSusp,Mode=TwoWay}" x:Name="RearSuspToggle" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearSuspDmg,Mode=TwoWay}" x:Name="RearSuspToggle" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearSusp,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSuspToggle}" Grid.Row="4" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -131,7 +131,7 @@
                     </GridView>
 
                     <TextBlock Text="Steering" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsSteering,Mode=TwoWay}" x:Name="SteeringToggle" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsSteeringDmg,Mode=TwoWay}" x:Name="SteeringToggle" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVSteering,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SteeringToggle}" Grid.Row="5" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -150,7 +150,7 @@
                     </GridView>
 
                     <TextBlock Text="Exhaust" Grid.Row="6" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsExhaust,Mode=TwoWay}" x:Name="ExhaustToggle" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsExhaustDmg,Mode=TwoWay}" x:Name="ExhaustToggle" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVExhaust,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExhaustToggle}" Grid.Row="6" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -169,7 +169,7 @@
                     </GridView>
 
                     <TextBlock Text="Battery" Grid.Row="7" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsBattery,Mode=TwoWay}" x:Name="BatteryToggle" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsBatteryDmg,Mode=TwoWay}" x:Name="BatteryToggle" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVBattery,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BatteryToggle}" Grid.Row="7" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -188,7 +188,7 @@
                     </GridView>
 
                     <TextBlock Text="Hand Brake" Grid.Row="8" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsHandBrake,Mode=TwoWay}" x:Name="HandBrakeToggle" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsHandBrakeDmg,Mode=TwoWay}" x:Name="HandBrakeToggle" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHandBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HandBrakeToggle}" Grid.Row="8" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -207,7 +207,7 @@
                     </GridView>
 
                     <TextBlock Text="Foot Brake" Grid.Row="9" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsFootBrake,Mode=TwoWay}" x:Name="FootBrakeToggle" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsFootBrakeDmg,Mode=TwoWay}" x:Name="FootBrakeToggle" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVFootBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FootBrakeToggle}" Grid.Row="9" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -226,7 +226,7 @@
                     </GridView>
 
                     <TextBlock Text="Gearbox" Grid.Row="10" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsGearbox,Mode=TwoWay}" x:Name="GearboxToggle" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsGearboxDmg,Mode=TwoWay}" x:Name="GearboxToggle" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVGearbox,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=GearboxToggle}" Grid.Row="10" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -245,7 +245,7 @@
                     </GridView>
 
                     <TextBlock Text="Differencial" Grid.Row="2" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsDifferential,Mode=TwoWay}" x:Name="DifferentialToggle" Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsDifferentialDmg,Mode=TwoWay}" x:Name="DifferentialToggle" Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVDifferencial,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DifferentialToggle}" Grid.Row="2" Grid.Column="8" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -264,7 +264,7 @@
                     </GridView>
 
                     <TextBlock Text="Auto Transmission" Grid.Row="3" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsAutoTransmission,Mode=TwoWay}" x:Name="AutoTransmissionToggle" Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsAutoTransmissionDmg,Mode=TwoWay}" x:Name="AutoTransmissionToggle" Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVAutoTransmission,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AutoTransmissionToggle}" Grid.Row="3" Grid.Column="8" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -283,7 +283,7 @@
                     </GridView>
 
                     <TextBlock Text="Oil Leaks" Grid.Row="4" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsOilLeaks,Mode=TwoWay}" x:Name="OilLeaksToggle" Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsOilLeaksDmg,Mode=TwoWay}" x:Name="OilLeaksToggle" Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVOilLeaks,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=OilLeaksToggle}" Grid.Row="4" Grid.Column="8" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -302,7 +302,7 @@
                     </GridView>
 
                     <TextBlock Text="Hydraulic Power Steering" Grid.Row="5" Grid.Column="6" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsHPS,Mode=TwoWay}" x:Name="HPSToggle" Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsHPSDmg,Mode=TwoWay}" x:Name="HPSToggle" Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHPS,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HPSToggle}" Grid.Row="5" Grid.Column="8" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>

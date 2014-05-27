@@ -95,8 +95,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                         });
                     }
                 }
-                this.IsSynchronizing = false;
-
+                this.IsSynchronizing = false; 
+          
             });
             //SyncData();
 
@@ -136,7 +136,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
             this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
             this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
-
+            
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
         async private void SyncData()

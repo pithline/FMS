@@ -49,7 +49,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> hailDamageImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Hail snapshot(s) required", "IsHailDmg")]
         public ObservableCollection<ImageCapture> HailDamageImgList
         {
             get { return hailDamageImgList; }
@@ -57,7 +57,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rFDoorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF door snapshot(s) required", "IsRFDoorDmg")]
         public ObservableCollection<ImageCapture> RFDoorImgList
         {
             get { return rFDoorImgList; }
@@ -65,7 +65,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rRDoorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RR door snapshot(s) required", "IsRRDoorDmg")]
         public ObservableCollection<ImageCapture> RRDoorImgList
         {
             get { return rRDoorImgList; }
@@ -73,14 +73,14 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lFDoorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF door snapshot(s) required", "IsLFDoorDmg")]
         public ObservableCollection<ImageCapture> LFDoorImgList
         {
             get { return lFDoorImgList; }
             set { SetProperty(ref lFDoorImgList, value); }
         }
         private ObservableCollection<ImageCapture> lRDoorImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LR door snapshot(s) required", "IsLRDoorDmg")]
         public ObservableCollection<ImageCapture> LRDoorImgList
         {
             get { return lRDoorImgList; }
@@ -88,7 +88,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> roofImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Roof snapshot(s) required", "IsRoofDmg")]
         public ObservableCollection<ImageCapture> RoofImgList
         {
             get { return roofImgList; }
@@ -96,7 +96,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rFBumperImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF bumper snapshot(s) required", "IsRFBumperDmg")]
         public ObservableCollection<ImageCapture> RFBumperImgList
         {
             get { return rFBumperImgList; }
@@ -104,7 +104,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lFBumperImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF bumper snapshot(s) required", "IsLFBumperDmg")]
         public ObservableCollection<ImageCapture> LFBumperImgList
         {
             get { return lFBumperImgList; }
@@ -112,7 +112,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rRBumperImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RR bumper snapshot(s) required", "IsRRBumperDmg")]
         public ObservableCollection<ImageCapture> RRBumperImgList
         {
             get { return rRBumperImgList; }
@@ -120,7 +120,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lRBumperImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LR bumper snapshot(s) required", "IsLRBumperDmg")]
         public ObservableCollection<ImageCapture> LRBumperImgList
         {
             get { return lRBumperImgList; }
@@ -128,7 +128,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> bonnetImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Bonnet snapshot(s) required", "IsBonnetDmg")]
         public ObservableCollection<ImageCapture> BonnetImgList
         {
             get { return bonnetImgList; }
@@ -136,21 +136,21 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> bootTailgateImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Boot tail gate snapshot(s) required", "IsBootTailgateDmg")]
         public ObservableCollection<ImageCapture> BootTailgateImgList
         {
             get { return bootTailgateImgList; }
             set { SetProperty(ref bootTailgateImgList, value); }
         }
         private ObservableCollection<ImageCapture> doorHandleImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Door handle snapshot(s) required", "IsDoorHandleDmg")]
         public ObservableCollection<ImageCapture> DoorHandleImgList
         {
             get { return doorHandleImgList; }
             set { SetProperty(ref doorHandleImgList, value); }
         }
         private ObservableCollection<ImageCapture> hubcapsImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Hubcap snapshot(s) required", "IsHubcapsDmg")]
         public ObservableCollection<ImageCapture> HubcapsImgList
         {
             get { return hubcapsImgList; }
@@ -158,35 +158,35 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rightSideImgList;
-           [Ignore]
+           [Ignore, DamageSnapshotRequired("Right side snapshot(s) required", "IsRightSideDmg")]
         public ObservableCollection<ImageCapture> RightSideImgList
         {
             get { return rightSideImgList; }
             set { SetProperty(ref  rightSideImgList, value); }
         }
         private ObservableCollection<ImageCapture> leftSideImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Left side snapshot(s) required", "IsLeftSideDmg")]
         public ObservableCollection<ImageCapture> LeftSideImgList
         {
             get { return leftSideImgList; }
             set { SetProperty(ref  leftSideImgList, value); }
         }
         private ObservableCollection<ImageCapture> rFWheelArchImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF wheel arch snapshot(s) required", "IsRFWheelArchDmg")]
         public ObservableCollection<ImageCapture> RFWheelArchImgList
         {
             get { return rFWheelArchImgList; }
             set { SetProperty(ref  rFWheelArchImgList, value); }
         }
         private ObservableCollection<ImageCapture> lFWheelArchImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF wheel arch snapshot(s) required", "IsLFWheelArchDmg")]
         public ObservableCollection<ImageCapture> LFWheelArchImgList
         {
             get { return lFWheelArchImgList; }
             set { SetProperty(ref  lFWheelArchImgList, value); }
         }
         private ObservableCollection<ImageCapture> rRWheelArchImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RR wheel arch snapshot(s) required", "IsRRWheelArchDmg")]
         public ObservableCollection<ImageCapture> RRWheelArchImgList
         {
             get { return rRWheelArchImgList; }
@@ -194,14 +194,14 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lRWheelArchImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LR wheel arch snapshot(s) required", "IsLRWheelArchDmg")]
         public ObservableCollection<ImageCapture> LRWheelArchImgList
         {
             get { return lRWheelArchImgList; }
             set { SetProperty(ref  lRWheelArchImgList, value); }
         }
         private ObservableCollection<ImageCapture> wipersImgList;
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Wipers snapshot(s) required", "IsWipersDmg")]
         public ObservableCollection<ImageCapture> WipersImgList
         {
             get { return wipersImgList; }
@@ -356,174 +356,174 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref wipersImgPathList, value); }
         }
 
-        private bool isHailDamageToggle;
+        private bool isHailDmg;
 
-        public bool IsHailDamageToggle
+        public bool IsHailDmg
         {
-            get { return isHailDamageToggle; }
+            get { return isHailDmg; }
 
-            set { SetProperty(ref  isHailDamageToggle, value); }
+            set { SetProperty(ref  isHailDmg, value); }
         }
-        private bool isRFDoorToggle;
+        private bool isRFDoorDmg;
 
-        public bool IsRFDoorToggle
+        public bool IsRFDoorDmg
         {
-            get { return isRFDoorToggle; }
+            get { return isRFDoorDmg; }
 
-            set { SetProperty(ref  isRFDoorToggle, value); }
+            set { SetProperty(ref  isRFDoorDmg, value); }
         }
-        private bool isLFDoorToggle;
+        private bool isLFDoorDmg;
 
-        public bool IsLFDoorToggle
+        public bool IsLFDoorDmg
         {
-            get { return isLFDoorToggle; }
+            get { return isLFDoorDmg; }
 
-            set { SetProperty(ref  isLFDoorToggle, value); }
+            set { SetProperty(ref  isLFDoorDmg, value); }
         }
-        private bool isRRDoorToggle;
+        private bool isRRDoorDmg;
 
-        public bool IsRRDoorToggle
+        public bool IsRRDoorDmg
         {
-            get { return isRRDoorToggle; }
+            get { return isRRDoorDmg; }
 
-            set { SetProperty(ref  isRRDoorToggle, value); }
+            set { SetProperty(ref  isRRDoorDmg, value); }
         }
-        private bool isLRDoorToggle;
+        private bool isLRDoorDmg;
 
-        public bool IsLRDoorToggle
+        public bool IsLRDoorDmg
         {
-            get { return isLRDoorToggle; }
+            get { return isLRDoorDmg; }
 
-            set { SetProperty(ref  isLRDoorToggle, value); }
+            set { SetProperty(ref  isLRDoorDmg, value); }
         }
-        private bool isRoofToggle;
+        private bool isRoofDmg;
 
-        public bool IsRoofToggle
+        public bool IsRoofDmg
         {
-            get { return isRoofToggle; }
+            get { return isRoofDmg; }
 
-            set { SetProperty(ref  isRoofToggle, value); }
+            set { SetProperty(ref  isRoofDmg, value); }
         }
-        private bool isRFBumperToggle;
+        private bool isRFBumperDmg;
 
-        public bool IsRFBumperToggle
+        public bool IsRFBumperDmg
         {
-            get { return isRFBumperToggle; }
+            get { return isRFBumperDmg; }
 
-            set { SetProperty(ref  isRFBumperToggle, value); }
+            set { SetProperty(ref  isRFBumperDmg, value); }
         }
-        private bool isLFBumperToggle;
+        private bool isLFBumperDmg;
 
-        public bool IsLFBumperToggle
+        public bool IsLFBumperDmg
         {
-            get { return isLFBumperToggle; }
+            get { return isLFBumperDmg; }
 
-            set { SetProperty(ref  isLFBumperToggle, value); }
+            set { SetProperty(ref  isLFBumperDmg, value); }
         }
-        private bool isRRBumperToggle;
+        private bool isRRBumperDmg;
 
-        public bool IsRRBumperToggle
+        public bool IsRRBumperDmg
         {
-            get { return isRRBumperToggle; }
+            get { return isRRBumperDmg; }
 
-            set { SetProperty(ref  isRRBumperToggle, value); }
+            set { SetProperty(ref  isRRBumperDmg, value); }
         }
-        private bool isBonnetToggle;
+        private bool isBonnetDmg;
 
-        public bool IsBonnetToggle
+        public bool IsBonnetDmg
         {
-            get { return isBonnetToggle; }
+            get { return isBonnetDmg; }
 
-            set { SetProperty(ref  isBonnetToggle, value); }
+            set { SetProperty(ref  isBonnetDmg, value); }
         }
-        private bool isBootTailgateToggle;
+        private bool isBootTailgateDmg;
 
-        public bool IsBootTailgateToggle
+        public bool IsBootTailgateDmg
         {
-            get { return isBootTailgateToggle; }
+            get { return isBootTailgateDmg; }
 
-            set { SetProperty(ref  isBootTailgateToggle, value); }
+            set { SetProperty(ref  isBootTailgateDmg, value); }
         }
-        private bool isDoorHandleToggle;
+        private bool isDoorHandleDmg;
 
-        public bool IsDoorHandleToggle
+        public bool IsDoorHandleDmg
         {
-            get { return isDoorHandleToggle; }
+            get { return isDoorHandleDmg; }
 
-            set { SetProperty(ref  isDoorHandleToggle, value); }
+            set { SetProperty(ref  isDoorHandleDmg, value); }
         }
-        private bool isHubcapsToggle;
+        private bool isHubcapsDmg;
 
-        public bool IsHubcapsToggle
+        public bool IsHubcapsDmg
         {
-            get { return isHubcapsToggle; }
+            get { return isHubcapsDmg; }
 
-            set { SetProperty(ref  isHubcapsToggle, value); }
+            set { SetProperty(ref  isHubcapsDmg, value); }
         }
-        private bool isRightSideToggle;
+        private bool isRightSideDmg;
 
-        public bool IsRightSideToggle
+        public bool IsRightSideDmg
         {
-            get { return isRightSideToggle; }
+            get { return isRightSideDmg; }
 
-            set { SetProperty(ref  isRightSideToggle, value); }
+            set { SetProperty(ref  isRightSideDmg, value); }
         }
-        private bool isLeftSideToggle;
+        private bool isLeftSideDmg;
 
-        public bool IsLeftSideToggle
+        public bool IsLeftSideDmg
         {
-            get { return isLeftSideToggle; }
+            get { return isLeftSideDmg; }
 
-            set { SetProperty(ref  isLeftSideToggle, value); }
+            set { SetProperty(ref  isLeftSideDmg, value); }
         }
-        private bool isRFWheelArchToggle;
+        private bool isRFWheelArchDmg;
 
-        public bool IsRFWheelArchToggle
+        public bool IsRFWheelArchDmg
         {
-            get { return isRFWheelArchToggle; }
+            get { return isRFWheelArchDmg; }
 
-            set { SetProperty(ref  isRFWheelArchToggle, value); }
+            set { SetProperty(ref  isRFWheelArchDmg, value); }
         }
-        private bool isLRBumperToggle;
+        private bool isLRBumperDmg;
 
-        public bool IsLRBumperToggle
+        public bool IsLRBumperDmg
         {
-            get { return isLRBumperToggle; }
+            get { return isLRBumperDmg; }
 
-            set { SetProperty(ref  isLRBumperToggle, value); }
+            set { SetProperty(ref  isLRBumperDmg, value); }
         }
-        private bool isLFWheelArchToggle;
+        private bool isLFWheelArchDmg;
 
-        public bool IsLFWheelArchToggle
+        public bool IsLFWheelArchDmg
         {
-            get { return isLFWheelArchToggle; }
+            get { return isLFWheelArchDmg; }
 
-            set { SetProperty(ref  isLFWheelArchToggle, value); }
+            set { SetProperty(ref  isLFWheelArchDmg, value); }
         }
-        private bool isRRWheelArchToggle;
+        private bool isRRWheelArchDmg;
 
-        public bool IsRRWheelArchToggle
+        public bool IsRRWheelArchDmg
         {
-            get { return isRRWheelArchToggle; }
+            get { return isRRWheelArchDmg; }
 
-            set { SetProperty(ref  isRRWheelArchToggle, value); }
+            set { SetProperty(ref  isRRWheelArchDmg, value); }
         }
-        private bool isLRWheelArchToggle;
+        private bool isLRWheelArchDmg;
 
-        public bool IsLRWheelArchToggle
+        public bool IsLRWheelArchDmg
         {
-            get { return isLRWheelArchToggle; }
+            get { return isLRWheelArchDmg; }
 
-            set { SetProperty(ref  isLRWheelArchToggle, value); }
+            set { SetProperty(ref  isLRWheelArchDmg, value); }
         }
-        private bool isWipersToggle;
+        private bool isWipersDmg;
 
-        public bool IsWipersToggle
+        public bool IsWipersDmg
         {
-            get { return isWipersToggle; }
+            get { return isWipersDmg; }
 
             set
-            { SetProperty(ref  isWipersToggle, value); }
+            { SetProperty(ref  isWipersDmg, value); }
         }
 
 

@@ -17,17 +17,17 @@
     <Page.Resources>
        
             <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-       
-        
+        <Converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Save" Icon="Save" Visibility="{Binding IsSave,Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" Command="{Binding SaveCommand}"/>
+                <AppBarButton Label="Save" Icon="Save" Visibility="{Binding AllowEditing,Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" Command="{Binding SaveCommand}"/>
             </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Next" Icon="Next"  Visibility="{Binding IsNext,Converter={StaticResource BooleanToVisibilityConverter}}"  HorizontalAlignment="Right" Command="{Binding DrivingDirectionCommand}"/>
+            <AppBarButton Label="Next" Icon="Next"   Visibility="{Binding AllowEditing,Converter={StaticResource InverseBooleanToVisibilityConverter}}"  HorizontalAlignment="Right" Command="{Binding DrivingDirectionCommand}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -90,7 +90,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <grid:SfDataGrid SelectedIndex="0" ShowBusyIndicator="True" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid ShowBusyIndicator="True" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>

@@ -25,7 +25,7 @@ namespace Eqstra.BusinessLogic.Commercial
         public async override Task<VIBase> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CGlass>(x => x.CaseNumber == caseNumber);
-        } 
+        }
 
         private string windscreenComment;
 
@@ -35,24 +35,24 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  windscreenComment, value); }
         }
-        private bool isWindscreen;
+        private bool isWindscreenDmg;
 
-        public bool IsWindscreen
+        public bool IsWindscreenDmg
         {
-            get { return isWindscreen; }
+            get { return isWindscreenDmg; }
 
-            set { SetProperty(ref  isWindscreen, value); }
+            set { SetProperty(ref  isWindscreenDmg, value); }
         }
         private ObservableCollection<ImageCapture> windscreenImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Wind screen snapshot(s) required", "IsWindscreenDmg")]
         public ObservableCollection<ImageCapture> WindscreenImgList
         {
             get { return windscreenImgList; }
 
             set { SetProperty(ref  windscreenImgList, value); }
         }
-     
+
         private string rearGlassComment;
 
         public string RearGlassComment
@@ -61,17 +61,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  rearGlassComment, value); }
         }
-        private bool isRearGlass;
+        private bool isRearGlassDmg;
 
-        public bool IsRearGlass
+        public bool IsRearGlassDmg
         {
-            get { return isRearGlass; }
+            get { return isRearGlassDmg; }
 
-            set { SetProperty(ref  isRearGlass, value); }
+            set { SetProperty(ref  isRearGlassDmg, value); }
         }
         private ObservableCollection<ImageCapture> rearGlassImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Rear glass snapshot(s) required", "IsRearGlassDmg")]
         public ObservableCollection<ImageCapture> RearGlassImgList
         {
             get { return rearGlassImgList; }
@@ -87,17 +87,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  sideGlassComment, value); }
         }
-        private bool isSideGlass;
+        private bool isSideGlassDmg;
 
-        public bool IsSideGlass
+        public bool IsSideGlassDmg
         {
-            get { return isSideGlass; }
+            get { return isSideGlassDmg; }
 
-            set { SetProperty(ref  isSideGlass, value); }
+            set { SetProperty(ref  isSideGlassDmg, value); }
         }
         private ObservableCollection<ImageCapture> sideGlassImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Side glass snapshot(s) required", "IsSideGlassDmg")]
         public ObservableCollection<ImageCapture> SideGlassImgList
         {
             get { return sideGlassImgList; }
@@ -113,17 +113,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  headLightsComment, value); }
         }
-        private bool isHeadLights;
+        private bool isHeadLightsDmg;
 
-        public bool IsHeadLights
+        public bool IsHeadLightsDmg
         {
-            get { return isHeadLights; }
+            get { return isHeadLightsDmg; }
 
-            set { SetProperty(ref  isHeadLights, value); }
+            set { SetProperty(ref  isHeadLightsDmg, value); }
         }
         private ObservableCollection<ImageCapture> headLightsImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Head lights snapshot(s) required", "IsHeadLightsDmg")]
         public ObservableCollection<ImageCapture> HeadLightsImgList
         {
             get { return headLightsImgList; }
@@ -131,7 +131,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  headLightsImgList, value); }
         }
 
-    
+
         private string tailLightsComment;
 
         public string TailLightsComment
@@ -140,17 +140,17 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  tailLightsComment, value); }
         }
-        private bool isTailLights;
+        private bool isTailLightsDmg;
 
-        public bool IsTailLights
+        public bool IsTailLightsDmg
         {
-            get { return isTailLights; }
+            get { return isTailLightsDmg; }
 
-            set { SetProperty(ref  isTailLights, value); }
+            set { SetProperty(ref  isTailLightsDmg, value); }
         }
         private ObservableCollection<ImageCapture> tailLightsImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Tail lights snapshot(s) required", "IsTailLightsDmg")]
         public ObservableCollection<ImageCapture> TailLightsImgList
         {
             get { return tailLightsImgList; }
@@ -166,18 +166,18 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  inductorLensesComment, value); }
         }
-        private bool isInductorLenses;
+        private bool isInductorLensesDmg;
 
-        public bool IsInductorLenses
+        public bool IsInductorLensesDmg
         {
-            get { return isInductorLenses; }
+            get { return isInductorLensesDmg; }
 
-            set { SetProperty(ref  isInductorLenses, value); }
+            set { SetProperty(ref  isInductorLensesDmg, value); }
         }
         private ObservableCollection<ImageCapture> inductorLensesImgList;
 
-        [Ignore]
-        public ObservableCollection<ImageCapture> InductorLensesImgList 
+        [Ignore, DamageSnapshotRequired("Inductor lenses snapshot(s) required", "IsInductorLensesDmg")]
+        public ObservableCollection<ImageCapture> InductorLensesImgList
         {
             get { return inductorLensesImgList; }
 
@@ -192,18 +192,18 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  extRearViewMirrorToggleComment, value); }
         }
-        private bool isExtRearViewMirrorToggle;
+        private bool isExtRearViewMirrorDmg;
 
-        public bool IsExtRearViewMirrorToggle
+        public bool IsExtRearViewMirrorDmg
         {
-            get { return isExtRearViewMirrorToggle; }
+            get { return isExtRearViewMirrorDmg; }
 
-            set { SetProperty(ref  isExtRearViewMirrorToggle, value); }
+            set { SetProperty(ref  isExtRearViewMirrorDmg, value); }
         }
         private ObservableCollection<ImageCapture> extRearViewMirrorImgList;
 
-        [Ignore]
-        public ObservableCollection<ImageCapture> ExtRearViewMirrorImgList 
+        [Ignore, DamageSnapshotRequired("Ext rear view mirror snapshot(s) required", "IsExtRearViewMirrorDmg")]
+        public ObservableCollection<ImageCapture> ExtRearViewMirrorImgList
         {
             get { return extRearViewMirrorImgList; }
 
@@ -259,6 +259,6 @@ namespace Eqstra.BusinessLogic.Commercial
             get { return string.Join("~", ExtRearViewMirrorImgList.Select(x => x.ImagePath)); }
             set { SetProperty(ref extRearViewMirrorImgPathList, value); }
         }
-      
+
     }
 }

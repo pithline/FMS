@@ -27,7 +27,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
         private ObservableCollection<ImageCapture> rFImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RF snapshot(s) required", "IsRFPChecked")]
         public ObservableCollection<ImageCapture> RFImgList
         {
             get { return rFImgList; }
@@ -37,7 +37,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ObservableCollection<ImageCapture> lFImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LF snapshot(s) required", "IsLFPChecked")]
         public ObservableCollection<ImageCapture> LFImgList
         {
             get { return lFImgList; }
@@ -47,17 +47,17 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ObservableCollection<ImageCapture> rRImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("RR snapshot(s) required", "IsRRPChecked")]
         public ObservableCollection<ImageCapture> RRImgList
         {
             get { return rRImgList; }
 
             set { SetProperty(ref  rRImgList, value); }
         }
-    
+
         private ObservableCollection<ImageCapture> lRImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("LR snapshot(s) required", "IsLRPChecked")]
         public ObservableCollection<ImageCapture> LRImgList
         {
             get { return lRImgList; }
@@ -67,14 +67,14 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ObservableCollection<ImageCapture> spareImgList;
 
-        [Ignore]
+        [Ignore, DamageSnapshotRequired("Spare snapshot(s) required", "IsSparePChecked")]
         public ObservableCollection<ImageCapture> SpareImgList
         {
             get { return spareImgList; }
 
             set { SetProperty(ref  spareImgList, value); }
         }
-   
+
         private string rFTreadDepth;
 
         public string RFTreadDepth
