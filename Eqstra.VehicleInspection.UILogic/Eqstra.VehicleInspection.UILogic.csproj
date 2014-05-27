@@ -102,6 +102,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AifServices\VIServiceHelper.cs" />
     <Compile Include="AppSettingData.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="Common\VIExtension.cs" />

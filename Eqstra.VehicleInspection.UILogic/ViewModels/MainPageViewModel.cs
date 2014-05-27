@@ -69,25 +69,34 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.IsSynchronizing = true;
                 VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
+                //var r = await client.createTyreConditionAsync(
+                //    new ObservableCollection<VIService.MzkTyreConditionContract> 
+                //    {
+                //        new MzkTyreConditionContract 
+                //        { parmPassengerTyreType = MzkPassengerTyreCondition.RR, parmRecID = 0, parmTableId = 0, parmVehicleInsRecID = 5637144576, parmComments = "tested by noor", parmCondition = MZKConditionEnum.Fair 
+                //    }
+                //    });
                 var res = await client.getTasksAsync("rchivukula");
+
                 if (res != null && res.response.Count > 0)
                 {
                     await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
 
                     foreach (var item in res.response)
                     {
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task {
-                             Address = item.parmCustAddress,
-                             CaseNumber = item.parmCaseID,
-                             CaseCategory = item.parmCaseCategory,
-                             StatusDueDate = item.parmStatusDueDate,
-                             ConfirmedDate = item.parmConfirmedDueDate,
-                             CustomerName = item.parmCustName
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task
+                        {
+                            Address = item.parmCustAddress,
+                            CaseNumber = item.parmCaseID,
+                            CaseCategory = item.parmCaseCategory,
+                            StatusDueDate = item.parmStatusDueDate,
+                            ConfirmedDate = item.parmConfirmedDueDate,
+                            CustomerName = item.parmCustName
                         });
                     }
                 }
-                this.IsSynchronizing = false; 
-          
+                this.IsSynchronizing = false;
+
             });
             //SyncData();
 
@@ -125,9 +134,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
             this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
-            
+
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
         async private void SyncData()

@@ -16,6 +16,7 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
+   
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>
