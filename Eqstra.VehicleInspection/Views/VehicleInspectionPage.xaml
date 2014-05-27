@@ -7,23 +7,23 @@
     xmlns:common="using:Eqstra.VehicleInspection.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    prism:ViewModelLocator.AutoWireViewModel="True" RightTapped="VisualStateAwarePage_RightTapped"
     mc:Ignorable="d">
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Page.Resources>
-    
-    <!--<prism:VisualStateAwarePage.TopAppBar>
-        <AppBar Background="{StaticResource AppBarBackgroundThemeBrush}" Height="300"  IsOpen="{Binding ShowValidationSummary,Mode=TwoWay}">
+    <prism:VisualStateAwarePage.TopAppBar>
+        <AppBar x:Name="TopAppBarShowValidationSummary" Visibility="{Binding ShowValidationSummary,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Background="{StaticResource AppBarBackgroundThemeBrush}" Height="300">
             <Grid>
-                <GridView ItemsSource="{Binding Errors}" Margin="10 0">
-
+                <GridView ItemsSource="{Binding Errors}" Margin="10 0" IsHitTestVisible="False" SelectionMode="None">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding ErrorMessage}"
+                            <TextBlock Text="{Binding ErrorMessage}" Width="240"
                                        Foreground="Crimson" />
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -31,7 +31,7 @@
                 </GridView>
             </Grid>
         </AppBar>
-    </prism:VisualStateAwarePage.TopAppBar>-->
+    </prism:VisualStateAwarePage.TopAppBar>
 
     <FlyoutBase.AttachedFlyout>
       

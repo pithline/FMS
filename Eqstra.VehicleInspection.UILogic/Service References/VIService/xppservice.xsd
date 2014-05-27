@@ -425,58 +425,58 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkVehicleDetailsContract" nillable="true" type="tns:ArrayOfMzkVehicleDetailsContract" />
-  <xs:complexType name="ArrayOfMzkGlassContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkGlassContract" nillable="true" type="tns:MzkGlassContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkGlassContract" nillable="true" type="tns:ArrayOfMzkGlassContract" />
-  <xs:complexType name="ArrayOfMZKVehicleInspectionTableContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKVehicleInspectionTableContract" nillable="true" type="tns:ArrayOfMZKVehicleInspectionTableContract" />
-  <xs:complexType name="ArrayOfMzkCustAddressContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustAddressContract" nillable="true" type="tns:MzkCustAddressContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCustAddressContract" nillable="true" type="tns:ArrayOfMzkCustAddressContract" />
-  <xs:complexType name="ArrayOfMzkBodyworkContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkBodyworkContract" nillable="true" type="tns:MzkBodyworkContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkBodyworkContract" nillable="true" type="tns:ArrayOfMzkBodyworkContract" />
-  <xs:complexType name="ArrayOfMzkMechanicalConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMechanicalConditionContract" nillable="true" type="tns:MzkMechanicalConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMechanicalConditionContract" nillable="true" type="tns:ArrayOfMzkMechanicalConditionContract" />
-  <xs:complexType name="ArrayOfMzkTrimInteriorContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTrimInteriorContract" nillable="true" type="tns:MzkTrimInteriorContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkTrimInteriorContract" nillable="true" type="tns:ArrayOfMzkTrimInteriorContract" />
-  <xs:complexType name="ArrayOfMzkTasksContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTasksContract" nillable="true" type="tns:MzkTasksContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
   <xs:complexType name="ArrayOfMzkTyreConditionContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTyreConditionContract" nillable="true" type="tns:MzkTyreConditionContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkTyreConditionContract" nillable="true" type="tns:ArrayOfMzkTyreConditionContract" />
+  <xs:complexType name="ArrayOfMzkTrimInteriorContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTrimInteriorContract" nillable="true" type="tns:MzkTrimInteriorContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkTrimInteriorContract" nillable="true" type="tns:ArrayOfMzkTrimInteriorContract" />
+  <xs:complexType name="ArrayOfMzkMechanicalConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMechanicalConditionContract" nillable="true" type="tns:MzkMechanicalConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMechanicalConditionContract" nillable="true" type="tns:ArrayOfMzkMechanicalConditionContract" />
+  <xs:complexType name="ArrayOfMzkGlassContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkGlassContract" nillable="true" type="tns:MzkGlassContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkGlassContract" nillable="true" type="tns:ArrayOfMzkGlassContract" />
+  <xs:complexType name="ArrayOfMzkBodyworkContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkBodyworkContract" nillable="true" type="tns:MzkBodyworkContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkBodyworkContract" nillable="true" type="tns:ArrayOfMzkBodyworkContract" />
   <xs:complexType name="ArrayOfMzkAccessoryContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkAccessoryContract" nillable="true" type="tns:MzkAccessoryContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkAccessoryContract" nillable="true" type="tns:ArrayOfMzkAccessoryContract" />
+  <xs:complexType name="ArrayOfMzkTasksContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTasksContract" nillable="true" type="tns:MzkTasksContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
+  <xs:complexType name="ArrayOfMzkCustAddressContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustAddressContract" nillable="true" type="tns:MzkCustAddressContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCustAddressContract" nillable="true" type="tns:ArrayOfMzkCustAddressContract" />
+  <xs:complexType name="ArrayOfMZKVehicleInspectionTableContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKVehicleInspectionTableContract" nillable="true" type="tns:ArrayOfMZKVehicleInspectionTableContract" />
 </xs:schema>

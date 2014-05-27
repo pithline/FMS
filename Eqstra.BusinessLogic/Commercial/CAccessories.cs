@@ -120,7 +120,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> bullBarImgList;
 
-        [Ignore, DamageSnapshotRequired("BullBar snapshot(s) required", "IsBullBarDmg")]
+        [Ignore, DamageSnapshotRequired("Bull bar snapshot(s) required", "IsBullBarDmg")]
         public ObservableCollection<ImageCapture> BullBarImgList
         {
             get { return bullBarImgList; }

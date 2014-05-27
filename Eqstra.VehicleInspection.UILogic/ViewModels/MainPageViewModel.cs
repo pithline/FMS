@@ -87,7 +87,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 //        });
                 //    }
                 //}
-                this.IsSynchronizing = false; 
+                this.IsSynchronizing = false;
           
             });
             //SyncData();

@@ -136,7 +136,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> bootTailgateImgList;
-        [Ignore, DamageSnapshotRequired("Boot Tail gate snapshot(s) required", "IsBootTailgateDmg")]
+        [Ignore, DamageSnapshotRequired("Boot tail gate snapshot(s) required", "IsBootTailgateDmg")]
         public ObservableCollection<ImageCapture> BootTailgateImgList
         {
             get { return bootTailgateImgList; }

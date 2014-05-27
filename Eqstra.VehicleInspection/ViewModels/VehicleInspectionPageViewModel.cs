@@ -63,10 +63,12 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     //this.IsCommandBarOpen = false;
                     //this.IsFlyoutOpen = true;
+                    ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
 
                     if (currentModel.ValidateModel())
                     {
+                       
                         this.PrevViewStack.Push(this.NextViewStack.Pop());
                         this.SaveCurrentUIDataAsync(currentModel);
                         this.FrameContent = this.NextViewStack.Peek();
@@ -85,7 +87,6 @@ namespace Eqstra.VehicleInspection.ViewModels
                         OnPropertyChanged("Errors");
                         ShowValidationSummary = true;
                         var page = _container.Resolve<VehicleInspectionPage>();
-
                         //await Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { FlyoutBase.ShowAttachedFlyout(page); });
                         
                     }
@@ -98,6 +99,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.PreviousCommand = new DelegateCommand(async () =>
                 {
                     this.IsCommandBarOpen = false;
+                    ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
                     if (currentModel.ValidateModel())
                     {
@@ -409,7 +411,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.DropTableAsync<CPOI>();
             //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
-           // await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
 
             ////create new  tables
 

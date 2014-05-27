@@ -440,7 +440,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> trackingUnitImgList;
-        [Ignore, DamageSnapshotRequired("TrackingUnit snapshot(s) required", "IsTrackingUnitDmg")]
+        [Ignore, DamageSnapshotRequired("Tracking unit snapshot(s) required", "IsTrackingUnitDmg")]
         public ObservableCollection<ImageCapture> TrackingUnitImgList
         {
             get { return trackingUnitImgList; }

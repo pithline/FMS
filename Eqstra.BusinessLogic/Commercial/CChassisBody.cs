@@ -131,7 +131,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> headboardImgList;
 
-        [Ignore, DamageSnapshotRequired("Headboard snapshot(s) required", "IsHeadboardDmg")]
+        [Ignore, DamageSnapshotRequired("Head board snapshot(s) required", "IsHeadboardDmg")]
         public ObservableCollection<ImageCapture> HeadboardImgList
         {
             get { return headboardImgList; }
@@ -260,7 +260,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> fuelTankImgList;
 
-        [Ignore, DamageSnapshotRequired("FuelTank snapshot(s) required", "IsFuelTankDmg")]
+        [Ignore, DamageSnapshotRequired("Fuel tank snapshot(s) required", "IsFuelTankDmg")]
         public ObservableCollection<ImageCapture> FuelTankImgList
         {
             get { return fuelTankImgList; }

@@ -78,7 +78,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> frontSuspImgList;
 
-        [Ignore, DamageSnapshotRequired("Front Susp snapshot(s) required", "IsFrontSuspDmg")]
+        [Ignore, DamageSnapshotRequired("Front susp snapshot(s) required", "IsFrontSuspDmg")]
         public ObservableCollection<ImageCapture> FrontSuspImgList
         {
             get { return frontSuspImgList; }
@@ -104,7 +104,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rearSuspImgList;
 
-        [Ignore, DamageSnapshotRequired("Rear Susp snapshot(s) required", "IsRearSuspDmg")]
+        [Ignore, DamageSnapshotRequired("Rear susp snapshot(s) required", "IsRearSuspDmg")]
         public ObservableCollection<ImageCapture> RearSuspImgList
         {
             get { return rearSuspImgList; }

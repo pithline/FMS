@@ -45,7 +45,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> windscreenImgList;
 
-        [Ignore, DamageSnapshotRequired("Windscreen snapshot(s) required", "IsWindscreenDmg")]
+        [Ignore, DamageSnapshotRequired("Wind screen snapshot(s) required", "IsWindscreenDmg")]
         public ObservableCollection<ImageCapture> WindscreenImgList
         {
             get { return windscreenImgList; }
@@ -71,7 +71,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> rearGlassImgList;
 
-        [Ignore, DamageSnapshotRequired("RearGlass snapshot(s) required", "IsRearGlassDmg")]
+        [Ignore, DamageSnapshotRequired("Rear glass snapshot(s) required", "IsRearGlassDmg")]
         public ObservableCollection<ImageCapture> RearGlassImgList
         {
             get { return rearGlassImgList; }
@@ -97,7 +97,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> sideGlassImgList;
 
-        [Ignore, DamageSnapshotRequired("SideGlass snapshot(s) required", "IsSideGlassDmg")]
+        [Ignore, DamageSnapshotRequired("Side glass snapshot(s) required", "IsSideGlassDmg")]
         public ObservableCollection<ImageCapture> SideGlassImgList
         {
             get { return sideGlassImgList; }
@@ -123,7 +123,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> headLightsImgList;
 
-        [Ignore, DamageSnapshotRequired("HeadLights snapshot(s) required", "IsHeadLightsDmg")]
+        [Ignore, DamageSnapshotRequired("Head lights snapshot(s) required", "IsHeadLightsDmg")]
         public ObservableCollection<ImageCapture> HeadLightsImgList
         {
             get { return headLightsImgList; }
@@ -150,7 +150,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> tailLightsImgList;
 
-        [Ignore, DamageSnapshotRequired("TailLights snapshot(s) required", "IsTailLightsDmg")]
+        [Ignore, DamageSnapshotRequired("Tail lights snapshot(s) required", "IsTailLightsDmg")]
         public ObservableCollection<ImageCapture> TailLightsImgList
         {
             get { return tailLightsImgList; }
@@ -176,7 +176,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> inductorLensesImgList;
 
-        [Ignore, DamageSnapshotRequired("InductorLenses snapshot(s) required", "IsInductorLensesDmg")]
+        [Ignore, DamageSnapshotRequired("Inductor lenses snapshot(s) required", "IsInductorLensesDmg")]
         public ObservableCollection<ImageCapture> InductorLensesImgList
         {
             get { return inductorLensesImgList; }
@@ -202,7 +202,7 @@ namespace Eqstra.BusinessLogic.Commercial
         }
         private ObservableCollection<ImageCapture> extRearViewMirrorImgList;
 
-        [Ignore, DamageSnapshotRequired("ExtRearViewMirror snapshot(s) required", "IsExtRearViewMirrorDmg")]
+        [Ignore, DamageSnapshotRequired("Ext rear view mirror snapshot(s) required", "IsExtRearViewMirrorDmg")]
         public ObservableCollection<ImageCapture> ExtRearViewMirrorImgList
         {
             get { return extRearViewMirrorImgList; }

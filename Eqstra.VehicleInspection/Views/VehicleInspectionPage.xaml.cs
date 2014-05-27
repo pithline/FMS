@@ -80,6 +80,10 @@ namespace Eqstra.VehicleInspection.Views
         {
         }
 
+        private void VisualStateAwarePage_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            TopAppBarShowValidationSummary.Visibility = Visibility.Collapsed;
+        }
         #region NavigationHelper registration
 
         /// The methods provided in this section are simply used to allow

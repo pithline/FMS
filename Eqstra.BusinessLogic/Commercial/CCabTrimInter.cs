@@ -85,7 +85,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  rrQuaterPanelImgList, value); }
         }
         private ObservableCollection<ImageCapture> frontViewImgList;
-        [Ignore, DamageSnapshotRequired("FrontView  snapshot(s) required", "IsFrontViewDmg")]
+        [Ignore, DamageSnapshotRequired("Front view  snapshot(s) required", "IsFrontViewDmg")]
         public ObservableCollection<ImageCapture> FrontViewImgList
         {
             get { return frontViewImgList; }
