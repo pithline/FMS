@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.StoreApps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,7 @@ namespace Eqstra.BusinessLogic
 {
     public class LogonResult
     {
+        [RestorableState]
         public UserInfo UserInfo { get; set; }
     }
 }

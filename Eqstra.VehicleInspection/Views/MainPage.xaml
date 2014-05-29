@@ -27,6 +27,13 @@
         * Row 1 contains the rest of the page layout
     -->
     <Grid Style="{StaticResource LayoutRootStyle}">
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="VisualStateGroup">
+    			<VisualState x:Name="VisualState">
+    				<Storyboard AutoReverse="False"/>
+    			</VisualState>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
         <Grid.Transitions>
             <TransitionCollection>
                 <EdgeUIThemeTransition Edge="Right"/>
@@ -94,7 +101,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Height="70" Width="300" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                    <Border Grid.Row="0" Height="70" Width="300" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" >
                         <Grid Margin="10 0" VerticalAlignment="Center">
                             <TextBlock Text="Total" Style="{StaticResource GroupHeaderStyle}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding TotalCount}" Style="{StaticResource TotalNumberStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -188,7 +195,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Quick Info" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <Border BorderBrush="#FFE0E0E0" Grid.Row="1" BorderThickness="1" Background="White">
+                <Border  BorderBrush="#FFE0E0E0" Grid.Row="1" BorderThickness="1" Background="White">
                     <Grid Width="200" Background="White" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
@@ -209,7 +216,7 @@
                     </Interactivity:Interaction.Behaviors>
                 </Border>
 
-                <Border BorderBrush="#FFE0E0E0" Grid.Row="2" Margin="0 20 0 0" BorderThickness="1" Background="White">
+                <Border  BorderBrush="#FFE0E0E0" Grid.Row="2" Margin="0 20 0 0" BorderThickness="1" Background="White">
                     <Grid Width="200">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5"/>
@@ -225,7 +232,7 @@
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitInspectionAcceptance,AwaitInspectionDataCapture"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="MyTasks"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>
@@ -267,4 +274,5 @@
             </Grid>
         </Grid>
     </Grid>
+    
 </prism:VisualStateAwarePage>

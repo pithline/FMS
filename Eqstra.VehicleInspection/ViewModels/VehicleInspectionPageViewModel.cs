@@ -10,6 +10,7 @@ using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using SQLite;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
@@ -34,14 +35,12 @@ namespace Eqstra.VehicleInspection.ViewModels
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
-        private IUnityContainer _container;
-        public VehicleInspectionPageViewModel(INavigationService navigationService,IUnityContainer container)
+        
+        public VehicleInspectionPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             try
             {
-                CreateTableAsync();
-                _container = container;
                 _navigationService = navigationService;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
@@ -68,7 +67,7 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                     if (currentModel.ValidateModel())
                     {
-                       
+
                         this.PrevViewStack.Push(this.NextViewStack.Pop());
                         this.SaveCurrentUIDataAsync(currentModel);
                         this.FrameContent = this.NextViewStack.Peek();
@@ -85,10 +84,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     {
                         Errors = currentModel.Errors;
                         OnPropertyChanged("Errors");
-                        ShowValidationSummary = true;
-                        var page = _container.Resolve<VehicleInspectionPage>();
-                        //await Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { FlyoutBase.ShowAttachedFlyout(page); });
-                        
+                        ShowValidationSummary = true;                        
                     }
 
                 }, () =>
@@ -132,7 +128,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 throw;
             }
-            CloseCommand = new RelayCommand(() =>
+            CloseCommand = new DelegateCommand(() =>
         {
             IsFlyoutOpen = false;
         });
@@ -174,8 +170,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Robert Green",InspectedOn = DateTime.Now},
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Christopher",InspectedOn = DateTime.Now},
             };
-
-            _task = (Eqstra.BusinessLogic.Task)navigationParameter;
+            _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             App.Task = _task;
             var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
             ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
@@ -208,7 +203,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private UserControl frameContent;
-
+  
         public UserControl FrameContent
         {
             get { return frameContent; }
@@ -216,14 +211,14 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private DelegateCommand completeCommand;
-
+    
         public DelegateCommand CompleteCommand
         {
             get { return completeCommand; }
             set { SetProperty(ref completeCommand, value); }
         }
         private bool isCommandBarOpen;
-
+        [RestorableState]
         public bool IsCommandBarOpen
         {
             get { return isCommandBarOpen; }
@@ -231,7 +226,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private bool showValidationSummary;
-
+        [RestorableState]
         public bool ShowValidationSummary
         {
             get { return showValidationSummary; }
@@ -239,16 +234,14 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private ObservableCollection<ValidationError> errors;
-
+       
         public ObservableCollection<ValidationError> Errors
         {
             get { return errors; }
             set { SetProperty(ref errors, value); }
         }
-
-
         private DelegateCommand nextCommand;
-
+    
         public DelegateCommand NextCommand
         {
             get { return nextCommand; }
@@ -268,7 +261,7 @@ namespace Eqstra.VehicleInspection.ViewModels
 
 
         private Stack<UserControl> nextViewStack;
-
+ 
         public Stack<UserControl> NextViewStack
         {
             get { return nextViewStack; }
@@ -280,7 +273,6 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private Stack<UserControl> prevViewStack;
-
         public Stack<UserControl> PrevViewStack
         {
             get { return prevViewStack; }
@@ -293,7 +285,6 @@ namespace Eqstra.VehicleInspection.ViewModels
 
 
         private ObservableCollection<UserControl> inpectionUserControls;
-
         public ObservableCollection<UserControl> InspectionUserControls
         {
             get { return inpectionUserControls; }
@@ -301,7 +292,6 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private ObservableCollection<InspectionHistory> inspectionHistList;
-
         public ObservableCollection<InspectionHistory> InspectionHistList
         {
             get { return inspectionHistList; }
@@ -309,7 +299,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private CustomerDetails customerDetails;
-
+      
         public CustomerDetails CustomerDetails
         {
             get { return customerDetails; }
@@ -318,15 +308,16 @@ namespace Eqstra.VehicleInspection.ViewModels
 
 
         private Customer customer;
-
+     
         public Customer Customer
         {
             get { return customer; }
             set { SetProperty(ref customer, value); }
         }
-        public RelayCommand CloseCommand { get; set; }
+        public DelegateCommand CloseCommand { get; set; }
 
         private bool isFlyoutOpen;
+
         public bool IsFlyoutOpen
         {
             get { return isFlyoutOpen; }

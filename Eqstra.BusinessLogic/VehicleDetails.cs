@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace Eqstra.BusinessLogic
         private string registrationNumber;
 
         [PrimaryKey]
+        [RestorableState]
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -20,7 +22,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string description;
-
+         [RestorableState]
         public string Description
         {
             get { return description; }
@@ -28,7 +30,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string make;
-
+         [RestorableState]
         public string Make
         {
             get { return make; }

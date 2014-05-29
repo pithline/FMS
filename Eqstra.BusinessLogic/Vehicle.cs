@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,8 @@ namespace Eqstra.BusinessLogic
     {
         
         private string registrationNumber;
-        [SQLite.Column("RegistrationNumber"), PrimaryKey, SQLite.Unique, ]
+        [SQLite.Column("RegistrationNumber"), PrimaryKey, SQLite.Unique,]
+        [RestorableState]
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -23,6 +25,7 @@ namespace Eqstra.BusinessLogic
 
         private string color;
         [Column("Color")]
+        [RestorableState]
         public string Color
         {
             get { return color; }
@@ -31,6 +34,7 @@ namespace Eqstra.BusinessLogic
 
         private string chassisNumber;
         [Column("ChassisNumber"),]
+        [RestorableState]
         public string ChassisNumber
         {
             get { return chassisNumber; }
@@ -40,6 +44,7 @@ namespace Eqstra.BusinessLogic
 
         private DateTime modelYear;
         [Column("ModelYear")]
+        [RestorableState]
         public DateTime ModelYear
         {
             get { return modelYear; }
@@ -48,6 +53,7 @@ namespace Eqstra.BusinessLogic
 
         private VehicleTypeEnum vehicleType;
         [Column("VehicleType")]
+        [RestorableState]
         public VehicleTypeEnum VehicleType
         {
             get { return vehicleType; }

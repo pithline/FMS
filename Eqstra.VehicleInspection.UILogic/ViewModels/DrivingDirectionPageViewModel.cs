@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
@@ -22,15 +23,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
         private INavigationService _navigationService;
         private Eqstra.BusinessLogic.Task _inspection;
-        
-      
+
+
         public DrivingDirectionPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             _navigationService = navigationService;
             this.CustomerDetails = new BusinessLogic.CustomerDetails();
             LoadDemoAppointments();
-           
+
             GetDirectionsCommand = DelegateCommand<Location>.FromAsyncHandler(async (location) =>
             {
                 var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
@@ -43,20 +44,21 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
             {
-                _navigationService.Navigate("VehicleInspection", _inspection);
+                string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);
+                _navigationService.Navigate("VehicleInspection", JsoninspectionTask);
             });
 
             this.StartDrivingCommand = new DelegateCommand(async () =>
             {
                 this.IsStartDriving = false;
-                this.IsArrived = true;               
-                    await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now,CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString()});              
+                this.IsArrived = true;
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString() });
             });
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
                 if (this._inspection != null)
                 {
-                    string caseNumber= (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
+                    string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == caseNumber);
                     dd.StopDateTime = DateTime.Now;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(dd);
@@ -100,14 +102,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _inspection = (Eqstra.BusinessLogic.Task)navigationParameter;
+           _inspection = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
 
             var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == _inspection.CaseNumber);
             if (dd != null)
             {
                 this.IsArrived = dd.StopDateTime == DateTime.MinValue;
-                this.IsStartInspection = !this.IsArrived; 
+                this.IsStartInspection = !this.IsArrived;
             }
             else
             {

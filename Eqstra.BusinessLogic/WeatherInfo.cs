@@ -3,15 +3,18 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
+
     public class WeatherInfo : ValidatableBindableBase
     {
         private int id;
         [PrimaryKey, Unique]
+        [RestorableState]
         public int Id
         {
             get { return id; }
@@ -19,7 +22,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string cloudCover;
-
+        [RestorableState]
         public string CloudCover
         {
             get { return cloudCover; }
@@ -27,7 +30,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string humidity;
-
+        [RestorableState]
         public string Humidity
         {
             get { return humidity; }
@@ -35,7 +38,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string temp_C;
-
+        [RestorableState]
         public string Temp_C
         {
             get { return temp_C; }
@@ -43,7 +46,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string temp_F;
-
+        [RestorableState]
         public string Temp_F
         {
             get { return temp_F; }
@@ -51,7 +54,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string weatherIconUrl;
-
+        [RestorableState]
         public string WeatherIconUrl
         {
             get { return weatherIconUrl; }
@@ -59,7 +62,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string weatherDesc;
-
+        [RestorableState]
         public string WeatherDesc
         {
             get { return weatherDesc; }
@@ -67,7 +70,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string precipMM;
-
+        [RestorableState]
         public string PrecipMM
         {
             get { return precipMM; }

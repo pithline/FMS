@@ -37,7 +37,7 @@ namespace Eqstra.VehicleInspection.Views
     public sealed partial class ImageMarkupPage : VisualStateAwarePage
     {
 
-        private NavigationHelper navigationHelper;
+    
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         #region Private Vars
         private InkManager _inkManager;
@@ -62,86 +62,18 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.defaultViewModel; }
         }
 
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
+
 
 
         public ImageMarkupPage()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
-
             this._inkManager = new InkManager();
 
-            //#FF003f82
+
             this._brushColor = Colors.Blue;
             this.Loaded += DrawImageView_Loaded;
         }
-
-        #region NavHelper Handlers
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-        #endregion
-
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-
-
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-
-
         void DrawImageView_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -186,7 +118,7 @@ namespace Eqstra.VehicleInspection.Views
             }
         }
 
-     async   private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        async private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             try
             {
@@ -228,7 +160,7 @@ namespace Eqstra.VehicleInspection.Views
             }
             catch (Exception ex)
             {
-                 //new MessageDialog(ex.Message,"Error").ShowAsync();
+                //new MessageDialog(ex.Message,"Error").ShowAsync();
             }
         }
 
@@ -363,7 +295,7 @@ namespace Eqstra.VehicleInspection.Views
             //await background.SaveToFile(file, BitmapEncoder.JpegEncoderId);
         }
 
-      
+
 
         async private void Snapshot_Changed(object sender, SelectionChangedEventArgs e)
         {
@@ -371,15 +303,15 @@ namespace Eqstra.VehicleInspection.Views
             {
                 //save image to buffer
                 this.Progress.Opacity = 1;
-                
+
                 //var buffer = new InMemoryRandomAccessStream();
                 //await this._inkManager.SaveAsync(buffer);
-               
+
 
                 ClearCanvas();
 
-                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex) as StorageFile;
-                
+                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + App.Task.CaseNumber + this.listView.SelectedIndex) as StorageFile;
+
                 if (bf != null)
                 {
                     using (var inputStream = await bf.OpenAsync(FileAccessMode.ReadWrite))
@@ -465,11 +397,11 @@ namespace Eqstra.VehicleInspection.Views
         async private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             ClearCanvas();
-           var file =await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex);
-           if (file !=null)
-           {
-              await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
-           }
+            var file = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + App.Task.CaseNumber + this.listView.SelectedIndex);
+            if (file != null)
+            {
+                await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            }
         }
 
     }

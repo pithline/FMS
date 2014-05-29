@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Syncfusion.UI.Xaml.Schedule;
@@ -12,9 +13,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -24,9 +27,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-
+        
         public MainPageViewModel()
         {
+            
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -58,10 +62,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
+           
+
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
+
+            var userInfo = JsonConvert.DeserializeObject<UserInfo>(navigationParameter.ToString());
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
             Synchronize(async () =>
@@ -88,7 +96,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 //    }
                 //}
                 this.IsSynchronizing = false;
-          
+
             });
             //SyncData();
 
@@ -126,9 +134,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingConfirmationCount= this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
+            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
             this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
-            
+
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
         async private void SyncData()
@@ -150,7 +158,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private WeatherInfo weatherInfo;
-
+    
         public WeatherInfo WeatherInfo
         {
             get { return weatherInfo; }
@@ -158,7 +166,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private int total;
-
+        [RestorableState]
         public int TotalCount
         {
             get { return total; }
@@ -166,24 +174,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private int awaitingConfirmationCount;
-
+        [RestorableState]
         public int AwaitingConfirmationCount
         {
             get { return awaitingConfirmationCount; }
             set { SetProperty(ref awaitingConfirmationCount, value); }
         }
         private int myTasksCount;
-
+        [RestorableState]
         public int MyTasksCount
         {
             get { return myTasksCount; }
             set { SetProperty(ref myTasksCount, value); }
         }
 
-
-
-
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
+
         public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
         {
             get { return poolofTasks; }
@@ -201,8 +207,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref appointments, value); }
         }
         public DelegateCommand BingWeatherCommand { get; set; }
+       
 
-        public DelegateCommand AssignCommand { get; set; }
+       
 
     }
 }

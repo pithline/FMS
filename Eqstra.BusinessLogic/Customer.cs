@@ -4,15 +4,17 @@ using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-  public  class Customer : ValidatableBindableBase
+   
+    public class Customer : ValidatableBindableBase
     {
         private string id;
-
+        [RestorableState]
         public string Id
         {
             get { return id; }
@@ -20,7 +22,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerName;
-
+        [RestorableState]
         public string CustomerName
         {
             get { return customerName; }
@@ -28,7 +30,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string contactName;
-
+        [RestorableState]
         public string ContactName
         {
             get { return contactName; }
@@ -36,7 +38,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string contactNumber;
-
+        [RestorableState]
         public string ContactNumber
         {
             get { return contactNumber; }
@@ -44,7 +46,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string address;
-
+        [RestorableState]
         public string Address
         {
             get { return address; }
@@ -52,7 +54,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string emailId;
-
+        [RestorableState]
         public string EmailId
         {
             get { return emailId; }

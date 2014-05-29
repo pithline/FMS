@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-  public  class UserInfo: ValidatableBindableBase
+    public class UserInfo : ValidatableBindableBase
     {
         private string userId;
-
+        [RestorableState]
         public string UserId
         {
             get { return userId; }
@@ -18,7 +19,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string name;
-
+        [RestorableState]
         public string Name
         {
             get { return name; }
@@ -26,7 +27,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string emailId;
-
+        [RestorableState]
         public string EmailId
         {
             get { return emailId; }

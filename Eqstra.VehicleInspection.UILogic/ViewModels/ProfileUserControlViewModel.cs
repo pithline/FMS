@@ -26,7 +26,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.ClearHistory();
             });
         }
-
         public ICommand LogoutCommand { get; private set; }
     }
 }
