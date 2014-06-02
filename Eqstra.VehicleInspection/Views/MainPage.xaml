@@ -156,7 +156,7 @@
                         </Grid.RowDefinitions>
                         <!--<MzkFilterBox />-->
 
-                        <SearchBox PlaceholderText="Type to filter..." x:Name="filterBox" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" HorizontalAlignment="Left">
+                        <SearchBox PlaceholderText="Type to filter..." x:Name="filterBox"  FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" HorizontalAlignment="Left">
                         </SearchBox>
                         <grid:SfDataGrid Grid.Row="1"  x:Name="mainGrid"  SelectedIndex="0"  NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="True" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                             <grid:SfDataGrid.Columns>
