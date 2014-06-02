@@ -175,7 +175,7 @@
                                     </grid:GridTemplateColumn.CellTemplate>
                                 </grid:GridTemplateColumn>
                                 <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridComboBoxColumn MappingName="DisplayStatus" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="MM/dd/yyyy" HeaderText="CONFIRMED DATE" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTemplateColumn HeaderText="CONFIRMED TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">

@@ -8,7 +8,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 namespace Eqstra.BusinessLogic
 {
     
@@ -102,6 +103,17 @@ namespace Eqstra.BusinessLogic
         {
             get { return allocatedTo; }
             set { SetProperty(ref allocatedTo, value); }
+        }
+
+        [Ignore]
+        [RestorableState]
+        public string DisplayStatus
+        {
+            get
+            {
+                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
+                return member.GetCustomAttribute<DisplayAttribute>().Name;
+            }
         }
     }
 }

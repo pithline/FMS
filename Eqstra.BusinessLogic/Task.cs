@@ -7,7 +7,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 namespace Eqstra.BusinessLogic
 {
     public class Task : ValidatableBindableBase
@@ -109,6 +110,16 @@ namespace Eqstra.BusinessLogic
             get { return confirmedTime; }
             set { SetProperty(ref confirmedTime, value); }
         }
-
+        
+        [Ignore]
+        [RestorableState]
+        public string DisplayStatus
+        {
+            get
+            {
+                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
+                return member.GetCustomAttribute<DisplayAttribute>().Name;                
+            }
+        }
     }
 }
