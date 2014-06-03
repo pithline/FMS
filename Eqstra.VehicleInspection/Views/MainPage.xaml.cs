@@ -48,17 +48,17 @@ namespace Eqstra.VehicleInspection.Views
         }
         async System.Threading.Tasks.Task WriteTasksToDiskAsync(string content)
         {
-            StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("ItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);
+            StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("MainItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(itemsSourceFile, content);
         }
 
-        async System.Threading.Tasks.Task<ObservableCollection<Task>> ReadTasksFromDiskAsync()
+        async System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.Task>> ReadTasksFromDiskAsync()
         {
             try
             {
-                StorageFile itemsSourceFile = await temporaryFolder.GetFileAsync("ItemsSourceFile.txt");
+                StorageFile itemsSourceFile = await temporaryFolder.GetFileAsync("MainItemsSourceFile.txt");
                 String jsonItemsSource = await FileIO.ReadTextAsync(itemsSourceFile);
-                return JsonConvert.DeserializeObject<ObservableCollection<Task>>(jsonItemsSource);
+                return JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.Task>>(jsonItemsSource);
             }
             catch (Exception)
             {
@@ -85,6 +85,7 @@ namespace Eqstra.VehicleInspection.Views
                  x.CaseType.ToString().Contains(args.QueryText) ||
                  x.CustomerName.Contains(args.QueryText) ||
                  x.RegistrationNumber.Contains(args.QueryText) ||
+                  x.DisplayStatus.Contains(args.QueryText) ||
                  x.Status.ToString().Contains(args.QueryText));
         }
 
