@@ -11,6 +11,8 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
      xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     x:Name="pageRoot"
+    SizeChanged="pageRoot_SizeChanged"
+    
     x:Class="Eqstra.VehicleInspection.Views.DrivingDirectionPage"
     
     mc:Ignorable="d">

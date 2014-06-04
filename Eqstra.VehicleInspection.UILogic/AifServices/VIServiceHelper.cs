@@ -11,7 +11,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
     {
        private static readonly VIServiceHelper instance = new VIServiceHelper();
 
-       static public VIServiceHelper()
+       private  VIServiceHelper()
        {
 
        }

@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
 using Newtonsoft.Json;
@@ -63,41 +64,49 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            //VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
+            //client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");            
+            
+            //var res = await  client.createGlassAsync(new ObservableCollection<MzkMobiPassengerGlassContract>{
+            //    new MzkMobiPassengerGlassContract{ parmVehicleInsRecID =5637144576 , parmIsDamagedHeadLights = NoYes.Yes, parmHeadLightsComments = "head lights broken by noor"}}, "1000");
 
-            Synchronize(async () =>
-            {
-                this.IsSynchronizing = true;
-                VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
-                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
-                //var r = await client.createTyreConditionAsync(
-                //    new ObservableCollection<VIService.MzkTyreConditionContract> 
-                //    {
-                //        new MzkTyreConditionContract 
-                //        { parmPassengerTyreType = MzkPassengerTyreCondition.RR, parmRecID = 0, parmTableId = 0, parmVehicleInsRecID = 5637144576, parmComments = "tested by noor", parmCondition = MZKConditionEnum.Fair 
-                //    }
-                //    });
-                var res = await client.getTasksAsync("rchivukula");
+            //Synchronize(async () =>
+            //{
+            //    this.IsSynchronizing = true;
+                
+            //    //VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
+            //    //client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
+                
+            //    //var r = await client.createTyreConditionAsync(
+            //    //    new ObservableCollection<VIService.MzkTyreConditionContract> 
+            //    //    {
+            //    //        new MzkTyreConditionContract 
+            //    //        { parmPassengerTyreType = MzkPassengerTyreCondition.RR, parmRecID = 0, parmTableId = 0, parmVehicleInsRecID = 5637144576, parmComments = "tested by noor", parmCondition = MZKConditionEnum.Fair 
+            //    //    }
+            //    //    });
+            //   // var res = await client.getTasksAsync("rchivuku");
+                
 
-                if (res != null && res.response.Count > 0)
-                {
-                    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+            //    //if (res != null && res.response.Count > 0)
+            //    //{
+            //    //    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
 
-                    foreach (var item in res.response)
-                    {
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task
-                        {
-                            Address = item.parmCustAddress,
-                            CaseNumber = item.parmCaseID,
-                            CaseCategory = item.parmCaseCategory,
-                            StatusDueDate = item.parmStatusDueDate,
-                            ConfirmedDate = item.parmConfirmedDueDate,
-                            CustomerName = item.parmCustName
-                        });
-                    }
-                }
-                this.IsSynchronizing = false; 
+            //    //    foreach (var item in res.response)
+            //    //    {
+            //    //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task
+            //    //        {
+            //    //            Address = item.parmCustAddress,
+            //    //            CaseNumber = item.parmCaseID,
+            //    //            CaseCategory = item.parmCaseCategory,
+            //    //            StatusDueDate = item.parmStatusDueDate,
+            //    //            ConfirmedDate = item.parmConfirmedDueDate,
+            //    //            CustomerName = item.parmCustName
+            //    //        });
+            //    //    }
+            //    //}
+            //    this.IsSynchronizing = false; 
           
-            });
+            //});
             //SyncData();
 
             var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
