@@ -28,6 +28,12 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Eqstra.VehicleInspection.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Windows.UI.Popups;
+using System.Collections.ObjectModel;
+using Eqstra.BusinessLogic;
+using Eqstra.VehicleInspection.UILogic.ViewModels;
+using Eqstra.VehicleInspection.Common;
+using Eqstra.VehicleInspection.UILogic;
+using Newtonsoft.Json;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -36,7 +42,7 @@ namespace Eqstra.VehicleInspection
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : MvvmAppBase,IDisposable
+    sealed partial class App : MvvmAppBase, IDisposable
     {
         public static Eqstra.BusinessLogic.Task Task { get; set; }
         private readonly IUnityContainer _container = new UnityContainer();
@@ -48,37 +54,61 @@ namespace Eqstra.VehicleInspection
         public App()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnRegisterKnownTypesForSerialization()
+        {
+
+            base.OnRegisterKnownTypesForSerialization();
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.UserInfo));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Task));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Customer));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PAccessories));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PBodywork));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.ImageCapture));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<ImageCapture>));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PGlass));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PInspectionProof));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.CaseTypeEnum));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.TaskStatusEnum));
+            SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.VehicleTypeEnum));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.Task>));
+            SessionStateService.RegisterKnownType(typeof(LogonResult));
+            SessionStateService.RegisterKnownType(typeof(List<string>));
             
         }
 
-
-      async  protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
+        async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-            
-                var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-                if (db == null)
-                {
-                    var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                    // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
-                    var destinationFolder = await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB",CreationCollisionOption.ReplaceExisting);
-                    await packDb.CopyAsync(destinationFolder);
-                }
-                SqliteHelper.Storage.ConnectionDatabaseAsync();
-          var accountService = _container.Resolve<IAccountService>();
-            var result = await accountService.VerifyUserCredentialsAsync();
-            if (result != null)
+
+            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+            if (db == null)
             {
-               NavigationService .Navigate("Main", result);
+                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                var destinationFolder = await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB", CreationCollisionOption.ReplaceExisting);
+                await packDb.CopyAsync(destinationFolder);
+            }
+            SqliteHelper.Storage.ConnectionDatabaseAsync();
+            var accountService = _container.Resolve<IAccountService>();
+            UserInfo userInfo = await accountService.VerifyUserCredentialsAsync();
+            if (userInfo != null)
+            {
+                string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+                NavigationService.Navigate("Main", jsonUserInfo);
             }
             else
             {
-                NavigationService.Navigate("Login", args.Arguments); 
+                NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-          
+
         }
 
-         protected override void OnInitialize(IActivatedEventArgs args)
+        protected override void OnInitialize(IActivatedEventArgs args)
         {
             try
             {
@@ -87,14 +117,14 @@ namespace Eqstra.VehicleInspection
 
                 _container.RegisterInstance(NavigationService);
                 _container.RegisterInstance(EventAggregator);
+
                 _container.RegisterInstance(SessionStateService);
 
                 _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
                 _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
                 _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
-                
-                
-                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService,_container));
+
+                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
 
                 ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
                 {
@@ -107,10 +137,11 @@ namespace Eqstra.VehicleInspection
                 //        return Type.GetType(viewModelTypeName);
                 //    });
             }
-            catch ( Exception ex)
+            catch (Exception ex)
             {
                 new MessageDialog(ex.Message).ShowAsync();
             }
+
         }
 
         protected override object Resolve(Type type)
@@ -143,8 +174,6 @@ namespace Eqstra.VehicleInspection
 
             return settingsCommands;
         }
-
-        
 
         public void Dispose()
         {

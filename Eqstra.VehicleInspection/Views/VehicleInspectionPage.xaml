@@ -18,7 +18,7 @@
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Page.Resources>
     <prism:VisualStateAwarePage.TopAppBar>
-        <AppBar x:Name="TopAppBarShowValidationSummary" Visibility="{Binding ShowValidationSummary,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Background="{StaticResource AppBarBackgroundThemeBrush}" Height="300">
+        <AppBar x:Name="TopAppBarShowValidationSummary" Closed="TopAppBarShowValidationSummary_Closed"  Visibility="{Binding ShowValidationSummary,Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}" Background="{StaticResource AppBarBackgroundThemeBrush}" Height="300">
             <Grid>
                 <GridView ItemsSource="{Binding Errors}" Margin="10 0" IsHitTestVisible="False" SelectionMode="None">
                     <GridView.ItemTemplate>
@@ -33,22 +33,6 @@
         </AppBar>
     </prism:VisualStateAwarePage.TopAppBar>
 
-    <FlyoutBase.AttachedFlyout>
-      
-        <Flyout>            
-                <Grid>
-                    <GridView ItemsSource="{Binding Errors}" Margin="10 0">
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding ErrorMessage}"
-                                       Foreground="Crimson" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </Grid>            
-        </Flyout>
-    </FlyoutBase.AttachedFlyout>
-    
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar IsOpen="{Binding IsCommandBarOpen,Mode=TwoWay}">
             <CommandBar.SecondaryCommands>

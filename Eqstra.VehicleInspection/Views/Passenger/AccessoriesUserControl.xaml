@@ -310,7 +310,7 @@
                     <Button  IsEnabled="{Binding ElementName=HasCanopyChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVCanopy}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CanopyToggle}" Margin="5 0" Grid.Column="8" Grid.Row="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.CanopyComment}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.CanopyComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="9"/>
                     <GridView  IsEnabled="{Binding ElementName=HasCanopyChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVCanopy" ItemsSource="{Binding Path= Model.CanopyImgList,Mode=TwoWay}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CanopyToggle}" Grid.Row="2" Grid.Column="10" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>

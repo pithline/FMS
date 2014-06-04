@@ -2,12 +2,14 @@
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Grid;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -31,18 +33,19 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;
+                string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
                 if (this.InspectionTask.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture)
                 {
-                    _navigationService.Navigate("DrivingDirection", this.InspectionTask);
+                     navigationService.Navigate("DrivingDirection", jsonInspectionTask);
                 }
                 else
                 {
-                    _navigationService.Navigate("VehicleInspection", InspectionTask);
+                    _navigationService.Navigate("VehicleInspection", jsonInspectionTask);
                 }
                 return System.Threading.Tasks.Task.FromResult<object>(null);
             }, () =>
             {
-                return (this.InspectionTask != null);                
+                return (this.InspectionTask != null);
             }
             );
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
@@ -108,7 +111,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ConfirmedDate.Date.Date.Equals(DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance));
             }
-            if (navigationParameter.ToString().Contains("AwaitInspectionDataCapture") || navigationParameter.ToString().Contains("AwaitInspectionAcceptance"))
+            if (navigationParameter.Equals("MyTasks"))
             {
 
                 list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance);
@@ -130,7 +133,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         #region Properties
         private bool allowEditing;
-
+        [RestorableState]
         public bool AllowEditing
         {
             get { return allowEditing; }
@@ -138,7 +141,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private NavigationMode navigationMode;
-
+ 
         public NavigationMode NavigationMode
         {
             get { return navigationMode; }
@@ -146,7 +149,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private ObservableCollection<Eqstra.BusinessLogic.Task> inspectionList;
-
+ 
         public ObservableCollection<Eqstra.BusinessLogic.Task> InspectionList
         {
             get { return inspectionList; }
@@ -154,6 +157,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private bool isSave;
+        [RestorableState]
         public bool IsSave
         {
             get { return isSave; }
@@ -161,6 +165,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private bool isNext;
+        [RestorableState]
         public bool IsNext
         {
             get { return isNext; }
@@ -168,7 +173,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private bool isCommandBarOpen;
-
+        [RestorableState]
         public bool IsCommandBarOpen
         {
             get { return isCommandBarOpen; }
@@ -176,6 +181,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
+
         public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
         {
             get { return poolofTasks; }
@@ -194,6 +200,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private ScheduleAppointmentCollection appointments;
+  
         public ScheduleAppointmentCollection Appointments
         {
             get { return appointments; }
@@ -201,14 +208,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private CustomerDetails customerDetails;
-
+    
         public CustomerDetails CustomerDetails
         {
             get { return customerDetails; }
             set { SetProperty(ref customerDetails, value); }
         }
         private Eqstra.BusinessLogic.Task task;
-
         public Eqstra.BusinessLogic.Task InspectionTask
         {
             get { return task; }
@@ -221,8 +227,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
             }
         }
-
+    
         public DelegateCommand DrivingDirectionCommand { get; set; }
+   
         public DelegateCommand SaveCommand { get; set; }
 
         #endregion

@@ -124,12 +124,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
   
-
-        void task_Completed(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
-        {
-
-        }
-
         private WeatherInfo weatherInfo;
 
         public WeatherInfo WeatherInfo
@@ -190,7 +184,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             }
         }
-
 
         private ScheduleAppointmentCollection appointments;
         public ScheduleAppointmentCollection Appointments

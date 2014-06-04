@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Syncfusion.UI.Xaml.Schedule;
@@ -13,9 +14,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -28,6 +31,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public MainPageViewModel()
         {
+            
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -59,14 +63,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
+           
+
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
+
+            var userInfo = JsonConvert.DeserializeObject<UserInfo>(navigationParameter.ToString());
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             //VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
             //client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");            
-            
+
             //var res = await  client.createGlassAsync(new ObservableCollection<MzkMobiPassengerGlassContract>{
             //    new MzkMobiPassengerGlassContract{ parmVehicleInsRecID =5637144576 , parmIsDamagedHeadLights = NoYes.Yes, parmHeadLightsComments = "head lights broken by noor"}}, "1000");
 
@@ -175,7 +183,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private int total;
-
+        [RestorableState]
         public int TotalCount
         {
             get { return total; }
@@ -183,24 +191,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
 
         private int awaitingConfirmationCount;
-
+        [RestorableState]
         public int AwaitingConfirmationCount
         {
             get { return awaitingConfirmationCount; }
             set { SetProperty(ref awaitingConfirmationCount, value); }
         }
         private int myTasksCount;
-
+        [RestorableState]
         public int MyTasksCount
         {
             get { return myTasksCount; }
             set { SetProperty(ref myTasksCount, value); }
         }
 
-
-
-
         private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
+
         public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
         {
             get { return poolofTasks; }
@@ -219,7 +225,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
         public DelegateCommand BingWeatherCommand { get; set; }
 
-        public DelegateCommand AssignCommand { get; set; }
+
+       
 
     }
 }

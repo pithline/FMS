@@ -1,7 +1,9 @@
 ﻿using Eqstra.BusinessLogic.Enums;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,15 +12,14 @@ namespace Eqstra.BusinessLogic
    public class CollectDeliveryTask : Task
     {
         private CDTaskStatusEnum cdTaskStatus;
-
         public CDTaskStatusEnum CDTaskStatus
         {
             get { return cdTaskStatus; }
             set { SetProperty(ref cdTaskStatus, value); }
         }
-
+       
         private CDTaskTypeEnum taskType;
-
+     
         public CDTaskTypeEnum TaskType
         {
             get { return taskType; }
@@ -26,7 +27,6 @@ namespace Eqstra.BusinessLogic
         }
 
         private DateTime deliveryDate;
-
         public DateTime DeliveryDate
         {
             get { return deliveryDate; }
@@ -34,15 +34,13 @@ namespace Eqstra.BusinessLogic
         }
 
         private DateTime deliveryTime;
-
         public DateTime DeliveryTime
         {
             get { return deliveryTime; }
             set { SetProperty(ref deliveryTime, value); }
         }
-
         private int documentCount;
-
+        [RestorableState]
         public int DocumentCount
         {
             get { return documentCount; }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string color;
-
+        [RestorableState]
         public string Color
         {
             get { return color; }
@@ -49,7 +50,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private bool isLicenseDiscCurrent;
-
+        [RestorableState]
         public bool IsLicenseDiscCurrent
         {
             get { return isLicenseDiscCurrent; }
@@ -57,7 +58,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string odoReading;
-
+        [RestorableState]
         public string ODOReading
         {
             get { return odoReading; }
@@ -65,7 +66,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string registrationNumber;
-
+        [RestorableState]
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -73,7 +74,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string engineNumber;
-
+        [RestorableState]
         public string EngineNumber
         {
             get { return engineNumber; }
@@ -81,7 +82,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private DateTime licenseDiscExpiryDate;
-
+        [RestorableState]
         public DateTime LicenseDiscExpireDate
         {
             get { return licenseDiscExpiryDate; }
@@ -89,7 +90,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string chassisNumber;
-
+        [RestorableState]
         public string ChassisNumber
         {
             get { return chassisNumber; }
@@ -97,7 +98,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string make;
-
+        [RestorableState]
         public string Make
         {
             get { return make; }
@@ -105,6 +106,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private bool isSpareKeysShown;
+        [RestorableState]
 
         public bool IsSpareKeysShown
         {
@@ -113,7 +115,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private bool isSpareKeysTested;
-
+        [RestorableState]
         public bool IsSpareKeysTested
         {
             get { return isSpareKeysTested; }
@@ -121,7 +123,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private string year;
-
+        [RestorableState]
         public string Year
         {
             get { return year; }
@@ -131,7 +133,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture licenseDiscSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture LicenseDiscSnapshot
         {
             get { return licenseDiscSnapshot; }
@@ -140,7 +142,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture odoReadingSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture ODOReadingSnapshot
         {
             get { return odoReadingSnapshot; }
@@ -150,7 +152,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture leftSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture LeftSnapshot
         {
             get { return leftSnapshot; }
@@ -159,7 +161,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture backSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture BackSnapshot
         {
             get { return backSnapshot; }
@@ -168,7 +170,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture rightSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture RightSnapshot
         {
             get { return rightSnapshot; }
@@ -177,7 +179,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture frontSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture FrontSnapshot
         {
             get { return frontSnapshot; }
@@ -186,7 +188,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
         private ImageCapture topSnapshot;
 
-        [Ignore]
+        [RestorableState, Ignore]
         public ImageCapture TopSnapshot
         {
             get { return topSnapshot; }

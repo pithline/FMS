@@ -4,9 +4,11 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 namespace Eqstra.BusinessLogic
 {
     public class Task : ValidatableBindableBase
@@ -15,14 +17,13 @@ namespace Eqstra.BusinessLogic
         private string caseNumber;
 
         [PrimaryKey]
+        [RestorableState]
         public string CaseNumber
         {
             get { return caseNumber; }
             set { caseNumber = value; }
         }
-
         private CaseTypeEnum caseType;
-
         public CaseTypeEnum CaseType
         {
             get { return caseType; }
@@ -30,15 +31,12 @@ namespace Eqstra.BusinessLogic
         }
 
         private string caseCategory;
-
+        [RestorableState]
         public string CaseCategory
         {
             get { return caseCategory; }
             set { SetProperty(ref caseCategory, value); }
         }
-
-
-
         private DateTime statusDueDate;
 
         public DateTime StatusDueDate
@@ -56,7 +54,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string allocatedTo;
-
+        [RestorableState]
         public string AllocatedTo
         {
             get { return allocatedTo; }
@@ -72,7 +70,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerId;
-
+        [RestorableState]
         public string CustomerId
         {
             get { return customerId; }
@@ -80,7 +78,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string registrationNumber;
-
+        [RestorableState]
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -89,6 +87,7 @@ namespace Eqstra.BusinessLogic
 
         private string customerName;
         [Ignore]
+        [RestorableState]
         public string CustomerName
         {
             get { return customerName; }
@@ -96,12 +95,13 @@ namespace Eqstra.BusinessLogic
         }
 
         private string address;
-        [Ignore]
+        [RestorableState]
         public string Address
         {
             get { return address; }
             set { SetProperty(ref address, value); }
         }
+
 
         private DateTime confirmedTime;
 
@@ -110,7 +110,16 @@ namespace Eqstra.BusinessLogic
             get { return confirmedTime; }
             set { SetProperty(ref confirmedTime, value); }
         }
-
-
+        
+        [Ignore]
+        [RestorableState]
+        public string DisplayStatus
+        {
+            get
+            {
+                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
+                return member.GetCustomAttribute<DisplayAttribute>().Name;                
+            }
+        }
     }
 }

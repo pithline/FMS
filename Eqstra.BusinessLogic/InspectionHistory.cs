@@ -3,15 +3,18 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   public class InspectionHistory : ValidatableBindableBase
+
+    public class InspectionHistory : ValidatableBindableBase
     {
         private string id;
-       [PrimaryKey,AutoIncrement,Indexed]
+        [PrimaryKey, AutoIncrement, Indexed]
+        [RestorableState]
         public string Id
         {
             get { return id; }
@@ -19,7 +22,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerId;
-
+        [RestorableState]
         public string CustomerId
         {
             get { return customerId; }
@@ -27,7 +30,6 @@ namespace Eqstra.BusinessLogic
         }
 
         private DateTime inspectedOn;
-
         public DateTime InspectedOn
         {
             get { return inspectedOn; }
@@ -35,7 +37,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string inspectedBy;
-
+        [RestorableState]
         public string InspectedBy
         {
             get { return inspectedBy; }
@@ -43,7 +45,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string registrationNumber;
-
+        [RestorableState]
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -51,7 +53,6 @@ namespace Eqstra.BusinessLogic
         }
 
         private List<string> inspectionResult;
-
         public List<string> InspectionResult
         {
             get { return inspectionResult; }

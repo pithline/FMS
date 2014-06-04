@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Microsoft.Practices.Prism.StoreApps;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
            get { return customerDetails; }
            set { SetProperty(ref customerDetails, value); }
        }
-
        
        public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
        {
            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           this.CustomerDetails = navigationParameter as CustomerDetails;    
-          
+           this.CustomerDetails = JsonConvert.DeserializeObject<CustomerDetails>(navigationParameter.ToString());
        }
 
     }

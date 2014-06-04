@@ -78,7 +78,7 @@
 
 				<StackPanel Grid.Row="6" Margin="0 15 0 0">
 					<TextBlock Text="Status" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding Status}" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding DisplayStatus}" Style="{StaticResource TextContentStyle}"/>
 				</StackPanel>
 				<StackPanel Grid.Row="7" Margin="0 15 0 0">
 					<TextBlock Text="Allocated To" Style="{StaticResource TextHeaderStyle}"/>

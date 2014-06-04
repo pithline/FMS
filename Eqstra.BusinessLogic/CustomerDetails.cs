@@ -5,15 +5,18 @@ using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 namespace Eqstra.BusinessLogic
 {
+    
     public class CustomerDetails : ValidatableBindableBase
     {
         private string customerName;
-
+        [RestorableState]
         public string CustomerName
         {
             get { return customerName; }
@@ -21,7 +24,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string contactName;
-
+        [RestorableState]
         public string ContactName
         {
             get { return contactName; }
@@ -30,7 +33,7 @@ namespace Eqstra.BusinessLogic
 
 
         private string contactNumber;
-
+        [RestorableState]
         public string ContactNumber
         {
             get { return contactNumber; }
@@ -38,7 +41,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string address;
-
+        [RestorableState]
         public string Address
         {
             get { return address; }
@@ -46,7 +49,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string emailId;
-
+        [RestorableState]
         public string EmailId
         {
             get { return emailId; }
@@ -55,6 +58,7 @@ namespace Eqstra.BusinessLogic
 
         private ScheduleAppointmentCollection appointments;
         [Ignore]
+   
         public ScheduleAppointmentCollection Appointments
         {
             get { return appointments; }
@@ -62,7 +66,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string caseNumber;
-
+        [RestorableState]
         public string CaseNumber
         {
             get { return caseNumber; }
@@ -94,11 +98,22 @@ namespace Eqstra.BusinessLogic
         }
 
         private string allocatedTo;
-
+        [RestorableState]
         public string AllocatedTo
         {
             get { return allocatedTo; }
             set { SetProperty(ref allocatedTo, value); }
+        }
+
+        [Ignore]
+        [RestorableState]
+        public string DisplayStatus
+        {
+            get
+            {
+                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
+                return member.GetCustomAttribute<DisplayAttribute>().Name;
+            }
         }
     }
 }

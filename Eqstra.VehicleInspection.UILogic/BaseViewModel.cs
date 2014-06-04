@@ -8,17 +8,22 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.Networking.Connectivity;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.VehicleInspection.UILogic
 {
+    [DataContract]
     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
@@ -50,11 +55,12 @@ namespace Eqstra.VehicleInspection.UILogic
             this.GoHomeCommand = new DelegateCommand(() =>
             {
                 _navigationService.ClearHistory();
-                _navigationService.Navigate("Main", null);
+                _navigationService.Navigate("Main", string.Empty);
             });
         }
 
         private Object model;
+        [RestorableState]
         public Object Model
         {
             get { return model; }
@@ -62,7 +68,7 @@ namespace Eqstra.VehicleInspection.UILogic
         }
 
         private bool isSynchronizing;
-
+        [RestorableState]
         public bool IsSynchronizing
         {
             get { return isSynchronizing; }
@@ -72,8 +78,11 @@ namespace Eqstra.VehicleInspection.UILogic
         public DelegateCommand GoHomeCommand { get; set; }
 
         public DelegateCommand<ObservableCollection<ImageCapture>> TakeSnapshotCommand { get; set; }
+
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
+
         public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
+
         protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
         {
             try
@@ -90,6 +99,7 @@ namespace Eqstra.VehicleInspection.UILogic
                 throw;
             }
         }
+
         async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
         {
             try
@@ -160,7 +170,25 @@ namespace Eqstra.VehicleInspection.UILogic
             }
 
         }
+        /// <summary>
+        /// /  This metod is only for testing suspension ,later we can remove it
+        /// </summary>
+        /// <param name="viewModelState"></param>
+        /// <param name="suspending"></param>
+        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
+        {
+            base.OnNavigatedFrom(viewModelState, suspending);
 
-
+        }
+        /// <summary>
+        /// This metod is only for testing suspension, later we can remove it
+        /// </summary>
+        /// <param name="navigationParameter"></param>
+        /// <param name="navigationMode"></param>
+        /// <param name="viewModelState"></param>
+        public override void OnNavigatedTo(object navigationParameter, NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        {
+            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+        }
     }
 }

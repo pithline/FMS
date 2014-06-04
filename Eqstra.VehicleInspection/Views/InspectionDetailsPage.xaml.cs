@@ -1,13 +1,17 @@
 ﻿using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,7 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using System.Reflection;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.VehicleInspection.Views
@@ -27,97 +31,93 @@ namespace Eqstra.VehicleInspection.Views
     public sealed partial class InspectionDetailsPage : VisualStateAwarePage
     {
 
-        private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private Windows.Storage.StorageFolder temporaryFolder = ApplicationData.Current.TemporaryFolder;
+        private bool isCached;
 
-        /// <summary>
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
         }
-
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-
         public InspectionDetailsPage()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
-
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
         async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             try
             {
                 var dc = (InspectionDetailsPageViewModel)this.DataContext;
                 await dc.GetCustomerDetailsAsync();
-                
+
             }
             catch (Exception ex)
             {
                 new MessageDialog(ex.Message);
             }
+
+        }
+        async System.Threading.Tasks.Task WriteTasksToDiskAsync(string content)
+        {
+            StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("DetailsItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(itemsSourceFile, content);
+        }
+
+        async System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.Task>> ReadTasksFromDiskAsync()
+        {
+            try
+            {
+                StorageFile itemsSourceFile = await temporaryFolder.GetFileAsync("DetailsItemsSourceFile.txt");
+                String jsonItemsSource = await FileIO.ReadTextAsync(itemsSourceFile);
+                return JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.Task>>(jsonItemsSource);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            this.detailsGrid.ItemsSource = (await ReadTasksFromDiskAsync()).Where(x => x.CaseCategory.Contains(args.QueryText) ||
+                 x.CaseNumber.Contains(args.QueryText) ||
+                 x.CaseType.ToString().Contains(args.QueryText) ||
+                 x.CustomerName.Contains(args.QueryText) ||
+                 x.RegistrationNumber.Contains(args.QueryText) ||
+                 x.DisplayStatus.Contains(args.QueryText) ||
+                 x.Status.ToString().Contains(args.QueryText));
+        }
+
+
+        async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
+        {
+            var deferral = args.Request.GetDeferral();
+            if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                if (!isCached)
+                {
+                    await WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource));
+                    isCached = true;
+                }
+
+                var searchSuggestionList = new List<string>();
+                foreach (var task in await ReadTasksFromDiskAsync())
+                {
+                    foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                    {
+                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
+                            continue;
+                        var propVal = propInfo.GetValue(task).ToString();
+                        if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                        {
+                            searchSuggestionList.Add(propVal);
+                        }
+                    }
+                }
+                args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+            }
+            deferral.Complete();
 
         }
     }

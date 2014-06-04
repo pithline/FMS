@@ -23,8 +23,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        {
            _navigationService = navigationService;
            this.Model = new CVehicleDetails();
-           string CaseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
-           UpdateModelAsync(CaseNumber);
+           string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
+           UpdateModelAsync(caseNumber);
            this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
            {
                _navigationService.Navigate("ImageMarkup", this.Model);
