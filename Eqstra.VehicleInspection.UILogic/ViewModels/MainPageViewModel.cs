@@ -208,8 +208,5 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
         public DelegateCommand BingWeatherCommand { get; set; }
        
-
-       
-
     }
 }

@@ -235,7 +235,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         #endregion
 
         #region Methods
-        async public System.Threading.Tasks.Task GetCustomerDetailsAsync()
+        async public System.Threading.Tasks.Task GetCustomerDetailsAsync(bool isAppBarOpen)
         {
             try
             {
@@ -252,6 +252,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.customerDetails.ContactName = this.customer.ContactName;
                     this.customerDetails.CaseType = this.InspectionTask.CaseType;
                     this.customerDetails.EmailId = this.customer.EmailId;
+                    this.IsCommandBarOpen = isAppBarOpen;
                 }
             }
             catch (Exception)

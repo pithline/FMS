@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
+using Windows.UI.ViewManagement;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -45,7 +46,23 @@ namespace Eqstra.VehicleInspection.Views
         public MainPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += (s, e) => UpdateVisualState();
         }
+        private void UpdateVisualState()
+        {
+            VisualStateManager.GoToState(this, ApplicationView.GetForCurrentView().Orientation.ToString(), true);
+            if( ApplicationView.GetForCurrentView().Orientation==ApplicationViewOrientation.Portrait)
+            {
+                this.FullView.Visibility = Visibility.Collapsed;
+                this.SnapView.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.FullView.Visibility = Visibility.Visible;
+                this.SnapView.Visibility = Visibility.Collapsed;
+            }
+        }
+    
         async System.Threading.Tasks.Task WriteTasksToDiskAsync(string content)
         {
             StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("MainItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);

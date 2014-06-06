@@ -15,8 +15,8 @@
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d">
     <Page.Resources>
-       
-            <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
@@ -73,27 +73,36 @@
 
 
         </Grid>
+        
 
         <Grid Grid.Row="1" Margin="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="0 0 0 0">
+
+            <Grid Grid.Column="0" Margin="20 0 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Tasks" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+            </Grid>
+            
+            <Grid Grid.Column="1" Margin="0 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Tasks" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <SearchBox Grid.Row="0"  HorizontalAlignment="Right" Height="40"  PlaceholderText="Type to filter..." x:Name="filterBox"  FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Column="0" Width="250"/>
                 <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <SearchBox PlaceholderText="Type to filter..." x:Name="filterBox" HorizontalAlignment="Right" FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" >
-                        </SearchBox>
-                        <grid:SfDataGrid x:Name="detailsGrid" ShowBusyIndicator="True" Grid.Row="1" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid x:Name="detailsGrid"  ShowBusyIndicator="True" Grid.Row="0" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
@@ -123,18 +132,37 @@
                                 </grid:GridTemplateColumn>
                             </grid:SfDataGrid.Columns>
                         </grid:SfDataGrid>
+                       
+                            <ListView x:Name="snapedListView"  Grid.Row="0" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" SelectionChanged="snapedListView_SelectionChanged" 
+                                  ItemsSource="{Binding ElementName=detailsGrid,Path=ItemsSource}" Visibility="Collapsed" SelectionMode="Single"
+                                  BorderThickness="0">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="#FFE0E0E0" BorderThickness="1" Background="#BFFFFFFF">
+                                            <StackPanel Orientation="Vertical" Background="WhiteSmoke" Width="400">
+                                                <TextBlock Text="Case Number" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CaseNumber}" MaxHeight="100"/>
+                                                <TextBlock Text="Case Type" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CaseType}" MaxHeight="100"/>
+                                                <TextBlock Text="Customer Name" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CustomerName}" MaxHeight="100"/>
+                                                <TextBlock Text="Status Due Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding StatusDueDate}" MaxHeight="100"/>
+                                                <TextBlock Text="Status" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding DisplayStatus}" MaxHeight="100"/>
+                                                <TextBlock Text="Allocated To" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding AllocatedTo}" MaxHeight="100"/>
+                                                <TextBlock Text="Confirmed Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding ConfirmedDate}" MaxHeight="100"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                     </Grid>
                 </Border>
-
             </Grid>
-            <Grid Grid.Column="1" Margin="20 0 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
-            </Grid>
+         
         </Grid>
     </Grid>
 </prism:VisualStateAwarePage>

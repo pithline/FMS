@@ -42,13 +42,30 @@ namespace Eqstra.VehicleInspection.Views
         public InspectionDetailsPage()
         {
             this.InitializeComponent();
+            this.SizeChanged += InspectionDetailsPage_SizeChanged;
+        }
+
+        void InspectionDetailsPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 850.0)
+            {
+                // VisualStateManager.GoToState(this, "SnapedLayout", true);
+                this.detailsGrid.Visibility = Visibility.Collapsed;
+                this.snapedListView.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                //VisualStateManager.GoToState(this, "DefaultLayout", true);
+                this.snapedListView.Visibility = Visibility.Collapsed;
+                this.detailsGrid.Visibility = Visibility.Visible;
+            }
         }
         async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             try
             {
                 var dc = (InspectionDetailsPageViewModel)this.DataContext;
-                await dc.GetCustomerDetailsAsync();
+                await dc.GetCustomerDetailsAsync(false);
 
             }
             catch (Exception ex)
@@ -118,6 +135,21 @@ namespace Eqstra.VehicleInspection.Views
                 args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
             }
             deferral.Complete();
+
+        }
+
+        async private void snapedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var dc = (InspectionDetailsPageViewModel)this.DataContext;
+                await dc.GetCustomerDetailsAsync(true);
+
+            }
+            catch (Exception ex)
+            {
+                new MessageDialog(ex.Message);
+            }
 
         }
     }
