@@ -12,7 +12,7 @@ namespace Eqstra.BusinessLogic.Helpers
 {
     public sealed class SqliteHelper
     {
-        public SqliteHelper()
+        private SqliteHelper()
         {
 
 

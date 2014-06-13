@@ -37,7 +37,7 @@ namespace Eqstra.VehicleInspection.Views
     public sealed partial class ImageMarkupPage : VisualStateAwarePage
     {
 
-    
+        
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         #region Private Vars
         private InkManager _inkManager;
@@ -62,18 +62,27 @@ namespace Eqstra.VehicleInspection.Views
             get { return this.defaultViewModel; }
         }
 
-
+        
 
 
         public ImageMarkupPage()
         {
             this.InitializeComponent();
+            
+
             this._inkManager = new InkManager();
 
-
+            //#FF003f82
             this._brushColor = Colors.Blue;
             this.Loaded += DrawImageView_Loaded;
         }
+
+        
+
+       
+
+
+
         void DrawImageView_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -118,7 +127,7 @@ namespace Eqstra.VehicleInspection.Views
             }
         }
 
-        async private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+     async   private void panelcanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             try
             {
@@ -160,7 +169,7 @@ namespace Eqstra.VehicleInspection.Views
             }
             catch (Exception ex)
             {
-                //new MessageDialog(ex.Message,"Error").ShowAsync();
+                 //new MessageDialog(ex.Message,"Error").ShowAsync();
             }
         }
 
@@ -295,7 +304,7 @@ namespace Eqstra.VehicleInspection.Views
             //await background.SaveToFile(file, BitmapEncoder.JpegEncoderId);
         }
 
-
+      
 
         async private void Snapshot_Changed(object sender, SelectionChangedEventArgs e)
         {
@@ -303,15 +312,15 @@ namespace Eqstra.VehicleInspection.Views
             {
                 //save image to buffer
                 this.Progress.Opacity = 1;
-
+                
                 //var buffer = new InMemoryRandomAccessStream();
                 //await this._inkManager.SaveAsync(buffer);
-
+               
 
                 ClearCanvas();
 
-                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + App.Task.CaseNumber + this.listView.SelectedIndex) as StorageFile;
-
+                var bf = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex) as StorageFile;
+                
                 if (bf != null)
                 {
                     using (var inputStream = await bf.OpenAsync(FileAccessMode.ReadWrite))
@@ -397,11 +406,11 @@ namespace Eqstra.VehicleInspection.Views
         async private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             ClearCanvas();
-            var file = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + App.Task.CaseNumber + this.listView.SelectedIndex);
-            if (file != null)
-            {
-                await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
-            }
+           var file =await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" +App.Task.CaseNumber+ this.listView.SelectedIndex);
+           if (file !=null)
+           {
+              await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
+           }
         }
 
     }

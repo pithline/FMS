@@ -81,5 +81,10 @@ namespace Eqstra.VehicleInspection.Views
             RaisePropertyChanged(propertyName);
             return true;
         }
+
+        private void pageRoot_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
     }
 }
