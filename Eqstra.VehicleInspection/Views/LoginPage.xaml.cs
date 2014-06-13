@@ -35,7 +35,7 @@ namespace Eqstra.VehicleInspection.Views
         {
             this.InitializeComponent();
         }
-        private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void PasswordBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if(e.Key == Windows.System.VirtualKey.Enter)
             {

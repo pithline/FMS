@@ -198,6 +198,18 @@ namespace SQLite
 			});
 		}
 
+        public Task<int> UpdateAllAsync(IEnumerable items)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var conn = GetConnection();
+                using (conn.Lock())
+                {
+                    return conn.UpdateAll(items);
+                }
+            });
+
+        }
 		public Task<int> InsertAllAsync (IEnumerable items)
 		{
 			return Task.Factory.StartNew (() => {

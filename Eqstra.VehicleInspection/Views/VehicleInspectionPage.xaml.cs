@@ -26,7 +26,7 @@ namespace Eqstra.VehicleInspection.Views
     {
 
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
+        
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }

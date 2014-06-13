@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PVehicleDetails : VIBase, IVehicleDetails
+    public class PVehicleDetails : BaseModel
     {
 
         public PVehicleDetails()
@@ -25,21 +25,14 @@ namespace Eqstra.BusinessLogic.Passenger
             this.TopSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/car_top.png" };
             this.LicenseDiscSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/license_disc.png" };
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
-            this.ODOReading = "490292";
-            this.registrationNumber = "HU 29209";
-            this.EngineNumber = "0DG445G9332";
-            this.LicenseDiscExpireDate = DateTime.Now;
-            this.ChassisNumber = "99382302-8494";
-            this.Make = "Audi A1";
-            this.Year = "2014";
-            this.Color = "Black";
         }
 
-        public async override System.Threading.Tasks.Task<VIBase> GetDataAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber == caseNumber);
 
         }
+
 
         private string color;
         [RestorableState]

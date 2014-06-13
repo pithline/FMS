@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Eqstra.BusinessLogic.Enums
+{
+    public class TaskStatus
+    {
+        public const string AwaitInspectionDetail = "Await Inspection Detail";
+        public const string AwaitInspectionDataCapture = "Await Inspection Data Capture";
+        public const string AwaitingConfirmation = "Await Inspection Confirmation";
+        public const string AwaitInspectionAcceptance = "Await Inspection Acceptance";
+        public const string AwaitDamageConfirmation = "Await Damage Confirmation";
+        public const string Completed = "Completed";
+    }
+}

@@ -13,7 +13,7 @@ namespace Eqstra.VehicleInspection.UILogic.Services
 
         UserInfo SignedInUser { get; }
 
-        Task<UserInfo> VerifyUserCredentialsAsync();
+        Tuple<string,string> VerifyUserCredentialsAsync();
 
         void SignOut();
 

@@ -1,4 +1,6 @@
-﻿using Eqstra.DocumentDelivery.UILogic.Services;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
@@ -7,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Networking.Connectivity;
+using Windows.Storage;
+
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
@@ -19,6 +24,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             _navigationService = navigationService;
             _accountService = accountService;
 
+            
+
             LogoutCommand = new DelegateCommand(() =>
             {
                 _accountService.SignOut();
@@ -26,6 +33,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 _navigationService.ClearHistory();
             });
         }
+
+       
+
 
         public ICommand LogoutCommand { get; private set; }
     }

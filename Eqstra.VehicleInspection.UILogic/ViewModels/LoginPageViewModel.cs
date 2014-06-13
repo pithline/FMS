@@ -24,15 +24,28 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
-                    var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
-                    if (result.Item1 != null)
+                    try
                     {
-                        string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
-                        navigationService.Navigate("Main", jsonUserInfo);
+                        IsLoggingIn = true;
+                        var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
+                        if (result.Item1 != null)
+                        {
+                            string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
+                            navigationService.Navigate("Main", jsonUserInfo);
+                        }
+                        else
+                        {
+                            ErrorMessage = result.Item2;
+                        }
+                        
                     }
-                    else
+                    catch (Exception)
                     {
-                        ErrorMessage = result.Item2;
+                        throw;
+                    }
+                    finally
+                    {
+                        IsLoggingIn = false;
                     }
                 },
 
@@ -89,6 +102,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             get { return errorMessage; }
             set { SetProperty(ref errorMessage, value); }
+        }
+
+        private bool isLoggingIn;
+
+        public bool IsLoggingIn
+        {
+            get { return isLoggingIn; }
+            set { SetProperty(ref isLoggingIn, value); }
         }
 
     }

@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   public class CollectDeliveryTask : Task
+    public class CollectDeliveryTask : Task
     {
-        private CDTaskStatusEnum cdTaskStatus;
-        public CDTaskStatusEnum CDTaskStatus
+        private string cdTaskStatus;
+        public string CDTaskStatus
         {
             get { return cdTaskStatus; }
             set { SetProperty(ref cdTaskStatus, value); }
         }
-       
+
         private CDTaskTypeEnum taskType;
-     
+
         public CDTaskTypeEnum TaskType
         {
             get { return taskType; }

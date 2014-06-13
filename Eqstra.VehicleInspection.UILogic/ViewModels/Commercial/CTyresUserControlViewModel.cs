@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Commercial;
+using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
@@ -17,15 +18,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Model = new CTyres();
         }
 
-        public async override System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
         {
             this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CTyres>(x => x.CaseNumber == caseNumber);
             if (this.Model == null)
             {
                 this.Model = new CTyres();
             }
-            VIBase viBaseObject = (CTyres)this.Model;
+            BaseModel viBaseObject = (CTyres)this.Model;
             viBaseObject.LoadSnapshotsFromDb();
+            PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+            viBaseObject.ShouldSave = false;
         }
     }
 }

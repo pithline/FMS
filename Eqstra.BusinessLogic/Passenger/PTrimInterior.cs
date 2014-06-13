@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PTrimInterior : VIBase
+    public class PTrimInterior : BaseModel
     {
         public PTrimInterior()
         {
@@ -29,7 +29,7 @@ namespace Eqstra.BusinessLogic.Passenger
             // this.CarpetImgList.Add(new ImageCapture() { ImagePath = "ms-appx:///Images/images.png" });
         }
 
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PTrimInterior>(x => x.CaseNumber == caseNumber);
         }
@@ -354,7 +354,6 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return carpetComment; }
             set { SetProperty(ref carpetComment, value); }
         }
-
 
     }
 }

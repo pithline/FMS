@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -15,6 +16,7 @@ using Windows.Media.Capture;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,10 +29,9 @@ namespace Eqstra.VehicleInspection.UILogic
     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
-        ConnectionProfile _connectionProfile;
+ 
         INavigationService _navigationService;
 
-        Action _syncExecute;
         public BaseViewModel()
         {
             TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
@@ -48,6 +49,37 @@ namespace Eqstra.VehicleInspection.UILogic
                 OpenPopup(param);
             });
 
+            this.SaveModelCommand = new DelegateCommand<object>(async (param) =>
+                {
+                    BaseModel baseModel = ((BaseViewModel)param).Model as BaseModel;
+                    string caseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
+                    int successFlag = 0;
+                    try
+                    {
+                        var viobj = await baseModel.GetDataAsync(caseNumber);
+                        if (viobj != null)
+                        {
+                            successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(baseModel);
+                        }
+                        else
+                        {
+                            ((BaseModel)param).CaseNumber = caseNumber;
+                            successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(baseModel);
+                        }
+
+                        if(successFlag!=0)
+                        {
+                            baseModel.ShouldSave = false;
+                          string tableName= baseModel.GetType().Name;
+                          //await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+
+                });
         }
         public BaseViewModel(INavigationService navigationService)
         {
@@ -67,13 +99,9 @@ namespace Eqstra.VehicleInspection.UILogic
             set { SetProperty(ref model, value); }
         }
 
-        private bool isSynchronizing;
-        [RestorableState]
-        public bool IsSynchronizing
-        {
-            get { return isSynchronizing; }
-            set { SetProperty(ref isSynchronizing, value); }
-        }
+
+
+        public DelegateCommand<object> SaveModelCommand { get; set; }
 
         public DelegateCommand GoHomeCommand { get; set; }
 
@@ -146,30 +174,13 @@ namespace Eqstra.VehicleInspection.UILogic
             popup.IsOpen = true;
 
         }
-        public virtual System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        public virtual System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
         {
             return null;
         }
 
-        public void Synchronize(Action syncExecute)
-        {
-            _syncExecute = syncExecute;
-            _connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
-            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-            {
-                _syncExecute.Invoke();
-            }
-        }
 
-        void NetworkInformation_NetworkStatusChanged(object sender)
-        {
-            if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-            {
-                _syncExecute.Invoke();
-            }
 
-        }
         /// <summary>
         /// /  This metod is only for testing suspension ,later we can remove it
         /// </summary>

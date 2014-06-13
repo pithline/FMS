@@ -15,7 +15,6 @@ namespace Eqstra.BusinessLogic
     {
 
         private string caseNumber;
-
         [PrimaryKey]
         [RestorableState]
         public string CaseNumber
@@ -45,9 +44,9 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref statusDueDate, value); }
         }
 
-        private TaskStatusEnum status;
+        private string status;
 
-        public TaskStatusEnum Status
+        public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
@@ -110,16 +109,85 @@ namespace Eqstra.BusinessLogic
             get { return confirmedTime; }
             set { SetProperty(ref confirmedTime, value); }
         }
-        
-        [Ignore]
-        [RestorableState]
-        public string DisplayStatus
+
+
+        private long caseServiceRecID;
+
+        public long CaseServiceRecID
         {
-            get
-            {
-                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
-                return member.GetCustomAttribute<DisplayAttribute>().Name;                
-            }
+            get { return caseServiceRecID; }
+            set { SetProperty(ref caseServiceRecID, value); }
+        }
+
+        private string categoryType;
+        public string CategoryType
+        {
+            get { return categoryType; }
+            set { SetProperty(ref categoryType, value); }
+        }
+
+        private long collectionRecID;
+        public long CollectionRecID
+        {
+            get { return collectionRecID; }
+            set { SetProperty(ref collectionRecID, value); }
+        }
+
+        private long processStepRecID;
+
+        public long ProcessStepRecID
+        {
+            get { return processStepRecID; }
+            set { SetProperty(ref processStepRecID, value); }
+        }
+        private string custPhone;
+
+        public string CustPhone
+        {
+            get { return custPhone; }
+            set { SetProperty(ref custPhone, value); }
+        }
+
+        private long serviceRecID;
+
+        public long ServiceRecID
+        {
+            get { return serviceRecID; }
+            set { SetProperty(ref serviceRecID, value); }
+        }
+
+        private string processStep;
+
+        public string ProcessStep
+        {
+            get { return  processStep; }
+            set { SetProperty(ref  processStep, value); }
+        }
+
+
+        private long vehicleInsRecId;
+
+        public long VehicleInsRecId
+        {
+            get { return vehicleInsRecId; }
+            set { SetProperty(ref vehicleInsRecId, value); }
+
+        }
+        private string userId;
+
+        public string UserId
+        {
+            get { return userId; }
+            set { SetProperty(ref userId, value); }
+        }
+
+
+        private VehicleTypeEnum vehicleType;
+
+        public VehicleTypeEnum VehicleType
+        {
+            get { return vehicleType; }
+            set { SetProperty(ref vehicleType, value); }
         }
     }
 }

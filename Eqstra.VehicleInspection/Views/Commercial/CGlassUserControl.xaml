@@ -23,7 +23,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Glass" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+           
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Glass" Style="{StaticResource GroupHeaderStyle}" VerticalAlignment="Center" Margin="0 0 0 10"/>
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 10"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}">
+                    <Image Source="ms-appx:///Assets/save.png"/>
+                </Button>
+            </StackPanel>
             <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" HorizontalAlignment="Stretch">
                 <Grid Margin="20 10" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -172,7 +178,7 @@
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVExtRearViewMirror}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExtRearViewMirrorToggle}" Margin="5 0" Grid.Row="7" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.ExtRearViewMirrorToggleComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.ExtRearViewMirrorComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVExtRearViewMirror" ItemsSource="{Binding Path= Model.ExtRearViewMirrorImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExtRearViewMirrorToggle}" Grid.Column="4" Grid.Row="7" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

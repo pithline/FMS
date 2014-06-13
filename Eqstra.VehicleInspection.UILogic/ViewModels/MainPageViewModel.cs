@@ -1,5 +1,8 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.VIService;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -21,16 +24,17 @@ using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-        
+
         public MainPageViewModel()
         {
-            
+
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -62,82 +66,86 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
-           
+
 
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
 
-            var userInfo = JsonConvert.DeserializeObject<UserInfo>(navigationParameter.ToString());
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-
-            Synchronize(async () =>
+            try
             {
-                //this.IsSynchronizing = true;
-                //VIService.MzkVehicleInspectionServiceClient client = new VIService.MzkVehicleInspectionServiceClient();
-                //client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password3", "lfmd");
-                //var res = await client.getTasksAsync("rchivukula");
-                //if (res != null && res.response.Count > 0)
-                //{
-                //    await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+                var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                userInfo.CompanyId = "1000";
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                // await CreateTableAsync();
+                //SyncData();
 
-                //    foreach (var item in res.response)
-                //    {
-                //        await SqliteHelper.Storage.InsertSingleRecordAsync<Eqstra.BusinessLogic.Task>(new Eqstra.BusinessLogic.Task
-                //        {
-                //            Address = item.parmCustAddress,
-                //            CaseNumber = item.parmCaseID,
-                //            CaseCategory = item.parmCaseCategory,
-                //            StatusDueDate = item.parmStatusDueDate,
-                //            ConfirmedDate = item.parmConfirmedDueDate,
-                //            CustomerName = item.parmCustName
-                //        });
-                //    }
-                //}
-                this.IsSynchronizing = false;
+                var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
+                this.WeatherInfo = weather.FirstOrDefault();
 
-            });
-            //SyncData();
-
-            var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
-            this.WeatherInfo = weather.FirstOrDefault();
-
-            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
-            foreach (Eqstra.BusinessLogic.Task item in list)
-            {
-                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
+                var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).TakeWhile(w => w.Status != Eqstra.BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation).ToList();
+                foreach (Eqstra.BusinessLogic.Task item in list)
                 {
-                    item.ConfirmedDate = DateTime.Today.AddDays(-1);
-                    item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                    var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
+                    item.CustomerName = cust.CustomerName;
+                    if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
+                    {
+                        item.ConfirmedDate = DateTime.Today.AddDays(-1);
+                        item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                    }
+                    item.ConfirmedDate = DateTime.Now;
+                    if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
+                    {
+                        item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
+                    }
+                    item.Address = cust.Address;
+                    //if (item.Status != BusinessLogic.Enums.TaskStatus.AwaitingInspection)
+                    //{
+                    //    this.Appointments.Add(new ScheduleAppointment
+                    //           {
+                    //               Subject = "Inspection at " + item.CustomerName,
+                    //               StartTime = item.ConfirmedTime,
+                    //               EndTime = item.ConfirmedTime.AddHours(1),
+                    //               Location = item.Address,
+                    //               ReadOnly = true,
+                    //               Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
+                    //           });
+                    //}
+                    AppSettingData.Appointments = this.Appointments;
+                    this.PoolofTasks.Add(item);
                 }
-                item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress)
+                this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
+                this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
+
+                this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                if (AppSettings.Instance.IsSynchronizing == 0)
                 {
-                    item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
-                }
-                item.Address = cust.Address;
-                if (item.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection)
-                {
-                    this.Appointments.Add(new ScheduleAppointment
+                    VIServiceHelper.Instance.Synchronize(async () =>
+                       {
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                            {
-                               Subject = "Inspection at " + item.CustomerName,
-                               StartTime = item.ConfirmedTime,
-                               EndTime = item.ConfirmedTime.AddHours(1),
-                               Location = item.Address,
-                               ReadOnly = true,
-                               Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
-                           });
-                }
-                AppSettingData.Appointments = this.Appointments;
-                this.PoolofTasks.Add(item);
-            }
-            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingConfirmation);
-            this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitInspectionDataCapture);
 
-            this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
+                               AppSettings.Instance.IsSynchronizing = 1;
+                           }
+                                );
+
+                          await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                 {
+
+                                     AppSettings.Instance.IsSynchronizing = 0;
+                                 }
+                                 );
+
+                       });
+                }
+            }
+            catch (Exception)
+            {
+                
+
+            }
         }
         async private void SyncData()
         {
@@ -149,16 +157,32 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             builder.Name = "SilentSync";
             var task = builder.Register();
             task.Completed += task_Completed;
-
         }
 
         void task_Completed(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
         {
 
         }
+        async private void SyncTaskFromService()
+        {
+            await BackgroundExecutionManager.RequestAccessAsync();
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.TaskEntryPoint = "Eqstra.VehicleInspection.UILogic.ServiceBackgroundTask";
+            builder.SetTrigger(new TimeTrigger(15, false));
+            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            builder.Name = "ServiceBackgroundTask";
+            var taskfromService = builder.Register();
+            taskfromService.Completed += taskfromService_Completed;
+        }
+        void taskfromService_Completed(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         private WeatherInfo weatherInfo;
-    
+
         public WeatherInfo WeatherInfo
         {
             get { return weatherInfo; }
@@ -207,6 +231,63 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref appointments, value); }
         }
         public DelegateCommand BingWeatherCommand { get; set; }
-       
+
+
+
+
+        /// <summary>
+        ///  this is  Temporary method for create tables in DB
+        /// </summary>
+
+        private async System.Threading.Tasks.Task CreateTableAsync()
+        {
+
+            ////Drop Existing tables
+
+            await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+            await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
+
+            await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
+            await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
+            await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
+            await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
+            await SqliteHelper.Storage.DropTableAsync<PGlass>();
+            await SqliteHelper.Storage.DropTableAsync<PBodywork>();
+            await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
+            await SqliteHelper.Storage.DropTableAsync<PAccessories>();
+
+            await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
+            await SqliteHelper.Storage.DropTableAsync<CTyres>();
+            await SqliteHelper.Storage.DropTableAsync<CAccessories>();
+            await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
+            await SqliteHelper.Storage.DropTableAsync<CGlass>();
+            await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
+            await SqliteHelper.Storage.DropTableAsync<CPOI>();
+            await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
+            await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+
+            ////create new  tables
+
+            await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
+            await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
+            await SqliteHelper.Storage.CreateTableAsync<PMechanicalCond>();
+            await SqliteHelper.Storage.CreateTableAsync<PInspectionProof>();
+            await SqliteHelper.Storage.CreateTableAsync<PGlass>();
+            await SqliteHelper.Storage.CreateTableAsync<PBodywork>();
+            await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
+            await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
+
+            await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
+            await SqliteHelper.Storage.CreateTableAsync<CTyres>();
+            await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
+            await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
+            await SqliteHelper.Storage.CreateTableAsync<CGlass>();
+            await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
+            await SqliteHelper.Storage.CreateTableAsync<CPOI>();
+            await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
+            await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+        }
+
     }
 }

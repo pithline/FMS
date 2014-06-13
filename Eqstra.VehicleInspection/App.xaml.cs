@@ -34,6 +34,7 @@ using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Newtonsoft.Json;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -71,7 +72,7 @@ namespace Eqstra.VehicleInspection
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PGlass));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PInspectionProof));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.CaseTypeEnum));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.TaskStatusEnum));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.TaskStatus));
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.VehicleTypeEnum));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
@@ -93,12 +94,17 @@ namespace Eqstra.VehicleInspection
                 await packDb.CopyAsync(destinationFolder);
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
+            
+
+            
             var accountService = _container.Resolve<IAccountService>();
-            UserInfo userInfo = await accountService.VerifyUserCredentialsAsync();
-            if (userInfo != null)
+            var cred =  accountService.VerifyUserCredentialsAsync();
+            if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {
-                string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
-                NavigationService.Navigate("Main", jsonUserInfo);
+                //string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+                //ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
+                VIServiceHelper.Instance.ConnectAsync(cred.Item1,cred.Item2);
+                NavigationService.Navigate("Main", string.Empty);
             }
             else
             {
@@ -143,6 +149,8 @@ namespace Eqstra.VehicleInspection
             }
 
         }
+
+        
 
         protected override object Resolve(Type type)
         {

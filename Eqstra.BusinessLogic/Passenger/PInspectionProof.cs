@@ -11,9 +11,9 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PInspectionProof : VIBase
+    public class PInspectionProof : BaseModel
     {
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PInspectionProof>(x => x.CaseNumber == caseNumber);
         }

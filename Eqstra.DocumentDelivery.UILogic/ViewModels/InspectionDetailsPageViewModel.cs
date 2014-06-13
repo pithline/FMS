@@ -38,7 +38,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 return System.Threading.Tasks.Task.FromResult<object>(null);
             }, 
             () =>
-                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection && this.Inspection.Status != BusinessLogic.Enums.TaskStatusEnum.Completed); }
+                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Enums.TaskStatus.Completed); }
             );
 
             this.SaveTaskCommand = new DelegateCommand(async () =>
@@ -48,11 +48,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     //this.InspectionList.Remove(item);
                     if (item.TaskType == CDTaskTypeEnum.Delivery)
                     {
-                        item.CDTaskStatus = CDTaskStatusEnum.AwaitingDelivery; 
+                        item.CDTaskStatus = CDTaskStatus.AwaitingDelivery; 
                     }
                     else
                     {
-                        item.CDTaskStatus = CDTaskStatusEnum.AwaitingDriverCollection; 
+                        item.CDTaskStatus = CDTaskStatus.AwaitingDriverCollection; 
                     }
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<Eqstra.BusinessLogic.CollectDeliveryTask>(item);
                     this._navigationService.Navigate("Main",null);
@@ -79,29 +79,29 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 return (this.Inspection != null);
             }
             );
-            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            {
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from engine",
-                    Location = "Cape Town",
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddHours(2),
-                    ReadOnly = true,
-                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            //{
+            //    new ScheduleAppointment(){
+            //        Subject = "Inspection at Peter Johnson",
+            //        Notes = "some noise from engine",
+            //        Location = "Cape Town",
+            //        StartTime = DateTime.Now,
+            //        EndTime = DateTime.Now.AddHours(2),
+            //        ReadOnly = true,
+            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-                },
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from differential",
-                    Location = "Cape Town",
-                     ReadOnly = true,
-                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-                },                    
-            };
+            //    },
+            //    new ScheduleAppointment(){
+            //        Subject = "Inspection at Peter Johnson",
+            //        Notes = "some noise from differential",
+            //        Location = "Cape Town",
+            //         ReadOnly = true,
+            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+            //    },                    
+            //};
         }
         #region Overrides
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -113,7 +113,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.SaveVisibility = Visibility.Visible;
                 this.NextStepVisibility = Visibility.Collapsed;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.CDTaskStatus == CDTaskStatusEnum.AwaitingConfirmation);
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.CDTaskStatus == CDTaskStatus.AwaitingConfirmation);
             }
             else if (navigationParameter.Equals("Total"))
             {
@@ -125,7 +125,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.SaveVisibility = Visibility.Collapsed;
                 this.NextStepVisibility = Visibility.Visible;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => (x.CDTaskStatus != CDTaskStatusEnum.AwaitingConfirmation && x.CDTaskStatus != CDTaskStatusEnum.Complete));
+                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => (x.CDTaskStatus != CDTaskStatus.AwaitingConfirmation && x.CDTaskStatus != CDTaskStatus.Complete));
             }
             foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {

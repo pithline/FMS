@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PBodywork : VIBase
+    public class PBodywork : BaseModel
     {
         public PBodywork()
         {
@@ -43,7 +43,7 @@ namespace Eqstra.BusinessLogic.Passenger
 
 
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PBodywork>(x => x.CaseNumber == caseNumber);
         }
@@ -158,7 +158,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rightSideImgList;
-           [Ignore, DamageSnapshotRequired("Right side snapshot(s) required", "IsRightSideDmg")]
+        [Ignore, DamageSnapshotRequired("Right side snapshot(s) required", "IsRightSideDmg")]
         public ObservableCollection<ImageCapture> RightSideImgList
         {
             get { return rightSideImgList; }

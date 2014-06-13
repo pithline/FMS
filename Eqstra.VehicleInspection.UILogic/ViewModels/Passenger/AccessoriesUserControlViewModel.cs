@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Eqstra.BusinessLogic.Passenger;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Common;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
@@ -16,15 +17,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Model =new PAccessories();
         }
 
-        public async override System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
         {
             this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.CaseNumber == caseNumber);
             if (this.Model == null)
             {
                 this.Model = new PAccessories();
             }
-            VIBase viBaseObject = (PAccessories)this.Model;
+            BaseModel viBaseObject = (PAccessories)this.Model;
             viBaseObject.LoadSnapshotsFromDb();
+            PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+            viBaseObject.ShouldSave = false;
         }
 
     }

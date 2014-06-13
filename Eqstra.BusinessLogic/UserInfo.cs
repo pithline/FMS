@@ -34,5 +34,23 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref emailId, value); }
         }
 
+        private string companyId;
+
+        [RestorableState]
+        public string CompanyId
+        {
+            get { return companyId; }
+            set { SetProperty(ref companyId, value); }
+        }
+
+        private string companyName;
+
+        [RestorableState]
+        public string CompanyName
+        {
+            get { return companyName; }
+            set { SetProperty(ref companyName, value); }
+        }
+
     }
 }

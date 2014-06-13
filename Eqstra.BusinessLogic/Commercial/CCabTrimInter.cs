@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CCabTrimInter : VIBase
+    public class CCabTrimInter : BaseModel
     {
         public CCabTrimInter()
         {
@@ -658,7 +658,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  isPassengerSeatDmg, value); }
         }
 
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CCabTrimInter>(x => x.CaseNumber == caseNumber);
         }

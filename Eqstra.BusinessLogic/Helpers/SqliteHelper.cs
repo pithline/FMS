@@ -65,14 +65,33 @@ namespace Eqstra.BusinessLogic.Helpers
             return await this.Connection.InsertAllAsync(items);
         }
 
+        public async Task<int> UpdateAllAsync<T>(IEnumerable<T> items) where T : new()
+        {
+            return await this.Connection.UpdateAllAsync(items);
+        }
+
         public async Task<int> InsertSingleRecordAsync<T>(T obj)
         {
-            return await this.Connection.InsertAsync(obj);
+            try
+            {
+                return await this.Connection.InsertAsync(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         async public Task<int> UpdateSingleRecordAsync<T>(T obj)
         {
-            return await this.Connection.UpdateAsync(obj);
+            try
+            {
+                return await this.Connection.UpdateAsync(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<CreateTablesResult> CreateTableAsync<T>() where T:new()
@@ -80,6 +99,10 @@ namespace Eqstra.BusinessLogic.Helpers
            return await this.Connection.CreateTableAsync<T>();
         }
 
-
+        public async System.Threading.Tasks.Task DropnCreateTableAsync<T>()where T:new()
+        {
+            await this.Connection.DropTableAsync<T>();
+            await this.Connection.CreateTableAsync<T>();
+        }
     }
 }

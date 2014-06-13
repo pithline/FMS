@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PGlass : VIBase
+    public class PGlass : BaseModel
     {
         public PGlass()
         {
@@ -23,9 +23,10 @@ namespace Eqstra.BusinessLogic.Passenger
             this.GVTailLightsImgList = new ObservableCollection<ImageCapture>();
             this.GVInductorLensesImgList = new ObservableCollection<ImageCapture>();
             this.GVExtRearViewMirrorImgList = new ObservableCollection<ImageCapture>();
+            this.ShouldSave = false;
         }
-
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.CaseNumber == caseNumber);
         }
@@ -96,7 +97,10 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return gVRearGlassComment; }
 
-            set { SetProperty(ref  gVRearGlassComment, value); }
+            set {
+                SetProperty(ref  gVRearGlassComment, value);
+              
+            }
         }
         private string gVSideGlassComment;
 
@@ -130,13 +134,13 @@ namespace Eqstra.BusinessLogic.Passenger
 
             set { SetProperty(ref  gVInductorLensesComment, value); }
         }
-        private string gVExtRearViewMirrorToggleComment;
+        private string gVExtRearViewMirrorComment;
 
-        public string GVExtRearViewMirrorToggleComment
+        public string GVExtRearViewMirrorComment
         {
-            get { return gVExtRearViewMirrorToggleComment; }
+            get { return gVExtRearViewMirrorComment; }
 
-            set { SetProperty(ref  gVExtRearViewMirrorToggleComment, value); }
+            set { SetProperty(ref  gVExtRearViewMirrorComment, value); }
         }
 
 

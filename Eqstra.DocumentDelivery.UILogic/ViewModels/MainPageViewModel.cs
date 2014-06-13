@@ -55,7 +55,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.AssignCommand = new DelegateCommand(async () =>
                 {
-                    this.InspectionTask.Status = BusinessLogic.Enums.TaskStatusEnum.InProgress;
+                    this.InspectionTask.Status = BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
@@ -69,12 +69,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     });
                     this.AssignCommand.RaiseCanExecuteChanged();
 
-                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
-                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress);
+                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitingConfirmation);
+                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                     this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date == DateTime.Today);
                 }, () =>
                 {
-                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection);
+                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                 }
             );
 
@@ -93,18 +93,18 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
+                if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
                     item.ConfirmedTime = DateTime.Now.AddHours(-2);
                 }
                 item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress)
+                if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
                 {
                     item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
                 }
                 item.Address = cust.Address;
-                if (item.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.AwaitingDelivery)
+                if (item.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery)
                 {
                     this.Appointments.Add(new ScheduleAppointment
                            {
@@ -119,8 +119,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.CDTaskStatus == BusinessLogic.Enums.CDTaskStatusEnum.AwaitingConfirmation);
-            this.MyInspectionCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatusEnum.AwaitingConfirmation));
+            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.CDTaskStatus == BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation);
+            this.MyInspectionCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation));
             this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
         }
   

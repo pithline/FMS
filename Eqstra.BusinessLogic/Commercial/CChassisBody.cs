@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CChassisBody : VIBase
+    public class CChassisBody : BaseModel
     {
         public CChassisBody()
         {
@@ -29,7 +29,8 @@ namespace Eqstra.BusinessLogic.Commercial
             this.LandingLegsImgList = new ObservableCollection<ImageCapture>();
 
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CChassisBody>(x => x.CaseNumber == caseNumber);
         }

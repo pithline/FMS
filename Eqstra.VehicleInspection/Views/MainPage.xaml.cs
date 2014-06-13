@@ -23,6 +23,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Windows.UI.ViewManagement;
+using System.Collections;
+using Eqstra.BusinessLogic.Helpers;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -33,12 +35,9 @@ namespace Eqstra.VehicleInspection.Views
     /// </summary>
     public sealed partial class MainPage : VisualStateAwarePage
     {
-
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        private Windows.Storage.StorageFolder temporaryFolder = ApplicationData.Current.TemporaryFolder;
         private bool isCached;
-
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -51,7 +50,7 @@ namespace Eqstra.VehicleInspection.Views
         private void UpdateVisualState()
         {
             VisualStateManager.GoToState(this, ApplicationView.GetForCurrentView().Orientation.ToString(), true);
-            if( ApplicationView.GetForCurrentView().Orientation==ApplicationViewOrientation.Portrait)
+            if (ApplicationView.GetForCurrentView().Orientation == ApplicationViewOrientation.Portrait)
             {
                 this.FullView.Visibility = Visibility.Collapsed;
                 this.SnapView.Visibility = Visibility.Visible;
@@ -60,26 +59,6 @@ namespace Eqstra.VehicleInspection.Views
             {
                 this.FullView.Visibility = Visibility.Visible;
                 this.SnapView.Visibility = Visibility.Collapsed;
-            }
-        }
-    
-        async System.Threading.Tasks.Task WriteTasksToDiskAsync(string content)
-        {
-            StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("MainItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(itemsSourceFile, content);
-        }
-
-        async System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.Task>> ReadTasksFromDiskAsync()
-        {
-            try
-            {
-                StorageFile itemsSourceFile = await temporaryFolder.GetFileAsync("MainItemsSourceFile.txt");
-                String jsonItemsSource = await FileIO.ReadTextAsync(itemsSourceFile);
-                return JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.Task>>(jsonItemsSource);
-            }
-            catch (Exception)
-            {
-                return null;
             }
         }
 
@@ -97,44 +76,49 @@ namespace Eqstra.VehicleInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            this.mainGrid.ItemsSource = (await ReadTasksFromDiskAsync()).Where(x => x.CaseCategory.Contains(args.QueryText) ||
-                 x.CaseNumber.Contains(args.QueryText) ||
-                 x.CaseType.ToString().Contains(args.QueryText) ||
-                 x.CustomerName.Contains(args.QueryText) ||
-                 x.RegistrationNumber.Contains(args.QueryText) ||
-                  x.DisplayStatus.Contains(args.QueryText) ||
-                 x.Status.ToString().Contains(args.QueryText));
+            var result = await Util.ReadTasksFromDiskAsync("MainItemsSourceFile.txt");
+            if (result != null)
+            {
+                this.mainGrid.ItemsSource = result.Where(x => x.CaseCategory.Contains(args.QueryText) ||
+                         x.CaseNumber.Contains(args.QueryText) ||
+                         x.CaseType.ToString().Contains(args.QueryText) ||
+                         x.CustomerName.Contains(args.QueryText) ||
+                         x.RegistrationNumber.Contains(args.QueryText) ||
+                         x.Status.ToString().Contains(args.QueryText));
+            }
         }
-
 
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
-            var deferral = args.Request.GetDeferral();
-            if (!string.IsNullOrEmpty(args.QueryText))
+            if (this.mainGrid.ItemsSource != null & ((IEnumerable<Task>)this.mainGrid.ItemsSource).Any())
             {
-                if (!isCached)
+                var deferral = args.Request.GetDeferral();
+                if (!string.IsNullOrEmpty(args.QueryText))
                 {
-                    await WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource));
-                    isCached = true;
-                }
-
-                var searchSuggestionList = new List<string>();
-                foreach (var task in await ReadTasksFromDiskAsync())
-                {
-                    foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                    if (!isCached)
                     {
-                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
-                            continue;
-                        var propVal = propInfo.GetValue(task).ToString();
-                        if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                        await  Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource),"MainItemsSourceFile.txt");
+                        isCached = true;
+                    }
+
+                    var searchSuggestionList = new List<string>();
+                    foreach (var task in await Util.ReadTasksFromDiskAsync("MainItemsSourceFile.txt"))
+                    {
+                        foreach (var propInfo in task.GetType().GetRuntimeProperties())
                         {
-                            searchSuggestionList.Add(propVal);
+                            if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
+                                continue;
+                            var propVal = Convert.ToString(propInfo.GetValue(task));
+                            if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                            {
+                                searchSuggestionList.Add(propVal);
+                            }
                         }
                     }
+                    args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
                 }
-                args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+                deferral.Complete();
             }
-            deferral.Complete();
 
         }
 

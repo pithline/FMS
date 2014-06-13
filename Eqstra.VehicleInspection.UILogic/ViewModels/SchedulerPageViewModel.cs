@@ -26,8 +26,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        
        public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
        {
+
+
+           Dictionary<string, object> customerDetails = JsonConvert.DeserializeObject<Dictionary<string, object>>(navigationParameter.ToString());
            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           this.CustomerDetails = JsonConvert.DeserializeObject<CustomerDetails>(navigationParameter.ToString());
        }
 
     }

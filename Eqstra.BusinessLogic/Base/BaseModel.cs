@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
+using Eqstra.BusinessLogic.Common;
 
 namespace Eqstra.BusinessLogic.Base
 {
-    abstract public class VIBase : ValidatableBindableBase
+    abstract public class BaseModel : ValidatableBindableBase
     {
         private string caseNumber;
         [SQLite.Column("CaseNumber"), PrimaryKey]
@@ -22,15 +24,61 @@ namespace Eqstra.BusinessLogic.Base
 
         private ObservableCollection<ValidationError> _errors = new ObservableCollection<ValidationError>();
 
+        private long vehicleInsRecID;
 
+        public long VehicleInsRecID
+        {
+            get { return vehicleInsRecID; }
+            set { SetProperty(ref vehicleInsRecID, value); }
+        }
+
+
+        private int tableId;
+
+        public int TableId
+        {
+            get { return tableId; }
+            set { SetProperty(ref tableId, value); }
+        }
+
+        private long recID;
+
+        public long RecID
+        {
+            get { return recID; }
+            set { SetProperty(ref recID, value); }
+        }
         public ObservableCollection<ValidationError> Errors
         {
             get { return _errors; }
             private set { SetProperty(ref _errors, value); }
         }
 
+        private bool shouldSave;
 
-        public abstract System.Threading.Tasks.Task<VIBase> GetDataAsync(string caseNumber);
+        public bool ShouldSave
+        {
+            get { return shouldSave; }
+            set
+            {
+                shouldSave = value;
+                OnPropertyChanged("ShouldSave");
+            }
+        }
+
+        protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            bool isOriginalchanged = false;
+            bool result = base.SetProperty<T>(ref storage, value, propertyName);
+
+            if (PropertyHistory.Instance.StorageHistory.Any())
+            {
+                isOriginalchanged = PropertyHistory.Instance.IsProperiesValuesChanged(this);
+            }
+            return ShouldSave =isOriginalchanged;
+        }
+
+        public abstract System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber);
 
 
         public bool ValidateModel()
@@ -50,9 +98,9 @@ namespace Eqstra.BusinessLogic.Base
                     {
                         if (imgList.Count == 0)
                         {
-                            if (!_errors.Any(x=>x.PropertyName ==propInfo.Name))
+                            if (!_errors.Any(x => x.PropertyName == propInfo.Name))
                             {
-                                _errors.Add(new ValidationError { PropertyName = propInfo.Name, ErrorMessage = att.ErrorMessage }); 
+                                _errors.Add(new ValidationError { PropertyName = propInfo.Name, ErrorMessage = att.ErrorMessage });
                             }
                         }
                     }

@@ -15,33 +15,40 @@ namespace Eqstra.VehicleInspection
 {
     public static class VIExtension
     {
-        public static void LoadSnapshotsFromDb(this VIBase viBase)
+        public static void LoadSnapshotsFromDb(this BaseModel viBase)
         {
 
-            TypeInfo t = viBase.GetType().GetTypeInfo();
-            IEnumerable<FieldInfo> fieldInfoList = t.DeclaredFields;
-            IEnumerable<PropertyInfo> propertyInfoList = t.DeclaredProperties;
-            foreach (var fieldInfo in fieldInfoList.Where(x => x.Name.Contains("Path")))
+            try
             {
-                var pathValue = t.GetDeclaredField(fieldInfo.Name).GetValue(viBase);
-                if (pathValue != null)
+                TypeInfo t = viBase.GetType().GetTypeInfo();
+                IEnumerable<FieldInfo> fieldInfoList = t.DeclaredFields;
+                IEnumerable<PropertyInfo> propertyInfoList = t.DeclaredProperties;
+                foreach (var fieldInfo in fieldInfoList.Where(x => x.Name.Contains("Path")))
                 {
-                    var prop = propertyInfoList.First(x => x.Name.ToUpper().Equals(fieldInfo.Name.Replace("Path", "").ToUpper()));
-                    if (prop.PropertyType.Equals(typeof(ObservableCollection<ImageCapture>)))
+                    string pathValue =Convert.ToString(t.GetDeclaredField(fieldInfo.Name).GetValue(viBase));
+                    if (!String.IsNullOrEmpty(pathValue))
                     {
-                        ObservableCollection<ImageCapture> imgListvalue = new ObservableCollection<ImageCapture>();
-                        string[] pathlist = pathValue.ToString().Split(new char[]{'~'}, StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string path in pathlist)
+                        var prop = propertyInfoList.First(x => x.Name.ToUpper().Equals(fieldInfo.Name.Replace("Path", "").ToUpper()));
+                        if (prop.PropertyType.Equals(typeof(ObservableCollection<ImageCapture>)))
                         {
-                            imgListvalue.Add(new ImageCapture() { ImagePath = path });
+                            ObservableCollection<ImageCapture> imgListvalue = new ObservableCollection<ImageCapture>();
+                            string[] pathlist = pathValue.ToString().Split(new char[] { '~' }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (string path in pathlist)
+                            {
+                                imgListvalue.Add(new ImageCapture() { ImagePath = path });
+                            }
+                            prop.SetValue(viBase, imgListvalue);
                         }
-                        prop.SetValue(viBase, imgListvalue);
-                    }
-                    else if (prop.PropertyType.Equals(typeof(ImageCapture)))
-                    {
-                        prop.SetValue(viBase, new ImageCapture() { ImagePath = pathValue.ToString() });
+                        else if (prop.PropertyType.Equals(typeof(ImageCapture)))
+                        {
+                            prop.SetValue(viBase, new ImageCapture() { ImagePath = pathValue.ToString() });
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

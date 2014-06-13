@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PAccessories : VIBase
-    {
+    public class PAccessories : BaseModel
+    {        
         public PAccessories()
         {
 
@@ -34,7 +35,7 @@ namespace Eqstra.BusinessLogic.Passenger
             this.SpareTyreImgList = new ObservableCollection<ImageCapture>();
         }
 
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.CaseNumber == caseNumber);
         }

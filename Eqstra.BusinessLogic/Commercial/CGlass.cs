@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CGlass : VIBase
+    public class CGlass : BaseModel
     {
         public CGlass()
         {
@@ -22,7 +22,8 @@ namespace Eqstra.BusinessLogic.Commercial
             this.InductorLensesImgList = new ObservableCollection<ImageCapture>();
             this.ExtRearViewMirrorImgList = new ObservableCollection<ImageCapture>();
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+       
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CGlass>(x => x.CaseNumber == caseNumber);
         }
@@ -184,13 +185,13 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  inductorLensesImgList, value); }
         }
 
-        private string extRearViewMirrorToggleComment;
+        private string extRearViewMirrorComment;
 
-        public string ExtRearViewMirrorToggleComment
+        public string ExtRearViewMirrorComment
         {
-            get { return extRearViewMirrorToggleComment; }
+            get { return extRearViewMirrorComment; }
 
-            set { SetProperty(ref  extRearViewMirrorToggleComment, value); }
+            set { SetProperty(ref  extRearViewMirrorComment, value); }
         }
         private bool isExtRearViewMirrorDmg;
 

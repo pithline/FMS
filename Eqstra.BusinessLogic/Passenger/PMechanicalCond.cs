@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PMechanicalCond : VIBase
+    public class PMechanicalCond : BaseModel
     {
         private string remarks;
         public string Remarks
@@ -19,8 +19,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref  remarks, value); }
         }
 
-
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PMechanicalCond>(x => x.CaseNumber == caseNumber);
         }

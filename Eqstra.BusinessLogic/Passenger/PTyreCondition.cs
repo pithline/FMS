@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Passenger
 {
-    public class PTyreCondition : VIBase
+    public class PTyreCondition : BaseModel
     {
         public PTyreCondition()
         {
@@ -21,7 +21,7 @@ namespace Eqstra.BusinessLogic.Passenger
             this.SpareImgList = new ObservableCollection<ImageCapture>();
             this.LRImgList = new ObservableCollection<ImageCapture>();
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PTyreCondition>(x => x.CaseNumber == caseNumber);
         }
@@ -74,6 +74,8 @@ namespace Eqstra.BusinessLogic.Passenger
 
             set { SetProperty(ref  spareImgList, value); }
         }
+
+        
 
         private string rFTreadDepth;
 

@@ -12,7 +12,7 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 namespace Eqstra.BusinessLogic
 {
-    
+     
     public class CustomerDetails : ValidatableBindableBase
     {
         private string customerName;
@@ -58,7 +58,7 @@ namespace Eqstra.BusinessLogic
 
         private ScheduleAppointmentCollection appointments;
         [Ignore]
-   
+
         public ScheduleAppointmentCollection Appointments
         {
             get { return appointments; }
@@ -89,9 +89,9 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref statusDueDate, value); }
         }
 
-        private TaskStatusEnum status;
+        private string status;
 
-        public TaskStatusEnum Status
+        public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
@@ -105,15 +105,5 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref allocatedTo, value); }
         }
 
-        [Ignore]
-        [RestorableState]
-        public string DisplayStatus
-        {
-            get
-            {
-                var member = this.Status.GetType().GetRuntimeField(this.Status.ToString());
-                return member.GetCustomAttribute<DisplayAttribute>().Name;
-            }
-        }
     }
 }

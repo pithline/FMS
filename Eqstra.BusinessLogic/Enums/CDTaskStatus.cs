@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Enums
 {
-  public  enum CDTaskStatusEnum
+    public class CDTaskStatus
     {
-      AwaitingConfirmation,
-      AwaitingDriverCollection,
-      AwaitingCustomerCollection,
-      AwaitingCourierCollection,
-      AwaitingDelivery,
-      Complete,
-      
+
+        public static string AwaitingConfirmation = "AwaitingConfirmation";
+        public static string AwaitingDriverCollection = "AwaitingDriverCollection";
+        public static string AwaitingCustomerCollection = "AwaitingCustomerCollection";
+        public static string AwaitingCourierCollection = "AwaitingCourierCollection";
+        public static string AwaitingDelivery = "AwaitingDelivery";
+        public static string Complete = "Complete";
+
     }
 }

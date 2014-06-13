@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CMechanicalCond : VIBase
+    public class CMechanicalCond : BaseModel
     {
         public CMechanicalCond()
         {
@@ -29,7 +29,8 @@ namespace Eqstra.BusinessLogic.Commercial
             this.HPSImgList = new ObservableCollection<ImageCapture>();
 
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CMechanicalCond>(x => x.CaseNumber == caseNumber);
         }

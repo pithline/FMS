@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage;
@@ -38,7 +39,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 stringBuilder.Append(location.Latitude);
                 stringBuilder.Append("_");
                 stringBuilder.Append(location.Longitude);
-                stringBuilder.Append("~adr.Chanchalguda,Hyderabad");
+                stringBuilder.Append("~adr." + Regex.Replace(this.CustomerDetails.Address, "\n", ","));
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             });
 
@@ -74,35 +75,35 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private void LoadDemoAppointments()
         {
             this.CustomerDetails.Appointments = AppSettingData.Appointments;
-            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            //{
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from engine",
-            //        Location = "Cape Town",
-            //        StartTime = DateTime.Now,
-            //        EndTime = DateTime.Now.AddHours(2),
-            //        ReadOnly = true,
-            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from engine",
+                    Location = "Cape Town",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-            //    },
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from differential",
-            //        Location = "Cape Town",
-            //         ReadOnly = true,
-            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-            //    },                    
-            //};
+                },
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from differential",
+                    Location = "Cape Town",
+                     ReadOnly = true,
+                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+                },                    
+            };
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           _inspection = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
+            _inspection = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
 
             var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == _inspection.CaseNumber);

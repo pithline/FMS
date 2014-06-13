@@ -11,13 +11,18 @@
     mc:Ignorable="d">
 
     <ScrollViewer ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Auto">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch" >
             <Grid Grid.Column="0" Margin="0 0 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Proof of Inspection" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Proof of Inspection" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Center"  Margin="0 0 0 10"/>
+                    <Button Style="{StaticResource TransparentBtn}"  VerticalAlignment="Center" Margin="10 0 0 10" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}">
+                        <Image Source="ms-appx:///Assets/save.png"/>
+                    </Button>
+                </StackPanel>
                 <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" HorizontalAlignment="Stretch">
                     <Grid Margin="20 10" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>

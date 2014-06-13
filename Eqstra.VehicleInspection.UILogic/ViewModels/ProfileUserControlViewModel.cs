@@ -1,12 +1,17 @@
-﻿using Eqstra.VehicleInspection.UILogic.Services;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Networking.Connectivity;
+using Windows.Storage;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
@@ -19,6 +24,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             _navigationService = navigationService;
             _accountService = accountService;
 
+            UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            GetNetworkStatus();
             LogoutCommand = new DelegateCommand(() =>
             {
                 _accountService.SignOut();
@@ -26,6 +33,44 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.ClearHistory();
             });
         }
-        public ICommand LogoutCommand { get; private set; }
+
+        
+
+        private string networkIcon;
+
+        public string NetworkIcon
+        {
+            get { return networkIcon; }
+            set { SetProperty(ref networkIcon, value); }
+        }
+
+        private UserInfo userInfo;
+
+        public UserInfo UserInfo
+        {
+            get { return userInfo; }
+            set { SetProperty(ref userInfo, value); }
+        }
+
+
+        public void GetNetworkStatus()
+        {
+            var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            NetworkInformation.NetworkStatusChanged += (s) =>
+            {
+                if (connectionProfile != null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetConnected.png"; });
+                else
+                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetDisconnected.png"; }); 
+
+            };
+            if (connectionProfile != null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+                NetworkIcon = "ms-appx:///Assets/NetConnected.png";
+            else
+                NetworkIcon = "ms-appx:///Assets/NetDisconnected.png";
+        }
+
+        public ICommand LogoutCommand { get; private set; }     
+        
     }
 }

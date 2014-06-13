@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CTyres : VIBase
+    public class CTyres : BaseModel
     {
         public CTyres()
         {
@@ -26,7 +26,9 @@ namespace Eqstra.BusinessLogic.Commercial
             this.LROuterImgList = new ObservableCollection<ImageCapture>();
             this.RInnerAxleOutImgList = new ObservableCollection<ImageCapture>();
         }
-        public async override System.Threading.Tasks.Task<VIBase> GetDataAsync(string caseNumber)
+
+        
+        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CTyres>(x => x.CaseNumber == caseNumber);
         }

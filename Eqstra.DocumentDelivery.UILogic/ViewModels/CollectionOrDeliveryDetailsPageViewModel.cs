@@ -28,14 +28,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             });
             this.CollectCommand = new DelegateCommand(async () =>
             {
-                _task.CDTaskStatus = BusinessLogic.Enums.CDTaskStatusEnum.AwaitingDelivery;
+                _task.CDTaskStatus = BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery;
                 await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
                 _navigationService.Navigate("Main", null);
 
             });
             this.CompleteCommand = new DelegateCommand(async () =>
                 {
-                    _task.CDTaskStatus = BusinessLogic.Enums.CDTaskStatusEnum.Complete;
+                    _task.CDTaskStatus = BusinessLogic.Enums.CDTaskStatus.Complete;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
                     _navigationService.Navigate("Main", null);
                 });

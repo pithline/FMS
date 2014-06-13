@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
+using Eqstra.BusinessLogic.Helpers;
+using Syncfusion.UI.Xaml.Grid;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.VehicleInspection.Views
@@ -34,7 +36,6 @@ namespace Eqstra.VehicleInspection.Views
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private Windows.Storage.StorageFolder temporaryFolder = ApplicationData.Current.TemporaryFolder;
         private bool isCached;
-
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -44,7 +45,6 @@ namespace Eqstra.VehicleInspection.Views
             this.InitializeComponent();
             this.SizeChanged += InspectionDetailsPage_SizeChanged;
         }
-
         void InspectionDetailsPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.NewSize.Width < 850.0)
@@ -74,38 +74,15 @@ namespace Eqstra.VehicleInspection.Views
             }
 
         }
-        async System.Threading.Tasks.Task WriteTasksToDiskAsync(string content)
-        {
-            StorageFile itemsSourceFile = await temporaryFolder.CreateFileAsync("DetailsItemsSourceFile.txt", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(itemsSourceFile, content);
-        }
-
-        async System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.Task>> ReadTasksFromDiskAsync()
-        {
-            try
-            {
-                StorageFile itemsSourceFile = await temporaryFolder.GetFileAsync("DetailsItemsSourceFile.txt");
-                String jsonItemsSource = await FileIO.ReadTextAsync(itemsSourceFile);
-                return JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.Task>>(jsonItemsSource);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            this.detailsGrid.ItemsSource = (await ReadTasksFromDiskAsync()).Where(x => x.CaseCategory.Contains(args.QueryText) ||
+            this.detailsGrid.ItemsSource = (await Util.ReadTasksFromDiskAsync("DetailsItemsSourceFile.txt")).Where(x => x.CaseCategory.Contains(args.QueryText) ||
                  x.CaseNumber.Contains(args.QueryText) ||
                  x.CaseType.ToString().Contains(args.QueryText) ||
                  x.CustomerName.Contains(args.QueryText) ||
                  x.RegistrationNumber.Contains(args.QueryText) ||
-                 x.DisplayStatus.Contains(args.QueryText) ||
                  x.Status.ToString().Contains(args.QueryText));
         }
-
 
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
@@ -114,18 +91,18 @@ namespace Eqstra.VehicleInspection.Views
             {
                 if (!isCached)
                 {
-                    await WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource));
+                    await Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource), "DetailsItemsSourceFile.txt");
                     isCached = true;
                 }
 
                 var searchSuggestionList = new List<string>();
-                foreach (var task in await ReadTasksFromDiskAsync())
+                foreach (var task in await Util.ReadTasksFromDiskAsync("DetailsItemsSourceFile.txt"))
                 {
                     foreach (var propInfo in task.GetType().GetRuntimeProperties())
                     {
                         if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
                             continue;
-                        var propVal = propInfo.GetValue(task).ToString();
+                        var propVal = Convert.ToString( propInfo.GetValue(task));
                         if (propVal.ToLowerInvariant().Contains(args.QueryText))
                         {
                             searchSuggestionList.Add(propVal);
@@ -138,7 +115,7 @@ namespace Eqstra.VehicleInspection.Views
 
         }
 
-        async private void snapedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        async private void snapedListView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
             try
             {
@@ -152,5 +129,6 @@ namespace Eqstra.VehicleInspection.Views
             }
 
         }
+
     }
 }

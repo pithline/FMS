@@ -90,12 +90,7 @@
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
                 </StackPanel>
                 <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="10 0">
-                    <StackPanel Orientation="Horizontal" Background="#BFFFFFFF" Margin="0 5"  Visibility="{Binding IsSynchronizing,Converter={StaticResource BooleanToVisibilityConverter}}">
-
-                        <TextBlock Text="Synchronizing" VerticalAlignment="Center" Margin="0 0 15 0" FontSize="15" />
-                        <ProgressBar  Name="SyncProgress" Width="300" Height="15"  IsIndeterminate="True" />
-
-                    </StackPanel>
+                  
                     <local:ProfileUserControl HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 </StackPanel>
 
@@ -149,11 +144,11 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Tasks" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                    <SearchBox PlaceholderText="Type to filter..." x:Name="filterBox" HorizontalAlignment="Right" FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Row="0" Grid.Column="0" Margin="10 10 0 20" Width="180" >
+                    <TextBlock Text="Tasks" Style="{StaticResource GroupHeaderStyle}" Margin="10 0 0 0"/>
+                    <SearchBox ChooseSuggestionOnEnter="True" Width="250" PlaceholderText="Type to filter..." Margin="0 0 10 0" x:Name="filterBox" HorizontalAlignment="Right" FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested" >
                     </SearchBox>
-                    <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
-                        <Grid Margin="10" >
+                    <Border Grid.Row="1" Margin="10 10 10 0" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                        <Grid  >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -167,7 +162,7 @@
                                     <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTemplateColumn  HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
+                                    <grid:GridTemplateColumn MappingName="ContactNumber"  HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -178,10 +173,10 @@
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
                                     <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridComboBoxColumn MappingName="DisplayStatus" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="MM/dd/yyyy" HeaderText="CONFIRMED DATE" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTemplateColumn HeaderText="CONFIRMED TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                    <grid:GridTemplateColumn MappingName="ConfirmedTime" HeaderText="CONFIRMED TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" Background="Transparent"/>
@@ -218,7 +213,7 @@
                         </Grid>
                         <Interactivity:Interaction.Behaviors>
                             <Core:EventTriggerBehavior EventName="Tapped">
-                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitingConfirmation"/>
+                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage" Parameter="AwaitInspectionDetail"/>
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
                     </Border>
@@ -378,7 +373,7 @@
                                             <TextBlock Text="Status Due Date"  Grid.Row="3" Grid.Column="0" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
                                             <TextBlock Text="{Binding StatusDueDate}"  Grid.Row="3" Grid.Column="1" MaxHeight="100"/>
                                             <TextBlock Text="Status" MaxHeight="100"  Grid.Row="4" Grid.Column="0" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding DisplayStatus}" Grid.Row="4" Grid.Column="1"  MaxHeight="100"/>
+                                            <TextBlock Text="{Binding Status}" Grid.Row="4" Grid.Column="1"  MaxHeight="100"/>
                                             <TextBlock Text="Allocated To" MaxHeight="100"  Grid.Row="5" Grid.Column="0" Style="{StaticResource ListViewItemStyle}"/>
                                             <TextBlock Text="{Binding AllocatedTo}" Grid.Row="5" Grid.Column="1" MaxHeight="100"/>
                                             <TextBlock Text="Confirmed Date" MaxHeight="100"  Grid.Row="6" Grid.Column="0" Style="{StaticResource ListViewItemStyle}"/>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CAccessories : VIBase
+    public class CAccessories : BaseModel
     {
         public CAccessories()
         {
@@ -23,6 +23,7 @@ namespace Eqstra.BusinessLogic.Commercial
             this.DecalSignWritingImgList = new ObservableCollection<ImageCapture>();
             this.ReflectiveTapeImgList = new ObservableCollection<ImageCapture>();
         }
+
         private string serviceBlockComment;
 
         public string ServiceBlockComment
@@ -32,7 +33,6 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref  serviceBlockComment, value); }
         }
         private bool isServiceBlockDmg;
-
         public bool IsServiceBlockDmg
         {
             get { return isServiceBlockDmg; }
@@ -351,7 +351,7 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  hasReflectiveTapeDmg, value); }
         }
-        public async override Task<VIBase> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(string caseNumber)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CAccessories>(x => x.CaseNumber == caseNumber);
         }

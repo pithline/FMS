@@ -5,6 +5,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
@@ -23,6 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,7 +37,7 @@ namespace Eqstra.VehicleInspection.ViewModels
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
-        
+
         public VehicleInspectionPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -50,12 +52,13 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
-                    this._task.Status = BusinessLogic.Enums.TaskStatusEnum.Completed;
+                    this._task.Status = BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
                     var currentModel = ((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model;
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
                     this.IsCommandBarOpen = false;
+                    await VIServiceHelper.Instance.UpdateStatusListAsync();
                 }, () => { return this.NextViewStack.Count == 1; });
 
                 this.NextCommand = new DelegateCommand(async () =>
@@ -63,7 +66,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     //this.IsCommandBarOpen = false;
                     //this.IsFlyoutOpen = true;
                     ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
+                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
 
                     if (currentModel.ValidateModel())
                     {
@@ -77,14 +80,14 @@ namespace Eqstra.VehicleInspection.ViewModels
                         if (this.NextViewStack.FirstOrDefault() != null)
                         {
                             BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                            await nextViewModel.LoadModelFromDbAsync(this._task.CaseNumber);
                         }
                     }
                     else
                     {
                         Errors = currentModel.Errors;
                         OnPropertyChanged("Errors");
-                        ShowValidationSummary = true;                        
+                        ShowValidationSummary = true;
                     }
 
                 }, () =>
@@ -96,7 +99,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     this.IsCommandBarOpen = false;
                     ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as VIBase;
+                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
                     if (currentModel.ValidateModel())
                     {
                         var item = this.PrevViewStack.Pop();
@@ -109,7 +112,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                         if (this.PrevViewStack.FirstOrDefault() != null)
                         {
                             BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.UpdateModelAsync(this._task.CaseNumber);
+                            await nextViewModel.LoadModelFromDbAsync(this._task.CaseNumber);
                         }
                     }
                     else
@@ -123,6 +126,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     return this.PrevViewStack.Count > 0;
                 });
+
             }
             catch (Exception)
             {
@@ -138,29 +142,34 @@ namespace Eqstra.VehicleInspection.ViewModels
         private void LoadDemoAppointments()
         {
             this.CustomerDetails.Appointments = AppSettingData.Appointments;
-            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            //{
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from engine",
-            //        Location = "Cape Town",
-            //        StartTime = DateTime.Now,
-            //        EndTime = DateTime.Now.AddHours(2),
-            //        ReadOnly = true,
-            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-            //    },
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from differential",
-            //        Location = "Cape Town",
-            //         ReadOnly = true,
-            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-            //    },                    
-            //};
+
+          //  Eqstra.BusinessLogic.DrivingDuration durationData = SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.DrivingDuration>(w => w.CaseNumber == this._task.CaseNumber);
+       
+
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = this._task.CaseNumber,
+                    
+                    Location =this._task.Address,
+                    StartTime = DateTime.Parse(  this._task.ConfirmedDate.ToString("MM/dd/yyyy") + this._task.ConfirmedTime.ToString("hh:mm:ss")),
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                    AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = this._task.Status,Brush = new SolidColorBrush(Colors.Chocolate)}
+
+                },
+                //new ScheduleAppointment(){
+                //    Subject = "Inspection at Peter Johnson",
+                //    Notes = "some noise from differential",
+                //    Location = this._task.Address,
+                //     ReadOnly = true,
+                //    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                //    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                //    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status = this._task.Status},
+                //},                    
+            };
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -203,7 +212,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private UserControl frameContent;
-  
+
         public UserControl FrameContent
         {
             get { return frameContent; }
@@ -211,7 +220,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private DelegateCommand completeCommand;
-    
+
         public DelegateCommand CompleteCommand
         {
             get { return completeCommand; }
@@ -234,14 +243,14 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private ObservableCollection<ValidationError> errors;
-       
+
         public ObservableCollection<ValidationError> Errors
         {
             get { return errors; }
             set { SetProperty(ref errors, value); }
         }
         private DelegateCommand nextCommand;
-    
+
         public DelegateCommand NextCommand
         {
             get { return nextCommand; }
@@ -259,9 +268,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref previousCommand, value); }
         }
 
-
         private Stack<UserControl> nextViewStack;
- 
+
         public Stack<UserControl> NextViewStack
         {
             get { return nextViewStack; }
@@ -299,7 +307,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
 
         private CustomerDetails customerDetails;
-      
+
         public CustomerDetails CustomerDetails
         {
             get { return customerDetails; }
@@ -308,7 +316,7 @@ namespace Eqstra.VehicleInspection.ViewModels
 
 
         private Customer customer;
-     
+
         public Customer Customer
         {
             get { return customer; }
@@ -357,18 +365,29 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 if (this._task != null)
                 {
-                    var viobj = await (model as VIBase).GetDataAsync(this._task.CaseNumber);
-                    if (viobj != null)
+                    var baseModel = await (model as BaseModel).GetDataAsync(this._task.CaseNumber);
+                    var successFlag = 0;
+                    if (baseModel != null)
                     {
-                        var successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(model);
-                    }
-                    else
-                    {
+                        if (baseModel.ShouldSave)
+                        {
+                            if (baseModel != null)
+                            {
+                                successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(model);
+                            }
+                            else
+                            {
 
-                        ((VIBase)model).CaseNumber = this._task.CaseNumber;
-                        var successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(model);
-                    }
+                                ((BaseModel)model).CaseNumber = this._task.CaseNumber;
+                                successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(model);
+                            }
+                        }
 
+                        if (successFlag != 0)
+                        {
+                            await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -380,51 +399,6 @@ namespace Eqstra.VehicleInspection.ViewModels
         /// <summary>
         /// This function is to create table Only it should run only once.
         /// </summary>
-        private async void CreateTableAsync()
-        {
 
-            ////Drop Existing tables
-
-            //await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
-            //await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
-            //await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
-            //await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
-            //await SqliteHelper.Storage.DropTableAsync<PGlass>();
-            //await SqliteHelper.Storage.DropTableAsync<PBodywork>();
-            //await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
-            //await SqliteHelper.Storage.DropTableAsync<PAccessories>();
-
-            //await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
-            //await SqliteHelper.Storage.DropTableAsync<CTyres>();
-            //await SqliteHelper.Storage.DropTableAsync<CAccessories>();
-            //await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
-            //await SqliteHelper.Storage.DropTableAsync<CGlass>();
-            //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
-            //await SqliteHelper.Storage.DropTableAsync<CPOI>();
-            //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
-            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
-
-            ////create new  tables
-
-            //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
-            //await SqliteHelper.Storage.CreateTableAsync<PMechanicalCond>();
-            //await SqliteHelper.Storage.CreateTableAsync<PInspectionProof>();
-            //await SqliteHelper.Storage.CreateTableAsync<PGlass>();
-            //await SqliteHelper.Storage.CreateTableAsync<PBodywork>();
-            //await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
-            //await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
-
-            //await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<CTyres>();
-            //await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
-            //await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
-            //await SqliteHelper.Storage.CreateTableAsync<CGlass>();
-            //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
-            //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
-            //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-        }
     }
 }

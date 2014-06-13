@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
-    public class CPOI : VIBase
+    public class CPOI : BaseModel
     {
      
-            public async override Task<VIBase> GetDataAsync(string caseNumber)
+            public async override Task<BaseModel> GetDataAsync(string caseNumber)
             {
                 return await SqliteHelper.Storage.GetSingleRecordAsync<CPOI>(x => x.CaseNumber == caseNumber);
             }
@@ -32,8 +32,6 @@ namespace Eqstra.BusinessLogic.Commercial
                 get { return crSignFileName; }
                 set { SetProperty(ref crSignFileName, value); }
             }
-
-
             private string eqrSignFileName;
 
             public string EQRSignFileName
@@ -69,6 +67,56 @@ namespace Eqstra.BusinessLogic.Commercial
                 get { return eQRTime; }
                 set { SetProperty(ref eQRTime, value); }
             }
+
+            private bool isSellChecked;
+
+            public bool IsSellChecked
+            {
+                get { return isSellChecked; }
+                set { SetProperty(ref isSellChecked, value); }
+            }
+
+
+            private bool isNotFeasChecked;
+
+            public bool IsNotFeasChecked
+            {
+                get { return isNotFeasChecked; }
+                set { SetProperty(ref isNotFeasChecked, value); }
+            }
+
+            private bool isRetainChecked;
+
+            public bool IsRetainChecked
+            {
+                get { return isRetainChecked; }
+                set { SetProperty(ref isRetainChecked, value); }
+            }
+
+
+            private bool isGoodChecked;
+
+            public bool IsGoodChecked
+            {
+                get { return isGoodChecked; }
+                set { SetProperty(ref isGoodChecked, value); }
+            }
+            private bool isFairChecked;
+
+            public bool IsFairChecked
+            {
+                get { return isFairChecked; }
+                set { SetProperty(ref isFairChecked, value); }
+            }
+
+            private bool isPoorChecked;
+
+            public bool IsPoorChecked
+            {
+                get { return isPoorChecked; }
+                set { SetProperty(ref isPoorChecked, value); }
+            }
+        
         }
     }
 

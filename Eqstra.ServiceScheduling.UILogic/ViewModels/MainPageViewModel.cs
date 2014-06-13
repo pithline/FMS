@@ -73,29 +73,29 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.Completed)
+                if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
                     item.ConfirmedTime = DateTime.Now.AddHours(-2);
                 }
                 item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Enums.TaskStatusEnum.InProgress)
+                if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
                 {
                     item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
                 }
                 item.Address = cust.Address;
-                if (item.Status != BusinessLogic.Enums.TaskStatusEnum.AwaitingInspection)
-                {
-                    this.Appointments.Add(new ScheduleAppointment
-                    {
-                        Subject = "Inspection at " + item.CustomerName,
-                        StartTime = item.ConfirmedTime,
-                        EndTime = item.ConfirmedTime.AddHours(1),
-                        Location = item.Address,
-                        ReadOnly = true,
-                        Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
-                    });
-                }
+                //if (item.Status != BusinessLogic.Enums.TaskStatus.AwaitingInspection)
+                //{
+                //    this.Appointments.Add(new ScheduleAppointment
+                //    {
+                //        Subject = "Inspection at " + item.CustomerName,
+                //        StartTime = item.ConfirmedTime,
+                //        EndTime = item.ConfirmedTime.AddHours(1),
+                //        Location = item.Address,
+                //        ReadOnly = true,
+                //        Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
+                //    });
+                //}
                 var vehicleDetails = await SqliteHelper.Storage.GetSingleRecordAsync<VehicleDetails>(x => x.RegistrationNumber == item.RegistrationNumber);
                 var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == item.RegistrationNumber);
 

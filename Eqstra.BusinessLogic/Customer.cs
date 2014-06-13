@@ -52,7 +52,6 @@ namespace Eqstra.BusinessLogic
             get { return address; }
             set { SetProperty(ref address, value); }
         }
-
         private string emailId;
         [RestorableState]
         public string EmailId
@@ -60,6 +59,5 @@ namespace Eqstra.BusinessLogic
             get { return emailId; }
             set { SetProperty(ref emailId, value); }
         }
-
     }
 }

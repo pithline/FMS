@@ -10,6 +10,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Base;
 using Windows.Storage;
 using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Common;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             _navigationService = navigationService;
             this.Model = new PVehicleDetails();
             string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
-            UpdateModelAsync(caseNumber);
+            LoadModelFromDbAsync(caseNumber);
             this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
             {
                 _navigationService.Navigate("ImageMarkup", this.Model);
@@ -36,15 +37,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public DelegateCommand GoToImageMarkupPageCommand { get; set; }
 
 
-        public async override System.Threading.Tasks.Task UpdateModelAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
         {
             this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber == caseNumber);
             if (this.Model == null)
             {
                 this.Model = new PVehicleDetails();
             }
-            VIBase viBaseObject = (PVehicleDetails)this.Model;
+            BaseModel viBaseObject = (PVehicleDetails)this.Model;
             viBaseObject.LoadSnapshotsFromDb();
+            viBaseObject.ShouldSave = false;
+            PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
         }
 
         async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
@@ -53,14 +56,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
             if (caseNumber != null)
             {
-                var viobj = await (this.Model as VIBase).GetDataAsync(caseNumber);
+                var viobj = await (this.Model as BaseModel).GetDataAsync(caseNumber);
                 if (viobj != null)
                 {
                     var successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(this.Model);
                 }
                 else
                 {
-                    ((VIBase)this.Model).CaseNumber = caseNumber;
+                    ((BaseModel)this.Model).CaseNumber = caseNumber;
                     var successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(this.Model);
                 }
             }
