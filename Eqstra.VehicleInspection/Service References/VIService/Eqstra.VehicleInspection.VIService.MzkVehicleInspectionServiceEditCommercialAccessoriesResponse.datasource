@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="MzkVehicleInspectionServiceCreateAccessoriesResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateAccessoriesResponse</TypeInfo>
+<GenericObjectDataSource DisplayName="MzkVehicleInspectionServiceEditCommercialAccessoriesResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse</TypeInfo>
 </GenericObjectDataSource>
