@@ -91,18 +91,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     if (cust != null)
                     {
                         item.CustomerName = cust.CustomerName;
+                        item.Address = cust.Address;
                     }
-                    if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
-                    {
-                        item.ConfirmedDate = DateTime.Today.AddDays(-1);
-                        item.ConfirmedTime = DateTime.Now.AddHours(-2);
-                    }
+
                     item.ConfirmedDate = DateTime.Now;
-                    if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
-                    {
-                        item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
-                    }
-                    item.Address = cust.Address;
+                    //if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
+                    //{
+                    //    item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
+                    //}
                     //if (item.Status != BusinessLogic.Enums.TaskStatus.AwaitingInspection)
                     //{
                     //    this.Appointments.Add(new ScheduleAppointment
@@ -121,7 +117,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                 this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
 
-                this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
                     VIServiceHelper.Instance.Synchronize(async () =>
@@ -133,7 +129,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            }
                                 );
 
-                           await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                          await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                                  {
 
@@ -144,10 +140,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                        });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
         async private void SyncData()

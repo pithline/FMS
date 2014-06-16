@@ -29,7 +29,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public InspectionDetailsPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            this.inspectionList = new ObservableCollection<BusinessLogic.Task>();
+            this.InspectionList = new ObservableCollection<BusinessLogic.Task>();
             this.CustomerDetails = new CustomerDetails();
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
@@ -101,8 +101,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             foreach (var t in tasks)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
-                t.CustomerName = cust.CustomerName;
-                t.Address = cust.Address;
+                if (cust != null)
+                {
+                    t.CustomerName = cust.CustomerName;
+                    t.Address = cust.Address; 
+                }
             }
             if (navigationParameter.Equals("AwaitInspectionDetail"))
             {
@@ -142,7 +145,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
 
 
-            foreach (var item in tasks)
+            foreach (var item in list)
             {
                 this.InspectionList.Add(item);
             }

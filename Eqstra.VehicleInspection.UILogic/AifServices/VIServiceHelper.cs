@@ -221,7 +221,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     List<Eqstra.BusinessLogic.Task> taskInsertList = new List<BusinessLogic.Task>();
                     List<Eqstra.BusinessLogic.Task> taskUpdateList = new List<BusinessLogic.Task>();
-                    result.response.AsParallel().ForAll(mzkTask =>
+                    result.response.AsParallel().ForAll(async mzkTask =>
                         {
                             var taskTosave = new Eqstra.BusinessLogic.Task
                                {
@@ -243,12 +243,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                    UserId = mzkTask.parmUserID,
                                    RegistrationNumber = mzkTask.parmRegistrationNum,
                                    AllocatedTo = _userInfo.Name,
-                                   VehicleInsRecId = mzkTask.parmRecID,
+                                    VehicleInsRecId = mzkTask.parmRecID,
                                    VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), mzkTask.parmVehicleType.ToString())
                                };
 
-                            GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
-                            //GetVehicleDetailsAsync(mzkTask.parmRecID);
+                             await GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
+                             await GetVehicleDetailsAsync(mzkTask.parmRecID);
                             if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
                             {
                                 taskUpdateList.Add(taskTosave);
@@ -316,7 +316,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     if (vehicleInsertList.Any())
                         await SqliteHelper.Storage.UpdateAllAsync(vehicleInsertList);
 
-                }
+            }
             }
             catch (Exception)
             {
@@ -398,7 +398,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString()); 
                 }
                 var pAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerAccessoriesContract> mzkMobiPassengerAccessoriesContractColl = new ObservableCollection<MzkMobiPassengerAccessoriesContract>();
@@ -1702,20 +1702,20 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
         }
         public async System.Threading.Tasks.Task ConfirmTasksAsync()
-        {
+            {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return;
-                if (_userInfo == null)
-                {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-                }
-                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(d => d.CaseNumber == x.CaseNumber) != null);
-                ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
+            if (_userInfo == null)
+            {
+                _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            }
+            var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(d => d.CaseNumber == x.CaseNumber) != null);
+            ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
 
-
+           
                 if (tasks != null)
                 {
                     foreach (var task in tasks)
@@ -1774,28 +1774,28 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     tasks.AsParallel().ForAll(task =>
                     {
                         mzkTasks.Add(
-                           new MzkTasksContract
-                           {
-                               parmCaseID = task.CaseNumber,
-                               parmCaseServiceRecId = task.CaseServiceRecID,
-                               parmProcessStepRecID = task.ProcessStepRecID,
-                               parmServiceRecId = task.ServiceRecID,
-                               parmCaseCategory = task.CaseCategory,
-                               parmCategoryType = (CaseCategoryType)Enum.Parse(typeof(CaseCategoryType), task.CategoryType.ToString()),
-                               parmCollectionRecId = task.CollectionRecID,
-                               parmConfirmedDueDate = task.ConfirmedDate,
-                               parmCustAddress = task.Address,
-                               parmCustId = task.CustomerId,
-                               parmCustName = task.CustomerName,
-                               parmCustPhone = task.CustPhone,
-                               parmRegistrationNum = task.RegistrationNumber,
-                               parmStatus = task.Status,
-                               parmStatusDueDate = task.StatusDueDate,
-                               parmUserID = task.UserId,
-                               parmVehicleType = (MzkVehicleType)Enum.Parse(typeof(MzkVehicleType), task.VehicleType.ToString()),
-                               parmProcessStep = task.ProcessStep,
+                            new MzkTasksContract
+                            {
+                                parmCaseID = task.CaseNumber,
+                                parmCaseServiceRecId = task.CaseServiceRecID,
+                                parmProcessStepRecID = task.ProcessStepRecID,
+                                parmServiceRecId = task.ServiceRecID,
+                                parmCaseCategory = task.CaseCategory,
+                                parmCategoryType = (CaseCategoryType)Enum.Parse(typeof(CaseCategoryType), task.CategoryType.ToString()),
+                                parmCollectionRecId = task.CollectionRecID,
+                                parmConfirmedDueDate = task.ConfirmedDate,
+                                parmCustAddress = task.Address,
+                                parmCustId = task.CustomerId,
+                                parmCustName = task.CustomerName,
+                                parmCustPhone = task.CustPhone,
+                                parmRegistrationNum = task.RegistrationNumber,
+                                parmStatus = task.Status,
+                                parmStatusDueDate = task.StatusDueDate,
+                                parmUserID = task.UserId,
+                                parmVehicleType = (MzkVehicleType)Enum.Parse(typeof(MzkVehicleType), task.VehicleType.ToString()),
+                                parmProcessStep = task.ProcessStep,
 
-                           });
+                            });
                     });
                 }
                 var res = await client.updateStatusListAsync(mzkTasks);
