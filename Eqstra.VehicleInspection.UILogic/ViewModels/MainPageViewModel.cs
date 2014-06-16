@@ -247,6 +247,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
             await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
 
+            await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
+            await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
+
+
             await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
             await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
             await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
@@ -266,7 +270,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
             await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
 
-            ////create new  tables
+            ////create new  tables 
 
             await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
             await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();

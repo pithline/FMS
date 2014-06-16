@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
@@ -10,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   
-    public class Customer : ValidatableBindableBase
+
+    public class Customer : BaseModel
     {
         private string id;
         [RestorableState]
@@ -58,6 +59,11 @@ namespace Eqstra.BusinessLogic
         {
             get { return emailId; }
             set { SetProperty(ref emailId, value); }
+        }
+
+        public override Task<BaseModel> GetDataAsync(string caseNumber)
+        {
+            throw new NotImplementedException();
         }
     }
 }
