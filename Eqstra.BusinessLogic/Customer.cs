@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 namespace Eqstra.BusinessLogic
 {
 
-    public class Customer : BaseModel
+    public class Customer : ValidatableBindableBase
     {
         private string id;
         [RestorableState]
+        [PrimaryKey]
         public string Id
         {
             get { return id; }
@@ -61,9 +62,5 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref emailId, value); }
         }
 
-        public override Task<BaseModel> GetDataAsync(string caseNumber)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
