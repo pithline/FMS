@@ -53,14 +53,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 this.IsStartDriving = false;
                 this.IsArrived = true;
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString() });
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID =long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString())});
             });
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
                 if (this._inspection != null)
                 {
-                    string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
-                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == caseNumber);
+                    var vehicleInsRecId = Int64.Parse( ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
+
+                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
                     dd.StopDateTime = DateTime.Now;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(dd);
                 }
@@ -106,7 +107,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             _inspection = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
 
-            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == _inspection.CaseNumber);
+            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _inspection.VehicleInsRecId);
             if (dd != null)
             {
                 this.IsArrived = dd.StopDateTime == DateTime.MinValue;
@@ -173,6 +174,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
                     this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
                     this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this._inspection.VehicleInsRecId;
                     this.CustomerDetails.Status = this._inspection.Status;
                     this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;

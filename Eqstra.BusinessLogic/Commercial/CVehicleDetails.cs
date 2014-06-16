@@ -220,9 +220,9 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref oDOReadingSnapshotPath, value); }
         }
 
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
     }
 }

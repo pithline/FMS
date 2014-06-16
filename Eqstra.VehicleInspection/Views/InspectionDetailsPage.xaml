@@ -122,7 +122,7 @@
                                 <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn MappingName="ConfirmedDate" HeaderText="CONFIRMED DATE" AllowEditing="{Binding AllowEditing}"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTemplateColumn MappingName="ConfirmedDate" HeaderText="CONFIRMED DATE" AllowEditing="{Binding AllowEditing }"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <input:SfDatePicker Value="{Binding ConfirmedDate,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing}" Background="Transparent"/>

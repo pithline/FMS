@@ -223,6 +223,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.inspection.CustomerId);
                     this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
                     this.customerDetails.CaseNumber = this.inspection.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this.inspection.VehicleInsRecId;
                     this.customerDetails.Status = this.inspection.Status;
                     this.customerDetails.StatusDueDate = this.inspection.StatusDueDate;
                     this.customerDetails.Address = this.customer.Address;

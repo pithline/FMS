@@ -351,9 +351,9 @@ namespace Eqstra.BusinessLogic.Commercial
 
             set { SetProperty(ref  hasReflectiveTapeDmg, value); }
         }
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<CAccessories>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<CAccessories>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
     }
 }

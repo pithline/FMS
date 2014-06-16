@@ -13,13 +13,21 @@ namespace Eqstra.BusinessLogic
     {
 
         private string caseNumber;
-        [PrimaryKey]
         [RestorableState]
         public string CaseNumber
         {
             get { return caseNumber; }
             set { SetProperty(ref caseNumber, value); }
         }
+
+        private long vehicleInsRecID;
+        [PrimaryKey]
+        public long VehicleInsRecID
+        {
+            get { return vehicleInsRecID; }
+            set { SetProperty(ref vehicleInsRecID, value); }
+        }
+
         private DateTime startDateTime;
    
         public DateTime StartDateTime

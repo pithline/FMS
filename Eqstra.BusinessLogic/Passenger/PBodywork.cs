@@ -43,9 +43,9 @@ namespace Eqstra.BusinessLogic.Passenger
 
 
         }
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PBodywork>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PBodywork>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
 
         private ObservableCollection<ImageCapture> hailDamageImgList;

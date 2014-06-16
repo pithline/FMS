@@ -19,9 +19,9 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref  remarks, value); }
         }
 
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PMechanicalCond>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PMechanicalCond>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Eqstra.VehicleInspection.UILogic
     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
- 
+
         INavigationService _navigationService;
 
         public BaseViewModel()
@@ -51,27 +51,26 @@ namespace Eqstra.VehicleInspection.UILogic
 
             this.SaveModelCommand = new DelegateCommand<object>(async (param) =>
                 {
-                    BaseModel baseModel = ((BaseViewModel)param).Model as BaseModel;
-                    string caseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
+                    BaseModel baseModel = param as BaseModel;
+                    long vehicleInsRecId = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
                     int successFlag = 0;
                     try
                     {
-                        var viobj = await baseModel.GetDataAsync(caseNumber);
+                        var viobj = await baseModel.GetDataAsync(vehicleInsRecId);
                         if (viobj != null)
                         {
                             successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(baseModel);
                         }
                         else
                         {
-                            ((BaseModel)param).CaseNumber = caseNumber;
+                            baseModel.VehicleInsRecID = vehicleInsRecId;
                             successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(baseModel);
                         }
 
-                        if(successFlag!=0)
+                        if (successFlag != 0)
                         {
                             baseModel.ShouldSave = false;
-                          string tableName= baseModel.GetType().Name;
-                          await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                            await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
                         }
                     }
                     catch (Exception)
@@ -174,7 +173,7 @@ namespace Eqstra.VehicleInspection.UILogic
             popup.IsOpen = true;
 
         }
-        public virtual System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
+        public virtual System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
             return null;
         }

@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Trim/Interior" VerticalAlignment="Center" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 10"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}">
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 10"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
                     <Image Source="ms-appx:///Assets/save.png"/>
                 </Button>
             </StackPanel> 

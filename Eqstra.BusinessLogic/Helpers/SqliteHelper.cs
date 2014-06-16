@@ -57,7 +57,7 @@ namespace Eqstra.BusinessLogic.Helpers
         public Task<T> GetSingleRecordAsync<T>(Expression<Func<T, bool>> criteria)
             where T : ValidatableBindableBase, new()
         {
-            return this.connection.Table<T>().Where(criteria).FirstOrDefaultAsync();
+            return this.connection.Table<T>().Where(criteria).FirstOrDefaultAsync();            
         }
 
         public async Task<int> InsertAllAsync<T>(IEnumerable<T> items) where T : new()

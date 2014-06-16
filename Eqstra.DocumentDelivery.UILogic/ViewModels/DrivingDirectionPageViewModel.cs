@@ -86,7 +86,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return customerDetails; }
             set { SetProperty(ref customerDetails, value); }
         }
-
+  
         public ICommand GetDirectionsCommand { get; set; }
         public DelegateCommand GoToDocumentDeliveryCommand { get; set; }
 
@@ -110,6 +110,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
                     this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
                     this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this._inspection.VehicleInsRecId;
                     this.CustomerDetails.Status = this._inspection.Status;
                     this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;

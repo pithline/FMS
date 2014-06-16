@@ -15,13 +15,24 @@ namespace Eqstra.BusinessLogic
     {
 
         private string caseNumber;
-        [PrimaryKey]
+
         [RestorableState]
         public string CaseNumber
         {
             get { return caseNumber; }
             set { caseNumber = value; }
+
         }
+
+        private long vehicleInsRecId;
+        [PrimaryKey]
+        public long VehicleInsRecId
+        {
+            get { return vehicleInsRecId; }
+            set { SetProperty(ref vehicleInsRecId, value); }
+
+        }
+
         private CaseTypeEnum caseType;
         public CaseTypeEnum CaseType
         {
@@ -160,19 +171,10 @@ namespace Eqstra.BusinessLogic
 
         public string ProcessStep
         {
-            get { return  processStep; }
+            get { return processStep; }
             set { SetProperty(ref  processStep, value); }
         }
 
-
-        private long vehicleInsRecId;
-
-        public long VehicleInsRecId
-        {
-            get { return vehicleInsRecId; }
-            set { SetProperty(ref vehicleInsRecId, value); }
-
-        }
         private string userId;
 
         public string UserId
@@ -181,9 +183,7 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref userId, value); }
         }
 
-
         private VehicleTypeEnum vehicleType;
-
         public VehicleTypeEnum VehicleType
         {
             get { return vehicleType; }

@@ -26,9 +26,9 @@ namespace Eqstra.BusinessLogic.Passenger
             this.ShouldSave = false;
         }
         
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
 
         private ObservableCollection<ImageCapture> gVWindscreenImgList;

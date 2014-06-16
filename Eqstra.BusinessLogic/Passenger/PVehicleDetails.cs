@@ -27,9 +27,17 @@ namespace Eqstra.BusinessLogic.Passenger
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
         }
 
-        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber == caseNumber);
+            try
+            {
+                var t = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x=>x.ShouldSave == false);
+                return await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber.Equals(vehicleInsRecID));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 

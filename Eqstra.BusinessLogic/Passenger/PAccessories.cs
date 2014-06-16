@@ -35,9 +35,9 @@ namespace Eqstra.BusinessLogic.Passenger
             this.SpareTyreImgList = new ObservableCollection<ImageCapture>();
         }
 
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PAccessories>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
         private bool hasRadio;
 

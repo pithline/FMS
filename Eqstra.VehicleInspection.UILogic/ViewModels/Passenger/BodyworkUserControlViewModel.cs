@@ -17,9 +17,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Model = new PBodywork();
         }
 
-        public async override Task LoadModelFromDbAsync(string caseNumber)
+        public async override Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PBodywork>(x => x.CaseNumber == caseNumber);
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PBodywork>(x => x.VehicleInsRecID == vehicleInsRecID);
             if (this.Model == null)
             {
                 this.Model = new PBodywork();

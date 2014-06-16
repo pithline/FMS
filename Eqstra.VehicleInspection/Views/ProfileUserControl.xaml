@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:c="using:Eqstra.VehicleInspection.Converters"
     prism:ViewModelLocator.AutoWireViewModel="True"
     
     xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"    
@@ -14,13 +15,14 @@
     
     d:DesignHeight="100"
     d:DesignWidth="350">
-    
+
     <UserControl.Resources>
         <SynchronizingSetting:AppSettings x:Key="VM"/>
         
+        <c:InvertOpacityConverter x:Key="IO"/>
     </UserControl.Resources>
 
-    <Grid Tapped="Grid_Tapped">
+    <Grid >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="36"/>
@@ -30,25 +32,25 @@
                 <TextBlock Text="Syncing" VerticalAlignment="Center" Margin="0 0 15 0" FontSize="15" />
                 <ProgressBar  Name="SyncProgress" Width="300" Height="10"  IsIndeterminate="True" />
             </StackPanel>
-            <Button Style="{StaticResource TransparentBtn}" Width="380">
+            <Button Style="{StaticResource TransparentBtn}" Opacity="{Binding Path=Instance.IsSynchronizing, Source={StaticResource VM}, Converter={StaticResource IO}}" Width="380">
                 <Button.Flyout>
                     <Flyout>
                         <TextBlock Foreground="Crimson"
                                    Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}"
                                    ></TextBlock>
                     </Flyout>
-                </Button.Flyout>   
+                </Button.Flyout>
                 <TextBlock Foreground="Crimson"
                            Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}" TextWrapping="Wrap"></TextBlock>
-                
+
             </Button>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Tapped="Grid_Tapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                    <Image Source="{Binding NetworkIcon}" VerticalAlignment="Bottom" />
+                <Image Source="{Binding NetworkIcon}" VerticalAlignment="Bottom" />
                 <StackPanel Grid.Column="1"  Orientation="Horizontal" Margin="0 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right">
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" >
@@ -57,12 +59,12 @@
                     </StackPanel>
                     <Image Source="ms-appx:///Assets/User_profile.png" Stretch="None" Width="52" Height="56"/>
                 </StackPanel>
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Text="Logout" Width="140" Command="{Binding LogoutCommand}"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
             </Grid>
         </Grid>
-        <FlyoutBase.AttachedFlyout>
-            <MenuFlyout Placement="Bottom">
-                <MenuFlyoutItem Text="Logout" Width="140" Command="{Binding LogoutCommand}"/>
-            </MenuFlyout>
-        </FlyoutBase.AttachedFlyout>
     </Grid>
 </UserControl>

@@ -80,7 +80,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                         if (this.NextViewStack.FirstOrDefault() != null)
                         {
                             BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.LoadModelFromDbAsync(this._task.CaseNumber);
+                            await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
                         }
                     }
                     else
@@ -113,7 +113,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                         if (this.PrevViewStack.FirstOrDefault() != null)
                         {
                             BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.LoadModelFromDbAsync(this._task.CaseNumber);
+                            await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
                         }
                     }
                     else
@@ -180,11 +180,11 @@ namespace Eqstra.VehicleInspection.ViewModels
             };
                 _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
                 App.Task = _task;
-                var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+                //var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
-                var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
+                
                 await GetCustomerDetailsAsync();
-                if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
+                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
                 {
                     this.InspectionUserControls.Add(new VehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new TrimIntUserControl());
@@ -362,30 +362,30 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 if (this._task != null)
                 {
-                    var baseModel = await (model as BaseModel).GetDataAsync(this._task.CaseNumber);
+                    var m = (BaseModel)model;
+                    var baseModel = await (model as BaseModel).GetDataAsync(this._task.VehicleInsRecId);
                     var successFlag = 0;
-                    if (baseModel != null)
-                    {
-                        if (baseModel.ShouldSave)
+                 
+                        if (m.ShouldSave)
                         {
                             if (baseModel != null)
                             {
-                                successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(model);
+                                successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(m);
                             }
                             else
                             {
-
-                                ((BaseModel)model).CaseNumber = this._task.CaseNumber;
-                                successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(model);
+                                m.VehicleInsRecID = this._task.VehicleInsRecId;
+                                successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(m);
                             }
                         }
 
                         if (successFlag != 0)
                         {
+                            baseModel.ShouldSave = false;
                             await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
                         }
                     }
-                }
+                
             }
             catch (Exception)
             {

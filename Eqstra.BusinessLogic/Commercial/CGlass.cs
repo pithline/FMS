@@ -23,9 +23,9 @@ namespace Eqstra.BusinessLogic.Commercial
             this.ExtRearViewMirrorImgList = new ObservableCollection<ImageCapture>();
         }
        
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<CGlass>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<CGlass>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
 
         private string windscreenComment;

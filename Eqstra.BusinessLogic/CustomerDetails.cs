@@ -31,6 +31,14 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref contactName, value); }
         }
 
+        private long vehicleInsRecId;
+        [PrimaryKey]
+        public long VehicleInsRecId
+        {
+            get { return vehicleInsRecId; }
+            set { SetProperty(ref vehicleInsRecId, value); }
+
+        }
 
         private string contactNumber;
         [RestorableState]

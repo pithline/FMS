@@ -28,9 +28,9 @@ namespace Eqstra.BusinessLogic.Commercial
         }
 
         
-        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<CTyres>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<CTyres>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
         private string lFComment;
 

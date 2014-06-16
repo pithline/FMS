@@ -18,9 +18,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Model = new PGlass();
             ((BaseModel)this.Model).ShouldSave = false;
         }
-        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.CaseNumber == caseNumber);
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.VehicleInsRecID == vehicleInsRecID);
             if (this.Model == null)
             {
                 this.Model = new PGlass();

@@ -46,18 +46,19 @@ namespace Eqstra.BusinessLogic.Common
             {
                 TypeInfo typeInfo = context.GetType().GetTypeInfo();
                 IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
-                bool result = false;
-                propertyInfoList.AsParallel().ForAll(propInfo =>
+                
+                foreach(var propInfo in propertyInfoList)
                       {
                           string currentValue = Convert.ToString(propInfo.GetValue(context));
                           object originalvalue;
                           StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
                           if (!currentValue.Equals(Convert.ToString(originalvalue)))
                           {
-                              result = true;
+                              return  true;
+                              
                           }
-                      });
-                return result;
+                      }
+                return false;
             }
             catch (Exception)
             {

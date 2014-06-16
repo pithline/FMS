@@ -82,17 +82,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            }
                                 );
 
-                           string classname = baseModel.GetType().Name;
-
                            if (baseModel is PAccessories)
                            {
                                await this.EditPassengerAccessoriesToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PBodywork).Name))
+                           if (baseModel is PBodywork)
                            {
                                await this.EditPassengerBodyworkToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PVehicleDetails).Name))
+                           if (baseModel is PVehicleDetails)
                            {
                                await this.EditPassengerVehicleDetailsToSvcAsync();
                            }
@@ -100,43 +98,43 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                await this.EditPassengerTrimInteriorToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PTyreCondition).Name))
+                           if (baseModel is PTyreCondition)
                            {
                                await this.EditPassengerTyreConditionToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PGlass).Name))
+                           if (baseModel is PGlass)
                            {
                                await this.EditPassengerGlassToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PAccessories).Name))
+                           if (baseModel is PAccessories)
                            {
                                await this.EditCommercialAccessoriesToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CVehicleDetails).Name))
+                           if (baseModel is CVehicleDetails)
                            {
                                await this.EditCommercialVehicleDetailsToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CCabTrimInter).Name))
+                           if (baseModel is CCabTrimInter)
                            {
                                await this.EditCommercialTrimInteriorToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CTyres).Name))
+                           if (baseModel is CTyres)
                            {
                                await this.EditCommercialTyreConditionToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CGlass).Name))
+                           if (baseModel is CGlass)
                            {
                                await this.EditCommercialGlassToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CMechanicalCond).Name))
+                           if (baseModel is CMechanicalCond)
                            {
                                await this.EditCommercialMechConditionToSvcAsync();
                            }
-                           if (classname.Equals(typeof(CPOI).Name))
+                           if (baseModel is CPOI)
                            {
                                //await this.EditCommercialVehicleInspectionToSvcAsync();
                            }
-                           if (classname.Equals(typeof(PInspectionProof).Name))
+                           if (baseModel is PInspectionProof)
                            {
                                //await this.EditPassengerInspectionProofToSvcAsync();
                            }
@@ -152,8 +150,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
             catch (Exception ex)
             {
-                throw;
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task GetCustDetailsFromSvcAsync(string cusId)
@@ -197,10 +199,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         await SqliteHelper.Storage.InsertAllAsync(cusInsertList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
@@ -221,7 +227,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     List<Eqstra.BusinessLogic.Task> taskInsertList = new List<BusinessLogic.Task>();
                     List<Eqstra.BusinessLogic.Task> taskUpdateList = new List<BusinessLogic.Task>();
-                    result.response.AsParallel().ForAll(async mzkTask =>
+                    result.response.AsParallel().ForAll(mzkTask =>
                         {
                             var taskTosave = new Eqstra.BusinessLogic.Task
                                {
@@ -243,12 +249,19 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                    UserId = mzkTask.parmUserID,
                                    RegistrationNumber = mzkTask.parmRegistrationNum,
                                    AllocatedTo = _userInfo.Name,
-                                    VehicleInsRecId = mzkTask.parmRecID,
+                                   VehicleInsRecId = mzkTask.parmRecID,
                                    VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), mzkTask.parmVehicleType.ToString())
                                };
 
-                             await GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
-                             await GetVehicleDetailsAsync(mzkTask.parmRecID);
+                            GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
+                            if (mzkTask.parmVehicleType == MzkVehicleType.Passenger)
+                            {
+                                GetPVehicleDetailsAsync(mzkTask.parmCaseID);
+                            }
+                            else
+                            {
+                                GetPVehicleDetailsAsync(mzkTask.parmCaseID);
+                            }
                             if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
                             {
                                 taskUpdateList.Add(taskTosave);
@@ -277,29 +290,109 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                           });
             }
         }
-        async private System.Threading.Tasks.Task GetVehicleDetailsAsync(long recId)
+
+        async private System.Threading.Tasks.Task GetCVehicleDetailsAsync(string caseNumber)
         {
             try
             {
-                var resp = await client.readVehicleDetailsAsync(recId);
-                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Vehicle>();
+                if (_userInfo == null)
+                {
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
                 {
-                    List<Eqstra.BusinessLogic.Vehicle> vehicleInsertList = new List<BusinessLogic.Vehicle>();
-                    List<Eqstra.BusinessLogic.Vehicle> vehicleUpdateList = new List<BusinessLogic.Vehicle>();
-                    resp.response.AsParallel().ForAll(mzkVehi =>
+                    List<BusinessLogic.Commercial.CVehicleDetails> vehicleInsertList = new List<BusinessLogic.Commercial.CVehicleDetails>();
+                    List<BusinessLogic.Commercial.CVehicleDetails> vehicleUpdateList = new List<BusinessLogic.Commercial.CVehicleDetails>();
+                    resp.response.AsParallel().ForAll(v =>
+                    {
+
+                        var vehicleTosave = new BusinessLogic.Commercial.CVehicleDetails
                         {
-                            var vehicleTosave = new Eqstra.BusinessLogic.Vehicle
+                            ChassisNumber = v.parmChassisNumber.ToString(),
+                            Color = v.parmColor,
+                            Year = v.parmyear,
+                            ODOReading = v.parmODOReading.ToString(),
+                            Make = v.parmMake,
+                            EngineNumber = v.parmEngineNumber,
+                            VehicleInsRecID = v.parmVehicleInsRecID,
+                            RecID = v.parmRecID,
+                            CaseNumber = caseNumber,
+                            TableId = v.parmTableId,
+                            RegistrationNumber = v.parmRegNo,
+
+
+
+                        };
+
+                        if (vehicleData.Any(s => s.RegistrationNumber == v.parmRegNo))
+                        {
+                            vehicleUpdateList.Add(vehicleTosave);
+                        }
+                        else
+                        {
+                            vehicleInsertList.Add(vehicleTosave);
+                        }
+
+                    });
+
+                    if (vehicleUpdateList.Any())
+                        await SqliteHelper.Storage.UpdateAllAsync(vehicleUpdateList);
+
+                    if (vehicleInsertList.Any())
+                        await SqliteHelper.Storage.InsertAllAsync(vehicleInsertList);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
+            }
+        }
+
+        async private System.Threading.Tasks.Task GetPVehicleDetailsAsync(string caseNumber)
+        {
+            try
+            {
+                if (_userInfo == null)
+                {
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
+                if (resp.response != null && resp.response.Any())
+                {
+                    List<BusinessLogic.Passenger.PVehicleDetails> vehicleInsertList = new List<BusinessLogic.Passenger.PVehicleDetails>();
+                    List<BusinessLogic.Passenger.PVehicleDetails> vehicleUpdateList = new List<BusinessLogic.Passenger.PVehicleDetails>();
+                    resp.response.AsParallel().ForAll(v =>
+                        {
+
+                            var vehicleTosave = new BusinessLogic.Passenger.PVehicleDetails
                                {
-                                   ChassisNumber = mzkVehi.parmChassisNumber.ToString(),
-                                   Color = mzkVehi.parmColor,
-                                   ModelYear = DateTime.Parse(mzkVehi.parmyear),
-                                   RegistrationNumber = mzkVehi.parmRegNo,
-                                   VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), mzkVehi.parmVehicleType.ToString())
+                                   ChassisNumber = v.parmChassisNumber.ToString(),
+                                   Color = v.parmColor,
+                                   Year = v.parmyear,
+                                   ODOReading = v.parmODOReading.ToString(),
+                                   Make = v.parmMake,
+                                   EngineNumber = v.parmEngineNumber,
+                                   VehicleInsRecID = v.parmVehicleInsRecID,
+                                   RecID = v.parmRecID,
+                                   CaseNumber = caseNumber,
+                                   TableId = v.parmTableId,
+                                   RegistrationNumber = v.parmRegNo,
+
+
 
                                };
 
-                            if (vehicleData.Any(s => s.RegistrationNumber == mzkVehi.parmRegNo))
+                            if (vehicleData.Any(s => s.RegistrationNumber == v.parmRegNo))
                             {
                                 vehicleUpdateList.Add(vehicleTosave);
                             }
@@ -314,14 +407,18 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         await SqliteHelper.Storage.UpdateAllAsync(vehicleUpdateList);
 
                     if (vehicleInsertList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync(vehicleInsertList);
+                        await SqliteHelper.Storage.InsertAllAsync(vehicleInsertList);
 
+                }
             }
-            }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditPassengerVehicleDetailsToSvcAsync()
@@ -341,7 +438,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                        {
                            mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                            {
-                               parmChassisNumber = int.Parse(pVehicleDetails.ChassisNumber),
+                               parmChassisNumber = pVehicleDetails.ChassisNumber,
                                parmColor = pVehicleDetails.Color,
                                parmEngineNumber = pVehicleDetails.EngineNumber,
                                parmLisenceDiscCurrent = pVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
@@ -386,10 +483,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditPassengerAccessoriesToSvcAsync()
@@ -398,7 +499,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString()); 
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerAccessoriesContract> mzkMobiPassengerAccessoriesContractColl = new ObservableCollection<MzkMobiPassengerAccessoriesContract>();
@@ -522,10 +623,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditPassengerBodyworkToSvcAsync()
@@ -592,6 +697,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 var res = await client.editPassengerBodyworkAsync(mzkMobiPassengerBodyworkContractColl, _userInfo.CompanyId);
 
                 var pBodyworkList = new ObservableCollection<PBodywork>();
+
                 if (res.response != null)
                 {
                     res.response.AsParallel().ForAll(x =>
@@ -640,10 +746,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditPassengerTrimInteriorToSvcAsync()
@@ -722,10 +832,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -797,7 +911,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                    RFTreadDepth = x.parmRFDepth,
                                    RRTreadDepth = x.parmRRDepth,
                                    SpareTreadDepth = x.parmSpareDepth,
-
+                                   VehicleInsRecID = x.parmVehicleInsRecID,
+                                   RecID = x.parmRecID,
+                                   TableId = x.parmTableId,
                                    IsLFFChecked = MZKConditionEnum.Fair == x.parmLFCondition ? true : false,
                                    IsLFGChecked = MZKConditionEnum.Good == x.parmLFCondition ? true : false,
                                    IsLFPChecked = MZKConditionEnum.Poor == x.parmLFCondition ? true : false,
@@ -818,10 +934,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PTyreCondition>(pTyreConditionList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -895,10 +1015,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<PGlass>(glassList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -946,9 +1070,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<PInspectionProof>(inspectionProofList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -968,7 +1097,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                                {
-                                   parmChassisNumber = int.Parse(cVehicleDetails.ChassisNumber),
+                                   parmChassisNumber = cVehicleDetails.ChassisNumber,
                                    parmColor = cVehicleDetails.Color,
                                    parmEngineNumber = cVehicleDetails.EngineNumber,
                                    parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
@@ -1013,10 +1142,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditCommercialGlassToSvcAsync()
@@ -1088,10 +1221,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CGlass>(glassList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -1185,10 +1322,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CAccessories>(cAccessoriesList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditCommercialTrimInteriorToSvcAsync()
@@ -1313,10 +1454,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditCommercialChassisBodyToSvcAsync()
@@ -1415,10 +1560,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditCommercialMechConditionToSvcAsync()
@@ -1517,10 +1666,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CMechanicalCond>(cMechanicalCondList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         async private System.Threading.Tasks.Task EditCommercialTyreConditionToSvcAsync()
@@ -1635,13 +1788,17 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     await SqliteHelper.Storage.UpdateAllAsync<CTyres>(cTyresList);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
-        async private System.Threading.Tasks.Task EditCommercialInspectionProofToSvcAsync(string taskId)
+        async private System.Threading.Tasks.Task EditCommercialInspectionProofToSvcAsync()
         {
             try
             {
@@ -1661,7 +1818,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                    parmCompanyRepSignDateTime = insProof.EQRDate,
                                    parmCustomerRepSignDateTime = insProof.CRDate,
                                    parmRecommendation = insProof.IsRetainChecked ? MZKRecommendationEnum.Retain : (insProof.IsSellChecked ? MZKRecommendationEnum.Sell : (insProof.IsNotFeasChecked ? MZKRecommendationEnum.NotFeasible : MZKRecommendationEnum.None)),
-                                   parmTaskId = taskId,
+                                   
                                    parmVehicleType = MzkVehicleType.Commercial,
                                    parmRecID = insProof.RecID,
                                    parmVehicleInspector = long.Parse(_userInfo.UserId),
@@ -1694,28 +1851,32 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 await SqliteHelper.Storage.UpdateAllAsync<CPOI>(cpoiList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
         public async System.Threading.Tasks.Task ConfirmTasksAsync()
-            {
+        {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return;
-            if (_userInfo == null)
-            {
-                _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-            }
-            var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(d => d.CaseNumber == x.CaseNumber) != null);
-            ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
+                if (_userInfo == null)
+                {
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(d => d.CaseNumber == x.CaseNumber) != null);
+                ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
 
-           
+
                 if (tasks != null)
                 {
                     foreach (var task in tasks)
@@ -1744,13 +1905,17 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmRecID = task.VehicleInsRecId
 
                             });
-                    var res = await client.updateConfirmationDateAsync(mzkTasks);
+                    var res = await client.updateConfirmationDateAsync(mzkTasks, _userInfo.CompanyId);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
 
         }
@@ -1794,7 +1959,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmUserID = task.UserId,
                                 parmVehicleType = (MzkVehicleType)Enum.Parse(typeof(MzkVehicleType), task.VehicleType.ToString()),
                                 parmProcessStep = task.ProcessStep,
-
+                                
                             });
                     });
                 }
@@ -1830,10 +1995,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
 
-                throw;
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
             }
         }
         public void Synchronize(Action syncExecute)
@@ -1856,7 +2025,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
 
         }
-
 
     }
 }

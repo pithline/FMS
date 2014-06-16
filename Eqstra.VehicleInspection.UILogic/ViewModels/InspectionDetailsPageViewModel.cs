@@ -37,6 +37,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;
+                ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"] = this.InspectionTask.VehicleInsRecId;
+
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
                 if (this.InspectionTask.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture)
                 {
@@ -78,8 +80,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                    navigationService.GoBack();
                     await VIServiceHelper.Instance.ConfirmTasksAsync();
+                    navigationService.GoBack();
                 }
 
           
@@ -126,20 +128,20 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)))
             {
-                this.CustomerDetails.Appointments.Add(
+                //this.CustomerDetails.Appointments.Add(
 
-                              new ScheduleAppointment()
-                              {
-                                  Subject = item.CaseNumber,
-                                  Location = item.Address,
-                                  StartTime = DateTime.Parse(item.ConfirmedDate.ToString("dd/MM/yyyy ") + item.ConfirmedTime.ToString("hh:mm:ss")),
-                                  EndTime = DateTime.Now.AddHours(2),
-                                  ReadOnly = true,
-                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                //              new ScheduleAppointment()
+                //              {
+                //                  Subject = item.CaseNumber,
+                //                  Location = item.Address,
+                //                  StartTime = DateTime.Parse(item.ConfirmedDate.ToString("dd/MM/yyyy ") + item.ConfirmedTime.ToString("hh:mm:ss")),
+                //                  EndTime = DateTime.Now.AddHours(2),
+                //                  ReadOnly = true,
+                //                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                //                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
-                              }
-                         );
+                //              }
+                //         );
             }
 
 
@@ -273,6 +275,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
                     this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
                     this.customerDetails.CaseNumber = this.InspectionTask.CaseNumber;
+                    this.customerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
                     this.customerDetails.Status = this.InspectionTask.Status;
                     this.customerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
                     this.customerDetails.Address = this.customer.Address;

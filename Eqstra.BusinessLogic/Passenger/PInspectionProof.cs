@@ -13,9 +13,9 @@ namespace Eqstra.BusinessLogic.Passenger
 {
     public class PInspectionProof : BaseModel
     {
-        public async override Task<BaseModel> GetDataAsync(string caseNumber)
+        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<PInspectionProof>(x => x.CaseNumber == caseNumber);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<PInspectionProof>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
         public PInspectionProof()
         {

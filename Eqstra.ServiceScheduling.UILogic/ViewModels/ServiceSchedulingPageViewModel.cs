@@ -82,6 +82,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
                     this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
                     this.CustomerDetails.CaseNumber = this._task.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this._task.VehicleInsRecId;
                     this.CustomerDetails.Status = this._task.Status;
                     this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
                     this.CustomerDetails.Address = this.Customer.Address;

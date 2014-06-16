@@ -14,8 +14,7 @@ namespace Eqstra.BusinessLogic.Base
 {
     abstract public class BaseModel : ValidatableBindableBase
     {
-        private string caseNumber;
-        [SQLite.Column("CaseNumber"), PrimaryKey]
+        private string caseNumber;        
         public string CaseNumber
         {
             get { return caseNumber; }
@@ -25,7 +24,7 @@ namespace Eqstra.BusinessLogic.Base
         private ObservableCollection<ValidationError> _errors = new ObservableCollection<ValidationError>();
 
         private long vehicleInsRecID;
-
+        [PrimaryKey]
         public long VehicleInsRecID
         {
             get { return vehicleInsRecID; }
@@ -78,7 +77,7 @@ namespace Eqstra.BusinessLogic.Base
             return ShouldSave =isOriginalchanged;
         }
 
-        public abstract System.Threading.Tasks.Task<BaseModel> GetDataAsync(string caseNumber);
+        public abstract System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID);
 
 
         public bool ValidateModel()

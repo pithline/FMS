@@ -103,6 +103,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     RegistrationNumber = item.RegistrationNumber,
                     CaseNumber = item.CaseNumber,
+                    VehicleInsRecId=item.VehicleInsRecId,
                     CaseType = item.CaseType,
                     Make = vehicleDetails.Make,
                     Description = vehicleDetails.Description,

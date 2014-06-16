@@ -24,8 +24,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        {
            _navigationService = navigationService;
            this.Model = new CVehicleDetails();
-           string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
-           LoadModelFromDbAsync(caseNumber);
+           long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
+           LoadModelFromDbAsync(vehicleInsRecID);
            this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
            {
                _navigationService.Navigate("ImageMarkup", this.Model);
@@ -34,9 +34,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
        public DelegateCommand GoToImageMarkupPageCommand { get; set; }
 
-       public async override System.Threading.Tasks.Task LoadModelFromDbAsync(string caseNumber)
+       public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
        {
-           this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.CaseNumber == caseNumber);
+           this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.RecID == vehicleInsRecID);
            if (this.Model == null)
            {
                this.Model = new CVehicleDetails();
@@ -50,17 +50,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
        {
            await base.TakePictureAsync(param);
-           string caseNumber = (string)ApplicationData.Current.LocalSettings.Values["CaseNumber"];
-           if (caseNumber != null)
+           long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
+           if (vehicleInsRecID != null)
            {
-               var viobj = await (this.Model as BaseModel).GetDataAsync(caseNumber);
+               var viobj = await (this.Model as BaseModel).GetDataAsync(vehicleInsRecID);
                if (viobj != null)
                {
                    var successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(this.Model);
                }
                else
                {
-                   ((BaseModel)this.Model).CaseNumber = caseNumber;
+                   ((BaseModel)this.Model).VehicleInsRecID = vehicleInsRecID;
                    var successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(this.Model);
                }
            }
