@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="MzkVehicleInspectionServiceGetCustDetailsResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceGetCustDetailsResponse</TypeInfo>
+   <TypeInfo>Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceGetCustDetailsResponse, Eqstra.VehicleInspection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

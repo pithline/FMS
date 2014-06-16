@@ -242,37 +242,25 @@
     <Content Include="Assets\user_profile.png" />
     <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateVehicleCollectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditAccessoryResponse.datasource">
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditBodyworkResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditBodyworkResponse.datasource">
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialMechConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditGlassResponse.datasource">
@@ -281,10 +269,19 @@
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditMechConditionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditTrimInteriorResponse.datasource">
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditTyreConditionResponse.datasource">
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditPassengerBodyworkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditPassengerMechConditionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceEditVehicleDetailsResponse.datasource">
@@ -299,28 +296,16 @@
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceReadVehicleDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceUpdateConfirmationDateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceUpdateStatusListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.VIService.MzkVehicleInspectionServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VIService\xppservice.disco" />
