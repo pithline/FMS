@@ -73,7 +73,7 @@ namespace Eqstra.BusinessLogic.Base
 
             if (PropertyHistory.Instance.StorageHistory.Any())
             {
-                isOriginalchanged = PropertyHistory.Instance.IsProperiesValuesChanged(this);
+                isOriginalchanged = PropertyHistory.Instance.IsPropertyOriginalValueChanged(this);
             }
             return ShouldSave =isOriginalchanged;
         }

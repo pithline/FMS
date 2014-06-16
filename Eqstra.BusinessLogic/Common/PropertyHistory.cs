@@ -28,40 +28,47 @@ namespace Eqstra.BusinessLogic.Common
                 StorageHistory.Clear();
                 TypeInfo typeInfo = baseModel.GetType().GetTypeInfo();
                 IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
-                foreach (var propInfo in propertyInfoList)
+                propertyInfoList.AsParallel().ForAll(propInfo =>
                 {
                     object value = propInfo.GetValue(baseModel);
                     StorageHistory.Add(propInfo.Name, value);
                 }
+                );
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
-        public bool IsProperiesValuesChanged(object context)
+        public bool IsPropertyOriginalValueChanged(object context)
         {
 
-            TypeInfo typeInfo = context.GetType().GetTypeInfo();
-            bool result = false;
-            IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
-            foreach (var propInfo in propertyInfoList)
+            try
             {
-                string value = Convert.ToString(propInfo.GetValue(context));
-
-                object origanlvalue;
-                StorageHistory.TryGetValue(propInfo.Name, out origanlvalue);
-                string origanlvaluestr = Convert.ToString(origanlvalue);
-
-                if (!String.IsNullOrEmpty(value))
+                TypeInfo typeInfo = context.GetType().GetTypeInfo();
+                bool result = false;
+                IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
+                foreach (var propInfo in propertyInfoList)
                 {
-                    if (!value.Equals(origanlvaluestr))
+                    string currentValue = Convert.ToString(propInfo.GetValue(context));
+                    object originalvalue;
+                    StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
+                    string originalvaluestr = Convert.ToString(originalvalue);
+                    if (!String.IsNullOrEmpty(currentValue))
                     {
-                        return true;
+                        if (!currentValue.Equals(originalvaluestr))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return result;
             }
-            return result;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
