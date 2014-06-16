@@ -100,8 +100,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             foreach (var t in tasks)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
-                t.CustomerName = cust.CustomerName;
-                t.Address = cust.Address;
+                if (cust != null)
+                {
+                    t.CustomerName = cust.CustomerName;
+                    t.Address = cust.Address; 
+                }
             }
             if (navigationParameter.Equals("AwaitInspectionDetail"))
             {

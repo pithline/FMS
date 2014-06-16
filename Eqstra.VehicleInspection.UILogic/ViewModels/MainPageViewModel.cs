@@ -78,7 +78,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 userInfo.CompanyId = "1000";
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                 await CreateTableAsync();
+                //  await CreateTableAsync();
                 //SyncData();
 
                 var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
@@ -88,18 +88,17 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 foreach (Eqstra.BusinessLogic.Task item in list)
                 {
                     var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
-                    item.CustomerName = cust.CustomerName;
-                    if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
+                    if (cust != null)
                     {
-                        item.ConfirmedDate = DateTime.Today.AddDays(-1);
-                        item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                        item.CustomerName = cust.CustomerName;
+                        item.Address = cust.Address;
                     }
+
                     item.ConfirmedDate = DateTime.Now;
-                    if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
-                    {
-                        item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
-                    }
-                    item.Address = cust.Address;
+                    //if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
+                    //{
+                    //    item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
+                    //}
                     //if (item.Status != BusinessLogic.Enums.TaskStatus.AwaitingInspection)
                     //{
                     //    this.Appointments.Add(new ScheduleAppointment
@@ -130,7 +129,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            }
                                 );
 
-                          await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                           await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                                  {
 
@@ -141,10 +140,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                        });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
         async private void SyncData()
