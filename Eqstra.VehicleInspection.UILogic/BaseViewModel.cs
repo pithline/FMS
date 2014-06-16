@@ -71,7 +71,7 @@ namespace Eqstra.VehicleInspection.UILogic
                         {
                             baseModel.ShouldSave = false;
                           string tableName= baseModel.GetType().Name;
-                          //await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                          await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
                         }
                     }
                     catch (Exception)

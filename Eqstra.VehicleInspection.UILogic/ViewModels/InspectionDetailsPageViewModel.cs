@@ -79,9 +79,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
                     navigationService.GoBack();
+                    await VIServiceHelper.Instance.ConfirmTasksAsync();
                 }
 
-                await VIServiceHelper.Instance.ConfirmTasksAsync();
+          
             }
             , () =>
             {
@@ -107,26 +108,26 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 this.NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
                 this.AllowEditing = true;
-                list = (tasks).Where(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitingConfirmation || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
+                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail));
             }
             if (navigationParameter.Equals("Total"))
             {
-                list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                this.AllowEditing = false;
+                list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
             }
             if (navigationParameter.Equals("MyTasks"))
             {
-
-                list = (tasks).Where(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance);
+                this.AllowEditing = false;
+                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
             }
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
-            foreach (var item in tasks.Where(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance))
+            foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)))
             {
                 this.CustomerDetails.Appointments.Add(
 
                               new ScheduleAppointment()
                               {
                                   Subject = item.CaseNumber,
-
                                   Location = item.Address,
                                   StartTime = DateTime.Parse(item.ConfirmedDate.ToString("dd/MM/yyyy ") + item.ConfirmedTime.ToString("hh:mm:ss")),
                                   EndTime = DateTime.Now.AddHours(2),

@@ -175,11 +175,11 @@
                                     <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="MM/dd/yyyy" HeaderText="CONFIRMED DATE" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridDateTimeColumn MappingName="ConfirmedDate" FormatString="MM/dd/yyyy" HeaderText="CONFIRMED DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTemplateColumn MappingName="ConfirmedTime" HeaderText="CONFIRMED TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" Background="Transparent"/>
+                                                <input:SfTimePicker IsHitTestVisible="False" Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" Background="Transparent"/>
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>

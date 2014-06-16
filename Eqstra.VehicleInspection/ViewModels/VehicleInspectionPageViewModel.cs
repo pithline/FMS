@@ -48,7 +48,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.CustomerDetails = new CustomerDetails();
 
                 this.PrevViewStack = new Stack<UserControl>();
-                LoadDemoAppointments();
+               // LoadDemoAppointments();
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
@@ -173,42 +173,50 @@ namespace Eqstra.VehicleInspection.ViewModels
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            this.InspectionHistList = new ObservableCollection<InspectionHistory>{
+            try
+            {
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                this.InspectionHistList = new ObservableCollection<InspectionHistory>{
                 new InspectionHistory{InspectionResult=new List<string>{"Engine and brake oil replacement","Wheel alignment"},CustomerId="1",InspectedBy="Jon Tabor",InspectedOn = DateTime.Now},
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Robert Green",InspectedOn = DateTime.Now},
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Christopher",InspectedOn = DateTime.Now},
             };
-            _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
-            App.Task = _task;
-            var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
-            ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
-            var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
-            await GetCustomerDetailsAsync();
-            if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
-            {
-                this.InspectionUserControls.Add(new VehicleDetailsUserControl());
-                this.InspectionUserControls.Add(new TrimIntUserControl());
-                this.InspectionUserControls.Add(new BodyworkUserControl());
-                this.InspectionUserControls.Add(new GlassUserControl());
-                this.InspectionUserControls.Add(new AccessoriesUserControl());
-                this.InspectionUserControls.Add(new TyreConditionUserControl());
-                this.InspectionUserControls.Add(new MechanicalCondUserControl());
-                this.InspectionUserControls.Add(new InspectionProofUserControl());
+                _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
+                App.Task = _task;
+                var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+                ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
+                var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == _task.RegistrationNumber);
+                await GetCustomerDetailsAsync();
+                if (vehicle.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
+                {
+                    this.InspectionUserControls.Add(new VehicleDetailsUserControl());
+                    this.InspectionUserControls.Add(new TrimIntUserControl());
+                    this.InspectionUserControls.Add(new BodyworkUserControl());
+                    this.InspectionUserControls.Add(new GlassUserControl());
+                    this.InspectionUserControls.Add(new AccessoriesUserControl());
+                    this.InspectionUserControls.Add(new TyreConditionUserControl());
+                    this.InspectionUserControls.Add(new MechanicalCondUserControl());
+                    this.InspectionUserControls.Add(new InspectionProofUserControl());
+                }
+                else
+                {
+                    this.InspectionUserControls.Add(new CommercialVehicleDetailsUserControl());
+                    this.InspectionUserControls.Add(new CabTrimInterUserControl());
+                    this.InspectionUserControls.Add(new ChassisBodyUserControl());
+                    this.InspectionUserControls.Add(new CGlassUserControl());
+                    this.InspectionUserControls.Add(new CAccessoriesUserControl());
+                    this.InspectionUserControls.Add(new CTyresUserControl());
+                    this.InspectionUserControls.Add(new CMechanicalCondUserControl());
+                    this.InspectionUserControls.Add(new CPOIUserControl());
+                }
+                NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
+                this.FrameContent = this.inpectionUserControls[0];
             }
-            else
+            catch (Exception)
             {
-                this.InspectionUserControls.Add(new CommercialVehicleDetailsUserControl());
-                this.InspectionUserControls.Add(new CabTrimInterUserControl());
-                this.InspectionUserControls.Add(new ChassisBodyUserControl());
-                this.InspectionUserControls.Add(new CGlassUserControl());
-                this.InspectionUserControls.Add(new CAccessoriesUserControl());
-                this.InspectionUserControls.Add(new CTyresUserControl());
-                this.InspectionUserControls.Add(new CMechanicalCondUserControl());
-                this.InspectionUserControls.Add(new CPOIUserControl());
+                
+                throw;
             }
-            NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
-            this.FrameContent = this.inpectionUserControls[0];
         }
 
         private UserControl frameContent;
