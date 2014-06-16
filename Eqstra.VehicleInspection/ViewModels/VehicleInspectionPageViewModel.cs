@@ -95,6 +95,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     return this.NextViewStack.Count > 1;
                 });
 
+          
                 this.PreviousCommand = new DelegateCommand(async () =>
                 {
                     this.IsCommandBarOpen = false;
@@ -132,10 +133,6 @@ namespace Eqstra.VehicleInspection.ViewModels
             {
                 throw;
             }
-            CloseCommand = new DelegateCommand(() =>
-        {
-            IsFlyoutOpen = false;
-        });
 
         }
 
@@ -144,8 +141,8 @@ namespace Eqstra.VehicleInspection.ViewModels
             this.CustomerDetails.Appointments = AppSettingData.Appointments;
 
 
-          //  Eqstra.BusinessLogic.DrivingDuration durationData = SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.DrivingDuration>(w => w.CaseNumber == this._task.CaseNumber);
-       
+            //  Eqstra.BusinessLogic.DrivingDuration durationData = SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.DrivingDuration>(w => w.CaseNumber == this._task.CaseNumber);
+
 
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
@@ -322,15 +319,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             get { return customer; }
             set { SetProperty(ref customer, value); }
         }
-        public DelegateCommand CloseCommand { get; set; }
-
-        private bool isFlyoutOpen;
-
-        public bool IsFlyoutOpen
-        {
-            get { return isFlyoutOpen; }
-            set { this.SetProperty(ref isFlyoutOpen, value); }
-        }
+       
 
         async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
         {

@@ -275,6 +275,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             try
             {
                 var resp = await client.readVehicleDetailsAsync(recId);
+                
             }
             catch (Exception)
             {

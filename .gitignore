@@ -107,6 +107,7 @@ csx
 AppPackages/
 
 # Others
+Eqstra.VehicleInspection/bin
 sql/
 *.Cache
 ClientBin/

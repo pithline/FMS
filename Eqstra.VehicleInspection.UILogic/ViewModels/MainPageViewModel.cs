@@ -117,7 +117,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                 this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
 
-                this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
                     VIServiceHelper.Instance.Synchronize(async () =>

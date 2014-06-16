@@ -29,7 +29,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public InspectionDetailsPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            this.inspectionList = new ObservableCollection<BusinessLogic.Task>();
+            this.InspectionList = new ObservableCollection<BusinessLogic.Task>();
             this.CustomerDetails = new CustomerDetails();
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
@@ -144,7 +144,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
 
 
-            foreach (var item in tasks)
+            foreach (var item in list)
             {
                 this.InspectionList.Add(item);
             }
