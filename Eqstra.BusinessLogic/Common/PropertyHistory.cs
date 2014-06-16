@@ -42,26 +42,21 @@ namespace Eqstra.BusinessLogic.Common
         }
         public bool IsPropertyOriginalValueChanged(object context)
         {
-
             try
             {
                 TypeInfo typeInfo = context.GetType().GetTypeInfo();
-                bool result = false;
                 IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
-                foreach (var propInfo in propertyInfoList)
-                {
-                    string currentValue = Convert.ToString(propInfo.GetValue(context));
-                    object originalvalue;
-                    StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
-                    string originalvaluestr = Convert.ToString(originalvalue);
-                    if (!String.IsNullOrEmpty(currentValue))
-                    {
-                        if (!currentValue.Equals(originalvaluestr))
-                        {
-                            return true;
-                        }
-                    }
-                }
+                bool result = false;
+                propertyInfoList.AsParallel().ForAll(propInfo =>
+                      {
+                          string currentValue = Convert.ToString(propInfo.GetValue(context));
+                          object originalvalue;
+                          StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
+                          if (!currentValue.Equals(Convert.ToString(originalvalue)))
+                          {
+                              result = true;
+                          }
+                      });
                 return result;
             }
             catch (Exception)
