@@ -57,11 +57,11 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     this._task.Status = BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
-                    var currentModel = ((BaseViewModel)this.prevViewStack.FirstOrDefault().DataContext).Model;
+                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model;
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
-                    this.IsCommandBarOpen = false;
-                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    
+                   // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                 }, () => { return this.NextViewStack.Count == 1; });
 
                 this._eventAggregator.GetEvent<ErrorsRaisedEvent>().Subscribe((errors) =>
@@ -69,7 +69,8 @@ namespace Eqstra.VehicleInspection.ViewModels
                     Errors = errors;
                     OnPropertyChanged("Errors");
                     ShowValidationSummary = true;
-                });
+                    OnPropertyChanged("ShowValidationSummary");
+                },ThreadOption.UIThread);
 
                 this.NextCommand = new DelegateCommand(async () =>
                 {

@@ -19,7 +19,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Proof of Inspection" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Center"  Margin="0 0 0 10"/>
-                    <Button Style="{StaticResource TransparentBtn}"  VerticalAlignment="Center" Margin="10 0 0 10" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
+                    <Button Style="{StaticResource TransparentBtn}" Visibility="Collapsed" VerticalAlignment="Center" Margin="10 0 0 10" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
                         <Image Source="ms-appx:///Assets/save.png"/>
                     </Button>
                 </StackPanel>
@@ -47,7 +47,7 @@
                             <TimePicker IsHitTestVisible="False" Time="{Binding Path=Model.CRTime, Mode=TwoWay}"/>
                         </StackPanel>
                         <TextBlock Text="Comment" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
-                        <TextBox Text="{Binding Path=Model.CRSignComment,Mode=TwoWay}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Width="400" Height="200" VerticalAlignment="Center" />
+                        <TextBox AcceptsReturn="True" IsTextPredictionEnabled="True" Text="{Binding Path=Model.CRSignComment,Mode=TwoWay}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Width="400" Height="200" VerticalAlignment="Center" />
                         <TextBlock Text="Eqstra Representative Signature" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
                         <mzk:MzkSignature Title=""  FileName="{Binding EQRSignFileName,Mode=TwoWay}" HorizontalAlignment="Left" Margin="0 10" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="Date/Time" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
@@ -57,7 +57,7 @@
                             <TimePicker IsHitTestVisible="False" Time="{Binding Path=Model.EQRTime, Mode=TwoWay}"/>
                         </StackPanel >
                         <TextBlock Text="Comment" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
-                        <TextBox Text="{Binding Path=Model.EQRSignComment,Mode=TwoWay}" Grid.Row="5" HorizontalAlignment="Left" Width="400" Height="200" Grid.Column="1" VerticalAlignment="Center" />
+                        <TextBox AcceptsReturn="True" IsTextPredictionEnabled="True" Text="{Binding Path=Model.EQRSignComment,Mode=TwoWay}" Grid.Row="5" HorizontalAlignment="Left" Width="400" Height="200" Grid.Column="1" VerticalAlignment="Center" />
                     </Grid>
                 </Border>
             </Grid>
