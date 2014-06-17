@@ -158,7 +158,7 @@
   <xs:element name="MzkVehicleInspectionServiceEditPassengerMechConditionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q20:ArrayOfMzkMobiPassengerBodyworkContract" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q20:ArrayOfMzkMobiPassengerMechConditionContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -275,20 +275,22 @@
   </xs:element>
   <xs:element name="MzkVehicleInspectionServiceUpdateConfirmationDateResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q33:ArrayOfMzkTasksContract" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="MzkVehicleInspectionServiceUpdateStatusListRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q33:ArrayOfMzkTasksContract" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q34:ArrayOfMzkTasksContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="MzkVehicleInspectionServiceUpdateStatusListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q34:ArrayOfMzkTasksContract" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q35:ArrayOfMzkTasksContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -303,7 +305,7 @@
   <xs:element name="MzkVehicleInspectionServiceValidateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q35:MzkValidateUserContract" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q36:MzkValidateUserContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -106,7 +106,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                await this.EditPassengerGlassToSvcAsync();
                            }
-                           if (baseModel is PAccessories)
+                           if (baseModel is PMechanicalCond)
+                           {
+                               await this.EditPassengerMechanicalConditionAsync();
+                           }
+                           if (baseModel is CAccessories)
                            {
                                await this.EditCommercialAccessoriesToSvcAsync();
                            }
@@ -132,11 +136,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            }
                            if (baseModel is CPOI)
                            {
-                               //await this.EditCommercialVehicleInspectionToSvcAsync();
+                               await this.EditCommercialInspectionProofToSvcAsync();
                            }
                            if (baseModel is PInspectionProof)
                            {
-                               //await this.EditPassengerInspectionProofToSvcAsync();
+                               await this.EditPassengerInspectionProofToSvcAsync();
                            }
 
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -952,7 +956,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pGlassData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PGlass>()).Where(x => x.ShouldSave);
 
@@ -1038,22 +1042,28 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             var mechConditionContract = new ObservableCollection<MzkMobiPassengerMechConditionContract>();
             machTable.AsParallel().ForAll(m =>
             mechConditionContract.Add(
-               new MzkMobiPassengerMechConditionContract{parmVehicleInsRecID = m.VehicleInsRecID,
-                parmRecID = m.RecID,
-               parmRemarks = m.Remarks
+               new MzkMobiPassengerMechConditionContract
+               {
+                   parmVehicleInsRecID = m.VehicleInsRecID,
+                   parmRecID = m.RecID,
+                   parmRemarks = m.Remarks
                }
            ));
             var res = await client.editPassengerMechConditionAsync(mechConditionContract, _userInfo.CompanyId);
             var pMechConditionColl = new ObservableCollection<PMechanicalCond>();
-            if (res.response !=null)
+            if (res.response != null)
             {
-                res.response.AsParallel().ForAll(m => {
-                 //pMechConditionColl.Add(new PMechanicalCond {Remarks=m})
+                foreach (var result in res.response.Where(x => x.parmRecID == 0))
+                {
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<PMechanicalCond>(new PMechanicalCond { Remarks = result.parmRemarks, RecID = result.parmRecID, VehicleInsRecID = result.parmVehicleInsRecID });
                 }
-                 );
+                foreach (var result in res.response.Where(x => x.parmRecID != 0))
+                {
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<PMechanicalCond>(new PMechanicalCond { RecID = result.parmRecID, Remarks = result.parmRemarks, VehicleInsRecID = result.parmVehicleInsRecID });
+                }
             }
         }
-        async private System.Threading.Tasks.Task EditPassengerInspectionProofToSvcAsync(string taskId)
+        async private System.Threading.Tasks.Task EditPassengerInspectionProofToSvcAsync()
         {
             try
             {
@@ -1073,7 +1083,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                      parmComments = insProof.CRSignComment,
                      parmCompanyRepSignDateTime = insProof.EQRDate,
                      parmCustomerRepSignDateTime = insProof.CRDate,
-                     parmTaskId = taskId,
+                     
                      parmVehicleType = MzkVehicleType.Passenger,
                      parmRecID = insProof.RecID,
                      parmVehicleInspector = long.Parse(_userInfo.UserId)

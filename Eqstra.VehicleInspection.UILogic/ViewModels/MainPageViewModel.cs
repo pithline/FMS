@@ -87,8 +87,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 await GetTasksFromDbAsync();
                 this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                 this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
-
                 this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
+
+                GetAppointments();
+
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
                     VIServiceHelper.Instance.Synchronize(async () =>
@@ -120,6 +122,29 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+            }
+        }
+
+        private void GetAppointments()
+        {
+            foreach (var item in this.PoolofTasks.Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)))
+            {
+                var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                           item.ConfirmedTime.Second);
+                this.Appointments.Add(
+
+                              new ScheduleAppointment()
+                              {
+                                  Subject = item.CaseNumber,
+                                  Location = item.Address,
+                                  StartTime = startTime,
+                                  EndTime = startTime.AddHours(1),
+                                  ReadOnly = true,
+                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                              }
+                         );
             }
         }
 

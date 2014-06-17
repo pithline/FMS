@@ -39,7 +39,7 @@
     </UserControl.Resources>
   
     <Grid>
-        <schedule:SfSchedule  ScheduleType="Day" AllowEditing="False" EnableReminderTimer="True"  Appointments="{Binding Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="7" WorkEndHour="16" TimeInterval="OneHour">
+        <schedule:SfSchedule ContextMenuType="RadialMenu" ScheduleType="Day" AllowEditing="False" EnableReminderTimer="True"  Appointments="{Binding Appointments}" Grid.Column="1" ShowNonWorkingHours="True" TimeInterval="OneHour">
 
         </schedule:SfSchedule>
     </Grid>

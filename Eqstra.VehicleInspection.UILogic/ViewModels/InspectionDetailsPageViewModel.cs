@@ -84,7 +84,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     //await VIServiceHelper.Instance.ConfirmTasksAsync();
                     IsBusy = false;
                     navigationService.GoBack();
-                }          
+                }
             }
             , () =>
             {
@@ -99,14 +99,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             IEnumerable<Eqstra.BusinessLogic.Task> list = null;
             this.NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
             var tasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
-            
+
             foreach (var t in tasks)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
                 if (cust != null)
                 {
                     t.CustomerName = cust.CustomerName;
-                    t.Address = cust.Address; 
+                    t.Address = cust.Address;
                 }
             }
             if (navigationParameter.Equals("AwaitInspectionDetail"))
@@ -128,20 +128,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)))
             {
-                //this.CustomerDetails.Appointments.Add(
+                var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                           item.ConfirmedTime.Second);
+                this.CustomerDetails.Appointments.Add(
 
-                //              new ScheduleAppointment()
-                //              {
-                //                  Subject = item.CaseNumber,
-                //                  Location = item.Address,
-                //                  StartTime = DateTime.Parse(item.ConfirmedDate.ToString("dd/MM/yyyy ") + item.ConfirmedTime.ToString("hh:mm:ss")),
-                //                  EndTime = DateTime.Now.AddHours(2),
-                //                  ReadOnly = true,
-                //                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                //                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                              new ScheduleAppointment()
+                              {
+                                  Subject = item.CaseNumber,
+                                  Location = item.Address,
+                                  StartTime = startTime,
+                                  EndTime = startTime.AddHours(1),
+                                  ReadOnly = true,
+                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
-                //              }
-                //         );
+                              }
+                         );
             }
 
 

@@ -31,8 +31,7 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             try
             {
-                var t = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x=>x.ShouldSave == false);
-                return await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber.Equals(vehicleInsRecID));
+                return await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.VehicleInsRecID.Equals(vehicleInsRecID));
             }
             catch (Exception ex)
             {

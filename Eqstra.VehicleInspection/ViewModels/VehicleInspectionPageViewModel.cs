@@ -48,7 +48,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 this.CustomerDetails = new CustomerDetails();
 
                 this.PrevViewStack = new Stack<UserControl>();
-               // LoadDemoAppointments();
+                // LoadDemoAppointments();
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
@@ -95,7 +95,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     return this.NextViewStack.Count > 1;
                 });
 
-          
+
                 this.PreviousCommand = new DelegateCommand(async () =>
                 {
                     this.IsCommandBarOpen = false;
@@ -182,7 +182,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 App.Task = _task;
                 //var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
-                
+
                 await GetCustomerDetailsAsync();
                 if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
                 {
@@ -211,7 +211,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -327,7 +327,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             get { return customer; }
             set { SetProperty(ref customer, value); }
         }
-       
+
 
         async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
         {
@@ -363,29 +363,30 @@ namespace Eqstra.VehicleInspection.ViewModels
                 if (this._task != null)
                 {
                     var m = (BaseModel)model;
-                    var baseModel = await (model as BaseModel).GetDataAsync(this._task.VehicleInsRecId);
                     var successFlag = 0;
-                 
-                        if (m.ShouldSave)
-                        {
-                            if (baseModel != null)
-                            {
-                                successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(m);
-                            }
-                            else
-                            {
-                                m.VehicleInsRecID = this._task.VehicleInsRecId;
-                                successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(m);
-                            }
-                        }
+                    if (m.ShouldSave)
+                    {
+                        var baseModel = await (model as BaseModel).GetDataAsync(this._task.VehicleInsRecId);
 
-                        if (successFlag != 0)
+
+                        if (baseModel != null)
                         {
-                            baseModel.ShouldSave = false;
-                            await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                            successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(m);
+                        }
+                        else
+                        {
+                            m.VehicleInsRecID = this._task.VehicleInsRecId;
+                            successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(m);
                         }
                     }
-                
+
+                    if (successFlag != 0)
+                    {
+                        m.ShouldSave = false;
+                        await VIServiceHelper.Instance.SyncFromSvcAsync(m);
+                    }
+                }
+
             }
             catch (Exception)
             {
