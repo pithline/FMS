@@ -122,6 +122,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                await this.EditCommercialTrimInteriorToSvcAsync();
                            }
+                           if (baseModel is CChassisBody)
+                           {
+                               await this.EditCommercialChassisBodyToSvcAsync();
+                           }
                            if (baseModel is CTyres)
                            {
                                await this.EditCommercialTyreConditionToSvcAsync();
@@ -442,20 +446,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                        {
                            mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                            {
-                               parmChassisNumber = pVehicleDetails.ChassisNumber,
-                               parmColor = pVehicleDetails.Color,
-                               parmEngineNumber = pVehicleDetails.EngineNumber,
                                parmLisenceDiscCurrent = pVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
-                               parmlisenceDiscExpiryDate = pVehicleDetails.LicenseDiscExpireDate,
-                               parmMake = pVehicleDetails.Make,
-                               parmODOReading = Decimal.Parse(pVehicleDetails.ODOReading),
                                parmRecID = pVehicleDetails.RecID,
                                parmRegNo = pVehicleDetails.RegistrationNumber,
-                               parmSparseKeyShown = pVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
-                               parmSparseKeyTested = pVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
                                parmTableId = pVehicleDetails.TableId,
-                               parmVehicleInsRecID = pVehicleDetails.VehicleInsRecID,
-                               parmyear = pVehicleDetails.Year
+                               parmVehicleInsRecID = pVehicleDetails.VehicleInsRecID
 
                            });
                        });
@@ -468,20 +463,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     resp.response.AsParallel().ForAll(x =>
                 pVehicleDetailsList.Add(new PVehicleDetails
                 {
-                    ChassisNumber = x.parmChassisNumber.ToString(),
-                    Color = x.parmColor,
-                    EngineNumber = x.parmEngineNumber,
                     IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                    LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate,
-                    Make = x.parmMake,
-                    ODOReading = x.parmODOReading.ToString(),
                     RecID = x.parmRecID,
                     RegistrationNumber = x.parmRegNo,
-                    IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
-                    IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
                     TableId = x.parmTableId,
-                    VehicleInsRecID = x.parmVehicleInsRecID,
-                    Year = x.parmyear,
+                    VehicleInsRecID = x.parmVehicleInsRecID
 
                 }));
                     await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
@@ -1079,12 +1065,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
              {
                  MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
                  {
-                     parmCaseId = insProof.CaseNumber,
-                     parmComments = insProof.CRSignComment,
+                     parmCustomerComments = insProof.CRSignComment,
+                     parmComments = insProof.EQRSignComment,
                      parmCompanyRepSignDateTime = insProof.EQRDate,
                      parmCustomerRepSignDateTime = insProof.CRDate,
-                     
-                     parmVehicleType = MzkVehicleType.Passenger,
                      parmRecID = insProof.RecID,
                      parmVehicleInspector = long.Parse(_userInfo.UserId)
                  });
@@ -1098,7 +1082,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     res.response.AsParallel().ForAll(x =>
                                inspectionProofList.Add(new PInspectionProof
                                {
-                                   CaseNumber = x.parmCaseId,
                                    EQRDate = x.parmCompanyRepSignDateTime,
                                    CRDate = x.parmCustomerRepSignDateTime,
                                    CRSignComment = x.parmComments,
@@ -1134,21 +1117,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                                {
-                                   parmChassisNumber = cVehicleDetails.ChassisNumber,
-                                   parmColor = cVehicleDetails.Color,
-                                   parmEngineNumber = cVehicleDetails.EngineNumber,
                                    parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
                                    parmlisenceDiscExpiryDate = cVehicleDetails.LicenseDiscExpireDate,
-                                   parmMake = cVehicleDetails.Make,
-                                   parmODOReading = Decimal.Parse(cVehicleDetails.ODOReading),
                                    parmRecID = cVehicleDetails.RecID,
                                    parmRegNo = cVehicleDetails.RegistrationNumber,
                                    parmSparseKeyShown = cVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
                                    parmSparseKeyTested = cVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
                                    parmTableId = cVehicleDetails.TableId,
-                                   parmVehicleInsRecID = cVehicleDetails.VehicleInsRecID,
-                                   parmyear = cVehicleDetails.Year
-
+                                   parmVehicleInsRecID = cVehicleDetails.VehicleInsRecID
                                });
                            });
                 }
@@ -1160,20 +1136,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     resp.response.AsParallel().ForAll(x =>
                                cVehicleDetailsList.Add(new CVehicleDetails
                                {
-                                   ChassisNumber = x.parmChassisNumber.ToString(),
-                                   Color = x.parmColor,
-                                   EngineNumber = x.parmEngineNumber,
                                    IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
                                    LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate,
-                                   Make = x.parmMake,
-                                   ODOReading = x.parmODOReading.ToString(),
                                    RecID = x.parmRecID,
                                    RegistrationNumber = x.parmRegNo,
                                    IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
                                    IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
                                    TableId = x.parmTableId,
-                                   VehicleInsRecID = x.parmVehicleInsRecID,
-                                   Year = x.parmyear,
+                                   VehicleInsRecID = x.parmVehicleInsRecID
 
                                }));
                 }

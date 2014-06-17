@@ -99,8 +99,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            {
 
                                AppSettings.Instance.IsSynchronizing = 1;
-                           }
-                                );
+                           });
 
                            await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -109,8 +108,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                      await GetTasksFromDbAsync();
                                      this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
                                      this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
-
                                      this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
+                                     GetAppointments();
                                      AppSettings.Instance.IsSynchronizing = 0;
                                      AppSettings.Instance.Synced = true;
                                  }
