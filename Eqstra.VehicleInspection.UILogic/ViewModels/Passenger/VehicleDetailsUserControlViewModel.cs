@@ -11,13 +11,14 @@ using Eqstra.BusinessLogic.Base;
 using Windows.Storage;
 using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Common;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class VehicleDetailsUserControlViewModel : BaseViewModel
     {
         INavigationService _navigationService;
-        public VehicleDetailsUserControlViewModel(INavigationService navigationService)
+        public VehicleDetailsUserControlViewModel(INavigationService navigationService ,IEventAggregator eventAggregator):base(eventAggregator)
         {
             _navigationService = navigationService;
             this.Model = new PVehicleDetails();

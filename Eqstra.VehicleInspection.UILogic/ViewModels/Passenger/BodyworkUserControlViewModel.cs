@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class BodyworkUserControlViewModel : BaseViewModel
     {
-        public BodyworkUserControlViewModel()
+        public BodyworkUserControlViewModel(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             this.Model = new PBodywork();
         }

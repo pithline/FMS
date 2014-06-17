@@ -4,6 +4,7 @@ using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
@@ -20,7 +21,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
      
        INavigationService _navigationService;
-       public CommercialVehicleDetailsUserControlViewModel(INavigationService navigationService)
+       public CommercialVehicleDetailsUserControlViewModel(INavigationService navigationService,IEventAggregator eventAggregator):base(eventAggregator)
        {
            _navigationService = navigationService;
            this.Model = new CVehicleDetails();

@@ -7,12 +7,14 @@ using Eqstra.BusinessLogic.Passenger;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Common;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class AccessoriesUserControlViewModel : BaseViewModel
     {
-        public AccessoriesUserControlViewModel()
+        public AccessoriesUserControlViewModel(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             this.Model =new PAccessories();
         }

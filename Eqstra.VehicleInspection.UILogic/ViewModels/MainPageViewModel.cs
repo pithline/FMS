@@ -4,6 +4,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.VIService;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -32,7 +33,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
 
-        public MainPageViewModel()
+        public MainPageViewModel(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
 
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();

@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
    public class CGlassUserControlViewModel : BaseViewModel
     {
-       public CGlassUserControlViewModel()
+       public CGlassUserControlViewModel(IEventAggregator eventAggregator)
+           : base(eventAggregator)
        {
            this.Model = new CGlass();
        }

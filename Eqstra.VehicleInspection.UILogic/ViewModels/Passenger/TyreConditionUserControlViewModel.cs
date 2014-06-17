@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class TyreConditionUserControlViewModel : BaseViewModel
     {
-        public TyreConditionUserControlViewModel()
+        public TyreConditionUserControlViewModel(IEventAggregator eventAggregator):base(eventAggregator)
         {
             this.Model = new PTyreCondition();
         }
