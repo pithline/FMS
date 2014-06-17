@@ -17,8 +17,8 @@
             </Grid.RowDefinitions>
  
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Mechanical Condition"  VerticalAlignment="Center" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 10"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}"  CommandParameter="{Binding Model}">
+                <TextBlock Text="Mechanical Condition"  VerticalAlignment="Bottom" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 5"/>
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}"  CommandParameter="{Binding Model}">
                     <Image Source="ms-appx:///Assets/save.png"/>
                 </Button>
             </StackPanel>

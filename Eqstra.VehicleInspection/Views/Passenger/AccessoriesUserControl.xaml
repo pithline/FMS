@@ -20,8 +20,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Accessories" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Center" Margin="0 0 0 10"/>
-                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 10"   VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
+                <TextBlock Text="Accessories" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Bottom" Margin="0 0 0 5"/>
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"   VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
                     <Image Source="ms-appx:///Assets/save.png"/>
                 </Button>
             </StackPanel>
