@@ -46,6 +46,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             try
             {
                 _navigationService = navigationService;
+                this._eventAggregator = eventAggregator;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
 
