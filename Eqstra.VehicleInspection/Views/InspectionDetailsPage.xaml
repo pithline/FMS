@@ -11,7 +11,8 @@
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
      xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"    
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"  
+    xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d">
     <Page.Resources>
@@ -36,139 +37,141 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}" AnimationType="DoubleCircle">
+        <Grid Style="{StaticResource LayoutRootStyle}">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Back button and page title -->
-        <Grid Background="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+            <!-- Back button and page title -->
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
 				Style="{StaticResource NavigationBackButtonNormalStyle}"
 				VerticalAlignment="Center"
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
-                    <Button.Content>
-                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
-                    </Button.Content>
-                </Button>
-                <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
+                        <Button.Content>
+                            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                        </Button.Content>
+                    </Button>
+                    <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
-            </StackPanel>
-            <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
+                </StackPanel>
+                <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
 
 
-        </Grid>
-
-
-        <Grid Grid.Row="1" Margin="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Margin="10 0 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
             </Grid>
 
-            <Grid Grid.Column="1" Margin="20 0 20 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Tasks" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <SearchBox Grid.Row="0" ChooseSuggestionOnEnter="True" Margin="0 0 0 10"  HorizontalAlignment="Right" PlaceholderText="Type to filter..." x:Name="filterBox"  FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Column="0" Width="250"/>
-                <Border Grid.Row="1"  BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <grid:SfDataGrid x:Name="detailsGrid" ShowBusyIndicator="True" Grid.Row="0" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
-                            <grid:SfDataGrid.Columns>
-                                <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn  MappingName="ContactNumber" HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
-                                    <grid:GridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image />
-                                                <TextBlock Text="{Binding ContactNumber}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </grid:GridTemplateColumn.CellTemplate>
 
-                                </grid:GridTemplateColumn>
-                                <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn MappingName="ConfirmedDate" HeaderText="CONFIRMED DATE" AllowEditing="{Binding AllowEditing }"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
-                                    <grid:GridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <input:SfDatePicker Value="{Binding ConfirmedDate,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing}" Background="Transparent"/>
-                                        </DataTemplate>
-                                    </grid:GridTemplateColumn.CellTemplate>
-                                </grid:GridTemplateColumn>
-                                <grid:GridTemplateColumn MappingName="ConfirmedTime" HeaderText="CONFIRMED TIME" AllowEditing="{Binding AllowEditing}"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
-                                    <grid:GridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing}" Background="Transparent"/>
-                                        </DataTemplate>
-                                    </grid:GridTemplateColumn.CellTemplate>
-                                </grid:GridTemplateColumn>
-                            </grid:SfDataGrid.Columns>
-                        </grid:SfDataGrid>
+            <Grid Grid.Row="1" Margin="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                        <ListView x:Name="snapedListView"  Grid.Row="0" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" SelectionChanged="snapedListView_SelectionChanged" 
+                <Grid Grid.Column="0" Margin="10 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                    <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="20 0 20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Tasks" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                    <SearchBox Grid.Row="0" ChooseSuggestionOnEnter="True" Margin="0 0 0 10"  HorizontalAlignment="Right" PlaceholderText="Type to filter..." x:Name="filterBox"  FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested"  Grid.Column="0" Width="250"/>
+                    <Border Grid.Row="1"  BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <grid:SfDataGrid x:Name="detailsGrid" ShowBusyIndicator="True" Grid.Row="0" NavigationMode="{Binding NavigationMode}" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                                <grid:SfDataGrid.Columns>
+                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTemplateColumn  MappingName="ContactNumber" HeaderText="CONTACT NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
+                                        <grid:GridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image />
+                                                    <TextBlock Text="{Binding ContactNumber}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </grid:GridTemplateColumn.CellTemplate>
+
+                                    </grid:GridTemplateColumn>
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTemplateColumn MappingName="ConfirmedDate" HeaderText="CONFIRMED DATE" AllowEditing="{Binding AllowEditing }"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                        <grid:GridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <input:SfDatePicker Value="{Binding ConfirmedDate,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing}" Background="Transparent"/>
+                                            </DataTemplate>
+                                        </grid:GridTemplateColumn.CellTemplate>
+                                    </grid:GridTemplateColumn>
+                                    <grid:GridTemplateColumn MappingName="ConfirmedTime" HeaderText="CONFIRMED TIME" AllowEditing="{Binding AllowEditing}"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                        <grid:GridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="{Binding AllowEditing}" Background="Transparent"/>
+                                            </DataTemplate>
+                                        </grid:GridTemplateColumn.CellTemplate>
+                                    </grid:GridTemplateColumn>
+                                </grid:SfDataGrid.Columns>
+                            </grid:SfDataGrid>
+
+                            <ListView x:Name="snapedListView"  Grid.Row="0" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" SelectionChanged="snapedListView_SelectionChanged" 
                                   ItemsSource="{Binding ElementName=detailsGrid,Path=ItemsSource}" Visibility="Collapsed" SelectionMode="Single"
                                   BorderThickness="0">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BorderBrush="#FFE0E0E0" BorderThickness="1" Background="#BFFFFFFF">
-                                        <StackPanel Orientation="Vertical" Background="WhiteSmoke" Width="400">
-                                            <TextBlock Text="Case Number" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding CaseNumber}" MaxHeight="100"/>
-                                            <TextBlock Text="Case Type" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding CaseType}" MaxHeight="100"/>
-                                            <TextBlock Text="Customer Name" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding CustomerName}" MaxHeight="100"/>
-                                            <TextBlock Text="Status Due Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding StatusDueDate}" MaxHeight="100"/>
-                                            <TextBlock Text="Status" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding Status}" MaxHeight="100"/>
-                                            <TextBlock Text="Allocated To" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding AllocatedTo}" MaxHeight="100"/>
-                                            <TextBlock Text="Confirmed Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
-                                            <TextBlock Text="{Binding ConfirmedDate}" MaxHeight="100"/>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </Border>
-            </Grid>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="#FFE0E0E0" BorderThickness="1" Background="#BFFFFFFF">
+                                            <StackPanel Orientation="Vertical" Background="WhiteSmoke" Width="400">
+                                                <TextBlock Text="Case Number" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CaseNumber}" MaxHeight="100"/>
+                                                <TextBlock Text="Case Type" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CaseType}" MaxHeight="100"/>
+                                                <TextBlock Text="Customer Name" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding CustomerName}" MaxHeight="100"/>
+                                                <TextBlock Text="Status Due Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding StatusDueDate}" MaxHeight="100"/>
+                                                <TextBlock Text="Status" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding Status}" MaxHeight="100"/>
+                                                <TextBlock Text="Allocated To" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding AllocatedTo}" MaxHeight="100"/>
+                                                <TextBlock Text="Confirmed Date" MaxHeight="100" Style="{StaticResource ListViewItemStyle}"/>
+                                                <TextBlock Text="{Binding ConfirmedDate}" MaxHeight="100"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </Border>
+                </Grid>
 
+            </Grid>
         </Grid>
-    </Grid>
+    </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

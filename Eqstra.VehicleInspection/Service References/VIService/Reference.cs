@@ -6974,12 +6974,12 @@ namespace Eqstra.VehicleInspection.VIService {
     public partial class MzkVehicleInspectionServiceEditPassengerMechConditionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkMobiPassengerBodyworkContract> response;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkMobiPassengerMechConditionContract> response;
         
         public MzkVehicleInspectionServiceEditPassengerMechConditionResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkMobiPassengerBodyworkContract> response) {
+        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkMobiPassengerMechConditionContract> response) {
             this.response = response;
         }
     }
@@ -7269,7 +7269,14 @@ namespace Eqstra.VehicleInspection.VIService {
     [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
     public partial class MzkVehicleInspectionServiceUpdateConfirmationDateResponse {
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkTasksContract> response;
+        
         public MzkVehicleInspectionServiceUpdateConfirmationDateResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.VehicleInspection.VIService.MzkTasksContract> response) {
+            this.response = response;
         }
     }
     

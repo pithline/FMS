@@ -60,6 +60,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             this.SaveCommand = new DelegateCommand(async () =>
             {
+                this.IsBusy = true;
                 if (this.InspectionTask.ConfirmedDate < DateTime.Today)
                 {
                     Util.ShowToast("Confirmed Date should not be less than today's date");
@@ -80,11 +81,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                    await VIServiceHelper.Instance.ConfirmTasksAsync();
+                    //await VIServiceHelper.Instance.ConfirmTasksAsync();
+                    IsBusy = false;
                     navigationService.GoBack();
-                }
-
-          
+                }          
             }
             , () =>
             {
@@ -190,6 +190,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return isSave; }
             set { SetProperty(ref isSave, value); }
         }
+
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
+
 
         private bool isNext;
         [RestorableState]
