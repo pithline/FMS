@@ -156,10 +156,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.InspectionTask = list.FirstOrDefault();
         }
 
-        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
-        {
-            base.OnNavigatedFrom(viewModelState, suspending);
-        }
         #endregion
 
         #region Properties

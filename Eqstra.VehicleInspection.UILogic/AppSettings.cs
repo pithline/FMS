@@ -27,6 +27,14 @@ namespace Eqstra.VehicleInspection.UILogic
             set { SetProperty(ref isSynchronizing, value); }
         }
 
+        private bool synced;
+
+        public bool Synced
+        {
+            get { return synced; }
+            set { SetProperty(ref synced, value); }
+        }
+
 
         private string errorMessage;
 

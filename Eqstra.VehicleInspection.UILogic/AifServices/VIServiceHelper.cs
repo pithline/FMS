@@ -392,7 +392,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                                };
 
-                            if (vehicleData.Any(s => s.RegistrationNumber == v.parmRegNo))
+                            if (vehicleData.Any(s => s.VehicleInsRecID == v.parmVehicleInsRecID))
                             {
                                 vehicleUpdateList.Add(vehicleTosave);
                             }

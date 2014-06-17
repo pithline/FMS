@@ -89,7 +89,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
 
                 this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
-                if (AppSettings.Instance.IsSynchronizing == 0)
+                if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
                     VIServiceHelper.Instance.Synchronize(async () =>
                        {
@@ -101,16 +101,16 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                 );
 
                            await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
-                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                  {
-                                     // this.PoolofTasks.Clear();
-                                     // await GetTasksFromDbAsync();
-                                     //this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
-                                     //this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
+                                     this.PoolofTasks.Clear();
+                                     await GetTasksFromDbAsync();
+                                     this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
+                                     this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture);
 
-                                     //this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
+                                     this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
                                      AppSettings.Instance.IsSynchronizing = 0;
-
+                                     AppSettings.Instance.Synced = true;
                                  }
                                  );
 
