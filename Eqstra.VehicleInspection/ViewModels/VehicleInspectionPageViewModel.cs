@@ -8,6 +8,7 @@ using Eqstra.VehicleInspection.UILogic;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
@@ -37,8 +38,9 @@ namespace Eqstra.VehicleInspection.ViewModels
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
+        private IEventAggregator _eventAggregator;
 
-        public VehicleInspectionPageViewModel(INavigationService navigationService)
+        public VehicleInspectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
             try
@@ -58,8 +60,15 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
                     this.IsCommandBarOpen = false;
-                   await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                 }, () => { return this.NextViewStack.Count == 1; });
+
+                this._eventAggregator.GetEvent<ErrorsRaisedEvent>().Subscribe((errors) =>
+                {
+                    Errors = errors;
+                    OnPropertyChanged("Errors");
+                    ShowValidationSummary = true;
+                });
 
                 this.NextCommand = new DelegateCommand(async () =>
                 {
@@ -239,21 +248,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref isCommandBarOpen, value); }
         }
 
-        private bool showValidationSummary;
-        [RestorableState]
-        public bool ShowValidationSummary
-        {
-            get { return showValidationSummary; }
-            set { SetProperty(ref showValidationSummary, value); }
-        }
 
-        private ObservableCollection<ValidationError> errors;
-
-        public ObservableCollection<ValidationError> Errors
-        {
-            get { return errors; }
-            set { SetProperty(ref errors, value); }
-        }
         private DelegateCommand nextCommand;
 
         public DelegateCommand NextCommand
@@ -328,6 +323,21 @@ namespace Eqstra.VehicleInspection.ViewModels
             set { SetProperty(ref customer, value); }
         }
 
+        private bool showValidationSummary;
+        [RestorableState]
+        public bool ShowValidationSummary
+        {
+            get { return showValidationSummary; }
+            set { SetProperty(ref showValidationSummary, value); }
+        }
+
+        private ObservableCollection<ValidationError> errors;
+
+        public ObservableCollection<ValidationError> Errors
+        {
+            get { return errors; }
+            set { SetProperty(ref errors, value); }
+        }
 
         async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
         {

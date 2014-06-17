@@ -3,8 +3,10 @@ using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using Eqstra.VehicleInspection.UILogic.Popups;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,10 +31,10 @@ namespace Eqstra.VehicleInspection.UILogic
     public class BaseViewModel : ViewModel
     {
         SnapshotsViewer _snapShotsPopup;
-
         INavigationService _navigationService;
+        
 
-        public BaseViewModel()
+        public BaseViewModel(IEventAggregator eventAggregator)
         {
             TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
             {
@@ -56,21 +58,28 @@ namespace Eqstra.VehicleInspection.UILogic
                     int successFlag = 0;
                     try
                     {
-                        var viobj = await baseModel.GetDataAsync(vehicleInsRecId);
-                        if (viobj != null)
+                        if (baseModel.ValidateModel())
                         {
-                            successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(baseModel);
+                            var viobj = await baseModel.GetDataAsync(vehicleInsRecId);
+                            if (viobj != null)
+                            {
+                                successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(baseModel);
+                            }
+                            else
+                            {
+                                baseModel.VehicleInsRecID = vehicleInsRecId;
+                                successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(baseModel);
+                            }
+
+                            if (successFlag != 0)
+                            {
+                                baseModel.ShouldSave = false;
+                                await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                            } 
                         }
                         else
                         {
-                            baseModel.VehicleInsRecID = vehicleInsRecId;
-                            successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(baseModel);
-                        }
-
-                        if (successFlag != 0)
-                        {
-                            baseModel.ShouldSave = false;
-                            await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
+                            eventAggregator.GetEvent<ErrorsRaisedEvent>().Publish(baseModel.Errors);
                         }
                     }
                     catch (Exception)
@@ -109,7 +118,6 @@ namespace Eqstra.VehicleInspection.UILogic
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
 
         public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
-
         protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
         {
             try

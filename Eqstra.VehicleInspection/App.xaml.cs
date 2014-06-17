@@ -130,7 +130,7 @@ namespace Eqstra.VehicleInspection
                 _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
                 _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
 
-                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService));
+                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService,EventAggregator));
 
                 ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
                 {
