@@ -17,7 +17,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     public class VehicleDetailsUserControlViewModel : BaseViewModel
     {
         INavigationService _navigationService;
-        private Eqstra.BusinessLogic.Task _inspection;
         public VehicleDetailsUserControlViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -39,7 +38,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.CaseNumber.Equals(vehicleInsRecID));
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.VehicleInsRecID.Equals(vehicleInsRecID));
             if (this.Model == null)
             {
                 this.Model = new PVehicleDetails();
@@ -54,7 +53,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             await base.TakePictureAsync(param);
             long vehicleInsRecID =long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
-            if (vehicleInsRecID != null)
+            if (vehicleInsRecID != default(long))
             {
                 var viobj = await (this.Model as BaseModel).GetDataAsync(vehicleInsRecID);
                 if (viobj != null)

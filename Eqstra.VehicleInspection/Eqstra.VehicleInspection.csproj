@@ -316,9 +316,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="SqliteDB\eqstramobility.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <None Include="Service References\VIService\RoutingService.wsdl" />
     <None Include="Service References\VIService\xppservice.wsdl" />
@@ -347,6 +344,9 @@
     <None Include="Service References\VIService\xppservice7.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="SqliteDB\eqstramobility.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Eqstra_logo.png" />

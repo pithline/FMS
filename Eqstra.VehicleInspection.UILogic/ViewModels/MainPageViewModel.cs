@@ -78,7 +78,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 userInfo.CompanyId = "1000";
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                //await CreateTableAsync();
+                // await CreateTableAsync();
                 //SyncData();
 
                 var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();

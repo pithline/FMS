@@ -36,7 +36,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
        {
-           this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.RecID == vehicleInsRecID);
+           this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.VehicleInsRecID == vehicleInsRecID);
            if (this.Model == null)
            {
                this.Model = new CVehicleDetails();

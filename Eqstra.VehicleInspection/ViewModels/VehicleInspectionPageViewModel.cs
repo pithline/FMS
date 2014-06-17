@@ -58,7 +58,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
                     this.IsCommandBarOpen = false;
-                   await VIServiceHelper.Instance.UpdateStatusListAsync();
+                   await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                 }, () => { return this.NextViewStack.Count == 1; });
 
                 this.NextCommand = new DelegateCommand(async () =>
