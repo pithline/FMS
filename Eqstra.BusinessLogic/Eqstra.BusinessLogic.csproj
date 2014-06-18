@@ -127,6 +127,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\CDTaskTypeEnum.cs" />
+    <Compile Include="Helpers\ProcessStep.cs" />
     <Compile Include="Helpers\TaskStatus.cs" />
     <Compile Include="Enums\VehicleTypeEnum.cs" />
     <Compile Include="EventArgs\UserChangedEventArgs.cs" />

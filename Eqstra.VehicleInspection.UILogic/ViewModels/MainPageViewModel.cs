@@ -78,7 +78,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             try
             {
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-                userInfo.CompanyId = "1000";
+              
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 // await CreateTableAsync();
                 //SyncData();
@@ -151,7 +151,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).TakeWhile(w => w.Status != Eqstra.BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation).ToList();
+            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(w => w.Status != Eqstra.BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation);
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
@@ -178,7 +178,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 //               Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
                 //           });
                 //}
-                AppSettingData.Appointments = this.Appointments;
+                //AppSettingData.Appointments = this.Appointments;
                 this.PoolofTasks.Add(item);
             }
         }

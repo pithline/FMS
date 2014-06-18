@@ -97,7 +97,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             IEnumerable<Eqstra.BusinessLogic.Task> list = null;
-            this.NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
+            
             var tasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
 
             foreach (var t in tasks)
@@ -110,8 +110,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
             }
             if (navigationParameter.Equals("AwaitInspectionDetail"))
-            {
-                this.NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
+            {                
                 this.AllowEditing = true;
                 list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail));
             }
@@ -168,15 +167,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return allowEditing; }
             set { SetProperty(ref allowEditing, value); }
         }
-
-        private NavigationMode navigationMode;
-
-        public NavigationMode NavigationMode
-        {
-            get { return navigationMode; }
-            set { SetProperty(ref navigationMode, value); }
-        }
-
+               
         private ObservableCollection<Eqstra.BusinessLogic.Task> inspectionList;
 
         public ObservableCollection<Eqstra.BusinessLogic.Task> InspectionList
