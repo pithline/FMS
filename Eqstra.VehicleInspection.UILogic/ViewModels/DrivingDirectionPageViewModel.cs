@@ -1,6 +1,7 @@
 ﻿using Bing.Maps;
 using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic.AifServices;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -43,23 +44,27 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             });
 
-            this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
+            this.GoToVehicleInspectionCommand = new DelegateCommand(async () =>
             {
+                this._inspection.ProcessStep = ProcessStep.CaptureInspectionData;
+                await SqliteHelper.Storage.UpdateSingleRecordAsync(this._inspection);
                 string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);
+                await VIServiceHelper.Instance.UpdateTaskStatusAsync(ProcessStep.CaptureInspectionData);
                 _navigationService.Navigate("VehicleInspection", JsoninspectionTask);
+
             });
 
             this.StartDrivingCommand = new DelegateCommand(async () =>
             {
                 this.IsStartDriving = false;
                 this.IsArrived = true;
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID =long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString())});
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString()) });
             });
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
                 if (this._inspection != null)
                 {
-                    var vehicleInsRecId = Int64.Parse( ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
+                    var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
 
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
                     dd.StopDateTime = DateTime.Now;

@@ -38,7 +38,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 return System.Threading.Tasks.Task.FromResult<object>(null);
             }, 
             () =>
-                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Enums.TaskStatus.Completed); }
+                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.Completed); }
             );
 
             this.SaveTaskCommand = new DelegateCommand(async () =>

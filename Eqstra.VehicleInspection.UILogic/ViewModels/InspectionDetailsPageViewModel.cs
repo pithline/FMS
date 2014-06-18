@@ -40,7 +40,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"] = this.InspectionTask.VehicleInsRecId;
 
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
-                if (this.InspectionTask.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture)
+                if (this.InspectionTask.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)
                 {
                     navigationService.Navigate("DrivingDirection", jsonInspectionTask);
                 }
@@ -67,8 +67,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
                 else
                 {
-                    this.InspectionTask.Status = Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
+                    this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
+                    SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
                     this.Appointments.Add(new ScheduleAppointment
@@ -81,7 +81,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                   // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    await VIServiceHelper.Instance.UpdateTaskStatusAsync(ProcessStep.ConfirmInspectionDetails);
                     IsBusy = false;
                     navigationService.GoBack();
                 }
@@ -97,7 +97,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             IEnumerable<Eqstra.BusinessLogic.Task> list = null;
-            
+
             var tasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
 
             foreach (var t in tasks)
@@ -110,22 +110,22 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
             }
             if (navigationParameter.Equals("AwaitInspectionDetail"))
-            {                
+            {
                 this.AllowEditing = true;
-                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail));
+                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
             }
             if (navigationParameter.Equals("Total"))
             {
                 this.AllowEditing = false;
-                list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)));
+                list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
             }
             if (navigationParameter.Equals("MyTasks"))
             {
                 this.AllowEditing = false;
-                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance));
             }
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
-            foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance)))
+            foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
             {
                 var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
                            item.ConfirmedTime.Second);
@@ -167,7 +167,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return allowEditing; }
             set { SetProperty(ref allowEditing, value); }
         }
-               
+
         private ObservableCollection<Eqstra.BusinessLogic.Task> inspectionList;
 
         public ObservableCollection<Eqstra.BusinessLogic.Task> InspectionList

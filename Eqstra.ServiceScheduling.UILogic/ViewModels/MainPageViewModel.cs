@@ -73,18 +73,18 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
+                if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
                     item.ConfirmedTime = DateTime.Now.AddHours(-2);
                 }
                 item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
+                if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
                 {
                     item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
                 }
                 item.Address = cust.Address;
-                //if (item.Status != BusinessLogic.Enums.TaskStatus.AwaitingInspection)
+                //if (item.Status != BusinessLogic.Helpers.TaskStatus.AwaitingInspection)
                 //{
                 //    this.Appointments.Add(new ScheduleAppointment
                 //    {

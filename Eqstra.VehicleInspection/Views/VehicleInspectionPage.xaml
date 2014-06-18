@@ -9,6 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
+
     prism:ViewModelLocator.AutoWireViewModel="True" RightTapped="VisualStateAwarePage_RightTapped"
     mc:Ignorable="d">
 
@@ -61,7 +63,8 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}" AnimationType="DoubleCircle">
+        <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -161,4 +164,6 @@
         </Grid>
         </ScrollViewer>
     </Grid>
+
+    </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

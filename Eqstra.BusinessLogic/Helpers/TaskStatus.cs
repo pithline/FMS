@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic.Enums
+namespace Eqstra.BusinessLogic.Helpers
 {
     public class TaskStatus
     {

@@ -55,13 +55,15 @@ namespace Eqstra.VehicleInspection.ViewModels
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
-                    this._task.Status = BusinessLogic.Enums.TaskStatus.AwaitDamageConfirmation;
+                    this.IsBusy = true;
+                    this._task.ProcessStep = ProcessStep.AcceptInspection;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model;
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
-                    
-                   // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+
+                    await VIServiceHelper.Instance.UpdateTaskStatusAsync(ProcessStep.AcceptInspection);
+                    this.IsBusy = false;
                 }, () => { return this.NextViewStack.Count == 1; });
 
                 this._eventAggregator.GetEvent<ErrorsRaisedEvent>().Subscribe((errors) =>
@@ -70,7 +72,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     OnPropertyChanged("Errors");
                     ShowValidationSummary = true;
                     OnPropertyChanged("ShowValidationSummary");
-                },ThreadOption.UIThread);
+                }, ThreadOption.UIThread);
 
                 this.NextCommand = new DelegateCommand(async () =>
                 {
@@ -292,7 +294,13 @@ namespace Eqstra.VehicleInspection.ViewModels
                 //PreviousCommand.RaiseCanExecuteChanged();
             }
         }
+        private bool isBusy;
 
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
 
         private ObservableCollection<UserControl> inpectionUserControls;
         public ObservableCollection<UserControl> InspectionUserControls

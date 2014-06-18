@@ -1864,7 +1864,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
 
         }
-        public async System.Threading.Tasks.Task UpdateTaskStatusAsync()
+        public async System.Threading.Tasks.Task UpdateTaskStatusAsync(string processStep)
         {
             try
             {
@@ -1875,9 +1875,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.Status == Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionDataCapture || x.Status.Equals(Eqstra.BusinessLogic.Enums.TaskStatus.AwaitInspectionAcceptance));
+                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ProcessStep==processStep);
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
-
+              
                 if (tasks != null)
                 {
                     foreach (var task in tasks)

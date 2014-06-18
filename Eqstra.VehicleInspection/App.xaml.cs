@@ -72,7 +72,7 @@ namespace Eqstra.VehicleInspection
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PGlass));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PInspectionProof));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.CaseTypeEnum));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.TaskStatus));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Helpers.TaskStatus));
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.VehicleTypeEnum));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));

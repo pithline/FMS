@@ -55,7 +55,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.AssignCommand = new DelegateCommand(async () =>
                 {
-                    this.InspectionTask.Status = BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail;
+                    this.InspectionTask.Status = BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
@@ -69,12 +69,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     });
                     this.AssignCommand.RaiseCanExecuteChanged();
 
-                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitingConfirmation);
-                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
+                    this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation);
+                    this.MyInspectionCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail);
                     this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date == DateTime.Today);
                 }, () =>
                 {
-                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail);
+                    return (this.InspectionTask != null && this.InspectionTask.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail);
                 }
             );
 
@@ -93,13 +93,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
                 item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Enums.TaskStatus.Completed)
+                if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
                 {
                     item.ConfirmedDate = DateTime.Today.AddDays(-1);
                     item.ConfirmedTime = DateTime.Now.AddHours(-2);
                 }
                 item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Enums.TaskStatus.AwaitInspectionDetail)
+                if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
                 {
                     item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
                 }
