@@ -63,9 +63,9 @@
                     <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=RFRadio,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=RFImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RFTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3" />
-                    <TextBox Text="{Binding Path=Model.RFMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path=Model.RFComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path=Model.RFTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3" />
+                    <TextBox Text="{Binding Path=Model.RFMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path=Model.RFComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="5"/>
                     <GridView IsEnabled="{Binding ElementName=RFRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path= Model.RFImgList}" Grid.Row="1" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -90,9 +90,9 @@
                     <Button Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Center" IsEnabled="{Binding ElementName=LFRadio,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=LFImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.LFTreadDepth,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path=Model.LFMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path=Model.LFComment,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path=Model.LFTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.LFMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path=Model.LFComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="5"/>
                     <GridView   IsEnabled="{Binding ElementName=LFRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LFImg" ItemsSource="{Binding Path= Model.LFImgList}" Grid.Row="2" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -117,9 +117,9 @@
                     <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"  IsEnabled="{Binding ElementName=RRRadio,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=RRImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.RRTreadDepth,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path=Model.RRMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path=Model.RRComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path=Model.RRTreadDepth,Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.RRMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path=Model.RRComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="5"/>
                     <GridView   IsEnabled="{Binding ElementName=RRRadio,Path=IsChecked}"  common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RRImg" ItemsSource="{Binding Path= Model.RRImgList}" Grid.Row="3" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -144,9 +144,9 @@
                     <Button Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center"   IsEnabled="{Binding ElementName=LRRadio,Path=IsChecked}"  Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=LRImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.LRTreadDepth,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path=Model.LRMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path=Model.LRComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path=Model.LRTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.LRMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path=Model.LRComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=LRRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="LRImg" ItemsSource="{Binding Path= Model.LRImgList}" Grid.Row="4" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -171,9 +171,9 @@
                     <Button Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center"   IsEnabled="{Binding ElementName=SpareRadio,Path=IsChecked}"  Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=SpareImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path=Model.SpareTreadDepth,Mode=TwoWay}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path=Model.SpareMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path=Model.SpareComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path=Model.SpareTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path=Model.SpareMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path=Model.SpareComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=SpareRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="SpareImg" ItemsSource="{Binding Path= Model.SpareImgList}" Grid.Row="5" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

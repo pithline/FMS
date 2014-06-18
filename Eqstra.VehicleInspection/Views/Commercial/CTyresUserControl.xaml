@@ -78,9 +78,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPLFRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=LFImg}" Grid.Row="1" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.LFTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.LFMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.LFComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.LFTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.LFMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.LFComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPLFRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LFImg" ItemsSource="{Binding Path= Model.LFImgList}" Grid.Row="1" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -103,9 +103,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPLRInnerRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=LRInnerImg}" Grid.Row="2" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.LRInnerTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.LRInnerMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.LRInnerComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.LRInnerTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.LRInnerMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.LRInnerComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="5"/>
                     <GridView IsEnabled="{Binding ElementName=HasPLRInnerRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LRInnerImg" ItemsSource="{Binding Path= Model.LRInnerImgList}" Grid.Row="2" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -128,9 +128,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPLROuterRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=LROuterImg}" Grid.Row="3" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.LROuterTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.LROuterMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="4"/>
-                    <TextBox  Text="{Binding Path= Model.LROuterComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.LROuterTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.LROuterMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="4"/>
+                    <TextBox  Text="{Binding Path= Model.LROuterComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPLROuterRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LROuterImg" ItemsSource="{Binding Path= Model.LROuterImgList}" Grid.Row="3" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -153,9 +153,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPLInnerAxleInRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=LInnerAxleInImg}" Grid.Row="4" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.LInnerAxleInTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.LInnerAxleInMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="4"/>
-                    <TextBox  Text="{Binding Path= Model.LInnerAxleInComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.LInnerAxleInTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.LInnerAxleInMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="4"/>
+                    <TextBox  Text="{Binding Path= Model.LInnerAxleInComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPLInnerAxleInRadio,Path=IsChecked}"  common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LInnerAxleInImg" ItemsSource="{Binding Path= Model.LInnerAxleInImgList}" Grid.Row="4" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -179,9 +179,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPLInnerAxleOutRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=LInnerAxleOutImg}" Grid.Row="5" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.LInnerAxleOutTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.LInnerAxleOutMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.LInnerAxleOutComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.LInnerAxleOutTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.LInnerAxleOutMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.LInnerAxleOutComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPLInnerAxleOutRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="LInnerAxleOutImg" ItemsSource="{Binding Path= Model.LInnerAxleOutImgList}" Grid.Row="5" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -204,9 +204,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPRFRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=RFImg}" Grid.Row="6" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.RFTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.RFMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.RFComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.RFTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.RFMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.RFComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="5"/>
                     <GridView IsEnabled="{Binding ElementName=HasPRFRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path= Model.RFImgList}" Grid.Row="6" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -229,9 +229,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPRRInnerRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=RRInnerImg}" Grid.Row="7" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.RRInnerTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.RRInnerMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.RRInnerComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.RRInnerTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.RRInnerMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.RRInnerComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPRRInnerRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RRInnerImg" ItemsSource="{Binding Path= Model.RRInnerImgList}" Grid.Row="7" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -255,9 +255,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPRROuterRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=RROuterImg}" Grid.Row="8" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.RROuterTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.RROuterMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.RROuterComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.RROuterTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.RROuterMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.RROuterComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="5"/>
                     <GridView IsEnabled="{Binding ElementName=HasPRROuterRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RROuterImg" ItemsSource="{Binding Path= Model.RROuterImgList}" Grid.Row="8" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -281,9 +281,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPRInnerAxleInRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=RInnerAxleInImg}" Grid.Row="9" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleInTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="3"/>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleInMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="4"/>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleInComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="5"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleInTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="3"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleInMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="4"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleInComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="9" Grid.Column="5"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPRInnerAxleInRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RInnerAxleInImg" ItemsSource="{Binding Path= Model.RInnerAxleInImgList}" Grid.Row="9" Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -307,9 +307,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPRInnerAxleOutRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=RInnerAxleOutImg}" Grid.Row="1" Grid.Column="10" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleOutTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="11"/>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleOutMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="12"/>
-                    <TextBox Text="{Binding Path= Model.RInnerAxleOutComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="13"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleOutTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="11"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleOutMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="12"/>
+                    <TextBox Text="{Binding Path= Model.RInnerAxleOutComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="13"/>
                     <GridView IsEnabled="{Binding ElementName=HasPRInnerAxleOutRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RInnerAxleOutImg" ItemsSource="{Binding Path= Model.RInnerAxleOutImgList}" Grid.Row="1" Grid.Column="14" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -332,9 +332,9 @@
                     <Button Command="{Binding TakeSnapshotCommand}" IsEnabled="{Binding ElementName=HasPSpareRadio,Path=IsChecked}" CommandParameter="{Binding ItemsSource,ElementName=SpareImg}" Grid.Row="2" Grid.Column="10" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.SpareTreadDepth,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="11"/>
-                    <TextBox Text="{Binding Path= Model.SpareMake,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="12"/>
-                    <TextBox Text="{Binding Path= Model.SpareComment,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="13"/>
+                    <TextBox Text="{Binding Path= Model.SpareTreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="11"/>
+                    <TextBox Text="{Binding Path= Model.SpareMake,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="12"/>
+                    <TextBox Text="{Binding Path= Model.SpareComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="13"/>
                     <GridView  IsEnabled="{Binding ElementName=HasPSpareRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="SpareImg" ItemsSource="{Binding Path= Model.SpareImgList}" Grid.Row="2" Grid.Column="14" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
