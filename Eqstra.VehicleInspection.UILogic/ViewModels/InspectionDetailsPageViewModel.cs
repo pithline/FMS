@@ -67,7 +67,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
                 else
                 {
-                    this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
+                    this.InspectionTask.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture;
                     SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
@@ -81,7 +81,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                    await VIServiceHelper.Instance.UpdateTaskStatusAsync(ProcessStep.ConfirmInspectionDetails);
+                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                     IsBusy = false;
                     navigationService.GoBack();
                 }

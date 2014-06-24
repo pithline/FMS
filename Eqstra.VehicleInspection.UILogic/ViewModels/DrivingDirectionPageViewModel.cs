@@ -46,10 +46,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             this.GoToVehicleInspectionCommand = new DelegateCommand(async () =>
             {
-                this._inspection.ProcessStep = ProcessStep.CaptureInspectionData;
+                this._inspection.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance;
                 await SqliteHelper.Storage.UpdateSingleRecordAsync(this._inspection);
                 string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);
-                await VIServiceHelper.Instance.UpdateTaskStatusAsync(ProcessStep.CaptureInspectionData);
+                await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                 _navigationService.Navigate("VehicleInspection", JsoninspectionTask);
 
             });

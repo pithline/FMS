@@ -268,7 +268,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             }
                             else
                             {
-                                GetPVehicleDetailsAsync(mzkTask.parmCaseID);
+
+                                GetCVehicleDetailsAsync(mzkTask.parmCaseID);
                             }
                             if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
                             {
@@ -320,7 +321,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             ChassisNumber = v.parmChassisNumber.ToString(),
                             Color = v.parmColor,
-                            Year = v.parmyear,
+                            Year = v.parmyear.ToString(),
                             ODOReading = v.parmODOReading.ToString(),
                             Make = v.parmMake,
                             EngineNumber = v.parmEngineNumber,
@@ -386,7 +387,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                {
                                    ChassisNumber = v.parmChassisNumber.ToString(),
                                    Color = v.parmColor,
-                                   Year = v.parmyear,
+                                   Year = v.parmyear.ToString(),
                                    ODOReading = v.parmODOReading.ToString(),
                                    Make = v.parmMake,
                                    EngineNumber = v.parmEngineNumber,
@@ -1864,7 +1865,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
 
         }
-        public async System.Threading.Tasks.Task UpdateTaskStatusAsync(string processStep)
+        public async System.Threading.Tasks.Task UpdateTaskStatusAsync()
         {
             try
             {
@@ -1875,9 +1876,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ProcessStep==processStep);
+                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
-              
+                Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
+
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionAcceptance);
+
                 if (tasks != null)
                 {
                     foreach (var task in tasks)
@@ -1904,8 +1910,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmVehicleType = (MzkVehicleType)Enum.Parse(typeof(MzkVehicleType), task.VehicleType.ToString()),
                                 parmProcessStep = task.ProcessStep,
                                 parmRecID = task.VehicleInsRecId,
-
-
+                                parmEEPActionStep = actionStepMapping[task.Status]
                             });
                     }
                     var res = await client.updateStatusListAsync(mzkTasks,_userInfo.CompanyId);
