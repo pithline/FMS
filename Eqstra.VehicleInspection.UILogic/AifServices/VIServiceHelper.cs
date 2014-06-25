@@ -183,7 +183,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 });
             }
         }
-        async private System.Threading.Tasks.Task GetCustDetailsFromSvcAsync(string cusId)
+        async private System.Threading.Tasks.Task GetCustDetailsFromSvcAsync(string cusId,string contactName,string contactNumber)
         {
             try
             {
@@ -205,6 +205,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                  Address = mzkCustomer.parmCustAddress,
                                  CustomerName = mzkCustomer.parmCustName,
                                  ContactNumber = mzkCustomer.parmCustPhone,
+                                 ContactName = contactName,
+                                EmailId = mzkCustomer.parmCustEmail,                                
                                  Id = cusId
 
                              };
@@ -262,7 +264,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CaseCategory = mzkTask.parmCaseCategory,
                                CaseNumber = mzkTask.parmCaseID,
                                CaseServiceRecID = mzkTask.parmCaseServiceRecId,
-                               CategoryType = mzkTask.parmCategoryType.ToString(),
+                               CategoryType = mzkTask.parmCategoryType,
                                CollectionRecID = mzkTask.parmCollectionRecId,
                                ConfirmedDate = mzkTask.parmConfirmedDueDate < DateTime.Today ? DateTime.Today : mzkTask.parmConfirmedDueDate,
                                Address = mzkTask.parmCustAddress,
@@ -282,7 +284,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), mzkTask.parmVehicleType.ToString())
                            };
 
-                        GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
+                        GetCustDetailsFromSvcAsync(mzkTask.parmCustId,mzkTask.parmContactPersonName,mzkTask.parmContactPersonPhone);
                         if (mzkTask.parmVehicleType == MzkVehicleType.Passenger)
                         {
                             GetPVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
