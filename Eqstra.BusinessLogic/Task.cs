@@ -96,7 +96,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerName;
-        [Ignore]
+   
         [RestorableState]
         public string CustomerName
         {

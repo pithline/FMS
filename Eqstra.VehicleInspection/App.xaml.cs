@@ -84,7 +84,7 @@ namespace Eqstra.VehicleInspection
 
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-
+            
             var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
             if (db == null)
             {

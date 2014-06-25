@@ -14,6 +14,8 @@ namespace Eqstra.BusinessLogic.Helpers
         public const string AwaitingConfirmation = "Await Inspection Confirmation";
         public const string AwaitInspectionAcceptance = "Await Inspection Acceptance";
         public const string AwaitDamageConfirmation = "Await Damage Confirmation";
+        public const string AwaitCollectionDetail = "Await Collection Detail";
+        public const string AwaitVehicleCollection = "Await Vehicle Collection";
         public const string Completed = "Completed";
     }
 }
