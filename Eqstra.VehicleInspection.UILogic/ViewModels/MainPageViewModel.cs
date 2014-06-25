@@ -154,12 +154,12 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
-                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
-                if (cust != null)
-                {
-                    item.CustomerName = cust.CustomerName;
-                    item.Address = cust.Address;
-                }
+                //var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
+                //if (cust != null)
+                //{
+                //    item.CustomerName = cust.CustomerName;
+                //    item.Address = cust.Address;
+                //}
 
                 //item.ConfirmedDate = DateTime.Now;
                 //if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)

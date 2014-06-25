@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
@@ -41,7 +42,23 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
         {
             try
             {
-                client = new VIService.MzkVehicleInspectionServiceClient();
+                BasicHttpBinding basicHttpBinding = new BasicHttpBinding()
+                {
+                    MaxBufferPoolSize = int.MaxValue,
+                    MaxBufferSize = int.MaxValue,
+                    MaxReceivedMessageSize = int.MaxValue,
+                    OpenTimeout = new TimeSpan(2, 0, 0),
+                    ReceiveTimeout = new TimeSpan(2, 0, 0),
+                    SendTimeout = new TimeSpan(2, 0, 0),
+                    AllowCookies = true
+                };
+
+                basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+                client = new VIService.MzkVehicleInspectionServiceClient(basicHttpBinding, new EndpointAddress("http://196.35.126.189/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc"));
+                client.ClientCredentials.UserName.UserName = userName;
+                client.ClientCredentials.UserName.Password = password;
+                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
                 return client;
             }
@@ -162,7 +179,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
 
                     AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                 });
             }
         }
@@ -199,8 +216,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 {
                                     cusInsertList.Add(custToSave);
                                 }
-                            }
-                            );
+                    });
 
                     if (cusUpdateList.Any())
                         await SqliteHelper.Storage.UpdateAllAsync<Customer>(cusUpdateList);
@@ -216,7 +232,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
 
                     AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                 });
             }
         }
@@ -238,7 +254,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     List<Eqstra.BusinessLogic.Task> taskInsertList = new List<BusinessLogic.Task>();
                     List<Eqstra.BusinessLogic.Task> taskUpdateList = new List<BusinessLogic.Task>();
-                    result.response.AsParallel().ForAll(mzkTask =>
+                    foreach (var mzkTask in result.response)
                         {
                             var taskTosave = new Eqstra.BusinessLogic.Task
                                {
@@ -253,6 +269,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                    CustomerId = mzkTask.parmCustId,
                                    CustomerName = mzkTask.parmCustName,
                                    CustPhone = mzkTask.parmCustPhone,
+                               ContactName = mzkTask.parmContactPersonName,
+                               ContactNumber = mzkTask.parmContactPersonPhone,
                                    ProcessStepRecID = mzkTask.parmProcessStepRecID,
                                    ServiceRecID = mzkTask.parmServiceRecId,
                                    Status = mzkTask.parmStatus,
@@ -267,12 +285,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             GetCustDetailsFromSvcAsync(mzkTask.parmCustId);
                             if (mzkTask.parmVehicleType == MzkVehicleType.Passenger)
                             {
-                                GetPVehicleDetailsAsync(mzkTask.parmCaseID);
+                            GetPVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                             }
                             else
                             {
-
-                                GetCVehicleDetailsAsync(mzkTask.parmCaseID);
+                           GetCVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                             }
                             if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
                             {
@@ -282,7 +299,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             {
                                 taskInsertList.Add(taskTosave);
                             }
-                        });
+                    }
 
                     if (taskUpdateList.Any())
                         await SqliteHelper.Storage.UpdateAllAsync<BusinessLogic.Task>(taskUpdateList);
@@ -298,12 +315,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                           {
 
                               AppSettings.Instance.IsSynchronizing = 0;
-                              AppSettings.Instance.ErrorMessage = ex.Message;
+                              AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                           });
             }
         }
 
-        async private System.Threading.Tasks.Task GetCVehicleDetailsAsync(string caseNumber)
+        async private System.Threading.Tasks.Task GetCVehicleDetailsAsync(string caseNumber, long vRecId)
         {
             try
             {
@@ -312,7 +329,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
-                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Commercial.CVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
                 {
                     List<BusinessLogic.Commercial.CVehicleDetails> vehicleInsertList = new List<BusinessLogic.Commercial.CVehicleDetails>();
@@ -328,7 +345,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             ODOReading = v.parmODOReading.ToString(),
                             Make = v.parmMake,
                             EngineNumber = v.parmEngineNumber,
-                            VehicleInsRecID = v.parmVehicleInsRecID,
+                            VehicleInsRecID = vRecId,
                             RecID = v.parmRecID,
                             CaseNumber = caseNumber,
                             TableId = v.parmTableId,
@@ -338,7 +355,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                         };
 
-                        if (vehicleData.Any(s => s.RegistrationNumber == v.parmRegNo))
+                        if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
                         {
                             vehicleUpdateList.Add(vehicleTosave);
                         }
@@ -364,12 +381,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
 
                     AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                 });
             }
         }
 
-        async private System.Threading.Tasks.Task GetPVehicleDetailsAsync(string caseNumber)
+        async private System.Threading.Tasks.Task GetPVehicleDetailsAsync(string caseNumber, long vRecId)
         {
             try
             {
@@ -390,21 +407,18 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                {
                                    ChassisNumber = v.parmChassisNumber.ToString(),
                                    Color = v.parmColor,
-                                   Year = v.parmyear.ToString(),
+                               Year = v.parmyear.ToString(),
                                    ODOReading = v.parmODOReading.ToString(),
                                    Make = v.parmMake,
                                    EngineNumber = v.parmEngineNumber,
-                                   VehicleInsRecID = v.parmVehicleInsRecID,
+                               VehicleInsRecID = vRecId,
                                    RecID = v.parmRecID,
                                    CaseNumber = caseNumber,
                                    TableId = v.parmTableId,
                                    RegistrationNumber = v.parmRegNo,
-
-
-
                                };
 
-                            if (vehicleData.Any(s => s.VehicleInsRecID == v.parmVehicleInsRecID))
+                        if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
                             {
                                 vehicleUpdateList.Add(vehicleTosave);
                             }
@@ -429,7 +443,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
 
                     AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                 });
             }
         }
@@ -1886,10 +1900,18 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
                 actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
                 actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionAcceptance);
-
+              
                 if (tasks != null)
                 {
-                    foreach (var task in tasks)
+                    var q = tasks.Where(x =>
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail ||
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection ||
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail).ToArray();
+
+                    foreach (var task in tasks.Where(x =>
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail &&
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection &&
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail))
                     {
                         mzkTasks.Add(
                             new MzkTasksContract
@@ -1906,6 +1928,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmCustId = task.CustomerId,
                                 parmCustName = task.CustomerName,
                                 parmCustPhone = task.CustPhone,
+                                parmContactPersonPhone = task.ContactNumber,
+                                parmContactPersonName = task.ContactName,
                                 parmRegistrationNum = task.RegistrationNumber,
                                 parmStatus = task.Status,
                                 parmStatusDueDate = task.StatusDueDate,
@@ -1916,7 +1940,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmEEPActionStep = actionStepMapping[task.Status]
                             });
                     }
-                    var res = await client.updateStatusListAsync(mzkTasks,_userInfo.CompanyId);
+                    var res = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
 
                     var taskList = new ObservableCollection<Eqstra.BusinessLogic.Task>();
                     if (res.response != null)
@@ -1935,6 +1959,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                        CustomerId = x.parmCustId,
                                        CustomerName = x.parmCustName,
                                        CustPhone = x.parmCustPhone,
+                                       ContactName = x.parmContactPersonName,
+                                       ContactNumber = x.parmContactPersonPhone,
                                        RegistrationNumber = x.parmRegistrationNum,
                                        Status = x.parmStatus,
                                        StatusDueDate = x.parmStatusDueDate,

@@ -96,7 +96,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerName;
-        [Ignore]
+   
         [RestorableState]
         public string CustomerName
         {
@@ -188,6 +188,22 @@ namespace Eqstra.BusinessLogic
         {
             get { return vehicleType; }
             set { SetProperty(ref vehicleType, value); }
+        }
+
+        private string contactName;
+        [RestorableState]
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
+        }
+
+        private string contactNumber;
+        [RestorableState]
+        public string ContactNumber
+        {
+            get { return contactNumber; }
+            set { SetProperty(ref contactNumber, value); }
         }
     }
 }

@@ -67,8 +67,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
                 else
                 {
+                    this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
                     this.InspectionTask.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture;
-                    SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
+                   await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
                     this.Appointments.Add(new ScheduleAppointment
@@ -100,15 +101,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             var tasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
 
-            foreach (var t in tasks)
-            {
-                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
-                if (cust != null)
-                {
-                    t.CustomerName = cust.CustomerName;
-                    t.Address = cust.Address;
-                }
-            }
+            //foreach (var t in tasks)
+            //{
+            //    var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
+            //    if (cust != null)
+            //    {
+            //        t.CustomerName = cust.CustomerName;
+            //        t.Address = cust.Address;
+            //    }
+            //}
             if (navigationParameter.Equals("AwaitInspectionDetail"))
             {
                 this.AllowEditing = true;

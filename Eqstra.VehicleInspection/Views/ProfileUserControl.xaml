@@ -37,6 +37,7 @@
                     <Flyout>
                         <TextBlock Foreground="Crimson"
                                    Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}"
+                                   TextWrapping="Wrap"
                                    ></TextBlock>
                     </Flyout>
                 </Button.Flyout>
