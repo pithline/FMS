@@ -9,7 +9,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     x:Name="pageRoot"
     SizeChanged="pageRoot_SizeChanged"
     

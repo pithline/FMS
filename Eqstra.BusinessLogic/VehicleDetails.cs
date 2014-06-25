@@ -37,6 +37,5 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref make, value); }
         }
 
-
     }
 }

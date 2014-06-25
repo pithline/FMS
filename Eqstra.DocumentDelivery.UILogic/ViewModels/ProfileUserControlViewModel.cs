@@ -24,18 +24,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             _navigationService = navigationService;
             _accountService = accountService;
 
-            
-
             LogoutCommand = new DelegateCommand(() =>
             {
                 _accountService.SignOut();
-                _navigationService.Navigate("Login", null);
+                _navigationService.Navigate("Login", string.Empty);
                 _navigationService.ClearHistory();
             });
         }
-
-       
-
 
         public ICommand LogoutCommand { get; private set; }
     }

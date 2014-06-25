@@ -66,7 +66,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -76,8 +76,8 @@
                     <TextBlock Text="Username" Grid.Row="0" Grid.Column="0" Style="{StaticResource LoginTextBlockStyle}"/>
                     <TextBlock Text="Password" Grid.Row="0" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}"/>
                     <TextBox PlaceholderText="Enter AX User Id" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0 0 20 0" Width="180" />
-                    <PasswordBox PlaceholderText="Enter Password" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1" Width="180"/>
-                    <Button Command="{Binding LoginCommand, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}">
+                    <PasswordBox KeyUp="PasswordBox_KeyUp" PlaceholderText="Enter Password" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1" Width="180"/>
+                    <Button x:Name="btnLogin" Command="{Binding LoginCommand, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="ms-appx:///Assets/loginIcon.png" Width="26" Height="26"/>
@@ -86,7 +86,8 @@
                         </Button.Content>
                     </Button>
                     <CheckBox IsChecked="{Binding ShouldSaveCredential,Mode=TwoWay}" Grid.Row="2" Content="Save Credentials"/>
-                    <TextBlock Text="{Binding ErrorMessage}" Grid.ColumnSpan="3" Grid.Row="3" Foreground="Crimson"  Style="{StaticResource InfoBoxTitleStyle}"/>
+                    <TextBlock Text="{Binding ErrorMessage}" TextWrapping="WrapWholeWords" Width="470" Grid.ColumnSpan="3"  Grid.Row="3" Foreground="Crimson"  Style="{StaticResource InfoBoxTitleStyle}"/>
+                    <ProgressRing IsActive="{Binding IsLoggingIn}" Grid.Row="2" Grid.Column="2" />
                 </Grid>
             </Grid>
         </ScrollViewer>

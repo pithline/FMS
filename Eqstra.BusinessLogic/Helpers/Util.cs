@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Eqstra.BusinessLogic.ServiceSchedule;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,86 @@ namespace Eqstra.BusinessLogic.Helpers
             }
         }
 
+
+
+        async public static System.Threading.Tasks.Task WriteDeliveryTaskToDiskAsync(string content, string fileName)
+        {
+            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(itemsSourceFile, content);
+        }
+
+        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>> ReadDeliveryTaskFromDiskAsync(string fileName)
+        {
+            try
+            {
+                ObservableCollection<BusinessLogic.CollectDeliveryTask> tasks = null;
+                var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
+                if (itemsSourceFile != null)
+                {
+                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
+                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>>(content);
+                }
+                return tasks;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
+        async public static System.Threading.Tasks.Task WriteDriverTasksToDiskAsync(string content, string fileName)
+        {
+            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(itemsSourceFile, content);
+        }
+
+        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>> ReadDriverTasksFromDiskAsync(string fileName)
+        {
+            try
+            {
+                ObservableCollection<DriverTask> tasks = null;
+                var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
+                if (itemsSourceFile != null)
+                {
+                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
+                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>>(content);
+                }
+                return tasks;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
+        async public static System.Threading.Tasks.Task WriteSuppliersToDiskAsync(string content, string fileName)
+        {
+            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(itemsSourceFile, content);
+        }
+
+        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.Suppliers>> ReadSuppliersFromDiskAsync(string fileName)
+        {
+            try
+            {
+                ObservableCollection<Suppliers> tasks = null;
+                var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
+                if (itemsSourceFile != null)
+                {
+                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
+                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.Suppliers>>(content);
+                }
+                return tasks;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
     }
 }

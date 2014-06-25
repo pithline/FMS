@@ -20,7 +20,7 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                
+
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Submit" Command="{Binding SubmitCommand}">
                 <AppBarButton.Icon>
@@ -59,9 +59,12 @@
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
-                <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>-->
+      
+                <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
             </StackPanel>
             <local:ProfileUserControl Grid.Column="2" Margin="10 0"/>
         </Grid>
@@ -104,24 +107,24 @@
                         </Grid.RowDefinitions>
                         <StackPanel >
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="ODO Reading"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="ODO Reading"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding Model.ODOReading,Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="ODO Reading Date"/>
-                            <input:SfDatePicker BorderThickness="0"  Foreground="#FF666666" FontSize="18" Margin="-10 0 0 0" IsHitTestVisible="False"/>
+                            <input:SfDatePicker BorderThickness="0"  Foreground="#FF666666" Value="{Binding Model.ODOReadingDate,Mode=TwoWay}" FontSize="18" Margin="-10 0 0 0" IsHitTestVisible="False"/>
                         </StackPanel>
 
 
                         <StackPanel Grid.Row="2" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Type"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Service Type"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding Model.ServiceType,Mode=TwoWay}"/>
                         </StackPanel>
 
 
                         <StackPanel Grid.Row="3" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Delivery Option"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Delivery Option"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding Model.DeliveryOption,Mode=TwoWay}"/>
                         </StackPanel>
 
 
@@ -132,45 +135,45 @@
 
                         <StackPanel Grid.Row="5" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Address"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Address"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding Model.Address,Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="6" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Location Type"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Location Type"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}"  Text="{Binding Model.LocationType,Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="7" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Additional Work"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Additional Work"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}"  Text="{Binding Model.AdditionalWork,Mode=TwoWay}"/>
                         </StackPanel>
 
 
                         <StackPanel Grid.Row="0" Grid.Column="1" >
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Name"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Name"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}"  Text="{Binding Model.SupplierName,Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Contact Name"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Name"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding Model.SupplierContactName,Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Contact Number"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Contact Number"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}"  Text="{Binding Model.SupplierContactNumber,Mode=TwoWay}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 20 20 0">
                             <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Supplier Date &amp; Time"/>
-                            <TextBlock Style="{StaticResource TextContentStyle}" Text="Supplier Date &amp; Time"/>
+                            <TextBlock Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
                         <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Date (Option 1)"/>
-                            <DatePicker Grid.Row="9" Margin="0 20" />
+                            <TextBlock Style="{StaticResource TextHeaderStyle}"  Text="{Binding Model.ODOReading,Mode=TwoWay}"/>
+                            <DatePicker Grid.Row="9" Margin="0 20" Date="{Binding Model.SupplierDate,Mode=TwoWay}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Margin="0 0 20 0" VerticalAlignment="Top">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}" Text="Service Date (Option 2)"/>
-                            <DatePicker Grid.Row="9" Margin="0 20" />
+                            <TextBlock Style="{StaticResource TextHeaderStyle}" />
+                            <DatePicker Grid.Row="9" Margin="0 20" Date="{Binding Model.SupplierTime,Mode=TwoWay}"/>
                         </StackPanel>
                     </Grid>
                 </Border>

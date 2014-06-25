@@ -1,4 +1,6 @@
-﻿using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Services;
 using Eqstra.ServiceScheduling.UILogic.ViewModels;
 using Eqstra.ServiceScheduling.Views;
@@ -6,9 +8,11 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -53,19 +57,39 @@ namespace Eqstra.ServiceScheduling
 
         }
 
-        async protected override Task OnLaunchApplication(LaunchActivatedEventArgs args)
+        protected override void OnRegisterKnownTypesForSerialization()
+        {
+
+            base.OnRegisterKnownTypesForSerialization();
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.UserInfo));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.ImageCapture));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<ImageCapture>));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.CaseTypeEnum));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Helpers.TaskStatus));
+            SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>));
+            SessionStateService.RegisterKnownType(typeof(LogonResult));
+            SessionStateService.RegisterKnownType(typeof(List<string>));
+
+        }
+        async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
             var accountService = _container.Resolve<IAccountService>();
-            var result = await accountService.VerifyUserCredentialsAsync();
-            if (result != null)
+            var cred = accountService.VerifyUserCredentialsAsync();
+            if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {
-                NavigationService.Navigate("Main", result);
+
+                await SSProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2);
+                NavigationService.Navigate("Main", string.Empty);
             }
             else
             {
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
+
 
         }
 
@@ -92,7 +116,7 @@ namespace Eqstra.ServiceScheduling
 
             _container.RegisterType<SettingsFlyout, AddAddressFlyoutPage>(new ContainerControlledLifetimeManager());
 
-            ViewModelLocator.Register(typeof(ServiceSchedulingPage).ToString(), () => new ServiceSchedulingPageViewModel(this.NavigationService,new AddAddressFlyoutPage()));
+            ViewModelLocator.Register(typeof(ServiceSchedulingPage).ToString(), () => new ServiceSchedulingPageViewModel(this.NavigationService, new AddAddressFlyoutPage()));
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.ViewModels.{0}ViewModel,Eqstra.ServiceScheduling.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
@@ -109,8 +133,6 @@ namespace Eqstra.ServiceScheduling
         {
             return _container.Resolve(type);
         }
-
-        
 
         protected override IList<Windows.UI.ApplicationSettings.SettingsCommand> GetSettingsCommands()
         {

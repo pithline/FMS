@@ -1,7 +1,9 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.Common;
 using Eqstra.DocumentDelivery.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using System.Reflection;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.DocumentDelivery.Views
@@ -28,91 +30,22 @@ namespace Eqstra.DocumentDelivery.Views
     /// </summary>
     public sealed partial class InspectionDetailsPage : VisualStateAwarePage
     {
-
-        private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
-        /// <summary>
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
+        private bool isCached;
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
         }
 
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-
         public InspectionDetailsPage()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
-
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-        private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
+        async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             try
             {
-                if (e.AddedItems !=null && e.AddedItems.Count>0)
+                if (e.AddedItems != null && e.AddedItems.Count > 0)
                 {
                     var dc = (InspectionDetailsPageViewModel)this.DataContext;
                     dc.SelectedTaskList.Clear();
@@ -123,9 +56,9 @@ namespace Eqstra.DocumentDelivery.Views
 
                     dc.SaveTaskCommand.RaiseCanExecuteChanged();
                     dc.NextStepCommand.RaiseCanExecuteChanged();
+                    await dc.GetCustomerDetailsAsync();
                 }
-                //var dc = (InspectionDetailsPageViewModel)this.DataContext;
-                //await dc.GetCustomerDetailsAsync();
+
             }
             catch (Exception ex)
             {
@@ -133,5 +66,60 @@ namespace Eqstra.DocumentDelivery.Views
             }
 
         }
+        async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            try
+            {
+                var result = await Util.ReadDeliveryTaskFromDiskAsync("DetailsItemsSourceFile.txt");
+                if (result != null)
+                {
+                    this.sfDataGrid.ItemsSource = result.Where(x => x.CustomerName.Contains(args.QueryText) ||
+                                      Convert.ToString(x.DocumentCount).Contains(args.QueryText) || x.AllocatedTo.Contains(args.QueryText) ||
+                                     Convert.ToString(x.TaskType).Contains(args.QueryText) || Convert.ToString(x.ConfirmedDate).Contains(args.QueryText) ||
+                                     Convert.ToString(x.StatusDueDate).Contains(args.QueryText) || x.Status.Contains(args.QueryText) ||
+                                     Convert.ToString(x.DeliveryTime).Contains(args.QueryText) || Convert.ToString(x.DeliveryDate).Contains(args.QueryText));                  
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
+        {
+            var deferral = args.Request.GetDeferral();
+            if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                if (!isCached)
+                {
+                    await Util.WriteDeliveryTaskToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "DetailsItemsSourceFile.txt");
+                    isCached = true;
+                }
+
+                var searchSuggestionList = new List<string>();
+                foreach (var task in await Util.ReadDeliveryTaskFromDiskAsync("DetailsItemsSourceFile.txt"))
+                {
+                    foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                    {
+                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.Name.Equals("VehicleInsRecId") ||
+                            propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
+                            continue;
+                        var propVal = Convert.ToString(propInfo.GetValue(task));
+                        if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                        {
+                            if (!searchSuggestionList.Contains(propVal))
+                            searchSuggestionList.Add(propVal);
+                        }
+                    }
+                }
+                args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+            }
+            deferral.Complete();
+
+        }
+
     }
 }

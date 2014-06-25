@@ -1,6 +1,7 @@
 ﻿using Eqstra.DocumentDelivery.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                      var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
                      if (result.Item1 != null)
                      {
-                         navigationService.Navigate("Main", result.Item1);
+                         string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
+                         navigationService.Navigate("Main", jsonUserInfo);
                      }
                      else
                      {

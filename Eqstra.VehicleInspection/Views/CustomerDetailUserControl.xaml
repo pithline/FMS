@@ -8,7 +8,7 @@
     x:Class="Eqstra.VehicleInspection.Views.CustomerDetailUserControl"
     xmlns:vms="using:Eqstra.VehicleInspection.UILogic.ViewModels"
     x:Name="custDetailsUserControl"
-        xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
+    xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
     <UserControl.Resources>
         <vms:CustomerDetailUserControlViewModel x:Key="CustDetailsViewModel"/>

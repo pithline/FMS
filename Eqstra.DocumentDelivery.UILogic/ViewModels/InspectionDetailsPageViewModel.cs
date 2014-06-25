@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
-    public class InspectionDetailsPageViewModel : ViewModel
+    public class InspectionDetailsPageViewModel : BaseViewModel
     {
         INavigationService _navigationService;
         public InspectionDetailsPageViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
             this.InspectionList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
             this.SaveVisibility = Visibility.Collapsed;
@@ -34,11 +37,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     return System.Threading.Tasks.Task.FromResult<object>(null);
                 }
-                _navigationService.Navigate("DrivingDirection", Inspection);
+                string jsonInspection = JsonConvert.SerializeObject(Inspection);
+                _navigationService.Navigate("DrivingDirection", jsonInspection);
                 return System.Threading.Tasks.Task.FromResult<object>(null);
-            }, 
+            },
             () =>
-                { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.Completed); }
+            { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.Completed); }
             );
 
             this.SaveTaskCommand = new DelegateCommand(async () =>
@@ -48,30 +52,40 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     //this.InspectionList.Remove(item);
                     if (item.TaskType == CDTaskTypeEnum.Delivery)
                     {
-                        item.CDTaskStatus = CDTaskStatus.AwaitingDelivery; 
+                        item.CDTaskStatus = CDTaskStatus.AwaitingDelivery;
                     }
                     else
                     {
-                        item.CDTaskStatus = CDTaskStatus.AwaitingDriverCollection; 
+                        item.CDTaskStatus = CDTaskStatus.AwaitingDriverCollection;
                     }
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<Eqstra.BusinessLogic.CollectDeliveryTask>(item);
-                    this._navigationService.Navigate("Main",null);
+                    this._navigationService.Navigate("Main", string.Empty);
                 }
-            }, 
+            },
             () =>
             {
                 return this.SelectedTaskList.Count > 0;
             });
             this.NextStepCommand = new DelegateCommand(() =>
             {
+                try
+                {
 
-                if (this.Inspection.TaskType == CDTaskTypeEnum.Collection)
-                {
-                    this._navigationService.Navigate("CollectionOrDeliveryDetails", this.Inspection); 
+                    ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"] = this.Inspection.VehicleInsRecId;
+                    string jsonInspection = JsonConvert.SerializeObject(this.Inspection);
+                    if (this.Inspection.TaskType == CDTaskTypeEnum.Collection)
+                    {
+                        this._navigationService.Navigate("CollectionOrDeliveryDetails", jsonInspection);
+                    }
+                    else
+                    {
+                        _navigationService.Navigate("DrivingDirection", jsonInspection);
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    _navigationService.Navigate("DrivingDirection", Inspection);
+                    
+                    throw;
                 }
             },
             () =>
@@ -79,29 +93,29 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 return (this.Inspection != null);
             }
             );
-            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            //{
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from engine",
-            //        Location = "Cape Town",
-            //        StartTime = DateTime.Now,
-            //        EndTime = DateTime.Now.AddHours(2),
-            //        ReadOnly = true,
-            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from engine",
+                    Location = "Cape Town",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(2),
+                    ReadOnly = true,
+                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-            //    },
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from differential",
-            //        Location = "Cape Town",
-            //         ReadOnly = true,
-            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-            //    },                    
-            //};
+                },
+                new ScheduleAppointment(){
+                    Subject = "Inspection at Peter Johnson",
+                    Notes = "some noise from differential",
+                    Location = "Cape Town",
+                     ReadOnly = true,
+                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
+                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
+                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
+                },                    
+            };
         }
         #region Overrides
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -129,11 +143,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             }
             foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
             {
-                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.CustomerName;
-                item.Address = cust.Address;
                 this.InspectionList.Add(item);
             }
+            if (this.InspectionList.Any())
+                this.Inspection = this.InspectionList.FirstOrDefault();
         }
 
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
@@ -143,7 +156,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         #endregion
 
         #region Properties
-    
+
         private Visibility saveVisibility;
 
         public Visibility SaveVisibility
@@ -222,15 +235,15 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.inspection.CustomerId);
                     this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                    this.customerDetails.CaseNumber = this.inspection.CaseNumber;
+                    this.CustomerDetails.CaseNumber = this.inspection.CaseNumber;
                     this.CustomerDetails.VehicleInsRecId = this.inspection.VehicleInsRecId;
-                    this.customerDetails.Status = this.inspection.Status;
-                    this.customerDetails.StatusDueDate = this.inspection.StatusDueDate;
-                    this.customerDetails.Address = this.customer.Address;
-                    this.customerDetails.AllocatedTo = this.inspection.AllocatedTo;
-                    this.customerDetails.CustomerName = this.customer.CustomerName;
-                    this.customerDetails.CaseType = this.inspection.CaseType;
-                    this.customerDetails.EmailId = this.customer.EmailId;
+                    this.CustomerDetails.Status = this.inspection.Status;
+                    this.CustomerDetails.StatusDueDate = this.inspection.StatusDueDate;
+                    this.CustomerDetails.Address = this.customer.Address;
+                    this.CustomerDetails.AllocatedTo = this.inspection.AllocatedTo;
+                    this.CustomerDetails.CustomerName = this.customer.CustomerName;
+                    this.CustomerDetails.CaseType = this.inspection.CaseType;
+                    this.CustomerDetails.EmailId = this.customer.EmailId;
                 }
             }
             catch (Exception)

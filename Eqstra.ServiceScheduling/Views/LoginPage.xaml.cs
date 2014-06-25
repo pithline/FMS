@@ -28,7 +28,12 @@ namespace Eqstra.ServiceScheduling.Views
         {
             this.InitializeComponent();
         }
-
-
+        private void PasswordBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if(e.Key == Windows.System.VirtualKey.Enter)
+            {
+                this.btnLogin.Command.Execute(null);
+            }
+        }
     }
 }

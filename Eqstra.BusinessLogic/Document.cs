@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +9,22 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-   public class Document: ValidatableBindableBase
+    public class Document : BindableBase
     {
-        private string caseNumber;
+        private long vehicleInsRecID;
+        [PrimaryKey]
+        public long VehicleInsRecID
+        {
+            get { return vehicleInsRecID; }
+            set { SetProperty(ref vehicleInsRecID, value); }
+        }
 
+        private string caseNumber;
         public string CaseNumber
         {
             get { return caseNumber; }
-            set { SetProperty(ref caseNumber, value); }
+            set { caseNumber = value; }
         }
-
         private string documentType;
 
         public string DocumentType
@@ -55,6 +63,5 @@ namespace Eqstra.BusinessLogic
             get { return registrationNumber; }
             set { SetProperty(ref registrationNumber, value); }
         }
-
     }
 }

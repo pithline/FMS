@@ -6,8 +6,10 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,6 +19,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,17 +46,28 @@ namespace Eqstra.DocumentDelivery
         public App()
         {
             this.InitializeComponent();
-                    }
+        }
 
-
-
-       async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
+        protected override void OnRegisterKnownTypesForSerialization()
+        {
+            base.OnRegisterKnownTypesForSerialization();
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.UserInfo));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Customer));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Helpers.TaskStatus));
+            SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>));
+            SessionStateService.RegisterKnownType(typeof(List<string>));
+        }
+        async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
             var accountService = _container.Resolve<IAccountService>();
             var result = await accountService.VerifyUserCredentialsAsync();
             if (result != null)
             {
-                NavigationService.Navigate("Main", result);
+                string jsonUserInfo = JsonConvert.SerializeObject(result);
+                NavigationService.Navigate("Main", jsonUserInfo);
             }
             else
             {
@@ -61,7 +75,7 @@ namespace Eqstra.DocumentDelivery
             }
             Window.Current.Activate();
         }
-        
+
         async protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
@@ -85,18 +99,40 @@ namespace Eqstra.DocumentDelivery
 
             _container.RegisterType<SettingsFlyout, AddCustomerPage>(new ContainerControlledLifetimeManager());
 
-            ViewModelLocator.Register(typeof(CollectionOrDeliveryDetailsPage).ToString(), () =>  new CollectionOrDeliveryDetailsPageViewModel(this.NavigationService, new AddCustomerPage()) );
+            ViewModelLocator.Register(typeof(CollectionOrDeliveryDetailsPage).ToString(), () => new CollectionOrDeliveryDetailsPageViewModel(this.NavigationService, new AddCustomerPage()));
 
-           
+
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.DocumentDelivery.UILogic.ViewModels.{0}ViewModel,Eqstra.DocumentDelivery.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
                 return Type.GetType(viewModelTypeName);
             });
 
-            
-        }
 
+        }
+        protected override IList<Windows.UI.ApplicationSettings.SettingsCommand> GetSettingsCommands()
+        {
+            var settingsCommands = new List<SettingsCommand>();
+            var accountService = _container.Resolve<IAccountService>();
+            if (accountService.SignedInUser != null)
+            {
+                settingsCommands.Add(new SettingsCommand("resetpassword", "Reset Password", (handler) =>
+                {
+                    ResetPasswordPage page = new ResetPasswordPage();
+                    page.Show();
+                }));
+            }
+            settingsCommands.Add(new SettingsCommand("privacypolicy", "Privacy Policy", (handler) =>
+            {
+
+            }));
+            settingsCommands.Add(new SettingsCommand("help", "Help", (handler) =>
+            {
+
+            }));
+
+            return settingsCommands;
+        }
         protected override object Resolve(Type type)
         {
             return _container.Resolve(type);

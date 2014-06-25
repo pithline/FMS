@@ -81,10 +81,10 @@ namespace Eqstra.VehicleInspection.Views
             {
                 this.mainGrid.ItemsSource = result.Where(x => x.CaseCategory.Contains(args.QueryText) ||
                          x.CaseNumber.Contains(args.QueryText) ||
-                         x.CaseType.ToString().Contains(args.QueryText) ||
+                        Convert.ToString(x.CaseType).Contains(args.QueryText) ||
                          x.CustomerName.Contains(args.QueryText) ||
                          x.RegistrationNumber.Contains(args.QueryText) ||
-                         x.Status.ToString().Contains(args.QueryText));
+                         x.Status.Contains(args.QueryText));
             }
         }
 
@@ -97,7 +97,7 @@ namespace Eqstra.VehicleInspection.Views
                 {
                     if (!isCached)
                     {
-                        await  Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource),"MainItemsSourceFile.txt");
+                        await Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
                         isCached = true;
                     }
 

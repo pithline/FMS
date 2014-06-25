@@ -1,7 +1,8 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
-
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             this.PoolofTasks = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
             this.Appointments = new ScheduleAppointmentCollection();
+
+            this.CreateTableAsync();
             //this.Appointments = new ScheduleAppointmentCollection
             //{
             //    new ScheduleAppointment(){
@@ -82,48 +85,52 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-
-
-            var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
-             this.WeatherInfo = weather.FirstOrDefault();
-
-            var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>();
-            foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
+            try
             {
-                var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == item.CustomerId);
-                item.CustomerName = cust.CustomerName;
-                if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                var userInfo = JsonConvert.DeserializeObject<UserInfo>(navigationParameter.ToString());
+
+                //var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
+                //this.WeatherInfo = weather.FirstOrDefault();
+
+                var list = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>();
+                foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
                 {
-                    item.ConfirmedDate = DateTime.Today.AddDays(-1);
-                    item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                    if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
+                    {
+                        item.ConfirmedDate = DateTime.Today.AddDays(-1);
+                        item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                    }
+                    item.ConfirmedDate = DateTime.Now;
+                    if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
+                    {
+                        item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
+                    }
+                    if (item.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery)
+                    {
+                        this.Appointments.Add(new ScheduleAppointment
+                               {
+                                   Subject = "Inspection at " + item.CustomerName,
+                                   StartTime = item.ConfirmedTime,
+                                   EndTime = item.ConfirmedTime.AddHours(1),
+                                   Location = item.Address,
+                                   ReadOnly = true,
+                                   Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
+                               });
+                    }
+                    AppSettingData.Appointments = this.Appointments;
+                    this.PoolofTasks.Add(item);
                 }
-                item.ConfirmedDate = DateTime.Now;
-                if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
-                {
-                    item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
-                }
-                item.Address = cust.Address;
-                if (item.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery)
-                {
-                    this.Appointments.Add(new ScheduleAppointment
-                           {
-                               Subject = "Inspection at " + item.CustomerName,
-                               StartTime = item.ConfirmedTime,
-                               EndTime = item.ConfirmedTime.AddHours(1),
-                               Location = item.Address,
-                               ReadOnly = true,
-                               Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
-                           });
-                }
-                AppSettingData.Appointments = this.Appointments;
-                this.PoolofTasks.Add(item);
+                this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.CDTaskStatus == BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation);
+                this.MyInspectionCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation));
+                this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
             }
-            this.AwaitingInspectionCount = this.PoolofTasks.Count(x => x.CDTaskStatus == BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation);
-            this.MyInspectionCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation));
-            this.TotalCount = this.PoolofTasks.Count(x => x.ConfirmedDate.Date.Equals(DateTime.Today));
+            catch (Exception)
+            {
+                throw;
+            }
         }
-  
+
         private WeatherInfo weatherInfo;
 
         public WeatherInfo WeatherInfo
@@ -196,5 +203,22 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         public DelegateCommand AssignCommand { get; set; }
 
+
+
+        /// <summary>
+        /// / testing temporary code.
+        /// </summary>
+        /// <returns></returns>
+        private async System.Threading.Tasks.Task CreateTableAsync()
+        {
+
+            // await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+
+            // await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            await SqliteHelper.Storage.CreateTableAsync<AddCustomer>();
+
+            //await SqliteHelper.Storage.CreateTableAsync<ProofOfCollection>();
+
+        }
     }
 }

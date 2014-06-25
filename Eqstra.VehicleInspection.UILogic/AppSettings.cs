@@ -11,12 +11,10 @@ namespace Eqstra.VehicleInspection.UILogic
     public class AppSettings : BindableBase
     {
         private static readonly AppSettings _instance = new AppSettings();
-
         public AppSettings()
         {
-            
-        }
 
+        }
         public static AppSettings Instance { get { return _instance; } }
 
         private int isSynchronizing;
@@ -28,22 +26,17 @@ namespace Eqstra.VehicleInspection.UILogic
         }
 
         private bool synced;
-
         public bool Synced
         {
             get { return synced; }
             set { SetProperty(ref synced, value); }
         }
 
-
         private string errorMessage;
-
         public string ErrorMessage
         {
             get { return errorMessage; }
             set { SetProperty(ref errorMessage, value); }
         }
-
-
     }
 }

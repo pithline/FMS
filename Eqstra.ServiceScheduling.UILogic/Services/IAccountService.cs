@@ -15,7 +15,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
 
          event EventHandler<BusinessLogic.EventArgs.UserChangedEventArgs> UserChanged;
 
-         Task<UserInfo> VerifyUserCredentialsAsync();
+         Task<Tuple<string,string>> VerifyUserCredentialsAsync();
 
     }
 }

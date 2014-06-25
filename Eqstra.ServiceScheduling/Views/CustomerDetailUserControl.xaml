@@ -8,80 +8,81 @@
     x:Class="Eqstra.ServiceScheduling.Views.CustomerDetailUserControl"
     xmlns:vms="using:Eqstra.ServiceScheduling.UILogic.ViewModels"
     x:Name="custDetailsUserControl"
+    xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
     <UserControl.Resources>
         <vms:CustomerDetailUserControlViewModel x:Key="CustDetailsViewModel"/>
     </UserControl.Resources>
-	<Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
         <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Top" Width="310">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Grid Grid.Row="1" VerticalAlignment="Top">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition/>
-						<RowDefinition/>
-					</Grid.RowDefinitions>
-					<Image Source="ms-appx:///Assets/details_image.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
-					<StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
-						<TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
-						<TextBlock Text="{Binding CaseNumber}" Style="{StaticResource TextContentStyle}"/>
-					</StackPanel>
-					<StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
-						<TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-						<TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
-					</StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Source="ms-appx:///Assets/details_image.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
+                        <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource TextContentStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
+                        <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
+                    </StackPanel>
 
-				</Grid>
+                </Grid>
 
-				<StackPanel Grid.Row="1" Margin="0 10 0 0">
-					<TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding Name}" Style="{StaticResource TextContentStyle}"/>
-				</StackPanel>
-				<StackPanel Grid.Row="2" Margin="0 15 0 0">
-					<TextBlock Text="Contact Number" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding CellNumber}" Style="{StaticResource TextContentStyle}"/>
-				</StackPanel>
-				<StackPanel Grid.Row="3" Margin="0 15 0 0">
-					<TextBlock Text="Address" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
-				</StackPanel>
+                <StackPanel Grid.Row="1" Margin="0 10 0 0">
+                    <TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="0 15 0 0">
+                    <TextBlock Text="Contact Number" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding CellNumber}" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="0 15 0 0">
+                    <TextBlock Text="Address" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
+                </StackPanel>
 
-				<StackPanel Grid.Row="4" Margin="0 15 0 0">
-					<TextBlock Text="Status Due Date" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding StatusDueDate}" Style="{StaticResource TextContentStyle}"/>
-				</StackPanel>
+                <StackPanel Grid.Row="4" Margin="0 15 0 0">
+                    <TextBlock Text="Status Due Date" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding StatusDueDate}" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
 
-				<!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>-->
+                <!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>-->
 
-				<StackPanel Grid.Row="5" Margin="0 15 0 0">
-					<TextBlock Text="Status" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding Status}" Style="{StaticResource TextContentStyle}"/>
-				</StackPanel>
-				<StackPanel Grid.Row="6" Margin="0 15 0 0">
-					<TextBlock Text="Allocated To" Style="{StaticResource TextHeaderStyle}"/>
-					<TextBlock Text="{Binding AllocatedTo}" Style="{StaticResource TextContentStyle}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" Grid.Row="7" Margin="0 10 0 0">
+                <StackPanel Grid.Row="5" Margin="0 15 0 0">
+                    <TextBlock Text="Status" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding Status}" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="0 15 0 0">
+                    <TextBlock Text="Allocated To" Style="{StaticResource TextHeaderStyle}"/>
+                    <TextBlock Text="{Binding AllocatedTo}" Style="{StaticResource TextContentStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="0 10 0 0">
                     <Button Command="{Binding MakeSkypeCallCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding ContactNumber}" Style="{StaticResource TransparentBtn}" Margin="0 0 0 0">
-					<Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
+                        <Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
                     </Button>
                     <Button Command="{Binding MakeIMCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding EmailId}" Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">
                         <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
@@ -90,22 +91,21 @@
                         <Image Source="ms-appx:///Assets/mail_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
                     </Button>
                     <Button Command="{Binding LocateCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding Address}" Style="{StaticResource TransparentBtn}">
-					<Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                        <Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
                     </Button>
                     <Button Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">
-                        
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="Click">
-                                <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.SchedulerPage" Parameter="{Binding Path=DataContext , ElementName=custDetailsUserControl}"/>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
-                        
-						<Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
-					</Button>
-				</StackPanel>
+                        <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                        <Button.Flyout>
+                            <Flyout>
+                                <schedule:SfSchedule ContextMenuType="RadialMenu" AllowEditing="False" HorizontalAlignment="Center"  Width="350" Height="500" ScheduleType="Day"  EnableReminderTimer="True"  Appointments="{Binding Appointments}"  ShowNonWorkingHours="True" TimeInterval="OneHour" Margin="30">
+                                </schedule:SfSchedule>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
 
 
-			</Grid>
-		</Grid>
-	</Border>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

@@ -109,10 +109,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\DataGridDoubleTappedCommand.cs" />
-    <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Views\AddAddressFlyoutPage.xaml.cs">
       <DependentUpon>AddAddressFlyoutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -150,6 +147,7 @@
     <None Include="Eqstra.ServiceScheduling_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <Content Include="Common\ReadMe.txt" />
+    <Content Include="GeoNameConfig\GeoNamesData.xml" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -238,6 +236,10 @@
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.NetCore">
       <HintPath>..\packages\Unity.3.0.1304.1\lib\NetCore45\Microsoft.Practices.Unity.NetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\netcore45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

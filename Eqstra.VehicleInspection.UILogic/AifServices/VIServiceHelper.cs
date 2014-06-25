@@ -170,9 +170,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
         {
             try
             {
+                if (_userInfo == null)
+                {
+                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
 
-
-                var result = await client.getCustDetailsAsync(cusId);
+                var result = await client.getCustDetailsAsync(cusId,_userInfo.CompanyId);
                 if (result.response != null)
                 {
                     List<Eqstra.BusinessLogic.Customer> cusInsertList = new List<Customer>();
@@ -1896,7 +1899,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmProcessStepRecID = task.ProcessStepRecID,
                                 parmServiceRecId = task.ServiceRecID,
                                 parmCaseCategory = task.CaseCategory,
-                                parmCategoryType = (CaseCategoryType)Enum.Parse(typeof(CaseCategoryType), task.CategoryType.ToString()),
+                                parmCategoryType = task.CategoryType,
                                 parmCollectionRecId = task.CollectionRecID,
                                 parmConfirmedDueDate = task.ConfirmedDate,
                                 parmCustAddress = task.Address,
