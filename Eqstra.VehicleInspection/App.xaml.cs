@@ -94,8 +94,8 @@ namespace Eqstra.VehicleInspection
                 await packDb.CopyAsync(destinationFolder);
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
-            
 
+            
             
             var accountService = _container.Resolve<IAccountService>();
             var cred =  accountService.VerifyUserCredentialsAsync();
