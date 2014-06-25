@@ -273,16 +273,16 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
                     this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                    this.customerDetails.CaseNumber = this.InspectionTask.CaseNumber;
-                    this.customerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
-                    this.customerDetails.Status = this.InspectionTask.Status;
-                    this.customerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
-                    this.customerDetails.Address = this.customer.Address;
-                    this.customerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
-                    this.customerDetails.CustomerName = this.customer.CustomerName;
-                    this.customerDetails.ContactName = this.customer.ContactName;
-                    this.customerDetails.CaseType = this.InspectionTask.CaseType;
-                    this.customerDetails.EmailId = this.customer.EmailId;
+                    this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
+                    this.CustomerDetails.Status = this.InspectionTask.Status;
+                    this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
+                    this.CustomerDetails.Address = this.customer.Address;
+                    this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
+                    this.CustomerDetails.CustomerName = this.customer.CustomerName;
+                    this.CustomerDetails.ContactName = this.customer.ContactName;
+                    this.CustomerDetails.CaseType = this.InspectionTask.CaseType;
+                    this.CustomerDetails.EmailId = this.customer.EmailId;
                     this.IsCommandBarOpen = isAppBarOpen;
                 }
             }
