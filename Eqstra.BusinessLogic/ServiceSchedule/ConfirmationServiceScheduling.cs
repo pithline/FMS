@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.ServiceSchedulingModel
 {
-    public class Confirmation : ValidatableBindableBase
+    public class ConfirmationServiceScheduling : ValidatableBindableBase
     {
-        private string odoReading;
-
-        public string ODOReading
+        private decimal odoReading;
+        public decimal ODOReading
         {
             get { return odoReading; }
             set { SetProperty(ref odoReading, value); }
@@ -120,5 +119,29 @@ namespace Eqstra.BusinessLogic.ServiceSchedulingModel
             set { SetProperty(ref serviceDateOption2, value); }
         }
 
+        private string eventDesc;
+
+        public string EventDesc
+        {
+            get { return eventDesc; }
+            set { SetProperty(ref eventDesc, value); }
+        }
+
+        private string contactPersonName;
+
+        public string ContactPersonName
+        {
+            get { return contactPersonName; }
+            set { SetProperty(ref contactPersonName, value); }
+        }
+
+        private string contactPersonPhone;
+
+        public string ContactPersonPhone
+        {
+            get { return contactPersonPhone; }
+            set { SetProperty(ref contactPersonPhone, value); }
+        }
+        
     }
 }

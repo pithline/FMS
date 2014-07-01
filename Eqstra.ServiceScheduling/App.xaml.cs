@@ -77,11 +77,9 @@ namespace Eqstra.ServiceScheduling
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
             var accountService = _container.Resolve<IAccountService>();
-            var cred = accountService.VerifyUserCredentialsAsync();
+            var cred = await accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
-            {
-
-                await SSProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2);
+            { 
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
@@ -116,7 +114,7 @@ namespace Eqstra.ServiceScheduling
 
             _container.RegisterType<SettingsFlyout, AddAddressFlyoutPage>(new ContainerControlledLifetimeManager());
 
-            ViewModelLocator.Register(typeof(ServiceSchedulingPage).ToString(), () => new ServiceSchedulingPageViewModel(this.NavigationService, new AddAddressFlyoutPage()));
+            ViewModelLocator.Register(typeof(ServiceSchedulingPage).ToString(), () => new ServiceSchedulingPageViewModel(this.NavigationService,this.EventAggregator, new AddAddressFlyoutPage()));
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.ViewModels.{0}ViewModel,Eqstra.ServiceScheduling.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);

@@ -76,7 +76,7 @@ namespace Eqstra.VehicleInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadTasksFromDiskAsync("MainItemsSourceFile.txt");
+            var result = await Util.ReadFromDiskAsync<Task>("VITasksFile.txt");
             if (result != null)
             {
                 this.mainGrid.ItemsSource = result.Where(x => x.CaseCategory.Contains(args.QueryText) ||
@@ -97,12 +97,12 @@ namespace Eqstra.VehicleInspection.Views
                 {
                     if (!isCached)
                     {
-                        await Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
+                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "VITasksFile.txt");
                         isCached = true;
                     }
 
                     var searchSuggestionList = new List<string>();
-                    foreach (var task in await Util.ReadTasksFromDiskAsync("MainItemsSourceFile.txt"))
+                    foreach (var task in await Util.ReadFromDiskAsync<Task>("VITasksFile.txt"))
                     {
                         foreach (var propInfo in task.GetType().GetRuntimeProperties())
                         {

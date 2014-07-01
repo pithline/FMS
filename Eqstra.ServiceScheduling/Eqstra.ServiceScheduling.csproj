@@ -147,7 +147,6 @@
     <None Include="Eqstra.ServiceScheduling_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <Content Include="Common\ReadMe.txt" />
-    <Content Include="GeoNameConfig\GeoNamesData.xml" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

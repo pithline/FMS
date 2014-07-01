@@ -10,6 +10,8 @@ using Eqstra.BusinessLogic.ServiceSchedule;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Core;
+using System.Diagnostics;
+using Eqstra.BusinessLogic.ServiceSchedulingModel;
 namespace Eqstra.ServiceScheduling.UILogic.AifServices
 {
     public class SSProxyHelper
@@ -85,10 +87,11 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-
-                var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
+               
+                var result = await client.getTasksOptimizeAsync(_userInfo.UserId, _userInfo.CompanyId);              
+               
                 List<DriverTask> driverTaskList = new List<DriverTask>();
                 if (result.response != null)
                 {
@@ -128,7 +131,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         }
 
 
-        async public System.Threading.Tasks.Task<DetailServiceScheduling> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId)
+        async public System.Threading.Tasks.Task<ServiceSchedulingDetail> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId)
         {
             try
             {
@@ -138,16 +141,16 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getServiceDetailsAsync(caseNumber, caseServiceRecId, _userInfo.CompanyId);
-                DetailServiceScheduling detailServiceScheduling = null;
+                ServiceSchedulingDetail detailServiceScheduling = null;
                 if (result.response != null)
                 {
 
                     result.response.AsParallel().ForAll(mzkTask =>
                     {
-                        detailServiceScheduling = (new Eqstra.BusinessLogic.ServiceSchedule.DetailServiceScheduling
+                        detailServiceScheduling = (new Eqstra.BusinessLogic.ServiceSchedule.ServiceSchedulingDetail
                         {
                             Address = mzkTask.parmAddress,
                             AdditionalWork = mzkTask.parmAdditionalWork,
@@ -155,8 +158,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ServiceDateOption2 = mzkTask.parmPreferredDateSecondOption,
                             ODOReading = mzkTask.parmODOReading,
                             ODOReadingDate = mzkTask.parmODOReadingDate,
-                            ServiceType = mzkTask.parmServiceType,
-                            LocationType = new List<string> { mzkTask.parmServiceType },
+                            //ServiceType =(await client.getLocationTypeAsync(caseServiceRecId, _userInfo.CompanyId)).response.Select(s=>s.),
+                            LocationType = mzkTask.parmLocationType.Split(',').ToList<string>(),
                             SupplierName = mzkTask.parmSupplierName,
                             EventDesc = mzkTask.parmEventDesc,
                             ContactPersonName = mzkTask.parmContactPersonName,
@@ -175,8 +178,12 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
         }
 
+        async public System.Threading.Tasks.Task GetServiceDetailsAsync()
+        {
+          // var result = await client.getServiceDetailsAsync(caseNumber, caseServiceRecId, _userInfo.CompanyId);
+        }
 
-        async public System.Threading.Tasks.Task InsertServiceDetailsToSvcAsync(DetailServiceScheduling detailServiceScheduling, string caseNumber, long caseServiceRecId)
+        async public System.Threading.Tasks.Task InsertConfirmationServiceSchedulingToSvcAsync(ConfirmationServiceScheduling confirmationServiceScheduling, string caseNumber, long caseServiceRecId)
         {
             try
             {
@@ -186,23 +193,22 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, new MzkServiceDetailsContract
                 {
-                    parmAdditionalWork = detailServiceScheduling.AdditionalWork,
-                    parmAddress = detailServiceScheduling.Address,
-                    parmContactPersonName = detailServiceScheduling.ContactPersonName,
-                    parmEventDesc = detailServiceScheduling.EventDesc,
-                    parmLocationType = detailServiceScheduling.LocationType.ToString(),
-                    parmODOReading = detailServiceScheduling.ODOReading,
-                    parmODOReadingDate = detailServiceScheduling.ODOReadingDate,
-                    parmPreferredDateFirstOption = detailServiceScheduling.ServiceDateOption1,
-                    parmPreferredDateSecondOption = detailServiceScheduling.ServiceDateOption2,
-                    parmServiceType = detailServiceScheduling.ServiceType,
-                    parmSupplierName = detailServiceScheduling.SupplierName,
-                    parmContactPersonPhone = detailServiceScheduling.ContactPersonPhone
-
+                    parmAdditionalWork = confirmationServiceScheduling.AdditionalWork,
+                    parmAddress = confirmationServiceScheduling.Address,
+                    parmContactPersonName = confirmationServiceScheduling.ContactPersonName,
+                    parmEventDesc = confirmationServiceScheduling.EventDesc,
+                    parmLocationType = confirmationServiceScheduling.LocationType,
+                    parmODOReading = confirmationServiceScheduling.ODOReading,
+                    parmODOReadingDate = confirmationServiceScheduling.ODOReadingDate,
+                    parmPreferredDateFirstOption = confirmationServiceScheduling.ServiceDateOption1,
+                    parmPreferredDateSecondOption = confirmationServiceScheduling.ServiceDateOption2,
+                    parmServiceType = confirmationServiceScheduling.ServiceType,
+                    parmSupplierName = confirmationServiceScheduling.SupplierName,
+                    parmContactPersonPhone = confirmationServiceScheduling.ContactPersonPhone,
                 }, _userInfo.CompanyId);
 
             }

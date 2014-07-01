@@ -87,7 +87,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
@@ -190,7 +190,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
 
                 var result = await client.getCustDetailsAsync(cusId,_userInfo.CompanyId);
@@ -249,7 +249,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getTasksAsync(_userInfo.CompanyId, _userInfo.UserId);
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
@@ -329,7 +329,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
                 var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Commercial.CVehicleDetails>();
@@ -395,7 +395,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
                 var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
@@ -456,7 +456,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
                 var pVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PVehicleDetails>()).Where(x => x.ShouldSave);
@@ -510,7 +510,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerAccessoriesContract> mzkMobiPassengerAccessoriesContractColl = new ObservableCollection<MzkMobiPassengerAccessoriesContract>();
@@ -650,7 +650,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pBodyworkData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PBodywork>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerBodyworkContract> mzkMobiPassengerBodyworkContractColl = new ObservableCollection<MzkMobiPassengerBodyworkContract>();
@@ -773,7 +773,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pTrimInteriorData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PTrimInterior>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerTrimInteriorContract> mzkMobiPassengerTrimInteriorContractColl = new ObservableCollection<MzkMobiPassengerTrimInteriorContract>();
@@ -861,7 +861,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var pTyreConditionData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PTyreCondition>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKMobiPassengerTyreConditionContract> mZKMobiPassengerTyreConditionContractColl = new ObservableCollection<MZKMobiPassengerTyreConditionContract>();
@@ -1076,7 +1076,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var inspectionProofData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PInspectionProof>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKVehicleInspectionTableContract> MZKVehicleInspectionTableContractColl = new ObservableCollection<MZKVehicleInspectionTableContract>();
@@ -1127,7 +1127,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
                 var cVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CVehicleDetails>()).Where(x => x.ShouldSave);
@@ -1186,7 +1186,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cGlassData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CGlass>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerGlassContract> mzkMobiCommercialGlassContractColl = new ObservableCollection<MzkMobiPassengerGlassContract>();
@@ -1265,7 +1265,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialAccessoriesContract> mzkMobiCommercialAccessoriesContractColl = new ObservableCollection<MzkMobiCommercialAccessoriesContract>();
@@ -1365,7 +1365,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cCabTrimInterData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CCabTrimInter>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKMobiCommercialTrimInteriorContract> mZKMobiCommercialTrimInteriorContractColl = new ObservableCollection<MZKMobiCommercialTrimInteriorContract>();
@@ -1497,7 +1497,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cChassisBodyData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CChassisBody>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialChassisBodyContract> mzkMobiCommercialChassisBodyContractColl = new ObservableCollection<MzkMobiCommercialChassisBodyContract>();
@@ -1603,7 +1603,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cMechanicalCondData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CMechanicalCond>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialMechConditionContract> mzkMobiCommercialMechConditionContractColl = new ObservableCollection<MzkMobiCommercialMechConditionContract>();
@@ -1709,7 +1709,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cTyresData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CTyres>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialTyresContract> mzkMobiCommercialTyresContractColl = new ObservableCollection<MzkMobiCommercialTyresContract>();
@@ -1831,7 +1831,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var inspectionProofData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CPOI>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKVehicleInspectionTableContract> MZKVehicleInspectionTableContractColl = new ObservableCollection<MZKVehicleInspectionTableContract>();
@@ -1894,7 +1894,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     return;
                 if (_userInfo == null)
                 {
-                    _userInfo = await JsonConvert.DeserializeObjectAsync<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();

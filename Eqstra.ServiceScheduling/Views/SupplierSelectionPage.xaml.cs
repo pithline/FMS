@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Microsoft.Practices.Prism.StoreApps;
 using Eqstra.BusinessLogic.ServiceSchedule;
+using Eqstra.ServiceScheduling.UILogic.ViewModels;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.ServiceScheduling.Views
@@ -43,7 +44,7 @@ namespace Eqstra.ServiceScheduling.Views
 
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadSuppliersFromDiskAsync("SuppliersGridItemsSourceFile.txt");
+            var result = await Util.ReadFromDiskAsync<Supplier>("SuppliersGridItemsSourceFile.txt");
             if (result != null)
             {
                 this.suppliersGrid.ItemsSource = result.Where(x =>
@@ -61,12 +62,12 @@ namespace Eqstra.ServiceScheduling.Views
                 {
                     if (!isCached)
                     {
-                        await Util.WriteSuppliersToDiskAsync(JsonConvert.SerializeObject(this.suppliersGrid.ItemsSource), "SuppliersGridItemsSourceFile.txt");
+                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.suppliersGrid.ItemsSource), "SuppliersGridItemsSourceFile.txt");
                         isCached = true;
                     }
 
                     var searchSuggestionList = new List<string>();
-                    foreach (var task in await Util.ReadSuppliersFromDiskAsync("SuppliersGridItemsSourceFile.txt"))
+                    foreach (var task in await Util.ReadFromDiskAsync<Supplier>("SuppliersGridItemsSourceFile.txt"))
                     {
                         foreach (var propInfo in task.GetType().GetRuntimeProperties())
                         {
