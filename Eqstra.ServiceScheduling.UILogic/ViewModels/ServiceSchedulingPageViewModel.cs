@@ -3,16 +3,21 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
+using Eqstra.ServiceScheduling.UILogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
+using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
@@ -20,21 +25,29 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
     public class ServiceSchedulingPageViewModel : BaseViewModel
     {
         private DriverTask _task;
-        INavigationService _navigationService;
-        SettingsFlyout _settingsFlyout;
-        public ServiceSchedulingPageViewModel(INavigationService navigationService, SettingsFlyout settingsFlyout) :base(navigationService)
+        private INavigationService _navigationService;
+        private IEventAggregator _eventAggregator;
+        private SettingsFlyout _settingsFlyout;
+        private Dictionary<string, object> navigationData = new Dictionary<string, object>();
+        public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, SettingsFlyout settingsFlyout)
+            : base(navigationService)
         {
             _navigationService = navigationService;
             _settingsFlyout = settingsFlyout;
-
+            _eventAggregator = eventAggregator;
             this.CustomerDetails = new CustomerDetails();
-            this.Model = new DetailServiceScheduling();
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
+            this.Model = new ServiceSchedulingDetail();
             this.GoToSupplierSelectionCommand = new DelegateCommand<object>(async (param) =>
             {
-                DetailServiceScheduling detailServiceScheduling = param as DetailServiceScheduling;
-                await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(detailServiceScheduling, this._task.CaseNumber, this._task.CaseServiceRecID);
-                string jsonCustomerDetails = JsonConvert.SerializeObject(this.CustomerDetails);
-                _navigationService.Navigate("SupplierSelection", jsonCustomerDetails);
+                ServiceSchedulingDetail detailServiceScheduling = param as ServiceSchedulingDetail;
+
+                await Util.WriteToDiskAsync(JsonConvert.SerializeObject(detailServiceScheduling), "ServiceSchedulingDetail");
+
+                PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
+                PersistentData.Instance.DriverTask = this._task;
+                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                _navigationService.Navigate("SupplierSelection", string.Empty);
             });
 
             this.AddAddressCommand = new DelegateCommand<string>((x) =>
@@ -53,6 +66,22 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
             });
 
+            this._eventAggregator.GetEvent<AddressEvent>().Subscribe((address) =>
+            {
+                if (address != null)
+                {
+                    ((ServiceSchedulingDetail)this.Model).Address = address.Street + "," + Environment.NewLine + address.Suburb
+                               + "," + Environment.NewLine + address.City + "," + Environment.NewLine + address.Province + "," +
+                               Environment.NewLine + address.Country + "," + Environment.NewLine + address.Postcode;
+                }
+            });
+
+            this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
+            {
+                await TakePictureAsync(param);
+            });
+
+
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -63,6 +92,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             await GetCustomerDetailsAsync();
             this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
             this.IsBusy = false;
+
+
         }
 
         private CustomerDetails customerDetails;
@@ -95,6 +126,21 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.ContactName = this._task.CustomerName;
                     this.CustomerDetails.CaseType = this._task.CaseType;
 
+                    var startTime = new DateTime(this._task.ConfirmedTime.Year, this._task.ConfirmedTime.Month, this._task.ConfirmedTime.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
+                                this._task.ConfirmedTime.Second);
+                    this.CustomerDetails.Appointments.Add(
+                                                        new ScheduleAppointment()
+                                                        {
+                                                            Subject = this._task.CaseNumber,
+                                                            Location = this._task.Address,
+                                                            StartTime = startTime,
+                                                            EndTime = startTime.AddHours(1),
+                                                            ReadOnly = true,
+                                                            AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                                            Status = new ScheduleAppointmentStatus { Status = this._task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                                                        });
+
                 }
             }
             catch (Exception)
@@ -104,9 +150,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
         }
         public DelegateCommand<object> GoToSupplierSelectionCommand { get; set; }
-
         public DelegateCommand ODOReadingPictureCommand { get; set; }
-
         public DelegateCommand<string> AddAddressCommand { get; set; }
 
         private string odoReadingImagePath;
@@ -115,6 +159,27 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return odoReadingImagePath; }
             set { SetProperty(ref odoReadingImagePath, value); }
         }
+
+
+        public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
+        async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        {
+            try
+            {
+                CameraCaptureUI cam = new CameraCaptureUI();
+
+                var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (file != null)
+                {
+                    param.ImagePath = file.Path;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Enums;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
@@ -218,4 +219,5 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
         
     }
+
 }

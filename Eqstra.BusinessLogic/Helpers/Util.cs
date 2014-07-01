@@ -23,24 +23,25 @@ namespace Eqstra.BusinessLogic.Helpers
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
-        async public static System.Threading.Tasks.Task WriteTasksToDiskAsync(string content, string fileName)
+        async public static System.Threading.Tasks.Task WriteToDiskAsync(string content, string fileName)
         {
             StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(itemsSourceFile, content);
+
         }
 
-        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.Task>> ReadTasksFromDiskAsync(string fileName)
+        async public static System.Threading.Tasks.Task<ObservableCollection<T>> ReadFromDiskAsync<T>(string fileName)
         {
             try
             {
-                ObservableCollection<Task> tasks = null;
+                string content = string.Empty;
                 var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
                 if (itemsSourceFile != null)
                 {
-                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
-                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.Task>>(content);
+                    content = await FileIO.ReadTextAsync(itemsSourceFile);
                 }
-                return tasks;
+                return JsonConvert.DeserializeObject<ObservableCollection<T>>(content);
+
             }
             catch (Exception)
             {
@@ -48,86 +49,23 @@ namespace Eqstra.BusinessLogic.Helpers
             }
         }
 
-
-
-        async public static System.Threading.Tasks.Task WriteDeliveryTaskToDiskAsync(string content, string fileName)
-        {
-            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(itemsSourceFile, content);
-        }
-
-        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>> ReadDeliveryTaskFromDiskAsync(string fileName)
+        async public static Task<T> DeserializeObjectAsync<T>(string fileName)
         {
             try
             {
-                ObservableCollection<BusinessLogic.CollectDeliveryTask> tasks = null;
+                string content = string.Empty;
                 var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
                 if (itemsSourceFile != null)
                 {
-                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
-                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>>(content);
+                    content = await FileIO.ReadTextAsync(itemsSourceFile);
                 }
-                return tasks;
+                return JsonConvert.DeserializeObject<T>(content);
             }
             catch (Exception)
             {
-                return null;
+                return default(T);
             }
+
         }
-
-
-
-        async public static System.Threading.Tasks.Task WriteDriverTasksToDiskAsync(string content, string fileName)
-        {
-            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(itemsSourceFile, content);
-        }
-
-        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>> ReadDriverTasksFromDiskAsync(string fileName)
-        {
-            try
-            {
-                ObservableCollection<DriverTask> tasks = null;
-                var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
-                if (itemsSourceFile != null)
-                {
-                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
-                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>>(content);
-                }
-                return tasks;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-
-
-        async public static System.Threading.Tasks.Task WriteSuppliersToDiskAsync(string content, string fileName)
-        {
-            StorageFile itemsSourceFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(itemsSourceFile, content);
-        }
-
-        async public static System.Threading.Tasks.Task<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.Suppliers>> ReadSuppliersFromDiskAsync(string fileName)
-        {
-            try
-            {
-                ObservableCollection<Suppliers> tasks = null;
-                var itemsSourceFile = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName) as StorageFile;
-                if (itemsSourceFile != null)
-                {
-                    var content = await FileIO.ReadTextAsync(itemsSourceFile);
-                    tasks = JsonConvert.DeserializeObject<ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.Suppliers>>(content);
-                }
-                return tasks;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
     }
 }

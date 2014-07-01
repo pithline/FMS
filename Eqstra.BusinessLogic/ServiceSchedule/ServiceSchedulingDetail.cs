@@ -7,9 +7,21 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.ServiceSchedule
 {
-    public class DetailServiceScheduling : ValidatableBindableBase
+    public class ServiceSchedulingDetail : ValidatableBindableBase
     {
-        
+        public ServiceSchedulingDetail()
+        {
+            this.SelectedItems = new Dictionary<string, object>();
+            this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
+        }
+
+        private ImageCapture odoReadingSnapshot;
+        [RestorableState]
+        public ImageCapture ODOReadingSnapshot
+        {
+            get { return odoReadingSnapshot; }
+            set { SetProperty(ref odoReadingSnapshot, value); }
+        }
 
         private decimal odoReading;
 
@@ -27,9 +39,9 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref odoReadingDate, value); }
         }
 
-        private string serviceType;
+        private List<string> serviceType;
 
-        public string ServiceType
+        public List<string> ServiceType
         {
             get { return serviceType; }
             set { SetProperty(ref serviceType, value); }
@@ -50,7 +62,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return contactPersonPhone; }
             set { SetProperty(ref contactPersonPhone, value); }
         }
-        
 
         private string supplierName;
 
@@ -60,7 +71,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref supplierName, value); }
         }
 
-
         private string eventDesc;
 
         public string EventDesc
@@ -68,7 +78,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return eventDesc; }
             set { SetProperty(ref eventDesc, value); }
         }
-        
+
         private string deliveryOption;
 
         public string DeliveryOption
@@ -123,6 +133,14 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         {
             get { return isLiftRequired; }
             set { SetProperty(ref isLiftRequired, value); }
+        }
+
+        private Dictionary<string, object> selectedItems;
+
+        public Dictionary<string, object> SelectedItems
+        {
+            get { return selectedItems; }
+            set { SetProperty(ref selectedItems, value); }
         }
 
     }

@@ -47,7 +47,7 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                var result = await Util.ReadDeliveryTaskFromDiskAsync("MainItemsSourceFile.txt");
+                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.txt");
                 if (result != null)
                 {
                     this.mainGrid.ItemsSource = result.Where(x => x.CustomerName.Contains(args.QueryText) ||
@@ -76,12 +76,12 @@ namespace Eqstra.DocumentDelivery.Views
                     {
                         if (!isCached)
                         {
-                            await Util.WriteDeliveryTaskToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
+                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
                             isCached = true;
                         }
 
                         var searchSuggestionList = new List<string>();
-                        foreach (var task in await Util.ReadDeliveryTaskFromDiskAsync("MainItemsSourceFile.txt"))
+                        foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.txt"))
                         {
                             foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {

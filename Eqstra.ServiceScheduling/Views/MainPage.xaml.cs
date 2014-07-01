@@ -27,6 +27,7 @@ namespace Eqstra.ServiceScheduling.Views
     public sealed partial class MainPage : VisualStateAwarePage
     {
         bool isCached;
+        HashSet<string> _searchSuggestionList = new HashSet<string>();
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,49 +37,67 @@ namespace Eqstra.ServiceScheduling.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadDriverTasksFromDiskAsync("MainItemsSourceFile.txt");
+            var result = await Util.ReadFromDiskAsync<DriverTask>("MainItemsSourceFile.json");
             if (result != null)
             {
                 this.mainGrid.ItemsSource = result.Where(x =>
                          x.CaseNumber.Contains(args.QueryText) ||
-                        Convert.ToString(x.CaseType).Contains(args.QueryText) ||
+
                          x.CustomerName.Contains(args.QueryText) ||
                          x.RegistrationNumber.Contains(args.QueryText) ||
+                         x.Model.Contains(args.QueryText) ||
+                         x.Make.Contains(args.QueryText) ||
+                         x.Description.Contains(args.QueryText) ||
+                         x.Address.Contains(args.QueryText) ||
                          x.Status.Contains(args.QueryText));
             }
         }
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
-            if (this.mainGrid.ItemsSource != null & ((IEnumerable<DriverTask>)this.mainGrid.ItemsSource).Any())
+            try
             {
-                var deferral = args.Request.GetDeferral();
-                if (!string.IsNullOrEmpty(args.QueryText))
+                if (this.mainGrid.ItemsSource != null & ((IEnumerable<DriverTask>)this.mainGrid.ItemsSource).Any())
                 {
-                    if (!isCached)
+                    var deferral = args.Request.GetDeferral();
+                    var query = args.QueryText != null ? args.QueryText.Trim() : null;
+                    if (string.IsNullOrEmpty(query))
                     {
-                        await Util.WriteDriverTasksToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
-                        isCached = true;
+                        return;
                     }
-
-                    var searchSuggestionList = new List<string>();
-                    foreach (var task in await Util.ReadDriverTasksFromDiskAsync("MainItemsSourceFile.txt"))
+                    if (!string.IsNullOrEmpty(args.QueryText))
                     {
-                        foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                        if (!isCached)
                         {
-                            if (propInfo.Name.Equals("ModelYear") || propInfo.Name.Equals("ConfirmedTime") || propInfo.Name.Equals("ConfirmedDate") || propInfo.Name.Equals("VehicleInsRecId") || propInfo.Name.Equals("CustomerId")
-                                || propInfo.Name.Equals("CaseServiceRecID") ||propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address")|| propInfo.Name.Equals("CollectionRecID") || propInfo.Name.Equals("DriverPhone") || propInfo.Name.Equals("DriverLastName") || propInfo.Name.Equals("DriverFirstName"))
-                                continue;
-                       
-                            var propVal = Convert.ToString(propInfo.GetValue(task));
-                            if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.json");
+                            isCached = true;
+                        }
+                        _searchSuggestionList.Clear();
+                        foreach (var task in await Util.ReadFromDiskAsync<DriverTask>("MainItemsSourceFile.json"))
+                        {
+                            foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {
-                                searchSuggestionList.Add(propVal);
+                                if (propInfo.Name.Equals("CaseCategory") || propInfo.Name.Equals("CaseType") || propInfo.Name.Equals("ModelYear") || propInfo.Name.Equals("ConfirmedTime") || propInfo.Name.Equals("ConfirmedDate") || propInfo.Name.Equals("VehicleInsRecId") || propInfo.Name.Equals("CustomerId")
+                                    || propInfo.Name.Equals("CaseServiceRecID") || propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address") || propInfo.Name.Equals("CollectionRecID") || propInfo.Name.Equals("DriverPhone") || propInfo.Name.Equals("DriverLastName") || propInfo.Name.Equals("DriverFirstName"))
+                                    continue;
+
+                                var propVal = Convert.ToString(propInfo.GetValue(task));
+                                if (propVal.ToLowerInvariant().Contains(query.ToLowerInvariant()))
+                                {
+
+                                    args.Request.SearchSuggestionCollection.AppendQuerySuggestion(propVal);
+
+                                }
                             }
                         }
+
                     }
-                    args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+                    deferral.Complete();
                 }
-                deferral.Complete();
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
         }

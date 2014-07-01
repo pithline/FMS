@@ -1,34 +1,123 @@
-﻿<SettingsFlyout
-    x:Class="Eqstra.ServiceScheduling.Views.AddAddressFlyoutPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.ServiceScheduling.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" 
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    IconSource="/Assets/StoreLogo.scale-100.png"
-    Title="Add Address"
-    d:DesignWidth="346">
+﻿<SettingsFlyout x:Class="Eqstra.ServiceScheduling.Views.AddAddressFlyoutPage"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:Eqstra.ServiceScheduling.Views"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d"
+                xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                prism:ViewModelLocator.AutoWireViewModel="True"
+                IconSource="/Assets/StoreLogo.scale-100.png"
+                Title="Add Address"
+                d:DesignWidth="346">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <ComboBox Header="Country :" x:Name="country" Width="250" ItemsSource="{Binding Model.Catalog.Country,Mode=TwoWay}" DisplayMemberPath="{Binding}" SelectedValuePath="{Binding}" SelectedValue="{Binding}" SelectedItem="{Binding}"/>
-        <ComboBox Header="Province :" x:Name="Province" ItemsSource="{Binding ElementName=country,Path=Provinces}" DisplayMemberPath="{Binding title}" Grid.Row="1" Margin="0 10"/>
-        <ComboBox Header="City :" x:Name="City" ItemsSource="{Binding ElementName=Province,Path=Cities}" DisplayMemberPath="{Binding title}" Grid.Row="2" Margin="0 10"/>
-        <ComboBox Header="Suburb :" ItemsSource="{Binding ElementName=City,Path=Suburbs}" DisplayMemberPath="{Binding title}" Grid.Row="3" Margin="0 10"/>
-        <TextBox Header="Street/Post Box :"  Text="{Binding Model.Street,Mode=TwoWay}" AcceptsReturn="True" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True" Grid.Row="4" Height="200" Margin="0 10"/>
-        <ComboBox Header="Zip/Postcode :" ItemsSource="{Binding Model.Postcode}" DisplayMemberPath="{Binding}" Grid.Row="5" Margin="0 10"/>
+
+        <TextBox Header="Street/Post Box :"
+                 Text="{Binding Model.Street,Mode=TwoWay}"
+                 AcceptsReturn="True"
+                 IsSpellCheckEnabled="True"
+                 IsTextPredictionEnabled="True"
+                 Grid.Row="0"
+                 Height="200"
+                 Margin="0 10" />
+
+        <TextBox Header="Suburb :"
+                 Text="{Binding  Model.Suburb,Mode=TwoWay}"
+                 Grid.Row="1"
+                 Height="80"
+                 Margin="0 10" />
+
+        <TextBox Header="City :"
+                 x:Name="City"
+                 Height="80"
+                 Text="{Binding  Model.City,Mode=TwoWay}"
+                 Grid.Row="2"
+                 Margin="0 10" />
+
+        <TextBox Header="Province :"
+                 x:Name="Province"
+                 Height="80"
+                 Text="{Binding  Model.Province,Mode=TwoWay}"
+                 Grid.Row="3"
+                 Margin="0 10" />
+        <TextBox Header="Country :"
+                 x:Name="country"
+                 Width="250"
+                 Grid.Row="4"
+                 Height="80"
+                 Text="{Binding  Model.Country,Mode=TwoWay}" />
+
+        <TextBox Header="Zip/Postcode :"
+                 Text="{Binding  Model.Postcode,Mode=TwoWay}"
+                 Grid.Row="5"
+                 Height="80"
+                 Margin="0 10" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="6">
+            <AppBarButton Icon="Save"
+                          RequestedTheme="Light"
+                          VerticalAlignment="Bottom"
+                          Command="{Binding SaveAddressCommand}"
+                           />
+            <AppBarButton Icon="Cancel"
+                          RequestedTheme="Light"
+                          VerticalAlignment="Bottom" />
+        </StackPanel>
     </Grid>
 
 </SettingsFlyout>
+
+
+<!--This code for for dropdown box, will add later-->
+
+
+<!--<ComboBox Header="Country :"
+          x:Name="country"
+          Width="250"
+          ItemsSource="{Binding Model.Catalog.Country,Mode=TwoWay}"
+          DisplayMemberPath="{Binding}"
+          SelectedValuePath="{Binding}"
+          SelectedValue="{Binding}"
+          SelectedItem="{Binding}" />
+<ComboBox Header="Province :"
+          x:Name="Province"
+          ItemsSource="{Binding ElementName=country,Path=Provinces}"
+          DisplayMemberPath="{Binding title}"
+          Grid.Row="1"
+          Margin="0 10" />
+<ComboBox Header="City :"
+          x:Name="City"
+          ItemsSource="{Binding ElementName=Province,Path=Cities}"
+          DisplayMemberPath="{Binding title}"
+          Grid.Row="2"
+          Margin="0 10" />
+<ComboBox Header="Suburb :"
+          ItemsSource="{Binding ElementName=City,Path=Suburbs}"
+          DisplayMemberPath="{Binding title}"
+          Grid.Row="3"
+          Margin="0 10" />
+<TextBox Header="Street/Post Box :"
+         Text="{Binding Model.Street,Mode=TwoWay}"
+         AcceptsReturn="True"
+         IsSpellCheckEnabled="True"
+         IsTextPredictionEnabled="True"
+         Grid.Row="4"
+         Height="200"
+         Margin="0 10" />
+<ComboBox Header="Zip/Postcode :"
+          ItemsSource="{Binding Model.Postcode}"
+          DisplayMemberPath="{Binding}"
+          Grid.Row="5"
+          Margin="0 10" />-->

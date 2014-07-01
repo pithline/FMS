@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic;
 using Syncfusion.UI.Xaml.Grid;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -76,7 +77,7 @@ namespace Eqstra.VehicleInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            this.detailsGrid.ItemsSource = (await Util.ReadTasksFromDiskAsync("DetailsItemsSourceFile.txt")).Where(x => x.CaseCategory.Contains(args.QueryText) ||
+            this.detailsGrid.ItemsSource = (await Util.ReadFromDiskAsync<Eqstra.BusinessLogic.Task>("DetailsItemsSourceFile.txt")).Where(x => x.CaseCategory.Contains(args.QueryText) ||
                  x.CaseNumber.Contains(args.QueryText) ||
                  x.CaseType.ToString().Contains(args.QueryText) ||
                  x.CustomerName.Contains(args.QueryText) ||
@@ -91,12 +92,12 @@ namespace Eqstra.VehicleInspection.Views
             {
                 if (!isCached)
                 {
-                    await Util.WriteTasksToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource), "DetailsItemsSourceFile.txt");
+                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource), "DetailsItemsSourceFile.txt");
                     isCached = true;
                 }
 
                 var searchSuggestionList = new List<string>();
-                foreach (var task in await Util.ReadTasksFromDiskAsync("DetailsItemsSourceFile.txt"))
+                foreach (var task in await Util.ReadFromDiskAsync<Eqstra.BusinessLogic.Task>("DetailsItemsSourceFile.txt"))
                 {
                     foreach (var propInfo in task.GetType().GetRuntimeProperties())
                     {

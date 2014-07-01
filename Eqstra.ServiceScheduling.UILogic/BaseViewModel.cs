@@ -1,10 +1,12 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic;
+using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Capture;
 
 namespace Eqstra.ServiceScheduling.UILogic
 {
@@ -19,6 +21,7 @@ namespace Eqstra.ServiceScheduling.UILogic
                 _navigationService.ClearHistory();
                 _navigationService.Navigate("Main", string.Empty);
             });
+    
         }
         public DelegateCommand GoHomeCommand { get; set; }
 
@@ -29,7 +32,7 @@ namespace Eqstra.ServiceScheduling.UILogic
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-
+ 
         private bool isBusy;
 
         public bool IsBusy
@@ -37,5 +40,6 @@ namespace Eqstra.ServiceScheduling.UILogic
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
+     
     }
 }

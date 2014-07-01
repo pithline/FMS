@@ -12,6 +12,7 @@
     xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
+    x:Name="pageRoot"
     mc:Ignorable="d">
 
     <busy:SfBusyIndicator IsBusy="{Binding IsBusy}" AnimationType="DoubleCircle">
@@ -40,11 +41,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <!--<Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
-				Style="{StaticResource NavigationBackButtonNormalStyle}"
-				VerticalAlignment="Center"
-				AutomationProperties.Name="Back"
-				AutomationProperties.AutomationId="BackButton"
-				AutomationProperties.ItemType="Navigation Button"/>-->
+                Style="{StaticResource NavigationBackButtonNormalStyle}"
+                VerticalAlignment="Center"
+                AutomationProperties.Name="Back"
+                AutomationProperties.AutomationId="BackButton"
+                AutomationProperties.ItemType="Navigation Button"/>-->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
 
                     <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
@@ -89,14 +90,14 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <grid:SfDataGrid x:Name="mainGrid"  common:DataGridDoubleTappedCommand.Command="{Binding StartSchedulingCommand}"  Grid.Row="1"  IsDoubleTapEnabled="True"  NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+                            <grid:SfDataGrid x:Name="mainGrid" common:DataGridDoubleTappedCommand.Command="{Binding StartSchedulingCommand}"  Grid.Row="1"  IsDoubleTapEnabled="True"  NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                                 <grid:SfDataGrid.Columns>
                                     <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="200" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="Make" HeaderText="MAKE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="Model" HeaderText="MODEL" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="VehicleDescription" HeaderText="VEHICLE DESCRIPTION" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="Description" HeaderText="VEHICLE DESCRIPTION" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +11,34 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
     public class SupplierSelection : ValidatableBindableBase
     {
 
-        private List<string> country;
-        public List<string> Country
+        private List<string> countries;
+        public List<string> Countries
         {
-            get { return country; }
-            set { SetProperty(ref country, value); }
+            get { return countries; }
+            set { SetProperty(ref countries, value); }
         }
 
-        private List<string> suburb;
+        private List<string> provinces;
 
-        public List<string> Suburb
+        public List<string> Provinces
         {
-            get { return suburb; }
-            set { SetProperty(ref suburb, value); }
+            get { return provinces; }
+            set { SetProperty(ref provinces, value); }
+        }
+        private List<string> cities;
+
+        public List<string> Cities
+        {
+            get { return cities; }
+            set { SetProperty(ref cities, value); }
         }
 
-        private List<string> city;
+        private List<string> suburbs;
 
-        public List<string> City
+        public List<string> Suburbs
         {
-            get { return city; }
-            set { SetProperty(ref city, value); }
-        }
-
-        private List<string> province;
-
-        public List<string> Province
-        {
-            get { return province; }
-            set { SetProperty(ref province, value); }
+            get { return suburbs; }
+            set { SetProperty(ref suburbs, value); }
         }
 
         private List<string> region;
@@ -49,41 +49,21 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref region, value); }
         }
 
-        private Suppliers suppliers;
+        private List<Supplier> suppliers;
 
-        public Suppliers Suppliers
+        public List<Supplier> Suppliers
         {
             get { return suppliers; }
             set { SetProperty(ref suppliers, value); }
         }
 
-    }
+        private Supplier selectedSupplier;
 
-    public class Suppliers : ValidatableBindableBase
-    {
-        private string supplierName;
-
-        public string SupplierName
+        public Supplier SelectedSupplier
         {
-            get { return supplierName; }
-            set { SetProperty(ref supplierName, value); }
+            get { return selectedSupplier; }
+            set { SetProperty(ref selectedSupplier, value); }
         }
 
-        private string supplierContactName;
-
-        public string SupplierContactName
-        {
-            get { return supplierContactName; }
-            set { SetProperty(ref supplierContactName, value); }
-        }
-
-        private string supplierContactNumber;
-
-        public string SupplierContactNumber
-        {
-            get { return supplierContactNumber; }
-            set { SetProperty(ref  supplierContactNumber, value); }
-        }
-       
     }
 }

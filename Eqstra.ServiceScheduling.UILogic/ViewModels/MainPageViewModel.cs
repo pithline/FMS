@@ -9,6 +9,7 @@ using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,32 +26,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             : base(navigationService)
         {
             this.PoolofTasks = new ObservableCollection<DriverTask>();
-            this.Appointments = new ScheduleAppointmentCollection();
+
             _navigationService = navigationService;
-
-            this.Appointments = new ScheduleAppointmentCollection
-            {
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from engine",
-                    Location = "Cape Town",
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddHours(2),
-                    ReadOnly = true,
-                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
-
-                },
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Daren May",
-                    Notes = "some noise from differential",
-                    Location = "Cape Town",
-                     ReadOnly = true,
-                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-                },                    
-            };
 
             this.BingWeatherCommand = new DelegateCommand(() =>
             {
@@ -61,44 +38,35 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
                 _navigationService.Navigate("ServiceScheduling", jsonInspectionTask);
             });
-
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             this.IsBusy = true;
+
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             var list = await SSProxyHelper.Instance.GetTasksFromSvcAsync();
+
             try
             {
                 if (list != null)
                 {
                     foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list)
                     {
-                        if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
-                        {
-                            item.ConfirmedDate = DateTime.Today.AddDays(-1);
-                            item.ConfirmedTime = DateTime.Now.AddHours(-2);
-                        }
-                        item.ConfirmedDate = DateTime.Now;
-                        if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
-                        {
-                            item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
-                        }
+                        //if (item.Status == BusinessLogic.Helpers.TaskStatus.Completed)
+                        //{
+                        //    item.ConfirmedDate = DateTime.Today.AddDays(-1);
+                        //    item.ConfirmedTime = DateTime.Now.AddHours(-2);
+                        //}
+                        //item.ConfirmedDate = DateTime.Now;
+                        //if (item.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail)
+                        //{
+                        //    item.ConfirmedTime = DateTime.Now.AddHours(list.IndexOf(item));
+                        //}
 
                         this.PoolofTasks.Add(item);
-                        //if (item.Status != BusinessLogic.Helpers.TaskStatus.AwaitingInspection)
-                        //{
-                        //    this.Appointments.Add(new ScheduleAppointment
-                        //    {
-                        //        Subject = "Inspection at " + item.CustomerName,
-                        //        StartTime = item.ConfirmedTime,
-                        //        EndTime = item.ConfirmedTime.AddHours(1),
-                        //        Location = item.Address,
-                        //        ReadOnly = true,
-                        //        Status = new ScheduleAppointmentStatus { Brush = new SolidColorBrush(Colors.LightGreen), Status = "Free" },
-                        //    });
-                        //}
+
+
                         //var vehicleDetails = await SqliteHelper.Storage.GetSingleRecordAsync<VehicleDetails>(x => x.RegistrationNumber == item.RegistrationNumber);
                         //var vehicle = await SqliteHelper.Storage.GetSingleRecordAsync<Vehicle>(x => x.RegistrationNumber == item.RegistrationNumber);
 
@@ -121,6 +89,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         //    ModelYear = vehicle.ModelYear
                         //});
                     }
+
+                    GetAppointments();
+
                 }
 
             }
@@ -132,6 +103,35 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.IsBusy = false;
 
         }
+
+
+
+        private void GetAppointments()
+        {
+            foreach (var item in this.PoolofTasks)
+            {
+
+                var startTime = new DateTime(item.ConfirmedTime.Year, item.ConfirmedTime.Month, item.ConfirmedTime.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                           item.ConfirmedTime.Second);
+                this.Appointments = new ScheduleAppointmentCollection
+            {
+                new ScheduleAppointment()
+                {
+                                  Subject = item.CaseNumber,
+                                  Location = item.Address,
+                                  StartTime = startTime,
+                                  EndTime = startTime.AddHours(1),
+                                  ReadOnly = true,
+                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                              }
+                         
+                         };
+            }
+
+        }
+
 
         private DriverTask task;
         public DriverTask InspectionTask
