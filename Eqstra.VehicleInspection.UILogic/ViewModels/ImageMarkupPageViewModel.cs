@@ -22,7 +22,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-           
+
             if (navigationParameter is PVehicleDetails)
             {
                 var model = (PVehicleDetails)navigationParameter;
@@ -31,6 +31,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Snapshots.Add(model.LeftSnapshot);
                 this.Snapshots.Add(model.RightSnapshot);
                 this.Snapshots.Add(model.TopSnapshot);
+                PanelBackground = new ImageBrush()
+                {
+                    ImageSource = new BitmapImage(new Uri(((PVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
+                    Stretch = Stretch.Fill
+                };
             }
             else
             {
@@ -38,13 +43,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Snapshots.Add(model.FrontSnapshot);
                 this.Snapshots.Add(model.RightSnapshot);
                 this.Snapshots.Add(model.LeftSnapshot);
-            }
-
-            PanelBackground = new ImageBrush()
+                PanelBackground = new ImageBrush()
             {
                 ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
                 Stretch = Stretch.Fill
             };
+            }
+
+
 
         }
         private ObservableCollection<ImageCapture> snapshots;

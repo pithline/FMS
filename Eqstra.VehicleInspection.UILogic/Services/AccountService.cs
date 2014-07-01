@@ -47,10 +47,11 @@ namespace Eqstra.VehicleInspection.UILogic.Services
 
         async public Task<Tuple<UserInfo,string>> SignInAsync(string userId, string password, bool isCredentialStore)
         {
+            Tuple<LogonResult,string> result = null;
             try
             {
                 var userInfo = new UserInfo { Name = userId, UserId = userId };
-                 var result =await _identityService.LogonAsync(userId, password);
+                result =await _identityService.LogonAsync(userId, password);
                  if (result.Item1 == null)
                  {
                      return new Tuple<UserInfo,string>(null,result.Item2);
@@ -80,9 +81,9 @@ namespace Eqstra.VehicleInspection.UILogic.Services
                 }
                 return new Tuple<UserInfo,string>(_signedInUser,"");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return new Tuple<UserInfo,string>(null,ex.Message);
+                return new Tuple<UserInfo,string>(null, result.Item2);
             }
         }
 

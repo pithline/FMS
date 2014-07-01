@@ -4,6 +4,7 @@ using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.UILogic.Comparers;
 using Eqstra.VehicleInspection.UILogic.VIService;
 using Newtonsoft.Json;
 using System;
@@ -221,11 +222,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     });
 
                     if (cusUpdateList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync<Customer>(cusUpdateList);
+                        await SqliteHelper.Storage.UpdateAllAsync<Customer>(cusUpdateList.Distinct(new CustComparer()));
 
 
                     if (cusInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<Customer>(cusInsertList);
+                        await SqliteHelper.Storage.InsertAllAsync<Customer>(cusInsertList.Distinct(new CustComparer()));
                 }
             }
             catch (Exception ex)
@@ -343,7 +344,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             ChassisNumber = v.parmChassisNumber.ToString(),
                             Color = v.parmColor,
-                            Year = v.parmyear.ToString(),
+                            Year = v.parmyear.ToString("MM/dd/yyyy"),
                             ODOReading = v.parmODOReading.ToString(),
                             Make = v.parmMake,
                             EngineNumber = v.parmEngineNumber,
@@ -409,13 +410,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
                                ChassisNumber = v.parmChassisNumber.ToString(),
                                Color = v.parmColor,
-                               Year = v.parmyear.ToString(),
+                               Year = v.parmyear.ToString("MM/dd/yyyy"),
                                ODOReading = v.parmODOReading.ToString(),
                                Make = v.parmMake,
                                EngineNumber = v.parmEngineNumber,
                                VehicleInsRecID = vRecId,
                                RecID = v.parmRecID,
-                               CaseNumber = caseNumber,
+                               CaseNumber = caseNumber,                               
                                TableId = v.parmTableId,
                                RegistrationNumber = v.parmRegNo,
                            };

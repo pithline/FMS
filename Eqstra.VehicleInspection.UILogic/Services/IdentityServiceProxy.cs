@@ -15,26 +15,33 @@ namespace Eqstra.VehicleInspection.UILogic.Services
     {
         async public Task<Tuple<LogonResult, string>> LogonAsync(string userId, string password)
         {
-            await VIServiceHelper.Instance.ConnectAsync(userId.Trim(),password.Trim());            
-            var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
-            if (result != null)
+            try
             {
-                var userInfo = new UserInfo
-                    {
-                        UserId = result.response.parmUserID,
-                        CompanyId = result.response.parmCompany,
-                        CompanyName = result.response.parmCompanyName,
-                        Name = result.response.parmUserName
-                    };
-                string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
-                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
-                return new Tuple<LogonResult, string>(new LogonResult
+                await VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
+                var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
+                if (result != null)
                 {
-                    UserInfo = userInfo
+                    var userInfo = new UserInfo
+                        {
+                            UserId = result.response.parmUserID,
+                            CompanyId = result.response.parmCompany,
+                            CompanyName = result.response.parmCompanyName,
+                            Name = result.response.parmUserName
+                        };
+                    string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+                    ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
+                    return new Tuple<LogonResult, string>(new LogonResult
+                    {
+                        UserInfo = userInfo
 
-                }, "");
+                    }, "");
+                }
+                else
+                {
+                    return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                }
             }
-            else
+            catch (Exception)
             {
                 return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
             }
