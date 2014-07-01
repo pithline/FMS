@@ -68,7 +68,35 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
+            this.SyncCommand = new DelegateCommand(() =>
+            {
+                if (AppSettings.Instance.IsSynchronizing == 0)
+                {
+                    VIServiceHelper.Instance.Synchronize(async () =>
+                            {
+                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
 
+                                    AppSettings.Instance.IsSynchronizing = 1;
+                                });
+
+                                await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                                {
+                                    this.PoolofTasks.Clear();
+                                    await GetTasksFromDbAsync();
+                                    this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail);
+                                    this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture);
+                                    this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
+                                    GetAppointments();
+                                    AppSettings.Instance.IsSynchronizing = 0;
+                                    AppSettings.Instance.Synced = true;
+                                }
+                                      );
+
+                            });
+                }
+            });
 
         }
 
@@ -78,7 +106,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             try
             {
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-              
+
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 // await CreateTableAsync();
                 //SyncData();
@@ -267,7 +295,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
         public DelegateCommand BingWeatherCommand { get; set; }
 
-
+        public DelegateCommand SyncCommand { get; set; }
 
 
         /// <summary>
