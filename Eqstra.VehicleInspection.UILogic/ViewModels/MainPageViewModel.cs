@@ -108,7 +108,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             try
             {
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-
+                
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 // await CreateTableAsync();
                 //SyncData();

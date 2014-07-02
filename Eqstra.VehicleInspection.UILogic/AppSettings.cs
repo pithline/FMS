@@ -17,6 +17,23 @@ namespace Eqstra.VehicleInspection.UILogic
         }
         public static AppSettings Instance { get { return _instance; } }
 
+        private int isSyncingCustDetails;
+
+        public int IsSyncingCustDetails
+        {
+            get { return isSyncingCustDetails; }
+            set { SetProperty(ref isSyncingCustDetails, value); }
+        }
+
+        private int isSyncingVehDetails;
+
+        public int IsSyncingVehDetails
+        {
+            get { return isSyncingVehDetails; }
+            set { SetProperty(ref isSyncingVehDetails, value); }
+        }
+
+
         private int isSynchronizing;
 
         public int IsSynchronizing

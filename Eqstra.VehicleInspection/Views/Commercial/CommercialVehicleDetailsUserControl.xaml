@@ -81,7 +81,7 @@
                                 <Image Source="{Binding Path=Model.FrontSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button >
                         </Grid>-->
-                        <Grid Grid.Row="2" Grid.Column="0" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="1" Grid.Column="0" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -91,7 +91,7 @@
                                 <Image Source="{Binding Path=Model.LicenseDiscSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="2" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>

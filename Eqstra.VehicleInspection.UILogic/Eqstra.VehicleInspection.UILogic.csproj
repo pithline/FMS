@@ -108,7 +108,9 @@
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="Common\VIExtension.cs" />
     <Compile Include="Comparers\CustComparer.cs" />
+    <Compile Include="Events\CustFetchedEvent.cs" />
     <Compile Include="ErrorsRaisedEvent.cs" />
+    <Compile Include="Events\VehicleFetchedEvent.cs" />
     <Compile Include="Popups\SnapshotsViewer.xaml.cs">
       <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
     </Compile>
@@ -290,12 +292,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
-      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
-      <Name>Eqstra.BusinessLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Service References\VIService\" />
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +308,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
+      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
+      <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

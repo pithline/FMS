@@ -19,6 +19,7 @@
 
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+        <Converters:InvertBooleanConverter x:Key="Inverter" />
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
@@ -30,6 +31,7 @@
                               Icon="Save"
                               Visibility="{Binding AllowEditing,Converter={StaticResource BooleanToVisibilityConverter}}"
                               HorizontalAlignment="Left"
+                              IsEnabled="{Binding Path=IsBusy, Converter={StaticResource Inverter}}"
                               Command="{Binding SaveCommand}" />
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Next"
@@ -162,13 +164,13 @@
                                                          HeaderText="CASE NUMBER"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         MinimumWidth="120"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="CaseType"
+                                    <grid:GridTextColumn MappingName="CategoryType"
                                                          HeaderText="CASE TYPE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         MinimumWidth="100"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
@@ -203,7 +205,7 @@
                                     <grid:GridDateTimeColumn MappingName="StatusDueDate"
                                                              HeaderText="STATUS DUE DATE"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
@@ -214,7 +216,7 @@
                                                              HeaderText="CONFIRMED DATE"
                                                              AllowEditing="{Binding AllowEditing }"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -229,7 +231,7 @@
                                                              HeaderText="CONFIRMED TIME"
                                                              AllowEditing="{Binding AllowEditing}"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>

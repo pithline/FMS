@@ -6,6 +6,7 @@ using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Eqstra.VehicleInspection.UILogic.Events;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -222,6 +223,10 @@ namespace Eqstra.VehicleInspection.ViewModels
                 }
                 NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
                 this.FrameContent = this.inpectionUserControls[0];
+                _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
+                {
+                    await GetCustomerDetailsAsync();
+                });
             }
             catch (Exception)
             {
@@ -357,17 +362,25 @@ namespace Eqstra.VehicleInspection.ViewModels
                 if (this._task != null)
                 {
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this._task.CaseNumber;
-                    this.CustomerDetails.Status = this._task.Status;
-                    this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
-                    this.CustomerDetails.Address = this.Customer.Address;
-                    this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                    this.CustomerDetails.ContactName = this.Customer.ContactName;
-                    this.CustomerDetails.CaseType = this._task.CaseType;
-                    this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    if (this.Customer == null)
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 1;
 
+                    }
+                    else
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 0;
+                        this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
+                        this.CustomerDetails.CaseNumber = this._task.CaseNumber;
+                        this.CustomerDetails.Status = this._task.Status;
+                        this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
+                        this.CustomerDetails.Address = this.Customer.Address;
+                        this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
+                        this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                        this.CustomerDetails.ContactName = this.Customer.ContactName;
+                        this.CustomerDetails.CategoryType = this._task.CategoryType;
+                        this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    }
                 }
             }
             catch (Exception)

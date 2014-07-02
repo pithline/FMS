@@ -232,7 +232,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="CaseType"
+                                    <grid:GridTextColumn MappingName="CategoryType"
                                                          HeaderText="CASE TYPE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"

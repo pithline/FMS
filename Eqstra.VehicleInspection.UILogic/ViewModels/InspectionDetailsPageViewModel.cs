@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Eqstra.VehicleInspection.UILogic.Events;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -37,21 +38,23 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
+            DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;
                 ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"] = this.InspectionTask.VehicleInsRecId;
 
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
-                if (this.InspectionTask.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)
-                {
-                    navigationService.Navigate("DrivingDirection", jsonInspectionTask);
-                }
-                else
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == this.InspectionTask.VehicleInsRecId);
+
+                if (dd != null && !dd.StopDateTime.Equals(DateTime.MinValue))
                 {
                     _navigationService.Navigate("VehicleInspection", jsonInspectionTask);
                 }
-                return System.Threading.Tasks.Task.FromResult<object>(null);
+                else
+                {
+                    navigationService.Navigate("DrivingDirection", jsonInspectionTask);
+                }
+                
             }, () =>
             {
                 return (this.InspectionTask != null);
@@ -139,6 +142,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
 
             this.InspectionTask = list.FirstOrDefault();
+            _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
+            {
+                await GetCustomerDetailsAsync(b);
+            });
         }
 
         private IEnumerable<BusinessLogic.Task> EnumerateTasks(object navigationParameter, IEnumerable<BusinessLogic.Task> tasks)
@@ -149,7 +156,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 if (navigationParameter.Equals("AwaitInspectionDetail"))
                 {
                     this.AllowEditing = true;
-                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation)
+                        || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                        //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));
                 }
                 if (navigationParameter.Equals("Total"))
                 {
@@ -303,19 +312,30 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 if (this.InspectionTask != null)
                 {
-                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
-                    this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
-                    this.CustomerDetails.Status = this.InspectionTask.Status;
-                    this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
-                    this.CustomerDetails.Address = this.customer.Address;
-                    this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.customer.CustomerName;
-                    this.CustomerDetails.ContactName = this.customer.ContactName;
-                    this.CustomerDetails.CaseType = this.InspectionTask.CaseType;
-                    this.CustomerDetails.EmailId = this.customer.EmailId;
-                    this.IsCommandBarOpen = isAppBarOpen;
+                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
+                    if (this.Customer == null)
+                    {
+                            AppSettings.Instance.IsSyncingCustDetails = 1;
+                        
+                    }
+                    else
+                    {
+                            AppSettings.Instance.IsSyncingCustDetails = 0;
+                            this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
+                            this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
+                            this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
+                            this.CustomerDetails.Status = this.InspectionTask.Status;
+                            this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
+                            this.CustomerDetails.Address = this.customer.Address;
+                            this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
+                            this.CustomerDetails.CustomerName = this.customer.CustomerName;
+                            this.CustomerDetails.ContactName = this.customer.ContactName;
+                            this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
+
+                            this.CustomerDetails.EmailId = this.customer.EmailId;
+                            
+                    }
+                   
                 }
             }
             catch (Exception)

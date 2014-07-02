@@ -5,7 +5,9 @@ using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic.Comparers;
+using Eqstra.VehicleInspection.UILogic.Events;
 using Eqstra.VehicleInspection.UILogic.VIService;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
         private static readonly VIServiceHelper instance = new VIServiceHelper();
         private VIService.MzkVehicleInspectionServiceClient client;
         ConnectionProfile _connectionProfile;
+        IEventAggregator _eventAggregator;
         Action _syncExecute;
         private UserInfo _userInfo;
         static VIServiceHelper()
@@ -39,10 +42,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 return instance;
             }
         }
-        public async System.Threading.Tasks.Task<VIService.MzkVehicleInspectionServiceClient> ConnectAsync(string userName, string password, string domain = "lfmd")
+        public async System.Threading.Tasks.Task<VIService.MzkVehicleInspectionServiceClient> ConnectAsync(string userName, string password, IEventAggregator eventAggregator,string domain = "lfmd")
         {
             try
             {
+                _eventAggregator = eventAggregator;
                 BasicHttpBinding basicHttpBinding = new BasicHttpBinding()
                 {
                     MaxBufferPoolSize = int.MaxValue,
@@ -192,7 +196,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
+               await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+              {
 
+                  AppSettings.Instance.IsSyncingCustDetails = 1;
+              });
                 var result = await client.getCustDetailsAsync(cusId,_userInfo.CompanyId);
                 if (result.response != null)
                 {
@@ -222,11 +230,21 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     });
 
                     if (cusUpdateList.Any())
+                    {
                         await SqliteHelper.Storage.UpdateAllAsync<Customer>(cusUpdateList.Distinct(new CustComparer()));
-
+                    }
 
                     if (cusInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<Customer>(cusInsertList.Distinct(new CustComparer()));
+                    {
+                        await SqliteHelper.Storage.InsertAllAsync<Customer>(cusInsertList.Distinct(new CustComparer()));              
+                    }
+
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        _eventAggregator.GetEvent<CustFetchedEvent>().Publish(true);
+
+                        AppSettings.Instance.IsSyncingCustDetails = 0;
+                    });
                 }
             }
             catch (Exception ex)
@@ -332,6 +350,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo =  JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppSettings.Instance.IsSyncingVehDetails = 1;
+                });
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
                 var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Commercial.CVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
@@ -376,6 +398,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     if (vehicleInsertList.Any())
                         await SqliteHelper.Storage.InsertAllAsync<CVehicleDetails>(vehicleInsertList);
 
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
+
+                        AppSettings.Instance.IsSyncingVehDetails = 0;
+                    });
                 }
             }
             catch (Exception ex)
@@ -398,6 +426,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppSettings.Instance.IsSyncingVehDetails = 1;
+                });
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
                 var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
@@ -438,7 +470,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                     if (vehicleInsertList.Any())
                         await SqliteHelper.Storage.InsertAllAsync<PVehicleDetails>(vehicleInsertList);
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
 
+                        AppSettings.Instance.IsSyncingVehDetails = 0;
+                    });
                 }
             }
             catch (Exception ex)
@@ -1901,20 +1938,19 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionAcceptance);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionDetail);
+                //actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionDataCapture);
 
                 if (tasks != null)
                 {
-                    var q = tasks.Where(x =>
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail ||
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection ||
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail).ToArray();
-
+                   
                     foreach (var task in tasks.Where(x =>
                         x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail &&
                         x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection &&
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation &&
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVendorSelection &&
+                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance &&
                         x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail))
                     {
                         mzkTasks.Add(

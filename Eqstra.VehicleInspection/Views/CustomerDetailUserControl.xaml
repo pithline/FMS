@@ -8,10 +8,12 @@
     x:Class="Eqstra.VehicleInspection.Views.CustomerDetailUserControl"
     xmlns:vms="using:Eqstra.VehicleInspection.UILogic.ViewModels"
     x:Name="custDetailsUserControl"
-    xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
+             xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"
+             xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
     <UserControl.Resources>
         <vms:CustomerDetailUserControlViewModel x:Key="CustDetailsViewModel"/>
+        <SynchronizingSetting:AppSettings x:Key="VM" />
         <Style TargetType="schedule:HeaderTitleBarView">
             <Setter Property="Template">
                 <Setter.Value>
@@ -57,7 +59,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
                         <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="{Binding CategoryType}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                 </Grid>
@@ -125,7 +127,13 @@
                     </Button>
                 </StackPanel>
 
-                
+
+                <ProgressBar IsIndeterminate="True"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Center"
+                             Grid.RowSpan="9"
+                             Opacity="{Binding Source={StaticResource VM}, Path=Instance.IsSyncingCustDetails}"/>
+
             </Grid>
         </Grid>
     </Border>
