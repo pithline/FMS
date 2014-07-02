@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -26,7 +27,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     public class InspectionDetailsPageViewModel : BaseViewModel
     {
         INavigationService _navigationService;
-        public InspectionDetailsPageViewModel(INavigationService navigationService)
+        IEventAggregator _eventAggregator;
+        public InspectionDetailsPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
             this.InspectionList = new ObservableCollection<BusinessLogic.Task>();
@@ -34,6 +36,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;
@@ -69,7 +72,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
                     this.InspectionTask.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture;
-                   await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
                     this.Appointments.Add(new ScheduleAppointment
@@ -96,66 +99,95 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         #region Overrides
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            IEnumerable<Eqstra.BusinessLogic.Task> list = null;
-
-            var tasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
-
-            //foreach (var t in tasks)
-            //{
-            //    var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
-            //    if (cust != null)
-            //    {
-            //        t.CustomerName = cust.CustomerName;
-            //        t.Address = cust.Address;
-            //    }
-            //}
-            if (navigationParameter.Equals("AwaitInspectionDetail"))
+            try
             {
-                this.AllowEditing = true;
-                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                
+                //foreach (var t in tasks)
+                //{
+                //    var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
+                //    if (cust != null)
+                //    {
+                //        t.CustomerName = cust.CustomerName;
+                //        t.Address = cust.Address;
+                //    }
+                //}
+
+                _eventAggregator.GetEvent<TasksFetchedEvent>().Subscribe(async o =>
+                    {
+
+                        await ShowTasksAsync(navigationParameter);
+
+                    }, ThreadOption.UIThread);
+
+                
+                 await ShowTasksAsync(navigationParameter);
             }
-            if (navigationParameter.Equals("Total"))
+            catch (SQLite.SQLiteException)
             {
-                this.AllowEditing = false;
-                list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
+
+
             }
-            if (navigationParameter.Equals("MyTasks"))
-            {
-                this.AllowEditing = false;
-                list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance));
-            }
-            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
-            foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
-            {
-                var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
-                           item.ConfirmedTime.Second);
-                this.CustomerDetails.Appointments.Add(
+        }
 
-                              new ScheduleAppointment()
-                              {
-                                  Subject = item.CaseNumber,
-                                  Location = item.Address,
-                                  StartTime = startTime,
-                                  EndTime = startTime.AddHours(1),
-                                  ReadOnly = true,
-                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
-
-                              }
-                         );
-            }
-
-
-
-
+        private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
+        {
+            var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
             foreach (var item in list)
             {
                 this.InspectionList.Add(item);
             }
 
-            if (this.InspectionTask == null)
-                this.InspectionTask = list.FirstOrDefault();
+            this.InspectionTask = list.FirstOrDefault();
+        }
+
+        private IEnumerable<BusinessLogic.Task> EnumerateTasks(object navigationParameter, IEnumerable<BusinessLogic.Task> tasks)
+        {
+            try
+            {
+                IEnumerable<Eqstra.BusinessLogic.Task> list = null;
+                if (navigationParameter.Equals("AwaitInspectionDetail"))
+                {
+                    this.AllowEditing = true;
+                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                }
+                if (navigationParameter.Equals("Total"))
+                {
+                    this.AllowEditing = false;
+                    list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
+                }
+                if (navigationParameter.Equals("MyTasks"))
+                {
+                    this.AllowEditing = false;
+                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance));
+                }
+                this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
+                foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
+                {
+                    var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                               item.ConfirmedTime.Second);
+                    this.CustomerDetails.Appointments.Add(
+
+                                  new ScheduleAppointment()
+                                  {
+                                      Subject = item.CaseNumber,
+                                      Location = item.Address,
+                                      StartTime = startTime,
+                                      EndTime = startTime.AddHours(1),
+                                      ReadOnly = true,
+                                      AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                      Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                                  }
+                             );
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion

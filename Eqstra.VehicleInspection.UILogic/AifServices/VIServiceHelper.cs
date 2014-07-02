@@ -267,7 +267,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CaseServiceRecID = mzkTask.parmCaseServiceRecId,
                                CategoryType = mzkTask.parmCategoryType,
                                CollectionRecID = mzkTask.parmCollectionRecId,
-                               ConfirmedDate = mzkTask.parmConfirmedDueDate < DateTime.Today ? DateTime.Today : mzkTask.parmConfirmedDueDate,
+                               ConfirmedDate = mzkTask.parmConfirmedDueDate < DateTime.Today ? DateTime.Today : mzkTask.parmConfirmedDueDate.Date,
+                               ConfirmedTime =  new DateTime( mzkTask.parmConfirmedDueDate.TimeOfDay.Ticks),
                                Address = mzkTask.parmCustAddress,
                                CustomerId = mzkTask.parmCustId,
                                CustomerName = mzkTask.parmCustName,                               
@@ -1926,7 +1927,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmCaseCategory = task.CaseCategory,
                                 parmCategoryType = task.CategoryType,
                                 parmCollectionRecId = task.CollectionRecID,
-                                parmConfirmedDueDate = task.ConfirmedDate,
+                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month, task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                           task.ConfirmedTime.Second),
                                 parmCustAddress = task.Address,
                                 parmCustId = task.CustomerId,
                                 parmCustName = task.CustomerName,
@@ -1958,6 +1960,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                        CaseCategory = x.parmCaseCategory,
                                        CollectionRecID = x.parmCollectionRecId,
                                        ConfirmedDate = x.parmConfirmedDueDate,
+                                       ConfirmedTime = new DateTime(x.parmConfirmedDueDate.TimeOfDay.Ticks),
                                        Address = x.parmCustAddress,
                                        CustomerId = x.parmCustId,
                                        CustomerName = x.parmCustName,
@@ -1978,6 +1981,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                     await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
                 }
+            }
+                catch(SQLite.SQLiteException)
+            {
+
             }
             catch (Exception ex)
             {

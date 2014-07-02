@@ -125,6 +125,7 @@
     <Compile Include="Services\RoamingCredentialStore.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TasksFetchedEvent.cs" />
     <Compile Include="ViewModels\Commercial\CabTrimInterUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CAccessoriesUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CGlassUserControlViewModel.cs" />

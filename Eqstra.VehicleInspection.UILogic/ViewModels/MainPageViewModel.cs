@@ -32,11 +32,12 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
+        IEventAggregator _eventAggregator;
 
         public MainPageViewModel(IEventAggregator eventAggregator)
             : base(eventAggregator)
         {
-
+            _eventAggregator = eventAggregator;
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -81,6 +82,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                 });
 
                                 await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                                _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
                                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                 {
                                     this.PoolofTasks.Clear();
@@ -110,7 +112,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 // await CreateTableAsync();
                 //SyncData();
-
                 var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
                 this.WeatherInfo = weather.FirstOrDefault();
 
@@ -132,6 +133,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            });
 
                            await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                           _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                  {
                                      this.PoolofTasks.Clear();
@@ -140,6 +142,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                      this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance || x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture);
                                      this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
                                      GetAppointments();
+
                                      AppSettings.Instance.IsSynchronizing = 0;
                                      AppSettings.Instance.Synced = true;
                                  }
