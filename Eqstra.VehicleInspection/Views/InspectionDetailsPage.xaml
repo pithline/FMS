@@ -142,20 +142,20 @@
                             BorderBrush="#FFE0E0E0"
                             BorderThickness="1"
                             Background="White">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <Grid>
+
                             <grid:SfDataGrid x:Name="detailsGrid"
-                                             NavigationMode="Row"
+                                             NavigationMode="{Binding NavigationMode}"
                                              ShowBusyIndicator="True"
-                                             Grid.Row="0"
                                              SelectionChanged="sfDataGrid_SelectionChanged"
                                              ItemsSource="{Binding InspectionList}"
                                              ColumnSizer="SizeToCells"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"
-                                             SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
+                                             HorizontalAlignment="Stretch"
+                                             HorizontalContentAlignment="Stretch"
+                                             AllowEditing="True"
+                                             SelectedItem="{Binding InspectionTask}"
                                              BorderBrush="Transparent"
                                              BorderThickness="0"
                                              CellStyle="{StaticResource SyncGridCellStyle}">
@@ -163,6 +163,7 @@
                                     <grid:GridTextColumn MappingName="CaseNumber"
                                                          HeaderText="CASE NUMBER"
                                                          AllowEditing="False"
+                                                         ColumnSizer="SizeToCells"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
@@ -172,22 +173,37 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridComboBoxColumn MappingName="Status"
+                                                             ColumnSizer="SizeToCells"
+                                                             AllowEditing="False"
+                                                             HeaderText="STATUS"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
+                                                             HeaderText="STATUS DUE DATE"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                         ColumnSizer="SizeToCells"
+                                                         AllowEditing="False"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="ContactName"
                                                          HeaderText="CONTACT NAME"
+                                                         AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTemplateColumn  MappingName="ContactNumber"
-                                                              HeaderText="CONTACT NUMBER"
-                                                              AllowEditing="False"
-                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                              MinimumWidth="150"
-                                                              HorizontalHeaderContentAlignment="Left">
+                                    <grid:GridTemplateColumn MappingName="ContactNumber"
+                                                             HeaderText="CONTACT NUMBER"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -197,36 +213,19 @@
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
-                                    <grid:GridComboBoxColumn MappingName="Status"
-                                                             HeaderText="STATUS"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
-                                                             HeaderText="STATUS DUE DATE"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
+                                                         AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTemplateColumn MappingName="ConfirmedDate"
+                                    <grid:GridDateTimeColumn MappingName="ConfirmedDate"
+                                                             FormatString="MM/dd/yyyy"
                                                              HeaderText="CONFIRMED DATE"
-                                                             AllowEditing="{Binding AllowEditing }"
+                                                             AllowEditing="{Binding AllowEditing}"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                              MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left">
-                                        <grid:GridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <input:SfDatePicker Value="{Binding ConfirmedDate,Mode=TwoWay}"
-                                                                    BorderThickness="0"
-                                                                    IsHitTestVisible="{Binding AllowEditing}"
-                                                                    Background="Transparent" />
-                                            </DataTemplate>
-                                        </grid:GridTemplateColumn.CellTemplate>
-                                    </grid:GridTemplateColumn>
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn MappingName="ConfirmedTime"
                                                              HeaderText="CONFIRMED TIME"
                                                              AllowEditing="{Binding AllowEditing}"
@@ -235,9 +234,9 @@
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <input:SfTimePicker Value="{Binding ConfirmedTime,Mode=TwoWay}"
+                                                <input:SfTimePicker IsHitTestVisible="{Binding AllowEditing}"
+                                                                    Value="{Binding ConfirmedTime,Mode=TwoWay}"
                                                                     BorderThickness="0"
-                                                                    IsHitTestVisible="{Binding AllowEditing}"
                                                                     Background="Transparent" />
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>

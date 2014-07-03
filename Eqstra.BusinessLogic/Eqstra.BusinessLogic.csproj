@@ -112,6 +112,7 @@
     <Compile Include="Commercial\CChassisBody.cs" />
     <Compile Include="Commercial\CGlass.cs" />
     <Compile Include="Commercial\CMechanicalCond.cs" />
+    <Compile Include="Commercial\CommercialVehicle.cs" />
     <Compile Include="Commercial\CPOI.cs" />
     <Compile Include="Commercial\CTyres.cs" />
     <Compile Include="Commercial\CVehicleDetails.cs">
@@ -143,6 +144,7 @@
     <Compile Include="Passenger\PAccessories.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Passenger\PassengerVehicle.cs" />
     <Compile Include="Passenger\PBodywork.cs" />
     <Compile Include="Passenger\PGlass.cs" />
     <Compile Include="Passenger\PInspectionProof.cs" />

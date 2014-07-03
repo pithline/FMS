@@ -221,7 +221,7 @@
                                              ColumnSizer="SizeToCells"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"
-                                             AllowEditing="True"
+                                             AllowEditing="False"
                                              BorderBrush="Transparent"
                                              BorderThickness="0"
                                              CellStyle="{StaticResource SyncGridCellStyle}">
@@ -238,6 +238,18 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridComboBoxColumn MappingName="Status"
+                                                             AllowEditing="False"
+                                                             HeaderText="STATUS"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
+                                                             HeaderText="STATUS DUE DATE"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -263,18 +275,6 @@
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
-                                    <grid:GridComboBoxColumn MappingName="Status"
-                                                             AllowEditing="False"
-                                                             HeaderText="STATUS"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
-                                                             HeaderText="STATUS DUE DATE"
-                                                             AllowEditing="False"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
                                                          AllowEditing="False"

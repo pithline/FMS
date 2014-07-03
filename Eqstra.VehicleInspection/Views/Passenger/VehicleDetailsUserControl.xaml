@@ -7,7 +7,12 @@
              mc:Ignorable="d"
              xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
              xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+             xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <SynchronizingSetting:AppSettings x:Key="VM" />
+    </UserControl.Resources>
 
     <Grid HorizontalAlignment="Left">
         <Grid Grid.Column="0"
@@ -273,7 +278,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="ODO Reading"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.ODOReading}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.ODOReading}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -284,7 +289,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Registration Number"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path=Model.RegistrationNumber}"
+                            <TextBlock Text="{Binding Path=PassengerVehicle.RegistrationNumber}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -295,7 +300,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Engine Number"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.EngineNumber}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.EngineNumber}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -316,7 +321,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Color"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.Color}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.Color}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -327,7 +332,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Chasis Number"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.ChassisNumber}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.ChassisNumber}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -338,7 +343,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Make/Model"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.Make}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.Make}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 
@@ -379,9 +384,18 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Year"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.Year}"
+                            <TextBlock Text="{Binding Path= PassengerVehicle.Year}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
+
+
+                        <ProgressBar Grid.RowSpan="6"
+                                     Grid.ColumnSpan="4"
+                                     IsIndeterminate="True"
+                                     VerticalAlignment="Center"
+                                     Opacity="{Binding Source={StaticResource VM}, Path=Instance.IsSyncingVehDetails}"
+                                     VerticalContentAlignment="Center" />
+
                         <!--<Rectangle Fill="#FFE6E6E6" Grid.Column="0" Grid.Row="1" Width="175" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
                     </Grid>
                 </ScrollViewer>

@@ -142,6 +142,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
 
             this.InspectionTask = list.FirstOrDefault();
+           
             _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
             {
                 await GetCustomerDetailsAsync(b);
@@ -155,20 +156,23 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 IEnumerable<Eqstra.BusinessLogic.Task> list = null;
                 if (navigationParameter.Equals("AwaitInspectionDetail"))
                 {
-                    this.AllowEditing = true;
+                    NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
                     list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation)
                         || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                    list.AsParallel().ForAll(x => x.AllowEditing = true);
                         //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));
                 }
                 if (navigationParameter.Equals("Total"))
                 {
-                    this.AllowEditing = false;
+                    NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
                     list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
+                    list.AsParallel().ForAll(x=>x.AllowEditing = false);
                 }
                 if (navigationParameter.Equals("MyTasks"))
                 {
-                    this.AllowEditing = false;
+                    NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
                     list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance));
+                    list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
                 this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
                 foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
@@ -242,6 +246,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return isNext; }
             set { SetProperty(ref isNext, value); }
         }
+
+        private NavigationMode navigationMode;
+
+        public NavigationMode NavigationMode
+        {
+            get { return navigationMode; }
+            set { SetProperty(ref navigationMode, value); }
+        }
+
 
         private bool isCommandBarOpen;
         [RestorableState]

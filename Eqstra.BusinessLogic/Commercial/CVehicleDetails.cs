@@ -23,47 +23,13 @@ namespace Eqstra.BusinessLogic.Commercial
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
         }
 
-        private string color;
-
-        public string Color
-        {
-            get { return color; }
-            set { SetProperty(ref color, value); }
-        }
-
-
         private bool isLicenseDiscCurrent;
-
         public bool IsLicenseDiscCurrent
         {
             get { return isLicenseDiscCurrent; }
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
-
-        private string odoReading;
-
-        public string ODOReading
-        {
-            get { return odoReading; }
-            set { SetProperty(ref odoReading, value); }
-        }
-
-        private string registrationNumber;
-
-        public string RegistrationNumber
-        {
-            get { return registrationNumber; }
-            set { SetProperty(ref registrationNumber, value); }
-        }
-
-        private string engineNumber;
-
-        public string EngineNumber
-        {
-            get { return engineNumber; }
-            set { SetProperty(ref engineNumber, value); }
-        }
-
+        
         private DateTime licenseDiscExpiryDate;
 
         public DateTime LicenseDiscExpireDate
@@ -72,22 +38,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref licenseDiscExpiryDate, value); }
         }
 
-        private string chassisNumber;
-
-        public string ChassisNumber
-        {
-            get { return chassisNumber; }
-            set { SetProperty(ref chassisNumber, value); }
-        }
-
-        private string make;
-
-        public string Make
-        {
-            get { return make; }
-            set { SetProperty(ref make, value); }
-        }
-
+       
         private bool isSpareKeysShown;
 
         public bool IsSpareKeysShown
@@ -104,14 +55,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref isSpareKeysTested, value); }
         }
 
-        private string year;
-
-        public string Year
-        {
-            get { return year; }
-            set { SetProperty(ref year, value); }
-        }
-
+        
 
         private ImageCapture licenseDiscSnapshot;
         [Ignore]

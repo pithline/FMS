@@ -12,18 +12,24 @@ using Windows.Storage;
 using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Common;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Eqstra.VehicleInspection.UILogic.Events;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class VehicleDetailsUserControlViewModel : BaseViewModel
     {
         INavigationService _navigationService;
-        public VehicleDetailsUserControlViewModel(INavigationService navigationService ,IEventAggregator eventAggregator):base(eventAggregator)
+        public VehicleDetailsUserControlViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             _navigationService = navigationService;
-            this.Model = new PVehicleDetails();
-            long vehicleInsRecID =long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString());
+            long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString());
+            eventAggregator.GetEvent<VehicleFetchedEvent>().Subscribe(async b =>
+            {
+                await LoadPassengerVehicleAsync(vehicleInsRecID);
+            }, ThreadOption.UIThread);
             LoadModelFromDbAsync(vehicleInsRecID);
+            LoadPassengerVehicleAsync(vehicleInsRecID);
             this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
             {
                 _navigationService.Navigate("ImageMarkup", this.Model);
@@ -37,6 +43,19 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public DelegateCommand GoToImageMarkupPageCommand { get; set; }
 
 
+        private async System.Threading.Tasks.Task LoadPassengerVehicleAsync(long vRecId)
+        {
+            this.PassengerVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<PassengerVehicle>(x => x.VehicleInsRecID == vRecId);
+            if (this.PassengerVehicle == null)
+            {
+                AppSettings.Instance.IsSyncingVehDetails = 1;
+            }
+            else
+            {
+                AppSettings.Instance.IsSyncingVehDetails = 0;
+            }
+        }
+
         public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
             this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<PVehicleDetails>(x => x.VehicleInsRecID.Equals(vehicleInsRecID));
@@ -44,16 +63,20 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 this.Model = new PVehicleDetails();
             }
-            BaseModel viBaseObject = (PVehicleDetails)this.Model;
-            viBaseObject.LoadSnapshotsFromDb();
-            viBaseObject.ShouldSave = false;
-            PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+
+            else
+            {
+                BaseModel viBaseObject = (PVehicleDetails)this.Model;
+                viBaseObject.LoadSnapshotsFromDb();
+                viBaseObject.ShouldSave = false;
+                PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+            }
         }
 
         async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
         {
             await base.TakePictureAsync(param);
-            long vehicleInsRecID =long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
+            long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
             if (vehicleInsRecID != default(long))
             {
                 var viobj = await (this.Model as BaseModel).GetDataAsync(vehicleInsRecID);
@@ -68,5 +91,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
             }
         }
+
+        private PassengerVehicle passengerVehicle;
+
+        public PassengerVehicle PassengerVehicle
+        {
+            get { return passengerVehicle; }
+            set { SetProperty(ref passengerVehicle, value); }
+        }
+
     }
 }

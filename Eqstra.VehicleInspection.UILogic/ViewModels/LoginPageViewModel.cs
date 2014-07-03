@@ -1,4 +1,7 @@
-﻿using Eqstra.VehicleInspection.UILogic.Services;
+﻿using Eqstra.BusinessLogic.Commercial;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -56,6 +59,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+           
         }
 
         public DelegateCommand LoginCommand { get; private set; }
