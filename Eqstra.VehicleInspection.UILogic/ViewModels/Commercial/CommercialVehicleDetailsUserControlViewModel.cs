@@ -29,10 +29,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
            long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
            eventAggregator.GetEvent<VehicleFetchedEvent>().Subscribe(async b =>
            {
-               await LoadCommericalVehicleAsync(vehicleInsRecID);
+               await LoadCommericalVehicleAsync();
            }, ThreadOption.UIThread);
            LoadModelFromDbAsync(vehicleInsRecID);
-           LoadCommericalVehicleAsync(vehicleInsRecID);
+           LoadCommericalVehicleAsync();
            this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
            {
                _navigationService.Navigate("ImageMarkup", this.Model);
@@ -41,9 +41,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
        public DelegateCommand GoToImageMarkupPageCommand { get; set; }
 
-       private async System.Threading.Tasks.Task LoadCommericalVehicleAsync(long vRecId)
+       private async System.Threading.Tasks.Task LoadCommericalVehicleAsync()
        {
-           this.CommercialVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<CommercialVehicle>(x => x.VehicleInsRecID == vRecId);
+           this.CommercialVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<CommercialVehicle>(x => x.VehicleInsRecID == long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString()));
            if (this.CommercialVehicle == null)
            {
                AppSettings.Instance.IsSyncingVehDetails = 1;
