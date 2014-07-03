@@ -136,6 +136,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
         {
             var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
+            this.InspectionList.Clear();
             foreach (var item in list)
             {
                 this.InspectionList.Add(item);
@@ -158,20 +159,20 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
                     list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation)
-                        || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail));
+                        || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation));
                     list.AsParallel().ForAll(x => x.AllowEditing = true);
                         //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));
                 }
                 if (navigationParameter.Equals("Total"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
-                    list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)));
+                    list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)));
                     list.AsParallel().ForAll(x=>x.AllowEditing = false);
                 }
                 if (navigationParameter.Equals("MyTasks"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
-                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance));
+                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture));
                     list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
                 this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();

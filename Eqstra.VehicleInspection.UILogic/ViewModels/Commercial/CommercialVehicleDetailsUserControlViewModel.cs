@@ -43,7 +43,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
        private async System.Threading.Tasks.Task LoadCommericalVehicleAsync()
        {
-           this.CommercialVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<CommercialVehicle>(x => x.VehicleInsRecID == long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString()));
+            var recId = long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString());
+           this.CommercialVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<CommercialVehicle>(x => x.VehicleInsRecID.Equals(recId));
            if (this.CommercialVehicle == null)
            {
                AppSettings.Instance.IsSyncingVehDetails = 1;
