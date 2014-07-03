@@ -22,7 +22,7 @@
         <c:InvertOpacityConverter x:Key="IO"/>
     </UserControl.Resources>
 
-    <Grid >
+    <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="36"/>
@@ -30,9 +30,9 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Background="#BFFFFFFF" Margin="0 5"  Opacity="{Binding  Path=Instance.IsSynchronizing, Source={StaticResource VM}}">
                 <TextBlock Text="Syncing" Foreground="Black" VerticalAlignment="Center" Margin="0 0 15 0" FontSize="15" />
-                <ProgressBar  Name="SyncProgress" Width="300" Height="8"  IsIndeterminate="True" />
+                <ProgressBar  Name="SyncProgress" Width="250" Height="8"  IsIndeterminate="True" />
             </StackPanel>
-            <Button Style="{StaticResource TransparentBtn}" Opacity="{Binding Path=Instance.IsSynchronizing, Source={StaticResource VM}, Converter={StaticResource IO}}" Width="380">
+            <Button Style="{StaticResource TransparentBtn}" Opacity="{Binding Path=Instance.IsSynchronizing, Source={StaticResource VM}, Converter={StaticResource IO}}" HorizontalAlignment="Stretch">
                 <Button.Flyout>
                     <Flyout>
                         <TextBlock Foreground="Crimson"
@@ -48,10 +48,10 @@
 
             <Grid Grid.Row="1" Tapped="Grid_Tapped">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="{Binding NetworkIcon}" VerticalAlignment="Bottom" />
+                <Image Source="{Binding NetworkIcon}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 0" />
                 <StackPanel Grid.Column="1"  Orientation="Horizontal" Margin="0 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right">
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" >

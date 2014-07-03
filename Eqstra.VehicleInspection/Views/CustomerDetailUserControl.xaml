@@ -24,8 +24,9 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-        <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Top" Width="310">
+    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="370" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+        <ScrollViewer VerticalScrollMode="Auto">
+                   <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Top" MinWidth="330" ScrollViewer.VerticalScrollMode="Auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -136,5 +137,6 @@
 
             </Grid>
         </Grid>
+        </ScrollViewer>
     </Border>
 </UserControl>

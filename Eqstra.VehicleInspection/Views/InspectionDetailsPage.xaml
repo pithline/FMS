@@ -163,7 +163,6 @@
                                     <grid:GridTextColumn MappingName="CaseNumber"
                                                          HeaderText="CASE NUMBER"
                                                          AllowEditing="False"
-                                                         ColumnSizer="SizeToCells"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
@@ -174,7 +173,6 @@
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridComboBoxColumn MappingName="Status"
-                                                             ColumnSizer="SizeToCells"
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -188,7 +186,6 @@
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         ColumnSizer="SizeToCells"
                                                          AllowEditing="False"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
