@@ -353,7 +353,7 @@
                         <Interactivity:Interaction.Behaviors>
                             <Core:EventTriggerBehavior EventName="Tapped">
                                 <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage"
-                                                           Parameter="AwaitInspectionDetail" />
+                                                           Parameter="AwaitConfirmation" />
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
                     </Border>

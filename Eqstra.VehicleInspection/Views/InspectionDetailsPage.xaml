@@ -100,6 +100,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0"
@@ -147,13 +148,14 @@
                             <grid:SfDataGrid x:Name="detailsGrid"
                                              NavigationMode="{Binding NavigationMode}"
                                              ShowBusyIndicator="True"
+                                             
                                              SelectionChanged="sfDataGrid_SelectionChanged"
-                                             ItemsSource="{Binding InspectionList}"
+                                             ItemsSource="{Binding InspectionList,Mode=TwoWay}"
                                              ColumnSizer="SizeToCells"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"                                       
-                                             AllowEditing="True"
-                                             SelectedItem="{Binding InspectionTask}"
+                                             AllowEditing="{Binding AllowEditing}"
+                                             SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
                                              BorderBrush="Transparent"
                                              BorderThickness="0"
                                              CellStyle="{StaticResource SyncGridCellStyle}">
@@ -217,21 +219,22 @@
                                     <grid:GridDateTimeColumn MappingName="ConfirmedDate"
                                                              FormatString="MM/dd/yyyy"
                                                              HeaderText="CONFIRMED DATE"
-                                                             AllowEditing="{Binding AllowEditing, Mode=TwoWay}"
+                                                           
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                              MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn MappingName="ConfirmedTime"
                                                              HeaderText="CONFIRMED TIME"
-                                                             AllowEditing="{Binding AllowEditing}"
+                                                           AllowEditing="{Binding AllowEditing}"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                              MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <input:SfTimePicker IsHitTestVisible="{Binding AllowEditing}"
+                                                <input:SfTimePicker 
                                                                     Value="{Binding ConfirmedTime,Mode=TwoWay}"
                                                                     BorderThickness="0"
+                                                    IsHitTestVisible="{Binding AllowEditing}"
                                                                     Background="Transparent" />
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>

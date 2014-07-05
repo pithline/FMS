@@ -67,11 +67,11 @@
 
                 <StackPanel Grid.Row="1" Margin="0 10 0 0">
                     <TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="{Binding CustomerName}" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding CustomerName}" TextWrapping="Wrap" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="0 10 0 0">
                     <TextBlock Text="Contact Name" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="{Binding ContactName}" Style="{StaticResource TextContentStyle}"/>
+                    <TextBlock Text="{Binding ContactName}" TextWrapping="Wrap" Style="{StaticResource TextContentStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="0 10 0 0">
                     <TextBlock Text="Contact Number" Style="{StaticResource TextHeaderStyle}"/>

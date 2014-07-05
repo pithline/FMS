@@ -54,7 +54,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     navigationService.Navigate("DrivingDirection", jsonInspectionTask);
                 }
-                
+
             }, () =>
             {
                 return (this.InspectionTask != null);
@@ -88,7 +88,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                     IsBusy = false;
                     navigationService.GoBack();
                 }
@@ -105,7 +105,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                
+
                 //foreach (var t in tasks)
                 //{
                 //    var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id == t.CustomerId);
@@ -123,8 +123,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
                     }, ThreadOption.UIThread);
 
-                
-                 await ShowTasksAsync(navigationParameter);
+
+                await ShowTasksAsync(navigationParameter);
             }
             catch (SQLite.SQLiteException)
             {
@@ -142,8 +142,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.InspectionList.Add(item);
             }
 
-            this.InspectionTask = list.FirstOrDefault();
-           
+            this.InspectionTask = this.InspectionList.FirstOrDefault();
+
             _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
             {
                 await GetCustomerDetailsAsync(b);
@@ -155,23 +155,26 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             try
             {
                 IEnumerable<Eqstra.BusinessLogic.Task> list = null;
-                if (navigationParameter.Equals("AwaitInspectionDetail"))
+                if (navigationParameter.Equals("AwaitConfirmation"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
+                    this.AllowEditing = true;
                     list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation)
                         || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation));
                     list.AsParallel().ForAll(x => x.AllowEditing = true);
-                        //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));
+                    //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));
                 }
                 if (navigationParameter.Equals("Total"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
+                    this.AllowEditing = false;
                     list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)));
-                    list.AsParallel().ForAll(x=>x.AllowEditing = false);
+                    list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
                 if (navigationParameter.Equals("MyTasks"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
+                    this.AllowEditing = false;
                     list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture));
                     list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
@@ -223,13 +226,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref inspectionList, value); }
         }
 
-        private bool isSave;
-        [RestorableState]
-        public bool IsSave
-        {
-            get { return isSave; }
-            set { SetProperty(ref isSave, value); }
-        }
+
 
         private bool isBusy;
 
@@ -239,14 +236,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             set { SetProperty(ref isBusy, value); }
         }
 
-
-        private bool isNext;
-        [RestorableState]
-        public bool IsNext
-        {
-            get { return isNext; }
-            set { SetProperty(ref isNext, value); }
-        }
 
         private NavigationMode navigationMode;
 
@@ -329,27 +318,27 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
                     if (this.Customer == null)
                     {
-                            AppSettings.Instance.IsSyncingCustDetails = 1;
-                        
+                        AppSettings.Instance.IsSyncingCustDetails = 1;
+
                     }
                     else
                     {
-                            AppSettings.Instance.IsSyncingCustDetails = 0;
-                            this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                            this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
-                            this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
-                            this.CustomerDetails.Status = this.InspectionTask.Status;
-                            this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
-                            this.CustomerDetails.Address = this.customer.Address;
-                            this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
-                            this.CustomerDetails.CustomerName = this.customer.CustomerName;
-                            this.CustomerDetails.ContactName = this.customer.ContactName;
-                            this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
+                        AppSettings.Instance.IsSyncingCustDetails = 0;
+                        this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
+                        this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
+                        this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
+                        this.CustomerDetails.Status = this.InspectionTask.Status;
+                        this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
+                        this.CustomerDetails.Address = this.customer.Address;
+                        this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
+                        this.CustomerDetails.CustomerName = this.customer.CustomerName;
+                        this.CustomerDetails.ContactName = this.customer.ContactName;
+                        this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
 
-                            this.CustomerDetails.EmailId = this.customer.EmailId;
-                            
+                        this.CustomerDetails.EmailId = this.customer.EmailId;
+
                     }
-                   
+
                 }
             }
             catch (Exception)
