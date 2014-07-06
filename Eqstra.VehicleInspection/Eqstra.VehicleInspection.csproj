@@ -418,7 +418,7 @@
   <ItemGroup>
     <Reference Include="Mazik.WinRT.Components, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mzk.WinRT.Components.1.0.0.11\lib\netcore451\Mazik.WinRT.Components.winmd</HintPath>
+      <HintPath>..\packages\Mzk.WinRT.Components.1.0.0.13\lib\netcore451\Mazik.WinRT.Components.winmd</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
       <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>

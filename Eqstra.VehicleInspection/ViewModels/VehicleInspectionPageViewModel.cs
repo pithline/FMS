@@ -61,11 +61,11 @@ namespace Eqstra.VehicleInspection.ViewModels
                     var vm = ((BaseViewModel)this.NextViewStack.Peek().DataContext);
                     if (vm is InspectionProofUserControlViewModel)
                     {
-                      return  (this.NextViewStack.Count == 1) && (((InspectionProofUserControlViewModel)vm).CustSignature != null);
+                        return (this.NextViewStack.Count == 1) && (((InspectionProofUserControlViewModel)vm).CustSignature != null) && (((InspectionProofUserControlViewModel)vm).EqstraRepSignature != null);
                     }
                     else if (vm is CPOIUserControlViewModel)
                     {
-                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null);   
+                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);   
                     }
                     else
                     {
@@ -128,25 +128,24 @@ namespace Eqstra.VehicleInspection.ViewModels
                     ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
 
-                    if (currentModel is PInspectionProof || (currentModel is CPOI))
+                    if (currentModel is PInspectionProof )
                     {
-                        var item = this.PrevViewStack.Pop();
-                        this.FrameContent = item;
-                        this.NextViewStack.Push(item);
-                        CompleteCommand.RaiseCanExecuteChanged();
-                        PreviousCommand.RaiseCanExecuteChanged();
-                        NextCommand.RaiseCanExecuteChanged();
+                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
+                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
+                        SetFrameContent();
                     }
+                    else if (currentModel is CPOI)
+                    {
+                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
+                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
+                        SetFrameContent();
+                    }
+                                
                     else
                     {
                         if (currentModel.ValidateModel())
                         {
-                            var item = this.PrevViewStack.Pop();
-                            this.FrameContent = item;
-                            this.NextViewStack.Push(item);
-                            CompleteCommand.RaiseCanExecuteChanged();
-                            PreviousCommand.RaiseCanExecuteChanged();
-                            NextCommand.RaiseCanExecuteChanged();
+                            SetFrameContent();
                             this.SaveCurrentUIDataAsync(currentModel);
                             if (this.PrevViewStack.FirstOrDefault() != null)
                             {
@@ -173,6 +172,16 @@ namespace Eqstra.VehicleInspection.ViewModels
                 throw;
             }
 
+        }
+
+        private void SetFrameContent()
+        {
+            var item = this.PrevViewStack.Pop();
+            this.FrameContent = item;
+            this.NextViewStack.Push(item);
+            CompleteCommand.RaiseCanExecuteChanged();
+            PreviousCommand.RaiseCanExecuteChanged();
+            NextCommand.RaiseCanExecuteChanged();
         }
 
         private void LoadDemoAppointments()

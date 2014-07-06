@@ -21,8 +21,8 @@ namespace Eqstra.BusinessLogic.Passenger
         public PInspectionProof()
         {
             this.CRTime = DateTime.Now;
-            this.CRDate = DateTime.Today;
-            this.EQRDate = DateTime.Today;
+            this.CRDate = DateTime.Now;
+            this.EQRDate = DateTime.Now;
             this.EQRTime = DateTime.Now;
             this.CRSignFileName = "cr_" + new Random().Next(1000) + TimeSpan.TicksPerMillisecond;
             this.EQRSignFileName = "eqr_" + new Random().Next(1000) + TimeSpan.TicksPerMillisecond;
