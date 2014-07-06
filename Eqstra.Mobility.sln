@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.VehicleInspection", "Eqstra.VehicleInspection\Eqstra.VehicleInspection.csproj", "{8CAD1A1E-727E-49B9-A530-1B3A1F12E8F1}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -32,6 +32,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.DocumentDelivery", "
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.DocumentDelivery.UILogic", "Eqstra.DocumentDelivery.UILogic\Eqstra.DocumentDelivery.UILogic.csproj", "{A729BBB4-DBBB-46B0-9198-FB757B68AF3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5E32160B-EFE3-4249-9EF0-4F3480F4F792}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

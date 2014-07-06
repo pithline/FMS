@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.BusinessLogic.Commercial
 {
@@ -67,6 +68,36 @@ namespace Eqstra.BusinessLogic.Commercial
                 get { return eQRTime; }
                 set { SetProperty(ref eQRTime, value); }
             }
+
+            private BitmapImage custSignature;
+
+            public BitmapImage CustSignature
+            {
+                get { return custSignature; }
+                set
+                {
+                    if (SetProperty(ref custSignature, value))
+                    {
+                        CRDate = DateTime.Now;
+                    }
+
+                }
+            }
+
+            private BitmapImage eqstraRepSignature;
+
+            public BitmapImage EqstraRepSignature
+            {
+                get { return eqstraRepSignature; }
+                set
+                {
+                    if (SetProperty(ref eqstraRepSignature, value))
+                    {
+                        EQRDate = DateTime.Now;
+                    }
+                }
+            }
+            
 
             private bool isSellChecked;
 

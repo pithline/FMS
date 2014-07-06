@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,8 @@ namespace Eqstra.BusinessLogic.Passenger
         public DateTime CRDate
         {
             get { return cRDate; }
-            set { SetProperty(ref cRDate, value); }
+            set 
+            { SetProperty(ref cRDate, value); }
         }
 
         private DateTime cRTime;
@@ -71,6 +73,8 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return eQRTime; }
             set { SetProperty(ref eQRTime, value); }
         }
+
+      
 
         private string cRSignComment;
 
