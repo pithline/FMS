@@ -39,6 +39,10 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
                     _navigationService.Navigate("Confirmation", string.Empty);
                 }
+            }, () =>
+            {
+                return (this.SelectedSupplier != null);
+                 
             });
             this.CountryChangedCommand = new DelegateCommand<Country>(async (param) =>
             {
@@ -152,14 +156,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref driverTask, value); }
         }
         public DelegateCommand GoToConfirmationCommand { get; set; }
-
         public DelegateCommand<Country> CountryChangedCommand { get; set; }
         public DelegateCommand<province> ProvinceChangedCommand { get; set; }
         public DelegateCommand<City> CityChangedCommand { get; set; }
         public DelegateCommand<Suburb> SuburbChangedCommand { get; set; }
-
         public DelegateCommand<string> SubmitQueryCommand { get; set; }
-
         public DelegateCommand SupplierFilterCommand { get; set; }
 
         private SupplierSelection model;
@@ -168,6 +169,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             get { return model; }
             set { SetProperty(ref model, value); }
+        }
+
+        private Supplier selectedSupplier;
+        public Supplier SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set
+            {
+                if (SetProperty(ref selectedSupplier, value))
+                {
+                    this.GoToConfirmationCommand.RaiseCanExecuteChanged();
+                    this.Model.SelectedSupplier = this.SelectedSupplier;
+                }
+            }
         }
     }
 }

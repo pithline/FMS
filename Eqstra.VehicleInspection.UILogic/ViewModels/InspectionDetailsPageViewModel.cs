@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
+using Syncfusion.UI.Xaml.Grid;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;

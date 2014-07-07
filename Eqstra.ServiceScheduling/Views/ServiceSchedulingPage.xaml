@@ -295,7 +295,7 @@
                                 <ComboBox  Grid.Row="3"
                                            ItemsSource="{Binding Model.LocationTypes}"
                                            DisplayMemberPath="LocationName"
-                                           SelectedValue="recID"
+                                           SelectedValue="LocType"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
                                            x:Name="ddLocationType"
@@ -304,14 +304,45 @@
                                            Margin="0 20"
                                            Width="250"
                                            HorizontalAlignment="Left">
-
                                     <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                            <Core:InvokeCommandAction Command="{Binding LocTypeChangedCommand}"
+                                                                      CommandParameter="{Binding Model.SelectedLocationType}" />
+                                        </Core:EventTriggerBehavior>
                                         <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
+                                    </Interactivity:Interaction.Behaviors>
+
+                                </ComboBox>
+
+                                <TextBlock Text="Select Destination"
+                                           Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           Grid.Row="4"
+                                           Grid.Column="4"
+                                           Style="{StaticResource FormTextStyle}"
+                                           VerticalAlignment="Center" />
+
+                                <ComboBox  Grid.Row="4"
+                                           ItemsSource="{Binding Model.DestinationTypes}"
+                                           DisplayMemberPath="ContactName"
+                                           SelectedValue="RecID"
+                                           Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
+                                           x:Name="ddDestinationTypes"
+                                           Grid.Column="5"
+                                           Margin="0 20"
+                                           Width="250"
+                                           HorizontalAlignment="Left">
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                            <Core:InvokeCommandAction Command="{Binding DestiTypeChangedCommand}"
+                                                                      CommandParameter="{Binding Model.SelectedDestinationType}" />
+                                        </Core:EventTriggerBehavior>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedDestinationType]}" />
                                     </Interactivity:Interaction.Behaviors>
                                 </ComboBox>
 
                                 <TextBlock Text="Address"
-                                           Grid.Row="4"
+                                           Grid.Row="5"
                                            Grid.Column="4"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            Style="{StaticResource FormTextStyle}"
@@ -320,7 +351,7 @@
                                 </TextBlock>
 
                                 <StackPanel Orientation="Horizontal"
-                                            Grid.Row="4"
+                                            Grid.Row="5"
                                             Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                             Grid.Column="5"
                                             Grid.RowSpan="2">
@@ -331,7 +362,7 @@
                                              VerticalAlignment="Top"
                                              Text="{Binding Model.Address,Mode=TwoWay}"
                                              Margin="5 10"
-                                             Grid.Row="4"
+                                             Grid.Row="5"
                                              Grid.Column="5"
                                              IsSpellCheckEnabled="True"
                                              IsTextPredictionEnabled="True"
@@ -341,11 +372,12 @@
                                         </Interactivity:Interaction.Behaviors>
                                     </TextBox>
                                     <AppBarButton  VerticalAlignment="Top"
-                                                         Icon="Add"
-                                                         RequestedTheme="Light"
-                                                         Command="{Binding AddAddressCommand}"
-                                                         CommandParameter="Add"
-                                                         IsCompact="True" />
+                                                   Icon="Add"
+                                                   Visibility="{Binding IsAddFlyoutOn}"
+                                                   RequestedTheme="Light"
+                                                   Command="{Binding AddAddressCommand}"
+                                                   CommandParameter="Add"
+                                                   IsCompact="True" />
 
 
                                     <AppBarToggleButton  x:Name="editableAddress"
@@ -353,8 +385,6 @@
                                                          Icon="Edit"
                                                          RequestedTheme="Light"
                                                          IsCompact="True" />
-
-
                                 </StackPanel>
 
                                 <TextBlock Text="Please indicate any additional maintenance/repair work that may be required"

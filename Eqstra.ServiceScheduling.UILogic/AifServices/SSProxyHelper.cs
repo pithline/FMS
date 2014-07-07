@@ -295,7 +295,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ServiceDateOption2 = mzk.parmPreferredDateSecondOption,
                             ODOReading = mzk.parmODOReading.ToString(),
                             ODOReadingDate = mzk.parmODOReadingDate,
-                            ServiceType = GetServiceTypesAsync(caseNumber,_userInfo.CompanyId),
+                            ServiceType = GetServiceTypesAsync(caseNumber, _userInfo.CompanyId),
                             LocationTypes = GetLocationTypeAsync(caseServiceRecId, _userInfo.CompanyId).Result,
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
@@ -361,7 +361,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
         }
 
-        async public System.Threading.Tasks.Task<List<Customer>> GetCustomersFromSvcAsync()
+        async public System.Threading.Tasks.Task<List<DestinationType>> GetCustomersFromSvcAsync()
         {
             try
             {
@@ -374,19 +374,21 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getCustomersAsync(_userInfo.CompanyId);
-                List<Customer> customers = new List<Customer>();
+                List<DestinationType> destinationTypes = new List<DestinationType>();
                 if (result.response != null)
                 {
                     result.response.AsParallel().ForAll(mzk =>
                     {
-                        customers.Add(new Eqstra.BusinessLogic.Customer
+                        destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                        {
                            ContactName = mzk.parmName,
-                           Id = mzk.parmAccountNum
+                           Id = mzk.parmAccountNum,
+                           RecID = mzk.parmRecID,
+                           Address = mzk.parmAddress
                        });
                     });
                 }
-                return customers;
+                return destinationTypes;
             }
             catch (Exception ex)
             {
@@ -395,6 +397,78 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
         }
 
+
+        async public System.Threading.Tasks.Task<List<DestinationType>> GetVendorsFromSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return null;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.getVendorsAsync(_userInfo.CompanyId);
+                List<DestinationType> destinationTypes = new List<DestinationType>();
+                if (result.response != null)
+                {
+                    result.response.AsParallel().ForAll(mzk =>
+                    {
+                        destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
+                        {
+                            ContactName = mzk.parmName,
+                            Id = mzk.parmAccountNum,
+                            RecID = mzk.parmRecID,
+                            Address = mzk.parmAddress
+                        });
+                    });
+                }
+                return destinationTypes;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return null;
+            }
+        }
+
+        async public System.Threading.Tasks.Task<List<DestinationType>> GetDriversFromSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return null;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.getDriversAsync(_userInfo.CompanyId);
+                List<DestinationType> destinationTypes = new List<DestinationType>();
+                if (result.response != null)
+                {
+                    result.response.AsParallel().ForAll(mzk =>
+                    {
+                        destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
+                        {
+                            ContactName = mzk.parmName,
+                            Id = mzk.parmDriverId,
+                            RecID = mzk.parmRecID,
+                            Address = mzk.parmAddress
+                        });
+                    });
+                }
+                return destinationTypes;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return null;
+            }
+        }
 
         async public System.Threading.Tasks.Task<List<Supplier>> GetVendSupplirerSvcAsync()
         {
@@ -435,41 +509,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-        async public System.Threading.Tasks.Task<List<Customer>> GetDriversFromSvcAsync()
-        {
-            try
-            {
-                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return null;
-
-                if (_userInfo == null)
-                {
-                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-                }
-                var result = await client.getDriversAsync(_userInfo.CompanyId);
-                List<Customer> customers = new List<Customer>();
-                if (result.response != null)
-                {
-                    result.response.AsParallel().ForAll(mzk =>
-                    {
-                        customers.Add(new Eqstra.BusinessLogic.Customer
-                        {
-                            ContactName = mzk.parmName,
-                            Id = mzk.parmDriverId
-                        });
-                    });
-                }
-                return customers;
-            }
-            catch (Exception ex)
-            {
-                AppSettings.Instance.ErrorMessage = ex.Message;
-                return null;
-            }
-        }
-
 
         async public System.Threading.Tasks.Task InsertConfirmationServiceSchedulingToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId, long _entityRecId)
         {

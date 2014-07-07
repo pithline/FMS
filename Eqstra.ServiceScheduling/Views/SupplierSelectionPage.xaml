@@ -287,9 +287,9 @@
                                 </SearchBox>
                                 <grid:SfDataGrid ItemsSource="{Binding Model.Suppliers}"
                                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                                 x:Name="suppliersGrid"
-                                                NavigationMode="Row"                                                 
-                                                 SelectedItem="{Binding Model.SelectedSupplier, Mode=TwoWay}"
+                                                 x:Name="suppliersGrid" SelectionMode="Single"
+                                                  NavigationMode="Row"
+                                                 SelectedItem="{Binding SelectedSupplier, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                  AutoGenerateColumns="False"
                                                  BorderThickness=".5"
                                                  Grid.Row="7"

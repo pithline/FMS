@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -37,10 +38,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             _navigationService = navigationService;
             _settingsFlyout = settingsFlyout;
             _eventAggregator = eventAggregator;
+            this.IsAddFlyoutOn = Visibility.Collapsed;
             this.CustomerDetails = new CustomerDetails();
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             this.Model = new ServiceSchedulingDetail();
-            this.GoToSupplierSelectionCommand = new DelegateCommand( ()=>
+            this.GoToSupplierSelectionCommand = new DelegateCommand(() =>
             {
                 if (this.Model.ValidateProperties())
                 {
@@ -106,6 +108,38 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
             {
                 await TakePictureAsync(param);
+            });
+
+            this.LocTypeChangedCommand = new DelegateCommand<LocationType>(async (param) =>
+            {
+
+                if (param.LocType == "Driver")
+                {
+                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetDriversFromSvcAsync();
+                }
+                if (param.LocType == "Customer")
+                {
+                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetCustomersFromSvcAsync();
+                }
+
+                if (param.LocType == "Vendor")
+                {
+                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetVendorsFromSvcAsync();
+                }
+                if (param.LocType == "Other")
+                {
+                    this.IsAddFlyoutOn = Visibility.Visible;
+                }
+
+            });
+
+            this.DestiTypeChangedCommand = new DelegateCommand<DestinationType>(async (param) =>
+            {
+                if (param != null)
+                {
+                    DestinationType destinationType = param as DestinationType;
+                    this.Model.Address = destinationType.Address;
+                }
             });
 
 
@@ -180,6 +214,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public DelegateCommand GoToSupplierSelectionCommand { get; set; }
         public DelegateCommand ODOReadingPictureCommand { get; set; }
         public DelegateCommand<string> AddAddressCommand { get; set; }
+        public DelegateCommand<LocationType> LocTypeChangedCommand { get; set; }
+        public DelegateCommand<DestinationType> DestiTypeChangedCommand { get; set; }
 
         private string odoReadingImagePath;
         public string ODOReadingImagePath
@@ -207,6 +243,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
         }
 
+
+        private Visibility isAddFlyoutOn;
+        public Visibility IsAddFlyoutOn
+        {
+            get { return isAddFlyoutOn; }
+            set { SetProperty(ref isAddFlyoutOn, value); }
+        }
+
         private ServiceSchedulingDetail model;
 
         public ServiceSchedulingDetail Model
@@ -214,6 +258,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
+
+
 
     }
 }

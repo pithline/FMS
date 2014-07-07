@@ -85,14 +85,23 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref eventDesc, value); }
         }
 
+        private List<DestinationType> destinationTypes;
+
+        public List<DestinationType> DestinationTypes
+        {
+            get { return destinationTypes; }
+            set { SetProperty(ref destinationTypes, value); }
+        }
+        
+
         private List<LocationType> locationTypes;
 
         public List<LocationType> LocationTypes
         {
             get { return locationTypes; }
             set { SetProperty(ref locationTypes, value); }
-        }
 
+        }
         private string address;
         [Required(ErrorMessage = "Address required")]
         public string Address
@@ -141,6 +150,14 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref selectedLocationType, value); }
         }
 
+        private DestinationType selectedDestinationType;
+
+        public DestinationType SelectedDestinationType
+        {
+            get { return selectedDestinationType; }
+            set { SetProperty(ref selectedDestinationType, value); }
+        }
+        
         private string selectedServiceType;
         [Required(ErrorMessage = "Service Type required")]
         public string SelectedServiceType

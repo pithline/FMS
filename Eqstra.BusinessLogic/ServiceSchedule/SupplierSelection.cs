@@ -24,7 +24,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.SelectedCountry = new Country();
             this.Selectedprovince = new province();
             this.SelectedSuburb = new Suburb();
-
         }
 
         private List<Country> countries;
