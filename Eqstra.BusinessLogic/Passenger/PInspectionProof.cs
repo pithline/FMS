@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace Eqstra.BusinessLogic.Passenger
         public PInspectionProof()
         {
             this.CRTime = DateTime.Now;
-            this.CRDate = DateTime.Today;
-            this.EQRDate = DateTime.Today;
+            this.CRDate = DateTime.Now;
+            this.EQRDate = DateTime.Now;
             this.EQRTime = DateTime.Now;
             this.CRSignFileName = "cr_" + new Random().Next(1000) + TimeSpan.TicksPerMillisecond;
             this.EQRSignFileName = "eqr_" + new Random().Next(1000) + TimeSpan.TicksPerMillisecond;
@@ -48,7 +49,8 @@ namespace Eqstra.BusinessLogic.Passenger
         public DateTime CRDate
         {
             get { return cRDate; }
-            set { SetProperty(ref cRDate, value); }
+            set 
+            { SetProperty(ref cRDate, value); }
         }
 
         private DateTime cRTime;
@@ -71,6 +73,8 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return eQRTime; }
             set { SetProperty(ref eQRTime, value); }
         }
+
+      
 
         private string cRSignComment;
 

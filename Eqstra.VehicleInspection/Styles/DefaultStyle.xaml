@@ -566,7 +566,7 @@
                         <TextBlock x:Name="title" Grid.Row="0" FontSize="18" Margin="0 0 0 10" Visibility="Collapsed"/>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Background="White">
                             <Border BorderBrush="LightGray" BorderThickness="2" Height="172" Margin="0 0 10 10" Width="500" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <Image Name="imgOriginator"  Height="172" Stretch="None" Width="500" HorizontalAlignment="Stretch" />
+                                <Image Name="imgOriginator" Source="{Binding Path=ImageSource,Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Height="172" Stretch="None" Width="500" HorizontalAlignment="Stretch" />
                             </Border>
                             <Button x:Name="myButton" Style="{StaticResource LightBtnStyle}" Grid.Column="1" Width="50" Height="50" Margin="5 0" VerticalContentAlignment="Center" VerticalAlignment="Top"  Content="&#xE1E3;" FontFamily="Segoe UI Symbol" FontSize="25" />
                         </StackPanel>

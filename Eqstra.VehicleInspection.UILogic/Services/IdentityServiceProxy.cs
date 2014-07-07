@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,16 @@ namespace Eqstra.VehicleInspection.UILogic.Services
 {
     public class IdentityServiceProxy : IIdentityService
     {
+        IEventAggregator _eventAggregator;
+        public IdentityServiceProxy(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+        }
         async public Task<Tuple<LogonResult, string>> LogonAsync(string userId, string password)
         {
             try
             {
-                await VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
+                await VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
                 var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
                 if (result != null)
                 {

@@ -4,6 +4,7 @@ using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
+using Eqstra.VehicleInspection.UILogic.Events;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -24,9 +25,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
        public CommercialVehicleDetailsUserControlViewModel(INavigationService navigationService,IEventAggregator eventAggregator):base(eventAggregator)
        {
            _navigationService = navigationService;
-           this.Model = new CVehicleDetails();
+          
            long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
+           eventAggregator.GetEvent<VehicleFetchedEvent>().Subscribe(async b =>
+           {
+               await LoadCommericalVehicleAsync();
+           }, ThreadOption.UIThread);
            LoadModelFromDbAsync(vehicleInsRecID);
+           LoadCommericalVehicleAsync();
            this.GoToImageMarkupPageCommand = new DelegateCommand(() =>
            {
                _navigationService.Navigate("ImageMarkup", this.Model);
@@ -35,17 +41,36 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
        public DelegateCommand GoToImageMarkupPageCommand { get; set; }
 
+       private async System.Threading.Tasks.Task LoadCommericalVehicleAsync()
+       {
+            var recId = long.Parse(ApplicationData.Current.LocalSettings.Values["vehicleInsRecID"].ToString());
+           this.CommercialVehicle = await SqliteHelper.Storage.GetSingleRecordAsync<CommercialVehicle>(x => x.VehicleInsRecID.Equals(recId));
+           if (this.CommercialVehicle == null)
+           {
+               AppSettings.Instance.IsSyncingVehDetails = 1;
+           }
+           else
+           {
+               AppSettings.Instance.IsSyncingVehDetails = 0;
+           }
+       }
+
        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
        {
            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.VehicleInsRecID == vehicleInsRecID);
            if (this.Model == null)
            {
-               this.Model = new CVehicleDetails();
+               AppSettings.Instance.IsSyncingVehDetails = 1;              
            }
-           BaseModel viBaseObject = (CVehicleDetails)this.Model;
-           viBaseObject.LoadSnapshotsFromDb();
-           PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
-           viBaseObject.ShouldSave = false;
+
+           else
+           {
+               AppSettings.Instance.IsSyncingVehDetails = 0;              
+               BaseModel viBaseObject = (CVehicleDetails)this.Model;
+               viBaseObject.LoadSnapshotsFromDb();
+               PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+               viBaseObject.ShouldSave = false; 
+           }
        }
 
        async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
@@ -66,5 +91,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                }
            }
        }
+
+       private CommercialVehicle commercialVehicle;
+
+       public CommercialVehicle CommercialVehicle
+       {
+           get { return commercialVehicle; }
+           set { SetProperty(ref commercialVehicle, value); }
+       }
+
     }
 }

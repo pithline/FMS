@@ -3,33 +3,23 @@ using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
-using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Eqstra.VehicleInspection.UILogic.Events;
 using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Eqstra.VehicleInspection.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
-using SQLite;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.ViewModels
@@ -60,12 +50,34 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model;
+
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
 
                     await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                     this.IsBusy = false;
-                }, () => { return this.NextViewStack.Count == 1; });
+                }, () =>
+                {
+                    var vm = ((BaseViewModel)this.NextViewStack.Peek().DataContext);
+                    if (vm is InspectionProofUserControlViewModel)
+                    {
+                        return (this.NextViewStack.Count == 1) && (((InspectionProofUserControlViewModel)vm).CustSignature != null) && (((InspectionProofUserControlViewModel)vm).EqstraRepSignature != null);
+                    }
+                    else if (vm is CPOIUserControlViewModel)
+                    {
+                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);   
+                    }
+                    else
+                    {
+                        return (this.NextViewStack.Count == 1);
+                    }
+                    
+                });
+
+                this._eventAggregator.GetEvent<SignChangedEvent>().Subscribe(p =>
+                {
+                    CompleteCommand.RaiseCanExecuteChanged();
+                });
 
                 this._eventAggregator.GetEvent<ErrorsRaisedEvent>().Subscribe((errors) =>
                 {
@@ -115,26 +127,38 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.IsCommandBarOpen = false;
                     ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
-                    if (currentModel.ValidateModel())
+
+                    if (currentModel is PInspectionProof )
                     {
-                        var item = this.PrevViewStack.Pop();
-                        this.FrameContent = item;
-                        this.NextViewStack.Push(item);
-                        CompleteCommand.RaiseCanExecuteChanged();
-                        PreviousCommand.RaiseCanExecuteChanged();
-                        NextCommand.RaiseCanExecuteChanged();
-                        this.SaveCurrentUIDataAsync(currentModel);
-                        if (this.PrevViewStack.FirstOrDefault() != null)
-                        {
-                            BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
-                        }
+                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
+                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
+                        SetFrameContent();
                     }
+                    else if (currentModel is CPOI)
+                    {
+                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
+                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
+                        SetFrameContent();
+                    }
+                                
                     else
                     {
-                        Errors = currentModel.Errors;
-                        OnPropertyChanged("Errors");
-                        ShowValidationSummary = true;
+                        if (currentModel.ValidateModel())
+                        {
+                            SetFrameContent();
+                            this.SaveCurrentUIDataAsync(currentModel);
+                            if (this.PrevViewStack.FirstOrDefault() != null)
+                            {
+                                BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                                await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
+                            }
+                        }
+                        else
+                        {
+                            Errors = currentModel.Errors;
+                            OnPropertyChanged("Errors");
+                            ShowValidationSummary = true;
+                        } 
                     }
 
                 }, () =>
@@ -148,6 +172,16 @@ namespace Eqstra.VehicleInspection.ViewModels
                 throw;
             }
 
+        }
+
+        private void SetFrameContent()
+        {
+            var item = this.PrevViewStack.Pop();
+            this.FrameContent = item;
+            this.NextViewStack.Push(item);
+            CompleteCommand.RaiseCanExecuteChanged();
+            PreviousCommand.RaiseCanExecuteChanged();
+            NextCommand.RaiseCanExecuteChanged();
         }
 
         private void LoadDemoAppointments()
@@ -222,6 +256,10 @@ namespace Eqstra.VehicleInspection.ViewModels
                 }
                 NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
                 this.FrameContent = this.inpectionUserControls[0];
+                _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
+                {
+                    await GetCustomerDetailsAsync();
+                });
             }
             catch (Exception)
             {
@@ -357,17 +395,25 @@ namespace Eqstra.VehicleInspection.ViewModels
                 if (this._task != null)
                 {
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this._task.CaseNumber;
-                    this.CustomerDetails.Status = this._task.Status;
-                    this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
-                    this.CustomerDetails.Address = this.Customer.Address;
-                    this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                    this.CustomerDetails.ContactName = this.Customer.ContactName;
-                    this.CustomerDetails.CaseType = this._task.CaseType;
-                    this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    if (this.Customer == null)
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 1;
 
+                    }
+                    else
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 0;
+                        this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
+                        this.CustomerDetails.CaseNumber = this._task.CaseNumber;
+                        this.CustomerDetails.Status = this._task.Status;
+                        this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
+                        this.CustomerDetails.Address = this.Customer.Address;
+                        this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
+                        this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                        this.CustomerDetails.ContactName = this.Customer.ContactName;
+                        this.CustomerDetails.CategoryType = this._task.CategoryType;
+                        this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    }
                 }
             }
             catch (Exception)

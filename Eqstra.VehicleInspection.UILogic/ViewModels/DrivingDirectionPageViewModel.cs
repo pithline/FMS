@@ -2,6 +2,8 @@
 using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Eqstra.VehicleInspection.UILogic.Events;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -25,12 +27,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
         private INavigationService _navigationService;
         private Eqstra.BusinessLogic.Task _inspection;
+        private IEventAggregator _eventAggregator;
 
-
-        public DrivingDirectionPageViewModel(INavigationService navigationService)
+        public DrivingDirectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
             _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
             this.CustomerDetails = new BusinessLogic.CustomerDetails();
             LoadDemoAppointments();
 
@@ -44,22 +47,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             });
 
-            this.GoToVehicleInspectionCommand = new DelegateCommand(async () =>
-            {
-                this._inspection.ProcessStep = ProcessStep.CaptureInspectionData;
-                this._inspection.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance;
-                await SqliteHelper.Storage.UpdateSingleRecordAsync(this._inspection);
-                string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);
-                await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+            this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
+            {                
+                string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);                
                 _navigationService.Navigate("VehicleInspection", JsoninspectionTask);
 
             });
 
             this.StartDrivingCommand = new DelegateCommand(async () =>
             {
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString()) });
                 this.IsStartDriving = false;
                 this.IsArrived = true;
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString()) });
             });
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
@@ -125,7 +124,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.IsArrived = false;
                 this.IsStartInspection = false;
             }
-
+            _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
+            {
+                await GetCustomerDetailsAsync();
+            });
         }
 
         private CustomerDetails customerDetails;
@@ -178,17 +180,26 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 if (this._inspection != null)
                 {
                     this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
-                    this.CustomerDetails.VehicleInsRecId = this._inspection.VehicleInsRecId;
-                    this.CustomerDetails.Status = this._inspection.Status;
-                    this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
-                    this.CustomerDetails.Address = this.Customer.Address;
-                    this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                    this.CustomerDetails.ContactName = this.Customer.ContactName;
-                    this.CustomerDetails.CaseType = this._inspection.CaseType;
-                    this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    if (this.Customer == null)
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 1;
+
+                    }
+                    else
+                    {
+                        AppSettings.Instance.IsSyncingCustDetails = 0;
+                        this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
+                        this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
+                        this.CustomerDetails.VehicleInsRecId = this._inspection.VehicleInsRecId;
+                        this.CustomerDetails.Status = this._inspection.Status;
+                        this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
+                        this.CustomerDetails.Address = this.Customer.Address;
+                        this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
+                        this.CustomerDetails.CustomerName = this.Customer.CustomerName;
+                        this.CustomerDetails.ContactName = this.Customer.ContactName;
+                        this.CustomerDetails.CategoryType = this._inspection.CategoryType;
+                        this.CustomerDetails.EmailId = this.Customer.EmailId;
+                    }
                 }
             }
             catch (Exception)

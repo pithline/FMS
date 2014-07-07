@@ -39,22 +39,22 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Customer Representative Signature" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
-                        <mzk:MzkSignature Title="" FileName="{Binding Model.CRSignFileName,Mode=TwoWay}"  Margin="0 10" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"/>
+                        <mzk:MzkSignature ImageSource="{Binding CustSignature,Mode=TwoWay}" Title="" FileName="{Binding Model.CRSignFileName,Mode=TwoWay}"  Margin="0 10" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="Date/Time" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal" Margin="0 10" Grid.Row="1" Grid.Column="1">
-                            <DatePicker IsHitTestVisible="False" MonthFormat="{}{month.integer(2)}" Date="{Binding Path=Model.CRDate,Mode=TwoWay}"/>
-                            <TextBlock Text="--" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="10 0" FontSize="30"/>
-                            <TimePicker IsHitTestVisible="False" Time="{Binding Path=Model.CRTime, Mode=TwoWay}"/>
+                            <!--<DatePicker  MonthFormat="{}{month.integer(2)}" Date="{Binding Path=Model.CRDate,Mode=TwoWay}"/>-->
+                            <TextBlock Text="{Binding Path=Model.CRDate}" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="10 0" FontSize="30"/>
+                            <!--<TimePicker  Time="{Binding Path=Model.CRDate, Mode=TwoWay}"/>-->
                         </StackPanel>
                         <TextBlock Text="Comment" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
                         <TextBox AcceptsReturn="True" IsTextPredictionEnabled="True" Text="{Binding Path=Model.CRSignComment,Mode=TwoWay}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Width="400" Height="200" VerticalAlignment="Center" />
                         <TextBlock Text="Eqstra Representative Signature" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
-                        <mzk:MzkSignature Title=""  FileName="{Binding EQRSignFileName,Mode=TwoWay}" HorizontalAlignment="Left" Margin="0 10" Grid.Row="3" Grid.Column="1"/>
+                        <mzk:MzkSignature ImageSource="{Binding EqstraRepSignature,Mode=TwoWay}" Title=""  FileName="{Binding EQRSignFileName,Mode=TwoWay}" HorizontalAlignment="Left" Margin="0 10" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="Date/Time" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal" Margin="0 10" Grid.Row="4" Grid.Column="1">
-                            <DatePicker IsHitTestVisible="False" MonthFormat="{}{month.integer(2)}" Date="{Binding Path=Model.EQRDate,Mode=TwoWay}"/>
-                            <TextBlock Text="--" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="10 0" FontSize="30"/>
-                            <TimePicker IsHitTestVisible="False" Time="{Binding Path=Model.EQRTime, Mode=TwoWay}"/>
+                            <!--<DatePicker IsHitTestVisible="False" MonthFormat="{}{month.integer(2)}" Date="{Binding Path=Model.EQRDate,Mode=TwoWay}"/>-->
+                            <TextBlock Text="{Binding Path=Model.EQRDate}" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="10 0" FontSize="30"/>
+                            <!--<TimePicker IsHitTestVisible="False" Time="{Binding Path=Model.EQRDate, Mode=TwoWay}"/>-->
                         </StackPanel >
                         <TextBlock Text="Comment" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Top" Margin="0 20 0 0"/>
                         <TextBox AcceptsReturn="True" IsTextPredictionEnabled="True" Text="{Binding Path=Model.EQRSignComment,Mode=TwoWay}" Grid.Row="5" HorizontalAlignment="Left" Width="400" Height="200" Grid.Column="1" VerticalAlignment="Center" />

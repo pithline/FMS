@@ -49,17 +49,17 @@ namespace Eqstra.VehicleInspection.Views
         }
         private void UpdateVisualState()
         {
-            VisualStateManager.GoToState(this, ApplicationView.GetForCurrentView().Orientation.ToString(), true);
-            if (ApplicationView.GetForCurrentView().Orientation == ApplicationViewOrientation.Portrait)
-            {
-                this.FullView.Visibility = Visibility.Collapsed;
-                this.SnapView.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.FullView.Visibility = Visibility.Visible;
-                this.SnapView.Visibility = Visibility.Collapsed;
-            }
+            //VisualStateManager.GoToState(this, ApplicationView.GetForCurrentView().Orientation.ToString(), true);
+            //if (ApplicationView.GetForCurrentView().Orientation == ApplicationViewOrientation.Portrait)
+            //{
+            //    this.FullView.Visibility = Visibility.Collapsed;
+            //    this.SnapView.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    this.FullView.Visibility = Visibility.Visible;
+            //    this.SnapView.Visibility = Visibility.Collapsed;
+            //}
         }
 
         private void ProfileUserControl_Tapped(object sender, TappedRoutedEventArgs e)

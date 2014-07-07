@@ -51,7 +51,15 @@ namespace Eqstra.BusinessLogic.Helpers
         public Task<List<T>> LoadTableAsync<T>()
             where T : ValidatableBindableBase, new()
         {
-            return this.Connection.Table<T>().ToListAsync();
+            try
+            {
+                return this.Connection.Table<T>().ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<T> GetSingleRecordAsync<T>(Expression<Func<T, bool>> criteria)
@@ -62,7 +70,15 @@ namespace Eqstra.BusinessLogic.Helpers
 
         public async Task<int> InsertAllAsync<T>(IEnumerable<T> items) where T : new()
         {
-            return await this.Connection.InsertAllAsync(items);
+            try
+            {
+                return await this.Connection.InsertAllAsync(items);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<int> UpdateAllAsync<T>(IEnumerable<T> items) where T : new()

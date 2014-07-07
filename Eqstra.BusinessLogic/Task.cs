@@ -205,5 +205,14 @@ namespace Eqstra.BusinessLogic
             get { return contactNumber; }
             set { SetProperty(ref contactNumber, value); }
         }
+
+        private bool allowEditing;
+
+        public bool AllowEditing
+        {
+            get { return allowEditing; }
+            set { SetProperty(ref allowEditing, value); }
+        }
+
     }
 }

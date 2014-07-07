@@ -100,7 +100,7 @@ namespace Eqstra.VehicleInspection
             {
                 //string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                 //ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
-                VIServiceHelper.Instance.ConnectAsync(cred.Item1,cred.Item2);
+                VIServiceHelper.Instance.ConnectAsync(cred.Item1,cred.Item2,EventAggregator);
                 NavigationService.Navigate("Main", string.Empty);
             }
             else

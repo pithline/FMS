@@ -88,9 +88,9 @@ namespace Eqstra.BusinessLogic
             get { return caseType; }
             set { SetProperty(ref caseType, value); }
         }
-
+        
         private DateTime statusDueDate;
-
+        [RestorableState]
         public DateTime StatusDueDate
         {
             get { return statusDueDate; }
@@ -98,7 +98,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string status;
-
+        [RestorableState]
         public string Status
         {
             get { return status; }
@@ -112,6 +112,15 @@ namespace Eqstra.BusinessLogic
             get { return allocatedTo; }
             set { SetProperty(ref allocatedTo, value); }
         }
+
+        private string categoryType;
+        [RestorableState]
+        public string CategoryType
+        {
+            get { return categoryType; }
+            set { SetProperty(ref categoryType, value); }
+        }
+
 
     }
 }

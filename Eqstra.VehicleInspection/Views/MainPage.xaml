@@ -221,7 +221,7 @@
                                              ColumnSizer="SizeToCells"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"
-                                             AllowEditing="True"
+                                             AllowEditing="False"
                                              BorderBrush="Transparent"
                                              BorderThickness="0"
                                              CellStyle="{StaticResource SyncGridCellStyle}">
@@ -230,29 +230,41 @@
                                                          HeaderText="CASE NUMBER"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="120"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="CaseType"
+                                    <grid:GridTextColumn MappingName="CategoryType"
                                                          HeaderText="CASE TYPE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="100"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridComboBoxColumn MappingName="Status"
+                                                             AllowEditing="False"
+                                                             HeaderText="STATUS"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
+                                                             HeaderText="STATUS DUE DATE"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="150"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="ContactName"
                                                          HeaderText="CONTACT NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="150"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn MappingName="ContactNumber"
                                                              HeaderText="CONTACT NUMBER"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="150"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -263,36 +275,24 @@
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
-                                    <grid:GridComboBoxColumn MappingName="Status"
-                                                             AllowEditing="False"
-                                                             HeaderText="STATUS"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
-                                                             HeaderText="STATUS DUE DATE"
-                                                             AllowEditing="False"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
-                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="150"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridDateTimeColumn MappingName="ConfirmedDate"
                                                              FormatString="MM/dd/yyyy"
                                                              HeaderText="CONFIRMED DATE"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn MappingName="ConfirmedTime"
                                                              HeaderText="CONFIRMED TIME"
                                                              AllowEditing="True"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -353,7 +353,7 @@
                         <Interactivity:Interaction.Behaviors>
                             <Core:EventTriggerBehavior EventName="Tapped">
                                 <Core:NavigateToPageAction TargetPage="Eqstra.VehicleInspection.Views.InspectionDetailsPage"
-                                                           Parameter="AwaitInspectionDetail" />
+                                                           Parameter="AwaitConfirmation" />
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
                     </Border>

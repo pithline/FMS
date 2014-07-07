@@ -41,13 +41,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
 
-        private string color;
-        [RestorableState]
-        public string Color
-        {
-            get { return color; }
-            set { SetProperty(ref color, value); }
-        }
+       
 
         private bool isLicenseDiscCurrent;
         [RestorableState]
@@ -57,29 +51,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
 
-        private string odoReading;
-        [RestorableState]
-        public string ODOReading
-        {
-            get { return odoReading; }
-            set { SetProperty(ref odoReading, value); }
-        }
-
-        private string registrationNumber;
-        [RestorableState]
-        public string RegistrationNumber
-        {
-            get { return registrationNumber; }
-            set { SetProperty(ref registrationNumber, value); }
-        }
-
-        private string engineNumber;
-        [RestorableState]
-        public string EngineNumber
-        {
-            get { return engineNumber; }
-            set { SetProperty(ref engineNumber, value); }
-        }
+        
 
         private DateTime licenseDiscExpiryDate;
         [RestorableState]
@@ -89,21 +61,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref licenseDiscExpiryDate, value); }
         }
 
-        private string chassisNumber;
-        [RestorableState]
-        public string ChassisNumber
-        {
-            get { return chassisNumber; }
-            set { SetProperty(ref chassisNumber, value); }
-        }
-
-        private string make;
-        [RestorableState]
-        public string Make
-        {
-            get { return make; }
-            set { SetProperty(ref make, value); }
-        }
+       
 
         private bool isSpareKeysShown;
         [RestorableState]
@@ -121,16 +79,7 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return isSpareKeysTested; }
             set { SetProperty(ref isSpareKeysTested, value); }
         }
-
-        private string year;
-        [RestorableState]
-        public string Year
-        {
-            get { return year; }
-            set { SetProperty(ref year, value); }
-        }
-
-
+               
         private ImageCapture licenseDiscSnapshot;
 
         [RestorableState, Ignore]
