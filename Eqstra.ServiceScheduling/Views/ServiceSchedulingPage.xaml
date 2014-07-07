@@ -11,6 +11,10 @@
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
                             prism:ViewModelLocator.AutoWireViewModel="True"
+                            xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+                            xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+                            xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+                            xmlns:ValidationBehaviour="using:Eqstra.BusinessLogic.Behaviors"
                             mc:Ignorable="d">
 
     <Page.Resources>
@@ -19,11 +23,11 @@
         <Converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
+
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <AppBarButton Label="Next"
-                          Command="{Binding GoToSupplierSelectionCommand}"
-                          CommandParameter="{Binding Model,Mode=TwoWay}">
+                          Command="{Binding GoToSupplierSelectionCommand}">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Next" />
                 </AppBarButton.Icon>
@@ -156,20 +160,24 @@
                                          Margin="5 0"
                                          Grid.Row="1"
                                          Grid.Column="1"
-                                         HorizontalAlignment="Left" />
+                                         HorizontalAlignment="Left">
+                                    <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors  PropertyErrors="{Binding Model.Errors[ODOReading]}" />
+                                    </Interactivity:Interaction.Behaviors>
+                                </TextBox>
 
                                 <TextBlock Text="ODO Reading Date"
                                            Grid.Row="2"
                                            Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
-                                <DatePicker Width="200"
-                                            VerticalAlignment="Center"
-                                            Date="{Binding Model.ODOReadingDate,Mode=TwoWay}"
-                                            Margin="5 0"
-                                            Grid.Row="2"
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Left" />
+                                <input:SfDatePicker Width="200"
+                                                    VerticalAlignment="Center"
+                                                    Value="{Binding Model.ODOReadingDate,Mode=TwoWay}"
+                                                    Margin="5 0"
+                                                    Grid.Row="2"
+                                                    Grid.Column="1"
+                                                    HorizontalAlignment="Left" />
 
                                 <Grid Grid.Row="1"
                                       Grid.Column="2"
@@ -209,11 +217,16 @@
                                            VerticalAlignment="Center" />
                                 <ComboBox Width="200"
                                           VerticalAlignment="Center"
-                                          ItemsSource="{Binding Model.ServiceType,Mode=TwoWay}" DisplayMemberPath="{Binding}"
+                                          ItemsSource="{Binding Model.ServiceType,Mode=TwoWay}"
+                                          SelectedItem="{Binding Model.SelectedServiceType,Mode=TwoWay}"
                                           Margin="5 0"
                                           Grid.Row="5"
                                           Grid.Column="1"
-                                          HorizontalAlignment="Left" />
+                                          HorizontalAlignment="Left">
+                                    <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedServiceType]}" />
+                                    </Interactivity:Interaction.Behaviors>
+                                </ComboBox>
 
                                 <TextBlock Text="Please Select Preferred Service Dates"
                                            Style="{StaticResource TextContentStyle}"
@@ -225,22 +238,22 @@
                                            Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
-                                <DatePicker MonthFormat="{}{month.integer(2)}"
-                                            Date="{Binding Model.ServiceDateOption1,Mode=TwoWay}"
-                                            Grid.Row="8"
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Left" />
+                                <input:SfDatePicker
+                                        Value="{Binding Model.ServiceDateOption1,Mode=TwoWay}"
+                                                    Grid.Row="8"
+                                                    Grid.Column="1"
+                                                    HorizontalAlignment="Left" />
 
                                 <TextBlock Text="Service Date (Option 2)"
                                            Grid.Row="9"
                                            Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
-                                <DatePicker MonthFormat="{}{month.integer(2)}"
-                                            Date="{Binding Model.ServiceDateOption2,Mode=TwoWay}"
-                                            Grid.Row="9"
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Left" />
+                                <input:SfDatePicker
+                                        Value="{Binding Model.ServiceDateOption2,Mode=TwoWay}"
+                                                    Grid.Row="9"
+                                                    Grid.Column="1"
+                                                    HorizontalAlignment="Left" />
 
                                 <TextBlock Text="Please Provide Delivery Requirements"
                                            Style="{StaticResource TextContentStyle}"
@@ -278,21 +291,33 @@
                                            Grid.Column="4"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
+
                                 <ComboBox  Grid.Row="3"
-                                           ItemsSource="{Binding Model.LocationType}"
-                                           DisplayMemberPath="{Binding}"
+                                           ItemsSource="{Binding Model.LocationTypes}"
+                                           DisplayMemberPath="LocationName"
+                                           SelectedValue="recID"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
+                                           x:Name="ddLocationType"
+                                           SelectionChanged="ddLocationType_SelectionChanged"
                                            Grid.Column="5"
                                            Margin="0 20"
                                            Width="250"
-                                           HorizontalAlignment="Left" />
+                                           HorizontalAlignment="Left">
+
+                                    <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
+                                    </Interactivity:Interaction.Behaviors>
+                                </ComboBox>
 
                                 <TextBlock Text="Address"
                                            Grid.Row="4"
                                            Grid.Column="4"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
+                                           VerticalAlignment="Center">
+
+                                </TextBlock>
 
                                 <StackPanel Orientation="Horizontal"
                                             Grid.Row="4"
@@ -310,18 +335,26 @@
                                              Grid.Column="5"
                                              IsSpellCheckEnabled="True"
                                              IsTextPredictionEnabled="True"
-                                             AcceptsReturn="True" />
-                                    <AppBarToggleButton  VerticalAlignment="Top"
+                                             AcceptsReturn="True">
+                                        <Interactivity:Interaction.Behaviors>
+                                            <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[Address]}" />
+                                        </Interactivity:Interaction.Behaviors>
+                                    </TextBox>
+                                    <AppBarButton  VerticalAlignment="Top"
                                                          Icon="Add"
                                                          RequestedTheme="Light"
                                                          Command="{Binding AddAddressCommand}"
                                                          CommandParameter="Add"
                                                          IsCompact="True" />
+
+
                                     <AppBarToggleButton  x:Name="editableAddress"
                                                          VerticalAlignment="Top"
                                                          Icon="Edit"
                                                          RequestedTheme="Light"
                                                          IsCompact="True" />
+
+
                                 </StackPanel>
 
                                 <TextBlock Text="Please indicate any additional maintenance/repair work that may be required"

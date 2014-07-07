@@ -1,6 +1,8 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +13,19 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
     {
         public ServiceSchedulingDetail()
         {
-            this.SelectedItems = new Dictionary<string, object>();
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
         }
 
+        public new bool ValidateProperties()
+        {
+            bool isValid = base.ValidateProperties();
+            var dic = this.Errors.Errors;
+            if (!this.IsLiftRequired && this.Errors.Errors.Count == 2)
+            {
+                return true;
+            }
+            return isValid;
+        }
         private ImageCapture odoReadingSnapshot;
         [RestorableState]
         public ImageCapture ODOReadingSnapshot
@@ -23,16 +34,16 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref odoReadingSnapshot, value); }
         }
 
-        private decimal odoReading;
-
-        public decimal ODOReading
+        private string odoReading;
+        [Required(ErrorMessage = "ODO Reading required.")]
+        public string ODOReading
         {
             get { return odoReading; }
             set { SetProperty(ref odoReading, value); }
         }
 
         private DateTime odoReadingDate;
-
+        [Required(ErrorMessage = "ODO Reading Date required.")]
         public DateTime ODOReadingDate
         {
             get { return odoReadingDate; }
@@ -48,21 +59,17 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private string contactPersonName;
-
         public string ContactPersonName
         {
             get { return contactPersonName; }
             set { SetProperty(ref contactPersonName, value); }
         }
-
         private string contactPersonPhone;
-
         public string ContactPersonPhone
         {
             get { return contactPersonPhone; }
             set { SetProperty(ref contactPersonPhone, value); }
         }
-
         private string supplierName;
 
         public string SupplierName
@@ -70,7 +77,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return supplierName; }
             set { SetProperty(ref supplierName, value); }
         }
-
         private string eventDesc;
 
         public string EventDesc
@@ -79,24 +85,16 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref eventDesc, value); }
         }
 
-        private string deliveryOption;
+        private List<LocationType> locationTypes;
 
-        public string DeliveryOption
+        public List<LocationType> LocationTypes
         {
-            get { return deliveryOption; }
-            set { SetProperty(ref deliveryOption, value); }
-        }
-
-        private List<string> locationType;
-
-        public List<string> LocationType
-        {
-            get { return locationType; }
-            set { SetProperty(ref locationType, value); }
+            get { return locationTypes; }
+            set { SetProperty(ref locationTypes, value); }
         }
 
         private string address;
-
+        [Required(ErrorMessage = "Address required")]
         public string Address
         {
             get { return address; }
@@ -135,13 +133,21 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref isLiftRequired, value); }
         }
 
-        private Dictionary<string, object> selectedItems;
-
-        public Dictionary<string, object> SelectedItems
+        private LocationType selectedLocationType;
+        [Required(ErrorMessage = "Location Type required")]
+        public LocationType SelectedLocationType
         {
-            get { return selectedItems; }
-            set { SetProperty(ref selectedItems, value); }
+            get { return selectedLocationType; }
+            set { SetProperty(ref selectedLocationType, value); }
         }
 
+        private string selectedServiceType;
+        [Required(ErrorMessage = "Service Type required")]
+        public string SelectedServiceType
+        {
+            get { return selectedServiceType; }
+            set { SetProperty(ref selectedServiceType, value); }
+        }
     }
+
 }

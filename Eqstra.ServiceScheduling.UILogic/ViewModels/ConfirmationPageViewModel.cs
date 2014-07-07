@@ -28,11 +28,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.Model = new ConfirmationServiceScheduling();
             SubmitCommand = new DelegateCommand(async () =>
             {
-                ConfirmationServiceScheduling confirmationServiceScheduling = this.Model as ConfirmationServiceScheduling;
                 if (this.DriverTask != null)
                 {
-                    await SSProxyHelper.Instance.InsertConfirmationServiceSchedulingToSvcAsync(confirmationServiceScheduling, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+                    await SSProxyHelper.Instance.InsertConfirmationServiceSchedulingToSvcAsync(this.ServiceSchedulingDetail, this.SupplierSelection, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID, this.DriverTask.CollectionRecID);
                 }
+                Util.ShowToast("Thank you very much. Your request has been sent to your selected  supplier, you will receive confirmation via the Car Manager application shortly.");
                 navigationService.Navigate("Main", string.Empty);
             });
         }
@@ -90,7 +90,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return serviceSchedulingDetail; }
             set { SetProperty(ref serviceSchedulingDetail, value); }
         }
-
 
     }
 }

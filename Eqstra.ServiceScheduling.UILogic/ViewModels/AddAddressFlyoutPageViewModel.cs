@@ -19,6 +19,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.SaveAddressCommand = new DelegateCommand(() =>
             {
                 this._eventAggregator.GetEvent<AddressEvent>().Publish(this.Model as Address);
+
+            });
+            this.CancelAddressCommand = new DelegateCommand(() =>
+            {
+                this.Model = new Address();
             });
         }
         private object model;
@@ -28,5 +33,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref model, value); }
         }
         public DelegateCommand SaveAddressCommand { get; set; }
+
+        public DelegateCommand CancelAddressCommand { get; set; }
     }
 }

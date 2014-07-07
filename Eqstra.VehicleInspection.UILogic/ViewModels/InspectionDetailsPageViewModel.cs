@@ -4,21 +4,13 @@ using Eqstra.VehicleInspection.UILogic.AifServices;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
-using Syncfusion.UI.Xaml.Grid;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels

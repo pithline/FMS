@@ -151,7 +151,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Service Type" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ServiceType,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.SelectedServiceType.ServiceType,Mode=TwoWay}" />
                         </StackPanel>
 
 
@@ -185,7 +185,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Location Type" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.LocationType,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationTyp,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="7"
@@ -202,7 +202,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Name" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierName,Mode=TwoWay}" />
+                                       Text="{Binding  SupplierSelection.SelectedSupplier.SupplierName,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="1"
@@ -211,7 +211,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Contact Name" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierContactName,Mode=TwoWay}" />
+                                       Text="{Binding  SupplierSelection.SelectedSupplier.SupplierContactName,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="2"
@@ -220,7 +220,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Contact Number" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierContactNumber,Mode=TwoWay}" />
+                                       Text="{Binding  SupplierSelection.SelectedSupplier.SupplierContactNumber,Mode=TwoWay}" />
                         </StackPanel>
                         <StackPanel Grid.Row="3"
                                     Grid.Column="1"
@@ -237,7 +237,7 @@
                                        Text="{Binding ServiceSchedulingDetail.ODOReading,Mode=TwoWay}" />
                             <DatePicker Grid.Row="9"
                                         Margin="0 20"
-                                        Date="{Binding SupplierSelection.SupplierDate,Mode=TwoWay}" />
+                                        Date="{Binding  SupplierSelection.SelectedSupplier.SupplierDate,Mode=TwoWay}" />
                         </StackPanel>
                         <StackPanel Grid.Row="6"
                                     Grid.RowSpan="2"
@@ -247,7 +247,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}" />
                             <DatePicker Grid.Row="9"
                                         Margin="0 20"
-                                        Date="{Binding SupplierSelection.SupplierTime,Mode=TwoWay}" />
+                                        Date="{Binding  SupplierSelection.SelectedSupplier.SupplierTime,Mode=TwoWay}" />
                         </StackPanel>
                     </Grid>
                 </Border>

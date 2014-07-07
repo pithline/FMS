@@ -9,6 +9,7 @@
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 IconSource="/Assets/StoreLogo.scale-100.png"
                 Title="Add Address"
+               
                 d:DesignWidth="346">
 
     <Grid>
@@ -73,7 +74,8 @@
                            />
             <AppBarButton Icon="Cancel"
                           RequestedTheme="Light"
-                          VerticalAlignment="Bottom" />
+                          VerticalAlignment="Bottom"
+                          Command="{Binding CancelAddressCommand}" />
         </StackPanel>
     </Grid>
 

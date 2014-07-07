@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
@@ -11,6 +12,7 @@ using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,16 +40,16 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.CustomerDetails = new CustomerDetails();
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             this.Model = new ServiceSchedulingDetail();
-            this.GoToSupplierSelectionCommand = new DelegateCommand<object>(async (param) =>
+            this.GoToSupplierSelectionCommand = new DelegateCommand( ()=>
             {
-                ServiceSchedulingDetail detailServiceScheduling = param as ServiceSchedulingDetail;
-
-                await Util.WriteToDiskAsync(JsonConvert.SerializeObject(detailServiceScheduling), "ServiceSchedulingDetail");
-
-                PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
-                PersistentData.Instance.DriverTask = this._task;
-                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
-                _navigationService.Navigate("SupplierSelection", string.Empty);
+                if (this.Model.ValidateProperties())
+                {
+                    Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.Model), "ServiceSchedulingDetail");
+                    PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
+                    PersistentData.Instance.DriverTask = this._task;
+                    PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                    _navigationService.Navigate("SupplierSelection", string.Empty);
+                }
             });
 
             this.AddAddressCommand = new DelegateCommand<string>((x) =>
@@ -70,10 +72,35 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (address != null)
                 {
-                    ((ServiceSchedulingDetail)this.Model).Address = address.Street + "," + Environment.NewLine + address.Suburb
-                               + "," + Environment.NewLine + address.City + "," + Environment.NewLine + address.Province + "," +
-                               Environment.NewLine + address.Country + "," + Environment.NewLine + address.Postcode;
+                    StringBuilder sb = new StringBuilder();
+                    if (!String.IsNullOrEmpty(address.Street))
+                    {
+                        sb.Append(address.Street).Append(",").Append(Environment.NewLine);
+                    }
+                    if (!String.IsNullOrEmpty(address.Suburb))
+                    {
+                        sb.Append(address.Suburb).Append(",").Append(Environment.NewLine);
+                    }
+                    if (!String.IsNullOrEmpty(address.City))
+                    {
+                        sb.Append(address.City).Append(",").Append(Environment.NewLine);
+                    }
+                    if (!String.IsNullOrEmpty(address.Province))
+                    {
+                        sb.Append(address.Province).Append(",").Append(Environment.NewLine);
+                    }
+
+                    if (!String.IsNullOrEmpty(address.Country))
+                    {
+                        sb.Append(address.Country).Append(",").Append(Environment.NewLine);
+                    }
+                    if (!String.IsNullOrEmpty(address.Postcode))
+                    {
+                        sb.Append(address.Postcode);
+                    }
+                    this.Model.Address = sb.ToString();
                 }
+                settingsFlyout.Hide();
             });
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
@@ -124,6 +151,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
                     this.CustomerDetails.CustomerName = this._task.CustomerName;
                     this.CustomerDetails.ContactName = this._task.CustomerName;
+                    this.CustomerDetails.EmailId = "DummyData@y.com";
                     this.CustomerDetails.CaseType = this._task.CaseType;
 
                     var startTime = new DateTime(this._task.ConfirmedTime.Year, this._task.ConfirmedTime.Month, this._task.ConfirmedTime.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
@@ -149,7 +177,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
 
         }
-        public DelegateCommand<object> GoToSupplierSelectionCommand { get; set; }
+        public DelegateCommand GoToSupplierSelectionCommand { get; set; }
         public DelegateCommand ODOReadingPictureCommand { get; set; }
         public DelegateCommand<string> AddAddressCommand { get; set; }
 
@@ -159,7 +187,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return odoReadingImagePath; }
             set { SetProperty(ref odoReadingImagePath, value); }
         }
-
 
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
@@ -180,6 +207,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
         }
 
+        private ServiceSchedulingDetail model;
+
+        public ServiceSchedulingDetail Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
 
     }
 }
