@@ -1936,7 +1936,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionDetail);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
                 //actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
                 actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionDataCapture);
 
@@ -1944,12 +1944,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
 
                     foreach (var task in tasks.Where(x =>
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail &&
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection &&
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation &&
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVendorSelection &&
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance &&
-                        x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail))
+                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture ||
+                        
+                        //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail &&
+                        //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection &&
+                        //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation &&
+                        //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVendorSelection &&
+                        //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance &&
+                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation))
                     {
                         mzkTasks.Add(
                             new MzkTasksContract

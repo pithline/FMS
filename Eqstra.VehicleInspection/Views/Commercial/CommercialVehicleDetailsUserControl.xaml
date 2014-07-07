@@ -45,7 +45,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Take Pictures of the Vehicle" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4"/>
 
-                        <Grid Grid.Row="1" Grid.Column="0" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -54,7 +54,7 @@
                                 <Image Margin="-10" Source="{Binding Path= Model.LeftSnapshot.ImagePath}"   Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Height="150"/>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="1" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -64,7 +64,7 @@
                                 <Image Source="{Binding Path= Model.FrontSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0 20 20 0">
+                        <Grid Grid.Row="1" Grid.Column="3" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -94,7 +94,7 @@
                                 <Image Source="{Binding Path=Model.LicenseDiscSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="2" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -104,7 +104,7 @@
                                 <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -186,8 +186,7 @@
                         <ProgressBar Grid.RowSpan="6"
                                      Grid.ColumnSpan="4"
                                      IsIndeterminate="True"
-                                     VerticalAlignment="Center"
-                                     
+                                     VerticalAlignment="Center"                                     
                                      VerticalContentAlignment="Center" />
 
                         <!--<Rectangle Fill="#FFE6E6E6" Grid.Column="0" Grid.Row="1" Width="175" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
