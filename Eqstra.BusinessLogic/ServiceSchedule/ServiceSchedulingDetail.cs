@@ -1,7 +1,9 @@
 ﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Common;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -14,13 +16,17 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         public ServiceSchedulingDetail()
         {
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
+            this.DestinationTypes = new ObservableCollection<DestinationType>();
+            this.LocationTypes = new List<LocationType>();
         }
-
         public new bool ValidateProperties()
         {
             bool isValid = base.ValidateProperties();
-            var dic = this.Errors.Errors;
-            if (!this.IsLiftRequired && this.Errors.Errors.Count == 2)
+            List<string> hiddenFields = new List<string>();
+            hiddenFields.Add("SelectedLocationType");
+            hiddenFields.Add("SelectedDestinationType");
+            hiddenFields.Add("Address");
+            if (!this.IsLiftRequired && !this.Errors.Errors.Keys.Except(hiddenFields).Any())
             {
                 return true;
             }
@@ -47,7 +53,10 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         public DateTime ODOReadingDate
         {
             get { return odoReadingDate; }
-            set { SetProperty(ref odoReadingDate, value); }
+            set
+            {
+                SetProperty(ref odoReadingDate, value);
+            }
         }
 
         private List<string> serviceType;
@@ -85,14 +94,14 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref eventDesc, value); }
         }
 
-        private List<DestinationType> destinationTypes;
+        private ObservableCollection<DestinationType> destinationTypes;
 
-        public List<DestinationType> DestinationTypes
+        public ObservableCollection<DestinationType> DestinationTypes
         {
             get { return destinationTypes; }
             set { SetProperty(ref destinationTypes, value); }
         }
-        
+
 
         private List<LocationType> locationTypes;
 
@@ -123,19 +132,23 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         public DateTime ServiceDateOption1
         {
             get { return serviceDateOption1; }
-            set { SetProperty(ref serviceDateOption1, value); }
+            set
+            {
+                SetProperty(ref serviceDateOption1, value);
+            }
         }
 
         private DateTime serviceDateOption2;
-
         public DateTime ServiceDateOption2
         {
             get { return serviceDateOption2; }
-            set { SetProperty(ref serviceDateOption2, value); }
+            set
+            {
+                SetProperty(ref serviceDateOption2, value);
+            }
         }
 
         private bool isLiftRequired;
-
         public bool IsLiftRequired
         {
             get { return isLiftRequired; }
@@ -143,7 +156,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private LocationType selectedLocationType;
-        [Required(ErrorMessage = "Location Type required")]
+        [Required(ErrorMessage = "Location type required")]
         public LocationType SelectedLocationType
         {
             get { return selectedLocationType; }
@@ -151,20 +164,19 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private DestinationType selectedDestinationType;
-
+        [Required(ErrorMessage = "Destination type required")]
         public DestinationType SelectedDestinationType
         {
             get { return selectedDestinationType; }
             set { SetProperty(ref selectedDestinationType, value); }
         }
-        
+
         private string selectedServiceType;
-        [Required(ErrorMessage = "Service Type required")]
+        [Required(ErrorMessage = "Service type required")]
         public string SelectedServiceType
         {
             get { return selectedServiceType; }
             set { SetProperty(ref selectedServiceType, value); }
         }
     }
-
 }

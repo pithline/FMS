@@ -78,7 +78,7 @@ namespace Eqstra.ServiceScheduling.Views
                     {
                         foreach (var propInfo in task.GetType().GetRuntimeProperties())
                         {
-                            if (!(propInfo.PropertyType.Name.Equals("SupplierName")||propInfo.PropertyType.Name.Equals("supplierContactName")||propInfo.PropertyType.Name.Equals("SupplierContactNumber")))
+                            if (!(propInfo.Name.Equals("SupplierName")||propInfo.Name.Equals("supplierContactName")||propInfo.Name.Equals("SupplierContactNumber")))
                                 continue;
                             var propVal = Convert.ToString(propInfo.GetValue(task));
                             if (propVal.ToLowerInvariant().Contains(args.QueryText))

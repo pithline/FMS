@@ -29,6 +29,14 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 
         }
 
+        private string cusEmailId;
+
+        public string CusEmailId
+        {
+            get { return cusEmailId; }
+            set { SetProperty(ref cusEmailId, value); }
+        }
+        
         private string caseCategory;
 
         public string CaseCategory

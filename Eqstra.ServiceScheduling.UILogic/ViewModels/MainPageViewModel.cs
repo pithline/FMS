@@ -26,9 +26,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             : base(navigationService)
         {
             this.PoolofTasks = new ObservableCollection<DriverTask>();
+            this.Appointments = new ScheduleAppointmentCollection();
 
             _navigationService = navigationService;
-
             this.BingWeatherCommand = new DelegateCommand(() =>
             {
             });
@@ -65,6 +65,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         //}
 
                         this.PoolofTasks.Add(item);
+                        GetAppointments(item);
 
 
                         //var vehicleDetails = await SqliteHelper.Storage.GetSingleRecordAsync<VehicleDetails>(x => x.RegistrationNumber == item.RegistrationNumber);
@@ -90,7 +91,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         //});
                     }
 
-                    GetAppointments();
 
                 }
 
@@ -106,29 +106,27 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
 
 
-        private void GetAppointments()
+        private void GetAppointments(DriverTask task)
         {
-            foreach (var item in this.PoolofTasks)
-            {
 
-                var startTime = new DateTime(item.ConfirmedTime.Year, item.ConfirmedTime.Month, item.ConfirmedTime.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
-                           item.ConfirmedTime.Second);
-                this.Appointments = new ScheduleAppointmentCollection
-            {
-                new ScheduleAppointment()
-                {
-                                  Subject = item.CaseNumber,
-                                  Location = item.Address,
-                                  StartTime = startTime,
-                                  EndTime = startTime.AddHours(1),
-                                  ReadOnly = true,
-                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
-                              }
-                         
-                         };
-            }
+            var startTime = new DateTime(task.ConfirmedTime.Year, task.ConfirmedTime.Month, task.ConfirmedTime.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                       task.ConfirmedTime.Second);
+            this.Appointments.Add(
+            new ScheduleAppointment()
+            {
+                Subject = task.CaseNumber,
+                Location = task.Address,
+                StartTime = startTime,
+                EndTime = startTime.AddHours(1),
+                ReadOnly = true,
+                AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+            });
+
+
+
 
         }
 

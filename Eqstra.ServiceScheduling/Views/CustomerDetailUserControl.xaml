@@ -47,7 +47,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
                         <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="{Binding CaseCategory}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                 </Grid>

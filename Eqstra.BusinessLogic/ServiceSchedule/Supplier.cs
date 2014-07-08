@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Common;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.SupplierTime = DateTime.Now;
         }
         private string supplierName;
-
         public string SupplierName
         {
             get { return supplierName; }
@@ -23,7 +23,6 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private string supplierContactName;
-
         public string SupplierContactName
         {
             get { return supplierContactName; }
@@ -37,23 +36,24 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return supplierContactNumber; }
             set { SetProperty(ref  supplierContactNumber, value); }
         }
-
         private DateTime supplierDate;
-
         public DateTime SupplierDate
         {
             get { return supplierDate; }
-            set { SetProperty(ref supplierDate, value); }
+            set
+            {
+                SetProperty(ref supplierDate, value);
+            }
         }
-
         private DateTime supplierTime;
-
         public DateTime SupplierTime
         {
             get { return supplierTime; }
-            set { SetProperty(ref supplierTime, value); }
+            set
+            {
+                SetProperty(ref supplierTime, value);
+            }
         }
-
         private string country;
         public string Country
         {
@@ -76,12 +76,10 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private string suburb;
-
         public string Suburb
         {
             get { return suburb; }
             set { SetProperty(ref suburb, value); }
         }
-        
     }
 }

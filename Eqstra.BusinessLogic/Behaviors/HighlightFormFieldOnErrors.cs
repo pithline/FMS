@@ -79,10 +79,10 @@ DependencyProperty.RegisterAttached("HighlightSfDataGridtStyle", typeof(string),
 
                 if (propertyErrors.Any())
                 {
-                    ToolTip toolTip = new ToolTip();
-                    toolTip.Content = propertyErrors.FirstOrDefault();
-                    toolTip.Foreground = new SolidColorBrush(Colors.Red);
-                    ToolTipService.SetToolTip(control, toolTip);
+                    //ToolTip toolTip = new ToolTip();
+                    //toolTip.Content = propertyErrors.FirstOrDefault();
+                    //toolTip.Foreground = new SolidColorBrush(Colors.Red);
+                    //ToolTipService.SetToolTip(control, toolTip);
                 }
                 control.Style = style;
             }

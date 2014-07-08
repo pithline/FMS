@@ -138,8 +138,12 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="30" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
@@ -227,6 +231,10 @@
                                         <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedServiceType]}" />
                                     </Interactivity:Interaction.Behaviors>
                                 </ComboBox>
+                                <TextBlock Grid.Row="6"
+                                           Grid.Column="1"
+                                           Text="{Binding ErrorMessage[SelectedServiceType],Mode=TwoWay}"
+                                           Foreground="Red" />
 
                                 <TextBlock Text="Please Select Preferred Service Dates"
                                            Style="{StaticResource TextContentStyle}"
@@ -280,8 +288,8 @@
                                            VerticalAlignment="Center" />
                                 <ToggleSwitch Grid.Row="2"
                                               x:Name="liftRequired"
-                                              Grid.Column="5"
                                               IsOn="{Binding Model.IsLiftRequired,Mode=TwoWay}"
+                                              Grid.Column="5"
                                               Margin="0 0"
                                               Style="{StaticResource DamagedToggleSwitch}" />
 
@@ -305,26 +313,31 @@
                                            Width="250"
                                            HorizontalAlignment="Left">
                                     <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
                                             <Core:InvokeCommandAction Command="{Binding LocTypeChangedCommand}"
                                                                       CommandParameter="{Binding Model.SelectedLocationType}" />
                                         </Core:EventTriggerBehavior>
-                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                     </Interactivity:Interaction.Behaviors>
 
                                 </ComboBox>
+                                <TextBlock Grid.Row="4"
+                                           Grid.Column="5"
+                                           Foreground="Red"
+                                           Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           Text="{Binding ErrorMessage[SelectedLocationType],Mode=TwoWay}" />
 
                                 <TextBlock Text="Select Destination"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
-                                           Grid.Row="4"
+                                           Grid.Row="5"
                                            Grid.Column="4"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
 
-                                <ComboBox  Grid.Row="4"
-                                           ItemsSource="{Binding Model.DestinationTypes}"
+                                <ComboBox  Grid.Row="5"
+                                           ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                            DisplayMemberPath="ContactName"
-                                           SelectedValue="RecID"
+                                           SelectedValue="Id"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                                            x:Name="ddDestinationTypes"
@@ -333,16 +346,18 @@
                                            Width="250"
                                            HorizontalAlignment="Left">
                                     <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding DestiTypeChangedCommand}"
-                                                                      CommandParameter="{Binding Model.SelectedDestinationType}" />
-                                        </Core:EventTriggerBehavior>
                                         <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedDestinationType]}" />
                                     </Interactivity:Interaction.Behaviors>
                                 </ComboBox>
 
+                                <TextBlock Grid.Row="6"
+                                           Grid.Column="5"
+                                           Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           Text="{Binding ErrorMessage[SelectedDestinationType],Mode=TwoWay}"
+                                           Foreground="Red" />
+
                                 <TextBlock Text="Address"
-                                           Grid.Row="5"
+                                           Grid.Row="7"
                                            Grid.Column="4"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            Style="{StaticResource FormTextStyle}"
@@ -350,8 +365,10 @@
 
                                 </TextBlock>
 
+
+
                                 <StackPanel Orientation="Horizontal"
-                                            Grid.Row="5"
+                                            Grid.Row="8"
                                             Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                             Grid.Column="5"
                                             Grid.RowSpan="2">
@@ -360,9 +377,9 @@
                                              TextWrapping="Wrap"
                                              IsReadOnly="{Binding ElementName=editableAddress,Path=IsChecked,Converter={StaticResource InvertBooleanConverter}}"
                                              VerticalAlignment="Top"
-                                             Text="{Binding Model.Address,Mode=TwoWay}"
+                                             Text="{Binding ElementName=ddDestinationTypes, Path=SelectedItem.Address,Mode=TwoWay}"
                                              Margin="5 10"
-                                             Grid.Row="5"
+                                             Grid.Row="8"
                                              Grid.Column="5"
                                              IsSpellCheckEnabled="True"
                                              IsTextPredictionEnabled="True"
@@ -371,6 +388,7 @@
                                             <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[Address]}" />
                                         </Interactivity:Interaction.Behaviors>
                                     </TextBox>
+                            
                                     <AppBarButton  VerticalAlignment="Top"
                                                    Icon="Add"
                                                    Visibility="{Binding IsAddFlyoutOn}"
@@ -383,19 +401,25 @@
                                     <AppBarToggleButton  x:Name="editableAddress"
                                                          VerticalAlignment="Top"
                                                          Icon="Edit"
+                                                         Visibility="{Binding IsAddFlyoutOn}"
                                                          RequestedTheme="Light"
                                                          IsCompact="True" />
                                 </StackPanel>
-
+                                <TextBlock Grid.Row="9"
+                                           Grid.Column="5"
+                                           Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           Text="{Binding ErrorMessage[Address],Mode=TwoWay}"
+                                           Foreground="Red" />
+                                
                                 <TextBlock Text="Please indicate any additional maintenance/repair work that may be required"
                                            Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="2"
-                                           Grid.Row="7"
+                                           Grid.Row="11"
                                            Grid.Column="4"
                                            TextWrapping="WrapWholeWords" />
 
                                 <TextBlock Text="Additional Work"
-                                           Grid.Row="8"
+                                           Grid.Row="12"
                                            Grid.Column="4"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
@@ -404,7 +428,7 @@
                                          VerticalAlignment="Top"
                                          Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
                                          Margin="5 10"
-                                         Grid.Row="8"
+                                         Grid.Row="12"
                                          Grid.Column="5"
                                          Grid.RowSpan="2"
                                          IsSpellCheckEnabled="True"

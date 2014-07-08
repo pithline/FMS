@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
@@ -26,15 +27,36 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
             this.Model = new ConfirmationServiceScheduling();
-            SubmitCommand = new DelegateCommand(async () =>
+            SubmitCommand = new DelegateCommand(async
+                () =>
             {
                 if (this.DriverTask != null)
                 {
+                    this.DriverTask.Status = DriverTaskStatus.AwaitServiceConfirmation;
                     await SSProxyHelper.Instance.InsertConfirmationServiceSchedulingToSvcAsync(this.ServiceSchedulingDetail, this.SupplierSelection, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID, this.DriverTask.CollectionRecID);
                 }
-                Util.ShowToast("Thank you very much. Your request has been sent to your selected  supplier, you will receive confirmation via the Car Manager application shortly.");
                 navigationService.Navigate("Main", string.Empty);
-            });
+            },
+            () =>
+            { return (this.ServiceDateOption1 == this.ServiceSchedulingDetail.ServiceDateOption1) && (this.ServiceDateOption2 == this.ServiceSchedulingDetail.ServiceDateOption2); }
+            );
+
+            this.ConfirmationDatesCommand = new DelegateCommand(async () =>
+            {
+                if (this.DriverTask != null)
+                {
+                    this.DriverTask.Status = DriverTaskStatus.AwaitJobCardCapture;
+                    this.ServiceSchedulingDetail.ServiceDateOption1 = this.ServiceDateOption1;
+                    this.ServiceSchedulingDetail.ServiceDateOption2 = this.ServiceDateOption2;
+                    bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
+                    if (IsUpdated)
+                    {
+                        this.ConfirmationDatesCommand.RaiseCanExecuteChanged();
+                        this.SubmitCommand.RaiseCanExecuteChanged();
+                    }
+                }
+            }, () => { return (this.ServiceDateOption1 != this.ServiceSchedulingDetail.ServiceDateOption1) || (this.ServiceDateOption2 != this.ServiceSchedulingDetail.ServiceDateOption2); });
+
         }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -45,11 +67,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
                 this.ServiceSchedulingDetail = await Util.DeserializeObjectAsync<ServiceSchedulingDetail>("ServiceSchedulingDetail");
                 this.SupplierSelection = await Util.DeserializeObjectAsync<SupplierSelection>("SupplierSelection");
+                this.ServiceDateOption1 = this.ServiceSchedulingDetail.ServiceDateOption1;
+                this.ServiceDateOption2 = this.ServiceSchedulingDetail.ServiceDateOption2;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
         private CustomerDetails customerDetails;
@@ -91,5 +115,36 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref serviceSchedulingDetail, value); }
         }
 
+        private DateTime serviceDateOption1;
+
+        public DateTime ServiceDateOption1
+        {
+            get { return serviceDateOption1; }
+            set
+            {
+                if (SetProperty(ref serviceDateOption1, value))
+                {
+                    ConfirmationDatesCommand.RaiseCanExecuteChanged();
+                    SubmitCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        private DateTime serviceDateOption2;
+
+        public DateTime ServiceDateOption2
+        {
+            get { return serviceDateOption2; }
+            set
+            {
+                if (SetProperty(ref serviceDateOption2, value))
+                {
+                    ConfirmationDatesCommand.RaiseCanExecuteChanged();
+                    SubmitCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public DelegateCommand ConfirmationDatesCommand { get; set; }
     }
 }
