@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Common\DataGridDoubleTappedCommand.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Converters\FirstErrorConverter.cs" />
     <Compile Include="Views\AddAddressFlyoutPage.xaml.cs">
       <DependentUpon>AddAddressFlyoutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
