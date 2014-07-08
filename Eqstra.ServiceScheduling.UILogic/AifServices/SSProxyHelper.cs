@@ -125,6 +125,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Make = mzkTask.parmMake,
                             Model = mzkTask.parmModel,
                             Description = mzkTask.parmVehicleDescription,
+                            CusEmailId = mzkTask.parmEmail
                         });
 
                     });
@@ -291,10 +292,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption,
-                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption,
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateFirstOption,
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateSecondOption,
                             ODOReading = mzk.parmODOReading.ToString(),
-                            ODOReadingDate = mzk.parmODOReadingDate,
+                            ODOReadingDate = mzk.parmODOReadingDate < DateTime.Today ? DateTime.Today : mzk.parmODOReadingDate,
                             ServiceType = GetServiceTypesAsync(caseNumber, _userInfo.CompanyId),
                             LocationTypes = GetLocationTypeAsync(caseServiceRecId, _userInfo.CompanyId).Result,
                             SupplierName = mzk.parmSupplierName,
@@ -388,6 +389,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        });
                     });
                 }
+                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
                 return destinationTypes;
             }
             catch (Exception ex)
@@ -410,7 +412,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.getVendorsAsync(_userInfo.CompanyId);
+                var result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
                 List<DestinationType> destinationTypes = new List<DestinationType>();
                 if (result.response != null)
                 {
@@ -420,11 +422,11 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         {
                             ContactName = mzk.parmName,
                             Id = mzk.parmAccountNum,
-                            RecID = mzk.parmRecID,
                             Address = mzk.parmAddress
                         });
                     });
                 }
+                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
                 return destinationTypes;
             }
             catch (Exception ex)
@@ -434,7 +436,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
         }
 
-        async public System.Threading.Tasks.Task<List<DestinationType>> GetDriversFromSvcAsync()
+        async public System.Threading.Tasks.Task<IEnumerable<DestinationType>> GetDriversFromSvcAsync()
         {
             try
             {
@@ -461,7 +463,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         });
                     });
                 }
-                return destinationTypes;
+                return destinationTypes.OrderBy(o => o.ContactName);
             }
             catch (Exception ex)
             {
@@ -497,7 +499,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Province = mzk.parmState,
                             City = mzk.parmCityName,
                             Suburb = mzk.parmSuburban,
-
                         });
                     });
                 }
@@ -510,6 +511,33 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
         }
 
+
+        async public System.Threading.Tasks.Task<bool> UpdateConfirmationDatesToSvcAsync(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return false;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.updateConfirmationDatesAsync(caseServiceRecId, new MzkServiceDetailsContract
+                {
+                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2
+                }, _userInfo.CompanyId);
+                return result.response;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return false;
+            }
+
+        }
         async public System.Threading.Tasks.Task InsertConfirmationServiceSchedulingToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId, long _entityRecId)
         {
             try
@@ -522,7 +550,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, new MzkServiceDetailsContract
+                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, new MzkServiceDetailsContract
                 {
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
@@ -538,7 +566,13 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmContactPersonPhone = supplierSelection.SelectedSupplier.SupplierContactNumber,
                 }, _userInfo.CompanyId);
 
+                if (result.response)
+                {
+                    Util.ShowToast("Thank you very much. Your request has been sent to your selected  supplier, you will receive confirmation via the Car Manager application shortly.");
+                }
             }
+
+
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;

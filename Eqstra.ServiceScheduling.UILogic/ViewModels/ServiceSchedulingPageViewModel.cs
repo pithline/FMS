@@ -22,7 +22,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-
+using Eqstra.ServiceScheduling.UILogic.Helpers;
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
     public class ServiceSchedulingPageViewModel : BaseViewModel
@@ -50,6 +50,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
                     PersistentData.Instance.DriverTask = this._task;
                     PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                    this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
                     _navigationService.Navigate("SupplierSelection", string.Empty);
                 }
             });
@@ -112,34 +113,50 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             this.LocTypeChangedCommand = new DelegateCommand<LocationType>(async (param) =>
             {
+                try
+                {
+                    this.IsBusy = true;
+                    if (this.Model.DestinationTypes != null)
+                    {
+                        this.Model.DestinationTypes.Clear();
+                    }
+                    if (param.LocType == "Driver")
+                    {
+                          this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
+                    }
+                    if (param.LocType == "Customer")
+                    {
+                          this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
+                    }
 
-                if (param.LocType == "Driver")
-                {
-                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetDriversFromSvcAsync();
+                    if (param.LocType == "Vendor")
+                    {
+                           this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
+                    }
+                    this.IsAddFlyoutOn = Visibility.Collapsed;
+                    if (param.LocType == "Other")
+                    {
+                        this.IsAddFlyoutOn = Visibility.Visible;
+                    }
+                
+                    this.IsBusy = false;
                 }
-                if (param.LocType == "Customer")
+                catch (Exception ex)
                 {
-                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetCustomersFromSvcAsync();
-                }
-
-                if (param.LocType == "Vendor")
-                {
-                    this.Model.DestinationTypes = await SSProxyHelper.Instance.GetVendorsFromSvcAsync();
-                }
-                if (param.LocType == "Other")
-                {
-                    this.IsAddFlyoutOn = Visibility.Visible;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
 
             });
 
             this.DestiTypeChangedCommand = new DelegateCommand<DestinationType>(async (param) =>
             {
+                this.IsBusy = true;
                 if (param != null)
                 {
                     DestinationType destinationType = param as DestinationType;
                     this.Model.Address = destinationType.Address;
                 }
+                this.IsBusy = false;
             });
 
 
@@ -185,7 +202,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
                     this.CustomerDetails.CustomerName = this._task.CustomerName;
                     this.CustomerDetails.ContactName = this._task.CustomerName;
-                    this.CustomerDetails.EmailId = "DummyData@y.com";
+                    this.CustomerDetails.EmailId = this._task.CusEmailId;
                     this.CustomerDetails.CaseType = this._task.CaseType;
 
                     var startTime = new DateTime(this._task.ConfirmedTime.Year, this._task.ConfirmedTime.Month, this._task.ConfirmedTime.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,

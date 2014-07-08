@@ -305,11 +305,11 @@
                                            Width="250"
                                            HorizontalAlignment="Left">
                                     <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
                                             <Core:InvokeCommandAction Command="{Binding LocTypeChangedCommand}"
                                                                       CommandParameter="{Binding Model.SelectedLocationType}" />
                                         </Core:EventTriggerBehavior>
-                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                     </Interactivity:Interaction.Behaviors>
 
                                 </ComboBox>
@@ -322,9 +322,9 @@
                                            VerticalAlignment="Center" />
 
                                 <ComboBox  Grid.Row="4"
-                                           ItemsSource="{Binding Model.DestinationTypes}"
+                                           ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                            DisplayMemberPath="ContactName"
-                                           SelectedValue="RecID"
+                                           SelectedValue="Id"
                                            Visibility="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToVisibilityConverter}}"
                                            SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                                            x:Name="ddDestinationTypes"
@@ -332,13 +332,9 @@
                                            Margin="0 20"
                                            Width="250"
                                            HorizontalAlignment="Left">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding DestiTypeChangedCommand}"
-                                                                      CommandParameter="{Binding Model.SelectedDestinationType}" />
-                                        </Core:EventTriggerBehavior>
+                                    <!--<Interactivity:Interaction.Behaviors>
                                         <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedDestinationType]}" />
-                                    </Interactivity:Interaction.Behaviors>
+                                    </Interactivity:Interaction.Behaviors>-->
                                 </ComboBox>
 
                                 <TextBlock Text="Address"
@@ -360,16 +356,14 @@
                                              TextWrapping="Wrap"
                                              IsReadOnly="{Binding ElementName=editableAddress,Path=IsChecked,Converter={StaticResource InvertBooleanConverter}}"
                                              VerticalAlignment="Top"
-                                             Text="{Binding Model.Address,Mode=TwoWay}"
+                                             
                                              Margin="5 10"
                                              Grid.Row="5"
                                              Grid.Column="5"
                                              IsSpellCheckEnabled="True"
                                              IsTextPredictionEnabled="True"
                                              AcceptsReturn="True">
-                                        <Interactivity:Interaction.Behaviors>
-                                            <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[Address]}" />
-                                        </Interactivity:Interaction.Behaviors>
+                                       
                                     </TextBox>
                                     <AppBarButton  VerticalAlignment="Top"
                                                    Icon="Add"
@@ -383,6 +377,7 @@
                                     <AppBarToggleButton  x:Name="editableAddress"
                                                          VerticalAlignment="Top"
                                                          Icon="Edit"
+                                                         Visibility="{Binding IsAddFlyoutOn}"
                                                          RequestedTheme="Light"
                                                          IsCompact="True" />
                                 </StackPanel>
