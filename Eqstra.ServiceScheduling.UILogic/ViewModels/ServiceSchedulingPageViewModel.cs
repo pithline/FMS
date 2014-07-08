@@ -42,6 +42,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.CustomerDetails = new CustomerDetails();
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             this.Model = new ServiceSchedulingDetail();
+            this.ErrorMessage = new Helpers.ObservableDictionary();
             this.GoToSupplierSelectionCommand = new DelegateCommand(() =>
             {
                 if (this.Model.ValidateProperties())
@@ -52,6 +53,16 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     PersistentData.Instance.CustomerDetails = this.CustomerDetails;
                     this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
                     _navigationService.Navigate("SupplierSelection", string.Empty);
+                }
+                else
+                {
+                    foreach (var err in this.Model.Errors.Errors)
+                    {
+                        if (!this.ErrorMessage.ContainsKey(err.Key))
+                        {
+                            this.ErrorMessage.Add(err.Key, err.Value[0]);
+                        }
+                    }
                 }
             });
 
@@ -122,23 +133,23 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     }
                     if (param.LocType == "Driver")
                     {
-                          this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
                     }
                     if (param.LocType == "Customer")
                     {
-                          this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
                     }
 
                     if (param.LocType == "Vendor")
                     {
-                           this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
                     }
                     this.IsAddFlyoutOn = Visibility.Collapsed;
                     if (param.LocType == "Other")
                     {
                         this.IsAddFlyoutOn = Visibility.Visible;
                     }
-                
+
                     this.IsBusy = false;
                 }
                 catch (Exception ex)
@@ -275,8 +286,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-
-
-
+        private ObservableDictionary errors;
+        public ObservableDictionary ErrorMessage
+        {
+            get { return errors; }
+            set { SetProperty(ref errors, value); }
+        }
     }
 }

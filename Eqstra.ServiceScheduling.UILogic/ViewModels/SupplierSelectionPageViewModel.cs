@@ -103,6 +103,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                             }
                         }
                     }
+                  
                     this.Model.Suppliers = filteredResult.ToList<Supplier>();
                 }
             });

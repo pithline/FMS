@@ -106,6 +106,7 @@
     <Compile Include="AifServices\SSProxyHelper.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Helpers\ObservableDictionary.cs" />
     <Compile Include="Helpers\PersistentData.cs" />
     <Compile Include="Helpers\SSExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

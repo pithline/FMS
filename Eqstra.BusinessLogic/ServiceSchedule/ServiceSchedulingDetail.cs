@@ -22,7 +22,11 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         public new bool ValidateProperties()
         {
             bool isValid = base.ValidateProperties();
-            if (!this.IsLiftRequired && this.Errors.Errors.Count<=3)
+            List<string> hiddenFields = new List<string>();
+            hiddenFields.Add("SelectedLocationType");
+            hiddenFields.Add("SelectedDestinationType");
+            hiddenFields.Add("Address");
+            if (!this.IsLiftRequired && !this.Errors.Errors.Keys.Except(hiddenFields).Any())
             {
                 return true;
             }
@@ -108,6 +112,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 
         }
         private string address;
+        [Required(ErrorMessage = "Address required")]
         public string Address
         {
             get { return address; }
@@ -159,7 +164,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
 
         private DestinationType selectedDestinationType;
-           [Required(ErrorMessage = "Destination type required")]
+        [Required(ErrorMessage = "Destination type required")]
         public DestinationType SelectedDestinationType
         {
             get { return selectedDestinationType; }
