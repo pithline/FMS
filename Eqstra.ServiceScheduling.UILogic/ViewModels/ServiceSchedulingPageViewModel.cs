@@ -214,7 +214,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.CustomerName = this._task.CustomerName;
                     this.CustomerDetails.ContactName = this._task.CustomerName;
                     this.CustomerDetails.EmailId = this._task.CusEmailId;
-                    this.CustomerDetails.CaseType = this._task.CaseType;
+                    this.CustomerDetails.CategoryType = this._task.CaseCategory;
 
                     var startTime = new DateTime(this._task.ConfirmedTime.Year, this._task.ConfirmedTime.Month, this._task.ConfirmedTime.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
                                 this._task.ConfirmedTime.Second);

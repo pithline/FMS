@@ -46,8 +46,8 @@
                         <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
-                        <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding CaseCategory}" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="Case Category" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="{Binding CategoryType}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                 </Grid>
