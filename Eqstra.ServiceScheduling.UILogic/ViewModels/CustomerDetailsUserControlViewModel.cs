@@ -76,7 +76,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
                 geocodeRequest.Credentials = new GeocodeService.Credentials();
                 geocodeRequest.Credentials.ApplicationId = BingMapkey;
-            
+
                 geocodeRequest.Query = address;
 
                 GeocodeServiceClient geocodeService = new GeocodeServiceClient(Eqstra.ServiceScheduling.UILogic.GeocodeService.GeocodeServiceClient.EndpointConfiguration.BasicHttpBinding_IGeocodeService);

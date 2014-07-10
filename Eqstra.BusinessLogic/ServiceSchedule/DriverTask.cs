@@ -115,12 +115,20 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref allocatedTo, value); }
         }
 
-        private DateTime scheduleDate;
+        private DateTime scheduledDate;
 
-        public DateTime ScheduleDate
+        public DateTime ScheduledDate
         {
-            get { return scheduleDate; }
-            set { SetProperty(ref scheduleDate, value); }
+            get { return scheduledDate; }
+            set { SetProperty(ref scheduledDate, value); }
+        }
+
+        private DateTime scheduledTime;
+
+        public DateTime ScheduledTime
+        {
+            get { return scheduledTime; }
+            set { SetProperty(ref scheduledTime, value); }
         }
 
         private string customerId;

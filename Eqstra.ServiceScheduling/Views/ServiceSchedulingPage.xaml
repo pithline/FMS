@@ -23,6 +23,7 @@
         <x:String x:Key="AppName">My Application</x:String>
         <Converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <c:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
         <c:FirstErrorConverter x:Key="ErrorConverter" />
     </Page.Resources>
 
@@ -128,7 +129,7 @@
                                   HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="250" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="150" />
@@ -297,24 +298,23 @@
                                               Style="{StaticResource DamagedToggleSwitch}" />
 
                                 <TextBlock Text="Location Type"
-                                           
+                                           Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}"
                                            Grid.Row="3"
                                            Grid.Column="4"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
 
-                                <StackPanel Grid.Row="3" Grid.Column="5">
-                                    <ComboBox 
-                                               ItemsSource="{Binding Model.LocationTypes}"
-                                               DisplayMemberPath="LocationName"
-                                               SelectedValue="LocType"
-                                               SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
-                                               x:Name="ddLocationType"
-                                               SelectionChanged="ddLocationType_SelectionChanged"
-                                              
-                                               Margin="0 20"
-                                               Width="250"
-                                               HorizontalAlignment="Left">
+                                <StackPanel Grid.Row="3"
+                                            Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}"
+                                            Grid.Column="5">
+                                    <ComboBox ItemsSource="{Binding Model.LocationTypes}"
+                                              DisplayMemberPath="LocationName"
+                                              SelectedValue="LocType"
+                                              SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
+                                              x:Name="ddLocationType"
+                                              Margin="0 20"
+                                              Width="250"
+                                              HorizontalAlignment="Left">
                                         <Interactivity:Interaction.Behaviors>
                                             <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                             <Core:EventTriggerBehavior EventName="SelectionChanged">
@@ -324,31 +324,37 @@
                                         </Interactivity:Interaction.Behaviors>
 
                                     </ComboBox>
-                                    <TextBlock 
-                                               Foreground="Red"
+                                    <TextBlock Foreground="Red"
                                                Text="{Binding Model.Errors[SelectedLocationType] , Converter={StaticResource ErrorConverter}}" />
                                 </StackPanel>
 
                                 <TextBlock Text="Select Destination"
-                                        
+                                           Visibility="{Binding IsAlternative}"
                                            Grid.Row="4"
                                            Grid.Column="4"
+                                           Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter},Mode=TwoWay}"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
 
-                                <StackPanel Grid.Row="4" Grid.Column="5">
-                                    <ComboBox  
-                                               ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                               DisplayMemberPath="ContactName"
-                                               SelectedValue="Id"
-                                               SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
-                                               x:Name="ddDestinationTypes"
-                                             
-                                               Margin="0 20"
-                                               Width="250"
-                                               HorizontalAlignment="Left">
+                                <StackPanel Grid.Row="4"
+                                            Visibility="{Binding IsAlternative}"
+                                            Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter},Mode=TwoWay}"
+                                            Grid.Column="5">
+                                    <ComboBox
+                                            ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              DisplayMemberPath="ContactName"
+                                              SelectedValue="Id"
+                                              SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
+                                              x:Name="ddDestinationTypes"
+                                              Margin="0 20"
+                                              Width="250"
+                                              HorizontalAlignment="Left">
                                         <Interactivity:Interaction.Behaviors>
                                             <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedDestinationType]}" />
+                                            <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                                <Core:InvokeCommandAction Command="{Binding DestiTypeChangedCommand}"
+                                                                          CommandParameter="{Binding Model.SelectedDestinationType}" />
+                                            </Core:EventTriggerBehavior>
                                         </Interactivity:Interaction.Behaviors>
                                     </ComboBox>
 
@@ -359,24 +365,24 @@
                                 <TextBlock Text="Address"
                                            Grid.Row="5"
                                            Grid.Column="4"
-                                           
+                                           Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter},Mode=TwoWay}"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center">
 
                                 </TextBlock>
 
-
-
                                 <StackPanel  Grid.Row="5"
                                              Grid.Column="5"
+                                             Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}"
                                              Grid.RowSpan="4">
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal"
+                                                Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}">
                                         <TextBox Width="200"
                                                  Height="80"
                                                  TextWrapping="Wrap"
                                                  IsReadOnly="{Binding ElementName=editableAddress,Path=IsChecked,Converter={StaticResource InvertBooleanConverter}}"
                                                  VerticalAlignment="Top"
-                                                 Text="{Binding ElementName=ddDestinationTypes, Path=SelectedItem.Address,Mode=TwoWay}"
+                                                 Text="{Binding Model.Address,Mode=TwoWay}"
                                                  Margin="5 10"
                                                  Grid.Row="8"
                                                  Grid.Column="5"
@@ -400,12 +406,11 @@
                                         <AppBarToggleButton  x:Name="editableAddress"
                                                              VerticalAlignment="Top"
                                                              Icon="Edit"
-                                                             Visibility="{Binding IsAddFlyoutOn}"
                                                              RequestedTheme="Light"
                                                              IsCompact="True" />
                                     </StackPanel>
-                                    <TextBlock 
-                                        Margin="5 0 0 0"
+                                    <TextBlock Margin="5 0 0 0"
+                                               Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}"
                                                Text="{Binding Model.Errors[Address], Converter={StaticResource ErrorConverter}}"
                                                Foreground="Red" />
                                 </StackPanel>

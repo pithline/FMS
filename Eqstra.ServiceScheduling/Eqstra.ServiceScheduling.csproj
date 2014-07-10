@@ -17,7 +17,7 @@
     <PackageCertificateKeyFile>Eqstra.ServiceScheduling_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -113,6 +113,7 @@
     <Compile Include="Common\DataGridDoubleTappedCommand.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Converters\FirstErrorConverter.cs" />
+    <Compile Include="Converters\BooleanToOpacityConverter.cs" />
     <Compile Include="Views\AddAddressFlyoutPage.xaml.cs">
       <DependentUpon>AddAddressFlyoutPage.xaml</DependentUpon>
       <SubType>Code</SubType>

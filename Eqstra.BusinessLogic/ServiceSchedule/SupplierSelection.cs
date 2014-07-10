@@ -17,12 +17,12 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         {
             this.Suppliers = new List<Supplier>();
             this.Countries = new List<Country>();
-            this.Provinces = new List<province>();
+            this.Provinces = new List<Province>();
             this.Cities = new List<City>();
             this.Suburbs = new List<Suburb>();
             this.SelectedCity = new City();
             this.SelectedCountry = new Country();
-            this.Selectedprovince = new province();
+            this.Selectedprovince = new Province();
             this.SelectedSuburb = new Suburb();
         }
 
@@ -33,9 +33,9 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref countries, value); }
         }
 
-        private List<province> provinces;
+        private List<Province> provinces;
 
-        public List<province> Provinces
+        public List<Province> Provinces
         {
             get { return provinces; }
             set { SetProperty(ref provinces, value); }
@@ -88,9 +88,9 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref selectedCountry, value); }
         }
 
-        private province selectedprovince;
+        private Province selectedprovince;
 
-        public province Selectedprovince
+        public Province Selectedprovince
         {
             get { return selectedprovince; }
             set { SetProperty(ref selectedprovince, value); }

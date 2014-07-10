@@ -30,7 +30,7 @@ namespace Eqstra.BusinessLogic
             set { caseNumber = value; }
 
         }
-
+        
         private string customerName;
         [RestorableState]
         public string CustomerName

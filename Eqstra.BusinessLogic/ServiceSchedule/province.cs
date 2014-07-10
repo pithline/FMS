@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.ServiceSchedule
 {
-    public class province : ValidatableBindableBase
+    public class Province : ValidatableBindableBase
     {
         private string name;
 

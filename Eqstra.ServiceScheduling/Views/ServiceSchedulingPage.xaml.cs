@@ -37,15 +37,6 @@ namespace Eqstra.ServiceScheduling.Views
             this.InitializeComponent();
             serviceSchedulingDetail = ((ServiceSchedulingDetail)((ServiceSchedulingPageViewModel)this.DataContext).Model);
         }
-      
-        private void ddLocationType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          LocationType selectedLocationType= this.serviceSchedulingDetail.SelectedLocationType;
-           //if(selectedLocationType.LocationTyp="")
-           //{
-           //    SSProxyHelper.Instance.GetCustomersFromSvcAsync();
-           //}
-        }
 
     }
 }

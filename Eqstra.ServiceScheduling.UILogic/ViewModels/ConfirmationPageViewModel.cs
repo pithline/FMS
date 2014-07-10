@@ -33,6 +33,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (this.DriverTask != null)
                 {
                     this.DriverTask.Status = DriverTaskStatus.AwaitServiceConfirmation;
+                    await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                     await SSProxyHelper.Instance.InsertConfirmationServiceSchedulingToSvcAsync(this.ServiceSchedulingDetail, this.SupplierSelection, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID, this.DriverTask.CollectionRecID);
                 }
                 navigationService.Navigate("Main", string.Empty);
@@ -54,6 +55,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         this.ConfirmationDatesCommand.RaiseCanExecuteChanged();
                         this.SubmitCommand.RaiseCanExecuteChanged();
                     }
+                    await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                 }
             }, () => { return (this.ServiceDateOption1 != this.ServiceSchedulingDetail.ServiceDateOption1) || (this.ServiceDateOption2 != this.ServiceSchedulingDetail.ServiceDateOption2); });
 
@@ -98,9 +100,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-
         private SupplierSelection supplierSelection;
-
         public SupplierSelection SupplierSelection
         {
             get { return supplierSelection; }
@@ -108,7 +108,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
 
         private ServiceSchedulingDetail serviceSchedulingDetail;
-
         public ServiceSchedulingDetail ServiceSchedulingDetail
         {
             get { return serviceSchedulingDetail; }
@@ -116,7 +115,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
 
         private DateTime serviceDateOption1;
-
         public DateTime ServiceDateOption1
         {
             get { return serviceDateOption1; }
@@ -131,7 +129,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
 
         private DateTime serviceDateOption2;
-
         public DateTime ServiceDateOption2
         {
             get { return serviceDateOption2; }
@@ -144,7 +141,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
             }
         }
-
         public DelegateCommand ConfirmationDatesCommand { get; set; }
     }
 }

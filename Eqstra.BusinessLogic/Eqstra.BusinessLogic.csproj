@@ -165,7 +165,7 @@
     <Compile Include="ServiceSchedule\Address.cs" />
     <Compile Include="ServiceSchedule\ConfirmationServiceScheduling.cs" />
     <Compile Include="ServiceSchedule\LocationType.cs" />
-    <Compile Include="ServiceSchedule\province.cs" />
+    <Compile Include="ServiceSchedule\Province.cs" />
     <Compile Include="ServiceSchedule\ServiceSchedulingDetail.cs" />
     <Compile Include="ServiceSchedule\Suburb.cs" />
     <Compile Include="ServiceSchedule\Supplier.cs" />

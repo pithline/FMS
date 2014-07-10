@@ -35,7 +35,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
 
         private string networkIcon;
-
         public string NetworkIcon
         {
             get { return networkIcon; }
@@ -44,7 +43,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public ICommand LogoutCommand { get; private set; }
 
         private UserInfo userInfo;
-
         public UserInfo UserInfo
         {
             get { return userInfo; }

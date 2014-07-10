@@ -12,6 +12,7 @@ using System.Linq;
 using Windows.UI.Core;
 using System.Diagnostics;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
+using System.Collections.ObjectModel;
 namespace Eqstra.ServiceScheduling.UILogic.AifServices
 {
     public class SSProxyHelper
@@ -125,7 +126,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Make = mzkTask.parmMake,
                             Model = mzkTask.parmModel,
                             Description = mzkTask.parmVehicleDescription,
-                            CusEmailId = mzkTask.parmEmail
+                            CusEmailId = mzkTask.parmEmail,
+                            ScheduledDate = DateTime.Today, //Need to add in Service
+                            ScheduledTime = DateTime.Today // Need to add in Service
                         });
 
                     });
@@ -153,19 +156,24 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getCountryRegionListAsync(_userInfo.CompanyId);
+                var vendor_result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
+
                 List<Country> countryList = new List<Country>();
                 if (result.response != null)
                 {
 
                     result.response.OrderBy(o => o.parmCountryRegionName).AsParallel().ForAll(mzk =>
                     {
-                        countryList.Add(
-                            new Country
-                            {
-                                Name = mzk.parmCountryRegionName,
-                                Id = mzk.parmCountryRegionId
-                            }
-                            );
+                        if (vendor_result.response.Any(a=>a.parmCountry==mzk.parmCountryRegionId))
+                        {
+                            countryList.Add(
+                                               new Country
+                                               {
+                                                   Name = mzk.parmCountryRegionName,
+                                                   Id = mzk.parmCountryRegionId
+                                               }
+                                               );
+                        }
                     });
                 }
 
@@ -180,7 +188,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         }
 
 
-        async public System.Threading.Tasks.Task<List<province>> GetProvinceListFromSvcAsync(string countryId)
+        async public System.Threading.Tasks.Task<List<Province>> GetProvinceListFromSvcAsync(string countryId)
         {
             try
             {
@@ -193,13 +201,13 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getProvinceListAsync(countryId, _userInfo.CompanyId);
-                List<province> provinceList = new List<province>();
+                List<Province> provinceList = new List<Province>();
                 if (result.response != null)
                 {
 
                     result.response.AsParallel().ForAll(mzk =>
                     {
-                        provinceList.Add(new province { Name = mzk.parmStateName, Id = mzk.parmStateId });
+                        provinceList.Add(new Province { Name = mzk.parmStateName, Id = mzk.parmStateId });
                     });
                 }
                 return provinceList;
@@ -572,6 +580,44 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 }
             }
 
+
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
+        }
+
+        async public System.Threading.Tasks.Task UpdateStatusListToSvcAsync(DriverTask task)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+
+                ObservableCollection<MzkServiceSchdTasksContract> mzkTasks = new ObservableCollection<MzkServiceSchdTasksContract>();
+
+                Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
+
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitServiceDetail);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceConfirmation, EEPActionStep.AwaitSupplierSelection);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
+                mzkTasks.Add(new MzkServiceSchdTasksContract
+                {
+                    parmCaseID = task.CaseNumber,
+                    parmCaseCategory = task.CaseCategory,
+                    parmCaseServiceRecID = task.ServiceRecID,
+                    parmServiceRecID = task.ServiceRecID,
+                    parmStatusDueDate = task.StatusDueDate,
+                    parmEEPActionStep = actionStepMapping[task.Status]
+                });
+                var result = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
+            }
 
             catch (Exception ex)
             {

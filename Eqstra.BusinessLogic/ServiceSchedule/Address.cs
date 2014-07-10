@@ -11,6 +11,13 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 {
     public class Address : ValidatableBindableBase
     {
+        public Address()
+        {
+            this.Countries = new List<Country>();
+            this.Provinces = new List<Province>();
+            this.Cities = new List<City>();
+            this.Suburbs = new List<Suburb>();
+        }
 
         private string street;
         public string Street
@@ -24,34 +31,76 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return postcode; }
             set { SetProperty(ref postcode, value); }
         }
-        private string country;
-        public string Country
+
+        private List<Country> countries;
+        public List<Country> Countries
         {
-            get { return country; }
-            set { SetProperty(ref country, value); }
+            get { return countries; }
+            set { SetProperty(ref countries, value); }
         }
 
-        private string province;
-        public string Province
+        private List<Province> provinces;
+
+        public List<Province> Provinces
         {
-            get { return province; }
-            set { SetProperty(ref province, value); }
+            get { return provinces; }
+            set { SetProperty(ref provinces, value); }
         }
-        private string city;
-        public string City
+        private List<City> cities;
+
+        public List<City> Cities
         {
-            get { return city; }
-            set { SetProperty(ref city, value); }
+            get { return cities; }
+            set { SetProperty(ref cities, value); }
         }
 
-        private string suburb;
-        public string Suburb
+        private List<Suburb> suburbs;
+
+        public List<Suburb> Suburbs
         {
-            get { return suburb; }
-            set { SetProperty(ref suburb, value); }
+            get { return suburbs; }
+            set { SetProperty(ref suburbs, value); }
+        }
+
+        private List<string> region;
+
+        public List<string> Region
+        {
+            get { return region; }
+            set { SetProperty(ref region, value); }
+        }
+
+
+        private Country selectedCountry;
+
+        public Country SelectedCountry
+        {
+            get { return selectedCountry; }
+            set { SetProperty(ref selectedCountry, value); }
+        }
+
+        private Province selectedprovince;
+
+        public Province Selectedprovince
+        {
+            get { return selectedprovince; }
+            set { SetProperty(ref selectedprovince, value); }
+        }
+
+        private City selectedCity;
+
+        public City SelectedCity
+        {
+            get { return selectedCity; }
+            set { SetProperty(ref selectedCity, value); }
+        }
+        private Suburb selectedSuburb;
+        public Suburb SelectedSuburb
+        {
+            get { return selectedSuburb; }
+            set { SetProperty(ref selectedSuburb, value); }
         }
     }
-
     public class AddressEvent : PubSubEvent<Address>
     {
     }
