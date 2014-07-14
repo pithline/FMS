@@ -35,8 +35,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (this.Model.ValidateProperties())
                 {
-                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.Model), "SupplierSelection");
-                    _navigationService.Navigate("Confirmation", string.Empty);
+                    bool isinserted = await SSProxyHelper.Instance.InsertSelectedSupplierToSvcAsync(this.Model, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+                    if (isinserted)
+                    {
+                        _navigationService.Navigate("Confirmation", string.Empty);
+                    }
                 }
             }, () =>
             {
@@ -44,7 +47,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             });
             this.CountryChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if ((param is Country) && (param != null))
+                if ((param != null) && (param is Country))
                 {
                     Country country = param as Country;
                     if (!String.IsNullOrEmpty(country.Id))
@@ -60,14 +63,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             this.ProvinceChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if ((param is Province) && (param != null))
+                if ((param != null) && (param is Province))
                 {
                     Province province = param as Province;
                     if (!String.IsNullOrEmpty(province.Id))
                     {
                         this.ProgressbarMessage = "Loading Cities ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
-                        this.Model.Cities = await SSProxyHelper.Instance.getCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
+                        this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.Selectedprovince = province;
                     }
@@ -76,14 +79,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             this.CityChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if ((param is City) && (param != null))
+                if ((param != null) && (param is City))
                 {
                     City city = param as City;
                     if (!String.IsNullOrEmpty(city.Id))
                     {
                         this.ProgressbarMessage = "Loading Suburbs ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
-                        this.Model.Suburbs = await SSProxyHelper.Instance.getSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, city.Id);
+                        this.Model.Suburbs = await SSProxyHelper.Instance.GetSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, city.Id);
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.SelectedCity = city;
                     }
@@ -91,12 +94,31 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             });
 
-            //this.SuburbChangedCommand = new DelegateCommand<Suburb>(async (param) =>
-            //{
-            //    this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(param.Id);
+            this.SuburbChangedCommand = new DelegateCommand<object>(async (param) =>
+            {
+                if ((param != null) && (param is Suburb))
+                {
+                    if (this.Model.Selectedprovince!=null)
+                    {
+                        this.ProgressbarMessage = "Loading Regions ....  ";
+                        this.ProgressbarVisiblity = Visibility.Visible;
+                        this.Model.Regions = await SSProxyHelper.Instance.GetRegionListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.Selectedprovince.Id);
+                        this.ProgressbarVisiblity = Visibility.Collapsed;
+                        this.Model.SelectedSuburb = (Suburb)param;
+                    }
+                }
 
+            });
 
-            //});
+            this.RegionChangedCommand = new DelegateCommand<object>(async (param) =>
+            {
+                if ((param != null) && (param is Region))
+                {
+                    this.Model.SelectedRegion = (Region)param;
+                }
+
+            });
+
             this.SubmitQueryCommand = new DelegateCommand<string>(async (param) =>
             {
 
@@ -115,19 +137,24 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     var result = await Util.ReadFromDiskAsync<Supplier>("SuppliersGridItemsSourceFile.json");
                     if (result != null)
                     {
-                        IEnumerable<Supplier> filteredResult = null;
+                        IEnumerable<Supplier> filteredResult = new List<Supplier>();
                         if ((this.Model != null) && !String.IsNullOrEmpty(this.Model.SelectedCountry.Id))
                         {
                             filteredResult = result.Where(w => w.Country == this.Model.SelectedCountry.Id);
-                            if ((this.Model != null) && !String.IsNullOrEmpty(this.Model.Selectedprovince.Id))
+                            if (!String.IsNullOrEmpty(this.Model.Selectedprovince.Id))
                             {
                                 filteredResult = filteredResult.Where(w => w.Province == this.Model.Selectedprovince.Id);
-                                if ((this.Model != null) && !String.IsNullOrEmpty(this.Model.SelectedCity.Id))
+                                if (!String.IsNullOrEmpty(this.Model.SelectedCity.Id))
                                 {
                                     filteredResult = filteredResult.Where(w => w.City == this.Model.SelectedCity.Id);
-                                    if ((this.Model != null) && !String.IsNullOrEmpty(this.Model.SelectedSuburb.Id))
+                                    if (!String.IsNullOrEmpty(this.Model.SelectedSuburb.Id))
                                     {
                                         filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedSuburb.Id);
+
+                                        if (!String.IsNullOrEmpty(this.Model.SelectedRegion.Id))
+                                        {
+                                            filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedRegion.Id);
+                                        }
                                     }
                                 }
                             }
@@ -183,6 +210,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public DelegateCommand<object> ProvinceChangedCommand { get; set; }
         public DelegateCommand<object> CityChangedCommand { get; set; }
         public DelegateCommand<object> SuburbChangedCommand { get; set; }
+
+        public DelegateCommand<object> RegionChangedCommand { get; set; }
         public DelegateCommand<string> SubmitQueryCommand { get; set; }
         public DelegateCommand SupplierFilterCommand { get; set; }
 

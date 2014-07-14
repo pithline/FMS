@@ -148,6 +148,16 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             }
         }
 
+        private DateTime supplierDateTime;
+        public DateTime SupplierDateTime
+        {
+            get { return supplierDateTime; }
+            set
+            {
+                SetProperty(ref supplierDateTime, value);
+            }
+        }
+
         private bool isLiftRequired;
         public bool IsLiftRequired
         {

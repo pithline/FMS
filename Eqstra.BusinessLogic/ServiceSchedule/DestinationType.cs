@@ -15,8 +15,8 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return contactName; }
             set { SetProperty(ref contactName, value); }
         }
-        private string id;
-        public string Id
+        private long id;
+        public long Id
         {
             get { return id; }
             set { SetProperty(ref id, value); }

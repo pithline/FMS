@@ -22,7 +22,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Eqstra.ServiceScheduling.UILogic.Helpers;
+
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
     public class ServiceSchedulingPageViewModel : BaseViewModel
@@ -37,27 +37,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             _navigationService = navigationService;
             _settingsFlyout = settingsFlyout;
             _eventAggregator = eventAggregator;
+            this.Address = new Address();
             this.IsAddFlyoutOn = Visibility.Collapsed;
             this.Model = new ServiceSchedulingDetail();
-            this.ErrorMessage = new Helpers.ObservableDictionary();
-            this.GoToSupplierSelectionCommand = new DelegateCommand(() =>
+            this.GoToSupplierSelectionCommand = new DelegateCommand(async () =>
             {
                 if (this.Model.ValidateProperties())
                 {
-                    Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.Model), "ServiceSchedulingDetail");
-
-                    this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
-                    SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-                    _navigationService.Navigate("SupplierSelection", string.Empty);
-                }
-                else
-                {
-                    foreach (var err in this.Model.Errors.Errors)
+                    bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+                    if (isInserted)
                     {
-                        if (!this.ErrorMessage.ContainsKey(err.Key))
-                        {
-                            this.ErrorMessage.Add(err.Key, err.Value[0]);
-                        }
+                        this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
+                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+
+                        _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
                 }
             });
@@ -82,31 +75,32 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (address != null)
                 {
+                    this.Address = address;
                     StringBuilder sb = new StringBuilder();
                     if (!String.IsNullOrEmpty(address.Street))
                     {
                         sb.Append(address.Street).Append(",").Append(Environment.NewLine);
                     }
-                    if ((address.SelectedSuburb!=null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
+                    if ((address.SelectedSuburb != null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
                     {
                         sb.Append(address.SelectedSuburb.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if ((address.SelectedCity != null) &&  !String.IsNullOrEmpty(address.SelectedCity.Name))
+                    if ((address.SelectedCity != null) && !String.IsNullOrEmpty(address.SelectedCity.Name))
                     {
                         sb.Append(address.SelectedCity.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if ((address.Selectedprovince != null) &&  !String.IsNullOrEmpty(address.Selectedprovince.Name))
+                    if ((address.Selectedprovince != null) && !String.IsNullOrEmpty(address.Selectedprovince.Name))
                     {
                         sb.Append(address.Selectedprovince.Name).Append(",").Append(Environment.NewLine);
                     }
 
-                    if ((address.SelectedCountry != null) &&  !String.IsNullOrEmpty(address.SelectedCountry.Name))
+                    if ((address.SelectedCountry != null) && !String.IsNullOrEmpty(address.SelectedCountry.Name))
                     {
                         sb.Append(address.SelectedCountry.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if (!String.IsNullOrEmpty(address.Postcode))
+                    if (!String.IsNullOrEmpty(address.SelectedZip))
                     {
-                        sb.Append(address.Postcode);
+                        sb.Append(address.SelectedZip);
                     }
                     this.Model.Address = sb.ToString();
                 }
@@ -127,23 +121,23 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         this.Model.DestinationTypes.Clear();
                     }
-                    if (param.LocType == "Driver")
+                    if (param.LocType == LocationTypeConstants.Driver)
                     {
 
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
                     }
-                    if (param.LocType == "Customer")
+                    if (param.LocType == LocationTypeConstants.Customer)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
                     }
 
-                    if (param.LocType == "Vendor")
+                    if (param.LocType == LocationTypeConstants.Vendor)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
                     }
                     this.IsAddFlyoutOn = Visibility.Collapsed;
                     this.IsAlternative = Visibility.Visible;
-                    if (param.LocType == "Other")
+                    if (param.LocType == LocationTypeConstants.Other)
                     {
                         this.Model.DestinationTypes = new ObservableCollection<DestinationType>();
                         this.Model.SelectedDestinationType = new DestinationType();
@@ -165,6 +159,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.IsBusy = true;
                 if (param != null)
                 {
+                    this.Address.EntityRecId = param.Id;
                     DestinationType destinationType = param as DestinationType;
                     this.Model.Address = destinationType.Address;
                 }
@@ -242,17 +237,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-        private ObservableDictionary errors;
-        public ObservableDictionary ErrorMessage
-        {
-            get { return errors; }
-            set { SetProperty(ref errors, value); }
-        }
+
         private Visibility isAlternative;
         public Visibility IsAlternative
         {
             get { return isAlternative; }
             set { SetProperty(ref isAlternative, value); }
         }
+
+        private Address address;
+        public Address Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
+
     }
 }

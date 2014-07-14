@@ -128,7 +128,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Description = mzkTask.parmVehicleDescription,
                             CusEmailId = mzkTask.parmEmail,
                             ScheduledDate = DateTime.Today, //Need to add in Service
-                            ScheduledTime = DateTime.Today // Need to add in Service
+                            ScheduledTime = DateTime.Today, // Need to add in Service
+                            ServiceRecID=mzkTask.parmServiceRecID
                         });
 
                     });
@@ -164,7 +165,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                     result.response.OrderBy(o => o.parmCountryRegionName).AsParallel().ForAll(mzk =>
                     {
-                        if (vendor_result.response.Any(a=>a.parmCountry==mzk.parmCountryRegionId))
+                        if (vendor_result.response.Any(a => a.parmCountry == mzk.parmCountryRegionId))
                         {
                             countryList.Add(
                                                new Country
@@ -220,7 +221,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         }
 
 
-        async public System.Threading.Tasks.Task<List<City>> getCityListFromSvcAsync(string countryId, string stateId)
+        async public System.Threading.Tasks.Task<List<City>> GetCityListFromSvcAsync(string countryId, string stateId)
         {
             try
             {
@@ -248,7 +249,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         }
 
 
-        async public System.Threading.Tasks.Task<List<Suburb>> getSuburbListFromSvcAsync(string countryId, string stateId)
+        async public System.Threading.Tasks.Task<List<Suburb>> GetSuburbListFromSvcAsync(string countryId, string stateId)
         {
             try
             {
@@ -276,6 +277,57 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         }
 
 
+        async public System.Threading.Tasks.Task<List<Region>> GetRegionListFromSvcAsync(string countryId, string stateId)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return null;
+
+                var result = await client.getRegionsAsync(countryId, stateId, _userInfo.CompanyId);
+                List<Region> regionList = new List<Region>();
+                if (result.response != null)
+                {
+                    result.response.AsParallel().ForAll(mzk =>
+                    {
+                        regionList.Add(new Region { Name = mzk.parmRegionName, Id = mzk.parmRegion });
+                    });
+                }
+                return regionList;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return null;
+            }
+        }
+
+        async public System.Threading.Tasks.Task<List<string>> GetZipcodeListFromSvcAsync(string countryId, string stateId)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return null;
+
+                var result = await client.getZipcodeListAsync(countryId, stateId, _userInfo.CompanyId);
+                List<string> zipcodeList = new List<string>();
+                if (result.response != null)
+                {
+                    result.response.AsParallel().ForAll(mzk =>
+                    {
+                        zipcodeList.Add(mzk.parmZipCode);
+                    });
+                }
+                return zipcodeList;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return null;
+            }
+        }
 
         async public System.Threading.Tasks.Task<ServiceSchedulingDetail> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId)
         {
@@ -309,7 +361,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
-                            ContactPersonPhone = mzk.parmContactPersonPhone
+                            ContactPersonPhone = mzk.parmContactPersonPhone,
+                            SupplierDateTime=DateTime.Now// need to add in service
                         });
                     });
 
@@ -391,7 +444,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                        {
                            ContactName = mzk.parmName,
-                           Id = mzk.parmAccountNum,
+                           Id =long.Parse(mzk.parmAccountNum),
                            RecID = mzk.parmRecID,
                            Address = mzk.parmAddress
                        });
@@ -429,7 +482,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id = mzk.parmAccountNum,
+                            Id = long.Parse(mzk.parmAccountNum),
                             Address = mzk.parmAddress
                         });
                     });
@@ -465,7 +518,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id = mzk.parmDriverId,
+                            Id =long.Parse(mzk.parmDriverId),
                             RecID = mzk.parmRecID,
                             Address = mzk.parmAddress
                         });
@@ -494,6 +547,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 }
                 var result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
                 List<Supplier> suppliers = new List<Supplier>();
+               
                 if (result.response != null)
                 {
                     result.response.AsParallel().ForAll(mzk =>
@@ -510,6 +564,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         });
                     });
                 }
+                
                 return suppliers;
             }
             catch (Exception ex)
@@ -546,23 +601,109 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
 
         }
-        async public System.Threading.Tasks.Task InsertConfirmationServiceSchedulingToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId, long _entityRecId)
+        async public System.Threading.Tasks.Task<bool> InsertServiceDetailsAsyncToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, Address address, string caseNumber, long caseServiceRecId, long _entityRecId)
         {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return;
+                    return false;
 
                 if (_userInfo == null)
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, new MzkServiceDetailsContract
+
+                 var mzkAddressContract= new MzkAddressContract {
+                    parmCity = address.SelectedCity != null ? address.SelectedCity.Id : string.Empty,
+                    parmCountryRegionId = address.SelectedCountry != null ? address.SelectedCountry.Id : string.Empty,
+                    parmProvince = address.Selectedprovince != null ? address.Selectedprovince.Id : string.Empty,
+                    parmStreet=address.Street,
+                    parmSubUrb = address.SelectedSuburb != null ? address.SelectedSuburb.Id : string.Empty,
+                    parmZipCode=address.SelectedZip
+                
+                };
+             var mzkServiceDetailsContract=  new MzkServiceDetailsContract
                 {
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
-                    parmContactPersonName = serviceSchedulingDetail.ContactPersonName,
+                    parmEventDesc = serviceSchedulingDetail.EventDesc,
+                    parmLocationType = serviceSchedulingDetail.SelectedLocationType!=null ? serviceSchedulingDetail.SelectedLocationType.LocType: string.Empty,
+                    parmODOReading = serviceSchedulingDetail.ODOReading,
+                    parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
+                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
+                    parmServiceType = serviceSchedulingDetail.SelectedServiceType
+                };
+
+
+             var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
+                   , mzkAddressContract, _userInfo.CompanyId);
+
+                if (result.response)
+                {
+                    Util.ShowToast("Thank you very much. Your Service Scheduling detail has been sent.");
+                }
+                return result.response;
+            }
+
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return false;
+            }
+        }
+
+        async public System.Threading.Tasks.Task<bool> InsertSelectedSupplierToSvcAsync(SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return false;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
+                {
+                    parmContactPersonName = supplierSelection.SelectedSupplier.SupplierContactName,
+                    parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
+                    parmContactPersonPhone = supplierSelection.SelectedSupplier.SupplierContactNumber,
+                }, new MzkAddressContract(), _userInfo.CompanyId);
+
+                if (result.response)
+                {
+                    Util.ShowToast("Thank you very much. Your supplier has been sent.");
+                }
+                return result.response;
+            }
+
+
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return false;
+            }
+        }
+
+        async public System.Threading.Tasks.Task<bool> InsertConfirmedServiceDetailToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, string caseNumber, long caseServiceRecId)
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return false;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId,default(long) ,new MzkServiceDetailsContract
+                {
+                    parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
+                    parmAddress = serviceSchedulingDetail.Address,
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
                     parmLocationType = serviceSchedulingDetail.SelectedLocationType.LocType,
                     parmODOReading = serviceSchedulingDetail.ODOReading,
@@ -570,30 +711,34 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                     parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                     parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                    parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
-                    parmContactPersonPhone = supplierSelection.SelectedSupplier.SupplierContactNumber,
-                }, _userInfo.CompanyId);
+                    parmSupplierName = serviceSchedulingDetail.SupplierName,
+                    parmContactPersonName = serviceSchedulingDetail.ContactPersonName,
+                    parmContactPersonPhone = serviceSchedulingDetail.ContactPersonPhone,
+                    
+                },new MzkAddressContract(),_userInfo.CompanyId);
 
                 if (result.response)
                 {
                     Util.ShowToast("Thank you very much. Your request has been sent to your selected  supplier, you will receive confirmation via the Car Manager application shortly.");
+                  
                 }
+                return result.response;
             }
 
 
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+                return false;
             }
         }
-
-        async public System.Threading.Tasks.Task UpdateStatusListToSvcAsync(DriverTask task)
+        async public System.Threading.Tasks.Task<string> UpdateStatusListToSvcAsync(DriverTask task)
         {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return;
+                    return task.Status;
 
                 if (_userInfo == null)
                 {
@@ -611,17 +756,21 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     parmCaseID = task.CaseNumber,
                     parmCaseCategory = task.CaseCategory,
-                    parmCaseServiceRecID = task.ServiceRecID,
+                    parmCaseServiceRecID = task.CaseServiceRecID,
+                    parmStatus=task.Status,
                     parmServiceRecID = task.ServiceRecID,
                     parmStatusDueDate = task.StatusDueDate,
                     parmEEPActionStep = actionStepMapping[task.Status]
                 });
                 var result = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
+
+                return result.response.FirstOrDefault().parmStatus;
             }
 
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+                return task.Status;
             }
         }
     }

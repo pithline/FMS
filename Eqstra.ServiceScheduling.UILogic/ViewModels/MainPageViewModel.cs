@@ -44,12 +44,16 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     PersistentData.Instance.DriverTask = this.InspectionTask;
                     PersistentData.Instance.CustomerDetails = this.CustomerDetails;
 
-                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitSupplierSelection)
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceConfirmation || this.InspectionTask.Status == DriverTaskStatus.AwaitJobCardCapture)
                     {
                         _navigationService.Navigate("Confirmation", string.Empty);
                     }
 
-                    else
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitSupplierSelection)
+                    {
+                        _navigationService.Navigate("SupplierSelection", string.Empty);
+                    }
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceDetail)
                     {
                         _navigationService.Navigate("ServiceScheduling", string.Empty);
                     }

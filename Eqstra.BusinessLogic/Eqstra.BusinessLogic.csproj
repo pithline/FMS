@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Enums\CDTaskTypeEnum.cs" />
     <Compile Include="Helpers\DriverTaskStatus.cs" />
+    <Compile Include="Helpers\LocationTypeConstants.cs" />
     <Compile Include="Helpers\ProcessStep.cs" />
     <Compile Include="Helpers\TaskStatus.cs" />
     <Compile Include="Enums\VehicleTypeEnum.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="ServiceSchedule\ConfirmationServiceScheduling.cs" />
     <Compile Include="ServiceSchedule\LocationType.cs" />
     <Compile Include="ServiceSchedule\Province.cs" />
+    <Compile Include="ServiceSchedule\Region.cs" />
     <Compile Include="ServiceSchedule\ServiceSchedulingDetail.cs" />
     <Compile Include="ServiceSchedule\Suburb.cs" />
     <Compile Include="ServiceSchedule\Supplier.cs" />

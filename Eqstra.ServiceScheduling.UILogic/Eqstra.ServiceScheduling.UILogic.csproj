@@ -175,13 +175,7 @@
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomerAddressResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriverAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriversResponse.datasource">
@@ -217,9 +211,6 @@
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasks_ModifiedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -227,9 +218,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertOtherAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">

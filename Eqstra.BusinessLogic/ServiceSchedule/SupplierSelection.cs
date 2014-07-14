@@ -56,12 +56,12 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref suburbs, value); }
         }
 
-        private List<string> region;
+        private List<Region> regions;
 
-        public List<string> Region
+        public List<Region> Regions
         {
-            get { return region; }
-            set { SetProperty(ref region, value); }
+            get { return regions; }
+            set { SetProperty(ref regions, value); }
         }
 
         private List<Supplier> suppliers;
@@ -110,5 +110,13 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref selectedSuburb, value); }
         }
 
+        private Region selectedRegion;
+
+        public Region SelectedRegion
+        {
+            get { return selectedRegion; }
+            set { SetProperty(ref selectedRegion, value); }
+        }
+        
     }
 }

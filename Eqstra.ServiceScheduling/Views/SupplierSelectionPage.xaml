@@ -8,11 +8,11 @@
                             xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
                             xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
                             xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
-                            xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+                  xmlns:syncfusion="using:Syncfusion.UI.Xaml.Controls.Input" 
                             xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
                             xmlns:ValidationBehaviour="using:Eqstra.BusinessLogic.Behaviors"
                             xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-                            xmlns:syncfusion="using:Syncfusion.UI.Xaml.Controls.Input"
+                            xmlns:datapager="using:Syncfusion.UI.Xaml.Controls.DataPager"
                             x:Name="pageRoot"
                             x:Class="Eqstra.ServiceScheduling.Views.SupplierSelectionPage"
                             DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
@@ -36,7 +36,9 @@
             <AppBarButton Label="Next"
                           Command="{Binding GoToConfirmationCommand}"
                           Icon="Next" />
+
         </CommandBar>
+
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <!--
@@ -146,6 +148,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Visibility="{Binding ProgressbarVisiblity}"
@@ -305,6 +308,7 @@
                                                          Grid.Column="1"
                                                          x:Name="AutoRegion"
                                                          Watermark="Enter region..."
+                                                              AutoCompleteSource="{Binding Model.Regions}"
                                                          ShowSuggestionsOnFocus="True"
                                                          AutoCompleteMode="Suggest"
                                                          SearchItemPath="Name"
@@ -313,12 +317,12 @@
                                                          SuggestionMode="Contains"
                                                          WatermarkTemplate="{StaticResource WatermarkTemplate}">
 
-                                    <!--<Interactivity:Interaction.Behaviors>
+                                    <Interactivity:Interaction.Behaviors>
                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoProvince,Path=SelectedItem}" />
+                                            <Core:InvokeCommandAction Command="{Binding RegionChangedCommand}"
+                                                                      CommandParameter="{Binding ElementName=AutoRegion,Path=SelectedItem}" />
                                         </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>-->
+                                    </Interactivity:Interaction.Behaviors>
 
                                     <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
                                         <DataTemplate>
@@ -419,12 +423,21 @@
                                                          x:Name="AutoSuburb"
                                                          Watermark="Enter suburb..."
                                                          ShowSuggestionsOnFocus="True"
+                                                         AutoCompleteSource="{Binding Model.Suburbs}"
                                                          AutoCompleteMode="Suggest"
                                                          SearchItemPath="Name"
                                                          Width="250"
                                                          Height="35"
                                                          SuggestionMode="Contains"
                                                          WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="TextChanged">
+                                            <Core:InvokeCommandAction Command="{Binding SuburbChangedCommand}"
+                                                                      CommandParameter="{Binding ElementName=AutoSuburb,Path=SelectedItem}" />
+                                        </Core:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+
                                     <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -442,7 +455,9 @@
                                            Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="4"
                                            Grid.Row="5" />
-                                <grid:SfDataGrid ItemsSource="{Binding Model.Suppliers}"
+
+                                <grid:SfDataGrid  ItemsSource="{Binding ElementName=sfDataPager,
+                                                                     Path=PagedSource}"
                                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                  x:Name="suppliersGrid"
                                                  SelectionMode="Single"
@@ -472,6 +487,19 @@
                                     </grid:SfDataGrid.Columns>
 
                                 </grid:SfDataGrid>
+
+                                <Border Grid.Row="8"  Grid.ColumnSpan="6"
+                        Background="White"
+                        BorderBrush="#B2B2B2"
+                        BorderThickness="0.5,0,0.5,0.5">
+                                    <datapager:SfDataPager x:Name="sfDataPager"
+                                           Height="50" 
+                                           HorizontalAlignment="Center" 
+                                           DisplayMode="PreviousNextNumeric"
+                                           NumericButtonCount="5"
+                                           PageSize="10"
+                                           Source="{Binding Model.Suppliers}" />
+                                </Border>
 
                             </Grid>
                         </Border>

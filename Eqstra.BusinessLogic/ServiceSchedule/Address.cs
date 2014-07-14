@@ -19,17 +19,25 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.Suburbs = new List<Suburb>();
         }
 
+        private long entityRecId;
+
+        public long EntityRecId
+        {
+            get { return entityRecId; }
+            set { SetProperty(ref entityRecId, value); }
+        }
+
         private string street;
         public string Street
         {
             get { return street; }
             set { SetProperty(ref street, value); }
         }
-        private string postcode;
-        public string Postcode
+        private List<string> postcodes;
+        public List<string> Postcodes
         {
-            get { return postcode; }
-            set { SetProperty(ref postcode, value); }
+            get { return postcodes; }
+            set { SetProperty(ref postcodes, value); }
         }
 
         private List<Country> countries;
@@ -100,6 +108,14 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return selectedSuburb; }
             set { SetProperty(ref selectedSuburb, value); }
         }
+
+        private string selectedZip;
+        public string SelectedZip
+        {
+            get { return selectedZip; }
+            set { SetProperty(ref selectedZip, value); }
+        }
+        
     }
     public class AddressEvent : PubSubEvent<Address>
     {
