@@ -50,14 +50,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if ((param != null) && (param is Country))
                 {
                     Country country = param as Country;
-                    if (!String.IsNullOrEmpty(country.Id))
+                    if (!String.IsNullOrEmpty(country.Id) && this.Model.Provinces != null && !this.Model.Provinces.Any())
                     {
                         this.ProgressbarMessage = "Loading Provinces ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
                         this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(country.Id);
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.SelectedCountry = country;
+                        this.Model.Selectedprovince = null;
                     }
+                }
+                else
+                {
+                    this.Model.SelectedCountry = null;
+                    this.Model.Selectedprovince = null;
                 }
             });
 
@@ -66,14 +72,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if ((param != null) && (param is Province))
                 {
                     Province province = param as Province;
-                    if (!String.IsNullOrEmpty(province.Id))
+                    if (!String.IsNullOrEmpty(province.Id) && this.Model.Cities != null && !this.Model.Cities.Any())
                     {
                         this.ProgressbarMessage = "Loading Cities ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
                         this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.Selectedprovince = province;
+                        this.Model.SelectedCity = null;
                     }
+                }
+                else
+                {
+                    this.Model.Selectedprovince = null;
+                    this.Model.SelectedCity = null;
                 }
             });
 
@@ -82,14 +94,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if ((param != null) && (param is City))
                 {
                     City city = param as City;
-                    if (!String.IsNullOrEmpty(city.Id))
+                    if (!String.IsNullOrEmpty(city.Id) && this.Model.Suburbs != null && !this.Model.Suburbs.Any())
                     {
                         this.ProgressbarMessage = "Loading Suburbs ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
                         this.Model.Suburbs = await SSProxyHelper.Instance.GetSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, city.Id);
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.SelectedCity = city;
+                        this.Model.SelectedSuburb = null;
                     }
+                }
+                else
+                {
+                    this.Model.SelectedCity = null;
+                    this.Model.SelectedSuburb = null;
                 }
 
             });
@@ -98,7 +116,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if ((param != null) && (param is Suburb))
                 {
-                    if (this.Model.Selectedprovince!=null)
+                    if (this.Model.Selectedprovince != null && this.Model.Regions != null && !this.Model.Regions.Any())
                     {
                         this.ProgressbarMessage = "Loading Regions ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
@@ -106,6 +124,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         this.ProgressbarVisiblity = Visibility.Collapsed;
                         this.Model.SelectedSuburb = (Suburb)param;
                     }
+                }
+                else
+                {
+                    this.Model.SelectedSuburb = null;
+                    this.Model.SelectedRegion = null;
                 }
 
             });
@@ -116,7 +139,10 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.Model.SelectedRegion = (Region)param;
                 }
-
+                else
+                {
+                    this.Model.SelectedRegion = null;
+                }
             });
 
             this.SubmitQueryCommand = new DelegateCommand<string>(async (param) =>
@@ -138,20 +164,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     if (result != null)
                     {
                         IEnumerable<Supplier> filteredResult = new List<Supplier>();
-                        if ((this.Model != null) && !String.IsNullOrEmpty(this.Model.SelectedCountry.Id))
+                        if ((this.Model != null) && this.Model.SelectedCountry != null && !String.IsNullOrEmpty(this.Model.SelectedCountry.Id))
                         {
                             filteredResult = result.Where(w => w.Country == this.Model.SelectedCountry.Id);
-                            if (!String.IsNullOrEmpty(this.Model.Selectedprovince.Id))
+                            if (this.Model.Selectedprovince != null && !String.IsNullOrEmpty(this.Model.Selectedprovince.Id))
                             {
                                 filteredResult = filteredResult.Where(w => w.Province == this.Model.Selectedprovince.Id);
-                                if (!String.IsNullOrEmpty(this.Model.SelectedCity.Id))
+                                if (this.Model.SelectedCity != null && !String.IsNullOrEmpty(this.Model.SelectedCity.Id))
                                 {
                                     filteredResult = filteredResult.Where(w => w.City == this.Model.SelectedCity.Id);
-                                    if (!String.IsNullOrEmpty(this.Model.SelectedSuburb.Id))
+                                    if (this.Model.SelectedSuburb != null && !String.IsNullOrEmpty(this.Model.SelectedSuburb.Id))
                                     {
                                         filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedSuburb.Id);
 
-                                        if (!String.IsNullOrEmpty(this.Model.SelectedRegion.Id))
+                                        if (this.Model.SelectedRegion != null && !String.IsNullOrEmpty(this.Model.SelectedRegion.Id))
                                         {
                                             filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedRegion.Id);
                                         }

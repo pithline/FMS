@@ -34,15 +34,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 try
                 {
-                    this.ProgressbarMessage = "Loading Countries ....  ";
-                    this.ProgressbarVisiblity = Visibility.Visible;
-                    var countries = await SSProxyHelper.Instance.GetCountryRegionListFromSvcAsync();
-                    if (countries != null)
+                    if (!this.Model.Countries.Any())
                     {
-                        this.Model.Countries.AddRange(countries);
+                        this.ProgressbarMessage = "Loading Countries ....  ";
+                        this.ProgressbarVisiblity = Visibility.Visible;
+                        this.Model.Countries = await SSProxyHelper.Instance.GetCountryRegionListFromSvcAsync();
                     }
                     this.ProgressbarVisiblity = Visibility.Collapsed;
-
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +52,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (param != null && (param is Country))
                 {
                     Country country = param as Country;
-                    if (!String.IsNullOrEmpty(country.Id))
+                    if (!String.IsNullOrEmpty(country.Id) && !this.Model.Provinces.Any())
                     {
                         this.ProgressbarMessage = "Loading Provinces ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
@@ -70,7 +68,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (param != null && (param is Province))
                 {
                     Province province = param as Province;
-                    if (!String.IsNullOrEmpty(province.Id))
+                    if (!String.IsNullOrEmpty(province.Id) && !this.Model.Cities.Any())
                     {
                         this.ProgressbarMessage = "Loading Cities ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
@@ -87,7 +85,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (param != null && (param is City))
                 {
                     City city = param as City;
-                    if (!String.IsNullOrEmpty(city.Id))
+                    if (!String.IsNullOrEmpty(city.Id) && !this.Model.Suburbs.Any())
                     {
                         this.ProgressbarMessage = "Loading Suburbs ....  ";
                         this.ProgressbarVisiblity = Visibility.Visible;
@@ -99,7 +97,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             });
 
-            this.SuburbChangedCommand = new DelegateCommand<object>(async (param) =>
+            this.SuburbChangedCommand = new DelegateCommand<object>((param) =>
             {
                 if (param != null && (param is Suburb))
                 {
@@ -111,7 +109,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
             });
 
-            this.ZipChangedCommand = new DelegateCommand<object>(async (param) =>
+            this.ZipChangedCommand = new DelegateCommand<object>((param) =>
             {
                 if (param != null && (param is string))
                 {
@@ -137,7 +135,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public DelegateCommand<object> CityChangedCommand { get; set; }
         public DelegateCommand<object> SuburbChangedCommand { get; set; }
         public DelegateCommand<object> ZipChangedCommand { get; set; }
-        
+
         public DelegateCommand PageLoadedCommand { get; set; }
 
         private Visibility progressbarVisiblity;

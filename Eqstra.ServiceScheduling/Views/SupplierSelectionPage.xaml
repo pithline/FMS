@@ -141,20 +141,20 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="70" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="50" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <StackPanel Visibility="{Binding ProgressbarVisiblity}"
+                                <StackPanel Visibility="{Binding ProgressbarVisiblity}" Grid.Column="2" Grid.ColumnSpan="2"
                                             Orientation="Horizontal"
                                             VerticalAlignment="Stretch">
-                                    <TextBlock Text="{Binding ProgressbarMessage}"
+                                    <TextBlock Text="{Binding ProgressbarMessage}" 
                                                Style="{StaticResource GroupHeaderStyle}"
                                                VerticalAlignment="Center"
                                                FontSize="15" />
@@ -165,7 +165,7 @@
                                 <TextBlock Text="Please Select the Preferred Suppliers"
                                            Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="4"
-                                           VerticalAlignment="Top" />
+                                           VerticalAlignment="Center" />
                                 <AppBarButton Icon="Filter"
                                               VerticalAlignment="Top"
                                               Command="{Binding SupplierFilterCommand}"
@@ -197,7 +197,7 @@
 
 
                                 <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="1"
+                                                         Grid.Row="1" Margin="5,0" 
                                                          Grid.Column="1"
                                                          x:Name="AutoCountry"
                                                          Watermark="Enter country..."
@@ -210,7 +210,7 @@
                                                          AutoCompleteSource="{Binding Model.Countries}"
                                                          WatermarkTemplate="{StaticResource WatermarkTemplate}">
                                     <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                        <Core:EventTriggerBehavior EventName="TextChanged">
                                             <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
                                                                       CommandParameter="{Binding ElementName=AutoCountry,Path=SelectedItem}" />
                                         </Core:EventTriggerBehavior>
@@ -318,7 +318,7 @@
                                                          WatermarkTemplate="{StaticResource WatermarkTemplate}">
 
                                     <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                        <Core:EventTriggerBehavior EventName="TextChanged">
                                             <Core:InvokeCommandAction Command="{Binding RegionChangedCommand}"
                                                                       CommandParameter="{Binding ElementName=AutoRegion,Path=SelectedItem}" />
                                         </Core:EventTriggerBehavior>
@@ -362,7 +362,7 @@
 
 
                                 <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="2"
+                                                         Grid.Row="2" Margin="5,0"
                                                          Grid.Column="1"
                                                          x:Name="AutoCity"
                                                          Watermark="Enter city..."
@@ -376,7 +376,7 @@
                                                          WatermarkTemplate="{StaticResource WatermarkTemplate}">
 
                                     <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                        <Core:EventTriggerBehavior EventName="TextChanged">
                                             <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
                                                                       CommandParameter="{Binding ElementName=AutoCity,Path=SelectedItem}" />
                                         </Core:EventTriggerBehavior>

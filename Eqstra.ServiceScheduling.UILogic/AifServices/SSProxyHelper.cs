@@ -69,7 +69,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 //_syncExecute.Invoke();
             }
         }
-
         void NetworkInformation_NetworkStatusChanged(object sender)
         {
             try
@@ -142,8 +141,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<Country>> GetCountryRegionListFromSvcAsync()
         {
             try
@@ -187,8 +184,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<Province>> GetProvinceListFromSvcAsync(string countryId)
         {
             try
@@ -219,8 +214,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<City>> GetCityListFromSvcAsync(string countryId, string stateId)
         {
             try
@@ -247,8 +240,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<Suburb>> GetSuburbListFromSvcAsync(string countryId, string stateId)
         {
             try
@@ -275,8 +266,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<Region>> GetRegionListFromSvcAsync(string countryId, string stateId)
         {
             try
@@ -302,7 +291,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
         async public System.Threading.Tasks.Task<List<string>> GetZipcodeListFromSvcAsync(string countryId, string stateId)
         {
             try
@@ -328,7 +316,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
         async public System.Threading.Tasks.Task<ServiceSchedulingDetail> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId)
         {
             try
@@ -394,8 +381,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
             return results;
         }
-
-
         async public System.Threading.Tasks.Task<List<LocationType>> GetLocationTypeAsync(long caseServiceRecId, string companyId)
         {
             try
@@ -422,7 +407,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
         async public System.Threading.Tasks.Task<List<DestinationType>> GetCustomersFromSvcAsync()
         {
             try
@@ -444,7 +428,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                        {
                            ContactName = mzk.parmName,
-                           Id =long.Parse(mzk.parmAccountNum),
+                           Id =mzk.parmAccountNum,
                            RecID = mzk.parmRecID,
                            Address = mzk.parmAddress
                        });
@@ -459,8 +443,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<List<DestinationType>> GetVendorsFromSvcAsync()
         {
             try
@@ -482,7 +464,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id = long.Parse(mzk.parmAccountNum),
+                            Id = mzk.parmAccountNum,
                             Address = mzk.parmAddress
                         });
                     });
@@ -496,7 +478,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
         async public System.Threading.Tasks.Task<IEnumerable<DestinationType>> GetDriversFromSvcAsync()
         {
             try
@@ -518,7 +499,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id =long.Parse(mzk.parmDriverId),
+                            Id =mzk.parmDriverId,
                             RecID = mzk.parmRecID,
                             Address = mzk.parmAddress
                         });
@@ -532,7 +513,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
         async public System.Threading.Tasks.Task<List<Supplier>> GetVendSupplirerSvcAsync()
         {
             try
@@ -573,8 +553,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-
-
         async public System.Threading.Tasks.Task<bool> UpdateConfirmationDatesToSvcAsync(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
         {
             try
@@ -653,7 +631,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return false;
             }
         }
-
         async public System.Threading.Tasks.Task<bool> InsertSelectedSupplierToSvcAsync(SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId)
         {
             try
@@ -687,7 +664,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return false;
             }
         }
-
         async public System.Threading.Tasks.Task<bool> InsertConfirmedServiceDetailToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, string caseNumber, long caseServiceRecId)
         {
             try

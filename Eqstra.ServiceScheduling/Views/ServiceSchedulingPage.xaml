@@ -129,7 +129,7 @@
                                   HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="230" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="150" />
@@ -147,6 +147,9 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="30" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -192,27 +195,27 @@
                                       Background="#FFE6E6E6"
                                       VerticalAlignment="Top"
                                       HorizontalAlignment="Left"
-                                      Margin="0 10 20 0">
+                                      >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Button Style="{StaticResource SnapshotButtonStyle}"
+                                    <Button Style="{StaticResource SnapshotButtonStyle}" HorizontalAlignment="Left"
                                             Command="{Binding TakePictureCommand}"
                                             CommandParameter="{Binding Path=Model.ODOReadingSnapshot}"
                                             Width="100"
-                                            Height="100">
+                                            Height="80">
                                         <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}"
                                                Grid.Row="0"
                                                Stretch="UniformToFill"
-                                               HorizontalAlignment="Center"
+                                               HorizontalAlignment="Left"
                                                VerticalAlignment="Center" />
                                     </Button>
                                 </Grid>
 
                                 <TextBlock Text="According to the above data, this vehicle is due for the following services"
-                                           Style="{StaticResource TextContentStyle}"
+                                           Style="{StaticResource TextContentStyle}" 
                                            Grid.ColumnSpan="2"
                                            Grid.Row="4"
                                            TextWrapping="WrapWholeWords" />
@@ -241,29 +244,35 @@
                                            Foreground="Red" />
 
                                 <TextBlock Text="Please Select Preferred Service Dates"
-                                           Style="{StaticResource TextContentStyle}"
+                                               Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="3"
-                                           Grid.Row="7"
+                                           Grid.Row="8"
                                            TextWrapping="WrapWholeWords" />
                                 <TextBlock Text="Service Date (Option 1)"
-                                           Grid.Row="8"
+                                           Grid.Row="9"
+                                             Margin="5 5"
                                            Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
                                 <input:SfDatePicker
                                         Value="{Binding Model.ServiceDateOption1,Mode=TwoWay}"
-                                                    Grid.Row="8"
+                                                    Grid.Row="9"
+                                    Width="200"
                                                     Grid.Column="1"
+                                        Margin="5 5"
                                                     HorizontalAlignment="Left" />
 
                                 <TextBlock Text="Service Date (Option 2)"
-                                           Grid.Row="9"
+                                           Grid.Row="10"
                                            Grid.Column="0"
+                                               Margin="5 5"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
                                 <input:SfDatePicker
                                         Value="{Binding Model.ServiceDateOption2,Mode=TwoWay}"
-                                                    Grid.Row="9"
+                                                    Grid.Row="10"
+                                         Margin="5 5"
+                                    Width="200"
                                                     Grid.Column="1"
                                                     HorizontalAlignment="Left" />
 
@@ -378,7 +387,7 @@
                                     <StackPanel Orientation="Horizontal"
                                                 Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}">
                                         <TextBox Width="200"
-                                                 Height="80"
+                                                 Height="80" 
                                                  TextWrapping="Wrap"
                                                  IsReadOnly="{Binding ElementName=editableAddress,Path=IsChecked,Converter={StaticResource InvertBooleanConverter}}"
                                                  VerticalAlignment="Top"
@@ -409,31 +418,33 @@
                                                              RequestedTheme="Light"
                                                              IsCompact="True" />
                                     </StackPanel>
-                                    <TextBlock Margin="5 0 0 0"
+                                    <TextBlock Margin="5 0 0 0" 
                                                Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}"
                                                Text="{Binding Model.Errors[Address], Converter={StaticResource ErrorConverter}}"
                                                Foreground="Red" />
                                 </StackPanel>
 
                                 <TextBlock Text="Please indicate any additional maintenance/repair work that may be required"
-                                           Style="{StaticResource TextContentStyle}"
+                                               Style="{StaticResource TextContentStyle}" VerticalAlignment="Bottom"
                                            Grid.ColumnSpan="2"
-                                           Grid.Row="11"
-                                           Grid.Column="4"
+                                           Grid.Row="13"
+                                           Margin="5,0"
+                                           Grid.Column="0"
                                            TextWrapping="WrapWholeWords" />
 
                                 <TextBlock Text="Additional Work"
-                                           Grid.Row="12"
-                                           Grid.Column="4"
+                                           Grid.Row="14"
+                                             Margin="5,0"
+                                           Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
                                 <TextBox Width="200"
                                          Height="80"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Bottom"
                                          Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
                                          Margin="5 10"
-                                         Grid.Row="12"
-                                         Grid.Column="5"
+                                         Grid.Row="14"
+                                         Grid.Column="1"
                                          Grid.RowSpan="2"
                                          IsSpellCheckEnabled="True"
                                          IsTextPredictionEnabled="True"
@@ -539,6 +550,8 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+
                                 </Grid.RowDefinitions>
                                 <TextBlock Style="{StaticResource TextContentStyle}"
                                            Text="Please Provide Delivery Requirements"

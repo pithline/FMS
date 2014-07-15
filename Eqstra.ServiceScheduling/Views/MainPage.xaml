@@ -60,9 +60,9 @@
             <!-- Main Content -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="2*" />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width=".5*"/>
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FFE0E0E0"
                         Grid.Row="1"
@@ -93,10 +93,10 @@
                                Style="{StaticResource GroupHeaderStyle}"
                                HorizontalAlignment="Left"
                                Margin="0 0 0 10" />
-                    <SearchBox ChooseSuggestionOnEnter="True"
-                               Width="250"
+                    <SearchBox ChooseSuggestionOnEnter="True" VerticalAlignment="Center" 
+                               Width="250" Height="35"
                                PlaceholderText="Type to filter..."
-                               Margin="0 0 10 0"
+                                Margin="0 0 0 8"
                                x:Name="filterBox"
                                HorizontalAlignment="Right"
                                FocusOnKeyboardInput="True"
@@ -132,47 +132,47 @@
                                                          HeaderText="CASE NUMBER"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="120"
+                                                             MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CaseCategory"
                                                          HeaderText="CASE CATEGORY"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="100"
+                                                        MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="RegistrationNumber"
                                                          HeaderText="REGISTRATION NUMBER"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="200"
+                                                       MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="Make"
                                                          HeaderText="MAKE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="100"
+                                                   MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="Model"
                                                          HeaderText="MODEL"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="100"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="Description"
                                                          HeaderText="VEHICLE DESCRIPTION"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="100"
+                                                     MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="CustomerName"
                                                          HeaderText="CUSTOMER NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="150"
+                                                            MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn HeaderText="CELL NUMBER"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="120"
+                                                            MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -187,29 +187,29 @@
                                                              HeaderText="STATUS DUE DATE"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
+                                                                MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridComboBoxColumn MappingName="Status"
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="150"
+                                                       MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                         Width="150"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridDateTimeColumn MappingName="ScheduledDate"
                                                              FormatString="MM/dd/yyyy"
                                                              HeaderText="SCHEDULED DATE"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
+                                                             MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn HeaderText="SCHEDULED TIME"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="130"
+                                                          MinimumWidth="150"
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>

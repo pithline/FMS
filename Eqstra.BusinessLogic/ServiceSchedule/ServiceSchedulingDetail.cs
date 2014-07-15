@@ -18,6 +18,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
             this.DestinationTypes = new ObservableCollection<DestinationType>();
             this.LocationTypes = new List<LocationType>();
+            this.IsValidationEnabled = false;
         }
         public new bool ValidateProperties()
         {

@@ -159,7 +159,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.IsBusy = true;
                 if (param != null)
                 {
-                    this.Address.EntityRecId = param.Id;
+                    this.Address.EntityRecId = param.RecID;
                     DestinationType destinationType = param as DestinationType;
                     this.Model.Address = destinationType.Address;
                 }
@@ -175,7 +175,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this._task = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
                 this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID);
-
+                this.Model.IsValidationEnabled =true;
                 this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
                 this.IsBusy = false;
             }
