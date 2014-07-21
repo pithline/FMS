@@ -30,9 +30,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             _navigationService = navigationSerive;
             _eventAggregator = eventAggregator;
+            
             this.Model = new SupplierSelection();
             this.GoToConfirmationCommand = new DelegateCommand(async () =>
             {
+                this.IsBusy = true;
                 if (this.Model.ValidateProperties())
                 {
                     bool isinserted = await SSProxyHelper.Instance.InsertSelectedSupplierToSvcAsync(this.Model, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
@@ -41,6 +43,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         _navigationService.Navigate("Confirmation", string.Empty);
                     }
                 }
+                this.IsBusy = false;
             }, () =>
             {
                 return (this.SelectedSupplier != null);

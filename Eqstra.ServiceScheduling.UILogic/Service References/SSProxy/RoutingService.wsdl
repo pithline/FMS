@@ -24,65 +24,39 @@
   <wsdl:binding name="BasicHttpBinding_MzkServiceSchedulingService" type="i1:MzkServiceSchedulingService">
     <wsp:PolicyReference URI="#BasicHttpBinding_MzkServiceSchedulingService_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="getProvinceList">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getProvinceList" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetProvinceListRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetProvinceListRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getCountryRegionList">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionList" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetCountryRegionListRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetCountryRegionListRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetProvinceListResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetCountryRegionListResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getServiceDetails">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getServiceDetails" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetServiceDetailsRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetServiceDetailsRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getVendors">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getVendors" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetVendorsRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetVendorsRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetServiceDetailsResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetVendorsResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="updateStatusList">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/updateStatusList" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceUpdateStatusListRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceUpdateStatusListRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getTasksOptimize">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimize" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetTasksOptimizeRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetTasksOptimizeRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceUpdateStatusListResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getCustomers">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getCustomers" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetCustomersRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetCustomersRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetCustomersResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getTasks">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getTasks" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetTasksRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetTasksRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetTasksResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetTasksOptimizeResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -102,6 +76,19 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="getTasks">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getTasks" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetTasksRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetTasksRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetTasksResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getSuburbList">
       <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getSuburbList" style="document" />
       <wsdl:input name="MzkServiceSchedulingServiceGetSuburbListRequest">
@@ -115,26 +102,78 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getVendSupplirerName">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerName" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetVendSupplirerNameRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetVendSupplirerNameRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getServiceTypes">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getServiceTypes" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetServiceTypesRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetServiceTypesRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetVendSupplirerNameResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetServiceTypesResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="validateUser">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/validateUser" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceValidateUserRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceValidateUserRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getServiceDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getServiceDetails" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetServiceDetailsRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetServiceDetailsRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceValidateUserResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetServiceDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRegions">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getRegions" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetRegionsRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetRegionsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetRegionsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProvinceList">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getProvinceList" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetProvinceListRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetProvinceListRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetProvinceListResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getODOReadingDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetails" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetODOReadingDetailsRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetODOReadingDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetODOReadingDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocationType">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getLocationType" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetLocationTypeRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetLocationTypeRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetLocationTypeResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -167,39 +206,26 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getCountryRegionList">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionList" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetCountryRegionListRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetCountryRegionListRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getCustomers">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getCustomers" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetCustomersRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetCustomersRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetCountryRegionListResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceGetCustomersResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getTasksOptimize">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimize" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetTasksOptimizeRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetTasksOptimizeRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="updateStatusList">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/updateStatusList" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceUpdateStatusListRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceUpdateStatusListRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetTasksOptimizeResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getLocationType">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getLocationType" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetLocationTypeRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetLocationTypeRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetLocationTypeResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceUpdateStatusListResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -219,52 +245,26 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getODOReadingDetails">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetails" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetODOReadingDetailsRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetODOReadingDetailsRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="insertSerDet">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/insertSerDet" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceInsertSerDetRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceInsertSerDetRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetODOReadingDetailsResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceInsertSerDetResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getServiceTypes">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getServiceTypes" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetServiceTypesRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetServiceTypesRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="validateUser">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/validateUser" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceValidateUserRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceValidateUserRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetServiceTypesResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="insertServiceDetails">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetails" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceInsertServiceDetailsRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceInsertServiceDetailsRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceInsertServiceDetailsResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getVendors">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getVendors" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetVendorsRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetVendorsRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetVendorsResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceValidateUserResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -284,13 +284,39 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getRegions">
-      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getRegions" style="document" />
-      <wsdl:input name="MzkServiceSchedulingServiceGetRegionsRequest">
-        <soap:header message="i1:MzkServiceSchedulingServiceGetRegionsRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="insertVendDet">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/insertVendDet" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceInsertVendDetRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceInsertVendDetRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkServiceSchedulingServiceGetRegionsResponse">
+      <wsdl:output name="MzkServiceSchedulingServiceInsertVendDetResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVendSupplirerName">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerName" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceGetVendSupplirerNameRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceGetVendSupplirerNameRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceGetVendSupplirerNameResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="insertServiceDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetails" style="document" />
+      <wsdl:input name="MzkServiceSchedulingServiceInsertServiceDetailsRequest">
+        <soap:header message="i1:MzkServiceSchedulingServiceInsertServiceDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkServiceSchedulingServiceInsertServiceDetailsResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">

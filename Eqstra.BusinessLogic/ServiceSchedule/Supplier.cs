@@ -15,6 +15,15 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.SupplierDate = DateTime.Now;
             this.SupplierTime = DateTime.Now;
         }
+
+        private string accountNum;
+
+        public string AccountNum
+        {
+            get { return accountNum; }
+            set { SetProperty(ref accountNum, value); }
+        }
+        
         private string supplierName;
         public string SupplierName
         {

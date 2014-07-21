@@ -107,35 +107,35 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkProvinceContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public partial class MzkProvinceContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCountryRegionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public partial class MzkCountryRegionContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
         
-        private string parmStateIdField;
+        private string parmCountryRegionIdField;
         
-        private string parmStateNameField;
+        private string parmCountryRegionNameField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmStateId {
+        public string parmCountryRegionId {
             get {
-                return this.parmStateIdField;
+                return this.parmCountryRegionIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmStateIdField, value) != true)) {
-                    this.parmStateIdField = value;
-                    this.RaisePropertyChanged("parmStateId");
+                if ((object.ReferenceEquals(this.parmCountryRegionIdField, value) != true)) {
+                    this.parmCountryRegionIdField = value;
+                    this.RaisePropertyChanged("parmCountryRegionId");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmStateName {
+        public string parmCountryRegionName {
             get {
-                return this.parmStateNameField;
+                return this.parmCountryRegionNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmStateNameField, value) != true)) {
-                    this.parmStateNameField = value;
-                    this.RaisePropertyChanged("parmStateName");
+                if ((object.ReferenceEquals(this.parmCountryRegionNameField, value) != true)) {
+                    this.parmCountryRegionNameField = value;
+                    this.RaisePropertyChanged("parmCountryRegionName");
                 }
             }
         }
@@ -147,17 +147,17 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCityContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountyContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkDriverContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkLocationTypeContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkRegionContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkValidateUserContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkVendorAccountContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkZipCodeContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract))]
     public partial class XppObjectBase : object, System.ComponentModel.INotifyPropertyChanged {
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -490,42 +490,6 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCountryRegionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public partial class MzkCountryRegionContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
-        
-        private string parmCountryRegionIdField;
-        
-        private string parmCountryRegionNameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCountryRegionId {
-            get {
-                return this.parmCountryRegionIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCountryRegionIdField, value) != true)) {
-                    this.parmCountryRegionIdField = value;
-                    this.RaisePropertyChanged("parmCountryRegionId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCountryRegionName {
-            get {
-                return this.parmCountryRegionNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCountryRegionNameField, value) != true)) {
-                    this.parmCountryRegionNameField = value;
-                    this.RaisePropertyChanged("parmCountryRegionName");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkCountyContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkCountyContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
         
@@ -694,6 +658,42 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkProvinceContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public partial class MzkProvinceContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
+        
+        private string parmStateIdField;
+        
+        private string parmStateNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmStateId {
+            get {
+                return this.parmStateIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmStateIdField, value) != true)) {
+                    this.parmStateIdField = value;
+                    this.RaisePropertyChanged("parmStateId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmStateName {
+            get {
+                return this.parmStateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmStateNameField, value) != true)) {
+                    this.parmStateNameField = value;
+                    this.RaisePropertyChanged("parmStateName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkRegionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkRegionContract : Eqstra.ServiceScheduling.UILogic.SSProxy.XppObjectBase {
         
@@ -756,6 +756,8 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         private System.DateTime parmPreferredDateSecondOptionField;
         
         private string parmServiceTypeField;
+        
+        private string parmSupplierIdField;
         
         private string parmSupplierNameField;
         
@@ -911,6 +913,19 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
                 if ((object.ReferenceEquals(this.parmServiceTypeField, value) != true)) {
                     this.parmServiceTypeField = value;
                     this.RaisePropertyChanged("parmServiceType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmSupplierId {
+            get {
+                return this.parmSupplierIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmSupplierIdField, value) != true)) {
+                    this.parmSupplierIdField = value;
+                    this.RaisePropertyChanged("parmSupplierId");
                 }
             }
         }
@@ -2207,41 +2222,53 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="SSProxy.MzkServiceSchedulingService")]
     public interface MzkServiceSchedulingService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getProvinceList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getProvinceListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getProvinceListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> getProvinceListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> getCountryRegionListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getServiceDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getServiceDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getServiceDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> getServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getVendors", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getVendorsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getVendorsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> getVendorsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/updateStatusList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/updateStatusListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getCustomers", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getCustomersResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getCustomersAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> getCustomersAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getTasks", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> getTasksAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimize", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimizeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimizeAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> getTasksOptimizeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getTasks_Modified", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getTasks_ModifiedResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getTasks_ModifiedAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasks_ModifiedResponse> getTasks_ModifiedAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasks_ModifiedRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getTasks", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> getTasksAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getSuburbList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getSuburbListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getSuburbListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse> getSuburbListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetSuburbListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerName", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerNameResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerNameAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> getVendSupplirerNameAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getServiceTypes", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getServiceTypesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getServiceTypesAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> getServiceTypesAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/validateUser", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> validateUserAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getServiceDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getServiceDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getServiceDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> getServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getRegions", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getRegionsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getRegionsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> getRegionsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getProvinceList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getProvinceListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getProvinceListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> getProvinceListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> getODOReadingDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getLocationType", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getLocationTypeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getLocationTypeAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> getLocationTypeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getDrivers", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getDriversResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getDriversAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
@@ -2251,65 +2278,57 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getCityListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCityListResponse> getCityListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCityListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getCountryRegionListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> getCountryRegionListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getCustomers", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getCustomersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getCustomersAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> getCustomersAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimize", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimizeResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getTasksOptimizeAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> getTasksOptimizeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getLocationType", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getLocationTypeResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getLocationTypeAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> getLocationTypeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/updateStatusList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/updateStatusListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getZipcodeList", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getZipcodeListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getZipcodeListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse> getZipcodeListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getODOReadingDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> getODOReadingDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/insertSerDet", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/insertSerDetResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/insertSerDetAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse> insertSerDetAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getServiceTypes", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getServiceTypesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getServiceTypesAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> getServiceTypesAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> insertServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getVendors", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getVendorsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getVendorsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> getVendorsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/validateUser", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> validateUserAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/updateConfirmationDates", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/updateConfirmationDatesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/updateConfirmationDatesAifFaultFau" +
             "lt", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse> updateConfirmationDatesAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getRegions", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getRegionsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getRegionsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> getRegionsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/insertVendDet", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/insertVendDetResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/insertVendDetAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse> insertVendDetAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerName", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerNameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/getVendSupplirerNameAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> getVendSupplirerNameAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetails", ReplyAction="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.ServiceScheduling.UILogic.SSProxy.AifFault), Action="http://tempuri.org/MzkServiceSchedulingService/insertServiceDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> insertServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetProvinceListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetProvinceListRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCountryRegionListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetCountryRegionListRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _countryId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetProvinceListRequest() {
+        public MzkServiceSchedulingServiceGetCountryRegionListRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetProvinceListRequest(string _countryId, string _company) {
-            this._countryId = _countryId;
+        public MzkServiceSchedulingServiceGetCountryRegionListRequest(string _company) {
             this._company = _company;
         }
     }
@@ -2317,16 +2336,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetProvinceListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetProvinceListResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCountryRegionListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetCountryRegionListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract> response;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract> response;
         
-        public MzkServiceSchedulingServiceGetProvinceListResponse() {
+        public MzkServiceSchedulingServiceGetCountryRegionListResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetProvinceListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract> response) {
+        public MzkServiceSchedulingServiceGetCountryRegionListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract> response) {
             this.response = response;
         }
     }
@@ -2334,24 +2353,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetServiceDetailsRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendorsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetVendorsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _caseId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public long _caseServiceRecId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetServiceDetailsRequest() {
+        public MzkServiceSchedulingServiceGetVendorsRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetServiceDetailsRequest(string _caseId, long _caseServiceRecId, string _company) {
-            this._caseId = _caseId;
-            this._caseServiceRecId = _caseServiceRecId;
+        public MzkServiceSchedulingServiceGetVendorsRequest(string _company) {
             this._company = _company;
         }
     }
@@ -2359,88 +2370,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetServiceDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response;
-        
-        public MzkServiceSchedulingServiceGetServiceDetailsResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceGetServiceDetailsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceUpdateStatusListRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceUpdateStatusListRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceUpdateStatusListRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks, string _company) {
-            this._lstTasks = _lstTasks;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceUpdateStatusListResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response;
-        
-        public MzkServiceSchedulingServiceUpdateStatusListResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceUpdateStatusListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCustomersRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetCustomersRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceGetCustomersRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceGetCustomersRequest(string _company) {
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCustomersResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetCustomersResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendorsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetVendorsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response;
         
-        public MzkServiceSchedulingServiceGetCustomersResponse() {
+        public MzkServiceSchedulingServiceGetVendorsResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetCustomersResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response) {
+        public MzkServiceSchedulingServiceGetVendorsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response) {
             this.response = response;
         }
     }
@@ -2448,8 +2387,8 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetTasksRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksOptimizeRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetTasksOptimizeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public string _userID;
@@ -2457,10 +2396,10 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetTasksRequest() {
+        public MzkServiceSchedulingServiceGetTasksOptimizeRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetTasksRequest(string _userID, string _company) {
+        public MzkServiceSchedulingServiceGetTasksOptimizeRequest(string _userID, string _company) {
             this._userID = _userID;
             this._company = _company;
         }
@@ -2469,16 +2408,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetTasksResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksOptimizeResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetTasksOptimizeResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response;
         
-        public MzkServiceSchedulingServiceGetTasksResponse() {
+        public MzkServiceSchedulingServiceGetTasksOptimizeResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
+        public MzkServiceSchedulingServiceGetTasksOptimizeResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
             this.response = response;
         }
     }
@@ -2517,6 +2456,44 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         public MzkServiceSchedulingServiceGetTasks_ModifiedResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetTasksRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetTasksRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetTasksRequest(string _userID, string _company) {
+            this._userID = _userID;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetTasksResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response;
+        
+        public MzkServiceSchedulingServiceGetTasksResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
             this.response = response;
         }
     }
@@ -2566,16 +2543,20 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendSupplirerNameRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetVendSupplirerNameRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceTypesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetServiceTypesRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _caseId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetVendSupplirerNameRequest() {
+        public MzkServiceSchedulingServiceGetServiceTypesRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetVendSupplirerNameRequest(string _company) {
+        public MzkServiceSchedulingServiceGetServiceTypesRequest(string _caseId, string _company) {
+            this._caseId = _caseId;
             this._company = _company;
         }
     }
@@ -2583,16 +2564,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendSupplirerNameResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetVendSupplirerNameResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceTypesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetServiceTypesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkVendorAccountContract> response;
+        public string response;
         
-        public MzkServiceSchedulingServiceGetVendSupplirerNameResponse() {
+        public MzkServiceSchedulingServiceGetServiceTypesResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetVendSupplirerNameResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkVendorAccountContract> response) {
+        public MzkServiceSchedulingServiceGetServiceTypesResponse(string response) {
             this.response = response;
         }
     }
@@ -2600,37 +2581,197 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceValidateUserRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetServiceDetailsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
+        public string _caseId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
+        public long _caseServiceRecId;
         
-        public MzkServiceSchedulingServiceValidateUserRequest() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetServiceDetailsRequest() {
         }
         
-        public MzkServiceSchedulingServiceValidateUserRequest(string _userID, string _password) {
-            this._userID = _userID;
-            this._password = _password;
+        public MzkServiceSchedulingServiceGetServiceDetailsRequest(string _caseId, long _caseServiceRecId, string _company) {
+            this._caseId = _caseId;
+            this._caseServiceRecId = _caseServiceRecId;
+            this._company = _company;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceValidateUserResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetServiceDetailsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkValidateUserContract response;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response;
         
-        public MzkServiceSchedulingServiceValidateUserResponse() {
+        public MzkServiceSchedulingServiceGetServiceDetailsResponse() {
         }
         
-        public MzkServiceSchedulingServiceValidateUserResponse(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkValidateUserContract response) {
+        public MzkServiceSchedulingServiceGetServiceDetailsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetRegionsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetRegionsRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _countryId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _StateId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetRegionsRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetRegionsRequest(string _countryId, string _StateId, string _company) {
+            this._countryId = _countryId;
+            this._StateId = _StateId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetRegionsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetRegionsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkRegionContract> response;
+        
+        public MzkServiceSchedulingServiceGetRegionsResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetRegionsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkRegionContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetProvinceListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetProvinceListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _countryId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetProvinceListRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetProvinceListRequest(string _countryId, string _company) {
+            this._countryId = _countryId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetProvinceListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetProvinceListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract> response;
+        
+        public MzkServiceSchedulingServiceGetProvinceListResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetProvinceListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkProvinceContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetODOReadingDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetODOReadingDetailsRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _caseId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetODOReadingDetailsRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetODOReadingDetailsRequest(string _caseId, string _company) {
+            this._caseId = _caseId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetODOReadingDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetODOReadingDetailsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response;
+        
+        public MzkServiceSchedulingServiceGetODOReadingDetailsResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetODOReadingDetailsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetLocationTypeRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetLocationTypeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public long _serviceRecId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetLocationTypeRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetLocationTypeRequest(long _serviceRecId, string _company) {
+            this._serviceRecId = _serviceRecId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetLocationTypeResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetLocationTypeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkLocationTypeContract> response;
+        
+        public MzkServiceSchedulingServiceGetLocationTypeResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetLocationTypeResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkLocationTypeContract> response) {
             this.response = response;
         }
     }
@@ -2714,16 +2855,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCountryRegionListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetCountryRegionListRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCustomersRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetCustomersRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetCountryRegionListRequest() {
+        public MzkServiceSchedulingServiceGetCustomersRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetCountryRegionListRequest(string _company) {
+        public MzkServiceSchedulingServiceGetCustomersRequest(string _company) {
             this._company = _company;
         }
     }
@@ -2731,16 +2872,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCountryRegionListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetCountryRegionListResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetCustomersResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetCustomersResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract> response;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response;
         
-        public MzkServiceSchedulingServiceGetCountryRegionListResponse() {
+        public MzkServiceSchedulingServiceGetCustomersResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetCountryRegionListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkCountryRegionContract> response) {
+        public MzkServiceSchedulingServiceGetCustomersResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response) {
             this.response = response;
         }
     }
@@ -2748,20 +2889,20 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksOptimizeRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetTasksOptimizeRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceUpdateStatusListRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetTasksOptimizeRequest() {
+        public MzkServiceSchedulingServiceUpdateStatusListRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetTasksOptimizeRequest(string _userID, string _company) {
-            this._userID = _userID;
+        public MzkServiceSchedulingServiceUpdateStatusListRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks, string _company) {
+            this._lstTasks = _lstTasks;
             this._company = _company;
         }
     }
@@ -2769,54 +2910,16 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetTasksOptimizeResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetTasksOptimizeResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceUpdateStatusListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response;
         
-        public MzkServiceSchedulingServiceGetTasksOptimizeResponse() {
+        public MzkServiceSchedulingServiceUpdateStatusListResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetTasksOptimizeResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetLocationTypeRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetLocationTypeRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public long _serviceRecId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceGetLocationTypeRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceGetLocationTypeRequest(long _serviceRecId, string _company) {
-            this._serviceRecId = _serviceRecId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetLocationTypeResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetLocationTypeResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkLocationTypeContract> response;
-        
-        public MzkServiceSchedulingServiceGetLocationTypeResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceGetLocationTypeResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkLocationTypeContract> response) {
+        public MzkServiceSchedulingServiceUpdateStatusListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> response) {
             this.response = response;
         }
     }
@@ -2866,20 +2969,28 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetODOReadingDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetODOReadingDetailsRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceInsertSerDetRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceInsertSerDetRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public string _caseId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public long _caseServiceRecId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=3)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetODOReadingDetailsRequest() {
+        public MzkServiceSchedulingServiceInsertSerDetRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetODOReadingDetailsRequest(string _caseId, string _company) {
+        public MzkServiceSchedulingServiceInsertSerDetRequest(string _caseId, long _caseServiceRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, string _company) {
             this._caseId = _caseId;
+            this._caseServiceRecId = _caseServiceRecId;
+            this._contract = _contract;
             this._company = _company;
         }
     }
@@ -2887,16 +2998,47 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetODOReadingDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetODOReadingDetailsResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceInsertSerDetResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceInsertSerDetResponse {
+        
+        public MzkServiceSchedulingServiceInsertSerDetResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceValidateUserRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response;
+        public string _userID;
         
-        public MzkServiceSchedulingServiceGetODOReadingDetailsResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _password;
+        
+        public MzkServiceSchedulingServiceValidateUserRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetODOReadingDetailsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract> response) {
+        public MzkServiceSchedulingServiceValidateUserRequest(string _userID, string _password) {
+            this._userID = _userID;
+            this._password = _password;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceValidateUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkValidateUserContract response;
+        
+        public MzkServiceSchedulingServiceValidateUserResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceValidateUserResponse(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -2904,20 +3046,24 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceTypesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetServiceTypesRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateConfirmationDatesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceUpdateConfirmationDatesRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _caseId;
+        public long _caseServiceRecId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract contract;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
         public string _company;
         
-        public MzkServiceSchedulingServiceGetServiceTypesRequest() {
+        public MzkServiceSchedulingServiceUpdateConfirmationDatesRequest() {
         }
         
-        public MzkServiceSchedulingServiceGetServiceTypesRequest(string _caseId, string _company) {
-            this._caseId = _caseId;
+        public MzkServiceSchedulingServiceUpdateConfirmationDatesRequest(long _caseServiceRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract contract, string _company) {
+            this._caseServiceRecId = _caseServiceRecId;
+            this.contract = contract;
             this._company = _company;
         }
     }
@@ -2925,16 +3071,97 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetServiceTypesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetServiceTypesResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateConfirmationDatesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceUpdateConfirmationDatesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string response;
+        public bool response;
         
-        public MzkServiceSchedulingServiceGetServiceTypesResponse() {
+        public MzkServiceSchedulingServiceUpdateConfirmationDatesResponse() {
         }
         
-        public MzkServiceSchedulingServiceGetServiceTypesResponse(string response) {
+        public MzkServiceSchedulingServiceUpdateConfirmationDatesResponse(bool response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceInsertVendDetRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceInsertVendDetRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _caseId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public long _caseServiceRecId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
+        public long _entityRecId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=3)]
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=4)]
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract _addressContract;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=5)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceInsertVendDetRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceInsertVendDetRequest(string _caseId, long _caseServiceRecId, long _entityRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract _addressContract, string _company) {
+            this._caseId = _caseId;
+            this._caseServiceRecId = _caseServiceRecId;
+            this._entityRecId = _entityRecId;
+            this._contract = _contract;
+            this._addressContract = _addressContract;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceInsertVendDetResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceInsertVendDetResponse {
+        
+        public MzkServiceSchedulingServiceInsertVendDetResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendSupplirerNameRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetVendSupplirerNameRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _company;
+        
+        public MzkServiceSchedulingServiceGetVendSupplirerNameRequest() {
+        }
+        
+        public MzkServiceSchedulingServiceGetVendSupplirerNameRequest(string _company) {
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendSupplirerNameResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkServiceSchedulingServiceGetVendSupplirerNameResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkVendorAccountContract> response;
+        
+        public MzkServiceSchedulingServiceGetVendSupplirerNameResponse() {
+        }
+        
+        public MzkServiceSchedulingServiceGetVendSupplirerNameResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkVendorAccountContract> response) {
             this.response = response;
         }
     }
@@ -2993,124 +3220,6 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendorsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetVendorsRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceGetVendorsRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceGetVendorsRequest(string _company) {
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetVendorsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetVendorsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response;
-        
-        public MzkServiceSchedulingServiceGetVendorsResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceGetVendorsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAccountContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateConfirmationDatesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceUpdateConfirmationDatesRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public long _caseServiceRecId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract contract;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceUpdateConfirmationDatesRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceUpdateConfirmationDatesRequest(long _caseServiceRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract contract, string _company) {
-            this._caseServiceRecId = _caseServiceRecId;
-            this.contract = contract;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceUpdateConfirmationDatesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceUpdateConfirmationDatesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public bool response;
-        
-        public MzkServiceSchedulingServiceUpdateConfirmationDatesResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceUpdateConfirmationDatesResponse(bool response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetRegionsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetRegionsRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _countryId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _StateId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=2)]
-        public string _company;
-        
-        public MzkServiceSchedulingServiceGetRegionsRequest() {
-        }
-        
-        public MzkServiceSchedulingServiceGetRegionsRequest(string _countryId, string _StateId, string _company) {
-            this._countryId = _countryId;
-            this._StateId = _StateId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkServiceSchedulingServiceGetRegionsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkServiceSchedulingServiceGetRegionsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkRegionContract> response;
-        
-        public MzkServiceSchedulingServiceGetRegionsResponse() {
-        }
-        
-        public MzkServiceSchedulingServiceGetRegionsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkRegionContract> response) {
-            this.response = response;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface MzkServiceSchedulingServiceChannel : Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService, System.ServiceModel.IClientChannel {
     }
@@ -3155,63 +3264,37 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getProvinceListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest request) {
-            return base.Channel.getProvinceListAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getCountryRegionListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest request) {
+            return base.Channel.getCountryRegionListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> getProvinceListAsync(string _countryId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest();
-            inValue._countryId = _countryId;
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> getCountryRegionListAsync(string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest();
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getProvinceListAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getCountryRegionListAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest request) {
-            return base.Channel.getServiceDetailsAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getVendorsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest request) {
+            return base.Channel.getVendorsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> getServiceDetailsAsync(string _caseId, long _caseServiceRecId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest();
-            inValue._caseId = _caseId;
-            inValue._caseServiceRecId = _caseServiceRecId;
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> getVendorsAsync(string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest();
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getServiceDetailsAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getVendorsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.updateStatusListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest request) {
-            return base.Channel.updateStatusListAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getTasksOptimizeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest request) {
+            return base.Channel.getTasksOptimizeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> updateStatusListAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest();
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).updateStatusListAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getCustomersAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest request) {
-            return base.Channel.getCustomersAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> getCustomersAsync(string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest();
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getCustomersAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getTasksAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest request) {
-            return base.Channel.getTasksAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> getTasksAsync(string _userID, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest();
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> getTasksOptimizeAsync(string _userID, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest();
             inValue._userID = _userID;
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getTasksAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getTasksOptimizeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3224,6 +3307,18 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
             inValue._userID = _userID;
             inValue._company = _company;
             return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getTasks_ModifiedAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getTasksAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest request) {
+            return base.Channel.getTasksAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse> getTasksAsync(string _userID, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksRequest();
+            inValue._userID = _userID;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3240,26 +3335,77 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getVendSupplirerNameAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest request) {
-            return base.Channel.getVendSupplirerNameAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getServiceTypesAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest request) {
+            return base.Channel.getServiceTypesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> getVendSupplirerNameAsync(string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest();
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> getServiceTypesAsync(string _caseId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest();
+            inValue._caseId = _caseId;
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getVendSupplirerNameAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getServiceTypesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.validateUserAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest request) {
+            return base.Channel.getServiceDetailsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> validateUserAsync(string _userID, string _password) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest();
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).validateUserAsync(inValue);
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse> getServiceDetailsAsync(string _caseId, long _caseServiceRecId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsRequest();
+            inValue._caseId = _caseId;
+            inValue._caseServiceRecId = _caseServiceRecId;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getServiceDetailsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getRegionsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest request) {
+            return base.Channel.getRegionsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> getRegionsAsync(string _countryId, string _StateId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest();
+            inValue._countryId = _countryId;
+            inValue._StateId = _StateId;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getRegionsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getProvinceListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest request) {
+            return base.Channel.getProvinceListAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse> getProvinceListAsync(string _countryId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListRequest();
+            inValue._countryId = _countryId;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getProvinceListAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getODOReadingDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest request) {
+            return base.Channel.getODOReadingDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> getODOReadingDetailsAsync(string _caseId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest();
+            inValue._caseId = _caseId;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getODOReadingDetailsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getLocationTypeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest request) {
+            return base.Channel.getLocationTypeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> getLocationTypeAsync(long _serviceRecId, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest();
+            inValue._serviceRecId = _serviceRecId;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getLocationTypeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3287,38 +3433,26 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getCountryRegionListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest request) {
-            return base.Channel.getCountryRegionListAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getCustomersAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest request) {
+            return base.Channel.getCustomersAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse> getCountryRegionListAsync(string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListRequest();
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse> getCustomersAsync(string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersRequest();
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getCountryRegionListAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getCustomersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getTasksOptimizeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest request) {
-            return base.Channel.getTasksOptimizeAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.updateStatusListAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest request) {
+            return base.Channel.updateStatusListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse> getTasksOptimizeAsync(string _userID, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeRequest();
-            inValue._userID = _userID;
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse> updateStatusListAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchdTasksContract> _lstTasks, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListRequest();
+            inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getTasksOptimizeAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getLocationTypeAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest request) {
-            return base.Channel.getLocationTypeAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse> getLocationTypeAsync(long _serviceRecId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeRequest();
-            inValue._serviceRecId = _serviceRecId;
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getLocationTypeAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).updateStatusListAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3335,54 +3469,29 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getODOReadingDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest request) {
-            return base.Channel.getODOReadingDetailsAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.insertSerDetAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetRequest request) {
+            return base.Channel.insertSerDetAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse> getODOReadingDetailsAsync(string _caseId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsRequest();
-            inValue._caseId = _caseId;
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getODOReadingDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getServiceTypesAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest request) {
-            return base.Channel.getServiceTypesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse> getServiceTypesAsync(string _caseId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesRequest();
-            inValue._caseId = _caseId;
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getServiceTypesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.insertServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest request) {
-            return base.Channel.insertServiceDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> insertServiceDetailsAsync(string _caseId, long _caseServiceRecId, long _entityRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract _addressContract, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest();
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse> insertSerDetAsync(string _caseId, long _caseServiceRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetRequest();
             inValue._caseId = _caseId;
             inValue._caseServiceRecId = _caseServiceRecId;
-            inValue._entityRecId = _entityRecId;
             inValue._contract = _contract;
-            inValue._addressContract = _addressContract;
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).insertServiceDetailsAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).insertSerDetAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getVendorsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest request) {
-            return base.Channel.getVendorsAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.validateUserAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse> getVendorsAsync(string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsRequest();
-            inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getVendorsAsync(inValue);
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse> validateUserAsync(string _userID, string _password) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserRequest();
+            inValue._userID = _userID;
+            inValue._password = _password;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).validateUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3399,16 +3508,46 @@ namespace Eqstra.ServiceScheduling.UILogic.SSProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getRegionsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest request) {
-            return base.Channel.getRegionsAsync(request);
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.insertVendDetAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetRequest request) {
+            return base.Channel.insertVendDetAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse> getRegionsAsync(string _countryId, string _StateId, string _company) {
-            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsRequest();
-            inValue._countryId = _countryId;
-            inValue._StateId = _StateId;
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse> insertVendDetAsync(string _caseId, long _caseServiceRecId, long _entityRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract _addressContract, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetRequest();
+            inValue._caseId = _caseId;
+            inValue._caseServiceRecId = _caseServiceRecId;
+            inValue._entityRecId = _entityRecId;
+            inValue._contract = _contract;
+            inValue._addressContract = _addressContract;
             inValue._company = _company;
-            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getRegionsAsync(inValue);
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).insertVendDetAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.getVendSupplirerNameAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest request) {
+            return base.Channel.getVendSupplirerNameAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse> getVendSupplirerNameAsync(string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameRequest();
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).getVendSupplirerNameAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService.insertServiceDetailsAsync(Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest request) {
+            return base.Channel.insertServiceDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse> insertServiceDetailsAsync(string _caseId, long _caseServiceRecId, long _entityRecId, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceDetailsContract _contract, Eqstra.ServiceScheduling.UILogic.SSProxy.MzkAddressContract _addressContract, string _company) {
+            Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest inValue = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsRequest();
+            inValue._caseId = _caseId;
+            inValue._caseServiceRecId = _caseServiceRecId;
+            inValue._entityRecId = _entityRecId;
+            inValue._contract = _contract;
+            inValue._addressContract = _addressContract;
+            inValue._company = _company;
+            return ((Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingService)(this)).insertServiceDetailsAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

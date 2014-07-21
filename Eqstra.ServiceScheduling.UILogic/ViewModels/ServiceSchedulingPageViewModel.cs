@@ -42,6 +42,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.Model = new ServiceSchedulingDetail();
             this.GoToSupplierSelectionCommand = new DelegateCommand(async () =>
             {
+                this.IsBusy = true;
                 if (this.Model.ValidateProperties())
                 {
                     bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
@@ -53,6 +54,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
                 }
+                this.IsBusy = false;
             });
 
             this.AddAddressCommand = new DelegateCommand<string>((x) =>

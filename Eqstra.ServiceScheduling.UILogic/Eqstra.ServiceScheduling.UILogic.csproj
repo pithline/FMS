@@ -220,7 +220,13 @@
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">

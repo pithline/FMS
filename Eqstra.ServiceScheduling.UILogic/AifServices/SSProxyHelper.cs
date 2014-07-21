@@ -13,6 +13,8 @@ using Windows.UI.Core;
 using System.Diagnostics;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
 using System.Collections.ObjectModel;
+using System.Collections;
+using System.Reflection;
 namespace Eqstra.ServiceScheduling.UILogic.AifServices
 {
     public class SSProxyHelper
@@ -24,6 +26,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         private UserInfo _userInfo;
         static SSProxyHelper()
         {
+           
         }
         public static SSProxyHelper Instance
         {
@@ -128,7 +131,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             CusEmailId = mzkTask.parmEmail,
                             ScheduledDate = DateTime.Today, //Need to add in Service
                             ScheduledTime = DateTime.Today, // Need to add in Service
-                            ServiceRecID=mzkTask.parmServiceRecID
+                            ServiceRecID = mzkTask.parmServiceRecID
                         });
 
                     });
@@ -349,7 +352,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
                             ContactPersonPhone = mzk.parmContactPersonPhone,
-                            SupplierDateTime=DateTime.Now// need to add in service
+                            SupplierDateTime = DateTime.Now// need to add in service
+                           
                         });
                     });
 
@@ -428,7 +432,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                        {
                            ContactName = mzk.parmName,
-                           Id =mzk.parmAccountNum,
+                           Id = mzk.parmAccountNum,
                            RecID = mzk.parmRecID,
                            Address = mzk.parmAddress
                        });
@@ -499,7 +503,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id =mzk.parmDriverId,
+                            Id = mzk.parmDriverId,
                             RecID = mzk.parmRecID,
                             Address = mzk.parmAddress
                         });
@@ -527,13 +531,14 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 }
                 var result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
                 List<Supplier> suppliers = new List<Supplier>();
-               
+
                 if (result.response != null)
                 {
                     result.response.AsParallel().ForAll(mzk =>
                     {
                         suppliers.Add(new Eqstra.BusinessLogic.ServiceSchedule.Supplier
                         {
+                            AccountNum = mzk.parmAccountNum,
                             SupplierContactName = mzk.parmContactPersonName,
                             SupplierContactNumber = mzk.parmContactPersonPhone,
                             SupplierName = mzk.parmName,
@@ -544,7 +549,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         });
                     });
                 }
-                
+
                 return suppliers;
             }
             catch (Exception ex)
@@ -592,31 +597,32 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
 
-                 var mzkAddressContract= new MzkAddressContract {
+                var mzkAddressContract = new MzkAddressContract
+                {
                     parmCity = address.SelectedCity != null ? address.SelectedCity.Id : string.Empty,
                     parmCountryRegionId = address.SelectedCountry != null ? address.SelectedCountry.Id : string.Empty,
                     parmProvince = address.Selectedprovince != null ? address.Selectedprovince.Id : string.Empty,
-                    parmStreet=address.Street,
+                    parmStreet = address.Street,
                     parmSubUrb = address.SelectedSuburb != null ? address.SelectedSuburb.Id : string.Empty,
-                    parmZipCode=address.SelectedZip
-                
+                    parmZipCode = address.SelectedZip
+
                 };
-             var mzkServiceDetailsContract=  new MzkServiceDetailsContract
-                {
-                    parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
-                    parmAddress = serviceSchedulingDetail.Address,
-                    parmEventDesc = serviceSchedulingDetail.EventDesc,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocationType!=null ? serviceSchedulingDetail.SelectedLocationType.LocType: string.Empty,
-                    parmODOReading = serviceSchedulingDetail.ODOReading,
-                    parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
-                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
-                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
-                    parmServiceType = serviceSchedulingDetail.SelectedServiceType
-                };
+                var mzkServiceDetailsContract = new MzkServiceDetailsContract
+                   {
+                       parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
+                       parmAddress = serviceSchedulingDetail.Address,
+                       parmEventDesc = serviceSchedulingDetail.EventDesc,
+                       parmLocationType = serviceSchedulingDetail.SelectedLocationType != null ? serviceSchedulingDetail.SelectedLocationType.LocType : string.Empty,
+                       parmODOReading = serviceSchedulingDetail.ODOReading,
+                       parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
+                       parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                       parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
+                       parmServiceType = serviceSchedulingDetail.SelectedServiceType
+                   };
 
 
-             var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
-                   , mzkAddressContract, _userInfo.CompanyId);
+                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
+                      , mzkAddressContract, _userInfo.CompanyId);
 
                 if (result.response)
                 {
@@ -643,18 +649,19 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
+                var result = await client.insertVendDetAsync(caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
                 {
                     parmContactPersonName = supplierSelection.SelectedSupplier.SupplierContactName,
                     parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
                     parmContactPersonPhone = supplierSelection.SelectedSupplier.SupplierContactNumber,
+                    parmSupplierId=supplierSelection.SelectedSupplier.AccountNum
                 }, new MzkAddressContract(), _userInfo.CompanyId);
 
-                if (result.response)
+                if (result!=null)
                 {
                     Util.ShowToast("Thank you very much. Your supplier has been sent.");
                 }
-                return result.response;
+                return result!=null;
             }
 
 
@@ -676,7 +683,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId,default(long) ,new MzkServiceDetailsContract
+                var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
                 {
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
@@ -690,13 +697,13 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmSupplierName = serviceSchedulingDetail.SupplierName,
                     parmContactPersonName = serviceSchedulingDetail.ContactPersonName,
                     parmContactPersonPhone = serviceSchedulingDetail.ContactPersonPhone,
-                    
-                },new MzkAddressContract(),_userInfo.CompanyId);
+
+                }, new MzkAddressContract(), _userInfo.CompanyId);
 
                 if (result.response)
                 {
                     Util.ShowToast("Thank you very much. Your request has been sent to your selected  supplier, you will receive confirmation via the Car Manager application shortly.");
-                  
+
                 }
                 return result.response;
             }
@@ -733,7 +740,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmCaseID = task.CaseNumber,
                     parmCaseCategory = task.CaseCategory,
                     parmCaseServiceRecID = task.CaseServiceRecID,
-                    parmStatus=task.Status,
+                    parmStatus = task.Status,
                     parmServiceRecID = task.ServiceRecID,
                     parmStatusDueDate = task.StatusDueDate,
                     parmEEPActionStep = actionStepMapping[task.Status]

@@ -113,7 +113,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <grid:SfDataGrid x:Name="mainGrid"
+                            <grid:SfDataGrid x:Name="mainGrid" 
                                              common:DataGridDoubleTappedCommand.Command="{Binding StartSchedulingCommand}"
                                              Grid.Row="1"
                                              IsDoubleTapEnabled="True"
