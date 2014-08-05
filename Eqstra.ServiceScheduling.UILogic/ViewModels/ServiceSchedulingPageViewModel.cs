@@ -253,6 +253,5 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return address; }
             set { SetProperty(ref address, value); }
         }
-
     }
 }

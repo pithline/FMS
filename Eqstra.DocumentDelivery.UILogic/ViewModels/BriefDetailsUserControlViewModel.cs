@@ -1,8 +1,11 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.DocumentDelivery;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.System;
 
@@ -29,7 +32,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
             {
-                await Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + address));
+                await Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(address, "\n", ",")));
             }, (address) =>
             {
                 return !string.IsNullOrEmpty(address);
@@ -43,9 +46,18 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         public DelegateCommand<string> MakeSkypeCallCommand { get; set; }
 
-
-
-
+        private ObservableCollection<DocumentsBrief> documentsBriefs;
+        public ObservableCollection<DocumentsBrief> DocumentsBriefs
+        {
+            get { return documentsBriefs; }
+            set { SetProperty(ref documentsBriefs, value); }
+        }
+        private CDCustomerDetails customerDetails;
+        public CDCustomerDetails CustomerDetails
+        {
+            get { return customerDetails; }
+            set { SetProperty(ref customerDetails, value); }
+        }
 
     }
 }

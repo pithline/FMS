@@ -7,7 +7,8 @@
     xmlns:common="using:Eqstra.DocumentDelivery.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
@@ -22,12 +23,8 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-
-
                 <AppBarButton Label="Save" Icon="Save" Command="{Binding SaveTaskCommand}" Visibility="{Binding SaveVisibility}"/>
                 <AppBarButton Label="Next Step" Icon="Forward" Command="{Binding NextStepCommand}" Visibility="{Binding NextStepVisibility}"/>
-
-
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -56,11 +53,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
-				Style="{StaticResource NavigationBackButtonNormalStyle}"
-				VerticalAlignment="Center"
-				AutomationProperties.Name="Back"
-				AutomationProperties.AutomationId="BackButton"
-				AutomationProperties.ItemType="Navigation Button"/>
+                Style="{StaticResource NavigationBackButtonNormalStyle}"
+                VerticalAlignment="Center"
+                AutomationProperties.Name="Back"
+                AutomationProperties.AutomationId="BackButton"
+                AutomationProperties.ItemType="Navigation Button"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Command="{Binding GoHomeCommand}" Style="{StaticResource TransparentBtn}">
                     <Button.Content>
@@ -75,16 +72,16 @@
 
         <Grid Grid.Row="1" Margin="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" Margin="0 0 0 0">
+            <Grid Grid.Column="1"  Margin="10 0 10 29">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Tasks"  HorizontalAlignment="Left" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <SearchBox ChooseSuggestionOnEnter="True" Width="250" Grid.Row="0" Grid.Column="0" PlaceholderText="Type to filter..." Margin="0 0 10 0" x:Name="filterBox" HorizontalAlignment="Right" FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested" >
+                <TextBlock Text="{Binding DetailTitle}"  HorizontalAlignment="Left" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <SearchBox ChooseSuggestionOnEnter="True" Width="250"  Margin="0 0 0 8" Height="35" Grid.Row="0" Grid.Column="0" PlaceholderText="Type to filter..." x:Name="filterBox" HorizontalAlignment="Right" FocusOnKeyboardInput="True" SearchHistoryEnabled="False" QuerySubmitted="filterBox_QuerySubmitted" SuggestionsRequested="filterBox_SuggestionsRequested" >
                 </SearchBox>
                 <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
                     <Grid Margin="10">
@@ -92,12 +89,12 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <grid:SfDataGrid x:Name="sfDataGrid" AllowSorting="False" ShowBusyIndicator="True" NavigationMode="Cell" SelectionChanged="sfDataGrid_SelectionChanged"  ItemsSource="{Binding InspectionList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Inspection,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
+                        <grid:SfDataGrid x:Name="sfDataGrid" NavigationMode="Row"  SelectionChanged="sfDataGrid_SelectionChanged"  AllowSorting="False" ShowBusyIndicator="True" ItemsSource="{Binding CDTaskList}"  ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding CDTask,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}" >
                             <grid:SfDataGrid.Columns>
                                 <!--<grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>-->
                                 <!--<grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>-->
                                 <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="CELL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridTemplateColumn HeaderText="CUSTOMER NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -110,30 +107,37 @@
                                 </grid:GridTemplateColumn>
                                 <grid:GridTextColumn MappingName="DocumentCount" HeaderText="NO OF DOCUMENTS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="TaskType" HeaderText="TASK TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridComboBoxColumn MappingName="CDTaskStatus" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridComboBoxColumn MappingName="Status" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
                                 <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridDateTimeColumn MappingName="DeliveryDate" FormatString="mm/dd/yyyy" HeaderText="DELIVERY DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left"/>
-                                <grid:GridTemplateColumn HeaderText="DELIVERY TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="130" HorizontalHeaderContentAlignment="Left">
+                                <grid:GridDateTimeColumn MappingName="DeliveryDate" FormatString="mm/dd/yyyy" HeaderText="DELIVERY DATE" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                <grid:GridTemplateColumn HeaderText="DELIVERY TIME"  HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
                                     <grid:GridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <input:SfTimePicker Value="{Binding DeliveryTime,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
+                                            <input:SfTimePicker Value="{Binding DeliveryDate,Mode=TwoWay}" BorderThickness="0" IsHitTestVisible="False" Background="Transparent"/>
                                         </DataTemplate>
                                     </grid:GridTemplateColumn.CellTemplate>
                                 </grid:GridTemplateColumn>
                             </grid:SfDataGrid.Columns>
+
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <Core:InvokeCommandAction Command="{Binding TasksChangedCommand}"
+                                              CommandParameter="{Binding ElementName=sfDataGrid,Path=SelectedItems}"/>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
                         </grid:SfDataGrid>
                     </Grid>
                 </Border>
 
             </Grid>
-            <Grid Grid.Column="0" Margin="20 0 0 0">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                <local:BriefDetailsUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}"/>
+                <TextBlock Text="Brief Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                <local:BriefDetailsUserControl Grid.Row="1" DataContext="{Binding BriefDetailsUserControlViewModel}" Margin="0 0 0 30"/>
             </Grid>
         </Grid>
     </Grid>

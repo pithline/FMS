@@ -19,31 +19,10 @@ namespace Eqstra.DocumentDelivery.Views
 {
     public sealed partial class BriefDetailsUserControl : UserControl
     {
-        public List<DocBrief> DocumentList { get; set; }
-        
         public BriefDetailsUserControl()
         {
             this.InitializeComponent();
-            this.DocumentList = new List<DocBrief>
-            {
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-                new DocBrief{CaseNumber="E4323",DocumentType = "LicenseDisc"},
-            };
         }
     }
 
-
-    public class DocBrief
-    {
-        public string CaseNumber { get; set; }
-        public string DocumentType { get; set; }
-    }
 }

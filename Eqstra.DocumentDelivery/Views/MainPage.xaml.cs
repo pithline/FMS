@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using Eqstra.DocumentDelivery.UILogic;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.DocumentDelivery.Views
@@ -47,22 +48,22 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.txt");
+                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.json");
                 if (result != null)
                 {
-                    this.mainGrid.ItemsSource = result.Where(x => x.CustomerName.Contains(args.QueryText) ||
-                                      Convert.ToString(x.DocumentCount).Contains(args.QueryText) || x.AllocatedTo.Contains(args.QueryText) ||
-                                     Convert.ToString(x.TaskType).Contains(args.QueryText) || Convert.ToString(x.ConfirmedDate).Contains(args.QueryText) ||
-                                     Convert.ToString(x.StatusDueDate).Contains(args.QueryText) || x.Status.Contains(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryTime).Contains(args.QueryText) || Convert.ToString(x.DeliveryDate).Contains(args.QueryText));
+                    this.mainGrid.ItemsSource = result.Where(x => x.CustomerName.Equals(args.QueryText) ||
+                                      Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
+                                     Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
+                                     Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
+                                     Convert.ToString(x.DeliveryTime).Equals(args.QueryText) || Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
 
                     
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                AppSettings.Instance.ErrorMessage = ex.Message;
+               
             }
         }
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
@@ -76,12 +77,12 @@ namespace Eqstra.DocumentDelivery.Views
                     {
                         if (!isCached)
                         {
-                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.txt");
+                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.json");
                             isCached = true;
                         }
 
                         var searchSuggestionList = new List<string>();
-                        foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.txt"))
+                        foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.json"))
                         {
                             foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {
@@ -90,7 +91,7 @@ namespace Eqstra.DocumentDelivery.Views
                                     propInfo.Name.Equals("Address"))
                                     continue;
                                 var propVal = Convert.ToString(propInfo.GetValue(task));
-                                if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                                if (propVal.ToLowerInvariant().Contains(args.QueryText.ToLowerInvariant()))
                                 {
                                     if (!searchSuggestionList.Contains(propVal))
                                         searchSuggestionList.Add(propVal);
@@ -102,10 +103,10 @@ namespace Eqstra.DocumentDelivery.Views
                     deferral.Complete();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                AppSettings.Instance.ErrorMessage = ex.Message;
 
-                throw;
             }
 
         }
@@ -116,10 +117,6 @@ namespace Eqstra.DocumentDelivery.Views
             {
                 FlyoutBase.ShowAttachedFlyout(element);
             }
-        }
-        async private void WeatherInfo_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("bingweather:"));
         }
     }
 }

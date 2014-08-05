@@ -1,4 +1,7 @@
-﻿using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic.Enums;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.AifServices;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Services;
 using Eqstra.DocumentDelivery.UILogic.ViewModels;
 using Eqstra.DocumentDelivery.Views;
@@ -64,10 +67,19 @@ namespace Eqstra.DocumentDelivery
         {
             var accountService = _container.Resolve<IAccountService>();
             var result = await accountService.VerifyUserCredentialsAsync();
+
             if (result != null)
             {
-                string jsonUserInfo = JsonConvert.SerializeObject(result);
-                NavigationService.Navigate("Main", jsonUserInfo);
+                await DDServiceProxyHelper.Instance.ConnectAsync("rchivukula", "P@ssword4");
+                var rs = await DDServiceProxyHelper.Instance.ValidateUser("rchivukula", "P@ssword4");
+                PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
+                PersistentData.Instance.UserInfo = new BusinessLogic.DeliveryModel.CDUserInfo();
+                PersistentData.Instance.UserInfo.CompanyId = rs.response.parmCompany;
+                PersistentData.Instance.UserInfo.CompanyName = rs.response.parmCompanyName;
+                PersistentData.Instance.UserInfo.UserId = rs.response.parmUserID;
+                PersistentData.Instance.UserInfo.Name = rs.response.parmUserName;
+                PersistentData.Instance.UserInfo.CDUserType = CDUserType.Driver; // it is only for testing.
+                NavigationService.Navigate("Main", string.Empty);
             }
             else
             {
@@ -99,8 +111,8 @@ namespace Eqstra.DocumentDelivery
 
             _container.RegisterType<SettingsFlyout, AddCustomerPage>(new ContainerControlledLifetimeManager());
 
-            ViewModelLocator.Register(typeof(CollectionOrDeliveryDetailsPage).ToString(), () => new CollectionOrDeliveryDetailsPageViewModel(this.NavigationService, new AddCustomerPage()));
-
+            //ViewModelLocator.Register(typeof(CollectionOrDeliveryDetailsPage).ToString(), () => new CollectionOrDeliveryDetailsPageViewModel(this.NavigationService, this.EventAggregator, new AddCustomerPage()));
+            //ViewModelLocator.Register(typeof(BriefDetailsUserControlViewModel).ToString(), () => new BriefDetailsUserControlViewModel(this.EventAggregator));
 
             ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {

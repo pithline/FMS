@@ -15,6 +15,120 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetCityListRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_CountryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetCityListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q2:ArrayOfMzkCountyContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceUpdateStatusListRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q3:ArrayOfMzkServiceSchdTasksContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceUpdateStatusListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q4:ArrayOfMzkServiceSchdTasksContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceUpdateConfirmationDatesRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="contract" nillable="true" type="q5:MzkServiceDetailsContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceUpdateConfirmationDatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="response" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertServiceDetailsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element minOccurs="0" name="_entityRecId" type="xs:long" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q6:MzkServiceDetailsContract" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_addressContract" nillable="true" type="q7:MzkAddressContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertServiceDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="response" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertVendDetRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element minOccurs="0" name="_entityRecId" type="xs:long" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q8:MzkServiceDetailsContract" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_addressContract" nillable="true" type="q9:MzkAddressContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertVendDetResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetZipcodeListRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_countryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetZipcodeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q10:ArrayOfMzkZipCodeContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertSerDetRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q11:MzkServiceDetailsContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceInsertSerDetResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="MzkServiceSchedulingServiceGetVendorsRequest">
     <xs:complexType>
       <xs:sequence>
@@ -25,7 +139,21 @@
   <xs:element name="MzkServiceSchedulingServiceGetVendorsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q2:ArrayOfMzkAccountContract" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q12:ArrayOfMzkAccountContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetVendSupplirerNameRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetVendSupplirerNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q13:ArrayOfMzkVendorAccountContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,22 +168,24 @@
   <xs:element name="MzkServiceSchedulingServiceGetTasksOptimizeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q3:ArrayOfMzkServiceSchdTasksContract" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q14:ArrayOfMzkServiceSchdTasksContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetTasks_ModifiedRequest">
+  <xs:element name="MzkServiceSchedulingServiceGetVendorAddressRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_vendAccount" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseRecID" type="xs:long" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetTasks_ModifiedResponse">
+  <xs:element name="MzkServiceSchedulingServiceGetVendorAddressResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q4:ArrayOfMzkServiceSchdTasksContract" />
+        <xs:element minOccurs="0" name="response" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -70,23 +200,22 @@
   <xs:element name="MzkServiceSchedulingServiceGetTasksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q5:ArrayOfMzkServiceSchdTasksContract" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q15:ArrayOfMzkServiceSchdTasksContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetSuburbListRequest">
+  <xs:element name="MzkServiceSchedulingServiceGetTasks_ModifiedRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="_CountryId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetSuburbListResponse">
+  <xs:element name="MzkServiceSchedulingServiceGetTasks_ModifiedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q6:ArrayOfMzkCityContract" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q16:ArrayOfMzkServiceSchdTasksContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -105,19 +234,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetServiceDetailsRequest">
+  <xs:element name="MzkServiceSchedulingServiceGetSuburbListRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element minOccurs="0" name="_CountryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetServiceDetailsResponse">
+  <xs:element name="MzkServiceSchedulingServiceGetSuburbListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q7:ArrayOfMzkServiceDetailsContract" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q17:ArrayOfMzkCityContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,22 +262,23 @@
   <xs:element name="MzkServiceSchedulingServiceGetRegionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q8:ArrayOfMzkRegionContract" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q18:ArrayOfMzkRegionContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetProvinceListRequest">
+  <xs:element name="MzkServiceSchedulingServiceGetServiceDetailsRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="_countryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetProvinceListResponse">
+  <xs:element name="MzkServiceSchedulingServiceGetServiceDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q9:ArrayOfMzkProvinceContract" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q19:ArrayOfMzkServiceDetailsContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,7 +293,36 @@
   <xs:element name="MzkServiceSchedulingServiceGetODOReadingDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q10:ArrayOfMzkServiceDetailsContract" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q20:ArrayOfMzkServiceDetailsContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetProvinceListRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_countryId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetProvinceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q21:ArrayOfMzkProvinceContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetDriversRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetDriversResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q22:ArrayOfMzkDriverContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -178,37 +337,7 @@
   <xs:element name="MzkServiceSchedulingServiceGetLocationTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q11:ArrayOfMzkLocationTypeContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetDriversRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetDriversResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q12:ArrayOfMzkDriverContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetCityListRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_CountryId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetCityListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q13:ArrayOfMzkCountyContract" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q23:ArrayOfMzkLocationTypeContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -222,54 +351,40 @@
   <xs:element name="MzkServiceSchedulingServiceGetCustomersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q14:ArrayOfMzkAccountContract" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q24:ArrayOfMzkAccountContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceUpdateStatusListRequest">
+  <xs:element name="MzkServiceSchedulingServiceGetDriverAddressRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q15:ArrayOfMzkServiceSchdTasksContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceUpdateStatusListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q16:ArrayOfMzkServiceSchdTasksContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetZipcodeListRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_countryId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_StateId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetZipcodeListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q17:ArrayOfMzkZipCodeContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertSerDetRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_driverTableRecId" type="xs:long" />
         <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q18:MzkServiceDetailsContract" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertSerDetResponse">
+  <xs:element name="MzkServiceSchedulingServiceGetDriverAddressResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="response" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetCustomerAddressRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_custTableRecId" type="xs:long" />
+        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkServiceSchedulingServiceGetCustomerAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="response" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="MzkServiceSchedulingServiceValidateUserRequest">
@@ -283,73 +398,7 @@
   <xs:element name="MzkServiceSchedulingServiceValidateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q19:MzkValidateUserContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceUpdateConfirmationDatesRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="contract" nillable="true" type="q20:MzkServiceDetailsContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceUpdateConfirmationDatesResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="response" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertVendDetRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
-        <xs:element minOccurs="0" name="_entityRecId" type="xs:long" />
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q21:MzkServiceDetailsContract" />
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_addressContract" nillable="true" type="q22:MzkAddressContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertVendDetResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetVendSupplirerNameRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceGetVendSupplirerNameResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q23:ArrayOfMzkVendorAccountContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertServiceDetailsRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_caseId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_caseServiceRecId" type="xs:long" />
-        <xs:element minOccurs="0" name="_entityRecId" type="xs:long" />
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_contract" nillable="true" type="q24:MzkServiceDetailsContract" />
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_addressContract" nillable="true" type="q25:MzkAddressContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkServiceSchedulingServiceInsertServiceDetailsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="response" type="xs:boolean" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q25:MzkValidateUserContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -8,21 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic.DeliveryModel
+namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class ProofOfCollection : BaseModel
+    public class CDProof : BaseModel
     {
-         public ProofOfCollection()
+        public CDProof()
         {
-            this.AddCustomer = (SqliteHelper.Storage.LoadTableAsync<AddCustomer>()).Result;
+            this.Customers = (SqliteHelper.Storage.LoadTableAsync<DestinationContacts>()).Result;
         }
 
-        private List<AddCustomer> addCustomer;
+        private List<DestinationContacts> customers;
         [Ignore]
-        public List<AddCustomer> AddCustomer
+        public List<DestinationContacts> Customers
         {
-            get { return addCustomer; }
-            set { SetProperty(ref addCustomer, value); }
+            get { return customers; }
+            set { SetProperty(ref customers, value); }
+        }
+
+        private string deliveryPersonName;
+        public string DeliveryPersonName
+        {
+            get { return deliveryPersonName; }
+            set { SetProperty(ref deliveryPersonName, value); }
         }
 
         private string cRSignature;

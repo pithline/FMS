@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Eqstra.DocumentDelivery.UILogic.Services
 {
-  public  interface IAccountService
+    public interface IAccountService
     {
-         UserInfo SignedInUser { get; }
-         Task<Tuple<UserInfo, string>> SignInAsync(string userId, string password, bool isCredentialStore);
-         void SignOut();
+        CDUserInfo SignedInUser { get; }
+        Task<Tuple<CDUserInfo, string>> SignInAsync(string userId, string password, bool isCredentialStore);
+        void SignOut();
 
-         event EventHandler<BusinessLogic.EventArgs.UserChangedEventArgs> UserChanged;
+        event EventHandler<BusinessLogic.EventArgs.UserChangedEventArgs> UserChanged;
 
-         Task<UserInfo> VerifyUserCredentialsAsync();
+        Task<CDUserInfo> VerifyUserCredentialsAsync();
 
     }
 }

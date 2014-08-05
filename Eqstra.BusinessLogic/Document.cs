@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic
 {
-    public class Document : BindableBase
+    public class Document : ValidatableBindableBase
     {
         private long vehicleInsRecID;
         [PrimaryKey]
@@ -18,7 +18,6 @@ namespace Eqstra.BusinessLogic
             get { return vehicleInsRecID; }
             set { SetProperty(ref vehicleInsRecID, value); }
         }
-
         private string caseNumber;
         public string CaseNumber
         {
@@ -42,7 +41,6 @@ namespace Eqstra.BusinessLogic
         }
 
         private string make;
-
         public string Make
         {
             get { return make; }
@@ -50,18 +48,24 @@ namespace Eqstra.BusinessLogic
         }
 
         private string model;
-
         public string Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }
         }
         private string registrationNumber;
-
         public string RegistrationNumber
         {
             get { return registrationNumber; }
             set { SetProperty(ref registrationNumber, value); }
         }
+
+        private bool isDelivered;
+        public bool IsDelivered
+        {
+            get { return isDelivered; }
+            set { SetProperty(ref isDelivered, value); }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.DeliveryModel;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,11 @@ namespace Eqstra.BusinessLogic
     {
         [RestorableState]
         public UserInfo UserInfo { get; set; }
+    }
+
+    public class CDLogonResult
+    {
+        [RestorableState]
+        public CDUserInfo UserInfo { get; set; }
     }
 }

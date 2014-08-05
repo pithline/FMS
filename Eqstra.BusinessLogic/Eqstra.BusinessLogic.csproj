@@ -125,15 +125,19 @@
     <Compile Include="Common\PropertyHistory.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDetails.cs" />
-    <Compile Include="DeliveryModel\AddCustomer.cs" />
-    <Compile Include="DeliveryModel\ProofOfCollection.cs" />
+    <Compile Include="DocumentDelivery\CDCustomerDetails.cs" />
+    <Compile Include="DocumentDelivery\CDUserInfo.cs" />
+    <Compile Include="DocumentDelivery\CustomerContacts.cs" />
+    <Compile Include="DocumentDelivery\CDProof.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="DocumentDelivery\DocumentsBrief.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Enums\CDTaskStatus.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\CDTaskTypeEnum.cs" />
+    <Compile Include="Enums\CDUserType.cs" />
     <Compile Include="Helpers\DriverTaskStatus.cs" />
     <Compile Include="Helpers\LocationTypeConstants.cs" />
     <Compile Include="Helpers\ProcessStep.cs" />

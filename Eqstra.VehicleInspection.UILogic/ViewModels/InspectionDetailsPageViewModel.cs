@@ -121,8 +121,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
             catch (SQLite.SQLiteException)
             {
-
-
             }
         }
 
@@ -134,9 +132,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 this.InspectionList.Add(item);
             }
-
             this.InspectionTask = this.InspectionList.FirstOrDefault();
-
             _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
             {
                 await GetCustomerDetailsAsync(b);

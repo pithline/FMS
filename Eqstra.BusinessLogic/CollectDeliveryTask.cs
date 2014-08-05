@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Enums;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
@@ -12,6 +13,11 @@ namespace Eqstra.BusinessLogic
 {
     public class CollectDeliveryTask : ValidatableBindableBase
     {
+        public CollectDeliveryTask()
+        {
+            this.Make = "45755";
+            this.Model = "ASD457";
+        }
 
         private long vehicleInsRecId;
         [PrimaryKey]
@@ -30,7 +36,12 @@ namespace Eqstra.BusinessLogic
             set { caseNumber = value; }
 
         }
-        
+        private string customerNumber;
+        public string CustomerNumber
+        {
+            get { return customerNumber; }
+            set { SetProperty(ref customerNumber, value); }
+        }
         private string customerName;
         [RestorableState]
         public string CustomerName
@@ -46,7 +57,6 @@ namespace Eqstra.BusinessLogic
         }
 
         private CDTaskTypeEnum taskType;
-
         public CDTaskTypeEnum TaskType
         {
             get { return taskType; }
@@ -60,12 +70,29 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref deliveryDate, value); }
         }
 
+        private string emailId;
+        public string EmailId
+        {
+            get { return emailId; }
+            set { SetProperty(ref emailId, value); }
+        }
+
         private DateTime deliveryTime;
         public DateTime DeliveryTime
         {
             get { return deliveryTime; }
             set { SetProperty(ref deliveryTime, value); }
         }
+
+
+        private long custPartyId;
+
+        public long CustPartyId
+        {
+            get { return custPartyId; }
+            set { SetProperty(ref custPartyId, value); }
+        }
+
         private int documentCount;
         [RestorableState]
         public int DocumentCount
@@ -133,6 +160,30 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref statusDueDate, value); }
         }
 
+        private string registrationNumber;
+        public string RegistrationNumber
+        {
+            get { return registrationNumber; }
+            set { SetProperty(ref registrationNumber, value); }
+        }
+        private string make;
+        public string Make
+        {
+            get { return make; }
+            set { SetProperty(ref make, value); }
+        }
+
+        private string model;
+        public string Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
+
+    }
+
+    public class TasksFetchedEvent : PubSubEvent<CollectDeliveryTask>
+    {
 
     }
 }

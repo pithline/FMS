@@ -9,7 +9,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
 {
    public interface IIdentityService
     {
-       Task<Tuple<LogonResult,string>> LogonAsync(string userId, string password);
+       Task<Tuple<CDLogonResult, string>> LogonAsync(string userId, string password);
 
        Task<bool> VerifyAcitveSessionAsync(string userId);
 

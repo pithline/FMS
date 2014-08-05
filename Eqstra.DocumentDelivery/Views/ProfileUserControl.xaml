@@ -7,22 +7,53 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:AppUI="using:Eqstra.DocumentDelivery.UILogic"
     mc:Ignorable="d"
     d:DesignHeight="100"
     d:DesignWidth="250">
 
-    <Grid Tapped="Grid_Tapped">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                <TextBlock Text="Michael Vander" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserNameStyle}"/>
-                <TextBlock Text="The South African Brewaries" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserCompanyStyle}"/>
-            </StackPanel>
-            <Image Source="ms-appx:///Assets/User_profile.png" Stretch="None" Width="52" Height="56"/>
-        </StackPanel>
-        <FlyoutBase.AttachedFlyout>
-            <MenuFlyout Placement="Bottom">
-                <MenuFlyoutItem Text="Logout" Width="140" Command="{Binding LogoutCommand}"/>
-            </MenuFlyout>
-        </FlyoutBase.AttachedFlyout>
+    <UserControl.Resources>
+        <AppUI:AppSettings x:Key="VM"/>
+    </UserControl.Resources>
+
+    <Grid >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="Crimson" Width="200"
+                           Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}" TextWrapping="Wrap">
+               <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock Foreground="Crimson" 
+                                   Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}"
+                                   ></TextBlock>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </TextBlock>
+
+            <Grid Grid.Row="1" Tapped="Grid_Tapped">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding NetworkIcon}" VerticalAlignment="Bottom" />
+                <StackPanel Grid.Column="1"  Orientation="Horizontal" Margin="0 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" >
+                        <TextBlock Text="{Binding UserInfo.Name}" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserNameStyle}"/>
+                        <TextBlock Text="{Binding UserInfo.CompanyName}" VerticalAlignment="Center" Margin="5 0" Style="{StaticResource UserCompanyStyle}"/>
+                    </StackPanel>
+                    <Image Source="ms-appx:///Assets/User_profile.png" Stretch="None" Width="52" Height="56"/>
+                </StackPanel>
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Text="Logout" Width="140" Command="{Binding LogoutCommand}"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

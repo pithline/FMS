@@ -1,6 +1,10 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
+using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -21,42 +25,44 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
     public class InspectionDetailsPageViewModel : BaseViewModel
     {
-        INavigationService _navigationService;
-        public InspectionDetailsPageViewModel(INavigationService navigationService)
+        private INavigationService _navigationService;
+        IEventAggregator _eventAggregator;
+        public InspectionDetailsPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
-            this.InspectionList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
+            this.CDTaskList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
+            this.SelectedTaskList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
+            this.BriefDetailsUserControlViewModel = new BriefDetailsUserControlViewModel();
+            this.CDUserInfo = PersistentData.Instance.UserInfo;
             this.SaveVisibility = Visibility.Collapsed;
             this.NextStepVisibility = Visibility.Collapsed;
-            this.CustomerDetails = new CustomerDetails();
-            this.Inspection = null;
+            this.CustomerDetails = new CDCustomerDetails();
+            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
+            this.CDTask = null;
             _navigationService = navigationService;
-            DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(() =>
-            {
-                if (this.Inspection == null)
-                {
-                    return System.Threading.Tasks.Task.FromResult<object>(null);
-                }
-                string jsonInspection = JsonConvert.SerializeObject(Inspection);
-                _navigationService.Navigate("DrivingDirection", jsonInspection);
-                return System.Threading.Tasks.Task.FromResult<object>(null);
-            },
-            () =>
-            { return (this.Inspection != null && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture && this.Inspection.Status != BusinessLogic.Helpers.TaskStatus.Completed); }
-            );
-
+            _eventAggregator = eventAggregator;
             this.SaveTaskCommand = new DelegateCommand(async () =>
             {
                 foreach (var item in this.SelectedTaskList)
                 {
-                    //this.InspectionList.Remove(item);
                     if (item.TaskType == CDTaskTypeEnum.Delivery)
                     {
-                        item.CDTaskStatus = CDTaskStatus.AwaitingDelivery;
+                        item.Status = CDTaskStatus.AwaitingDelivery;
                     }
                     else
                     {
-                        item.CDTaskStatus = CDTaskStatus.AwaitingDriverCollection;
+                        if (this.CDUserInfo.CDUserType == CDUserType.Driver)
+                        {
+                            item.Status = CDTaskStatus.AwaitingDriverCollection;
+                        }
+                        if (this.CDUserInfo.CDUserType == CDUserType.Customer)
+                        {
+                            item.Status = CDTaskStatus.AwaitingCustomerCollection;
+                        }
+                        if (this.CDUserInfo.CDUserType == CDUserType.Courier)
+                        {
+                            item.Status = CDTaskStatus.AwaitingCourierCollection;
+                        }
                     }
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<Eqstra.BusinessLogic.CollectDeliveryTask>(item);
                     this._navigationService.Navigate("Main", string.Empty);
@@ -64,101 +70,143 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             },
             () =>
             {
-                return this.SelectedTaskList.Count > 0;
+                return (this.CDTask != null);
             });
             this.NextStepCommand = new DelegateCommand(() =>
             {
                 try
                 {
-
-                    ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"] = this.Inspection.VehicleInsRecId;
-                    string jsonInspection = JsonConvert.SerializeObject(this.Inspection);
-                    if (this.Inspection.TaskType == CDTaskTypeEnum.Collection)
+                    PersistentData.Instance.CollectDeliveryTask = this.CDTask;
+                    ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"] = this.CDTask.VehicleInsRecId;
+                    if (this.CDTask.TaskType == CDTaskTypeEnum.Collection)
                     {
-                        this._navigationService.Navigate("CollectionOrDeliveryDetails", jsonInspection);
+                        this._navigationService.Navigate("CollectionOrDeliveryDetails", string.Empty);
                     }
                     else
                     {
-                        _navigationService.Navigate("DrivingDirection", jsonInspection);
+                        _navigationService.Navigate("DrivingDirection", string.Empty);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
-                    throw;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             },
             () =>
             {
-                return (this.Inspection != null);
+                return (this.CDTask != null);
             }
             );
-            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            {
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from engine",
-                    Location = "Cape Town",
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddHours(2),
-                    ReadOnly = true,
-                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
 
-                },
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from differential",
-                    Location = "Cape Town",
-                     ReadOnly = true,
-                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-                },                    
-            };
+            this.TasksChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
+            {
+                this.SelectedTaskList.Clear();
+                foreach (var item in param)
+                {
+                    this.SelectedTaskList.Add((CollectDeliveryTask)item);
+                }
+
+                this.SaveTaskCommand.RaiseCanExecuteChanged();
+                this.NextStepCommand.RaiseCanExecuteChanged();
+                this.GetCustomerDetailsAsync();
+                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
+                _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails);
+            });
         }
         #region Overrides
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            this.SelectedTaskList = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
-            IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> list = null;
-            if (navigationParameter.Equals("AwaitingInspections"))
+            try
             {
-                this.SaveVisibility = Visibility.Visible;
-                this.NextStepVisibility = Visibility.Collapsed;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.CDTaskStatus == CDTaskStatus.AwaitingConfirmation);
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                _eventAggregator.GetEvent<TasksFetchedEvent>().Subscribe(async o =>
+                {
+
+                    await ShowTasksAsync(navigationParameter);
+
+                }, ThreadOption.UIThread);
+                await ShowTasksAsync(navigationParameter);
             }
-            else if (navigationParameter.Equals("Total"))
+            catch (Exception ex)
             {
-                this.SaveVisibility = Visibility.Collapsed;
-                this.NextStepVisibility = Visibility.Collapsed;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => x.ConfirmedDate.Date.Date.Equals(DateTime.Today));
+
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
-            else if (navigationParameter.Equals("InProgress"))
-            {
-                this.SaveVisibility = Visibility.Collapsed;
-                this.NextStepVisibility = Visibility.Visible;
-                list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(x => (x.CDTaskStatus != CDTaskStatus.AwaitingConfirmation && x.CDTaskStatus != CDTaskStatus.Complete));
-            }
-            foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list)
-            {
-                this.InspectionList.Add(item);
-            }
-            if (this.InspectionList.Any())
-                this.Inspection = this.InspectionList.FirstOrDefault();
         }
 
-        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
+        private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
         {
-            base.OnNavigatedFrom(viewModelState, suspending);
+            var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(w => w.Status != Eqstra.BusinessLogic.Enums.CDTaskStatus.Complete);
+            this.CDTaskList.Clear();
+            foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list.OrderBy(o => o.CustomerName).ThenBy(o => o.Address))
+            {
+                this.CDTaskList.Add(item);
+                item.ConfirmedTime = DateTime.Now;//for testing only
+                GetAppointments(item);
+            }
+            if (this.CDTaskList.Any())
+                this.CDTask = this.CDTaskList.FirstOrDefault();
+
+            await GetDocumentsFromDbByCaseNumber();
+            await SetDocumentsCountByTask();
         }
+
+        private IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> EnumerateTasks(object navigationParameter, IEnumerable<BusinessLogic.CollectDeliveryTask> tasks)
+        {
+            try
+            {
+                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> list = null;
+                string _cdtaskStatus = string.Empty;
+                if (this.CDUserInfo.CDUserType == CDUserType.Driver)
+                {
+                    _cdtaskStatus = CDTaskStatus.AwaitingDriverCollection;
+                }
+                if (this.CDUserInfo.CDUserType == CDUserType.Customer)
+                {
+                    _cdtaskStatus = CDTaskStatus.AwaitingCustomerCollection;
+                }
+                if (this.CDUserInfo.CDUserType == CDUserType.Courier)
+                {
+                    _cdtaskStatus = CDTaskStatus.AwaitingCourierCollection;
+                }
+                if (navigationParameter.Equals("TasksAwaitingConfirmation"))
+                {
+                    this.DetailTitle = "Awaiting Tasks";
+                    this.SaveVisibility = Visibility.Visible;
+                    this.NextStepVisibility = Visibility.Collapsed;
+                    list = (tasks).Where(x => x.Status == CDTaskStatus.AwaitingDelivery || x.Status == CDTaskStatus.AwaitingConfirmation || x.Status == _cdtaskStatus);
+                }
+                if (navigationParameter.Equals("Total"))
+                {
+                    this.DetailTitle = "Todays's Tasks";
+                    this.SaveVisibility = Visibility.Collapsed;
+                    this.NextStepVisibility = Visibility.Visible;
+                    list = (tasks).Where(x => x.DeliveryDate.Date.Date.Equals(DateTime.Today));
+                }
+                if (navigationParameter.Equals("InProgress"))
+                {
+                    this.DetailTitle = "My Tasks";
+                    this.SaveVisibility = Visibility.Collapsed;
+                    this.NextStepVisibility = Visibility.Visible;
+                    list = (tasks).Where(x => (x.Status != CDTaskStatus.AwaitingConfirmation && x.CDTaskStatus != CDTaskStatus.Complete));
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return null;
+            }
+        }
+
         #endregion
 
         #region Properties
 
         private Visibility saveVisibility;
-
         public Visibility SaveVisibility
         {
             get { return saveVisibility; }
@@ -166,43 +214,48 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
         private Visibility nextStepVisibility;
-
         public Visibility NextStepVisibility
         {
             get { return nextStepVisibility; }
             set { SetProperty(ref nextStepVisibility, value); }
         }
 
-
-        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> inspectionList;
-
-        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> InspectionList
+        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> cdTaskList;
+        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> CDTaskList
         {
-            get { return inspectionList; }
-            set { SetProperty(ref inspectionList, value); }
+            get { return cdTaskList; }
+            set { SetProperty(ref cdTaskList, value); }
         }
-
         private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> selectedTaskList;
-
         public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> SelectedTaskList
         {
             get { return selectedTaskList; }
             set { SetProperty(ref selectedTaskList, value); }
         }
-
-
-        private Eqstra.BusinessLogic.CollectDeliveryTask inspection;
-
-        public Eqstra.BusinessLogic.CollectDeliveryTask Inspection
+        private Eqstra.BusinessLogic.CollectDeliveryTask cdTask;
+        public Eqstra.BusinessLogic.CollectDeliveryTask CDTask
         {
-            get { return inspection; }
+            get { return cdTask; }
             set
             {
-                if (SetProperty(ref inspection, value))
-                    DrivingDirectionCommand.RaiseCanExecuteChanged();
+                if (SetProperty(ref cdTask, value))
+                    this.NextStepCommand.RaiseCanExecuteChanged();
             }
         }
 
+        private string detailTitle;
+        public string DetailTitle
+        {
+            get { return detailTitle; }
+            set { SetProperty(ref detailTitle, value); }
+        }
+
+        private CDUserInfo cdUserInfo;
+        public CDUserInfo CDUserInfo
+        {
+            get { return cdUserInfo; }
+            set { SetProperty(ref cdUserInfo, value); }
+        }
 
         private Customer customer;
 
@@ -212,38 +265,84 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref customer, value); }
         }
 
-        private CustomerDetails customerDetails;
-
-        public CustomerDetails CustomerDetails
+        private CDCustomerDetails customerDetails;
+        public CDCustomerDetails CustomerDetails
         {
             get { return customerDetails; }
             set { SetProperty(ref customerDetails, value); }
         }
 
+        private BriefDetailsUserControlViewModel briefDetailsUserControlViewModel;
 
-        public DelegateCommand DrivingDirectionCommand { get; set; }
+        public BriefDetailsUserControlViewModel BriefDetailsUserControlViewModel
+        {
+            get { return briefDetailsUserControlViewModel; }
+            set { SetProperty(ref briefDetailsUserControlViewModel, value); }
+        }
+
         public DelegateCommand SaveTaskCommand { get; set; }
         public DelegateCommand NextStepCommand { get; set; }
+        public DelegateCommand<ObservableCollection<Object>> TasksChangedCommand { get; set; }
+
+
         #endregion
 
         #region Methods
-        async public System.Threading.Tasks.Task GetCustomerDetailsAsync()
+
+        public async System.Threading.Tasks.Task SetDocumentsCountByTask()
+        {
+            var docs = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Document>();
+            foreach (var item in this.CDTaskList)
+            {
+                item.DocumentCount = docs.Count(w => w.CaseNumber == item.CaseNumber);
+            }
+        }
+        public async System.Threading.Tasks.Task GetDocumentsFromDbByCaseNumber()
+        {
+            var docs = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Document>();
+
+            this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<DocumentsBrief>();
+            if (this.CDTask != null)
+                foreach (var d in docs.Where(w => w.CaseNumber == this.CDTask.CaseNumber))
+                {
+                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new DocumentsBrief { CaseNumber = d.CaseNumber, DocumentType = d.DocumentType });
+                }
+        }
+        private void GetAppointments(CollectDeliveryTask task)
+        {
+            task.ConfirmedTime = DateTime.Now;
+            var startTime = new DateTime(task.ConfirmedTime.Year, task.ConfirmedTime.Month, task.ConfirmedTime.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                       task.ConfirmedTime.Second);
+            this.CustomerDetails.Appointments.Add(
+            new ScheduleAppointment()
+            {
+                Subject = task.CaseNumber,
+                Location = task.Address,
+                StartTime = startTime,
+                EndTime = startTime.AddHours(1),
+                ReadOnly = true,
+                AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+            });
+        }
+        public void GetCustomerDetailsAsync()
         {
             try
             {
-                if (this.inspection != null)
+                if (this.CDTask != null)
                 {
-                    this.customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.inspection.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this.inspection.CaseNumber;
-                    this.CustomerDetails.VehicleInsRecId = this.inspection.VehicleInsRecId;
-                    this.CustomerDetails.Status = this.inspection.Status;
-                    this.CustomerDetails.StatusDueDate = this.inspection.StatusDueDate;
-                    this.CustomerDetails.Address = this.customer.Address;
-                    this.CustomerDetails.AllocatedTo = this.inspection.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.customer.CustomerName;
-                    this.CustomerDetails.CaseType = this.inspection.CaseType;
-                    this.CustomerDetails.EmailId = this.customer.EmailId;
+                    this.CustomerDetails.CustomerNumber = this.CDTask.CustomerNumber;
+                    this.CustomerDetails.CaseNumber = this.CDTask.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this.CDTask.VehicleInsRecId;
+                    this.CustomerDetails.Address = this.CDTask.Address.Replace(",", Environment.NewLine);
+                    this.CustomerDetails.CustomerName = this.CDTask.CustomerName;
+                    this.CustomerDetails.EmailId = this.CDTask.EmailId;
+                    this.CustomerDetails.DeliveryDate = this.CDTask.DeliveryDate;
+                    this.CustomerDetails.DeliveryTime = this.CDTask.DeliveryTime;
+                    this.CustomerDetails.RegistrationNumber = this.CDTask.RegistrationNumber;
+                    this.CustomerDetails.MakeModel = this.CDTask.Make + Environment.NewLine + this.CDTask.Model;
+                    this.CustomerDetails.CaseType = this.CDTask.CaseType;
                 }
             }
             catch (Exception)
@@ -253,7 +352,5 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
         #endregion
-
-
     }
 }
