@@ -23,7 +23,7 @@ namespace Eqstra.VehicleInspection.UILogic.Services
         {
             try
             {
-                await VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
+                VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
                 var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
                 if (result != null)
                 {

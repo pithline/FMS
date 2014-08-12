@@ -43,6 +43,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="enterpriseAuthentication" />
     <DeviceCapability Name="location" />
     <DeviceCapability Name="webcam" />
   </Capabilities>

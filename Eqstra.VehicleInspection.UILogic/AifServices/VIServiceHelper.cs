@@ -32,6 +32,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
         IEventAggregator _eventAggregator;
         Action _syncExecute;
         private UserInfo _userInfo;
+        private Func<Exception, bool> _errorHandler;
         static VIServiceHelper()
         {
         }
@@ -42,7 +43,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 return instance;
             }
         }
-        public async System.Threading.Tasks.Task<VIService.MzkVehicleInspectionServiceClient> ConnectAsync(string userName, string password, IEventAggregator eventAggregator, string domain = "lfmd")
+        public  VIService.MzkVehicleInspectionServiceClient ConnectAsync(string userName, string password, IEventAggregator eventAggregator, string domain = "lfmd")
         {
             try
             {
@@ -73,6 +74,16 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 return client;
             }
         }
+
+       public VIServiceHelper WithErrorHandler(Func<Exception,bool> errorHandler)
+        {
+            if (_errorHandler == null)
+            {
+                throw new ArgumentNullException("errorHandler");
+            }
+            _errorHandler = errorHandler;           
+            return Instance;
+        }
         async public System.Threading.Tasks.Task<MzkVehicleInspectionServiceValidateUserResponse> ValidateUser(string userId, string password)
         {
             try
@@ -80,8 +91,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 return await client.validateUserAsync(userId, password);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _errorHandler(ex);
                 throw;
             }
         }
