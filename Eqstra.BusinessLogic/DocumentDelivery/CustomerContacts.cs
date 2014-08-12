@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Base;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic.DeliveryModel
+namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class AddCustomer : ValidatableBindableBase
+    public class DestinationContacts : ValidatableBindableBase
     {
         private string caseNumber;
         public string CaseNumber
@@ -19,7 +20,7 @@ namespace Eqstra.BusinessLogic.DeliveryModel
         }
 
         private long vehicleInsRecID;
-   
+
         public long VehicleInsRecID
         {
             get { return vehicleInsRecID; }
@@ -63,6 +64,10 @@ namespace Eqstra.BusinessLogic.DeliveryModel
             get { return position; }
             set { SetProperty(ref position, value); }
         }
-       
+
+    }
+
+    public class DestinationContactsEvent : PubSubEvent<DestinationContacts>
+    {
     }
 }

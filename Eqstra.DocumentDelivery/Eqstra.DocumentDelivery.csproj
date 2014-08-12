@@ -16,9 +16,10 @@
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Eqstra.DocumentDelivery_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -192,6 +193,8 @@
     <Content Include="Assets\loginIcon.png" />
     <Content Include="Assets\mail_blue.png" />
     <Content Include="Assets\message_blue.png" />
+    <Content Include="Assets\NetConnected.png" />
+    <Content Include="Assets\NetDisconnected.png" />
     <Content Include="Assets\odo_meter.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />

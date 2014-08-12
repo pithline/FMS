@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
         ICredentialStore _credentialStore;
         IIdentityService _identityService;
 
-        UserInfo _signedInUser;
+        CDUserInfo _signedInUser;
         string _userId;
         string _password;
         public AccountService(IIdentityService identityService, ISessionStateService sessionStateService, ICredentialStore credentialStore)
@@ -29,7 +30,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
             _credentialStore = credentialStore;
             if (_sessionStateService.SessionState.ContainsKey(SignedInUserKey))
             {
-                _signedInUser = _sessionStateService.SessionState[SignedInUserKey] as UserInfo;
+                _signedInUser = _sessionStateService.SessionState[SignedInUserKey] as CDUserInfo;
             }
             if (_sessionStateService.SessionState.ContainsKey(UserIdKey))
             {
@@ -40,23 +41,23 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
                 _password = _sessionStateService.SessionState[PasswordKey].ToString();
             }
         }
-        public BusinessLogic.UserInfo SignedInUser
+        public CDUserInfo SignedInUser
         {
             get { return _signedInUser; }
         }
 
-        async public Task<Tuple<UserInfo, string>> SignInAsync(string userId, string password, bool isCredentialStore)
+        async public Task<Tuple<CDUserInfo, string>> SignInAsync(string userId, string password, bool isCredentialStore)
         {
             try
             {
-                var userInfo = new UserInfo { Name = userId, UserId = userId };
+                var userInfo = new CDUserInfo { Name = userId, UserId = userId };
                 var result = await _identityService.LogonAsync(userId, password);
                 if (result.Item1 == null)
                 {
-                    return new Tuple<UserInfo, string>(null, result.Item2);
+                    return new Tuple<CDUserInfo, string>(null, result.Item2);
                 }
 
-                UserInfo previousUser = _signedInUser;
+                CDUserInfo previousUser = _signedInUser;
                 _signedInUser = result.Item1.UserInfo;
 
                 _sessionStateService.SessionState[SignedInUserKey] = _signedInUser;
@@ -78,15 +79,15 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
                 {
                     RaiseUserChanged(_signedInUser, previousUser);
                 }
-                return new Tuple<UserInfo, string>(_signedInUser, "");
+                return new Tuple<CDUserInfo, string>(_signedInUser, "");
             }
             catch (Exception ex)
             {
-                return new Tuple<UserInfo, string>(null, ex.Message);
+                return new Tuple<CDUserInfo, string>(null, ex.Message);
             }
         }
 
-        private void RaiseUserChanged(UserInfo newUserInfo, UserInfo oldUserInfo)
+        private void RaiseUserChanged(CDUserInfo newUserInfo, CDUserInfo oldUserInfo)
         {
             var handler = UserChanged;
             if (handler != null)
@@ -98,7 +99,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
         public event EventHandler<BusinessLogic.EventArgs.UserChangedEventArgs> UserChanged;
 
 
-        async public Task<UserInfo> VerifyUserCredentialsAsync()
+        async public Task<CDUserInfo> VerifyUserCredentialsAsync()
         {
             var cred = _credentialStore.GetSavedCredentials(PasswordVaultResourceName);
             if (cred != null)

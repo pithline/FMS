@@ -7,16 +7,87 @@
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q1:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAccountNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCityName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCounty" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPostbox" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmZipcode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkAccountContract" nillable="true" type="tns:MzkAccountContract" />
+  <xs:complexType name="MzkAddressContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q2:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountryRegionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmProvince" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStreet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSubUrb" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmZipCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkAddressContract" nillable="true" type="tns:MzkAddressContract" />
+  <xs:complexType name="MzkCityContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q3:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountryRegionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStateId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkCityContract" nillable="true" type="tns:MzkCityContract" />
+  <xs:complexType name="MzkCountryRegionContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q4:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCountryRegionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountryRegionName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkCountryRegionContract" nillable="true" type="tns:MzkCountryRegionContract" />
+  <xs:complexType name="MzkCountyContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCountryRegionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountyId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStateId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkCountyContract" nillable="true" type="tns:MzkCountyContract" />
+  <xs:complexType name="MzkDriverContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q6:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmDriverId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="MzkAccountContract" nillable="true" type="tns:MzkAccountContract" />
+  <xs:element name="MzkDriverContract" nillable="true" type="tns:MzkDriverContract" />
   <xs:complexType name="MzkLocationTypeContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q2:XppObjectBase">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q7:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmLocationName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmLocationType" type="tns:EXDCaseServiceDestinationType" />
@@ -60,21 +131,45 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EXDCaseServiceDestinationType" nillable="true" type="tns:EXDCaseServiceDestinationType" />
+  <xs:complexType name="MzkProvinceContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q8:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmStateId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStateName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkProvinceContract" nillable="true" type="tns:MzkProvinceContract" />
+  <xs:complexType name="MzkRegionContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q9:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRegionName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkRegionContract" nillable="true" type="tns:MzkRegionContract" />
   <xs:complexType name="MzkServiceDetailsContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q3:XppObjectBase">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q10:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAdditionalWork" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmContactPersonName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmContactPersonPhone" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmEventDesc" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmLiftLocationRecId" type="xs:long" />
           <xs:element minOccurs="0" name="parmLocationType" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmODOReading" type="xs:decimal" />
+          <xs:element minOccurs="0" name="parmODOReading" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmODOReadingDate" type="xs:dateTime" />
           <xs:element minOccurs="0" name="parmPreferredDateFirstOption" type="xs:dateTime" />
           <xs:element minOccurs="0" name="parmPreferredDateSecondOption" type="xs:dateTime" />
           <xs:element minOccurs="0" name="parmServiceType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSupplierId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmSupplierName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
@@ -83,10 +178,11 @@
   <xs:element name="MzkServiceDetailsContract" nillable="true" type="tns:MzkServiceDetailsContract" />
   <xs:complexType name="MzkServiceSchdTasksContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q4:XppObjectBase">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q11:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmCaseCategory" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCaseID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCaseRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmCaseServiceRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmCustAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustName" nillable="true" type="xs:string" />
@@ -95,8 +191,10 @@
           <xs:element minOccurs="0" name="parmDriverLastName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmDriverPhone" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmEEPActionStep" type="tns:EEPActionStep" />
+          <xs:element minOccurs="0" name="parmEmail" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmMake" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmModel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPreferredDateFirstOption" type="xs:dateTime" />
           <xs:element minOccurs="0" name="parmRegistrationNum" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmServiceRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmStatus" nillable="true" type="xs:string" />
@@ -352,12 +450,47 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="UploadDrives">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">124</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreateDrivers">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">125</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Live">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">126</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UploadDevices">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">127</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CreateDevices">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EEPActionStep" nillable="true" type="tns:EEPActionStep" />
   <xs:complexType name="MzkValidateUserContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q12:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmCompany" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCompanyName" nillable="true" type="xs:string" />
@@ -368,28 +501,125 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkValidateUserContract" nillable="true" type="tns:MzkValidateUserContract" />
+  <xs:complexType name="MzkVendorAccountContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q13:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmAccountNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCityName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmContactPersonName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmContactPersonPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountryName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPostbox" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRegionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmState" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSuburban" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSuburbanName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmZipcode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkVendorAccountContract" nillable="true" type="tns:MzkVendorAccountContract" />
+  <xs:complexType name="MzkZipCodeContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q14:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmAddressType" type="tns:EXDAddressType" />
+          <xs:element minOccurs="0" name="parmCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCountryRegionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmStateId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSuburb" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmZipCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkZipCodeContract" nillable="true" type="tns:MzkZipCodeContract" />
+  <xs:simpleType name="EXDAddressType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Physical" />
+      <xs:enumeration value="Postal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EXDAddressType" nillable="true" type="tns:EXDAddressType" />
+  <xs:complexType name="ArrayOfMzkCountryRegionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountryRegionContract" nillable="true" type="tns:MzkCountryRegionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCountryRegionContract" nillable="true" type="tns:ArrayOfMzkCountryRegionContract" />
+  <xs:complexType name="ArrayOfMzkCountyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountyContract" nillable="true" type="tns:MzkCountyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCountyContract" nillable="true" type="tns:ArrayOfMzkCountyContract" />
   <xs:complexType name="ArrayOfMzkServiceSchdTasksContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkServiceSchdTasksContract" nillable="true" type="tns:MzkServiceSchdTasksContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkServiceSchdTasksContract" nillable="true" type="tns:ArrayOfMzkServiceSchdTasksContract" />
-  <xs:complexType name="ArrayOfMzkServiceDetailsContract">
+  <xs:complexType name="ArrayOfMzkZipCodeContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkServiceDetailsContract" nillable="true" type="tns:MzkServiceDetailsContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkZipCodeContract" nillable="true" type="tns:MzkZipCodeContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkServiceDetailsContract" nillable="true" type="tns:ArrayOfMzkServiceDetailsContract" />
-  <xs:complexType name="ArrayOfMzkLocationTypeContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkLocationTypeContract" nillable="true" type="tns:MzkLocationTypeContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkLocationTypeContract" nillable="true" type="tns:ArrayOfMzkLocationTypeContract" />
+  <xs:element name="ArrayOfMzkZipCodeContract" nillable="true" type="tns:ArrayOfMzkZipCodeContract" />
   <xs:complexType name="ArrayOfMzkAccountContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkAccountContract" nillable="true" type="tns:MzkAccountContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkAccountContract" nillable="true" type="tns:ArrayOfMzkAccountContract" />
+  <xs:complexType name="ArrayOfMzkVendorAccountContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVendorAccountContract" nillable="true" type="tns:MzkVendorAccountContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkVendorAccountContract" nillable="true" type="tns:ArrayOfMzkVendorAccountContract" />
+  <xs:complexType name="ArrayOfMzkCityContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCityContract" nillable="true" type="tns:MzkCityContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCityContract" nillable="true" type="tns:ArrayOfMzkCityContract" />
+  <xs:complexType name="ArrayOfMzkRegionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkRegionContract" nillable="true" type="tns:MzkRegionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkRegionContract" nillable="true" type="tns:ArrayOfMzkRegionContract" />
+  <xs:complexType name="ArrayOfMzkServiceDetailsContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkServiceDetailsContract" nillable="true" type="tns:MzkServiceDetailsContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkServiceDetailsContract" nillable="true" type="tns:ArrayOfMzkServiceDetailsContract" />
+  <xs:complexType name="ArrayOfMzkProvinceContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkProvinceContract" nillable="true" type="tns:MzkProvinceContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkProvinceContract" nillable="true" type="tns:ArrayOfMzkProvinceContract" />
+  <xs:complexType name="ArrayOfMzkDriverContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDriverContract" nillable="true" type="tns:MzkDriverContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkDriverContract" nillable="true" type="tns:ArrayOfMzkDriverContract" />
+  <xs:complexType name="ArrayOfMzkLocationTypeContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkLocationTypeContract" nillable="true" type="tns:MzkLocationTypeContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkLocationTypeContract" nillable="true" type="tns:ArrayOfMzkLocationTypeContract" />
 </xs:schema>

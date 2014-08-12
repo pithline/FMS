@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.Helpers;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
 {
    public class IdentityServiceProxy : IIdentityService
     {
-        async public Task<Tuple<LogonResult,string>> LogonAsync(string userId, string password)
+        async public Task<Tuple<CDLogonResult,string>> LogonAsync(string userId, string password)
         {
             var isUserExists = (await SqliteHelper.Storage.LoadTableAsync<LoggedInUser>()).Any(x => x.UserId == userId);
             if (isUserExists)
@@ -18,16 +19,16 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
                 var result = await SqliteHelper.Storage.GetSingleRecordAsync<LoggedInUser>(x => (x.UserId == userId && x.Password == password));
                 if (result != null)
                 {
-                    return new Tuple<LogonResult, string>(new LogonResult { UserInfo = new UserInfo { UserId = result.UserId } }, "");
+                    return new Tuple<CDLogonResult, string>(new CDLogonResult { UserInfo = new CDUserInfo { UserId = result.UserId } }, "");
                 }
                 else
                 {
-                    return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                    return new Tuple<CDLogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
                 } 
             }
             else
             {
-                return new Tuple<LogonResult, string>(null, "Whoa! No such user exists, verfiy if the entered userid is correct.");
+                return new Tuple<CDLogonResult, string>(null, "Whoa! No such user exists, verfiy if the entered userid is correct.");
             }
         }
 

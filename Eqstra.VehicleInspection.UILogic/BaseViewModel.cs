@@ -107,8 +107,6 @@ namespace Eqstra.VehicleInspection.UILogic
             set { SetProperty(ref model, value); }
         }
 
-
-
         public DelegateCommand<object> SaveModelCommand { get; set; }
 
         public DelegateCommand GoHomeCommand { get; set; }

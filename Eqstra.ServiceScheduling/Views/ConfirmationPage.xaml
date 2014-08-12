@@ -9,25 +9,37 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             prism:ViewModelLocator.AutoWireViewModel="True"
+                            xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
                             xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+                            xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+                            xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
                             mc:Ignorable="d">
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
-            <CommandBar.SecondaryCommands>
+            <CommandBar>
+               
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="Accept"
+                              Label="Confirm"
+                              Command="{Binding ConfirmationDatesCommand}" />
 
-            </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Submit"
-                          Command="{Binding SubmitCommand}">
-                <AppBarButton.Icon>
-                    <SymbolIcon Symbol="Accept" />
-                </AppBarButton.Icon>
-            </AppBarButton>
-        </CommandBar>
+                    <AppBarButton Icon="Previous"
+                              Label="Previous Step"
+                              Command="{Binding GoBackCommand, ElementName=pageRoot}" />
+                </CommandBar.SecondaryCommands>
+                <AppBarButton Label="Submit"
+                          Icon="Accept"
+                          Command="{Binding SubmitCommand}" />
+                <AppBarButton Icon="Calendar"
+                          Label="Propose New Date"
+                          Command="{Binding ProposingNewDateCommand}" />
+            </CommandBar>
+       
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <!--
@@ -125,6 +137,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <StackPanel>
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
@@ -151,7 +164,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Service Type" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ServiceType,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.SelectedServiceType,Mode=TwoWay}" />
                         </StackPanel>
 
 
@@ -185,7 +198,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Location Type" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.LocationType,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationName,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="7"
@@ -202,7 +215,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Name" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierName,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.SupplierName,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="1"
@@ -211,7 +224,7 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Contact Name" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierContactName,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.ContactPersonName,Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="2"
@@ -220,34 +233,49 @@
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
                                        Text="Supplier Contact Number" />
                             <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding SupplierSelection.SupplierContactNumber,Mode=TwoWay}" />
+                                       Text="{Binding ServiceSchedulingDetail.ContactPersonPhone,Mode=TwoWay}" />
                         </StackPanel>
+
                         <StackPanel Grid.Row="3"
-                                    Grid.Column="1"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Supplier Date &amp; Time" />
-                            <TextBlock Style="{StaticResource TextContentStyle}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="4"
                                     Grid.RowSpan="2"
                                     Grid.Column="1"
-                                    Margin="0 20 20 0">
+                                  >
                             <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ODOReading,Mode=TwoWay}" />
-                            <DatePicker Grid.Row="9"
-                                        Margin="0 20"
-                                        Date="{Binding SupplierSelection.SupplierDate,Mode=TwoWay}" />
+                                       Text="Supplier Date Time" />
+                            <input:SfDatePicker 
+                                                Value="{Binding ServiceSchedulingDetail.SupplierDateTime,Mode=TwoWay}" IsEnabled="False">
+
+                            </input:SfDatePicker>
                         </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="5"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    >
+                            <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                       Text="Service Date (Option 1)" />
+                            <input:SfDatePicker  IsEnabled="{Binding IsProposingNewDate}"
+                                           
+                                                Value="{Binding ServiceDateOption1,Mode=TwoWay}">
+
+                            </input:SfDatePicker>
+                        </StackPanel>
+
+
                         <StackPanel Grid.Row="6"
                                     Grid.RowSpan="2"
                                     Grid.Column="1"
-                                    Margin="0 0 20 0"
+                                  
                                     VerticalAlignment="Top">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}" />
-                            <DatePicker Grid.Row="9"
-                                        Margin="0 20"
-                                        Date="{Binding SupplierSelection.SupplierTime,Mode=TwoWay}" />
+                            <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                       Text="Service Date (Option 2)" />
+                            <input:SfDatePicker IsEnabled="{Binding IsProposingNewDate}"
+                                          
+                                                Value="{Binding ServiceDateOption2,Mode=TwoWay}">
+
+                            </input:SfDatePicker>
                         </StackPanel>
                     </Grid>
                 </Border>

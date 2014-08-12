@@ -8,11 +8,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary Source="Styles/DefaultStyle.xaml"/>
-                <ResourceDictionary>
-
-                </ResourceDictionary>
+                <ResourceDictionary Source="Styles/CustomStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

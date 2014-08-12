@@ -13,101 +13,109 @@
     <UserControl.Resources>
         <vms:BriefDetailsUserControlViewModel x:Key="briefDetailsViewModel"/>
     </UserControl.Resources>
-    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="350" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-        <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Top" Width="310">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="1" VerticalAlignment="Top">
+    <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="370" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+        <ScrollViewer VerticalScrollMode="Auto">
+            <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Stretch" Width="330" ScrollViewer.VerticalScrollMode="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="390"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Image Source="ms-appx:///Assets/details_image.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
-                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
-                        <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource TextContentStyle}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
-                        <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding CaseType}" Style="{StaticResource TextContentStyle}"/>
-                    </StackPanel>
-
-                </Grid>
-
-                <Grid Grid.Row="2" Margin="0 20 0 0">
+                <Grid Grid.Row="1" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
-                    <TextBlock Text="Document Type" Style="{StaticResource TextHeaderStyle}" Grid.Column="1"/>
 
-                    <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding ElementName=briefDetailsUserControl, Path=DocumentList}" MinHeight="350" MaxHeight="400" Margin="0 10 0 0">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="125"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
+                            <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding CustomerDetails.CaseNumber}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
+                            <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding CustomerDetails.CaseType}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
 
-                                    <HyperlinkButton Content="{Binding CaseNumber}" Foreground="#FF35a3dc" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
-                                    <TextBlock Text="{Binding DocumentType}" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}" Margin="0 5 0 0"/>
-                                </Grid>
+                    </Grid>
 
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid Grid.Row="2" Margin="0 20 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
+                        <TextBlock Text="Document Type" Style="{StaticResource TextHeaderStyle}" Grid.Column="1"/>
+
+                        <ListView Grid.Row="1"  Grid.ColumnSpan="2" SelectionMode="None" ItemsSource="{Binding ElementName=briefDetailsUserControl, Path=DataContext.DocumentsBriefs}" MinHeight="350" MaxHeight="550" Margin="0 10 0 0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="125"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <HyperlinkButton Content="{Binding CaseNumber}" Foreground="#FF35a3dc" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
+                                        <TextBlock Text="{Binding DocumentType}" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}" Margin="0 5 0 0"/>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                    <!--Command="{Binding MakeSkypeCallCommand, Source={StaticResource CustDetailsViewModel}}"-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" MinHeight="150"  VerticalAlignment="Bottom" Margin="0 10 0 0">
+                        <Button  Command="{Binding MakeSkypeCallCommand}" CommandParameter="{Binding CustomerDetails.CustomerNumber}" Style="{StaticResource TransparentBtn}" Margin="0 0 0 0">
+                            <Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
+                        </Button>
+                        <!--Command="{Binding MakeIMCommand, Source={StaticResource CustDetailsViewModel}}"-->
+                        <Button Command="{Binding MakeIMCommand }" CommandParameter="{Binding CustomerDetails.EmailId}" Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">
+                            <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                        </Button>
+                        <!--Command="{Binding MailToCommand,Source={StaticResource CustDetailsViewModel}}"-->
+                        <Button Style="{StaticResource TransparentBtn}" Command="{Binding MailToCommand}"  CommandParameter="{Binding CustomerDetails.EmailId}">
+                            <Image Source="ms-appx:///Assets/mail_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                        </Button>
+                        <!--Command="{Binding LocateCommand, Source={StaticResource CustDetailsViewModel}}"-->
+                        <Button  Command="{Binding LocateCommand}" CommandParameter="{Binding CustomerDetails.Address}" Style="{StaticResource TransparentBtn}">
+                            <Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                        </Button>
+                        <Button Style="{StaticResource TransparentBtn}" Margin="15 0 0 0" x:Name="Appointment">
+                            <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                            <Button.Flyout>
+                                <Flyout>
+                                    <schedule:SfSchedule ContextMenuType="RadialMenu" AllowEditing="False" 
+                                                     HorizontalAlignment="Center"  Width="350" Height="500" 
+                                                     ScheduleType="Day"  EnableReminderTimer="True" 
+                                                     Appointments="{Binding Appointments}"  
+                                                     ShowNonWorkingHours="True" 
+                                                     TimeInterval="OneHour" Margin="30">
+                                    </schedule:SfSchedule>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+
+
                 </Grid>
-                <!--Command="{Binding MakeSkypeCallCommand, Source={StaticResource CustDetailsViewModel}}"-->
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0 10 0 0">
-                    <Button  Command="{Binding MakeSkypeCallCommand ,Source={StaticResource briefDetailsViewModel}}" CommandParameter="{Binding ContactNumber}" Style="{StaticResource TransparentBtn}" Margin="0 0 0 0">
-                        <Image Source="ms-appx:///Assets/skype_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left"/>
-                    </Button>
-                    <!--Command="{Binding MakeIMCommand, Source={StaticResource CustDetailsViewModel}}"-->
-                    <Button Command="{Binding MakeIMCommand ,Source={StaticResource briefDetailsViewModel}}" CommandParameter="{Binding EmailId}" Style="{StaticResource TransparentBtn}" Margin="15 0 0 0">
-                        <Image Source="ms-appx:///Assets/message_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
-                    </Button>
-                    <!--Command="{Binding MailToCommand,Source={StaticResource CustDetailsViewModel}}"-->
-                    <Button Style="{StaticResource TransparentBtn}" Command="{Binding MailToCommand,Source={StaticResource briefDetailsViewModel}}"  CommandParameter="{Binding EmailId}">
-                        <Image Source="ms-appx:///Assets/mail_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
-                    </Button>
-                    <!--Command="{Binding LocateCommand, Source={StaticResource CustDetailsViewModel}}"-->
-                    <Button  Command="{Binding LocateCommand, Source={StaticResource briefDetailsViewModel}}" CommandParameter="{Binding Address}" Style="{StaticResource TransparentBtn}">
-                        <Image Source="ms-appx:///Assets/bing_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="20 0 0 0"/>
-                    </Button>
-                    <Button Style="{StaticResource TransparentBtn}" Margin="15 0 0 0" x:Name="Appointment">
-                        <Image Source="ms-appx:///Assets/calendar_blue.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" Margin="0 0 0 0"/>
-                        <Button.Flyout>
-                            <Flyout>
-                                <schedule:SfSchedule ContextMenuType="RadialMenu" AllowEditing="False" HorizontalAlignment="Center"  Width="350" Height="500" ScheduleType="Day"  EnableReminderTimer="True"  Appointments="{Binding Appointments}"  ShowNonWorkingHours="True" TimeInterval="OneHour" Margin="30">
-                                </schedule:SfSchedule>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
-
             </Grid>
-        </Grid>
+
+        </ScrollViewer>
     </Border>
+
 </UserControl>

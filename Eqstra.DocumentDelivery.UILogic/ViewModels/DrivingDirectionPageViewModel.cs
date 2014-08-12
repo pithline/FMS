@@ -1,6 +1,9 @@
 ﻿using Bing.Maps;
 using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
+using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -9,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage;
@@ -26,22 +30,21 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             : base(navigationService)
         {
             _navigationService = navigationService;
-            this.CustomerDetails = new BusinessLogic.CustomerDetails();
-            LoadDemoAppointments();
+            this._deliveryTask = PersistentData.Instance.CollectDeliveryTask;
+            this.CustomerDetails = PersistentData.Instance.CustomerDetails;
             GetDirectionsCommand = DelegateCommand<Location>.FromAsyncHandler(async (location) =>
             {
                 var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
                 stringBuilder.Append(location.Latitude);
                 stringBuilder.Append("_");
                 stringBuilder.Append(location.Longitude);
-                stringBuilder.Append("~adr." + this._deliveryTask.Address);
+                stringBuilder.Append("~adr." + Regex.Replace(this.CustomerDetails.Address, "\n", ","));
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             });
 
             this.GoToDocumentDeliveryCommand = new DelegateCommand(() =>
             {
-                string jsondeliveryTask = JsonConvert.SerializeObject(this._deliveryTask);
-                _navigationService.Navigate("CollectionOrDeliveryDetails", jsondeliveryTask);
+                _navigationService.Navigate("CollectionOrDeliveryDetails", string.Empty);
             });
 
             this.StartDrivingCommand = new DelegateCommand(async () =>
@@ -56,69 +59,43 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 if (this._deliveryTask != null)
                 {
                     var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
-
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
                     dd.StopDateTime = DateTime.Now;
+                    this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskTypeEnum.Delivery;
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this._deliveryTask);
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(dd);
                 }
                 this.IsStartDelivery = true;
                 this.IsStartDriving = false;
                 this.IsArrived = false;
             });
-
         }
-
-        private void LoadDemoAppointments()
-        {
-            //this.CustomerDetails.Appointments = AppSettingData.Appointments;
-            //this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
-            //{
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from engine",
-            //        Location = "Cape Town",
-            //        StartTime = DateTime.Now,
-            //        EndTime = DateTime.Now.AddHours(2),
-            //        ReadOnly = true,
-            //       AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-            //        Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
-
-            //    },
-            //    new ScheduleAppointment(){
-            //        Subject = "Inspection at Peter Johnson",
-            //        Notes = "some noise from differential",
-            //        Location = "Cape Town",
-            //         ReadOnly = true,
-            //        StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-            //        EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-            //        Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-            //    },                    
-            //};
-        }
-
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _deliveryTask = JsonConvert.DeserializeObject<CollectDeliveryTask>(navigationParameter.ToString());
-            await GetCustomerDetailsAsync();
-
-            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _deliveryTask.VehicleInsRecId);
-            if (dd != null)
+            try
             {
-                this.IsArrived = dd.StopDateTime == DateTime.MinValue;
-                this.IsStartDelivery = !this.IsArrived;
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _deliveryTask.VehicleInsRecId);
+                if (dd != null)
+                {
+                    this.IsArrived = dd.StopDateTime == DateTime.MinValue;
+                    this.IsStartDelivery = !this.IsArrived;
+                }
+                else
+                {
+                    this.IsStartDriving = true;
+                    this.IsArrived = false;
+                    this.IsStartDelivery = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.IsStartDriving = true;
-                this.IsArrived = false;
-                this.IsStartDelivery = false;
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
 
-        private CustomerDetails customerDetails;
-
-        public CustomerDetails CustomerDetails
+        private CDCustomerDetails customerDetails;
+        public CDCustomerDetails CustomerDetails
         {
             get { return customerDetails; }
             set { SetProperty(ref customerDetails, value); }
@@ -128,61 +105,23 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         public DelegateCommand GoToDocumentDeliveryCommand { get; set; }
         public DelegateCommand StartDrivingCommand { get; set; }
 
-
         private bool isStartDelivery;
         public bool IsStartDelivery
         {
             get { return isStartDelivery; }
             set { SetProperty(ref isStartDelivery, value); }
         }
-
-        private Customer customer;
-
-        public Customer Customer
-        {
-            get { return customer; }
-            set { SetProperty(ref customer, value); }
-        }
-
         private bool isStartDriving;
         public bool IsStartDriving
         {
             get { return isStartDriving; }
             set { SetProperty(ref isStartDriving, value); }
         }
-
         private bool isArrived;
         public bool IsArrived
         {
             get { return isArrived; }
             set { SetProperty(ref isArrived, value); }
-        }
-
-        async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
-        {
-            try
-            {
-                if (this._deliveryTask != null)
-                {
-                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._deliveryTask.CustomerId);
-                    this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                    this.CustomerDetails.CaseNumber = this._deliveryTask.CaseNumber;
-                    this.CustomerDetails.VehicleInsRecId = this._deliveryTask.VehicleInsRecId;
-                    this.CustomerDetails.Status = this._deliveryTask.Status;
-                    this.CustomerDetails.StatusDueDate = this._deliveryTask.StatusDueDate;
-                    this.CustomerDetails.Address = this.Customer.Address;
-                    this.CustomerDetails.AllocatedTo = this._deliveryTask.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                    this.CustomerDetails.ContactName = this.Customer.ContactName;
-                    this.CustomerDetails.CaseType = this._deliveryTask.CaseType;
-                    this.CustomerDetails.EmailId = this.Customer.EmailId;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
         }
     }
 }

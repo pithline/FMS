@@ -1,4 +1,7 @@
-﻿using Eqstra.ServiceScheduling.Common;
+﻿using Eqstra.BusinessLogic.ServiceSchedule;
+using Eqstra.ServiceScheduling.Common;
+using Eqstra.ServiceScheduling.UILogic.AifServices;
+using Eqstra.ServiceScheduling.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -23,6 +26,8 @@ namespace Eqstra.ServiceScheduling.Views
     {
 
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+
+        ServiceSchedulingDetail serviceSchedulingDetail = null;
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -30,6 +35,8 @@ namespace Eqstra.ServiceScheduling.Views
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
+            serviceSchedulingDetail = ((ServiceSchedulingDetail)((ServiceSchedulingPageViewModel)this.DataContext).Model);
         }
+
     }
 }

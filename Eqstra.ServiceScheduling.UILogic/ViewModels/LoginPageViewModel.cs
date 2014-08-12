@@ -39,9 +39,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         }
 
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        throw;
+                        AppSettings.Instance.ErrorMessage = ex.Message;
                     }
                     finally
                     {
@@ -95,7 +95,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
 
         private bool isLoggingIn;
-
         public bool IsLoggingIn
         {
             get { return isLoggingIn; }

@@ -15,25 +15,38 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
     {
         private INavigationService _navigationService;
         private IAccountService _accountService;
-        public LoginPageViewModel(INavigationService navigationService,IAccountService accountService)
+        public LoginPageViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
             _accountService = accountService;
 
             LoginCommand = DelegateCommand.FromAsyncHandler(
-                 async () =>
-                 {
-                     var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
-                     if (result.Item1 != null)
-                     {
-                         string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
-                         navigationService.Navigate("Main", jsonUserInfo);
-                     }
-                     else
-                     {
-                         ErrorMessage = result.Item2;
-                     }
-                 },
+                async () =>
+                {
+                    try
+                    {
+                        IsLoggingIn = true;
+                        var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
+                        if (result.Item1 != null)
+                        {
+                            string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
+                            navigationService.Navigate("Main", jsonUserInfo);
+                        }
+                        else
+                        {
+                            ErrorMessage = result.Item2;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        AppSettings.Instance.ErrorMessage = ex.Message;
+                    }
+                    finally
+                    {
+                        IsLoggingIn = false;
+                    }
+                },
 
                  () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
@@ -53,7 +66,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
         private string password;
-
         public string Password
         {
             get { return password; }
@@ -65,7 +77,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
         private bool shouldSaveCredential;
-
         public bool ShouldSaveCredential
         {
             get { return shouldSaveCredential; }
@@ -73,13 +84,18 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
 
         private string errorMessage;
-
         public string ErrorMessage
         {
             get { return errorMessage; }
             set { SetProperty(ref errorMessage, value); }
         }
 
+        private bool isLoggingIn;
+        public bool IsLoggingIn
+        {
+            get { return isLoggingIn; }
+            set { SetProperty(ref isLoggingIn, value); }
+        }
 
     }
 }

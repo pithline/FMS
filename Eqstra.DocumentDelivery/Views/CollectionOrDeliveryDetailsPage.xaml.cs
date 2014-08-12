@@ -5,6 +5,7 @@ using Microsoft.Practices.Prism.StoreApps;
 using Syncfusion.UI.Xaml.Grid;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -37,14 +38,6 @@ namespace Eqstra.DocumentDelivery.Views
         public CollectionOrDeliveryDetailsPage()
         {
             this.InitializeComponent();
-        }
-        async private void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
-        {
-            if (((SfDataGrid)sender).SelectedItem != null)
-            {
-                var dc = (CollectionOrDeliveryDetailsPageViewModel)this.DataContext;
-                await dc.GetProofOfCollectionAsync();
-            }
 
         }
     }

@@ -12,15 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
@@ -128,8 +121,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
             catch (SQLite.SQLiteException)
             {
-
-
             }
         }
 
@@ -141,9 +132,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 this.InspectionList.Add(item);
             }
-
             this.InspectionTask = this.InspectionList.FirstOrDefault();
-
             _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
             {
                 await GetCustomerDetailsAsync(b);

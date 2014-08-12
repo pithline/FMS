@@ -1,5 +1,7 @@
-﻿using Eqstra.BusinessLogic.DeliveryModel;
+﻿
+using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -12,29 +14,27 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
     public class AddCustomerPageViewModel : ViewModel
     {
-        public AddCustomerPageViewModel()
+        private IEventAggregator _eventAggregator;
+        public AddCustomerPageViewModel(IEventAggregator eventAggregator)
         {
-            this.Model = new AddCustomer();
-
-            this.AddCustomerCommand = DelegateCommand<object>.FromAsyncHandler(async (param) =>
+            this.Model = new DestinationContacts();
+            this._eventAggregator = eventAggregator;
+            this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async() =>
             {
-                AddCustomer addCustomer = param as AddCustomer;
-                var addCustomerData = await SqliteHelper.Storage.LoadTableAsync<AddCustomer>();
-                var vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
-                addCustomer.VehicleInsRecID = vehicleInsRecID;
-                await SqliteHelper.Storage.InsertSingleRecordAsync<AddCustomer>(addCustomer);
+                this.Model.VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
+                await SqliteHelper.Storage.InsertSingleRecordAsync<DestinationContacts>(this.Model);
+                this._eventAggregator.GetEvent<DestinationContactsEvent>().Publish(this.Model);
             });
+          
         }
-        public DelegateCommand<object> AddCustomerCommand { get; set; }
+        public DelegateCommand AddCustomerCommand { get; set; }
 
-        private object model;
-        public object Model
+        private DestinationContacts model;
+        public DestinationContacts Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-
     }
-
 
 }

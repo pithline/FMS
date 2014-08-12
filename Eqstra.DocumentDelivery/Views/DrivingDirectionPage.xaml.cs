@@ -53,8 +53,6 @@ namespace Eqstra.DocumentDelivery.Views
             {
                 Location.Latitude = args.Position.Coordinate.Point.Position.Latitude;
                 Location.Longitude = args.Position.Coordinate.Point.Position.Longitude;
-                //Location = new Location(args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
-                
                 MapLayer.SetPosition(pushpin, location);
                 pushpin.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 MyMap.SetView(location, 16);

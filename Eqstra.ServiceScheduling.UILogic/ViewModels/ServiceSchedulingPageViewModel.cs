@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.BusinessLogic.ServiceSchedulingModel;
@@ -11,11 +12,13 @@ using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -28,26 +31,30 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         private INavigationService _navigationService;
         private IEventAggregator _eventAggregator;
         private SettingsFlyout _settingsFlyout;
-        private Dictionary<string, object> navigationData = new Dictionary<string, object>();
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, SettingsFlyout settingsFlyout)
             : base(navigationService)
         {
             _navigationService = navigationService;
             _settingsFlyout = settingsFlyout;
             _eventAggregator = eventAggregator;
-            this.CustomerDetails = new CustomerDetails();
-            this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
+            this.Address = new Address();
+            this.IsAddFlyoutOn = Visibility.Collapsed;
             this.Model = new ServiceSchedulingDetail();
-            this.GoToSupplierSelectionCommand = new DelegateCommand<object>(async (param) =>
+            this.GoToSupplierSelectionCommand = new DelegateCommand(async () =>
             {
-                ServiceSchedulingDetail detailServiceScheduling = param as ServiceSchedulingDetail;
+                this.IsBusy = true;
+                if (this.Model.ValidateProperties())
+                {
+                    bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+                    if (isInserted)
+                    {
+                        this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
+                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
 
-                await Util.WriteToDiskAsync(JsonConvert.SerializeObject(detailServiceScheduling), "ServiceSchedulingDetail");
-
-                PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
-                PersistentData.Instance.DriverTask = this._task;
-                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
-                _navigationService.Navigate("SupplierSelection", string.Empty);
+                        _navigationService.Navigate("SupplierSelection", string.Empty);
+                    }
+                }
+                this.IsBusy = false;
             });
 
             this.AddAddressCommand = new DelegateCommand<string>((x) =>
@@ -70,10 +77,36 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (address != null)
                 {
-                    ((ServiceSchedulingDetail)this.Model).Address = address.Street + "," + Environment.NewLine + address.Suburb
-                               + "," + Environment.NewLine + address.City + "," + Environment.NewLine + address.Province + "," +
-                               Environment.NewLine + address.Country + "," + Environment.NewLine + address.Postcode;
+                    this.Address = address;
+                    StringBuilder sb = new StringBuilder();
+                    if (!String.IsNullOrEmpty(address.Street))
+                    {
+                        sb.Append(address.Street).Append(",").Append(Environment.NewLine);
+                    }
+                    if ((address.SelectedSuburb != null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
+                    {
+                        sb.Append(address.SelectedSuburb.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if ((address.SelectedCity != null) && !String.IsNullOrEmpty(address.SelectedCity.Name))
+                    {
+                        sb.Append(address.SelectedCity.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if ((address.Selectedprovince != null) && !String.IsNullOrEmpty(address.Selectedprovince.Name))
+                    {
+                        sb.Append(address.Selectedprovince.Name).Append(",").Append(Environment.NewLine);
+                    }
+
+                    if ((address.SelectedCountry != null) && !String.IsNullOrEmpty(address.SelectedCountry.Name))
+                    {
+                        sb.Append(address.SelectedCountry.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if (!String.IsNullOrEmpty(address.SelectedZip))
+                    {
+                        sb.Append(address.SelectedZip);
+                    }
+                    this.Model.Address = sb.ToString();
                 }
+                settingsFlyout.Hide();
             });
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
@@ -81,77 +114,95 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 await TakePictureAsync(param);
             });
 
+            this.LocTypeChangedCommand = new DelegateCommand<LocationType>(async (param) =>
+            {
+                try
+                {
+                    this.IsBusy = true;
+                    if (this.Model.DestinationTypes != null)
+                    {
+                        this.Model.DestinationTypes.Clear();
+                    }
+                    if (param.LocType == LocationTypeConstants.Driver)
+                    {
 
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
+                    }
+                    if (param.LocType == LocationTypeConstants.Customer)
+                    {
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
+                    }
+
+                    if (param.LocType == LocationTypeConstants.Vendor)
+                    {
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
+                    }
+                    this.IsAddFlyoutOn = Visibility.Collapsed;
+                    this.IsAlternative = Visibility.Visible;
+                    if (param.LocType == LocationTypeConstants.Other)
+                    {
+                        this.Model.DestinationTypes = new ObservableCollection<DestinationType>();
+                        this.Model.SelectedDestinationType = new DestinationType();
+                        this.IsAddFlyoutOn = Visibility.Visible;
+                        this.IsAlternative = Visibility.Collapsed;
+                    }
+
+                    this.IsBusy = false;
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
+
+            });
+
+            this.DestiTypeChangedCommand = new DelegateCommand<DestinationType>(async (param) =>
+            {
+                this.IsBusy = true;
+                if (param != null)
+                {
+                    this.Address.EntityRecId = param.RecID;
+                    DestinationType destinationType = param as DestinationType;
+                    this.Model.Address = destinationType.Address;
+                }
+                this.IsBusy = false;
+            });
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            this.IsBusy = true;
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _task = JsonConvert.DeserializeObject<DriverTask>(navigationParameter.ToString());
-            this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID);
-            await GetCustomerDetailsAsync();
-            this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
-            this.IsBusy = false;
-
-
+            try
+            {
+                this.IsBusy = true;
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                this._task = PersistentData.Instance.DriverTask;
+                this.CustomerDetails = PersistentData.Instance.CustomerDetails;
+                this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID);
+                this.Model.IsValidationEnabled =true;
+                this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
+                this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
         }
-
         private CustomerDetails customerDetails;
         public CustomerDetails CustomerDetails
         {
             get { return customerDetails; }
             set { SetProperty(ref customerDetails, value); }
         }
-
         private Customer customer;
         public Customer Customer
         {
             get { return customer; }
             set { SetProperty(ref customer, value); }
         }
-        async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
-        {
-            try
-            {
-                if (this._task != null)
-                {
-                    this.CustomerDetails.ContactNumber = this._task.CustPhone;
-                    this.CustomerDetails.CaseNumber = this._task.CaseNumber;
-                    this.CustomerDetails.VehicleInsRecId = this._task.VehicleInsRecId;
-                    this.CustomerDetails.Status = this._task.Status;
-                    this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
-                    this.CustomerDetails.Address = this._task.Address;
-                    this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                    this.CustomerDetails.CustomerName = this._task.CustomerName;
-                    this.CustomerDetails.ContactName = this._task.CustomerName;
-                    this.CustomerDetails.CaseType = this._task.CaseType;
-
-                    var startTime = new DateTime(this._task.ConfirmedTime.Year, this._task.ConfirmedTime.Month, this._task.ConfirmedTime.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
-                                this._task.ConfirmedTime.Second);
-                    this.CustomerDetails.Appointments.Add(
-                                                        new ScheduleAppointment()
-                                                        {
-                                                            Subject = this._task.CaseNumber,
-                                                            Location = this._task.Address,
-                                                            StartTime = startTime,
-                                                            EndTime = startTime.AddHours(1),
-                                                            ReadOnly = true,
-                                                            AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                                            Status = new ScheduleAppointmentStatus { Status = this._task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
-
-                                                        });
-
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-        public DelegateCommand<object> GoToSupplierSelectionCommand { get; set; }
+        public DelegateCommand GoToSupplierSelectionCommand { get; set; }
         public DelegateCommand ODOReadingPictureCommand { get; set; }
         public DelegateCommand<string> AddAddressCommand { get; set; }
+        public DelegateCommand<LocationType> LocTypeChangedCommand { get; set; }
+        public DelegateCommand<DestinationType> DestiTypeChangedCommand { get; set; }
 
         private string odoReadingImagePath;
         public string ODOReadingImagePath
@@ -159,27 +210,48 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             get { return odoReadingImagePath; }
             set { SetProperty(ref odoReadingImagePath, value); }
         }
-
-
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
         {
             try
             {
                 CameraCaptureUI cam = new CameraCaptureUI();
-
                 var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
                 if (file != null)
                 {
                     param.ImagePath = file.Path;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
+        private Visibility isAddFlyoutOn;
+        public Visibility IsAddFlyoutOn
+        {
+            get { return isAddFlyoutOn; }
+            set { SetProperty(ref isAddFlyoutOn, value); }
+        }
+        private ServiceSchedulingDetail model;
+        public ServiceSchedulingDetail Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
 
+        private Visibility isAlternative;
+        public Visibility IsAlternative
+        {
+            get { return isAlternative; }
+            set { SetProperty(ref isAlternative, value); }
+        }
 
+        private Address address;
+        public Address Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
     }
 }
