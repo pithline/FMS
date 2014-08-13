@@ -1,4 +1,4 @@
-﻿using Eqstra.ServiceScheduling.UILogic.GeocodeService;
+﻿
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -31,12 +31,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
                 {
-                    await this.GeocodeAddressAsync(Regex.Replace(address, "\n", ","));
-                    var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
-                    stringBuilder.Append(Location.Latitude);
-                    stringBuilder.Append("_");
-                    stringBuilder.Append(Location.Longitude);
-                    stringBuilder.Append("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
+                    //await this.GeocodeAddressAsync(Regex.Replace(address, "\n", ","));
+                    //var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
+                    //stringBuilder.Append(Location.Latitude);
+                    //stringBuilder.Append("_");
+                    //stringBuilder.Append(Location.Longitude);
+                       var stringBuilder = new StringBuilder("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
                     await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
                 }, (address) =>
                 {
@@ -58,40 +58,40 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref location, value); }
         }
 
-        private async System.Threading.Tasks.Task GeocodeAddressAsync(string address)
-        {
-            try
-            {
-                List<string> addressLines = new List<string>();
-                if (address.Split(',').Count() > 3)
-                {
-                    foreach (string line in address.Split(',').Reverse().Take(3))
-                    {
-                        addressLines.Add(line);
-                    }
-                    addressLines.Reverse();
-                    address = String.Join(",", addressLines);
-                }
-                GeocodeRequest geocodeRequest = new GeocodeRequest();
+        //private async System.Threading.Tasks.Task GeocodeAddressAsync(string address)
+        //{
+        //    try
+        //    {
+        //        List<string> addressLines = new List<string>();
+        //        if (address.Split(',').Count() > 3)
+        //        {
+        //            foreach (string line in address.Split(',').Reverse().Take(3))
+        //            {
+        //                addressLines.Add(line);
+        //            }
+        //            addressLines.Reverse();
+        //            address = String.Join(",", addressLines);
+        //        }
+        //        GeocodeRequest geocodeRequest = new GeocodeRequest();
 
-                geocodeRequest.Credentials = new GeocodeService.Credentials();
-                geocodeRequest.Credentials.ApplicationId = BingMapkey;
+        //        geocodeRequest.Credentials = new GeocodeService.Credentials();
+        //        geocodeRequest.Credentials.ApplicationId = BingMapkey;
 
-                geocodeRequest.Query = address;
+        //        geocodeRequest.Query = address;
 
-                GeocodeServiceClient geocodeService = new GeocodeServiceClient(Eqstra.ServiceScheduling.UILogic.GeocodeService.GeocodeServiceClient.EndpointConfiguration.BasicHttpBinding_IGeocodeService);
-                GeocodeResponse geocodeResponse = await geocodeService.GeocodeAsync(geocodeRequest);
+        //        GeocodeServiceClient geocodeService = new GeocodeServiceClient(Eqstra.ServiceScheduling.UILogic.GeocodeService.GeocodeServiceClient.EndpointConfiguration.BasicHttpBinding_IGeocodeService);
+        //        GeocodeResponse geocodeResponse = await geocodeService.GeocodeAsync(geocodeRequest);
 
-                if (geocodeResponse.Results.Count > 0)
-                {
-                    this.Location.Longitude = geocodeResponse.Results[0].Locations[0].Longitude;
-                    this.Location.Latitude = geocodeResponse.Results[0].Locations[0].Latitude;
-                }
-            }
-            catch (Exception ex)
-            {
-                AppSettings.Instance.ErrorMessage = ex.Message;
-            }
-        }
+        //        if (geocodeResponse.Results.Count > 0)
+        //        {
+        //            this.Location.Longitude = geocodeResponse.Results[0].Locations[0].Longitude;
+        //            this.Location.Latitude = geocodeResponse.Results[0].Locations[0].Latitude;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        AppSettings.Instance.ErrorMessage = ex.Message;
+        //    }
+        //}
     }
 }

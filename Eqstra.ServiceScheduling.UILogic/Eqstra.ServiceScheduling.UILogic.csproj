@@ -110,11 +110,6 @@
     <Compile Include="Helpers\PersistentData.cs" />
     <Compile Include="Helpers\SSExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\GeocodeService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\SSProxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,26 +144,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\GeocodeService\Eqstra.ServiceScheduling.UILogic.GeocodeService.GeocodeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\GeocodeService\GeocodeService.wsdl" />
-    <None Include="Service References\GeocodeService\GeocodeService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GeocodeService\GeocodeService1.wsdl" />
-    <None Include="Service References\GeocodeService\GeocodeService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GeocodeService\GeocodeService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GeocodeService\GeocodeService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GeocodeService\GeocodeService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCityListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -296,7 +271,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\GeocodeService\" />
     <WCFMetadataStorage Include="Service References\SSProxy\" />
   </ItemGroup>
   <ItemGroup>
@@ -307,18 +281,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SSProxy\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GeocodeService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GeocodeService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GeocodeService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
