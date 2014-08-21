@@ -26,7 +26,7 @@ namespace Eqstra.DataProvider.AX.Providers
             {
                 GetService();
                 System.Collections.IList response = null;
-                switch (criterias[1].ToString())
+                switch (criterias[0].ToString())
                 {
                     case ActionSwitch.GetTasks:
                         response = GetTasks();
@@ -155,10 +155,10 @@ namespace Eqstra.DataProvider.AX.Providers
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
                 client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));
-                client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "sahmed";
-                client.ClientCredentials.UserName.Password = "Password6";
+                client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "rchivukula";
+                client.ClientCredentials.UserName.Password = "Password1";
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
-                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("sahmed", "Password6", "lfmd");
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password1", "lfmd");
             }
             catch (Exception)
             {
@@ -193,7 +193,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = client.getTasksOptimize(new SSProxy.CallContext() { Company = "1000" }, "sahmed", "1000");
+                var result = client.getTasksOptimize(new SSProxy.CallContext() { Company = "1000" }, "rchivukula", "1000");
                 List<Eqstra.DataProvider.AX.SSModels.Task> driverTaskList = new List<Eqstra.DataProvider.AX.SSModels.Task>();
                 if (result != null)
                 {

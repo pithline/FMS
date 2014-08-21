@@ -193,6 +193,9 @@
     <Compile Include="Views\SchedulerUserControl.xaml.cs">
       <DependentUpon>SchedulerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TechnicalInpectionUserControl.xaml.cs">
+      <DependentUpon>TechnicalInpectionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehicleInspectionPage.xaml.cs">
       <DependentUpon>VehicleInspectionPage.xaml</DependentUpon>
     </Compile>
@@ -457,6 +460,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SchedulerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TechnicalInpectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
