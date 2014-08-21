@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -31,7 +32,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using System.Reflection;
+using Eqstra.BusinessLogic.ServiceSchedule;
+using System.Text;
+using Eqstra.BusinessLogic.ServiceSchedulingModel;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace Eqstra.ServiceScheduling
@@ -76,6 +80,8 @@ namespace Eqstra.ServiceScheduling
         }
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
+           // GenerateModalForHybApp();
+
             var accountService = _container.Resolve<IAccountService>();
             var cred = await accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
@@ -88,7 +94,7 @@ namespace Eqstra.ServiceScheduling
             }
             Window.Current.Activate();
 
-
+            
         }
 
         async protected override void OnInitialize(IActivatedEventArgs args)
@@ -157,6 +163,33 @@ namespace Eqstra.ServiceScheduling
             // args.Request.ApplicationCommands.Add(command); 
 
             return settingsCommands;
+        }
+
+
+        /// <summary>
+        ///  temporary code
+        /// </summary>
+
+        private async void GenerateModalForHybApp()
+        {
+
+            Type t = typeof(City);
+
+            var properties = t.GetRuntimeProperties();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var property in properties)
+            {
+                sb.Append("public ");
+                sb.Append(property.PropertyType.Name).Append(" ");
+                sb.Append(property.Name).Append(" ");
+                sb.Append(" { get ; set ; }");
+                sb.Append(Environment.NewLine);
+                sb.Append(Environment.NewLine);
+
+            }
+
+            string file = sb.ToString();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Eqstra.VehicleInspection.UILogic.Services
             {
                 VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
                 var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
+                
                 if (result != null)
                 {
                     var userInfo = new UserInfo
