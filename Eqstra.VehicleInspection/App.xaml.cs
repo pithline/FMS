@@ -35,6 +35,7 @@ using Eqstra.VehicleInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Newtonsoft.Json;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Windows.Networking.Connectivity;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -95,6 +96,7 @@ namespace Eqstra.VehicleInspection
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             var accountService = _container.Resolve<IAccountService>();
+            
             var cred =  accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd3" namespace="http://tempuri.org" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MzkCollectDeliveryServiceGetCustomerInfoRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetCustomerInfoRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetCustomerInfoRequest_Headers">
+    <wsdl:part xmlns:q1="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q1:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetCustomerInfoResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetCustomerInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_getCustomerInfo_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q2:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentNewContactPersonRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentNewContactPersonRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentNewContactPersonRequest_Headers">
+    <wsdl:part xmlns:q3="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q3:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_insertDocumentNewContactPerson_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q4:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceValidateUserRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceValidateUserRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceValidateUserRequest_Headers">
+    <wsdl:part xmlns:q5="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q5:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceValidateUserResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceValidateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_validateUser_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q6:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCollectedDetailsRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentCollectedDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCollectedDetailsRequest_Headers">
+    <wsdl:part xmlns:q7="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q7:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_insertDocumentCollectedDetails_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q8:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsRequest_Headers">
+    <wsdl:part xmlns:q9="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q9:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_insertDocumentDeliveryDetails_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q10:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceUpdateStatusListRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceUpdateStatusListRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceUpdateStatusListRequest_Headers">
+    <wsdl:part xmlns:q11="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q11:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceUpdateStatusListResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceUpdateStatusListResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_updateStatusList_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q12:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetDocumentsInfoRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetDocumentsInfoRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetDocumentsInfoRequest_Headers">
+    <wsdl:part xmlns:q13="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q13:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetDocumentsInfoResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetDocumentsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_getDocumentsInfo_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q14:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetTasksRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetTasksRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetTasksRequest_Headers">
+    <wsdl:part xmlns:q15="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q15:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceGetTasksResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceGetTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_getTasks_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q16:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsRequest">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsRequest_Headers">
+    <wsdl:part xmlns:q17="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q17:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse">
+    <wsdl:part name="parameters" element="tns:MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MzkCollectDeliveryService_insertDocumentCourierCollectionDetails_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q18:AifFault" />
+  </wsdl:message>
+  <wsdl:portType name="MzkCollectDeliveryService">
+    <wsdl:operation name="getCustomerInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfo" name="MzkCollectDeliveryServiceGetCustomerInfoRequest" message="tns:MzkCollectDeliveryServiceGetCustomerInfoRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfoResponse" name="MzkCollectDeliveryServiceGetCustomerInfoResponse" message="tns:MzkCollectDeliveryServiceGetCustomerInfoResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfoAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_getCustomerInfo_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="insertDocumentNewContactPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentNewContactPerson" name="MzkCollectDeliveryServiceInsertDocumentNewContactPersonRequest" message="tns:MzkCollectDeliveryServiceInsertDocumentNewContactPersonRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentNewContactPersonResponse" name="MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse" message="tns:MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentNewContactPersonAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_insertDocumentNewContactPerson_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="validateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/validateUser" name="MzkCollectDeliveryServiceValidateUserRequest" message="tns:MzkCollectDeliveryServiceValidateUserRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/validateUserResponse" name="MzkCollectDeliveryServiceValidateUserResponse" message="tns:MzkCollectDeliveryServiceValidateUserResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/validateUserAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_validateUser_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="insertDocumentCollectedDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCollectedDetails" name="MzkCollectDeliveryServiceInsertDocumentCollectedDetailsRequest" message="tns:MzkCollectDeliveryServiceInsertDocumentCollectedDetailsRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCollectedDetailsResponse" name="MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse" message="tns:MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCollectedDetailsAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_insertDocumentCollectedDetails_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="insertDocumentDeliveryDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDeliveryDetails" name="MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsRequest" message="tns:MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDeliveryDetailsResponse" name="MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse" message="tns:MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDeliveryDetailsAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_insertDocumentDeliveryDetails_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateStatusList">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/updateStatusList" name="MzkCollectDeliveryServiceUpdateStatusListRequest" message="tns:MzkCollectDeliveryServiceUpdateStatusListRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/updateStatusListResponse" name="MzkCollectDeliveryServiceUpdateStatusListResponse" message="tns:MzkCollectDeliveryServiceUpdateStatusListResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/updateStatusListAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_updateStatusList_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentsInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getDocumentsInfo" name="MzkCollectDeliveryServiceGetDocumentsInfoRequest" message="tns:MzkCollectDeliveryServiceGetDocumentsInfoRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getDocumentsInfoResponse" name="MzkCollectDeliveryServiceGetDocumentsInfoResponse" message="tns:MzkCollectDeliveryServiceGetDocumentsInfoResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getDocumentsInfoAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_getDocumentsInfo_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getTasks" name="MzkCollectDeliveryServiceGetTasksRequest" message="tns:MzkCollectDeliveryServiceGetTasksRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getTasksResponse" name="MzkCollectDeliveryServiceGetTasksResponse" message="tns:MzkCollectDeliveryServiceGetTasksResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/getTasksAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_getTasks_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="insertDocumentCourierCollectionDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCourierCollectionDetails" name="MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsRequest" message="tns:MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCourierCollectionDetailsResponse" name="MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse" message="tns:MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCourierCollectionDetailsAifFaultFault" name="AifFaultFault" message="tns:MzkCollectDeliveryService_insertDocumentCourierCollectionDetails_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

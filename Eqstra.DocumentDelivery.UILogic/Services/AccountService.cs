@@ -99,17 +99,18 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
         public event EventHandler<BusinessLogic.EventArgs.UserChangedEventArgs> UserChanged;
 
 
-        async public Task<CDUserInfo> VerifyUserCredentialsAsync()
+        public Tuple<string,string> VerifyUserCredentialsAsync()
         {
             var cred = _credentialStore.GetSavedCredentials(PasswordVaultResourceName);
             if (cred != null)
             {
                 cred.RetrievePassword();
-                var result = await SignInAsync(cred.UserName, cred.Password, false);
-                if (result.Item1 != null)
-                {
-                    return result.Item1;
-                }
+                //var result = await SignInAsync(cred.UserName, cred.Password, false);
+                //if (result.Item1 != null)
+                //{
+                //    return result.Item1;
+                //}
+                return new Tuple<string, string>(cred.UserName, cred.Password);
             }
             return null;
 

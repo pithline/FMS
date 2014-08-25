@@ -30,7 +30,7 @@ namespace Eqstra.BusinessLogic.Helpers
 
         }
 
-        async public static System.Threading.Tasks.Task<ObservableCollection<T>> ReadFromDiskAsync<T>(string fileName)
+        async public static System.Threading.Tasks.Task<List<T>> ReadFromDiskAsync<T>(string fileName)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Eqstra.BusinessLogic.Helpers
                 {
                     content = await FileIO.ReadTextAsync(itemsSourceFile);
                 }
-                return JsonConvert.DeserializeObject<ObservableCollection<T>>(content);
+                return JsonConvert.DeserializeObject<List<T>>(content);
 
             }
             catch (Exception)

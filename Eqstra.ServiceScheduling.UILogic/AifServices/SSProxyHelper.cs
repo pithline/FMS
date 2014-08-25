@@ -15,6 +15,7 @@ using Eqstra.BusinessLogic.ServiceSchedulingModel;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Reflection;
+using System.ServiceModel;
 namespace Eqstra.ServiceScheduling.UILogic.AifServices
 {
     public class SSProxyHelper
@@ -39,8 +40,27 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         {
             try
             {
-                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient();
+                BasicHttpBinding basicHttpBinding = new BasicHttpBinding()
+                {
+                    MaxBufferPoolSize = int.MaxValue,
+                    MaxBufferSize = int.MaxValue,
+                    MaxReceivedMessageSize = int.MaxValue,
+                    OpenTimeout = new TimeSpan(2, 0, 0),
+                    ReceiveTimeout = new TimeSpan(2, 0, 0),
+                    SendTimeout = new TimeSpan(2, 0, 0),
+                    AllowCookies = true
+                };
+
+                basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
+                client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
+                client.ClientCredentials.UserName.Password = password;
+                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
+                
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
+
+
                 return client;
             }
             catch (Exception ex)
@@ -732,9 +752,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitServiceDetail);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceConfirmation, EEPActionStep.AwaitSupplierSelection);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitServiceBookingConfirmation);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceConfirmation, EEPActionStep.Completed);
+              //  actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
                 mzkTasks.Add(new MzkServiceSchdTasksContract
                 {
                     parmCaseID = task.CaseNumber,

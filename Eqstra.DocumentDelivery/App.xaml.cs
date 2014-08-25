@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Enums;
+﻿using Eqstra.BusinessLogic.DeliveryModel;
+using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.AifServices;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
@@ -65,20 +66,24 @@ namespace Eqstra.DocumentDelivery
         }
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-            var accountService = _container.Resolve<IAccountService>();
-            var result = await accountService.VerifyUserCredentialsAsync();
-
-            if (result != null)
+            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+            if (db == null)
             {
-                await DDServiceProxyHelper.Instance.ConnectAsync("rchivukula", "P@ssword4");
-                var rs = await DDServiceProxyHelper.Instance.ValidateUser("rchivukula", "P@ssword4");
+                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
+            }
+            SqliteHelper.Storage.ConnectionDatabaseAsync();
+            var accountService = _container.Resolve<IAccountService>();
+            var cred = accountService.VerifyUserCredentialsAsync();
+
+            if (cred != null)
+            {
+                DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2);                
+                var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
-                PersistentData.Instance.UserInfo = new BusinessLogic.DeliveryModel.CDUserInfo();
-                PersistentData.Instance.UserInfo.CompanyId = rs.response.parmCompany;
-                PersistentData.Instance.UserInfo.CompanyName = rs.response.parmCompanyName;
-                PersistentData.Instance.UserInfo.UserId = rs.response.parmUserID;
-                PersistentData.Instance.UserInfo.Name = rs.response.parmUserName;
-                PersistentData.Instance.UserInfo.CDUserType = CDUserType.Driver; // it is only for testing.
+                PersistentData.Instance.UserInfo = userInfo;
+               
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
@@ -88,19 +93,12 @@ namespace Eqstra.DocumentDelivery
             Window.Current.Activate();
         }
 
-        async protected override void OnInitialize(IActivatedEventArgs args)
+        protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
             EventAggregator = new EventAggregator();
 
-            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-            if (db == null)
-            {
-                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
-                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
-            }
-            SqliteHelper.Storage.ConnectionDatabaseAsync();
+           
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);

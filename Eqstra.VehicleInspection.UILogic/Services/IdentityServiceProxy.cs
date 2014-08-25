@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic;
+﻿
+using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -45,12 +46,12 @@ namespace Eqstra.VehicleInspection.UILogic.Services
                 }
                 else
                 {
-                    return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                    return new Tuple<LogonResult, string>(null, "Whoa! The entered username or password is incorrect, please verify and try again.");
                 }
             }
             catch (Exception)
             {
-                return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                return new Tuple<LogonResult, string>(null, "Whoa! The entered username or password is incorrect, please verify and try again.");
             }
         }
 
