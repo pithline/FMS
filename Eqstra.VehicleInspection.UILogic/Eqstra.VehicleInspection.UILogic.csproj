@@ -156,6 +156,7 @@
     <Compile Include="ViewModels\Passenger\VehicleDetailsUserControlViewModel.cs" />
     <Compile Include="ViewModels\ProfileUserControlViewModel.cs" />
     <Compile Include="ViewModels\SchedulerPageViewModel.cs" />
+    <Compile Include="ViewModels\TechnicalInspectionUserControlViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
