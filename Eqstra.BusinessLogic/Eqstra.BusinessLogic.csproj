@@ -180,6 +180,7 @@
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="TIData.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleDetails.cs" />

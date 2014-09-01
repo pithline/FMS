@@ -241,7 +241,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     this.InspectionUserControls.Add(new AccessoriesUserControl());
                     this.InspectionUserControls.Add(new TyreConditionUserControl());
                     this.InspectionUserControls.Add(new MechanicalCondUserControl());
-                    this.InspectionUserControls.Add(new TechnicalInpectionUserControl());
+                    this.InspectionUserControls.Add(new TechnicalInspectionUserControl());
                     this.InspectionUserControls.Add(new InspectionProofUserControl());
                 }
                 else
@@ -253,7 +253,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     this.InspectionUserControls.Add(new CAccessoriesUserControl());
                     this.InspectionUserControls.Add(new CTyresUserControl());
                     this.InspectionUserControls.Add(new CMechanicalCondUserControl());
-                    this.InspectionUserControls.Add(new TechnicalInpectionUserControl());
+                    this.InspectionUserControls.Add(new TechnicalInspectionUserControl());
                     this.InspectionUserControls.Add(new CPOIUserControl());
                 }
                 NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());

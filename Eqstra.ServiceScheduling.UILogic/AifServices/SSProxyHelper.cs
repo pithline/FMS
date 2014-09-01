@@ -53,7 +53,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
+                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlaxdev01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));//http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
@@ -644,10 +644,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, _userInfo.CompanyId);
 
-                if (result.response)
-                {
-                    Util.ShowToast("Thank you very much. Your Service Scheduling detail has been sent.");
-                }
                 return result.response;
             }
 
@@ -677,10 +673,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmSupplierId=supplierSelection.SelectedSupplier.AccountNum
                 }, new MzkAddressContract(), _userInfo.CompanyId);
 
-                if (result!=null)
-                {
-                    Util.ShowToast("Thank you very much. Your supplier has been sent.");
-                }
+               
                 return result!=null;
             }
 

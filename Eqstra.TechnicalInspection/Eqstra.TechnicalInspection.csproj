@@ -14,12 +14,12 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Eqstra.VehicleInspection_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Eqstra.TechnicalInspection_TemporaryKey.pfx</PackageCertificateKeyFile>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>6376442D1D10D4A7925EB760AF0135E4972BE63A</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>433BCB3248F4A23494BFE9E16EF3F1B7695F5CEB</PackageCertificateThumbprint>
     <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -193,8 +193,8 @@
     <Compile Include="Views\SchedulerUserControl.xaml.cs">
       <DependentUpon>SchedulerUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TechnicalInpectionUserControl.xaml.cs">
-      <DependentUpon>TechnicalInpectionUserControl.xaml</DependentUpon>
+    <Compile Include="Views\TechnicalInspectionUserControl.xaml.cs">
+      <DependentUpon>TechnicalInspectionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehicleInspectionPage.xaml.cs">
       <DependentUpon>VehicleInspectionPage.xaml</DependentUpon>
@@ -213,6 +213,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Eqstra.TechnicalInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -463,7 +464,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TechnicalInpectionUserControl.xaml">
+    <Page Include="Views\TechnicalInspectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

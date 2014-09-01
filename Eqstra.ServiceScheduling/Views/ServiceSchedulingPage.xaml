@@ -112,6 +112,7 @@
 
                     <Grid Grid.Column="1"
                           Margin="20 0 0 0"
+                          
                           HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

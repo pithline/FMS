@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.PubSubEvents;
+﻿using Eqstra.BusinessLogic;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         }
 
-        public override Task LoadModelFromDbAsync(long vehicleInsRecID)
+        public override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            return Task.FromResult<object>(null);
+            this.Model = new TIData();
+            return System.Threading.Tasks.Task.FromResult<object>(null);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     if (isInserted)
                     {
                         this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
-                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+                       // PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
 
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
