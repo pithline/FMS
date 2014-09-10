@@ -27,7 +27,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
         private UserInfo _userInfo;
         static SSProxyHelper()
         {
-           
+
         }
         public static SSProxyHelper Instance
         {
@@ -52,12 +52,12 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 };
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlaxdev01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));//http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxdev01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl
+                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
-                
+
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
 
 
@@ -121,7 +121,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
 
-                var result = await client.getTasksOptimizeAsync(_userInfo.UserId, _userInfo.CompanyId);
+                var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
 
                 List<DriverTask> driverTaskList = new List<DriverTask>();
                 if (result.response != null)
@@ -151,7 +151,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             CusEmailId = mzkTask.parmEmail,
                             ScheduledDate = DateTime.Today, //Need to add in Service
                             ScheduledTime = DateTime.Today, // Need to add in Service
-                            ServiceRecID = mzkTask.parmServiceRecID
+                            ServiceRecID = mzkTask.parmServiceRecID,
+                           
                         });
 
                     });
@@ -177,7 +178,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getCountryRegionListAsync(_userInfo.CompanyId);
-                var vendor_result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
 
                 List<Country> countryList = new List<Country>();
                 if (result.response != null)
@@ -185,16 +185,15 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                     result.response.OrderBy(o => o.parmCountryRegionName).AsParallel().ForAll(mzk =>
                     {
-                        if (vendor_result.response.Any(a => a.parmCountry == mzk.parmCountryRegionId))
-                        {
-                            countryList.Add(
-                                               new Country
-                                               {
-                                                   Name = mzk.parmCountryRegionName,
-                                                   Id = mzk.parmCountryRegionId
-                                               }
-                                               );
-                        }
+
+                        countryList.Add(
+                                           new Country
+                                           {
+                                               Name = mzk.parmCountryRegionName,
+                                               Id = mzk.parmCountryRegionId
+                                           }
+                                           );
+
                     });
                 }
 
@@ -339,7 +338,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-        async public System.Threading.Tasks.Task<ServiceSchedulingDetail> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId)
+        async public System.Threading.Tasks.Task<ServiceSchedulingDetail> GetServiceDetailsFromSvcAsync(string caseNumber, long caseServiceRecId, long serviceRecId)
         {
             try
             {
@@ -367,13 +366,16 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ODOReading = mzk.parmODOReading.ToString(),
                             ODOReadingDate = mzk.parmODOReadingDate < DateTime.Today ? DateTime.Today : mzk.parmODOReadingDate,
                             ServiceType = GetServiceTypesAsync(caseNumber, _userInfo.CompanyId),
-                            LocationTypes = GetLocationTypeAsync(caseServiceRecId, _userInfo.CompanyId).Result,
+                            LocationTypes = GetLocationTypeAsync(serviceRecId, _userInfo.CompanyId).Result,
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
                             ContactPersonPhone = mzk.parmContactPersonPhone,
-                            SupplierDateTime = DateTime.Now// need to add in service
-                           
+                            SupplierDateTime = DateTime.Now,// need to add in service
+                            SelectedLocRecId = mzk.parmLiftLocationRecId,
+                            SelectedLocType = mzk.parmLocationType,
+                            SelectedServiceType = mzk.parmServiceType
+
                         });
                     });
 
@@ -489,7 +491,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         {
                             ContactName = mzk.parmName,
                             Id = mzk.parmAccountNum,
-                            Address = mzk.parmAddress
+                            Address = mzk.parmAddress,
+                            RecID = mzk.parmRecID
                         });
                     });
                 }
@@ -632,12 +635,14 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                        parmAddress = serviceSchedulingDetail.Address,
                        parmEventDesc = serviceSchedulingDetail.EventDesc,
-                       parmLocationType = serviceSchedulingDetail.SelectedLocationType != null ? serviceSchedulingDetail.SelectedLocationType.LocType : string.Empty,
+                       parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocationType.RecID,
                        parmODOReading = serviceSchedulingDetail.ODOReading,
                        parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
                        parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                        parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
-                       parmServiceType = serviceSchedulingDetail.SelectedServiceType
+                       parmServiceType = serviceSchedulingDetail.SelectedServiceType,
+                       parmSupplierId = serviceSchedulingDetail.SelectedDestinationType.Id
+
                    };
 
 
@@ -670,11 +675,11 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmContactPersonName = supplierSelection.SelectedSupplier.SupplierContactName,
                     parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
                     parmContactPersonPhone = supplierSelection.SelectedSupplier.SupplierContactNumber,
-                    parmSupplierId=supplierSelection.SelectedSupplier.AccountNum
+                    parmSupplierId = supplierSelection.SelectedSupplier.AccountNum
                 }, new MzkAddressContract(), _userInfo.CompanyId);
 
-               
-                return result!=null;
+
+                return result != null;
             }
 
 
@@ -701,7 +706,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocationType.LocType,
+                    parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocRecId,
+
+                    parmLocationType = serviceSchedulingDetail.SelectedLocType,
                     parmODOReading = serviceSchedulingDetail.ODOReading,
                     parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
                     parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
@@ -745,9 +752,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitServiceBookingConfirmation);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceConfirmation, EEPActionStep.Completed);
-              //  actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceDetail, EEPActionStep.AwaitServiceBookingDetail);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitSupplierSelection);
+                //  actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
                 mzkTasks.Add(new MzkServiceSchdTasksContract
                 {
                     parmCaseID = task.CaseNumber,

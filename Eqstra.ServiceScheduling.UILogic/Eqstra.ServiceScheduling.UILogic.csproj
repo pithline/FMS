@@ -263,7 +263,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.1.0.43">
+    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
   </ItemGroup>

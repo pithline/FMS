@@ -48,9 +48,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
                     if (isInserted)
                     {
-                        this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
-                       // PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-
+                        
+                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+                        PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
                 }
@@ -176,7 +176,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this._task = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID);
+                this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID,this._task.ServiceRecID);
                 this.Model.IsValidationEnabled =true;
                 this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
                 this.IsBusy = false;

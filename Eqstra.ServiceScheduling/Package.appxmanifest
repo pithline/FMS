@@ -16,6 +16,8 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.ServiceScheduling.App">
       <m2:VisualElements DisplayName="Eqstra Service Scheduling" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Eqstra Service Scheduling" ForegroundText="dark" BackgroundColor="#FFFFFF" ToastCapable="true">
+        <m2:DefaultTile ShortName="Eqstra Service Scheduling">
+        </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FFFFFF" />
         <m2:InitialRotationPreference>
           <m2:Rotation Preference="portrait" />

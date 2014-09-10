@@ -112,6 +112,27 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref locationTypes, value); }
 
         }
+
+
+
+        private long selectedlocRecId;
+
+        public long SelectedLocRecId
+        {
+            get { return selectedlocRecId; }
+            set { SetProperty(ref selectedlocRecId, value); }
+
+        }
+
+        private string selectedlocType;
+
+        public string SelectedLocType
+        {
+            get { return selectedlocType; }
+            set { SetProperty(ref selectedlocType, value); }
+        }
+
+
         private string address;
         [Required(ErrorMessage = "Address required")]
         public string Address
@@ -181,6 +202,15 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return selectedDestinationType; }
             set { SetProperty(ref selectedDestinationType, value); }
         }
+
+        private string selectedDestinationId;
+
+        public string SelectedDestinationId
+        {
+            get { return selectedDestinationId; }
+            set { SetProperty(ref selectedDestinationId, value); }
+        }
+
 
         private string selectedServiceType;
         [Required(ErrorMessage = "Service type required")]

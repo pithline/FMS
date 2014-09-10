@@ -319,7 +319,7 @@
                                             Grid.Column="5">
                                     <ComboBox ItemsSource="{Binding Model.LocationTypes}"
                                               DisplayMemberPath="LocationName"
-                                              SelectedValue="LocType"
+                                              
                                               SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
                                               x:Name="ddLocationType"
                                               Margin="0 20"
@@ -353,7 +353,7 @@
                                     <ComboBox
                                             ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                               DisplayMemberPath="ContactName"
-                                              SelectedValue="Id"
+                                              
                                               SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                                               x:Name="ddDestinationTypes"
                                               Margin="0 20"

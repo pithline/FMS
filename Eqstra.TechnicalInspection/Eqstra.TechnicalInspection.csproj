@@ -524,7 +524,7 @@
     <SDKReference Include="SQLite.WinRT81, Version=3.8.6">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
-    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.1.0.43">
+    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
   </ItemGroup>
