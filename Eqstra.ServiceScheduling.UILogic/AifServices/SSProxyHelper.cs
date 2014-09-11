@@ -641,7 +641,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                        parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                        parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                       parmSupplierId = serviceSchedulingDetail.SelectedDestinationType.Id
+                       parmSupplierId = serviceSchedulingDetail.SelectedDestinationType.Id,
+                      
 
                    };
 
