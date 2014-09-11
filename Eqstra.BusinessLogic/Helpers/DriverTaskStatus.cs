@@ -12,5 +12,6 @@ namespace Eqstra.BusinessLogic.Helpers
         public const string AwaitSupplierSelection = "Await Supplier Selection";
         public const string AwaitServiceConfirmation = "Await Service Confirmation";
         public const string AwaitJobCardCapture = "Await Job Card Capture";
+        public const string AwaitServiceBookingDetail = "Await Service Booking Detail";
     }
 }

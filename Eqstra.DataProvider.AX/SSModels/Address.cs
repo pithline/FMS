@@ -8,7 +8,6 @@ namespace Eqstra.DataProvider.AX.SSModels
 {
     public class Address
     {
-        public Int64 EntityRecId { get; set; }
 
         public String Street { get; set; }
 
@@ -24,15 +23,15 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public List<Region> Region { get; set; }
 
-        public Country SelectedCountry { get; set; }
+        public string SelectedCountry { get; set; }
 
-        public Province Selectedprovince { get; set; }
+        public string Selectedprovince { get; set; }
 
-        public City SelectedCity { get; set; }
+        public string SelectedCity { get; set; }
 
-        public Suburb SelectedSuburb { get; set; }
+        public string SelectedSuburb { get; set; }
 
-        public String SelectedZip { get; set; }
+        public string SelectedZip { get; set; }
 
     }
 }

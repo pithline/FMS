@@ -28,5 +28,9 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public String Suburb { get; set; }
 
+        public string Email { get; set; }
+
+        public string Address { get; set; }
+
     }
 }

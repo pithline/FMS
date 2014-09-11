@@ -34,10 +34,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.IsBusy = true;
                     this.DriverTask.Status = DriverTaskStatus.AwaitServiceConfirmation;
-                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
+                   
                     bool isInserted = await SSProxyHelper.Instance.InsertConfirmedServiceDetailToSvcAsync(this.ServiceSchedulingDetail, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
                     if (isInserted)
                     {
+                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                         navigationService.Navigate("Main", string.Empty);
                     }
                     this.IsBusy = false;

@@ -45,7 +45,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.IsBusy = true;
                 if (this.Model.ValidateProperties())
                 {
-                    bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+                    bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
                     if (isInserted)
                     {
                         this._task.Status = DriverTaskStatus.AwaitSupplierSelection;

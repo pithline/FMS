@@ -129,7 +129,7 @@
                                 BorderThickness="1"
                                 Background="White"
                                 HorizontalAlignment="Stretch">
-                            <Grid Margin="20 20 0 10"
+                            <Grid Margin="0 0 0 10"
                                   HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="150" />
@@ -151,17 +151,28 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <StackPanel Visibility="{Binding ProgressbarVisiblity}" Grid.Column="2" Grid.ColumnSpan="2"
-                                            Orientation="Horizontal"
-                                            VerticalAlignment="Stretch">
-                                    <TextBlock Text="{Binding ProgressbarMessage}" 
+                                <StackPanel Visibility="{Binding ProgressbarVisiblity}"  Grid.Column="0" Grid.ColumnSpan="2"
+                                            VerticalAlignment="Top">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="200" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding ProgressbarMessage}" VerticalAlignment="Top"
                                                Style="{StaticResource GroupHeaderStyle}"
-                                               VerticalAlignment="Center"
                                                FontSize="15" />
-                                    <ProgressBar Width="700"
+                                        <ProgressBar Width="700" Grid.Column="1" VerticalAlignment="Top"
                                                  Height="15"
                                                  IsIndeterminate="True" />
+
+
+                                    </Grid>
+
                                 </StackPanel>
+
                                 <TextBlock Text="Please Select the Preferred Suppliers"
                                            Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="4"

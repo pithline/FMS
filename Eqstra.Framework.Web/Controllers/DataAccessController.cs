@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Eqstra.Framework.Web.Controllers
 {
-    //[EnableCors("*", "*", "*")]
+    [EnableCors("*", "*", "*")]
     public class DataAccessController : ApiController
     {
         // GET api/da
@@ -23,6 +24,9 @@ namespace Eqstra.Framework.Web.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
+        /// 
+        
+       
         public HttpResponseMessage Post(CallObject obj)
         {
             try

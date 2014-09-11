@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="776a1ac2-2628-4643-8905-d5e228b78504" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://196.35.126.189/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="xppservice.xsd" MetadataType="Schema" ID="104f1249-89bd-4a31-9eac-6722d5016526" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd1" />
+    <MetadataFile FileName="xppservice1.xsd" MetadataType="Schema" ID="416781bd-d20e-47bf-9d9b-d1f3d2d0713a" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd7" />
+    <MetadataFile FileName="xppservice2.xsd" MetadataType="Schema" ID="2aa0d224-3352-4d65-9d6d-38d2fc064bb6" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd6" />
+    <MetadataFile FileName="xppservice.wsdl" MetadataType="Wsdl" ID="94c6900b-03e4-40ed-9e78-c3efd5cd6d85" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="xppservice1.wsdl" MetadataType="Wsdl" ID="62b7501b-97cf-48b2-b2b8-96f4c5f6f08e" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?wsdl=wsdl1" />
+    <MetadataFile FileName="xppservice3.xsd" MetadataType="Schema" ID="f5899eca-f074-43b1-b346-0c8a468c9b54" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd3" />
+    <MetadataFile FileName="xppservice4.xsd" MetadataType="Schema" ID="63ac6061-359c-4aa6-88dc-2197f5b46ac8" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd5" />
+    <MetadataFile FileName="RoutingService.wsdl" MetadataType="Wsdl" ID="d764c585-6faa-4562-b5cd-7051bd2d9d75" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?wsdl" />
+    <MetadataFile FileName="xppservice5.xsd" MetadataType="Schema" ID="48950a18-047b-42bf-a931-c6c1172f3313" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd0" />
+    <MetadataFile FileName="xppservice6.xsd" MetadataType="Schema" ID="063025de-3f19-441f-b185-05839691786f" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd4" />
+    <MetadataFile FileName="xppservice7.xsd" MetadataType="Schema" ID="4164656f-40ad-4129-8bee-c3ee4507e273" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?xsd=xsd2" />
+    <MetadataFile FileName="xppservice.disco" MetadataType="Disco" ID="412ac5ec-6075-46ef-b634-c71238f28d17" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

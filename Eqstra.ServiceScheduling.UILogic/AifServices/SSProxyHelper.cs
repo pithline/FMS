@@ -374,10 +374,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             {
                 results.AddRange(result.Split('~'));
             }
-            if (result.IndexOf(",") > 1)
-            {
-                results.AddRange(result.Split(','));
-            }
             else
             {
                 results.Add(result);
@@ -584,7 +580,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             }
 
         }
-        async public System.Threading.Tasks.Task<bool> InsertServiceDetailsAsyncToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, Address address, string caseNumber, long caseServiceRecId, long _entityRecId)
+        async public System.Threading.Tasks.Task<bool> InsertServiceDetailsToSvcAsync(ServiceSchedulingDetail serviceSchedulingDetail, Address address, string caseNumber, long caseServiceRecId, long _entityRecId)
         {
             try
             {
@@ -624,10 +620,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, _userInfo.CompanyId);
 
-                if (result.response)
-                {
-                    Util.ShowToast("Thank you very much. Your Service Scheduling detail has been sent.");
-                }
+              
                 return result.response;
             }
 
@@ -657,10 +650,6 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     parmSupplierId=supplierSelection.SelectedSupplier.AccountNum
                 }, new MzkAddressContract(), _userInfo.CompanyId);
 
-                if (result!=null)
-                {
-                    Util.ShowToast("Thank you very much. Your supplier has been sent.");
-                }
                 return result!=null;
             }
 

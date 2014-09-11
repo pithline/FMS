@@ -53,7 +53,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
-                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceDetail)
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceDetail || this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                     {
                         _navigationService.Navigate("ServiceScheduling", string.Empty);
                     }
