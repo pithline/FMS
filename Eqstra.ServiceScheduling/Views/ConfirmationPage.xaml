@@ -12,6 +12,7 @@
                             xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
                             xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
                             xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+                            xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
                             xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
                             mc:Ignorable="d">
 
@@ -26,7 +27,7 @@
                 <CommandBar.SecondaryCommands>
                     <AppBarButton Icon="Accept"
                               Label="Confirm"
-                              Command="{Binding ConfirmationDatesCommand}" />
+                              Command="{Binding ConfirmationDatesCommand}" Visibility="Collapsed"/>
 
                     <AppBarButton Icon="Previous"
                               Label="Previous Step"
@@ -37,7 +38,7 @@
                           Command="{Binding SubmitCommand}" />
                 <AppBarButton Icon="Calendar"
                           Label="Propose New Date"
-                          Command="{Binding ProposingNewDateCommand}" />
+                          Command="{Binding ProposingNewDateCommand}" Visibility="Collapsed"/>
             </CommandBar>
        
     </prism:VisualStateAwarePage.BottomAppBar>
@@ -47,239 +48,243 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition />
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
+                          AnimationType="DoubleCircle">
+        <Grid Style="{StaticResource LayoutRootStyle}">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Grid Background="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton"
-                    Margin="39,0,39,0"
-                    Command="{Binding GoBackCommand, ElementName=pageRoot}"
-                    Style="{StaticResource NavigationBackButtonNormalStyle}"
-                    VerticalAlignment="Center"
-                    AutomationProperties.Name="Back"
-                    AutomationProperties.AutomationId="BackButton"
-                    AutomationProperties.ItemType="Navigation Button" />
-            <StackPanel Grid.Column="1"
-                        Orientation="Horizontal">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton"
+                        Margin="39,0,39,0"
+                        Command="{Binding GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Center"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" />
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal">
 
-                <Button Command="{Binding GoHomeCommand}"
-                        Style="{StaticResource TransparentBtn}">
-                    <Button.Content>
-                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png"
-                               Width="235"
-                               Height="64" />
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-            <local:ProfileUserControl Grid.Column="2"
-                                      Margin="10 0" />
-        </Grid>
-
-        <Grid Grid.Row="1"
-              Margin="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Details"
-                           Style="{StaticResource GroupHeaderStyle}"
-                           Margin="0 0 0 10" />
-                <local:CustomerDetailUserControl Grid.Row="1"
-                                                 DataContext="{Binding CustomerDetails}" />
+                    <Button Command="{Binding GoHomeCommand}"
+                            Style="{StaticResource TransparentBtn}">
+                        <Button.Content>
+                            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png"
+                                   Width="235"
+                                   Height="64" />
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <local:ProfileUserControl Grid.Column="2"
+                                          Margin="10 0" />
             </Grid>
 
-            <Grid Grid.Column="1"
-                  Margin="20 0 0 0"
-                  HorizontalAlignment="Left"
-                  MinWidth="800">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Confirmation"
-                           Style="{StaticResource GroupHeaderStyle}"
-                           Margin="0 0 0 10" />
-                <Border Grid.Row="1"
-                        BorderBrush="#FFE0E0E0"
-                        BorderThickness="1"
-                        Background="White"
-                        HorizontalAlignment="Stretch">
-                    <Grid Margin="20 20 0 10"
-                          HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="ODO Reading" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ODOReading,Mode=TwoWay}" />
-                        </StackPanel>
+            <Grid Grid.Row="1"
+                  Margin="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Details"
+                               Style="{StaticResource GroupHeaderStyle}"
+                               Margin="0 0 0 10" />
+                    <local:CustomerDetailUserControl Grid.Row="1"
+                                                     DataContext="{Binding CustomerDetails}" />
+                </Grid>
 
-                        <StackPanel Grid.Row="1"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="ODO Reading Date" />
-                            <input:SfDatePicker BorderThickness="0"
-                                                Foreground="#FF666666"
-                                                Value="{Binding ServiceSchedulingDetail.ODOReadingDate,Mode=TwoWay}"
-                                                FontSize="18"
-                                                Margin="-10 0 0 0"
-                                                IsHitTestVisible="False" />
-                        </StackPanel>
+                <Grid Grid.Column="1"
+                      Margin="20 0 0 0"
+                      HorizontalAlignment="Left"
+                      MinWidth="800">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Confirmation"
+                               Style="{StaticResource GroupHeaderStyle}"
+                               Margin="0 0 0 10" />
+                    <Border Grid.Row="1"
+                            BorderBrush="#FFE0E0E0"
+                            BorderThickness="1"
+                            Background="White"
+                            HorizontalAlignment="Stretch">
+                        <Grid Margin="20 20 0 10"
+                              HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="ODO Reading" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.ODOReading,Mode=TwoWay}" />
+                            </StackPanel>
 
-
-                        <StackPanel Grid.Row="2"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Service Type" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.SelectedServiceType,Mode=TwoWay}" />
-                        </StackPanel>
-
-
-                        <StackPanel Grid.Row="3"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Delivery Option" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.DeliveryOption,Mode=TwoWay}" />
-                        </StackPanel>
-
-
-                        <StackPanel Grid.Row="4"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Service Type" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="Service Type" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="5"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Address" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.Address,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="6"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Location Type" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationName,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="7"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Additional Work" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.AdditionalWork,Mode=TwoWay}" />
-                        </StackPanel>
+                            <StackPanel Grid.Row="1"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="ODO Reading Date" />
+                                <input:SfDatePicker BorderThickness="0"
+                                                    Foreground="#FF666666"
+                                                    Value="{Binding ServiceSchedulingDetail.ODOReadingDate,Mode=TwoWay}"
+                                                    FontSize="18"
+                                                    Margin="-10 0 0 0"
+                                                    IsHitTestVisible="False" />
+                            </StackPanel>
 
 
-                        <StackPanel Grid.Row="0"
-                                    Grid.Column="1">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Supplier Name" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.SupplierName,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Supplier Contact Name" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ContactPersonName,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="0 20 20 0">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Supplier Contact Number" />
-                            <TextBlock Style="{StaticResource TextContentStyle}"
-                                       Text="{Binding ServiceSchedulingDetail.ContactPersonPhone,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                  >
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Supplier Date Time" />
-                            <input:SfDatePicker 
-                                                Value="{Binding ServiceSchedulingDetail.SupplierDateTime,Mode=TwoWay}" IsEnabled="False">
-
-                            </input:SfDatePicker>
-                        </StackPanel>
+                            <StackPanel Grid.Row="2"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Service Type" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.SelectedServiceType,Mode=TwoWay}" />
+                            </StackPanel>
 
 
-
-                        <StackPanel Grid.Row="5"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                    >
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Service Date (Option 1)" />
-                            <input:SfDatePicker  IsEnabled="{Binding IsProposingNewDate}"
-                                           
-                                                Value="{Binding ServiceDateOption1,Mode=TwoWay}">
-
-                            </input:SfDatePicker>
-                        </StackPanel>
+                            <StackPanel Grid.Row="3"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Delivery Option" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.DeliveryOption,Mode=TwoWay}" />
+                            </StackPanel>
 
 
-                        <StackPanel Grid.Row="6"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                  
-                                    VerticalAlignment="Top">
-                            <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                       Text="Service Date (Option 2)" />
-                            <input:SfDatePicker IsEnabled="{Binding IsProposingNewDate}"
-                                          
-                                                Value="{Binding ServiceDateOption2,Mode=TwoWay}">
+                            <StackPanel Grid.Row="4" Visibility="Collapsed"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Service Type" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="Service Type" />
+                            </StackPanel>
 
-                            </input:SfDatePicker>
-                        </StackPanel>
-                    </Grid>
-                </Border>
+                            <StackPanel Grid.Row="5"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Address" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.Address,Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="6"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Location Type" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.SelectedLocType,Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="7"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Additional Work" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.AdditionalWork,Mode=TwoWay}" />
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Row="0"
+                                        Grid.Column="1">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Supplier Name" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.SupplierName,Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Supplier Contact Name" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.ContactPersonName,Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0 20 20 0">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Supplier Contact Number" />
+                                <TextBlock Style="{StaticResource TextContentStyle}"
+                                           Text="{Binding ServiceSchedulingDetail.ContactPersonPhone,Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Supplier Date Time" />
+                                <input:SfDatePicker BorderThickness="0"
+                                                    IsHitTestVisible="False"
+                                                    Value="{Binding ServiceSchedulingDetail.SupplierDateTime,Mode=TwoWay}"
+                                                    IsEnabled="False">
+
+                                </input:SfDatePicker>
+                            </StackPanel>
+
+
+
+                            <StackPanel Grid.Row="5"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Service Date (Option 1)" />
+                                <input:SfDatePicker  BorderThickness="0"
+                                                     IsHitTestVisible="False"
+                                                     IsEnabled="{Binding IsProposingNewDate}"
+                                                     Value="{Binding ServiceDateOption1,Mode=TwoWay}">
+
+                                </input:SfDatePicker>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Row="6"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Top">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Service Date (Option 2)" />
+                                <input:SfDatePicker BorderThickness="0"
+                                                    IsHitTestVisible="False"
+                                                    IsEnabled="{Binding IsProposingNewDate}"
+                                                    Value="{Binding ServiceDateOption2,Mode=TwoWay}">
+
+                                </input:SfDatePicker>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

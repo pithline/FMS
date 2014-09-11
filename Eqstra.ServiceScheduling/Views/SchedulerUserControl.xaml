@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     >
-    
+
     <UserControl.Resources>
         <Style TargetType="schedule:HeaderTitleBarView">
             <Setter Property="Template">
@@ -37,10 +37,12 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-  
-    <Grid>
-        <schedule:SfSchedule  ScheduleType="Day" AllowEditing="False" EnableReminderTimer="True"  Appointments="{Binding Appointments}" Grid.Column="1" ShowNonWorkingHours="False" WorkStartHour="6" WorkEndHour="19" TimeInterval="OneHour">
 
-        </schedule:SfSchedule>
+    <Grid>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            <schedule:SfSchedule  ScheduleType="Month"  HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"  AllowEditing="False" EnableReminderTimer="True"  Appointments="{Binding Appointments}"  ShowNonWorkingHours="False" WorkStartHour="6" WorkEndHour="19" TimeInterval="OneHour">
+            </schedule:SfSchedule>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

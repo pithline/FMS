@@ -33,8 +33,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (this.DriverTask != null)
                 {
                     this.IsBusy = true;
-                    this.DriverTask.Status = DriverTaskStatus.AwaitServiceConfirmation;
-                   
+                    
+                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
+                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                     bool isInserted = await SSProxyHelper.Instance.InsertConfirmedServiceDetailToSvcAsync(this.ServiceSchedulingDetail, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
                     if (isInserted)
                     {
@@ -52,7 +53,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (this.DriverTask != null)
                 {
-                    this.DriverTask.Status = DriverTaskStatus.AwaitJobCardCapture;
+                    
                     this.ServiceSchedulingDetail.ServiceDateOption1 = this.ServiceDateOption1;
                     this.ServiceSchedulingDetail.ServiceDateOption2 = this.ServiceDateOption2;
                     bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
@@ -62,6 +63,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         this.SubmitCommand.RaiseCanExecuteChanged();
                     }
                     PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
+                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                 }
             }, () => { return (this.ServiceDateOption1 != this.ServiceSchedulingDetail.ServiceDateOption1) || (this.ServiceDateOption2 != this.ServiceSchedulingDetail.ServiceDateOption2); });
 
@@ -79,18 +81,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             try
             {
+                this.IsBusy = true;
                 this.DriverTask = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID,this.DriverTask.ServiceRecID);
                 if (this.ServiceSchedulingDetail != null)
                 {
                     this.ServiceDateOption1 = this.ServiceSchedulingDetail.ServiceDateOption1;
                     this.ServiceDateOption2 = this.ServiceSchedulingDetail.ServiceDateOption2;
                 }
+                this.IsBusy = false;
             }
             catch (Exception ex)
             {
-
+                this.IsBusy = false;
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }

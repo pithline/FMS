@@ -155,37 +155,49 @@
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\RoutingService1.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice2.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice21.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice8.xsd">
+    <None Include="Service References\DDServiceProxy\RoutingService.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice81.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice1.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice82.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice83.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice84.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice85.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice86.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice87.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice7.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -225,7 +237,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DDServiceProxy\xppservice1.disco" />
+    <None Include="Service References\DDServiceProxy\xppservice.disco" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

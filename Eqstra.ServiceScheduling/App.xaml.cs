@@ -81,6 +81,14 @@ namespace Eqstra.ServiceScheduling
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
            // GenerateModalForHybApp();
+            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
+            if (db == null)
+            {
+                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
+                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
+            }
+            SqliteHelper.Storage.ConnectionDatabaseAsync();
 
             var accountService = _container.Resolve<IAccountService>();
             var cred = await accountService.VerifyUserCredentialsAsync();
@@ -97,19 +105,12 @@ namespace Eqstra.ServiceScheduling
             
         }
 
-        async protected override void OnInitialize(IActivatedEventArgs args)
+         protected override void OnInitialize(IActivatedEventArgs args)
         {
             base.OnInitialize(args);
             EventAggregator = new EventAggregator();
 
-            var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
-            if (db == null)
-            {
-                var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
-                await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
-            }
-            SqliteHelper.Storage.ConnectionDatabaseAsync();
+            
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);

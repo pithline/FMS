@@ -93,7 +93,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
             catch (Exception ex)
             {
-                _errorHandler(ex);
+                
                 throw;
             }
         }

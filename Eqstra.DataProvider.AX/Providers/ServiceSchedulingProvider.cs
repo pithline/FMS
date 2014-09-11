@@ -87,22 +87,22 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                object response = null;
-                GetService();
+            object response = null;
+            GetService();
                 switch (criterias[0].ToString())
-                {
-                    case ActionSwitch.ValidateUser:
-                        response = ValidateUser("sahmed", "Password6");
-                        break;
+            {
+                case ActionSwitch.ValidateUser:
+                    response = ValidateUser("sahmed", "Password6");
+                    break;
 
                     case ActionSwitch.GetServiceDetails:
                         response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()));
                         break;
 
-                }
-                _client.Close();
-                return response;
             }
+                _client.Close();
+            return response;
+        }
             catch (Exception)
             {
                 _client.Close();
@@ -120,7 +120,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
                 object response = null;
-                GetService();
+            GetService();
                 switch (criterias[0].ToString())
                 {
                     case ActionSwitch.InsertServiceDetails:
@@ -142,7 +142,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     case ActionSwitch.UpdateStatusList:
                         response = UpdateStatusList(criterias[1].ToString(), JsonConvert.DeserializeObject<Eqstra.DataProvider.AX.SSModels.Task>(criterias[2].ToString()));
                         break;
-                }
+        }
                 _client.Close();
                 return true;
             }
@@ -317,16 +317,16 @@ namespace Eqstra.DataProvider.AX.Providers
                     {
                         //if (vendor_result.Any(a => a.parmCountry == mzk.parmCountryRegionId))
                         //{
-                        countryList.Add(
-                                           new Country
-                                           {
-                                               Name = mzk.parmCountryRegionName,
-                                               Id = mzk.parmCountryRegionId
-                                           }
-                                           );
+                            countryList.Add(
+                                               new Country
+                                               {
+                                                   Name = mzk.parmCountryRegionName,
+                                                   Id = mzk.parmCountryRegionId
+                                               }
+                                               );
                         //}
                     };
-                }
+                        }
 
                 return countryList;
 
@@ -348,7 +348,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result)
                     {
                         provinceList.Add(new Province { Name = mzk.parmStateName, Id = mzk.parmStateId });
-                    }
+                }
                 }
                 return provinceList;
 
@@ -370,7 +370,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result)
                     {
                         cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmStateId });
-                    }
+                }
                 }
                 return cityList;
 
@@ -392,7 +392,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result)
                     {
                         suburbList.Add(new Suburb { Name = mzk.parmCity, Id = mzk.parmStateId });
-                    }
+                }
                 }
                 return suburbList;
 
@@ -414,7 +414,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result)
                     {
                         regionList.Add(new Region { Name = mzk.parmRegionName, Id = mzk.parmRegion });
-                    }
+                }
                 }
                 return regionList;
 
@@ -436,7 +436,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result)
                     {
                         zipcodeList.Add(mzk.parmZipCode);
-                    }
+                }
                 }
                 return zipcodeList;
 
@@ -476,7 +476,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             CaseNumber = caseNumber,
                             SelectedLocationType=mzk.parmLocationType,
                             SelectedServiceType=mzk.parmServiceType
-                          
+
                         });
                     }
 
@@ -524,7 +524,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             LocType = mzk.parmLocationType.ToString(),
                             RecID = mzk.parmRecID,
                         });
-                    }
+                }
                 }
                 return locationTypes;
 
@@ -546,61 +546,61 @@ namespace Eqstra.DataProvider.AX.Providers
                 {
                     var result = _client.getCustomers(new SSProxy.CallContext() { Company = "1000" }, "1000");
 
-                    if (result != null)
-                    {
+                if (result != null)
+                {
                         foreach (var mzk in result)
+                    {
+                        destinationTypes.Add(new DestinationType
                         {
-                            destinationTypes.Add(new DestinationType
-                            {
-                                ContactName = mzk.parmName,
-                                Id = mzk.parmAccountNum,
-                                RecID = mzk.parmRecID,
-                                Address = mzk.parmAddress
-                            });
-                        }
-                    }
-                    destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
-
+                            ContactName = mzk.parmName,
+                            Id = mzk.parmAccountNum,
+                            RecID = mzk.parmRecID,
+                            Address = mzk.parmAddress
+                        });
                 }
+                    }
+                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
+
+            }
 
 
                 if (callerKey.Contains("Supplier") || callerKey.Contains("Vendor"))
-                {
+            {
                     var result = _client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
 
-                    if (result != null)
-                    {
+                if (result != null)
+                {
                         foreach (var mzk in result)
+                    {
+                        destinationTypes.Add(new DestinationType
                         {
-                            destinationTypes.Add(new DestinationType
-                            {
-                                ContactName = mzk.parmName,
-                                Id = mzk.parmAccountNum,
+                            ContactName = mzk.parmName,
+                            Id = mzk.parmAccountNum,
                                 Address = mzk.parmAddress,
                                 RecID=mzk.parmRecID
-                            });
-                        }
-                    }
-                    destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
+                    });
                 }
+                    }
+                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
+            }
 
 
                 if (callerKey.Contains("Driver"))
-                {
+            {
                     var result = _client.getDrivers(new SSProxy.CallContext() { Company = "1000" }, "1000");
 
-                    if (result != null)
-                    {
+                if (result != null)
+                {
                         foreach (var mzk in result)
+                    {
+                        destinationTypes.Add(new DestinationType
                         {
-                            destinationTypes.Add(new DestinationType
-                            {
-                                ContactName = mzk.parmName,
-                                Id = mzk.parmDriverId,
-                                RecID = mzk.parmRecID,
-                                Address = mzk.parmAddress
-                            });
-                        }
+                            ContactName = mzk.parmName,
+                            Id = mzk.parmDriverId,
+                            RecID = mzk.parmRecID,
+                            Address = mzk.parmAddress
+                        });
+                }
                     }
 
 
@@ -641,8 +641,8 @@ namespace Eqstra.DataProvider.AX.Providers
                             Email = "kasif.reza@mazikglobal.com",
                             Address = mzk.parmAddress,
                            
-                        });
-                    }
+                    });
+                }
                 }
 
                 return suppliers;
@@ -706,7 +706,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
 
                 var result = _client.insertServiceDetails(new SSProxy.CallContext() { Company = "1000" }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, Convert.ToInt64(serviceSchedulingDetail.SelectedDestinationType.RecID), mzkServiceDetailsContract
-                  , mzkAddressContract, "1000");
+                      , mzkAddressContract, "1000");
 
                 return true;
 
@@ -716,7 +716,7 @@ namespace Eqstra.DataProvider.AX.Providers
             {
                 throw;
             }
-        }
+            }
 
         public List<Supplier> FilteredSupplierByAddress(string countryId, string provinceId, string cityId, string suburbId, string regionId)
         {
@@ -750,7 +750,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         }
                     }
                     else
-                    {
+            {
                         return result.ToList<Supplier>();
                     }
 

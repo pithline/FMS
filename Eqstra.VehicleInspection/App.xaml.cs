@@ -1,23 +1,41 @@
-﻿using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.Helpers;
-using Eqstra.VehicleInspection.UILogic.AifServices;
-using Eqstra.VehicleInspection.UILogic.Services;
-using Eqstra.VehicleInspection.ViewModels;
-using Eqstra.VehicleInspection.Views;
-using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Prism.StoreApps;
-using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Storage;
-using Windows.UI.ApplicationSettings;
-using Windows.UI.Popups;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Microsoft.Practices.Unity;
+
+using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.Views;
+using Eqstra.VehicleInspection.ViewModels;
+using Windows.UI.ApplicationSettings;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Eqstra.VehicleInspection.UILogic.Services;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Windows.UI.Popups;
+using System.Collections.ObjectModel;
+using Eqstra.BusinessLogic;
+using Eqstra.VehicleInspection.UILogic.ViewModels;
+using Eqstra.VehicleInspection.Common;
+using Eqstra.VehicleInspection.UILogic;
+using Newtonsoft.Json;
+using Eqstra.VehicleInspection.UILogic.AifServices;
+using Windows.Networking.Connectivity;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -67,7 +85,7 @@ namespace Eqstra.VehicleInspection
 
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
         {
-           
+
             var db = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("SQLiteDB\\eqstramobility.sqlite") as StorageFile;
             if (db == null)
             {
@@ -78,6 +96,7 @@ namespace Eqstra.VehicleInspection
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             var accountService = _container.Resolve<IAccountService>();
+            
             var cred =  accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {
@@ -167,7 +186,5 @@ namespace Eqstra.VehicleInspection
         {
             this._container.Dispose();
         }
-
-       
     }
 }

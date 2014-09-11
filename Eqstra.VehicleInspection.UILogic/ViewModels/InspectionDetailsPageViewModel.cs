@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
@@ -81,7 +82,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                   // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                     navigationService.GoBack();
                 }
                 IsBusy = false;
@@ -148,7 +149,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Cell;
                     this.AllowEditing = true;
-                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitingConfirmation)
+                    list = (tasks).Where(x => Regex.Replace(x.Status, @"\s", "").ToLower() == BusinessLogic.Helpers.TaskStatus.AwaitingInspectionConfirmation.ToLower()
                         || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation));
                     list.AsParallel().ForAll(x => x.AllowEditing = true);
                     //|| x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail));

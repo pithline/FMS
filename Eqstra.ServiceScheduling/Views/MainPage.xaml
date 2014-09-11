@@ -62,7 +62,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width=".5*"/>
+
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FFE0E0E0"
                         Grid.Row="1"
@@ -84,7 +84,7 @@
                 </Border>
 
                 <Grid Grid.Column="1"
-                      Margin="20 20 0 30">
+                      Margin="20 20 20 30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -108,7 +108,7 @@
                             BorderBrush="#FFE0E0E0"
                             BorderThickness="1"
                             Background="White">
-                        <Grid Margin="10">
+                        <Grid Margin="10 0 20 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
@@ -193,7 +193,7 @@
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                       MinimumWidth="150"
+                                                              MinimumWidth="220"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
@@ -225,7 +225,7 @@
                     </Border>
                 </Grid>
 
-                <Border BorderBrush="#FFE0E0E0"
+                <!--<Border BorderBrush="#FFE0E0E0"
                         Grid.Column="2"
                         Margin="20 60 20 30"
                         VerticalAlignment="Stretch"
@@ -258,7 +258,7 @@
                                    HorizontalAlignment="Left"
                                    Style="{StaticResource InfoBoxTitleStyle}" />
                     </Grid>
-                </Border>
+                </Border>-->
             </Grid>
         </Grid>
     </busy:SfBusyIndicator>

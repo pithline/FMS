@@ -16,7 +16,7 @@
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Eqstra.VehicleInspection_TemporaryKey.pfx</PackageCertificateKeyFile>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>6376442D1D10D4A7925EB760AF0135E4972BE63A</PackageCertificateThumbprint>
@@ -451,7 +451,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.5">
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.6">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">

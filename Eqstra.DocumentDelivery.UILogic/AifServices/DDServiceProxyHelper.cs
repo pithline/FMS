@@ -31,7 +31,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 return instance;
             }
         }
-        public async System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient> ConnectAsync(string userName, string password, string domain = "lfmd")
+        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient ConnectAsync(string userName, string password, string domain = "lfmd")
         {
             try
             {
@@ -50,7 +50,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         {
             try
             {
-
                 return await client.validateUserAsync(userId, password);
             }
             catch (Exception)

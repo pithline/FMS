@@ -48,9 +48,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
                     if (isInserted)
                     {
-                        this._task.Status = DriverTaskStatus.AwaitSupplierSelection;
+                        
                         PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-
+                        PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
                 }

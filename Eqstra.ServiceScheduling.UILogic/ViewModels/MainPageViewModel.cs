@@ -90,8 +90,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
         private void GetAppointments(DriverTask task)
         {
-            var startTime = new DateTime(task.ConfirmedTime.Year, task.ConfirmedTime.Month, task.ConfirmedTime.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
-                       task.ConfirmedTime.Second);
+            var startTime = new DateTime(task.ConfirmationDate.Year, task.ConfirmationDate.Month, task.ConfirmationDate.Day, task.ConfirmationDate.Hour, task.ConfirmationDate.Minute,
+                       task.ConfirmationDate.Second);
             this.Appointments.Add(
             new ScheduleAppointment()
             {
@@ -158,22 +158,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.CustomerDetails.ContactName = this.InspectionTask.CustomerName;
                     this.CustomerDetails.EmailId = this.InspectionTask.CusEmailId;
                     this.CustomerDetails.CategoryType = this.InspectionTask.CaseCategory;
-
-                    var startTime = new DateTime(this.InspectionTask.ConfirmedTime.Year, this.InspectionTask.ConfirmedTime.Month, this.InspectionTask.ConfirmedTime.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
-                                this.InspectionTask.ConfirmedTime.Second);
-                    this.CustomerDetails.Appointments.Add(
-                                                        new ScheduleAppointment()
-                                                        {
-                                                            Subject = this.InspectionTask.CaseNumber,
-                                                            Location = this.InspectionTask.Address,
-                                                            StartTime = startTime,
-                                                            EndTime = startTime.AddHours(1),
-                                                            ReadOnly = true,
-                                                            AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                                            Status = new ScheduleAppointmentStatus { Status = this.InspectionTask.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
-
-                                                        });
-
+                    this.CustomerDetails.Appointments = this.Appointments;
                 }
             }
             catch (Exception ex)

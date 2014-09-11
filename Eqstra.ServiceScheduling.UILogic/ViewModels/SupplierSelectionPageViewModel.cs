@@ -34,16 +34,24 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.Model = new SupplierSelection();
             this.GoToConfirmationCommand = new DelegateCommand(async () =>
             {
-                this.IsBusy = true;
-                if (this.Model.ValidateProperties())
+                try
                 {
-                    bool isinserted = await SSProxyHelper.Instance.InsertSelectedSupplierToSvcAsync(this.Model, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
-                    if (isinserted)
+                    this.IsBusy = true;
+                    if (this.Model.ValidateProperties())
                     {
-                        _navigationService.Navigate("Confirmation", string.Empty);
+                        bool isinserted = await SSProxyHelper.Instance.InsertSelectedSupplierToSvcAsync(this.Model, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+                        if (isinserted)
+                        {
+                            _navigationService.Navigate("Confirmation", string.Empty);
+                        }
                     }
+                    this.IsBusy = false;
                 }
-                this.IsBusy = false;
+                catch (Exception)
+                {
+                    this.IsBusy = false;
+                    throw;
+                }
             }, () =>
             {
                 return (this.SelectedSupplier != null);
@@ -195,6 +203,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 catch (Exception ex)
                 {
                     AppSettings.Instance.ErrorMessage = ex.Message;
+                    this.IsBusy = false;
                 }
             }
             );

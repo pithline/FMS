@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="519308bc-11ed-4623-96b0-2399552feab9" Publisher="CN=Syed.Noor" Version="1.0.0.2" />
+  <Identity Name="519308bc-11ed-4623-96b0-2399552feab9" Publisher="CN=Syed.Noor" Version="1.0.0.9" />
   <Properties>
     <DisplayName>Eqstra.ServiceScheduling</DisplayName>
     <PublisherDisplayName>Syed.Noor</PublisherDisplayName>
@@ -16,6 +16,8 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.ServiceScheduling.App">
       <m2:VisualElements DisplayName="Eqstra Service Scheduling" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Eqstra Service Scheduling" ForegroundText="dark" BackgroundColor="#FFFFFF" ToastCapable="true">
+        <m2:DefaultTile ShortName="Eqstra Service Scheduling">
+        </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FFFFFF" />
         <m2:InitialRotationPreference>
           <m2:Rotation Preference="portrait" />
