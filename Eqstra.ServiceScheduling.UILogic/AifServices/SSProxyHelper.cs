@@ -152,7 +152,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ScheduledDate = DateTime.Today, //Need to add in Service
                             ScheduledTime = DateTime.Today, // Need to add in Service
                             ServiceRecID = mzkTask.parmServiceRecID,
-                           
+                           ConfirmedDate = mzkTask.parmConfirmationDate
                         });
 
                     });
@@ -374,7 +374,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
                             SelectedLocType = mzk.parmLocationType,
-                            SelectedServiceType = mzk.parmServiceType
+                            SelectedServiceType = mzk.parmServiceType,
+                            IsLiftRequired = mzk.parmLiftRequired.Equals(NoYes.Yes)
 
                         });
                     });
