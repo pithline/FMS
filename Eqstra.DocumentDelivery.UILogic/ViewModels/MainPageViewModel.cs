@@ -62,7 +62,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
             });
 
-            //  CreateTableAsync();
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)

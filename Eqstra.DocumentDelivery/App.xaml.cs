@@ -70,8 +70,8 @@ namespace Eqstra.DocumentDelivery
 
             if (result != null)
             {
-                await DDServiceProxyHelper.Instance.ConnectAsync("rchivukula", "P@ssword4");
-                var rs = await DDServiceProxyHelper.Instance.ValidateUser("rchivukula", "P@ssword4");
+                await DDServiceProxyHelper.Instance.ConnectAsync("rchivukula", "Password1");
+                var rs = await DDServiceProxyHelper.Instance.ValidateUser("rchivukula", "Password1");
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
                 PersistentData.Instance.UserInfo = new BusinessLogic.DeliveryModel.CDUserInfo();
                 PersistentData.Instance.UserInfo.CompanyId = rs.response.parmCompany;
