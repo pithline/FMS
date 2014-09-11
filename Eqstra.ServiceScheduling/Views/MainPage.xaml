@@ -140,6 +140,18 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
+                                                             HeaderText="STATUS DUE DATE"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridComboBoxColumn MappingName="Status"
+                                                             AllowEditing="False"
+                                                             HeaderText="STATUS"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="RegistrationNumber"
                                                          HeaderText="REGISTRATION NUMBER"
                                                          AllowEditing="False"
@@ -169,6 +181,11 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                             MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridTextColumn MappingName="ContactName"
+                                                         HeaderText="CONTACT NAME"
+                                                         HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                         MinimumWidth="150"
+                                                         HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn HeaderText="CELL NUMBER"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -183,18 +200,7 @@
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
-                                                             HeaderText="STATUS DUE DATE"
-                                                             AllowEditing="False"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                                MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridComboBoxColumn MappingName="Status"
-                                                             AllowEditing="False"
-                                                             HeaderText="STATUS"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                       MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
+                                   
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
                                                          AllowEditing="False"

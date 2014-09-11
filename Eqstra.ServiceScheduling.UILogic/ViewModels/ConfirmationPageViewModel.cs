@@ -33,14 +33,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (this.DriverTask != null)
                 {
                     this.IsBusy = true;
-                    
+
+                    //  bool isInserted = await SSProxyHelper.Instance.InsertConfirmedServiceDetailToSvcAsync(this.ServiceSchedulingDetail, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+                    //if (isInserted)
+                    //{
                     PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                     PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                    bool isInserted = await SSProxyHelper.Instance.InsertConfirmedServiceDetailToSvcAsync(this.ServiceSchedulingDetail, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
-                    if (isInserted)
-                    {
-                        navigationService.Navigate("Main", string.Empty);
-                    }
+                    navigationService.Navigate("Main", string.Empty);
+                    //}
                     this.IsBusy = false;
                 }
             },
@@ -52,7 +52,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (this.DriverTask != null)
                 {
-                    
+
                     this.ServiceSchedulingDetail.ServiceDateOption1 = this.ServiceDateOption1;
                     this.ServiceSchedulingDetail.ServiceDateOption2 = this.ServiceDateOption2;
                     bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
@@ -83,7 +83,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.IsBusy = true;
                 this.DriverTask = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID,this.DriverTask.ServiceRecID);
+                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID, this.DriverTask.ServiceRecID);
                 if (this.ServiceSchedulingDetail != null)
                 {
                     this.ServiceDateOption1 = this.ServiceSchedulingDetail.ServiceDateOption1;
