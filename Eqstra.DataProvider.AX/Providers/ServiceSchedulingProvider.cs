@@ -2,7 +2,6 @@
 using Eqstra.DataProvider.AX.SSModels;
 using Eqstra.DataProvider.AX.SSProxy;
 using Eqstra.Framework.Web.DataAccess;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,15 +10,15 @@ using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Eqstra.DataProvider.AX.Providers
 {
     [DataProvider(Name = "ServiceScheduling")]
+    [Export(typeof(IDataProvider))]
     public class ServiceSchedulingProvider : IDataProvider
     {
-        SSProxy.MzkServiceSchedulingServiceClient _client;
+        SSProxy.MzkServiceSchedulingServiceClient client;
 
         public System.Collections.IList GetDataList(object[] criterias)
         {
@@ -32,82 +31,94 @@ namespace Eqstra.DataProvider.AX.Providers
                     case ActionSwitch.GetTasks:
                         response = GetTasks();
                         break;
-                    case ActionSwitch.GetAppointments:
-                        response = GetAppointments();
-                        break;
 
-                    case ActionSwitch.GetCountryList:
-                        response = GetCountryList();
+                    case ActionSwitch.GetCountryRegionList:
+                        response = GetCountryRegionList();
                         break;
 
                     case ActionSwitch.GetProvinceList:
-                        response = GetProvinceList(criterias[1].ToString());
+                        response = GetProvinceList("");
                         break;
 
                     case ActionSwitch.GetCityList:
-                        response = GetCityList(criterias[1].ToString(), criterias[2].ToString());
+                        response = GetCityList("", "");
                         break;
 
                     case ActionSwitch.GetSuburbList:
-                        response = GetSuburbList(criterias[1].ToString(), criterias[2].ToString());
+                        response = GetSuburbList("", "");
                         break;
 
                     case ActionSwitch.GetRegionList:
-                        response = GetRegionList(criterias[1].ToString(), criterias[2].ToString());
+                        response = GetRegionList("", "");
                         break;
 
                     case ActionSwitch.GetZipcodeList:
-                        response = GetZipcodeList(criterias[1].ToString(), criterias[2].ToString());
+                        // response = GetZipcodeList();
                         break;
 
-                    case ActionSwitch.GetDestinationTypeList:
-                        response = GetDestinationTypeList(criterias[1].ToString());
+                    case ActionSwitch.GetServiceDetails:
+                        //response = GetServiceDetails();
                         break;
 
-                    case ActionSwitch.GetVendSupplierList:
-                        response = GetVendSupplierList();
+                    case ActionSwitch.GetLocationType:
+                        //response = GetLocationType();
                         break;
 
-                    case ActionSwitch.FilteredSupplierByAddress:
-                        response = FilteredSupplierByAddress(criterias[1].ToString(), criterias[2].ToString(), criterias[3].ToString(), criterias[4].ToString(), criterias[5].ToString());
+                    case ActionSwitch.GetCustomers:
+                        //response = GetCustomers();
                         break;
 
+                    case ActionSwitch.GetVendors:
+                        response = GetVendors();
+                        break;
+
+                    case ActionSwitch.GetDrivers:
+                        //response = GetDrivers();
+                        break;
+
+                    case ActionSwitch.GetVendSupplirerSvc:
+                        response = GetVendSupplirerSvc();
+                        break;
+
+                    case ActionSwitch.UpdateConfirmationDates:
+                        // response = UpdateConfirmationDates();
+                        break;
+
+                    case ActionSwitch.InsertServiceDetails:
+                        // response = InsertServiceDetails();
+                        break;
+
+                    case ActionSwitch.InsertSelectedSupplier:
+                        // response = InsertSelectedSupplier();
+                        break;
+
+                    case ActionSwitch.InsertConfirmedServiceDetail:
+                        // response = InsertConfirmedServiceDetail();
+                        break;
+
+                    case ActionSwitch.UpdateStatusList:
+                        // response = UpdateStatusList();
+                        break;
                 }
-                _client.Close();
                 return response;
             }
             catch (Exception)
             {
-                _client.Close();
                 throw;
             }
         }
 
         public object GetSingleData(object[] criterias)
         {
-            try
-            {
             object response = null;
             GetService();
-                switch (criterias[0].ToString())
+            switch (criterias[1].ToString())
             {
                 case ActionSwitch.ValidateUser:
                     response = ValidateUser("sahmed", "Password6");
                     break;
-
-                    case ActionSwitch.GetServiceDetails:
-                        response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()));
-                        break;
-
             }
-                _client.Close();
             return response;
-        }
-            catch (Exception)
-            {
-                _client.Close();
-                throw;
-            }
         }
 
         public bool DeleteData(object[] criterias)
@@ -117,40 +128,8 @@ namespace Eqstra.DataProvider.AX.Providers
 
         public object SaveData(object[] criterias)
         {
-            try
-            {
-                object response = null;
             GetService();
-                switch (criterias[0].ToString())
-                {
-                    case ActionSwitch.InsertServiceDetails:
-                        response = InsertServiceDetails(JsonConvert.DeserializeObject<ServiceSchedulingDetail>(criterias[1].ToString()), JsonConvert.DeserializeObject<Address>(criterias[2].ToString()));
-                        break;
-
-                    case ActionSwitch.InsertSelectedSupplier:
-                        response = InsertSelectedSupplier(JsonConvert.DeserializeObject<SupplierSelection>(criterias[1].ToString()));
-                        break;
-
-                    case ActionSwitch.InsertConfirmedServiceDetail:
-                        response = InsertConfirmedServiceDetail(JsonConvert.DeserializeObject<ServiceSchedulingDetail>(criterias[1].ToString()));
-                        break;
-
-                    case ActionSwitch.UpdateConfirmationDates:
-                        response = UpdateConfirmationDates(long.Parse(criterias[1].ToString()), JsonConvert.DeserializeObject<ServiceSchedulingDetail>(criterias[2].ToString()));
-                        break;
-
-                    case ActionSwitch.UpdateStatusList:
-                        response = UpdateStatusList(criterias[1].ToString(), JsonConvert.DeserializeObject<Eqstra.DataProvider.AX.SSModels.Task>(criterias[2].ToString()));
-                        break;
-        }
-                _client.Close();
-                return true;
-            }
-            catch (Exception)
-            {
-                _client.Close();
-                throw;
-            }
+            return null;
         }
 
         public object GetService()
@@ -158,7 +137,7 @@ namespace Eqstra.DataProvider.AX.Providers
             return GetServiceClient();
         }
 
-        private SSProxy.MzkServiceSchedulingServiceClient GetServiceClient()
+        public SSProxy.MzkServiceSchedulingServiceClient GetServiceClient()
         {
             try
             {
@@ -175,26 +154,26 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-                _client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));
-                _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "sahmed";
-                _client.ClientCredentials.UserName.Password = "Password6";
-                _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
-                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("sahmed", "Password6", "lfmd");
+                client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));
+                client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "rchivukula";
+                client.ClientCredentials.UserName.Password = "Password1";
+                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password1", "lfmd");
             }
             catch (Exception)
             {
                 throw;
             }
 
-            return _client;
+            return client;
         }
 
-        private UserInfo ValidateUser(string userId, string password)
+        public UserInfo ValidateUser(string userId, string password)
         {
             UserInfo userInfo = new UserInfo();
             try
             {
-                var result = _client.validateUser(new SSProxy.CallContext() { Company = "1000" }, userId, password);
+                var result = client.validateUser(null, userId, password);
                 if (result != null)
                 {
                     userInfo.UserId = result.parmUserID;
@@ -202,7 +181,6 @@ namespace Eqstra.DataProvider.AX.Providers
                     userInfo.CompanyName = result.parmCompanyName;
                     userInfo.Name = result.parmUserName;
                 }
-
             }
             catch (Exception)
             {
@@ -211,12 +189,11 @@ namespace Eqstra.DataProvider.AX.Providers
             return userInfo;
         }
 
-        private List<Eqstra.DataProvider.AX.SSModels.Task> GetTasks()
+        public List<Eqstra.DataProvider.AX.SSModels.Task> GetTasks()
         {
             try
             {
-
-                var result = _client.getTasks(new SSProxy.CallContext() { Company = "1000" }, "sahmed", "1000");
+                var result = client.getTasks(new SSProxy.CallContext() { Company = "1000" }, "rchivukula", "1000");
                 List<Eqstra.DataProvider.AX.SSModels.Task> driverTaskList = new List<Eqstra.DataProvider.AX.SSModels.Task>();
                 if (result != null)
                 {
@@ -226,11 +203,11 @@ namespace Eqstra.DataProvider.AX.Providers
                         driverTaskList.Add(new Eqstra.DataProvider.AX.SSModels.Task
                         {
                             CaseNumber = mzkTask.parmCaseID,
-                            Address = Regex.Replace(mzkTask.parmCustAddress, "\n", ","),
+                            Address = mzkTask.parmCustAddress,
                             CustomerName = mzkTask.parmCustName,
                             CustPhone = mzkTask.parmCustPhone,
                             Status = mzkTask.parmStatus,
-                            StatusDueDate = mzkTask.parmStatusDueDate.ToShortDateString(),
+                            StatusDueDate = mzkTask.parmStatusDueDate,
                             RegistrationNumber = mzkTask.parmRegistrationNum,
                             // AllocatedTo = _userInfo.Name,
                             UserId = mzkTask.parmUserID,
@@ -245,24 +222,12 @@ namespace Eqstra.DataProvider.AX.Providers
                             CusEmailId = mzkTask.parmEmail,
                             ScheduledDate = DateTime.Today, //Need to add in Service
                             ScheduledTime = DateTime.Today, // Need to add in Service
-                            ServiceRecID = mzkTask.parmServiceRecID,
-                            AppointmentStart = mzkTask.parmStatus==Eqstra.DataProvider.AX.Helpers.TaskStatus.AwaitServiceDetail ? DateTime.Now :DateTime.MinValue,
-                            AppointmentEnd = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.AwaitServiceDetail ? DateTime.Now.AddHours(2) : DateTime.MinValue
-                     
-
+                            ServiceRecID = mzkTask.parmServiceRecID
                         });
 
-
                     }
-
-                }
-
-                if (!driverTaskList.Any())
-                {
-                    // driverTaskList.Add(new Eqstra.DataProvider.AX.SSModels.Task { CaseNumber = "12458", Address = "johannesburg,south africa", CustomerName = "mohan lal", CusEmailId = "kasif@mail.com", Description = "Dummy" });
                 }
                 return driverTaskList;
-
             }
             catch (Exception)
             {
@@ -270,53 +235,21 @@ namespace Eqstra.DataProvider.AX.Providers
             }
         }
 
-        private List<Eqstra.DataProvider.AX.SSModels.Appointment> GetAppointments()
+        public List<Country> GetCountryRegionList()
         {
             try
             {
-
-                var result = _client.getTasksOptimize(new SSProxy.CallContext() { Company = "1000" }, "sahmed", "1000");
-                List<Eqstra.DataProvider.AX.SSModels.Appointment> appointmentList = new List<Eqstra.DataProvider.AX.SSModels.Appointment>();
-                if (result != null)
-                {
-
-                    foreach (var mzkTask in result)
-                    {
-                        appointmentList.Add(new Eqstra.DataProvider.AX.SSModels.Appointment
-                        {
-                            Title = mzkTask.parmCaseID,
-                            Description = mzkTask.parmVehicleDescription,
-                            Start = DateTime.Now,
-                            End = DateTime.Now.AddHours(2),
-                            Location = mzkTask.parmCustAddress
-                        });
-
-                    }
-                }
-                return appointmentList;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        private List<Country> GetCountryList()
-        {
-            try
-            {
-
-                var result = _client.getCountryRegionList(new SSProxy.CallContext() { Company = "1000" }, "1000");
-                // var vendor_result = client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
+                var result = client.getCountryRegionList(new SSProxy.CallContext() { Company = "1000" }, "1000");
+                var vendor_result = client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
 
                 List<Country> countryList = new List<Country>();
                 if (result != null)
                 {
 
-                    foreach (var mzk in result.OrderBy(o => o.parmCountryRegionName))
+                    result.OrderBy(o => o.parmCountryRegionName).AsParallel().ForAll(mzk =>
                     {
-                        //if (vendor_result.Any(a => a.parmCountry == mzk.parmCountryRegionId))
-                        //{
+                        if (vendor_result.Any(a => a.parmCountry == mzk.parmCountryRegionId))
+                        {
                             countryList.Add(
                                                new Country
                                                {
@@ -324,180 +257,167 @@ namespace Eqstra.DataProvider.AX.Providers
                                                    Id = mzk.parmCountryRegionId
                                                }
                                                );
-                        //}
-                    };
                         }
+                    });
+                }
 
                 return countryList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
-        private List<Province> GetProvinceList(string countryId)
+        public List<Province> GetProvinceList(string countryId)
         {
             try
             {
-
-                var result = _client.getProvinceList(new SSProxy.CallContext() { Company = "1000" }, countryId, "1000");
+                var result = client.getProvinceList(new SSProxy.CallContext() { Company = "1000" }, countryId, "1000");
                 List<Province> provinceList = new List<Province>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         provinceList.Add(new Province { Name = mzk.parmStateName, Id = mzk.parmStateId });
-                }
+                    });
                 }
                 return provinceList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
-        private List<City> GetCityList(string countryId, string stateId)
+        public List<City> GetCityList(string countryId, string stateId)
         {
             try
             {
-
-                var result = _client.getCityList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
+                var result = client.getCityList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
                 List<City> cityList = new List<City>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmStateId });
-                }
+                    });
                 }
                 return cityList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                return null;
             }
         }
-        private List<Suburb> GetSuburbList(string countryId, string stateId)
+        public List<Suburb> GetSuburbList(string countryId, string stateId)
         {
             try
             {
-
-                var result = _client.getSuburbList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
+                var result = client.getSuburbList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
                 List<Suburb> suburbList = new List<Suburb>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         suburbList.Add(new Suburb { Name = mzk.parmCity, Id = mzk.parmStateId });
-                }
+                    });
                 }
                 return suburbList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
-        private List<Region> GetRegionList(string countryId, string stateId)
+        public List<Region> GetRegionList(string countryId, string stateId)
         {
             try
             {
-
-                var result = _client.getRegions(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
+                var result = client.getRegions(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
                 List<Region> regionList = new List<Region>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         regionList.Add(new Region { Name = mzk.parmRegionName, Id = mzk.parmRegion });
-                }
+                    });
                 }
                 return regionList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
-        private List<string> GetZipcodeList(string countryId, string stateId)
+        public List<string> GetZipcodeList(string countryId, string stateId)
         {
             try
             {
-
-                var result = _client.getZipcodeList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
+                var result = client.getZipcodeList(new SSProxy.CallContext() { Company = "1000" }, countryId, stateId, "1000");
                 List<string> zipcodeList = new List<string>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         zipcodeList.Add(mzk.parmZipCode);
-                }
+                    });
                 }
                 return zipcodeList;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
-        private ServiceSchedulingDetail GetServiceDetails(string caseNumber, long serviceRecId)
+        public ServiceSchedulingDetail GetServiceDetails(string caseNumber, long caseServiceRecId)
         {
             try
             {
-
-                var result = _client.getServiceDetails(new SSProxy.CallContext() { Company = "1000" }, caseNumber, serviceRecId, "1000");
+                var result = client.getServiceDetails(new SSProxy.CallContext() { Company = "1000" }, caseNumber, caseServiceRecId, "1000");
                 ServiceSchedulingDetail detailServiceScheduling = null;
                 if (result != null)
                 {
 
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         detailServiceScheduling = (new ServiceSchedulingDetail
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = (mzk.parmPreferredDateFirstOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateFirstOption).ToShortDateString(),
-                            ServiceDateOption2 = (mzk.parmPreferredDateSecondOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateSecondOption).ToShortDateString(),
-                            ODOReading = Int64.Parse(mzk.parmODOReading.ToString()),
-                            ODOReadingDate = mzk.parmODOReadingDate == DateTime.MinValue ? string.Empty : mzk.parmODOReadingDate.ToShortDateString(),
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateFirstOption,
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateSecondOption,
+                            ODOReading = mzk.parmODOReading.ToString(),
+                            ODOReadingDate = mzk.parmODOReadingDate < DateTime.Today ? DateTime.Today : mzk.parmODOReadingDate,
                             ServiceType = GetServiceTypes(caseNumber, "1000"),
-                            LocationTypes = GetLocationType(serviceRecId, "1000"),
+                            LocationTypes = GetLocationType(caseServiceRecId, "1000"),
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
                             ContactPersonPhone = mzk.parmContactPersonPhone,
-                            SupplierDateTime = DateTime.Now,// need to add in service
-                            CaseNumber = caseNumber,
-                            SelectedLocationType=mzk.parmLocationType,
-                            SelectedServiceType=mzk.parmServiceType
+                            SupplierDateTime = DateTime.Now// need to add in service
 
                         });
-                    }
+                    });
 
                 }
-
                 return detailServiceScheduling;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
         private List<string> GetServiceTypes(string caseNumber, string companyId)
         {
-
-            var result = _client.getServiceTypes(new SSProxy.CallContext() { Company = "1000" }, caseNumber, "1000");
+            var result = client.getServiceTypes(new SSProxy.CallContext() { Company = "1000" }, caseNumber, "1000");
             List<string> results = new List<string>();
             if (result.IndexOf("~") > 1)
             {
                 results.AddRange(result.Split('~'));
+            }
+            if (result.IndexOf(",") > 1)
+            {
+                results.AddRange(result.Split(','));
             }
             else
             {
@@ -505,18 +425,16 @@ namespace Eqstra.DataProvider.AX.Providers
             }
 
             return results;
-
         }
-        private List<LocationType> GetLocationType(long serviceRecId, string companyId)
+        public List<LocationType> GetLocationType(long caseServiceRecId, string companyId)
         {
             try
             {
-
-                var result = _client.getLocationType(new SSProxy.CallContext() { Company = "1000" }, serviceRecId, companyId);
+                var result = client.getLocationType(new SSProxy.CallContext() { Company = "1000" }, caseServiceRecId, companyId);
                 List<LocationType> locationTypes = new List<LocationType>();
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         locationTypes.Add(new LocationType
                         {
@@ -524,109 +442,54 @@ namespace Eqstra.DataProvider.AX.Providers
                             LocType = mzk.parmLocationType.ToString(),
                             RecID = mzk.parmRecID,
                         });
-                }
-                }
-                return locationTypes;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-        public List<DestinationType> GetDestinationTypeList(string callerKey)
-        {
-            try
-            {
-
-                List<DestinationType> destinationTypes = new List<DestinationType>();
-                if (callerKey.Contains("Customer"))
-                {
-                    var result = _client.getCustomers(new SSProxy.CallContext() { Company = "1000" }, "1000");
-
-                if (result != null)
-                {
-                        foreach (var mzk in result)
-                    {
-                        destinationTypes.Add(new DestinationType
-                        {
-                            ContactName = mzk.parmName,
-                            Id = mzk.parmAccountNum,
-                            RecID = mzk.parmRecID,
-                            Address = mzk.parmAddress
-                        });
-                }
-                    }
-                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
-
-            }
-
-
-                if (callerKey.Contains("Supplier") || callerKey.Contains("Vendor"))
-            {
-                    var result = _client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
-
-                if (result != null)
-                {
-                        foreach (var mzk in result)
-                    {
-                        destinationTypes.Add(new DestinationType
-                        {
-                            ContactName = mzk.parmName,
-                            Id = mzk.parmAccountNum,
-                                Address = mzk.parmAddress,
-                                RecID=mzk.parmRecID
                     });
                 }
-                    }
-                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
+                return locationTypes;
             }
-
-
-                if (callerKey.Contains("Driver"))
+            catch (Exception ex)
             {
-                    var result = _client.getDrivers(new SSProxy.CallContext() { Company = "1000" }, "1000");
-
+                return null;
+            }
+        }
+       
+        public List<DestinationType> GetVendors()
+        {
+            try
+            {
+                var result = client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
+                List<DestinationType> destinationTypes = new List<DestinationType>();
                 if (result != null)
                 {
-                        foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         destinationTypes.Add(new DestinationType
                         {
                             ContactName = mzk.parmName,
-                            Id = mzk.parmDriverId,
-                            RecID = mzk.parmRecID,
+                            Id = mzk.parmAccountNum,
                             Address = mzk.parmAddress
                         });
+                    });
                 }
-                    }
-
-
-                }
-
-                return destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
-
+                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
+                return destinationTypes;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                return null;
             }
-
         }
-
-        private List<Supplier> GetVendSupplierList()
+       
+        public List<Supplier> GetVendSupplirerSvc()
         {
             try
             {
-
-                var result = _client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
+                var result = client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
                 List<Supplier> suppliers = new List<Supplier>();
 
                 if (result != null)
                 {
-                    foreach (var mzk in result)
+                    result.AsParallel().ForAll(mzk =>
                     {
                         suppliers.Add(new Supplier
                         {
@@ -638,138 +501,81 @@ namespace Eqstra.DataProvider.AX.Providers
                             Province = mzk.parmState,
                             City = mzk.parmCityName,
                             Suburb = mzk.parmSuburban,
-                            Email = "kasif.reza@mazikglobal.com",
-                            Address = mzk.parmAddress,
-                           
+                        });
                     });
-                }
                 }
 
                 return suppliers;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                return null;
             }
         }
-        private bool UpdateConfirmationDates(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
+        public bool UpdateConfirmationDates(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
         {
             try
             {
-
-                var result = _client.updateConfirmationDates(new SSProxy.CallContext() { Company = "1000" }, caseServiceRecId, new MzkServiceDetailsContract
+                var result = client.updateConfirmationDates(new SSProxy.CallContext() { Company = "1000" }, caseServiceRecId, new MzkServiceDetailsContract
                 {
-                    parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
-                    parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2)
+                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2
                 }, "1000");
                 return result;
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                return false;
             }
 
         }
-        private bool InsertServiceDetails(ServiceSchedulingDetail serviceSchedulingDetail, Address address)
+        public bool InsertServiceDetails(ServiceSchedulingDetail serviceSchedulingDetail, Address address, string caseNumber, long caseServiceRecId, long _entityRecId)
         {
             try
             {
-
                 var mzkAddressContract = new MzkAddressContract
                 {
-                    parmCity = address.SelectedCity != null ? address.SelectedCity : string.Empty,
-                    parmCountryRegionId = address.SelectedCountry != null ? address.SelectedCountry : string.Empty,
-                    parmProvince = address.Selectedprovince != null ? address.Selectedprovince : string.Empty,
+                    parmCity = address.SelectedCity != null ? address.SelectedCity.Id : string.Empty,
+                    parmCountryRegionId = address.SelectedCountry != null ? address.SelectedCountry.Id : string.Empty,
+                    parmProvince = address.Selectedprovince != null ? address.Selectedprovince.Id : string.Empty,
                     parmStreet = address.Street,
-                    parmSubUrb = address.SelectedSuburb != null ? address.SelectedSuburb : string.Empty,
+                    parmSubUrb = address.SelectedSuburb != null ? address.SelectedSuburb.Id : string.Empty,
                     parmZipCode = address.SelectedZip
 
                 };
                 var mzkServiceDetailsContract = new MzkServiceDetailsContract
                 {
-
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
-                   
-                    parmODOReading = serviceSchedulingDetail.ODOReading.ToString(),
-                    parmODOReadingDate = DateTime.Parse(serviceSchedulingDetail.ODOReadingDate),
-                    parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
-                    parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2),
-                    parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                    parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocType.RecID,
-                    parmSupplierId = serviceSchedulingDetail.SelectedDestinationType.Id,
-                    parmLocationType=serviceSchedulingDetail.SelectedLocType.LocationName
+                    parmLocationType = serviceSchedulingDetail.SelectedLocationType != null ? serviceSchedulingDetail.SelectedLocationType.LocType : string.Empty,
+                    parmODOReading = serviceSchedulingDetail.ODOReading,
+                    parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
+                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
+                    parmServiceType = serviceSchedulingDetail.SelectedServiceType
                 };
 
 
-                var result = _client.insertServiceDetails(new SSProxy.CallContext() { Company = "1000" }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, Convert.ToInt64(serviceSchedulingDetail.SelectedDestinationType.RecID), mzkServiceDetailsContract
+                var result = client.insertServiceDetails(new SSProxy.CallContext() { Company = "1000" }, caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, "1000");
 
-                return true;
-
+                return result;
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
-            }
-            }
 
-        public List<Supplier> FilteredSupplierByAddress(string countryId, string provinceId, string cityId, string suburbId, string regionId)
-        {
-
-            try
-            {
-                var result = this.GetVendSupplierList();
-                IEnumerable<Supplier> filteredResult = new List<Supplier>();
-                if (result != null)
-                {
-
-                    if (!String.IsNullOrEmpty(countryId))
-                    {
-                        filteredResult = result.Where(w => w.Country == countryId);
-                        if (!String.IsNullOrEmpty(provinceId))
-                        {
-                            filteredResult = filteredResult.Where(w => w.Province == provinceId);
-                            if (!String.IsNullOrEmpty(cityId))
-                            {
-                                filteredResult = filteredResult.Where(w => w.City == cityId);
-                                if (!String.IsNullOrEmpty(suburbId))
-                                {
-                                    filteredResult = filteredResult.Where(w => w.Suburb == suburbId);
-
-                                    if (!String.IsNullOrEmpty(regionId))
-                                    {
-                                        filteredResult = filteredResult.Where(w => w.Suburb == regionId);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else
-            {
-                        return result.ToList<Supplier>();
-                    }
-
-                }
-                return filteredResult.ToList<Supplier>();
-            }
-            catch (Exception)
-            {
-                throw;
+                return false;
             }
         }
-
-
-        private bool InsertSelectedSupplier(SupplierSelection supplierSelection)
+        public void InsertSelectedSupplier(SupplierSelection supplierSelection, string caseNumber, long caseServiceRecId)
         {
             try
             {
-
-                _client.insertVendDet(new SSProxy.CallContext() { Company = "1000" }, supplierSelection.CaseNumber, supplierSelection.CaseServiceRecID, default(long), new MzkServiceDetailsContract
+                client.insertVendDet(new SSProxy.CallContext() { Company = "1000" }, caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
                 {
                     parmContactPersonName = supplierSelection.SelectedSupplier.SupplierContactName,
                     parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
@@ -777,30 +583,28 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmSupplierId = supplierSelection.SelectedSupplier.AccountNum
                 }, new MzkAddressContract(), "1000");
 
-                return true;
-
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
             }
         }
-        private bool InsertConfirmedServiceDetail(ServiceSchedulingDetail serviceSchedulingDetail)
+        public bool InsertConfirmedServiceDetail(ServiceSchedulingDetail serviceSchedulingDetail, string caseNumber, long caseServiceRecId)
         {
             try
             {
 
-                var result = _client.insertServiceDetails(new SSProxy.CallContext() { Company = "1000" }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, default(long), new MzkServiceDetailsContract
+                var result = client.insertServiceDetails(new SSProxy.CallContext() { Company = "1000" }, caseNumber, caseServiceRecId, default(long), new MzkServiceDetailsContract
                 {
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocType.LocationName,
-                    parmODOReading = serviceSchedulingDetail.ODOReading.ToString(),
-                    parmODOReadingDate = DateTime.Parse(serviceSchedulingDetail.ODOReadingDate),
-                    parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
-                    parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2),
+                    parmLocationType = serviceSchedulingDetail.SelectedLocationType.LocType,
+                    parmODOReading = serviceSchedulingDetail.ODOReading,
+                    parmODOReadingDate = serviceSchedulingDetail.ODOReadingDate,
+                    parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
+                    parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                     parmServiceType = serviceSchedulingDetail.SelectedServiceType,
                     parmSupplierName = serviceSchedulingDetail.SupplierName,
                     parmContactPersonName = serviceSchedulingDetail.ContactPersonName,
@@ -810,26 +614,24 @@ namespace Eqstra.DataProvider.AX.Providers
 
 
                 return result;
-
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return false;
             }
         }
-        private string UpdateStatusList(string caller, Eqstra.DataProvider.AX.SSModels.Task task)
+        public string UpdateStatusList(Eqstra.DataProvider.AX.SSModels.Task task)
         {
             try
             {
-
                 ObservableCollection<MzkServiceSchdTasksContract> mzkTasks = new ObservableCollection<MzkServiceSchdTasksContract>();
 
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.DataProvider.AX.Helpers.DriverTaskStatus.AwaitServiceDetail, EEPActionStep.AwaitServiceBookingDetail);
-                actionStepMapping.Add(Eqstra.DataProvider.AX.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitSupplierSelection);
-
+                //actionStepMapping.Add(DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitServiceDetail);
+                //actionStepMapping.Add(DriverTaskStatus.AwaitServiceConfirmation, EEPActionStep.AwaitSupplierSelection);
+                //actionStepMapping.Add(DriverTaskStatus.AwaitJobCardCapture, EEPActionStep.AwaitServiceConfirmation);
                 mzkTasks.Add(new MzkServiceSchdTasksContract
                 {
                     parmCaseID = task.CaseNumber,
@@ -837,18 +639,17 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmCaseServiceRecID = task.CaseServiceRecID,
                     parmStatus = task.Status,
                     parmServiceRecID = task.ServiceRecID,
-                    parmStatusDueDate = DateTime.Parse(task.StatusDueDate),
+                    parmStatusDueDate = task.StatusDueDate,
                     parmEEPActionStep = actionStepMapping[task.Status]
                 });
-                var result = _client.updateStatusList(new SSProxy.CallContext() { Company = "1000" }, mzkTasks.ToArray(), "1000");
+                var result = client.updateStatusList(new SSProxy.CallContext() { Company = "1000" }, mzkTasks.ToArray(), "1000");
 
                 return result.FirstOrDefault().parmStatus;
-
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return task.Status;
             }
         }
 
