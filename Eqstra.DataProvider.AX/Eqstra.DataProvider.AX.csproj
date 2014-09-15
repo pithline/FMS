@@ -58,6 +58,7 @@
     <Compile Include="Helpers\TaskStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ServiceSchedulingProvider.cs" />
+    <Compile Include="Repositories\SSRepository.cs" />
     <Compile Include="Service References\SSProxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,19 +154,13 @@
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetTasks_ModifiedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse.datasource">
+    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">

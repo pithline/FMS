@@ -193,7 +193,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = client.getTasksOptimize(new SSProxy.CallContext() { Company = "1000" }, "rchivukula", "1000");
+                var result = client.getTasks(new SSProxy.CallContext() { Company = "1000" }, "rchivukula", "1000");
                 List<Eqstra.DataProvider.AX.SSModels.Task> driverTaskList = new List<Eqstra.DataProvider.AX.SSModels.Task>();
                 if (result != null)
                 {
@@ -451,34 +451,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 return null;
             }
         }
-        public List<DestinationType> GetCustomers()
-        {
-            try
-            {
-                var result = client.getCustomers(new SSProxy.CallContext() { Company = "1000" }, "1000");
-                List<DestinationType> destinationTypes = new List<DestinationType>();
-                if (result != null)
-                {
-                    result.AsParallel().ForAll(mzk =>
-                    {
-                        destinationTypes.Add(new DestinationType
-                        {
-                            ContactName = mzk.parmName,
-                            Id = mzk.parmAccountNum,
-                            RecID = mzk.parmRecID,
-                            Address = mzk.parmAddress
-                        });
-                    });
-                }
-                destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
-                return destinationTypes;
-            }
-            catch (Exception ex)
-            {
-
-                return null;
-            }
-        }
+       
         public List<DestinationType> GetVendors()
         {
             try
@@ -506,33 +479,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 return null;
             }
         }
-        public IEnumerable<DestinationType> GetDrivers()
-        {
-            try
-            {
-                var result = client.getDrivers(new SSProxy.CallContext() { Company = "1000" }, "1000");
-                List<DestinationType> destinationTypes = new List<DestinationType>();
-                if (result != null)
-                {
-                    result.AsParallel().ForAll(mzk =>
-                    {
-                        destinationTypes.Add(new DestinationType
-                        {
-                            ContactName = mzk.parmName,
-                            Id = mzk.parmDriverId,
-                            RecID = mzk.parmRecID,
-                            Address = mzk.parmAddress
-                        });
-                    });
-                }
-                return destinationTypes.OrderBy(o => o.ContactName);
-            }
-            catch (Exception ex)
-            {
-
-                return null;
-            }
-        }
+       
         public List<Supplier> GetVendSupplirerSvc()
         {
             try
