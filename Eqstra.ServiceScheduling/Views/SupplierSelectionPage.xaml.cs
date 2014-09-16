@@ -42,20 +42,6 @@ namespace Eqstra.ServiceScheduling.Views
         public SupplierSelectionPage()
         {
             this.InitializeComponent();
-            Loaded += OnLoaded;
         }
-        async void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Geolocator locator = new Geolocator();
-            var geolocator = new Geolocator();
-            Geoposition position = await geolocator.GetGeopositionAsync();
-
-            SupplierSelectionPageViewModel supplierSelectionPageVm = (SupplierSelectionPageViewModel)this.DataContext;
-            supplierSelectionPageVm.Model.SelectedCountry.Id =position.CivicAddress.Country;
-            supplierSelectionPageVm.Model.Selectedprovince.Id = position.CivicAddress.State;
-            await supplierSelectionPageVm.SupplierFilterCommand.Execute();
-
-        }
-
     }
 }

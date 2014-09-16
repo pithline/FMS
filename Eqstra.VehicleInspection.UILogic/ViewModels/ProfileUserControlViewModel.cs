@@ -78,5 +78,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
         }
 
+        public ICommand LogoutCommand { get; private set; }     
     }
 }

@@ -122,7 +122,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<DriverTask> driverTaskList = new List<DriverTask>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzkTask =>
+
+                    foreach (var mzkTask in result.response.Where(x => x != null))
                     {
                         driverTaskList.Add(new Eqstra.BusinessLogic.ServiceSchedule.DriverTask
                         {
@@ -150,7 +151,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ContactName = mzkTask.parmContactPersonName
                         });
 
-                    });
+                    }
                 }
                 return driverTaskList;
             }
@@ -189,7 +190,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                                            }
                                            );
 
-                }
+                    }
                 }
 
                 return countryList;
@@ -218,10 +219,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 if (result.response != null)
                 {
 
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         provinceList.Add(new Province { Name = mzk.parmStateName, Id = mzk.parmStateId });
-                    });
+                    }
                 }
                 return provinceList;
             }
@@ -246,10 +247,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<City> cityList = new List<City>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmStateId });
-                    });
+                    }
                 }
                 return cityList;
             }
@@ -271,10 +272,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<Suburb> suburbList = new List<Suburb>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         suburbList.Add(new Suburb { Name = mzk.parmCity, Id = mzk.parmStateId });
-                    });
+                    }
                 }
                 return suburbList;
             }
@@ -296,10 +297,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<Region> regionList = new List<Region>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         regionList.Add(new Region { Name = mzk.parmRegionName, Id = mzk.parmRegion });
-                    });
+                    }
                 }
                 return regionList;
             }
@@ -321,10 +322,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<string> zipcodeList = new List<string>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         zipcodeList.Add(mzk.parmZipCode);
-                    });
+                    }
                 }
                 return zipcodeList;
             }
@@ -406,7 +407,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 var result = (client.getLocationTypeAsync(serviceRecId, companyId).Result);
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         locationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.LocationType
                         {
@@ -414,7 +415,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             LocType = mzk.parmLocationType.ToString(),
                             RecID = mzk.parmRecID,
                         });
-                    });
+                    }
                 }
                 return locationTypes;
             }
@@ -441,7 +442,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                        {
@@ -450,7 +451,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                            RecID = mzk.parmRecID,
                            Address = mzk.parmAddress
                        });
-                    });
+                    }
                 }
                 destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
                 return destinationTypes;
@@ -478,7 +479,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
@@ -487,7 +488,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Address = mzk.parmAddress,
                             RecID = mzk.parmRecID
                         });
-                    });
+                    }
                 }
                 destinationTypes = destinationTypes.OrderBy(o => o.ContactName).ToList<DestinationType>();
                 return destinationTypes;
@@ -514,7 +515,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 List<DestinationType> destinationTypes = new List<DestinationType>();
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
                         destinationTypes.Add(new Eqstra.BusinessLogic.ServiceSchedule.DestinationType
                         {
@@ -523,7 +524,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             RecID = mzk.parmRecID,
                             Address = mzk.parmAddress
                         });
-                    });
+                    }
                 }
                 return destinationTypes.OrderBy(o => o.ContactName);
             }
@@ -533,9 +534,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return null;
             }
         }
-        async public System.Threading.Tasks.Task<List<Supplier>> GetVendSupplirerSvcAsync()
+        async public System.Threading.Tasks.Task<List<Supplier>> FilterSuppliersByCriteria(string countryId, string provinceId, string cityId, string suburbId, string regionId)
         {
-            List<Supplier> suppliers = new List<Supplier>();
+            List<Supplier> suplierList = new List<Supplier>();
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
@@ -546,34 +547,36 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.getVendSupplirerNameAsync(_userInfo.CompanyId);
+                var result = await client.getVendorBySelectionAsync(_userInfo.CompanyId, countryId, provinceId, suburbId, cityId, regionId); ;
 
                 if (result.response != null)
                 {
-                    result.response.Where(x => x != null).AsParallel().ForAll(mzk =>
+                    foreach (var mzk in result.response.Where(x => x != null))
                     {
-                        suppliers.Add(new Eqstra.BusinessLogic.ServiceSchedule.Supplier
+                        suplierList.Add(new Eqstra.BusinessLogic.ServiceSchedule.Supplier
                         {
-                            AccountNum = mzk.parmAccountNum,
                             SupplierContactName = mzk.parmContactPersonName,
                             SupplierContactNumber = mzk.parmContactPersonPhone,
                             SupplierName = mzk.parmName,
-                            Country = mzk.parmCountry,
-                            Province = mzk.parmState,
+                            AccountNum = mzk.parmAccountNum,
                             City = mzk.parmCityName,
-                            Suburb = mzk.parmSuburban,
+                            Country = mzk.parmCountryName,
+                            Province = mzk.parmStateName,
+                            Suburb = mzk.parmSuburbanName
                         });
-                    });
+                    }
                 }
-
-                return suppliers;
+                suplierList = suplierList.OrderBy(o => o.SupplierContactName).ToList<Supplier>();
+                return suplierList;
             }
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
-                return suppliers;
+                return suplierList;
             }
         }
+       
+
         async public System.Threading.Tasks.Task<bool> UpdateConfirmationDatesToSvcAsync(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
         {
             try
@@ -681,8 +684,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
                 return false;
-                }
             }
+        }
 
         async public System.Threading.Tasks.Task<string> UpdateStatusListToSvcAsync(DriverTask task)
         {

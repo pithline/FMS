@@ -19,7 +19,7 @@ namespace Eqstra.DataProvider.AX.Helpers
         public const string GetZipcodeList = "GetZipcodeList";
         public const string GetServiceDetails = "GetServiceDetails";
         public const string GetVendSupplierList = "GetVendSupplierList";
-        public const string FilteredSupplierByAddress = "FilteredSupplierByAddress";
+        public const string FilterSuppliersByCriteria = "FilterSuppliersByCriteria";
         public const string GetLocationType = "GetLocationType";
         public const string GetCustomers = "GetCustomers";
         public const string GetVendors = "GetVendors";

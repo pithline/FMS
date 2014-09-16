@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.Devices.Geolocation;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -152,38 +153,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
-                    if (!isCached)
-                    {
-                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(await SSProxyHelper.Instance.GetVendSupplirerSvcAsync()), "SuppliersGridItemsSourceFile.json");
-                        isCached = true;
-                    }
-                    var result = await Util.ReadFromDiskAsync<Supplier>("SuppliersGridItemsSourceFile.json");
-                    if (result != null)
-                    {
-                        IEnumerable<Supplier> filteredResult = new List<Supplier>();
-                        if ((this.Model != null) && this.Model.SelectedCountry != null && !String.IsNullOrEmpty(this.Model.SelectedCountry.Id))
-                        {
-                            filteredResult = result.Where(w => w.Country == this.Model.SelectedCountry.Id);
-                            if (this.Model.Selectedprovince != null && !String.IsNullOrEmpty(this.Model.Selectedprovince.Id))
-                            {
-                                filteredResult = filteredResult.Where(w => w.Province == this.Model.Selectedprovince.Id);
-                                if (this.Model.SelectedCity != null && !String.IsNullOrEmpty(this.Model.SelectedCity.Id))
-                                {
-                                    filteredResult = filteredResult.Where(w => w.City == this.Model.SelectedCity.Id);
-                                    if (this.Model.SelectedSuburb != null && !String.IsNullOrEmpty(this.Model.SelectedSuburb.Id))
-                                    {
-                                        filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedSuburb.Id);
+                    string countryId = this.Model.SelectedCountry != null ? this.Model.SelectedCountry.Id : string.Empty;
+                    string provinceId = this.Model.Selectedprovince != null ? this.Model.Selectedprovince.Id : string.Empty;
+                    string cityId = this.Model.SelectedCity != null ? this.Model.SelectedCity.Id : string.Empty;
+                    string suburbId = this.Model.SelectedSuburb != null ? this.Model.SelectedSuburb.Id : string.Empty;
+                    string regionId = this.Model.SelectedRegion != null ? this.Model.SelectedRegion.Id : string.Empty;
 
-                                        if (this.Model.SelectedRegion != null && !String.IsNullOrEmpty(this.Model.SelectedRegion.Id))
-                                        {
-                                            filteredResult = filteredResult.Where(w => w.Suburb == this.Model.SelectedRegion.Id);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        this.Model.Suppliers = filteredResult.ToList<Supplier>();
-                    }
+                    this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(countryId, provinceId, cityId, suburbId, regionId);
+
                     this.IsBusy = false;
                 }
                 catch (Exception ex)
@@ -194,6 +171,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
             );
         }
+
+        
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -209,6 +188,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.Model.Countries.AddRange(countries);
                 }
 
+                var geolocator = new Geolocator();
+                Geoposition position = await geolocator.GetGeopositionAsync();
+                if (position.CivicAddress!=null)
+                {
+                    this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(position.CivicAddress.Country, position.CivicAddress.State, position.CivicAddress.City, string.Empty, string.Empty);
+                }
             }
             catch (Exception ex)
             {

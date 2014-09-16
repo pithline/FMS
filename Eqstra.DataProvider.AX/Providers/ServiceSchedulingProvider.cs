@@ -58,9 +58,8 @@ namespace Eqstra.DataProvider.AX.Providers
                         response = GetDestinationTypeList(criterias[1].ToString(), criterias[2].ToString());
                         break;
 
-
-                    case ActionSwitch.FilteredSupplierByAddress:
-                        response = FilteredSupplierByAddress(criterias[1].ToString(), criterias[2].ToString(), criterias[3].ToString(), criterias[4].ToString(), criterias[5].ToString());
+                    case ActionSwitch.FilterSuppliersByCriteria:
+                        response = FilterSuppliersByCriteria(criterias[1].ToString(), criterias[2].ToString(), criterias[3].ToString(), criterias[4].ToString(), criterias[5].ToString());
                         break;
                     case ActionSwitch.FilteredSupplierByGeoLocation:
                         response = FilterSuppliersByGeoLocation(criterias[1].ToString(), criterias[2].ToString());
