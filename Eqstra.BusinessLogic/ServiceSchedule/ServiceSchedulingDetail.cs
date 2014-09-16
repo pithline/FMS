@@ -31,6 +31,13 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             {
                 return true;
             }
+            if (this.IsLiftRequired)
+            {
+                if (String.IsNullOrEmpty(this.SelectedDestinationType.Id) || String.IsNullOrEmpty(this.SelectedLocationType.LocType))
+                {
+                    return false;
+                }
+            }
             return isValid;
         }
         private ImageCapture odoReadingSnapshot;
