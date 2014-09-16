@@ -186,7 +186,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridDateTimeColumn MappingName="ConfirmedDate"
+                                    <grid:GridDateTimeColumn MappingName="ConfirmationDate"
                                                              FormatString="MM/dd/yyyy"
                                                              HeaderText="CONFIRMED DATE"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
