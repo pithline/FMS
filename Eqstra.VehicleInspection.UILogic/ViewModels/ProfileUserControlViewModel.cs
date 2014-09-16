@@ -19,7 +19,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
         INavigationService _navigationService;
         IAccountService _accountService;
-        public ProfileUserControlViewModel(INavigationService navigationService,IAccountService accountService)
+        public ProfileUserControlViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
             _accountService = accountService;
@@ -34,7 +34,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             });
         }
 
-        
+
 
         private string networkIcon;
 
@@ -77,6 +77,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
+
+        public ICommand LogoutCommand { get; private set; }
 
     }
 }

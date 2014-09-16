@@ -26,7 +26,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     public class DrivingDirectionPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private Eqstra.BusinessLogic.Task _inspection;
+        private Eqstra.BusinessLogic.Task _task;
         private IEventAggregator _eventAggregator;
 
         public DrivingDirectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
@@ -35,7 +35,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             this.CustomerDetails = new BusinessLogic.CustomerDetails();
-            LoadDemoAppointments();
+            LoadAppointments();
 
             GetDirectionsCommand = DelegateCommand<Location>.FromAsyncHandler(async (location) =>
             {
@@ -49,7 +49,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             this.GoToVehicleInspectionCommand = new DelegateCommand(() =>
             {                
-                string JsoninspectionTask = JsonConvert.SerializeObject(this._inspection);                
+                string JsoninspectionTask = JsonConvert.SerializeObject(this._task);                
                 _navigationService.Navigate("VehicleInspection", JsoninspectionTask);
 
             });
@@ -62,7 +62,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             });
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
-                if (this._inspection != null)
+                if (this._task != null)
                 {
                     var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
 
@@ -78,41 +78,33 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         }
 
-        private void LoadDemoAppointments()
+        private void LoadAppointments()
         {
-            this.CustomerDetails.Appointments = AppSettingData.Appointments;
+            var startTime = new DateTime(this._task.ConfirmedDate.Year, this._task.ConfirmedDate.Month, this._task.ConfirmedDate.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
+                               this._task.ConfirmedTime.Second);
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from engine",
-                    Location = "Cape Town",
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddHours(2),
+                    Subject = this._task.CaseNumber,                    
+                    Location =this._task.Address,
+                    StartTime = startTime,
+                    EndTime = startTime.AddHours(1),
                     ReadOnly = true,
-                   AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
-                    Status = new ScheduleAppointmentStatus{Status = "Tentative",Brush = new SolidColorBrush(Colors.Chocolate)}
+                    AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
+                    Status = new ScheduleAppointmentStatus{Status = this._task.Status,Brush = new SolidColorBrush(Colors.Chocolate)}
 
                 },
-                new ScheduleAppointment(){
-                    Subject = "Inspection at Peter Johnson",
-                    Notes = "some noise from differential",
-                    Location = "Cape Town",
-                     ReadOnly = true,
-                    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status  = "Free"},
-                },                    
+                               
             };
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _inspection = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
+            _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
 
-            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _inspection.VehicleInsRecId);
+            var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _task.VehicleInsRecId);
             if (dd != null)
             {
                 this.IsArrived = dd.StopDateTime == DateTime.MinValue;
@@ -177,9 +169,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             try
             {
-                if (this._inspection != null)
+                if (this._task != null)
                 {
-                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._inspection.CustomerId);
+                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
                     if (this.Customer == null)
                     {
                         AppSettings.Instance.IsSyncingCustDetails = 1;
@@ -189,15 +181,15 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     {
                         AppSettings.Instance.IsSyncingCustDetails = 0;
                         this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                        this.CustomerDetails.CaseNumber = this._inspection.CaseNumber;
-                        this.CustomerDetails.VehicleInsRecId = this._inspection.VehicleInsRecId;
-                        this.CustomerDetails.Status = this._inspection.Status;
-                        this.CustomerDetails.StatusDueDate = this._inspection.StatusDueDate;
+                        this.CustomerDetails.CaseNumber = this._task.CaseNumber;
+                        this.CustomerDetails.VehicleInsRecId = this._task.VehicleInsRecId;
+                        this.CustomerDetails.Status = this._task.Status;
+                        this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
                         this.CustomerDetails.Address = this.Customer.Address;
-                        this.CustomerDetails.AllocatedTo = this._inspection.AllocatedTo;
+                        this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
                         this.CustomerDetails.CustomerName = this.Customer.CustomerName;
                         this.CustomerDetails.ContactName = this.Customer.ContactName;
-                        this.CustomerDetails.CategoryType = this._inspection.CategoryType;
+                        this.CustomerDetails.CategoryType = this._task.CategoryType;
                         this.CustomerDetails.EmailId = this.Customer.EmailId;
                     }
                 }
