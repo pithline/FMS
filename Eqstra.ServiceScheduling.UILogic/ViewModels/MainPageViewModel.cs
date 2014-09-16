@@ -96,7 +96,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 Subject = task.CaseNumber,
                 Location = task.Address,
                 StartTime = startTime,
-                EndTime = startTime.AddHours(24),
+                EndTime = startTime.AddHours(12),
                 ReadOnly = true,
                 AppointmentBackground = new SolidColorBrush(Colors.Crimson),
                 AllDay = true,
