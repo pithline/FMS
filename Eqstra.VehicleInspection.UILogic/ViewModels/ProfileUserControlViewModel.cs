@@ -19,7 +19,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
         INavigationService _navigationService;
         IAccountService _accountService;
-        public ProfileUserControlViewModel(INavigationService navigationService,IAccountService accountService)
+        public ProfileUserControlViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
             _accountService = accountService;
@@ -78,6 +78,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             }
         }
 
-        public ICommand LogoutCommand { get; private set; }     
+        public ICommand LogoutCommand { get; private set; }
+
     }
 }

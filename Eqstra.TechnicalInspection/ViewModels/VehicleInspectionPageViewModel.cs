@@ -184,36 +184,23 @@ namespace Eqstra.TechnicalInspection.ViewModels
             NextCommand.RaiseCanExecuteChanged();
         }
 
-        private void LoadDemoAppointments()
+        private void LoadAppointments()
         {
-            this.CustomerDetails.Appointments = AppSettingData.Appointments;
-
-
-            //  Eqstra.BusinessLogic.DrivingDuration durationData = SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.DrivingDuration>(w => w.CaseNumber == this._task.CaseNumber);
-
-
+            var startTime = new DateTime(this._task.ConfirmedDate.Year, this._task.ConfirmedDate.Month, this._task.ConfirmedDate.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
+                                this._task.ConfirmedTime.Second);
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
-                    Subject = this._task.CaseNumber,
-                    
+                    Subject = this._task.CaseNumber,                    
                     Location =this._task.Address,
-                    StartTime = DateTime.Parse(  this._task.ConfirmedDate.ToString("MM/dd/yyyy") + this._task.ConfirmedTime.ToString("hh:mm:ss")),
-                    EndTime = DateTime.Now.AddHours(2),
+                    StartTime = startTime,
+                    EndTime = startTime.AddHours(1),
                     ReadOnly = true,
                     AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
                     Status = new ScheduleAppointmentStatus{Status = this._task.Status,Brush = new SolidColorBrush(Colors.Chocolate)}
 
                 },
-                //new ScheduleAppointment(){
-                //    Subject = "Inspection at Peter Johnson",
-                //    Notes = "some noise from differential",
-                //    Location = this._task.Address,
-                //     ReadOnly = true,
-                //    StartTime =new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,00,00),
-                //    EndTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,9,00,00),
-                //    Status = new ScheduleAppointmentStatus{Brush = new SolidColorBrush(Colors.Green), Status = this._task.Status},
-                //},                    
+                               
             };
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -230,7 +217,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 App.Task = _task;
                 //var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
-
+                LoadAppointments();
                 await GetCustomerDetailsAsync();
                 if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
                 {
