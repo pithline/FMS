@@ -5,16 +5,10 @@ using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
@@ -44,7 +38,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     PersistentData.Instance.DriverTask = this.InspectionTask;
                     PersistentData.Instance.CustomerDetails = this.CustomerDetails;
 
-                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceConfirmation || this.InspectionTask.Status == DriverTaskStatus.AwaitJobCardCapture)
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingConfirmation || this.InspectionTask.Status == DriverTaskStatus.AwaitJobCardCapture)
                     {
                         _navigationService.Navigate("Confirmation", string.Empty);
                     }
@@ -53,7 +47,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         _navigationService.Navigate("SupplierSelection", string.Empty);
                     }
-                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceDetail || this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    if (this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                     {
                         _navigationService.Navigate("ServiceScheduling", string.Empty);
                     }
@@ -76,31 +70,36 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list)
                     {
-                        this.PoolofTasks.Add(item);
-                        GetAppointments(item);
+                        if (item != null)
+                        {
+                            this.PoolofTasks.Add(item);
+                            GetAppointments(item);
+                        }
                     }
                 }
 
             }
             catch (Exception ex)
             {
+                this.IsBusy = false;
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
             this.IsBusy = false;
         }
         private void GetAppointments(DriverTask task)
         {
-            var startTime = new DateTime(task.ConfirmationDate.Year, task.ConfirmationDate.Month, task.ConfirmationDate.Day, task.ConfirmationDate.Hour, task.ConfirmationDate.Minute,
-                       task.ConfirmationDate.Second);
+            var startTime = new DateTime(task.ConfirmationDate.Year, task.ConfirmationDate.Month, task.ConfirmationDate.Day);
+
             this.Appointments.Add(
             new ScheduleAppointment()
             {
                 Subject = task.CaseNumber,
                 Location = task.Address,
                 StartTime = startTime,
-                EndTime = startTime.AddHours(1),
+                EndTime = startTime.AddHours(24),
                 ReadOnly = true,
                 AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                AllDay = true,
                 Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
             });

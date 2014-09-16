@@ -124,6 +124,477 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialMechConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkMobiCommercialMechConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmAutoTransmissionCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmBatteryCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmDifferentialCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmEngineCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmExhaustCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmFootBrakeCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmGearBoxCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmHandBrakeCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmHydraulicPowerSteeringCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmissionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferentialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaustField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrakeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppressionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBoxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrakeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteeringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppressionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteeringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmOilLeaksCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmRearSuppressionCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmSteeringCommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int parmTableIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmVehicleInsRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmfrontSuppressionCommentsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAutoTransmissionComments {
+            get {
+                return this.parmAutoTransmissionCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmAutoTransmissionCommentsField, value) != true)) {
+                    this.parmAutoTransmissionCommentsField = value;
+                    this.RaisePropertyChanged("parmAutoTransmissionComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmBatteryComments {
+            get {
+                return this.parmBatteryCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmBatteryCommentsField, value) != true)) {
+                    this.parmBatteryCommentsField = value;
+                    this.RaisePropertyChanged("parmBatteryComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmDifferentialComments {
+            get {
+                return this.parmDifferentialCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmDifferentialCommentsField, value) != true)) {
+                    this.parmDifferentialCommentsField = value;
+                    this.RaisePropertyChanged("parmDifferentialComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmEngineComments {
+            get {
+                return this.parmEngineCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmEngineCommentsField, value) != true)) {
+                    this.parmEngineCommentsField = value;
+                    this.RaisePropertyChanged("parmEngineComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmExhaustComments {
+            get {
+                return this.parmExhaustCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmExhaustCommentsField, value) != true)) {
+                    this.parmExhaustCommentsField = value;
+                    this.RaisePropertyChanged("parmExhaustComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmFootBrakeComments {
+            get {
+                return this.parmFootBrakeCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmFootBrakeCommentsField, value) != true)) {
+                    this.parmFootBrakeCommentsField = value;
+                    this.RaisePropertyChanged("parmFootBrakeComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmGearBoxComments {
+            get {
+                return this.parmGearBoxCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmGearBoxCommentsField, value) != true)) {
+                    this.parmGearBoxCommentsField = value;
+                    this.RaisePropertyChanged("parmGearBoxComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmHandBrakeComments {
+            get {
+                return this.parmHandBrakeCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmHandBrakeCommentsField, value) != true)) {
+                    this.parmHandBrakeCommentsField = value;
+                    this.RaisePropertyChanged("parmHandBrakeComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmHydraulicPowerSteeringComments {
+            get {
+                return this.parmHydraulicPowerSteeringCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmHydraulicPowerSteeringCommentsField, value) != true)) {
+                    this.parmHydraulicPowerSteeringCommentsField = value;
+                    this.RaisePropertyChanged("parmHydraulicPowerSteeringComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmission {
+            get {
+                return this.parmIsDamagedAutoTransmissionField;
+            }
+            set {
+                if ((this.parmIsDamagedAutoTransmissionField.Equals(value) != true)) {
+                    this.parmIsDamagedAutoTransmissionField = value;
+                    this.RaisePropertyChanged("parmIsDamagedAutoTransmission");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryComments {
+            get {
+                return this.parmIsDamagedBatteryCommentsField;
+            }
+            set {
+                if ((this.parmIsDamagedBatteryCommentsField.Equals(value) != true)) {
+                    this.parmIsDamagedBatteryCommentsField = value;
+                    this.RaisePropertyChanged("parmIsDamagedBatteryComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferential {
+            get {
+                return this.parmIsDamagedDifferentialField;
+            }
+            set {
+                if ((this.parmIsDamagedDifferentialField.Equals(value) != true)) {
+                    this.parmIsDamagedDifferentialField = value;
+                    this.RaisePropertyChanged("parmIsDamagedDifferential");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngine {
+            get {
+                return this.parmIsDamagedEngineField;
+            }
+            set {
+                if ((this.parmIsDamagedEngineField.Equals(value) != true)) {
+                    this.parmIsDamagedEngineField = value;
+                    this.RaisePropertyChanged("parmIsDamagedEngine");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaust {
+            get {
+                return this.parmIsDamagedExhaustField;
+            }
+            set {
+                if ((this.parmIsDamagedExhaustField.Equals(value) != true)) {
+                    this.parmIsDamagedExhaustField = value;
+                    this.RaisePropertyChanged("parmIsDamagedExhaust");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrake {
+            get {
+                return this.parmIsDamagedFootBrakeField;
+            }
+            set {
+                if ((this.parmIsDamagedFootBrakeField.Equals(value) != true)) {
+                    this.parmIsDamagedFootBrakeField = value;
+                    this.RaisePropertyChanged("parmIsDamagedFootBrake");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppression {
+            get {
+                return this.parmIsDamagedFrontSuppressionField;
+            }
+            set {
+                if ((this.parmIsDamagedFrontSuppressionField.Equals(value) != true)) {
+                    this.parmIsDamagedFrontSuppressionField = value;
+                    this.RaisePropertyChanged("parmIsDamagedFrontSuppression");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBox {
+            get {
+                return this.parmIsDamagedGearBoxField;
+            }
+            set {
+                if ((this.parmIsDamagedGearBoxField.Equals(value) != true)) {
+                    this.parmIsDamagedGearBoxField = value;
+                    this.RaisePropertyChanged("parmIsDamagedGearBox");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrake {
+            get {
+                return this.parmIsDamagedHandBrakeField;
+            }
+            set {
+                if ((this.parmIsDamagedHandBrakeField.Equals(value) != true)) {
+                    this.parmIsDamagedHandBrakeField = value;
+                    this.RaisePropertyChanged("parmIsDamagedHandBrake");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteering {
+            get {
+                return this.parmIsDamagedHydraulicPowerSteeringField;
+            }
+            set {
+                if ((this.parmIsDamagedHydraulicPowerSteeringField.Equals(value) != true)) {
+                    this.parmIsDamagedHydraulicPowerSteeringField = value;
+                    this.RaisePropertyChanged("parmIsDamagedHydraulicPowerSteering");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeks {
+            get {
+                return this.parmIsDamagedOilLeeksField;
+            }
+            set {
+                if ((this.parmIsDamagedOilLeeksField.Equals(value) != true)) {
+                    this.parmIsDamagedOilLeeksField = value;
+                    this.RaisePropertyChanged("parmIsDamagedOilLeeks");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppression {
+            get {
+                return this.parmIsDamagedRearSuppressionField;
+            }
+            set {
+                if ((this.parmIsDamagedRearSuppressionField.Equals(value) != true)) {
+                    this.parmIsDamagedRearSuppressionField = value;
+                    this.RaisePropertyChanged("parmIsDamagedRearSuppression");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteering {
+            get {
+                return this.parmIsDamagedSteeringField;
+            }
+            set {
+                if ((this.parmIsDamagedSteeringField.Equals(value) != true)) {
+                    this.parmIsDamagedSteeringField = value;
+                    this.RaisePropertyChanged("parmIsDamagedSteering");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmOilLeaksComments {
+            get {
+                return this.parmOilLeaksCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmOilLeaksCommentsField, value) != true)) {
+                    this.parmOilLeaksCommentsField = value;
+                    this.RaisePropertyChanged("parmOilLeaksComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmRearSuppressionComments {
+            get {
+                return this.parmRearSuppressionCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmRearSuppressionCommentsField, value) != true)) {
+                    this.parmRearSuppressionCommentsField = value;
+                    this.RaisePropertyChanged("parmRearSuppressionComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmRecID {
+            get {
+                return this.parmRecIDField;
+            }
+            set {
+                if ((this.parmRecIDField.Equals(value) != true)) {
+                    this.parmRecIDField = value;
+                    this.RaisePropertyChanged("parmRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmSteeringComments {
+            get {
+                return this.parmSteeringCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmSteeringCommentsField, value) != true)) {
+                    this.parmSteeringCommentsField = value;
+                    this.RaisePropertyChanged("parmSteeringComments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int parmTableId {
+            get {
+                return this.parmTableIdField;
+            }
+            set {
+                if ((this.parmTableIdField.Equals(value) != true)) {
+                    this.parmTableIdField = value;
+                    this.RaisePropertyChanged("parmTableId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmVehicleInsRecID {
+            get {
+                return this.parmVehicleInsRecIDField;
+            }
+            set {
+                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
+                    this.parmVehicleInsRecIDField = value;
+                    this.RaisePropertyChanged("parmVehicleInsRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmfrontSuppressionComments {
+            get {
+                return this.parmfrontSuppressionCommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmfrontSuppressionCommentsField, value) != true)) {
+                    this.parmfrontSuppressionCommentsField = value;
+                    this.RaisePropertyChanged("parmfrontSuppressionComments");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract))]
@@ -131,7 +602,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract))]
@@ -141,9 +611,10 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract))]
     public partial class XppObjectBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -1335,477 +1806,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
                 if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
                     this.parmVehicleInsRecIDField = value;
                     this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialMechConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiCommercialMechConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmAutoTransmissionCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBatteryCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDifferentialCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmEngineCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmExhaustCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmFootBrakeCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmGearBoxCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHandBrakeCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHydraulicPowerSteeringCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmissionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferentialField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaustField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppressionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBoxField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteeringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppressionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteeringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmOilLeaksCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRearSuppressionCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSteeringCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmfrontSuppressionCommentsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAutoTransmissionComments {
-            get {
-                return this.parmAutoTransmissionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmAutoTransmissionCommentsField, value) != true)) {
-                    this.parmAutoTransmissionCommentsField = value;
-                    this.RaisePropertyChanged("parmAutoTransmissionComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBatteryComments {
-            get {
-                return this.parmBatteryCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmBatteryCommentsField, value) != true)) {
-                    this.parmBatteryCommentsField = value;
-                    this.RaisePropertyChanged("parmBatteryComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDifferentialComments {
-            get {
-                return this.parmDifferentialCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDifferentialCommentsField, value) != true)) {
-                    this.parmDifferentialCommentsField = value;
-                    this.RaisePropertyChanged("parmDifferentialComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmEngineComments {
-            get {
-                return this.parmEngineCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmEngineCommentsField, value) != true)) {
-                    this.parmEngineCommentsField = value;
-                    this.RaisePropertyChanged("parmEngineComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmExhaustComments {
-            get {
-                return this.parmExhaustCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmExhaustCommentsField, value) != true)) {
-                    this.parmExhaustCommentsField = value;
-                    this.RaisePropertyChanged("parmExhaustComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmFootBrakeComments {
-            get {
-                return this.parmFootBrakeCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmFootBrakeCommentsField, value) != true)) {
-                    this.parmFootBrakeCommentsField = value;
-                    this.RaisePropertyChanged("parmFootBrakeComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmGearBoxComments {
-            get {
-                return this.parmGearBoxCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmGearBoxCommentsField, value) != true)) {
-                    this.parmGearBoxCommentsField = value;
-                    this.RaisePropertyChanged("parmGearBoxComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHandBrakeComments {
-            get {
-                return this.parmHandBrakeCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHandBrakeCommentsField, value) != true)) {
-                    this.parmHandBrakeCommentsField = value;
-                    this.RaisePropertyChanged("parmHandBrakeComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHydraulicPowerSteeringComments {
-            get {
-                return this.parmHydraulicPowerSteeringCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHydraulicPowerSteeringCommentsField, value) != true)) {
-                    this.parmHydraulicPowerSteeringCommentsField = value;
-                    this.RaisePropertyChanged("parmHydraulicPowerSteeringComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmission {
-            get {
-                return this.parmIsDamagedAutoTransmissionField;
-            }
-            set {
-                if ((this.parmIsDamagedAutoTransmissionField.Equals(value) != true)) {
-                    this.parmIsDamagedAutoTransmissionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedAutoTransmission");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryComments {
-            get {
-                return this.parmIsDamagedBatteryCommentsField;
-            }
-            set {
-                if ((this.parmIsDamagedBatteryCommentsField.Equals(value) != true)) {
-                    this.parmIsDamagedBatteryCommentsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBatteryComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferential {
-            get {
-                return this.parmIsDamagedDifferentialField;
-            }
-            set {
-                if ((this.parmIsDamagedDifferentialField.Equals(value) != true)) {
-                    this.parmIsDamagedDifferentialField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDifferential");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngine {
-            get {
-                return this.parmIsDamagedEngineField;
-            }
-            set {
-                if ((this.parmIsDamagedEngineField.Equals(value) != true)) {
-                    this.parmIsDamagedEngineField = value;
-                    this.RaisePropertyChanged("parmIsDamagedEngine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaust {
-            get {
-                return this.parmIsDamagedExhaustField;
-            }
-            set {
-                if ((this.parmIsDamagedExhaustField.Equals(value) != true)) {
-                    this.parmIsDamagedExhaustField = value;
-                    this.RaisePropertyChanged("parmIsDamagedExhaust");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrake {
-            get {
-                return this.parmIsDamagedFootBrakeField;
-            }
-            set {
-                if ((this.parmIsDamagedFootBrakeField.Equals(value) != true)) {
-                    this.parmIsDamagedFootBrakeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFootBrake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppression {
-            get {
-                return this.parmIsDamagedFrontSuppressionField;
-            }
-            set {
-                if ((this.parmIsDamagedFrontSuppressionField.Equals(value) != true)) {
-                    this.parmIsDamagedFrontSuppressionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFrontSuppression");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBox {
-            get {
-                return this.parmIsDamagedGearBoxField;
-            }
-            set {
-                if ((this.parmIsDamagedGearBoxField.Equals(value) != true)) {
-                    this.parmIsDamagedGearBoxField = value;
-                    this.RaisePropertyChanged("parmIsDamagedGearBox");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrake {
-            get {
-                return this.parmIsDamagedHandBrakeField;
-            }
-            set {
-                if ((this.parmIsDamagedHandBrakeField.Equals(value) != true)) {
-                    this.parmIsDamagedHandBrakeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHandBrake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteering {
-            get {
-                return this.parmIsDamagedHydraulicPowerSteeringField;
-            }
-            set {
-                if ((this.parmIsDamagedHydraulicPowerSteeringField.Equals(value) != true)) {
-                    this.parmIsDamagedHydraulicPowerSteeringField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHydraulicPowerSteering");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeks {
-            get {
-                return this.parmIsDamagedOilLeeksField;
-            }
-            set {
-                if ((this.parmIsDamagedOilLeeksField.Equals(value) != true)) {
-                    this.parmIsDamagedOilLeeksField = value;
-                    this.RaisePropertyChanged("parmIsDamagedOilLeeks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppression {
-            get {
-                return this.parmIsDamagedRearSuppressionField;
-            }
-            set {
-                if ((this.parmIsDamagedRearSuppressionField.Equals(value) != true)) {
-                    this.parmIsDamagedRearSuppressionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRearSuppression");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteering {
-            get {
-                return this.parmIsDamagedSteeringField;
-            }
-            set {
-                if ((this.parmIsDamagedSteeringField.Equals(value) != true)) {
-                    this.parmIsDamagedSteeringField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSteering");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmOilLeaksComments {
-            get {
-                return this.parmOilLeaksCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmOilLeaksCommentsField, value) != true)) {
-                    this.parmOilLeaksCommentsField = value;
-                    this.RaisePropertyChanged("parmOilLeaksComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRearSuppressionComments {
-            get {
-                return this.parmRearSuppressionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRearSuppressionCommentsField, value) != true)) {
-                    this.parmRearSuppressionCommentsField = value;
-                    this.RaisePropertyChanged("parmRearSuppressionComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSteeringComments {
-            get {
-                return this.parmSteeringCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSteeringCommentsField, value) != true)) {
-                    this.parmSteeringCommentsField = value;
-                    this.RaisePropertyChanged("parmSteeringComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmfrontSuppressionComments {
-            get {
-                return this.parmfrontSuppressionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmfrontSuppressionCommentsField, value) != true)) {
-                    this.parmfrontSuppressionCommentsField = value;
-                    this.RaisePropertyChanged("parmfrontSuppressionComments");
                 }
             }
         }
@@ -5924,6 +5924,77 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkValidateUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkValidateUserContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCompanyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCompanyNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmUserIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmUserNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCompany {
+            get {
+                return this.parmCompanyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCompanyField, value) != true)) {
+                    this.parmCompanyField = value;
+                    this.RaisePropertyChanged("parmCompany");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCompanyName {
+            get {
+                return this.parmCompanyNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCompanyNameField, value) != true)) {
+                    this.parmCompanyNameField = value;
+                    this.RaisePropertyChanged("parmCompanyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmUserID {
+            get {
+                return this.parmUserIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
+                    this.parmUserIDField = value;
+                    this.RaisePropertyChanged("parmUserID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmUserName {
+            get {
+                return this.parmUserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmUserNameField, value) != true)) {
+                    this.parmUserNameField = value;
+                    this.RaisePropertyChanged("parmUserName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkVehicleDetailsContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     [System.SerializableAttribute()]
     public partial class MzkVehicleDetailsContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
@@ -6368,75 +6439,15 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkValidateUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkValidateUserContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+    [System.Runtime.Serialization.DataContractAttribute(Name="NoYes", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public enum NoYes : int {
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCompanyField;
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        No = 0,
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCompanyNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserNameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCompany {
-            get {
-                return this.parmCompanyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCompanyField, value) != true)) {
-                    this.parmCompanyField = value;
-                    this.RaisePropertyChanged("parmCompany");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCompanyName {
-            get {
-                return this.parmCompanyNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCompanyNameField, value) != true)) {
-                    this.parmCompanyNameField = value;
-                    this.RaisePropertyChanged("parmCompanyName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserID {
-            get {
-                return this.parmUserIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
-                    this.parmUserIDField = value;
-                    this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserName {
-            get {
-                return this.parmUserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserNameField, value) != true)) {
-                    this.parmUserNameField = value;
-                    this.RaisePropertyChanged("parmUserName");
-                }
-            }
-        }
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Yes = 1,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -6477,17 +6488,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         MainsBattery = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NoYes", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum NoYes : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        No = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Yes = 1,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -7172,30 +7172,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIProxy.MzkVehicleInspectionService")]
     public interface MzkVehicleInspectionService {
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceValidateUserRequest) of message MzkVehicleInspectionServiceValidateUserRequest does not match the default value (validateUser)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialMechConditionRequest) of message MzkVehicleInspectionServiceEditCommercialMechConditionRequest does not match the default value (editCommercialMechCondition)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
+            "e")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionAifFaul" +
+            "tFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateStatusListRequest) of message MzkVehicleInspectionServiceUpdateStatusListRequest does not match the default value (updateStatusList)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateConfirmationDateRequest) of message MzkVehicleInspectionServiceUpdateConfirmationDateRequest does not match the default value (updateConfirmationDate)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateAifFaultFaul" +
-            "t", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
+            "e")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceReadVehicleDetailsRequest) of message MzkVehicleInspectionServiceReadVehicleDetailsRequest does not match the default value (readVehicleDetails)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetailsResponse")]
@@ -7205,46 +7191,22 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetailsResponse")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse> readVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetTasksRequest) of message MzkVehicleInspectionServiceGetTasksRequest does not match the default value (getTasks)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialChassisBodyRequest) of message MzkVehicleInspectionServiceEditCommercialChassisBodyRequest does not match the default value (editCommercialChassisBody)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyAifFaultF" +
+            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetInspectionHistoryRequest) of message MzkVehicleInspectionServiceGetInspectionHistoryRequest does not match the default value (getInspectionHistory)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateStatusListRequest) of message MzkVehicleInspectionServiceUpdateStatusListRequest does not match the default value (updateStatusList)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetCustDetailsRequest) of message MzkVehicleInspectionServiceGetCustDetailsRequest does not match the default value (getCustDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleInspectionRequest) of message MzkVehicleInspectionServiceEditVehicleInspectionRequest does not match the default value (editVehicleInspection)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionAifFaultFault" +
-            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleDetailsRequest) of message MzkVehicleInspectionServiceEditVehicleDetailsRequest does not match the default value (editVehicleDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerTyreConditionRequest) of message MzkVehicleInspectionServiceEditPassengerTyreConditionRequest does not match the default value (editPassengerTyreCondition)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreConditionResponse" +
@@ -7257,63 +7219,22 @@ namespace Eqstra.DataProvider.AX.TIProxy {
             "")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse> editPassengerTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest) of message MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest does not match the default value (editPassengerTrimInterior)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerAccessoriesRequest) of message MzkVehicleInspectionServiceEditPassengerAccessoriesRequest does not match the default value (editPassengerAccessories)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesAifFaultFa" +
+            "ult", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerMechConditionRequest) of message MzkVehicleInspectionServiceEditPassengerMechConditionRequest does not match the default value (editPassengerMechCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
-            "")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionAifFault" +
-            "Fault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceValidateUserRequest) of message MzkVehicleInspectionServiceValidateUserRequest does not match the default value (validateUser)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
-            "")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerBodyworkRequest) of message MzkVehicleInspectionServiceEditPassengerBodyworkRequest does not match the default value (editPassengerBodywork)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkAifFaultFault" +
-            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialChassisBodyRequest) of message MzkVehicleInspectionServiceEditCommercialChassisBodyRequest does not match the default value (editCommercialChassisBody)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialAccessoriesRequest) of message MzkVehicleInspectionServiceEditCommercialAccessoriesRequest does not match the default value (editCommercialAccessories)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialMechConditionRequest) of message MzkVehicleInspectionServiceEditCommercialMechConditionRequest does not match the default value (editCommercialMechCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
-            "e")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionAifFaul" +
-            "tFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
-            "e")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest) of message MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest does not match the default value (editCommercialTrimInterior)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInteriorResponse" +
@@ -7337,13 +7258,30 @@ namespace Eqstra.DataProvider.AX.TIProxy {
             "e")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse> editCommercialTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditGlassRequest) of message MzkVehicleInspectionServiceEditGlassRequest does not match the default value (editGlass)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editGlassAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleInspectionRequest) of message MzkVehicleInspectionServiceEditVehicleInspectionRequest does not match the default value (editVehicleInspection)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionAifFaultFault" +
+            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleDetailsRequest) of message MzkVehicleInspectionServiceEditVehicleDetailsRequest does not match the default value (editVehicleDetails)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetTasksRequest) of message MzkVehicleInspectionServiceGetTasksRequest does not match the default value (getTasks)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditMechConditionRequest) of message MzkVehicleInspectionServiceEditMechConditionRequest does not match the default value (editMechCondition)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editMechConditionResponse")]
@@ -7353,14 +7291,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editMechConditionResponse")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse> editMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerAccessoriesRequest) of message MzkVehicleInspectionServiceEditPassengerAccessoriesRequest does not match the default value (editPassengerAccessories)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesAifFaultFa" +
-            "ult", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerMechConditionRequest) of message MzkVehicleInspectionServiceEditPassengerMechConditionRequest does not match the default value (editPassengerMechCondition)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
+            "")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionAifFault" +
+            "Fault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
+            "")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetCustDetailsRequest) of message MzkVehicleInspectionServiceGetCustDetailsRequest does not match the default value (getCustDetails)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest) of message MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest does not match the default value (createVehicleInspectionTable)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTable", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTableRespon" +
@@ -7372,71 +7320,81 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTable", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTableRespon" +
             "se")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse> createVehicleInspectionTableAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerBodyworkRequest) of message MzkVehicleInspectionServiceEditPassengerBodyworkRequest does not match the default value (editPassengerBodywork)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkAifFaultFault" +
+            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditGlassRequest) of message MzkVehicleInspectionServiceEditGlassRequest does not match the default value (editGlass)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editGlassAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest) of message MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest does not match the default value (editPassengerTrimInterior)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorAifFaultF" +
+            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetInspectionHistoryRequest) of message MzkVehicleInspectionServiceGetInspectionHistoryRequest does not match the default value (getInspectionHistory)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialAccessoriesRequest) of message MzkVehicleInspectionServiceEditCommercialAccessoriesRequest does not match the default value (editCommercialAccessories)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesAifFaultF" +
+            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateConfirmationDateRequest) of message MzkVehicleInspectionServiceUpdateConfirmationDateRequest does not match the default value (updateConfirmationDate)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateAifFaultFaul" +
+            "t", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceValidateUserRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
-        
-        public MzkVehicleInspectionServiceValidateUserRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            this.CallContext = CallContext;
-            this._userID = _userID;
-            this._password = _password;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceValidateUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
-        
-        public MzkVehicleInspectionServiceValidateUserResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceValidateUserResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateStatusListRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceUpdateStatusListRequest() {
+        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest() {
         }
         
-        public MzkVehicleInspectionServiceUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
             this.CallContext = CallContext;
-            this._lstTasks = _lstTasks;
+            this._lstCommercialMechCondition = _lstCommercialMechCondition;
             this._company = _company;
         }
     }
@@ -7444,58 +7402,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateStatusListResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response;
         
-        public MzkVehicleInspectionServiceUpdateStatusListResponse() {
+        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse() {
         }
         
-        public MzkVehicleInspectionServiceUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            this.CallContext = CallContext;
-            this._lstTasks = _lstTasks;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
+        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response) {
             this.response = response;
         }
     }
@@ -7545,205 +7461,83 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetTasksRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _userID;
+        public string _company;
         
-        public MzkVehicleInspectionServiceGetTasksRequest() {
+        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest() {
         }
         
-        public MzkVehicleInspectionServiceGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
+        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
             this.CallContext = CallContext;
+            this._lstCommercialChassisBody = _lstCommercialChassisBody;
             this._company = _company;
-            this._userID = _userID;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetTasksResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response;
+        
+        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceUpdateStatusListRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceUpdateStatusListRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            this.CallContext = CallContext;
+            this._lstTasks = _lstTasks;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceUpdateStatusListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
         
-        public MzkVehicleInspectionServiceGetTasksResponse() {
+        public MzkVehicleInspectionServiceUpdateStatusListResponse() {
         }
         
-        public MzkVehicleInspectionServiceGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetInspectionHistoryRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _regNo;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            this.CallContext = CallContext;
-            this._regNo = _regNo;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetInspectionHistoryResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response;
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryResponse(Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetCustDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _custId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceGetCustDetailsRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceGetCustDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            this.CallContext = CallContext;
-            this._custId = _custId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetCustDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response;
-        
-        public MzkVehicleInspectionServiceGetCustDetailsResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceGetCustDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleInspectionRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp;
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            this.CallContext = CallContext;
-            this._lstVehicleInsp = _lstVehicleInsp;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleInspectionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response;
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionResponse(Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditVehicleDetailsRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response;
-        
-        public MzkVehicleInspectionServiceEditVehicleDetailsResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response) {
+        public MzkVehicleInspectionServiceUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
             this.response = response;
         }
     }
@@ -7793,24 +7587,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest() {
+        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
+        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
             this.CallContext = CallContext;
-            this._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            this._lstPassengerAccessory = _lstPassengerAccessory;
             this._company = _company;
         }
     }
@@ -7818,16 +7612,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response;
         
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse() {
+        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response) {
+        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response) {
             this.response = response;
         }
     }
@@ -7835,209 +7629,41 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceValidateUserRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition;
+        public string _userID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
+        public string _password;
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest() {
+        public MzkVehicleInspectionServiceValidateUserRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
+        public MzkVehicleInspectionServiceValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
             this.CallContext = CallContext;
-            this._lstPassengerMechCondition = _lstPassengerMechCondition;
-            this._company = _company;
+            this._userID = _userID;
+            this._password = _password;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceValidateUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse() {
+        public MzkVehicleInspectionServiceValidateUserResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerBodywork = _lstPassengerBodywork;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            this.CallContext = CallContext;
-            this._lstCommercialChassisBody = _lstCommercialChassisBody;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response;
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            this.CallContext = CallContext;
-            this._lstCommercialAccessory = _lstCommercialAccessory;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response;
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
-            this.CallContext = CallContext;
-            this._lstCommercialMechCondition = _lstCommercialMechCondition;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response;
-        
-        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response) {
+        public MzkVehicleInspectionServiceValidateUserResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -8129,24 +7755,62 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditGlassRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditVehicleInspectionRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass;
+        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp;
+        
+        public MzkVehicleInspectionServiceEditVehicleInspectionRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceEditVehicleInspectionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
+            this.CallContext = CallContext;
+            this._lstVehicleInsp = _lstVehicleInsp;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditVehicleInspectionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response;
+        
+        public MzkVehicleInspectionServiceEditVehicleInspectionResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditVehicleInspectionResponse(Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditVehicleDetailsRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditGlassRequest() {
+        public MzkVehicleInspectionServiceEditVehicleDetailsRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditGlassRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
+        public MzkVehicleInspectionServiceEditVehicleDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
             this.CallContext = CallContext;
-            this._lstGlass = _lstGlass;
+            this._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
             this._company = _company;
         }
     }
@@ -8154,16 +7818,58 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditGlassResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditVehicleDetailsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response;
         
-        public MzkVehicleInspectionServiceEditGlassResponse() {
+        public MzkVehicleInspectionServiceEditVehicleDetailsResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditGlassResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response) {
+        public MzkVehicleInspectionServiceEditVehicleDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetTasksRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _company;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _userID;
+        
+        public MzkVehicleInspectionServiceGetTasksRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
+            this.CallContext = CallContext;
+            this._company = _company;
+            this._userID = _userID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetTasksResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
+        
+        public MzkVehicleInspectionServiceGetTasksResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
             this.response = response;
         }
     }
@@ -8202,24 +7908,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest() {
+        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
+        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
             this.CallContext = CallContext;
-            this._lstPassengerAccessory = _lstPassengerAccessory;
+            this._lstPassengerMechCondition = _lstPassengerMechCondition;
             this._company = _company;
         }
     }
@@ -8227,16 +7933,58 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response;
         
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse() {
+        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response) {
+        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetCustDetailsRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _custId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceGetCustDetailsRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceGetCustDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
+            this.CallContext = CallContext;
+            this._custId = _custId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetCustDetailsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response;
+        
+        public MzkVehicleInspectionServiceGetCustDetailsResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceGetCustDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response) {
             this.response = response;
         }
     }
@@ -8279,6 +8027,258 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
+            this.CallContext = CallContext;
+            this._lstPassengerBodywork = _lstPassengerBodywork;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response;
+        
+        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditGlassRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceEditGlassRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceEditGlassRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
+            this.CallContext = CallContext;
+            this._lstGlass = _lstGlass;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditGlassResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response;
+        
+        public MzkVehicleInspectionServiceEditGlassResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditGlassResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
+            this.CallContext = CallContext;
+            this._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response;
+        
+        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetInspectionHistoryRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _regNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceGetInspectionHistoryRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceGetInspectionHistoryRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
+            this.CallContext = CallContext;
+            this._regNo = _regNo;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceGetInspectionHistoryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response;
+        
+        public MzkVehicleInspectionServiceGetInspectionHistoryResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceGetInspectionHistoryResponse(Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
+            this.CallContext = CallContext;
+            this._lstCommercialAccessory = _lstCommercialAccessory;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response;
+        
+        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest() {
+        }
+        
+        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            this.CallContext = CallContext;
+            this._lstTasks = _lstTasks;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
+        
+        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse() {
+        }
+        
+        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
+            this.response = response;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface MzkVehicleInspectionServiceChannel : Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService, System.ServiceModel.IClientChannel {
     }
@@ -8307,84 +8307,30 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
-            return base.Channel.validateUser(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
+            return base.Channel.editCommercialMechCondition(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
             inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            inValue._password = _password;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUser(inValue);
+            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechCondition(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
+            return base.Channel.editCommercialMechConditionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
             inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUserAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
-            return base.Channel.updateStatusList(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
+            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusList(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
-            return base.Channel.updateStatusListAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusListAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
-            return base.Channel.updateConfirmationDate(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDate(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
-            return base.Channel.updateConfirmationDateAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDateAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechConditionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -8415,136 +8361,57 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
-            return base.Channel.getTasks(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
+            return base.Channel.editCommercialChassisBody(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
             inValue.CallContext = CallContext;
+            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
             inValue._company = _company;
-            inValue._userID = _userID;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasks(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBody(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
-            return base.Channel.getTasksAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
+            return base.Channel.editCommercialChassisBodyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
             inValue.CallContext = CallContext;
+            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
             inValue._company = _company;
-            inValue._userID = _userID;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasksAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBodyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
-            return base.Channel.getInspectionHistory(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
+            return base.Channel.updateStatusList(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._regNo = _regNo;
+            inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistory(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusList(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
-            return base.Channel.getInspectionHistoryAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
+            return base.Channel.updateStatusListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._regNo = _regNo;
+            inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistoryAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
-            return base.Channel.getCustDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] getCustDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._custId = _custId;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
-            return base.Channel.getCustDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._custId = _custId;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
-            return base.Channel.editVehicleInspection(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstVehicleInsp = _lstVehicleInsp;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspection(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
-            return base.Channel.editVehicleInspectionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstVehicleInsp = _lstVehicleInsp;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspectionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
-            return base.Channel.editVehicleDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
-            return base.Channel.editVehicleDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetailsAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusListAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -8575,165 +8442,57 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
-            return base.Channel.editPassengerTrimInterior(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
+            return base.Channel.editPassengerAccessories(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            inValue._lstPassengerAccessory = _lstPassengerAccessory;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInterior(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessories(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
-            return base.Channel.editPassengerTrimInteriorAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
+            return base.Channel.editPassengerAccessoriesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            inValue._lstPassengerAccessory = _lstPassengerAccessory;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInteriorAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessoriesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
-            return base.Channel.editPassengerMechCondition(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
+            return base.Channel.validateUser(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechCondition(inValue);
+            inValue._userID = _userID;
+            inValue._password = _password;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUser(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
-            return base.Channel.editPassengerMechConditionAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechConditionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
-            return base.Channel.editPassengerBodywork(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerBodywork = _lstPassengerBodywork;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodywork(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
-            return base.Channel.editPassengerBodyworkAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerBodywork = _lstPassengerBodywork;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodyworkAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
-            return base.Channel.editCommercialChassisBody(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBody(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
-            return base.Channel.editCommercialChassisBodyAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBodyAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
-            return base.Channel.editCommercialAccessories(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialAccessory = _lstCommercialAccessory;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessories(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
-            return base.Channel.editCommercialAccessoriesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialAccessory = _lstCommercialAccessory;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessoriesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
-            return base.Channel.editCommercialMechCondition(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechCondition(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
-            return base.Channel.editCommercialMechConditionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechConditionAsync(inValue);
+            inValue._userID = _userID;
+            inValue._password = _password;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -8791,30 +8550,82 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
-            return base.Channel.editGlass(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
+            return base.Channel.editVehicleInspection(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] editGlass(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
             inValue.CallContext = CallContext;
-            inValue._lstGlass = _lstGlass;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlass(inValue);
+            inValue._lstVehicleInsp = _lstVehicleInsp;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspection(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
-            return base.Channel.editGlassAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
+            return base.Channel.editVehicleInspectionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
             inValue.CallContext = CallContext;
-            inValue._lstGlass = _lstGlass;
+            inValue._lstVehicleInsp = _lstVehicleInsp;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspectionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
+            return base.Channel.editVehicleDetails(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlassAsync(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetails(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
+            return base.Channel.editVehicleDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetailsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
+            return base.Channel.getTasks(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+            inValue.CallContext = CallContext;
+            inValue._company = _company;
+            inValue._userID = _userID;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasks(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
+            return base.Channel.getTasksAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+            inValue.CallContext = CallContext;
+            inValue._company = _company;
+            inValue._userID = _userID;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -8842,30 +8653,57 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
-            return base.Channel.editPassengerAccessories(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
+            return base.Channel.editPassengerMechCondition(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerAccessory = _lstPassengerAccessory;
+            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessories(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechCondition(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
-            return base.Channel.editPassengerAccessoriesAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
+            return base.Channel.editPassengerMechConditionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
             inValue.CallContext = CallContext;
-            inValue._lstPassengerAccessory = _lstPassengerAccessory;
+            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessoriesAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechConditionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
+            return base.Channel.getCustDetails(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] getCustDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._custId = _custId;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetails(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
+            return base.Channel.getCustDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._custId = _custId;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetailsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -8891,6 +8729,168 @@ namespace Eqstra.DataProvider.AX.TIProxy {
             inValue.CallContext = CallContext;
             inValue.contract = contract;
             return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).createVehicleInspectionTableAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
+            return base.Channel.editPassengerBodywork(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerBodywork = _lstPassengerBodywork;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodywork(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
+            return base.Channel.editPassengerBodyworkAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerBodywork = _lstPassengerBodywork;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodyworkAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
+            return base.Channel.editGlass(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] editGlass(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstGlass = _lstGlass;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlass(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
+            return base.Channel.editGlassAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstGlass = _lstGlass;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlassAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
+            return base.Channel.editPassengerTrimInterior(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInterior(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
+            return base.Channel.editPassengerTrimInteriorAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInteriorAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
+            return base.Channel.getInspectionHistory(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
+            inValue.CallContext = CallContext;
+            inValue._regNo = _regNo;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistory(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
+            return base.Channel.getInspectionHistoryAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
+            inValue.CallContext = CallContext;
+            inValue._regNo = _regNo;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistoryAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
+            return base.Channel.editCommercialAccessories(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstCommercialAccessory = _lstCommercialAccessory;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessories(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
+            return base.Channel.editCommercialAccessoriesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstCommercialAccessory = _lstCommercialAccessory;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessoriesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
+            return base.Channel.updateConfirmationDate(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstTasks = _lstTasks;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDate(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
+            return base.Channel.updateConfirmationDateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
+            inValue.CallContext = CallContext;
+            inValue._lstTasks = _lstTasks;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDateAsync(inValue);
         }
     }
 }

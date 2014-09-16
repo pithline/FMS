@@ -139,6 +139,15 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref customerId, value); }
         }
 
+        private string contactName;
+        [RestorableState]
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
+        }
+        
+
         private string registrationNumber;
         [RestorableState]
         public string RegistrationNumber

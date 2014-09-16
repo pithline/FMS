@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="vr578J+eSa5Dz3w1Msm8PUI9cLw=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="+NMjLpmxQXtBV/RJq8sfOCoOkg4=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="reqReplyEndpoint1">
+    <bindingConfiguration bindingType="basicHttpBinding" name="reqReplyEndpoint2">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>reqReplyEndpoint1</serializedValue>
+          <serializedValue>reqReplyEndpoint2</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_MzkVehicleInspectionService">
+    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_MzkVehicleInspectionService1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService</serializedValue>
+          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -221,7 +221,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="reqReplyEndpoint1" contract="TIProxy.IRequestReplyRouter" bindingType="basicHttpBinding" address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" bindingConfiguration="reqReplyEndpoint1">
+    <endpoint name="reqReplyEndpoint2" contract="TIProxy.IRequestReplyRouter" bindingType="basicHttpBinding" address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" bindingConfiguration="reqReplyEndpoint2">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc</serializedValue>
@@ -233,7 +233,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>reqReplyEndpoint1</serializedValue>
+          <serializedValue>reqReplyEndpoint2</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>TIProxy.IRequestReplyRouter</serializedValue>
@@ -296,7 +296,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>reqReplyEndpoint1</serializedValue>
+          <serializedValue>reqReplyEndpoint2</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -306,7 +306,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_MzkVehicleInspectionService" contract="TIProxy.MzkVehicleInspectionService" bindingType="basicHttpBinding" address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" bindingConfiguration="BasicHttpBinding_MzkVehicleInspectionService">
+    <endpoint name="BasicHttpBinding_MzkVehicleInspectionService1" contract="TIProxy.MzkVehicleInspectionService" bindingType="basicHttpBinding" address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc" bindingConfiguration="BasicHttpBinding_MzkVehicleInspectionService1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc</serializedValue>
@@ -318,7 +318,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService</serializedValue>
+          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>TIProxy.MzkVehicleInspectionService</serializedValue>
@@ -381,7 +381,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService</serializedValue>
+          <serializedValue>BasicHttpBinding_MzkVehicleInspectionService1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

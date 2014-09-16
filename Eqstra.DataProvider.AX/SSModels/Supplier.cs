@@ -32,5 +32,15 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public string Address { get; set; }
 
+
+        public String CountryName { get; set; }
+
+        public String ProvinceName { get; set; }
+
+        public String CityName { get; set; }
+
+        public String SuburbName { get; set; }
+
+
     }
 }

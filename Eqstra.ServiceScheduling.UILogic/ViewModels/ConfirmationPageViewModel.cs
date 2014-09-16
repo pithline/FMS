@@ -1,19 +1,12 @@
 ﻿using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.Common;
-using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
-using Eqstra.BusinessLogic.ServiceSchedulingModel;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -26,22 +19,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
-            this.Model = new ConfirmationServiceScheduling();
             SubmitCommand = new DelegateCommand(async
                 () =>
             {
                 if (this.DriverTask != null)
                 {
                     this.IsBusy = true;
-                    
-                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
-                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                    bool isInserted = await SSProxyHelper.Instance.InsertConfirmedServiceDetailToSvcAsync(this.ServiceSchedulingDetail, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
+
+                    bool isInserted = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
                     if (isInserted)
                     {
                         PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
-                        navigationService.Navigate("Main", string.Empty);
+                        PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                     }
+                    navigationService.Navigate("Main", string.Empty);
                     this.IsBusy = false;
                 }
             },
@@ -53,7 +44,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (this.DriverTask != null)
                 {
-                    
+                    this.IsBusy = true;
                     this.ServiceSchedulingDetail.ServiceDateOption1 = this.ServiceDateOption1;
                     this.ServiceSchedulingDetail.ServiceDateOption2 = this.ServiceDateOption2;
                     bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
@@ -61,20 +52,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         this.ConfirmationDatesCommand.RaiseCanExecuteChanged();
                         this.SubmitCommand.RaiseCanExecuteChanged();
+                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
+                        PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
                     }
-                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
-                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
+                    navigationService.Navigate("Main", string.Empty);
+                    this.IsBusy = false;
+
                 }
             }, () => { return (this.ServiceDateOption1 != this.ServiceSchedulingDetail.ServiceDateOption1) || (this.ServiceDateOption2 != this.ServiceSchedulingDetail.ServiceDateOption2); });
 
-            this.ProposingNewDateCommand = new DelegateCommand(() =>
-            {
-                this.IsProposingNewDate = true;
-            }, () =>
-            {
-                this.IsProposingNewDate = false;
-                return true;
-            });
         }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -84,7 +70,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 this.IsBusy = true;
                 this.DriverTask = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID,this.DriverTask.ServiceRecID);
+                this.ServiceSchedulingDetail = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID, this.DriverTask.ServiceRecID);
                 if (this.ServiceSchedulingDetail != null)
                 {
                     this.ServiceDateOption1 = this.ServiceSchedulingDetail.ServiceDateOption1;
@@ -113,13 +99,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref driverTask, value); }
         }
 
-        private ConfirmationServiceScheduling model;
-
-        public ConfirmationServiceScheduling Model
-        {
-            get { return model; }
-            set { SetProperty(ref model, value); }
-        }
 
         private ServiceSchedulingDetail serviceSchedulingDetail;
         public ServiceSchedulingDetail ServiceSchedulingDetail
@@ -151,21 +130,10 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     ConfirmationDatesCommand.RaiseCanExecuteChanged();
                     SubmitCommand.RaiseCanExecuteChanged();
-                    ProposingNewDateCommand.RaiseCanExecuteChanged();
                 }
             }
         }
 
-
-        private bool isProposingNewDate;
-        public bool IsProposingNewDate
-        {
-            get { return isProposingNewDate; }
-            set { SetProperty(ref isProposingNewDate, value); }
-        }
-
         public DelegateCommand ConfirmationDatesCommand { get; set; }
-
-        public DelegateCommand ProposingNewDateCommand { get; set; }
     }
 }
