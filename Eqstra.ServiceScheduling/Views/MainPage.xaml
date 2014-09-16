@@ -62,7 +62,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="2*" />
-
+                    
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FFE0E0E0"
                         Grid.Row="1"
@@ -140,6 +140,18 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
+                                                             HeaderText="STATUS DUE DATE"
+                                                             AllowEditing="False"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridComboBoxColumn MappingName="Status"
+                                                             AllowEditing="False"
+                                                             HeaderText="STATUS"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="RegistrationNumber"
                                                          HeaderText="REGISTRATION NUMBER"
                                                          AllowEditing="False"
@@ -169,14 +181,17 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                             MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-
                                     <grid:GridTextColumn MappingName="ContactName"
                                                          HeaderText="CONTACT NAME"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                            MinimumWidth="150"
+                                                         MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-
-
+                                    <grid:GridDateTimeColumn MappingName="ConfirmationDate"
+                                                             FormatString="MM/dd/yyyy"
+                                                             HeaderText="CONFIRMED DATE"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTemplateColumn HeaderText="CELL NUMBER"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -191,26 +206,31 @@
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>
                                     </grid:GridTemplateColumn>
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"
-                                                             HeaderText="STATUS DUE DATE"
-                                                             AllowEditing="False"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                                MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridComboBoxColumn MappingName="Status"
-                                                             AllowEditing="False"
-                                                             HeaderText="STATUS"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                              MinimumWidth="220"
-                                                             HorizontalHeaderContentAlignment="Left" />
+                                   
                                     <grid:GridTextColumn MappingName="AllocatedTo"
                                                          HeaderText="ALLOCATED TO"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-
-
+                                    <grid:GridDateTimeColumn MappingName="ScheduledDate"
+                                                             FormatString="MM/dd/yyyy"
+                                                             HeaderText="SCHEDULED DATE"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                             MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left" />
+                                    <grid:GridTemplateColumn HeaderText="SCHEDULED TIME"
+                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                          MinimumWidth="150"
+                                                             HorizontalHeaderContentAlignment="Left">
+                                        <grid:GridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <input:SfTimePicker Value="{Binding ScheduledTime,Mode=TwoWay}"
+                                                                    BorderThickness="0"
+                                                                    Background="Transparent" />
+                                            </DataTemplate>
+                                        </grid:GridTemplateColumn.CellTemplate>
+                                    </grid:GridTemplateColumn>
                                 </grid:SfDataGrid.Columns>
                             </grid:SfDataGrid>
                         </Grid>

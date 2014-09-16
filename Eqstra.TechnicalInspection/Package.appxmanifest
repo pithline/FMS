@@ -42,9 +42,11 @@
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="internetClient" />
     <Capability Name="enterpriseAuthentication" />
+    <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClientServer" />
     <DeviceCapability Name="location" />
     <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>
