@@ -1,0 +1,244 @@
+﻿<UserControl
+    x:Class="Eqstra.VehicleInspection.Views.CAccessoriesUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.VehicleInspection.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:common="using:Eqstra.VehicleInspection.Common"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    >
+
+    <UserControl.Resources>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+
+
+    <Grid HorizontalAlignment="Stretch" MinWidth="800">
+        <Grid Grid.Column="0" Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Accessories" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Bottom" Margin="0 0 0 5"/>
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
+                    <Image Source="ms-appx:///Assets/save.png"/>
+                </Button>
+            </StackPanel>
+            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" HorizontalAlignment="Stretch">
+                <Grid Margin="20 10" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="60"/>
+                        <!--Button Column-->
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Damaged/Missing" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="Comment" Grid.Row="0" Grid.Column="3" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" >
+                        <CheckBox IsChecked="{Binding Path=Model.HasServiceBlockDmg ,Mode=TwoWay}" x:Name="HasServiceBlockChkbox"/>
+                        <TextBlock Text="Service Block" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ToggleSwitch x:Name="ServiceBlockToggle" IsOn="{Binding Path=Model.IsServiceBlockDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasServiceBlockChkbox,Path=IsChecked}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasServiceBlockChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVServiceBlock}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ServiceBlockToggle}" Margin="5 0" Grid.Row="1" Grid.Column="2" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox IsEnabled="{Binding ElementName=HasServiceBlockChkbox,Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Path= Model.ServiceBlockComment ,Mode=TwoWay}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="3"/>
+                    <GridView IsEnabled="{Binding ElementName=HasServiceBlockChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVServiceBlock" ItemsSource="{Binding Path= Model.ServiceBlockImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ServiceBlockToggle}" Grid.Column="4" Grid.Row="1" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasToolsDmg ,Mode=TwoWay}" x:Name="HasToolsChkbox"/>
+                        <TextBlock Text="Tools" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="ToolsToggle" IsOn="{Binding Path=Model.IsToolsDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasToolsChkbox,Path=IsChecked}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasToolsChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVTools}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ToolsToggle}" Margin="5 0" Grid.Row="2" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.ToolsComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"  IsEnabled="{Binding ElementName=HasToolsChkbox,Path=IsChecked}" VerticalAlignment="Center" Margin="5 0" Grid.Row="2" Grid.Column="3"/>
+                    <GridView IsEnabled="{Binding ElementName=HasToolsChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVTools" ItemsSource="{Binding Path= Model.ToolsImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ToolsToggle}" Grid.Column="4" Grid.Row="2" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasJackDmg ,Mode=TwoWay}" x:Name="HasJackChkbox"/>
+                        <TextBlock Text="Jack" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="JackToggle" IsOn="{Binding Path=Model.IsJackDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasJackChkbox,Path=IsChecked}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button  IsEnabled="{Binding ElementName=HasJackChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVJack}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=JackToggle}" Margin="5 0" Grid.Row="3" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.JackComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasJackChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="3" Grid.Column="3"/>
+                    <GridView  IsEnabled="{Binding ElementName=HasJackChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVJack" ItemsSource="{Binding Path= Model.JackImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=JackToggle}" Grid.Column="4" Grid.Row="3" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasBullBarDmg ,Mode=TwoWay}" x:Name="HasBullBarChkbox"/>
+                        <TextBlock Text="Bull Bar" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="BullBarToggle" IsOn="{Binding Path=Model.IsBullBarDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasBullBarChkbox,Path=IsChecked}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button  IsEnabled="{Binding ElementName=HasBullBarChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVBullBar}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BullBarToggle}" Margin="5 0" Grid.Row="4" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.BullBarComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"  IsEnabled="{Binding ElementName=HasBullBarChkbox,Path=IsChecked}" VerticalAlignment="Center" Margin="5 0" Grid.Row="4" Grid.Column="3"/>
+                    <GridView  IsEnabled="{Binding ElementName=HasBullBarChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVBullBar" ItemsSource="{Binding Path= Model.BullBarImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=BullBarToggle}" Grid.Column="4" Grid.Row="4" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasTrackingDeviceDmg ,Mode=TwoWay}" x:Name="HasTrackingDeviceChkbox"/>
+                        <TextBlock Text="Tracking Device" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="TrackingDeviceToggle" IsOn="{Binding Path=Model.IsTrackingDeviceDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasTrackingDeviceChkbox,Path=IsChecked}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasTrackingDeviceChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVTrackingDevice}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TrackingDeviceToggle}" Margin="5 0" Grid.Row="5" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.TrackingDeviceComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasTrackingDeviceChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="3"/>
+                    <GridView IsEnabled="{Binding ElementName=HasTrackingDeviceChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVTrackingDevice" ItemsSource="{Binding Path= Model.TrackingDeviceImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TrackingDeviceToggle}" Grid.Column="4" Grid.Row="5" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasEngineProtectionUnitDmg ,Mode=TwoWay}" x:Name="HasEngineProtectionUnitChkbox"/>
+                        <TextBlock Text="Engine Protection Unit" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="EngineProtectionUnitToggle" IsOn="{Binding Path=Model.IsEngineProtectionUnitDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasEngineProtectionUnitChkbox,Path=IsChecked}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button  IsEnabled="{Binding ElementName=HasEngineProtectionUnitChkbox,Path=IsChecked}"  Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVEngProtectionUnit}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EngineProtectionUnitToggle}" Margin="5 0" Grid.Row="6" Grid.Column="2" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.EngineProtectionUnitComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasEngineProtectionUnitChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="3"/>
+                    <GridView  IsEnabled="{Binding ElementName=HasEngineProtectionUnitChkbox,Path=IsChecked}"  common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVEngProtectionUnit" ItemsSource="{Binding Path= Model.EngineProtectionUnitImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=EngineProtectionUnitToggle}" Grid.Column="4" Grid.Row="6" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasDecalSignWritingDmg ,Mode=TwoWay}" x:Name="HasDecalSignWritingChkbox"/>
+                        <TextBlock Text="Decal/Signwriting" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="DecalSignWritingToggle" IsOn="{Binding Path=Model.IsDecalSignWritingDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVDecalSignWriting}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DecalSignWritingToggle}" Margin="5 0" Grid.Row="7" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.DecalSignWritingComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="3"/>
+                    <GridView IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  x:Name="GVDecalSignWriting" ItemsSource="{Binding Path= Model.DecalSignWritingImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DecalSignWritingToggle}" Grid.Column="4" Grid.Row="7" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0">
+                        <CheckBox IsChecked="{Binding Path=Model.HasReflectiveTapeDmg ,Mode=TwoWay}" x:Name="HasReflectiveTapeChkbox"/>
+                        <TextBlock Text="Reflective Tape" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="ReflectiveTapeToggle" IsOn="{Binding Path=Model.IsReflectiveTapeDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVReflectiveTape}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ReflectiveTapeToggle}" Margin="5 0" Grid.Row="8" Grid.Column="2" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.ReflectiveTapeComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="8" Grid.Column="3"/>
+                    <GridView IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVReflectiveTape" ItemsSource="{Binding Path= Model.ReflectiveTapeImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ReflectiveTapeToggle}" Grid.Column="4" Grid.Row="8" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
