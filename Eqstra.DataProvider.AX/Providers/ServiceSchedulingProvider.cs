@@ -58,15 +58,12 @@ namespace Eqstra.DataProvider.AX.Providers
                         response = GetDestinationTypeList(criterias[1].ToString(), criterias[2].ToString());
                         break;
 
-                    case ActionSwitch.GetVendSupplierList:
-                        response = GetVendSupplierList();
-                        break;
 
                     case ActionSwitch.FilteredSupplierByAddress:
                         response = FilteredSupplierByAddress(criterias[1].ToString(), criterias[2].ToString(), criterias[3].ToString(), criterias[4].ToString(), criterias[5].ToString());
                         break;
                     case ActionSwitch.FilteredSupplierByGeoLocation:
-                        response = FilteredSupplierByGeoLocation(JsonConvert.DeserializeObject<string>(criterias[1].ToString()));
+                        response = FilterSuppliersByGeoLocation(criterias[1].ToString(), criterias[2].ToString());
                         break;
 
                 }
@@ -244,7 +241,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             CusEmailId = mzkTask.parmEmail,
                             ServiceRecID = mzkTask.parmServiceRecID,
                             CustomerId = mzkTask.parmCustAccount,
-                            ConfirmedDate = mzkTask.parmConfirmationDate,
+                            ConfirmedDate = mzkTask.parmConfirmationDate.ToShortDateString(),
                             ContactName = mzkTask.parmContactPersonName,
                             AppointmentStart = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime : DateTime.MinValue,
                             AppointmentEnd = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime.AddHours(24) : DateTime.MinValue
@@ -575,45 +572,6 @@ namespace Eqstra.DataProvider.AX.Providers
 
         }
 
-        private List<Supplier> GetVendSupplierList()
-        {
-            try
-            {
-
-                var result = _client.getVendSupplirerName(new SSProxy.CallContext() { Company = "1000" }, "1000");
-                List<Supplier> suppliers = new List<Supplier>();
-
-                if (result != null)
-                {
-                    foreach (var mzk in result)
-                    {
-                        suppliers.Add(new Supplier
-                        {
-                            AccountNum = mzk.parmAccountNum,
-                            SupplierContactName = mzk.parmContactPersonName,
-                            SupplierContactNumber = mzk.parmContactPersonPhone,
-                            SupplierName = mzk.parmName,
-                            Country = mzk.parmCountry,
-                            Province = mzk.parmState,
-                            City = mzk.parmCityName,
-                            Suburb = mzk.parmSuburban,
-                            Email = "kasif.reza@mazikglobal.com",
-                            Address = mzk.parmAddress,
-                            CountryName = mzk.parmCountryName,
-                            ProvinceName = mzk.parmStateName,
-                            CityName = mzk.parmCityName,
-                        });
-                    }
-                }
-
-                return suppliers;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         private bool UpdateConfirmationDates(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
         {
             try
@@ -682,80 +640,77 @@ namespace Eqstra.DataProvider.AX.Providers
 
 
 
-        public List<Supplier> FilteredSupplierByGeoLocation(string CurrentLocation)
+        public List<Supplier> FilterSuppliersByGeoLocation(string countryName, string cityName)
         {
-
             try
             {
-                var currentlocation = CurrentLocation.Split(',');
-                List<string> locList = new List<string>();
-                foreach (var loc in currentlocation)
-                {
-                    locList.Add(loc);
-                }
-                var result = this.GetVendSupplierList();
-                IEnumerable<Supplier> filteredResult = new List<Supplier>();
+                var result = _client.getVendorByName(new SSProxy.CallContext() { Company = "1000" }, countryName, cityName, "1000");
+
+                List<Supplier> suppliers = new List<Supplier>();
+
                 if (result != null)
                 {
-                    if (locList.Any())
+                    foreach (var mzk in result)
                     {
-                        filteredResult = result.Where(w => w.CountryName.Contains(locList.ElementAt(0)));
-                        if (locList.Any())
+                        suppliers.Add(new Supplier
                         {
-                            filteredResult = filteredResult.Where(w => w.ProvinceName.Contains(locList.ElementAt(1)));
-                        }
+                            AccountNum = mzk.parmAccountNum,
+                            SupplierContactName = mzk.parmContactPersonName,
+                            SupplierContactNumber = mzk.parmContactPersonPhone,
+                            SupplierName = mzk.parmName,
+                            Country = mzk.parmCountry,
+                            Province = mzk.parmState,
+                            City = mzk.parmCityName,
+                            Suburb = mzk.parmSuburban,
+                            Email = mzk.parmEmail,
+                            Address = mzk.parmAddress,
+                            CountryName = mzk.parmCountryName,
+                            ProvinceName = mzk.parmStateName,
+                            CityName = mzk.parmCityName,
+                        });
                     }
-                    else
-                    {
-                        return result.ToList<Supplier>();
-                    }
-
                 }
-                return filteredResult.ToList<Supplier>();
+
+                return suppliers;
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public List<Supplier> FilteredSupplierByAddress(string countryId, string provinceId, string cityId, string suburbId, string regionId)
+        public List<Supplier> FilterSuppliersByCriteria(string countryId, string provinceId, string cityId, string suburbId, string regionId)
         {
 
             try
             {
-                var result = this.GetVendSupplierList();
-                IEnumerable<Supplier> filteredResult = new List<Supplier>();
+                var result = _client.getVendorBySelection(new SSProxy.CallContext() { Company = "1000" }, "1000", countryId, provinceId, suburbId, cityId, regionId);
+
+                List<Supplier> suppliers = new List<Supplier>();
+
                 if (result != null)
                 {
-
-                    if (!String.IsNullOrEmpty(countryId))
+                    foreach (var mzk in result)
                     {
-                        filteredResult = result.Where(w => w.Country == countryId);
-                        if (!String.IsNullOrEmpty(provinceId))
+                        suppliers.Add(new Supplier
                         {
-                            filteredResult = filteredResult.Where(w => w.Province == provinceId);
-                            if (!String.IsNullOrEmpty(cityId))
-                            {
-                                filteredResult = filteredResult.Where(w => w.City == cityId);
-                                if (!String.IsNullOrEmpty(suburbId))
-                                {
-                                    filteredResult = filteredResult.Where(w => w.Suburb == suburbId);
-
-                                    if (!String.IsNullOrEmpty(regionId))
-                                    {
-                                        filteredResult = filteredResult.Where(w => w.Suburb == regionId);
-                                    }
-                                }
-                            }
-                        }
+                            AccountNum = mzk.parmAccountNum,
+                            SupplierContactName = mzk.parmContactPersonName,
+                            SupplierContactNumber = mzk.parmContactPersonPhone,
+                            SupplierName = mzk.parmName,
+                            Country = mzk.parmCountry,
+                            Province = mzk.parmState,
+                            City = mzk.parmCityName,
+                            Suburb = mzk.parmSuburban,
+                            Email = mzk.parmEmail,
+                            Address = mzk.parmAddress,
+                            CountryName = mzk.parmCountryName,
+                            ProvinceName = mzk.parmStateName,
+                            CityName = mzk.parmCityName,
+                        });
                     }
-                    else
-                    {
-                        return result.ToList<Supplier>();
-                    }
-
                 }
-                return filteredResult.ToList<Supplier>();
+                return suppliers;
             }
             catch (Exception)
             {

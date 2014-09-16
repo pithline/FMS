@@ -210,9 +210,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="C:\Program Files %28x86%29\MSBuild\Microsoft\.NetNative\NextSteps.mht">
-      <Link>NextSteps.mht</Link>
-    </None>
     <None Include="Eqstra.VehicleInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

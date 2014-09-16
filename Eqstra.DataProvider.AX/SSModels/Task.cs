@@ -25,7 +25,7 @@ namespace Eqstra.DataProvider.AX.SSModels
         public String CaseType { get; set; }
         public String ContactName { get; set; }
 
-        public DateTime ConfirmedDate { get; set; }
+        public string ConfirmedDate { get; set; }
 
         public Int64 VehicleInsRecId { get; set; }
 
@@ -34,10 +34,6 @@ namespace Eqstra.DataProvider.AX.SSModels
         public String Status { get; set; }
 
         public String AllocatedTo { get; set; }
-
-        public DateTime ScheduledDate { get; set; }
-
-        public DateTime ScheduledTime { get; set; }
 
         public String CustomerId { get; set; }
 
