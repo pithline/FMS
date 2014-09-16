@@ -89,7 +89,7 @@
 
 
             <ScrollViewer Grid.Row="1"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                           HorizontalAlignment="Stretch"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1"

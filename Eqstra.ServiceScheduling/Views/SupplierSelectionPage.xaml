@@ -142,6 +142,7 @@
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    
                                     <RowDefinition Height="70" />
                                     <RowDefinition Height="40" />
                                     <RowDefinition Height="40" />
@@ -152,8 +153,12 @@
                                     <RowDefinition Height="150" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-
-                                <TextBlock Text="Please Select the Preferred Suppliers"
+                                <ProgressBar Grid.ColumnSpan="6"
+                                             VerticalAlignment="Top"
+                                             IsIndeterminate="True"
+                                             Visibility="{Binding LoadingCriteriaVisibility}"
+                                             HorizontalAlignment="Stretch" Margin="0 -15 0 0"/>
+                                <TextBlock Text="Select the preferred suppliers"
                                                Style="{StaticResource TextContentStyle}"
                                                Grid.ColumnSpan="4"
                                                VerticalAlignment="Center" />

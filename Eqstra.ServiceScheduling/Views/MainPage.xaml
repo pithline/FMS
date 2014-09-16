@@ -134,12 +134,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                              MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="CaseCategory"
-                                                         HeaderText="CASE CATEGORY"
-                                                         AllowEditing="False"
-                                                         HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                        MinimumWidth="150"
-                                                         HorizontalHeaderContentAlignment="Left" />
+                                   
                                     <grid:GridDateTimeColumn MappingName="StatusDueDate"
                                                              HeaderText="STATUS DUE DATE"
                                                              AllowEditing="False"
@@ -150,7 +145,7 @@
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
+                                                             MinimumWidth="200"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="RegistrationNumber"
                                                          HeaderText="REGISTRATION NUMBER"
@@ -213,24 +208,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridDateTimeColumn MappingName="ScheduledDate"
-                                                             FormatString="MM/dd/yyyy"
-                                                             HeaderText="SCHEDULED DATE"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTemplateColumn HeaderText="SCHEDULED TIME"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                          MinimumWidth="150"
-                                                             HorizontalHeaderContentAlignment="Left">
-                                        <grid:GridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <input:SfTimePicker Value="{Binding ScheduledTime,Mode=TwoWay}"
-                                                                    BorderThickness="0"
-                                                                    Background="Transparent" />
-                                            </DataTemplate>
-                                        </grid:GridTemplateColumn.CellTemplate>
-                                    </grid:GridTemplateColumn>
+                                   
                                 </grid:SfDataGrid.Columns>
                             </grid:SfDataGrid>
                         </Grid>
