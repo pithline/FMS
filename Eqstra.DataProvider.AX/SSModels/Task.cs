@@ -23,12 +23,13 @@ namespace Eqstra.DataProvider.AX.SSModels
         public DateTime ConfirmedTime { get; set; }
 
         public String CaseType { get; set; }
+        public String ContactName { get; set; }
 
         public DateTime ConfirmedDate { get; set; }
 
         public Int64 VehicleInsRecId { get; set; }
 
-        public DateTime StatusDueDate { get; set; }
+        public string StatusDueDate { get; set; }
 
         public String Status { get; set; }
 
@@ -63,6 +64,9 @@ namespace Eqstra.DataProvider.AX.SSModels
         public String DriverPhone { get; set; }
 
         public String Model { get; set; }
+
+        public DateTime AppointmentStart { get; set; }
+        public DateTime AppointmentEnd { get; set; }
        
     }
 }

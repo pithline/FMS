@@ -8,11 +8,16 @@ namespace Eqstra.DataProvider.AX.SSModels
 {
     public class ServiceSchedulingDetail
     {
+
+        public String CaseNumber { get; set; }
+
+        public Int64 CaseServiceRecID { get; set; }
+
         public string ODOReadingSnapshot { get; set; }
 
-        public String ODOReading { get; set; }
+        public Int64 ODOReading { get; set; }
 
-        public DateTime ODOReadingDate { get; set; }
+        public string ODOReadingDate { get; set; }
 
         public List<string> ServiceType { get; set; }
 
@@ -32,19 +37,22 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public String AdditionalWork { get; set; }
 
-        public DateTime ServiceDateOption1 { get; set; }
+        public string ServiceDateOption1 { get; set; }
 
-        public DateTime ServiceDateOption2 { get; set; }
+        public string ServiceDateOption2 { get; set; }
 
         public DateTime SupplierDateTime { get; set; }
 
         public Boolean IsLiftRequired { get; set; }
 
-        public LocationType SelectedLocationType { get; set; }
+        public LocationType SelectedLocType { get; set; }
+
+        public string SelectedLocationType { get; set; }
 
         public DestinationType SelectedDestinationType { get; set; }
 
         public String SelectedServiceType { get; set; }
+
 
     }
 }

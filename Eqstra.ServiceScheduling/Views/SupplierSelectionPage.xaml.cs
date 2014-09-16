@@ -21,6 +21,8 @@ using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.ServiceScheduling.UILogic.ViewModels;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Windows.UI.Xaml.Documents;
+using Windows.Devices.Geolocation;
+using Windows.UI.Core;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.ServiceScheduling.Views
@@ -32,9 +34,7 @@ namespace Eqstra.ServiceScheduling.Views
     {
 
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private SupplierSelection supplierSelection = null;
-        Country selectedCountry = null;
-        Province selectedprovince = null;
+
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -42,7 +42,20 @@ namespace Eqstra.ServiceScheduling.Views
         public SupplierSelectionPage()
         {
             this.InitializeComponent();
+            Loaded += OnLoaded;
+        }
+        async void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Geolocator locator = new Geolocator();
+            var geolocator = new Geolocator();
+            Geoposition position = await geolocator.GetGeopositionAsync();
+
+            SupplierSelectionPageViewModel supplierSelectionPageVm = (SupplierSelectionPageViewModel)this.DataContext;
+            supplierSelectionPageVm.Model.SelectedCountry.Id =position.CivicAddress.Country;
+            supplierSelectionPageVm.Model.Selectedprovince.Id = position.CivicAddress.State;
+            await supplierSelectionPageVm.SupplierFilterCommand.Execute();
 
         }
+
     }
 }

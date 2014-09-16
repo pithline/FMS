@@ -9,14 +9,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Helpers
 {
     public static class SSExtension
     {
-        public static ObservableCollection<T> AddRange<T>(this ObservableCollection<T> source, IEnumerable<T> addSource)
+        public static ObservableCollection<T> AddRange<T>(this ObservableCollection<T> destination, IEnumerable<T> source)
         {
-            foreach (T item in addSource)
+            if (destination != null && source != null)
             {
-                source.Add(item);
+                foreach (T item in source)
+                {
+                    destination.Add(item);
+                }
             }
-
-            return source;
+            return destination;
         }
     }
 }

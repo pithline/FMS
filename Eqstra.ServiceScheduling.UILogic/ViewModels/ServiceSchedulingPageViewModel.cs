@@ -1,27 +1,19 @@
 ﻿using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
-using Eqstra.BusinessLogic.ServiceSchedulingModel;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
-using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Windows.Media.Capture;
-using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -42,19 +34,20 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.Model = new ServiceSchedulingDetail();
             this.GoToSupplierSelectionCommand = new DelegateCommand(async () =>
             {
-                this.IsBusy = true;
-                if (this.Model.ValidateProperties())
+                try
                 {
-                    bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsAsyncToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
-                    if (isInserted)
-                    {
-                        
-                        PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-                        PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                        _navigationService.Navigate("SupplierSelection", string.Empty);
-                    }
+
+                    var messageDialog = new MessageDialog("Details once saved cannot be edited. Do you want to continue ?");
+                    messageDialog.Commands.Add(new UICommand("Yes", OnYesButtonClicked));
+                    messageDialog.Commands.Add(new UICommand("No"));
+                    await messageDialog.ShowAsync();
                 }
-                this.IsBusy = false;
+                catch (Exception ex)
+                {
+
+                    this.IsBusy = false;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
             });
 
             this.AddAddressCommand = new DelegateCommand<string>((x) =>
@@ -119,21 +112,21 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
+                    this.Model.Address = string.Empty;
                     if (this.Model.DestinationTypes != null)
                     {
                         this.Model.DestinationTypes.Clear();
                     }
-                    if (param.LocType == LocationTypeConstants.Driver)
+                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Driver && this._task != null)
                     {
-
-                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync());
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync(this._task.CustomerId));
                     }
-                    if (param.LocType == LocationTypeConstants.Customer)
+                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Customer && this._task != null)
                     {
-                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync());
+                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync(this._task.CustomerId));
                     }
 
-                    if (param.LocType == LocationTypeConstants.Vendor)
+                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Vendor)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
                     }
@@ -151,22 +144,62 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    this.IsBusy = false;
                     AppSettings.Instance.ErrorMessage = ex.Message;
                 }
 
             });
 
-            this.DestiTypeChangedCommand = new DelegateCommand<DestinationType>(async (param) =>
+            this.DestiTypeChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                this.IsBusy = true;
-                if (param != null)
+                try
                 {
-                    this.Address.EntityRecId = param.RecID;
-                    DestinationType destinationType = param as DestinationType;
-                    this.Model.Address = destinationType.Address;
+                    this.IsBusy = true;
+                    if (param != null)
+                    {
+                        if (param is DestinationType)
+                        {
+                            this.Address.EntityRecId = ((DestinationType)param).RecID;
+                            DestinationType destinationType = param as DestinationType;
+                            this.Model.Address = destinationType.Address;
+                        }
+                    }
+                    this.IsBusy = false;
                 }
-                this.IsBusy = false;
+                catch (Exception ex)
+                {
+                    this.IsBusy = false;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
             });
+        }
+
+
+
+       async private void OnYesButtonClicked(IUICommand command)
+        {
+            this.IsBusy = true;
+            if (this.Model.ValidateProperties())
+            {
+                if (!this.Model.IsLiftRequired)
+                {
+                    this.Model.SelectedLocationType = new LocationType();
+                    this.Model.Address = string.Empty;
+                    this.Model.SelectedDestinationType = new DestinationType();
+                    this.Address.EntityRecId = default(long);
+                }
+
+                bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+                if (isInserted)
+                {
+
+                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
+                }
+                    _navigationService.Navigate("SupplierSelection", string.Empty);
+                
+            }
+            this.IsBusy = false;
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -176,13 +209,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this._task = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID,this._task.ServiceRecID);
-                this.Model.IsValidationEnabled =true;
+                this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID, this._task.ServiceRecID);
+                this.Model.IsValidationEnabled = true;
                 this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
                 this.IsBusy = false;
             }
             catch (Exception ex)
             {
+                this.IsBusy = false;
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
@@ -199,10 +233,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref customer, value); }
         }
         public DelegateCommand GoToSupplierSelectionCommand { get; set; }
+
         public DelegateCommand ODOReadingPictureCommand { get; set; }
         public DelegateCommand<string> AddAddressCommand { get; set; }
         public DelegateCommand<LocationType> LocTypeChangedCommand { get; set; }
-        public DelegateCommand<DestinationType> DestiTypeChangedCommand { get; set; }
+        public DelegateCommand<object> DestiTypeChangedCommand { get; set; }
 
         private string odoReadingImagePath;
         public string ODOReadingImagePath

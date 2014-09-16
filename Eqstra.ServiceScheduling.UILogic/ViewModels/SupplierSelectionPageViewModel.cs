@@ -7,16 +7,9 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
-using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -30,7 +23,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             _navigationService = navigationSerive;
             _eventAggregator = eventAggregator;
-            
+
             this.Model = new SupplierSelection();
             this.GoToConfirmationCommand = new DelegateCommand(async () =>
             {
@@ -40,10 +33,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     if (this.Model.ValidateProperties())
                     {
                         bool isinserted = await SSProxyHelper.Instance.InsertSelectedSupplierToSvcAsync(this.Model, this.DriverTask.CaseNumber, this.DriverTask.CaseServiceRecID);
-                        if (isinserted)
-                        {
-                            _navigationService.Navigate("Confirmation", string.Empty);
-                        }
+                         _navigationService.Navigate("Confirmation", string.Empty);
                     }
                     this.IsBusy = false;
                 }
@@ -63,10 +53,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     Country country = param as Country;
                     if (!String.IsNullOrEmpty(country.Id) && this.Model.Provinces != null && !this.Model.Provinces.Any())
                     {
-                        this.ProgressbarMessage = "Loading Provinces ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
+
                         this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(country.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
+
                         this.Model.SelectedCountry = country;
                         this.Model.Selectedprovince = null;
                     }
@@ -85,10 +74,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     Province province = param as Province;
                     if (!String.IsNullOrEmpty(province.Id) && this.Model.Cities != null && !this.Model.Cities.Any())
                     {
-                        this.ProgressbarMessage = "Loading Cities ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
+
                         this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
+
                         this.Model.Selectedprovince = province;
                         this.Model.SelectedCity = null;
                     }
@@ -107,10 +95,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     City city = param as City;
                     if (!String.IsNullOrEmpty(city.Id) && this.Model.Suburbs != null && !this.Model.Suburbs.Any())
                     {
-                        this.ProgressbarMessage = "Loading Suburbs ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
+
                         this.Model.Suburbs = await SSProxyHelper.Instance.GetSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, city.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
+
                         this.Model.SelectedCity = city;
                         this.Model.SelectedSuburb = null;
                     }
@@ -129,10 +116,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     if (this.Model.Selectedprovince != null && this.Model.Regions != null && !this.Model.Regions.Any())
                     {
-                        this.ProgressbarMessage = "Loading Regions ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
+
                         this.Model.Regions = await SSProxyHelper.Instance.GetRegionListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.Selectedprovince.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
+
                         this.Model.SelectedSuburb = (Suburb)param;
                     }
                 }
@@ -213,8 +199,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             try
             {
-                this.ProgressbarMessage = "Loading Countries ....  ";
-                this.ProgressbarVisiblity = Visibility.Visible;
+
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.DriverTask = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
@@ -223,7 +208,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.Model.Countries.AddRange(countries);
                 }
-                this.ProgressbarVisiblity = Visibility.Collapsed;
 
             }
             catch (Exception ex)
@@ -261,18 +245,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref model, value); }
         }
 
-        private Visibility progressbarVisiblity;
-        public Visibility ProgressbarVisiblity
-        {
-            get { return progressbarVisiblity; }
-            set { SetProperty(ref progressbarVisiblity, value); }
-        }
-        private string progressbarMessage;
-        public string ProgressbarMessage
-        {
-            get { return progressbarMessage; }
-            set { SetProperty(ref progressbarMessage, value); }
-        }
+
         private Supplier selectedSupplier;
         public Supplier SelectedSupplier
         {

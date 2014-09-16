@@ -8,6 +8,10 @@ namespace Eqstra.DataProvider.AX.SSModels
 {
     public class SupplierSelection
     {
+        public String CaseNumber { get; set; }
+
+        public Int64 CaseServiceRecID { get; set; }
+
         public List<Country> Countries { get; set; }
 
         public List<Province> Provinces { get; set; }
@@ -22,15 +26,15 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public Supplier SelectedSupplier { get; set; }
 
-        public Country SelectedCountry { get; set; }
+        public string SelectedCountry { get; set; }
 
-        public Province Selectedprovince { get; set; }
+        public string Selectedprovince { get; set; }
 
-        public City SelectedCity { get; set; }
+        public string SelectedCity { get; set; }
 
-        public Suburb SelectedSuburb { get; set; }
+        public string SelectedSuburb { get; set; }
 
-        public Region SelectedRegion { get; set; }
+        public string SelectedRegion { get; set; }
 
     }
 }

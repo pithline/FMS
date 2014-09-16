@@ -139,9 +139,8 @@
     <Reference Include="Microsoft.Practices.Prism.StoreApps">
       <HintPath>..\packages\Prism.StoreApps.1.1.0\lib\windows8\Microsoft.Practices.Prism.StoreApps.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\netcore45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +214,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.1.0.43">
+    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
   </ItemGroup>

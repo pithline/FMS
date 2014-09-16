@@ -193,6 +193,9 @@
           <xs:element minOccurs="0" name="parmCaseRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmCaseServiceRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmConfirmationDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="parmContactPersonName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmContactPersonPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCustAccount" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustPhone" nillable="true" type="xs:string" />
@@ -549,6 +552,7 @@
           <xs:element minOccurs="0" name="parmCountry" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCountryName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCountyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmEmail" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmPostbox" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
@@ -593,42 +597,60 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkServiceDetailsContract" nillable="true" type="tns:ArrayOfMzkServiceDetailsContract" />
-  <xs:complexType name="ArrayOfMzkProvinceContract">
+  <xs:complexType name="ArrayOfMzkRegionContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkProvinceContract" nillable="true" type="tns:MzkProvinceContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkRegionContract" nillable="true" type="tns:MzkRegionContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkProvinceContract" nillable="true" type="tns:ArrayOfMzkProvinceContract" />
-  <xs:complexType name="ArrayOfMzkCountryRegionContract">
+  <xs:element name="ArrayOfMzkRegionContract" nillable="true" type="tns:ArrayOfMzkRegionContract" />
+  <xs:complexType name="ArrayOfMzkDriverContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountryRegionContract" nillable="true" type="tns:MzkCountryRegionContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDriverContract" nillable="true" type="tns:MzkDriverContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkCountryRegionContract" nillable="true" type="tns:ArrayOfMzkCountryRegionContract" />
-  <xs:complexType name="ArrayOfMzkServiceSchdTasksContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkServiceSchdTasksContract" nillable="true" type="tns:MzkServiceSchdTasksContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkServiceSchdTasksContract" nillable="true" type="tns:ArrayOfMzkServiceSchdTasksContract" />
-  <xs:complexType name="ArrayOfMzkLocationTypeContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkLocationTypeContract" nillable="true" type="tns:MzkLocationTypeContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkLocationTypeContract" nillable="true" type="tns:ArrayOfMzkLocationTypeContract" />
-  <xs:complexType name="ArrayOfMzkCityContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCityContract" nillable="true" type="tns:MzkCityContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCityContract" nillable="true" type="tns:ArrayOfMzkCityContract" />
+  <xs:element name="ArrayOfMzkDriverContract" nillable="true" type="tns:ArrayOfMzkDriverContract" />
   <xs:complexType name="ArrayOfMzkZipCodeContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkZipCodeContract" nillable="true" type="tns:MzkZipCodeContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkZipCodeContract" nillable="true" type="tns:ArrayOfMzkZipCodeContract" />
+  <xs:complexType name="ArrayOfMzkCountryRegionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountryRegionContract" nillable="true" type="tns:MzkCountryRegionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCountryRegionContract" nillable="true" type="tns:ArrayOfMzkCountryRegionContract" />
+  <xs:complexType name="ArrayOfMzkProvinceContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkProvinceContract" nillable="true" type="tns:MzkProvinceContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkProvinceContract" nillable="true" type="tns:ArrayOfMzkProvinceContract" />
+  <xs:complexType name="ArrayOfMzkLocationTypeContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkLocationTypeContract" nillable="true" type="tns:MzkLocationTypeContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkLocationTypeContract" nillable="true" type="tns:ArrayOfMzkLocationTypeContract" />
+  <xs:complexType name="ArrayOfMzkServiceSchdTasksContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkServiceSchdTasksContract" nillable="true" type="tns:MzkServiceSchdTasksContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkServiceSchdTasksContract" nillable="true" type="tns:ArrayOfMzkServiceSchdTasksContract" />
+  <xs:complexType name="ArrayOfMzkCityContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCityContract" nillable="true" type="tns:MzkCityContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCityContract" nillable="true" type="tns:ArrayOfMzkCityContract" />
+  <xs:complexType name="ArrayOfMzkCountyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountyContract" nillable="true" type="tns:MzkCountyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCountyContract" nillable="true" type="tns:ArrayOfMzkCountyContract" />
   <xs:complexType name="ArrayOfMzkAccountContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkAccountContract" nillable="true" type="tns:MzkAccountContract" />
@@ -641,22 +663,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkVendorAccountContract" nillable="true" type="tns:ArrayOfMzkVendorAccountContract" />
-  <xs:complexType name="ArrayOfMzkDriverContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDriverContract" nillable="true" type="tns:MzkDriverContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkDriverContract" nillable="true" type="tns:ArrayOfMzkDriverContract" />
-  <xs:complexType name="ArrayOfMzkRegionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkRegionContract" nillable="true" type="tns:MzkRegionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkRegionContract" nillable="true" type="tns:ArrayOfMzkRegionContract" />
-  <xs:complexType name="ArrayOfMzkCountyContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCountyContract" nillable="true" type="tns:MzkCountyContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCountyContract" nillable="true" type="tns:ArrayOfMzkCountyContract" />
 </xs:schema>

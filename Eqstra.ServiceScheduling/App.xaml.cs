@@ -1,6 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
-using Eqstra.ServiceScheduling.UILogic.AifServices;
+using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.ServiceScheduling.UILogic.Services;
 using Eqstra.ServiceScheduling.UILogic.ViewModels;
 using Eqstra.ServiceScheduling.Views;
@@ -8,34 +8,18 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Microsoft.Practices.Unity;
-using Newtonsoft.Json;
-using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
+using System.Text;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Reflection;
-using Eqstra.BusinessLogic.ServiceSchedule;
-using System.Text;
-using Eqstra.BusinessLogic.ServiceSchedulingModel;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace Eqstra.ServiceScheduling

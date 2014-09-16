@@ -183,19 +183,16 @@
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksOptimizeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasks_ModifiedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsResponse.datasource">
+    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
@@ -251,17 +248,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
-      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
-      <Name>Eqstra.BusinessLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="Bing.Maps.Xaml, Version=1.313.0825.0">
       <Name>Bing Maps for C#, C++, or Visual Basic</Name>
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.5">
+      <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
@@ -284,6 +278,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
+      <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
+      <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

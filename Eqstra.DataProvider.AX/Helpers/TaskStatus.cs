@@ -19,6 +19,10 @@ namespace Eqstra.DataProvider.AX.Helpers
         public const string AwaitCollectionConfirmation = "Await Collection Confirmation";
 
 
+        public const string AwaitServiceDetail = "Await Service Booking Detail";
+        public const string AwaitSupplierSelection = "Await Supplier Selection";
+        public const string AwaitServiceConfirmation = "Await Service Booking Confirmation";
         public const string Completed = "Completed";
+
     }
 }
