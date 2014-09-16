@@ -699,10 +699,10 @@ namespace Eqstra.DataProvider.AX.Providers
                 {
                     if (locList.Any())
                     {
-                        filteredResult = result.Where(w => w.CountryName.Contains(locList.FirstOrDefault()));
+                        filteredResult = result.Where(w => w.CountryName.Contains(locList.ElementAt(0)));
                         if (locList.Any())
                         {
-                            filteredResult = filteredResult.Where(w => w.ProvinceName.Contains(locList.));
+                            filteredResult = filteredResult.Where(w => w.ProvinceName.Contains(locList.ElementAt(1)));
                         }
                     }
                     else

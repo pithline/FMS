@@ -23,6 +23,7 @@ namespace Eqstra.DataProvider.AX.SSModels
         public DateTime ConfirmedTime { get; set; }
 
         public String CaseType { get; set; }
+        public String ContactName { get; set; }
 
         public DateTime ConfirmedDate { get; set; }
 
