@@ -118,10 +118,10 @@ namespace Eqstra.TechnicalInspection
                 base.OnInitialize(args);
                 EventAggregator = new EventAggregator();
 
+                _container.RegisterInstance(SessionStateService);
                 _container.RegisterInstance(NavigationService);
                 _container.RegisterInstance(EventAggregator);
 
-                _container.RegisterInstance(SessionStateService);
 
                 _container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
                 _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());

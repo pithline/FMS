@@ -217,7 +217,7 @@
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridDateTimeColumn MappingName="ConfirmedDate"
-                                                             AllowEditing="{Binding AllowEditing}"
+                                                             FormatString="dd/MM/yyyy"
                                                              HeaderText="CONFIRMED DATE"
                                                            
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"

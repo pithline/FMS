@@ -54,11 +54,11 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxdev01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl
                 client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc"));
-                client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
+                client.ClientCredentials.UserName.UserName = domain + "\"" + "rchivukula";
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
 
-                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password10", domain);
 
 
                 return client;
@@ -152,7 +152,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ScheduledDate = DateTime.Today, //Need to add in Service
                             ScheduledTime = DateTime.Today, // Need to add in Service
                             ServiceRecID = mzkTask.parmServiceRecID,
-                           ConfirmedDate = mzkTask.parmConfirmationDate
+                           ConfirmedDate = mzkTask.parmConfirmationDate,
+                           
                         });
 
                     });
