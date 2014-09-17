@@ -91,6 +91,7 @@
             <ScrollViewer Grid.Row="1"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           HorizontalAlignment="Stretch"
+                          ZoomMode="Disabled"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1"
                       Margin="30">

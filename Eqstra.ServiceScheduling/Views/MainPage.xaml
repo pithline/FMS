@@ -145,7 +145,7 @@
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="200"
+                                                             MinimumWidth="240"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="RegistrationNumber"
                                                          HeaderText="REGISTRATION NUMBER"
