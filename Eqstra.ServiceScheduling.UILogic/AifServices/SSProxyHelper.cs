@@ -76,7 +76,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
             try
             {
 
-                return (await client.validateUserAsync(userId, password)).response;
+                return !(await client.validateUserAsync(userId, password)).response;
             }
             catch (Exception)
             {

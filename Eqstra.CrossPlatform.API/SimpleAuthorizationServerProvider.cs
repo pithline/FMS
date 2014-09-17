@@ -19,9 +19,8 @@ namespace Eqstra.CrossPlatform.API
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             
             using (SSRepository ssRepo = new SSRepository())
-            {
-                var userInfo = await ssRepo.ValidateUserAsync(null, context.UserName, context.Password);
-                if (userInfo == null)
+            {                
+                if (await ssRepo.ValidateUserAsync(null, context.UserName, context.Password))
                 {
                     context.SetError("invalid_grant", "The username or password is incorrect.");
                     return;

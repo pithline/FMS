@@ -21,7 +21,7 @@ namespace Eqstra.DataProvider.AX.Repositories
                 {
                     client = GetServiceClient();
                 }
-                return (await client.validateUserAsync(new CallContext() { }, userId, password)).response;
+                return !(await client.validateUserAsync(new CallContext() { }, userId, password)).response;
 
 
             }

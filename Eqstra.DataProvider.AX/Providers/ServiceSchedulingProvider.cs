@@ -189,7 +189,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {         
             try
             {
-                return _client.validateUser(new SSProxy.CallContext() { Company = "1000" }, userId, password);                
+                return !_client.validateUser(new SSProxy.CallContext() { Company = "1000" }, userId, password);                
             }
             catch (Exception)
             {

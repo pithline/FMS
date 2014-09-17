@@ -22,32 +22,15 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
         public new bool ValidateProperties()
         {
-            bool isValid=false;
-            if (this.IsLiftRequired)
-            {
-                if (this.SelectedDestinationType!=null && String.IsNullOrEmpty(this.SelectedDestinationType.Id) || this.SelectedLocationType.LocType!=null && String.IsNullOrEmpty(this.SelectedLocationType.LocType))
-                {
-                    this.SelectedDestinationType = null;
-                    this.SelectedLocationType = null;
-                    isValid= base.ValidateProperties();
+            bool isValid = base.ValidateProperties();
+            List<string> hiddenFields = new List<string>();
+            hiddenFields.Add("SelectedLocationType");
+            hiddenFields.Add("SelectedDestinationType");
+            hiddenFields.Add("Address");
 
-                    this.SelectedDestinationType=new DestinationType();
-                    this.SelectedLocationType=new LocationType();
-                    return isValid;
-                }
-            }
-            else
+            if (!this.IsLiftRequired && !this.Errors.Errors.Keys.Except(hiddenFields).Any())
             {
-                isValid = base.ValidateProperties();
-                List<string> hiddenFields = new List<string>();
-                hiddenFields.Add("SelectedLocationType");
-                hiddenFields.Add("SelectedDestinationType");
-                hiddenFields.Add("Address");
-                if (!this.Errors.Errors.Keys.Except(hiddenFields).Any())
-                {
-                    return true;
-                }
-           
+                return true;
             }
            
             return isValid;
