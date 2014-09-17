@@ -173,7 +173,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = (client.getCountryRegionListAsync(_userInfo.CompanyId)).Result;
+                var result = await client.getCountryRegionListAsync(_userInfo.CompanyId);
 
                 List<Country> countryList = new List<Country>();
                 if (result.response != null)

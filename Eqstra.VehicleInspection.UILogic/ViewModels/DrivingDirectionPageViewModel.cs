@@ -35,7 +35,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             this.CustomerDetails = new BusinessLogic.CustomerDetails();
-            LoadAppointments();
+         
 
             GetDirectionsCommand = DelegateCommand<Location>.FromAsyncHandler(async (location) =>
             {
@@ -103,7 +103,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
-
+            LoadAppointments();
             var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _task.VehicleInsRecId);
             if (dd != null)
             {
