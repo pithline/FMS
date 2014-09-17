@@ -61,7 +61,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     case ActionSwitch.FilterSuppliersByCriteria:
                         response = FilterSuppliersByCriteria(criterias[1].ToString(), criterias[2].ToString(), criterias[3].ToString(), criterias[4].ToString(), criterias[5].ToString());
                         break;
-                    case ActionSwitch.FilteredSupplierByGeoLocation:
+                    case ActionSwitch.FilterSuppliersByGeoLocation:
                         response = FilterSuppliersByGeoLocation(criterias[1].ToString(), criterias[2].ToString());
                         break;
 
