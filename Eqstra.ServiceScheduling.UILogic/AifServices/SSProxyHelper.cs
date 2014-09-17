@@ -65,12 +65,18 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return client;
             }
         }
-        async public System.Threading.Tasks.Task<MzkServiceSchedulingServiceValidateUserResponse> ValidateUser(string userId, string password)
+
+        async public System.Threading.Tasks.Task<MzkServiceSchedulingServiceGetUserDetailsResponse> GetUserInfo(string userId)
+        {
+            return await client.getUserDetailsAsync(userId);
+        }
+
+        async public System.Threading.Tasks.Task<bool> ValidateUser(string userId, string password)
         {
             try
             {
 
-                return await client.validateUserAsync(userId, password);
+                return (await client.validateUserAsync(userId, password)).response;
             }
             catch (Exception)
             {
