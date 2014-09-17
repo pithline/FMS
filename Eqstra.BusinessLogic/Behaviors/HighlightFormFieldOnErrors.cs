@@ -77,13 +77,6 @@ DependencyProperty.RegisterAttached("HighlightSfDataGridtStyle", typeof(string),
                     style = (propertyErrors.Any()) ? (Style)Application.Current.Resources[((HighlightFormFieldOnErrors)d).HighlightSfDataGridStyleName] : null;
                 }
 
-                if (propertyErrors.Any())
-                {
-                    //ToolTip toolTip = new ToolTip();
-                    //toolTip.Content = propertyErrors.FirstOrDefault();
-                    //toolTip.Foreground = new SolidColorBrush(Colors.Red);
-                    //ToolTipService.SetToolTip(control, toolTip);
-                }
                 control.Style = style;
             }
         }

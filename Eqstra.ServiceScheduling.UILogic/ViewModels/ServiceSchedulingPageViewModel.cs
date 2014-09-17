@@ -36,11 +36,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 try
                 {
-
-                    var messageDialog = new MessageDialog("Details once saved cannot be edited. Do you want to continue ?");
-                    messageDialog.Commands.Add(new UICommand("Yes", OnYesButtonClicked));
-                    messageDialog.Commands.Add(new UICommand("No"));
-                    await messageDialog.ShowAsync();
+                    if (this.Model.ValidateProperties())
+                    {
+                        var messageDialog = new MessageDialog("Details once saved cannot be edited. Do you want to continue ?");
+                        messageDialog.Commands.Add(new UICommand("Yes", OnYesButtonClicked));
+                        messageDialog.Commands.Add(new UICommand("No"));
+                        await messageDialog.ShowAsync();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -176,29 +178,28 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
 
 
-       async private void OnYesButtonClicked(IUICommand command)
+        async private void OnYesButtonClicked(IUICommand command)
         {
             this.IsBusy = true;
-            if (this.Model.ValidateProperties())
+
+            if (!this.Model.IsLiftRequired)
             {
-                if (!this.Model.IsLiftRequired)
-                {
-                    this.Model.SelectedLocationType = new LocationType();
-                    this.Model.Address = string.Empty;
-                    this.Model.SelectedDestinationType = new DestinationType();
-                    this.Address.EntityRecId = default(long);
-                }
-
-                bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
-                if (isInserted)
-                {
-
-                    PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-                    PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                }
-                    _navigationService.Navigate("SupplierSelection", string.Empty);
-                
+                this.Model.SelectedLocationType = new LocationType();
+                this.Model.Address = string.Empty;
+                this.Model.SelectedDestinationType = new DestinationType();
+                this.Address.EntityRecId = default(long);
             }
+
+            bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+            if (isInserted)
+            {
+
+                PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+                PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
+            }
+            _navigationService.Navigate("SupplierSelection", string.Empty);
+
+
             this.IsBusy = false;
         }
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)

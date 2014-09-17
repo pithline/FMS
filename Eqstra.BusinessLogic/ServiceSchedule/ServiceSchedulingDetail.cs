@@ -22,22 +22,34 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
         public new bool ValidateProperties()
         {
-            bool isValid = base.ValidateProperties();
-            List<string> hiddenFields = new List<string>();
-            hiddenFields.Add("SelectedLocationType");
-            hiddenFields.Add("SelectedDestinationType");
-            hiddenFields.Add("Address");
-            if (!this.IsLiftRequired && !this.Errors.Errors.Keys.Except(hiddenFields).Any())
-            {
-                return true;
-            }
+            bool isValid=false;
             if (this.IsLiftRequired)
             {
-                if (String.IsNullOrEmpty(this.SelectedDestinationType.Id) || String.IsNullOrEmpty(this.SelectedLocationType.LocType))
+                if (this.SelectedDestinationType!=null && String.IsNullOrEmpty(this.SelectedDestinationType.Id) || this.SelectedLocationType.LocType!=null && String.IsNullOrEmpty(this.SelectedLocationType.LocType))
                 {
-                    return false;
+                    this.SelectedDestinationType = null;
+                    this.SelectedLocationType = null;
+                    isValid= base.ValidateProperties();
+
+                    this.SelectedDestinationType=new DestinationType();
+                    this.SelectedLocationType=new LocationType();
+                    return isValid;
                 }
             }
+            else
+            {
+                isValid = base.ValidateProperties();
+                List<string> hiddenFields = new List<string>();
+                hiddenFields.Add("SelectedLocationType");
+                hiddenFields.Add("SelectedDestinationType");
+                hiddenFields.Add("Address");
+                if (!this.Errors.Errors.Keys.Except(hiddenFields).Any())
+                {
+                    return true;
+                }
+           
+            }
+           
             return isValid;
         }
         private ImageCapture odoReadingSnapshot;
