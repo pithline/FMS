@@ -18,7 +18,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
             try
             {
                 await SSProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
-                var result = await SSProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
+                if (await SSProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim()))
+                {
+                    return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                }
+                var result = await SSProxyHelper.Instance.GetUserInfo(userId.Trim());
                 if (result != null && result.response != null)
                 {
                     var userInfo = new UserInfo
@@ -43,8 +47,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
             }
             catch (Exception)
             {
-                
-               return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+
+                return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
             }
         }
 
