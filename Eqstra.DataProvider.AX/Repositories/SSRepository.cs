@@ -12,7 +12,7 @@ namespace Eqstra.DataProvider.AX.Repositories
     public class SSRepository : IDisposable
     {
 
-        async public Task<UserInfo> ValidateUserAsync(MzkServiceSchedulingServiceClient client, string userId, string password)
+        async public Task<bool> ValidateUserAsync(MzkServiceSchedulingServiceClient client, string userId, string password)
         {
             UserInfo userInfo = new UserInfo();
             try
@@ -21,21 +21,8 @@ namespace Eqstra.DataProvider.AX.Repositories
                 {
                     client = GetServiceClient();
                 }
-                var result = await client.validateUserAsync(new CallContext() { }, userId, password);
-                if (result.response != null)
-                {
-                    return new UserInfo()
-                    {
-                        UserId = result.response.parmUserID,
-                        CompanyId = result.response.parmCompany,
-                        CompanyName = result.response.parmCompanyName,
-                        Name = result.response.parmUserName
-                    };
-                }
-                else
-                {
-                    return null;
-                }
+                return (await client.validateUserAsync(new CallContext() { }, userId, password)).response;
+
 
             }
             catch (Exception)

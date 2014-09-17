@@ -31,6 +31,7 @@ namespace Eqstra.DataProvider.AX.Helpers
         public const string UpdateStatusList = "UpdateStatusList";
         public const string GetDestinationTypeList = "GetDestinationTypeList";
         public const string FilterSuppliersByGeoLocation = "FilterSuppliersByGeoLocation";
+        public const string GetUserInfo = "GetUserInfo";
 
     }
 }

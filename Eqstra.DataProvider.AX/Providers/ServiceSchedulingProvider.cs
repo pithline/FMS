@@ -85,13 +85,16 @@ namespace Eqstra.DataProvider.AX.Providers
                 switch (criterias[0].ToString())
                 {
                     case ActionSwitch.ValidateUser:
-                        response = ValidateUser("sahmed", "Password6");
+                        response = ValidateUser(criterias[2].ToString(), criterias[3].ToString());
                         break;
 
                     case ActionSwitch.GetServiceDetails:
                         response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()));
                         break;
 
+                    case   ActionSwitch.GetUserInfo :
+                        response = GetUserInfo(criterias[1].ToString());
+                        break;
                 }
                 _client.Close();
                 return response;
@@ -182,26 +185,39 @@ namespace Eqstra.DataProvider.AX.Providers
             return _client;
         }
 
-        private UserInfo ValidateUser(string userId, string password)
-        {
-            UserInfo userInfo = new UserInfo();
+        private bool ValidateUser(string userId, string password)
+        {         
             try
             {
-                var result = _client.validateUser(new SSProxy.CallContext() { Company = "1000" }, userId, password);
-                if (result != null)
-                {
-                    userInfo.UserId = result.parmUserID;
-                    userInfo.CompanyId = result.parmCompany;
-                    userInfo.CompanyName = result.parmCompanyName;
-                    userInfo.Name = result.parmUserName;
-                }
-
+                return _client.validateUser(new SSProxy.CallContext() { Company = "1000" }, userId, password);                
             }
             catch (Exception)
             {
                 throw;
+            }         
+        }
+
+        private UserInfo GetUserInfo(string userId)
+        {
+            try
+            {
+                var result = _client.getUserDetails(new SSProxy.CallContext() { Company = "1000" }, userId);
+                if (result != null)
+                {
+                    return new UserInfo
+                    {
+                        UserId = result.parmUserID,
+                        CompanyId = result.parmCompany,
+                        CompanyName = result.parmCompanyName,
+                        Name = result.parmUserName
+                    };
+                }
+                return null;
             }
-            return userInfo;
+            catch (Exception)
+            {                
+                throw;
+            }
         }
 
         private List<Eqstra.DataProvider.AX.SSModels.Task> GetTasks()
