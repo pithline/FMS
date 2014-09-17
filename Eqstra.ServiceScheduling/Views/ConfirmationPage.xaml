@@ -176,12 +176,13 @@
                             </StackPanel>
 
 
-                            <StackPanel Grid.Row="4"
-                                        Margin="0 20 20 0">
+                            <StackPanel Grid.Row="4"   Grid.RowSpan="2" Margin="0 20 20 0">
+
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                           Text="Lift Required" />
-                                <TextBlock Style="{StaticResource TextContentStyle}"
-                                           Text="{Binding ServiceSchedulingDetail.IsLiftRequired,Mode=TwoWay}" />
+                                           Text="Lift Required"/>
+                                <ToggleSwitch  IsEnabled="False"
+                                              IsOn="{Binding ServiceSchedulingDetail.IsLiftRequired,Mode=OneTime}"
+                                            />
                             </StackPanel>
 
                             <StackPanel Grid.Row="5"

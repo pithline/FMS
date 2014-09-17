@@ -8,7 +8,6 @@ namespace Eqstra.DataProvider.AX.SSModels
 {
     public class Task
     {
-        public DateTime ModelYear { get; set; }
 
         public String CaseNumber { get; set; }
 

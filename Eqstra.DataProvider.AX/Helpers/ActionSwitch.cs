@@ -30,7 +30,7 @@ namespace Eqstra.DataProvider.AX.Helpers
         public const string InsertConfirmedServiceDetail = "InsertConfirmedServiceDetail";
         public const string UpdateStatusList = "UpdateStatusList";
         public const string GetDestinationTypeList = "GetDestinationTypeList";
-        public const string FilteredSupplierByGeoLocation = "FilteredSupplierByGeoLocation";
+        public const string FilterSuppliersByGeoLocation = "FilterSuppliersByGeoLocation";
 
     }
 }
