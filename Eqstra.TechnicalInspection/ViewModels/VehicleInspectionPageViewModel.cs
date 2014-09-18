@@ -221,7 +221,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 await GetCustomerDetailsAsync();
                 if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
                 {
-                    this.InspectionUserControls.Add(new VehicleDetailsUserControl());
+                    this.InspectionUserControls.Add(new PVehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new TrimIntUserControl());
                     this.InspectionUserControls.Add(new BodyworkUserControl());
                     this.InspectionUserControls.Add(new GlassUserControl());
@@ -233,7 +233,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 }
                 else
                 {
-                    this.InspectionUserControls.Add(new CommercialVehicleDetailsUserControl());
+                    this.InspectionUserControls.Add(new CVehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new CabTrimInterUserControl());
                     this.InspectionUserControls.Add(new ChassisBodyUserControl());
                     this.InspectionUserControls.Add(new CGlassUserControl());

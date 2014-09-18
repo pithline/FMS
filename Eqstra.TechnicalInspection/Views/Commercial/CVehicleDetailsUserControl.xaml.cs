@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.TechnicalInspection.Views
 {
-    public sealed partial class CommercialVehicleDetailsUserControl : UserControl
+    public sealed partial class CVehicleDetailsUserControl : UserControl
     {
-        public CommercialVehicleDetailsUserControl()
+        public CVehicleDetailsUserControl()
         {
             this.InitializeComponent();
         }

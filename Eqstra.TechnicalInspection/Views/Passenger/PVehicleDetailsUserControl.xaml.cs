@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 
 namespace Eqstra.TechnicalInspection.Views
 {
-    public sealed partial class VehicleDetailsUserControl : UserControl
+    public sealed partial class PVehicleDetailsUserControl : UserControl
     {
-        public VehicleDetailsUserControl()
+        public PVehicleDetailsUserControl()
         {
             this.InitializeComponent();
         }
