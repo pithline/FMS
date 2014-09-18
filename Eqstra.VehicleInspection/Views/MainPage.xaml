@@ -242,7 +242,7 @@
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             MinimumWidth="150"
+                                                             MinimumWidth="220"
                                                              HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridDateTimeColumn MappingName="StatusDueDate"
                                                              HeaderText="STATUS DUE DATE"
