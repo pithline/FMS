@@ -368,15 +368,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                        _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
                    });
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
-                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Commercial.CommercialVehicle>();
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Commercial.CVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
                 {
-                    List<BusinessLogic.Commercial.CommercialVehicle> vehicleInsertList = new List<BusinessLogic.Commercial.CommercialVehicle>();
-                    List<BusinessLogic.Commercial.CommercialVehicle> vehicleUpdateList = new List<BusinessLogic.Commercial.CommercialVehicle>();
+                    List<BusinessLogic.Commercial.CVehicleDetails> vehicleInsertList = new List<BusinessLogic.Commercial.CVehicleDetails>();
+                    List<BusinessLogic.Commercial.CVehicleDetails> vehicleUpdateList = new List<BusinessLogic.Commercial.CVehicleDetails>();
                     foreach (var v in resp.response.Where(x => x != null))
                     {
 
-                        var vehicleTosave = new BusinessLogic.Commercial.CommercialVehicle
+                        var vehicleTosave = new BusinessLogic.Commercial.CVehicleDetails
                         {
                             ChassisNumber = v.parmChassisNumber.ToString(),
                             Color = v.parmColor,
@@ -389,9 +389,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             CaseNumber = caseNumber,
                             TableId = v.parmTableId,
                             RegistrationNumber = v.parmRegNo,
-
-
-
+                            IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate
+                           
                         };
 
                         if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
@@ -406,10 +406,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     }
 
                     if (vehicleUpdateList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync<CommercialVehicle>(vehicleUpdateList);
+                        await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(vehicleUpdateList);
 
                     if (vehicleInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<CommercialVehicle>(vehicleInsertList);
+                        await SqliteHelper.Storage.InsertAllAsync<CVehicleDetails>(vehicleInsertList);
 
                     await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
@@ -444,15 +444,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
                 });
                 var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
-                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PassengerVehicle>();
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.Passenger.PVehicleDetails>();
                 if (resp.response != null && resp.response.Any())
                 {
-                    List<BusinessLogic.Passenger.PassengerVehicle> vehicleInsertList = new List<BusinessLogic.Passenger.PassengerVehicle>();
-                    List<BusinessLogic.Passenger.PassengerVehicle> vehicleUpdateList = new List<BusinessLogic.Passenger.PassengerVehicle>();
+                    List<BusinessLogic.Passenger.PVehicleDetails> vehicleInsertList = new List<BusinessLogic.Passenger.PVehicleDetails>();
+                    List<BusinessLogic.Passenger.PVehicleDetails> vehicleUpdateList = new List<BusinessLogic.Passenger.PVehicleDetails>();
                     foreach (var v in resp.response.Where(x => x != null))
                     {
 
-                        var vehicleTosave = new BusinessLogic.Passenger.PassengerVehicle
+                        var vehicleTosave = new BusinessLogic.Passenger.PVehicleDetails
                            {
                                ChassisNumber = v.parmChassisNumber.ToString(),
                                Color = v.parmColor,
@@ -465,6 +465,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CaseNumber = caseNumber,
                                TableId = v.parmTableId,
                                RegistrationNumber = v.parmRegNo,
+                               IsLicenseDiscCurrent=v.parmLisenceDiscCurrent==NoYes.Yes? true:false,
+                               LicenseDiscExpireDate =v.parmlisenceDiscExpiryDate
                            };
 
                         if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
@@ -479,10 +481,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     }
 
                     if (vehicleUpdateList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync<PassengerVehicle>(vehicleUpdateList);
+                        await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(vehicleUpdateList);
 
                     if (vehicleInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<PassengerVehicle>(vehicleInsertList);
+                        await SqliteHelper.Storage.InsertAllAsync<PVehicleDetails>(vehicleInsertList);
                     await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);

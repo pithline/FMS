@@ -109,7 +109,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
       
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                // await CreateTableAsync();
+                 //await CreateTableAsync();
                 //SyncData();
                 var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
                 this.WeatherInfo = weather.FirstOrDefault();
@@ -313,53 +313,55 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             ////Drop Existing tables
 
-            await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
-            await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
 
-            await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
-            await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
 
 
-            await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
-            await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
-            await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
-            await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
-            await SqliteHelper.Storage.DropTableAsync<PGlass>();
-            await SqliteHelper.Storage.DropTableAsync<PBodywork>();
-            await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
-            await SqliteHelper.Storage.DropTableAsync<PAccessories>();
+           // await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
+            //await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
+            //await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
+            //await SqliteHelper.Storage.DropTableAsync<PGlass>();
+            //await SqliteHelper.Storage.DropTableAsync<PBodywork>();
+            //await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
+            //await SqliteHelper.Storage.DropTableAsync<PAccessories>();
 
-            await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
-            await SqliteHelper.Storage.DropTableAsync<CTyres>();
-            await SqliteHelper.Storage.DropTableAsync<CAccessories>();
-            await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
-            await SqliteHelper.Storage.DropTableAsync<CGlass>();
-            await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
-            await SqliteHelper.Storage.DropTableAsync<CPOI>();
-            await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
-            await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+           // await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<CTyres>();
+            //await SqliteHelper.Storage.DropTableAsync<CAccessories>();
+            //await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
+            //await SqliteHelper.Storage.DropTableAsync<CGlass>();
+            //await SqliteHelper.Storage.DropTableAsync<CMechanicalCond>();
+            //await SqliteHelper.Storage.DropTableAsync<CPOI>();
+            //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
+            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
 
-            ////create new  tables 
+            //////create new  tables 
 
-            await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
-            await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
-            await SqliteHelper.Storage.CreateTableAsync<PMechanicalCond>();
-            await SqliteHelper.Storage.CreateTableAsync<PInspectionProof>();
-            await SqliteHelper.Storage.CreateTableAsync<PGlass>();
-            await SqliteHelper.Storage.CreateTableAsync<PBodywork>();
-            await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
-            await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
+            //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
+            //await SqliteHelper.Storage.CreateTableAsync<PMechanicalCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<PInspectionProof>();
+            //await SqliteHelper.Storage.CreateTableAsync<PGlass>();
+            //await SqliteHelper.Storage.CreateTableAsync<PBodywork>();
+            //await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
+            //await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
 
-            await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
-            await SqliteHelper.Storage.CreateTableAsync<CTyres>();
-            await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
-            await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
-            await SqliteHelper.Storage.CreateTableAsync<CGlass>();
-            await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
-            await SqliteHelper.Storage.CreateTableAsync<CPOI>();
-            await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-            await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-            await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+           // await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<CTyres>();
+            //await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
+            //await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
+            //await SqliteHelper.Storage.CreateTableAsync<CGlass>();
+            //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
+            //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
+            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+
+
         }
 
     }
