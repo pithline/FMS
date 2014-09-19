@@ -19,7 +19,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-          
+
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Vehicle Details" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Bottom" Margin="0 0 0 5"/>
                 <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}"  CommandParameter="{Binding Model}">
@@ -43,7 +43,13 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Take Pictures of the Vehicle" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4"/>
+                        <TextBlock Text="Take Pictures of the Vehicle" VerticalAlignment="Top" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4"/>
+                        <ProgressBar 
+                                     Grid.ColumnSpan="4" 
+                                     IsIndeterminate="True"
+                                     VerticalAlignment="Top"
+                                     Opacity="{Binding Source={StaticResource VM}, Path=Instance.IsSyncingVehDetails}"
+                                     VerticalContentAlignment="Top" />
 
                         <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <Grid.RowDefinitions>
@@ -182,12 +188,6 @@
                             <TextBlock Text="{Binding Path= Model.Year}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
-
-                        <ProgressBar Grid.RowSpan="6"
-                                     Grid.ColumnSpan="4"
-                                     IsIndeterminate="True"
-                                     VerticalAlignment="Center"                                     
-                                     VerticalContentAlignment="Center" />
 
                         <!--<Rectangle Fill="#FFE6E6E6" Grid.Column="0" Grid.Row="1" Width="175" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
                     </Grid>
