@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Enums
 {
-    public enum CDTaskTypeEnum
+    public enum CDTaskType
     {
-        Collection,
+        Collect,
         Delivery
     }
 }

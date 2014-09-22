@@ -99,6 +99,23 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref appointments, value); }
         }
 
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty(ref name, value); }
+        }
+        
+
     }
 
      public class CustomerDetailsEvent : PubSubEvent<CDCustomerDetails>

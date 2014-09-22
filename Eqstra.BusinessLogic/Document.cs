@@ -40,6 +40,14 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref serialNumber, value); }
         }
 
+        private long caseCategoryRecID;
+
+        public long CaseCategoryRecID
+        {
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
+        }
+
         private string make;
         public string Make
         {
@@ -60,11 +68,27 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref registrationNumber, value); }
         }
 
+        private string docName;
+
+        public string DocName
+        {
+            get { return docName; }
+            set { SetProperty(ref docName, value); }
+        }
+
         private bool isDelivered;
         public bool IsDelivered
         {
             get { return isDelivered; }
             set { SetProperty(ref isDelivered, value); }
+        }
+
+        private bool shouldSave;
+
+        public bool ShouldSave
+        {
+            get { return shouldSave; }
+            set { SetProperty(ref shouldSave, value); }
         }
 
     }

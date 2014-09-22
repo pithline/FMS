@@ -14,7 +14,7 @@ using Windows.Storage;
 
 namespace Eqstra.DocumentDelivery.UILogic.Services
 {
-   public class IdentityServiceProxy : IIdentityService
+    public class IdentityServiceProxy : IIdentityService
     {
         IEventAggregator _eventAggregator;
         public IdentityServiceProxy(IEventAggregator eventAggregator)
@@ -25,18 +25,22 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
         {
             try
             {
-                DDServiceProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
-                var result = await DDServiceProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
-                if (result != null)
+                await DDServiceProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(), _eventAggregator);
+                if (await DDServiceProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim()))
+                {
+                    return new Tuple<CDLogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
+                }
+
+                var result = await DDServiceProxyHelper.Instance.GetUserInfo(userId.Trim());
+                if (result != null && result.response != null)
                 {
                     var userInfo = new CDUserInfo
-                    {
-                        UserId = result.response.parmUserID,
-                        CompanyId = result.response.parmCompany,
-                        CompanyName = result.response.parmCompanyName,
-                        Name = result.response.parmUserName
-                    };
-                    PersistentData.Instance.UserInfo = userInfo;
+                        {
+                            UserId = result.response.parmUserID,
+                            CompanyId = result.response.parmCompany,
+                            CompanyName = result.response.parmCompanyName,
+                            Name = result.response.parmUserName
+                        };
                     string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                     ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
                     return new Tuple<CDLogonResult, string>(new CDLogonResult
@@ -47,12 +51,12 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
                 }
                 else
                 {
-                    return new Tuple<CDLogonResult, string>(null, "Whoa! The entered username or password is incorrect, please verify and try again.");
+                    return new Tuple<CDLogonResult, string>(null, "Whoa! The entered username or password is incorrect,  please verify the password you entered");
                 }
             }
             catch (Exception)
             {
-                 return new Tuple<CDLogonResult, string>(null, "Whoa! The entered username or password is incorrect, please verify and try again.");
+                return new Tuple<CDLogonResult, string>(null, "Whoa! The entered username or password is incorrect, please verify the password you entered.");
             }
         }
 

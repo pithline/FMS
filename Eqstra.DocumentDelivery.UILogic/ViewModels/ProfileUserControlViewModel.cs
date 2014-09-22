@@ -1,19 +1,11 @@
-﻿using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.DeliveryModel;
-using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Networking.Connectivity;
-using Windows.Storage;
 
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
@@ -27,8 +19,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             _navigationService = navigationService;
             _accountService = accountService;
             UserInfo = PersistentData.Instance.UserInfo;
-            UserInfo.Name = "kasif";
-            UserInfo.CompanyName = "Mazik";
             GetNetworkStatus();
             LogoutCommand = new DelegateCommand(() =>
             {

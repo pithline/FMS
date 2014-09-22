@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.AifServices;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
@@ -45,7 +46,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 foreach (var item in this.SelectedTaskList)
                 {
-                    if (item.TaskType == CDTaskTypeEnum.Delivery)
+                    if (item.TaskType == CDTaskType.Delivery)
                     {
                         item.Status = CDTaskStatus.AwaitingDelivery;
                     }
@@ -65,6 +66,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         }
                     }
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<Eqstra.BusinessLogic.CollectDeliveryTask>(item);
+
+                    //await DDServiceProxyHelper.Instance.UpdateTaskStatusAsync();
+
                     this._navigationService.Navigate("Main", string.Empty);
                 }
             },
@@ -78,7 +82,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     PersistentData.Instance.CollectDeliveryTask = this.CDTask;
                     ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"] = this.CDTask.VehicleInsRecId;
-                    if (this.CDTask.TaskType == CDTaskTypeEnum.Collection)
+                    if (this.CDTask.TaskType == CDTaskType.Collect)
                     {
                         this._navigationService.Navigate("CollectionOrDeliveryDetails", string.Empty);
                     }
@@ -100,18 +104,21 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.TasksChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
             {
-                this.SelectedTaskList.Clear();
-                foreach (var item in param)
+                if (param is CollectDeliveryTask)
                 {
-                    this.SelectedTaskList.Add((CollectDeliveryTask)item);
-                }
+                    this.SelectedTaskList.Clear();
+                    foreach (var item in param)
+                    {
+                        this.SelectedTaskList.Add((CollectDeliveryTask)item);
+                    }
 
-                this.SaveTaskCommand.RaiseCanExecuteChanged();
-                this.NextStepCommand.RaiseCanExecuteChanged();
-                this.GetCustomerDetailsAsync();
-                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
-                this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
-                _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails);
+                    this.SaveTaskCommand.RaiseCanExecuteChanged();
+                    this.NextStepCommand.RaiseCanExecuteChanged();
+                    this.GetCustomerDetailsAsync();
+                    PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                    this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
+                    _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails); 
+                }
             });
         }
         #region Overrides
@@ -149,7 +156,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.CDTask = this.CDTaskList.FirstOrDefault();
 
             await GetDocumentsFromDbByCaseNumber();
-            await SetDocumentsCountByTask();
+      
         }
 
         private IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> EnumerateTasks(object navigationParameter, IEnumerable<BusinessLogic.CollectDeliveryTask> tasks)
@@ -289,28 +296,20 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         #region Methods
 
-        public async System.Threading.Tasks.Task SetDocumentsCountByTask()
-        {
-            var docs = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Document>();
-            foreach (var item in this.CDTaskList)
-            {
-                item.DocumentCount = docs.Count(w => w.CaseNumber == item.CaseNumber);
-            }
-        }
         public async System.Threading.Tasks.Task GetDocumentsFromDbByCaseNumber()
         {
             var docs = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Document>();
 
-            this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<DocumentsBrief>();
+            this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
             if (this.CDTask != null)
                 foreach (var d in docs.Where(w => w.CaseNumber == this.CDTask.CaseNumber))
                 {
-                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new DocumentsBrief { CaseNumber = d.CaseNumber, DocumentType = d.DocumentType });
+                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { CaseNumber = d.CaseNumber, DocumentType = d.DocumentType });
                 }
         }
         private void GetAppointments(CollectDeliveryTask task)
         {
-            task.ConfirmedTime = DateTime.Now;
+            task.ConfirmedTime = DateTime.Now;//for testing only
             var startTime = new DateTime(task.ConfirmedTime.Year, task.ConfirmedTime.Month, task.ConfirmedTime.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
                        task.ConfirmedTime.Second);
             this.CustomerDetails.Appointments.Add(

@@ -61,7 +61,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
                     dd.StopDateTime = DateTime.Now;
-                    this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskTypeEnum.Delivery;
+                    this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._deliveryTask);
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(dd);
                 }

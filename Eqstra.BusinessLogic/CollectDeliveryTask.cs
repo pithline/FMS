@@ -56,8 +56,8 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref cdTaskStatus, value); }
         }
 
-        private CDTaskTypeEnum taskType;
-        public CDTaskTypeEnum TaskType
+        private CDTaskType taskType;
+        public CDTaskType TaskType
         {
             get { return taskType; }
             set { SetProperty(ref taskType, value); }
@@ -178,6 +178,63 @@ namespace Eqstra.BusinessLogic
         {
             get { return model; }
             set { SetProperty(ref model, value); }
+        }
+
+        private long caseRecID;
+
+        public long CaseRecID
+        {
+            get { return caseRecID; }
+            set { SetProperty(ref caseRecID, value); }
+        }
+
+
+        private long caseServiceRecID;
+
+        public long CaseServiceRecID
+        {
+            get { return caseServiceRecID; }
+            set { SetProperty(ref caseServiceRecID, value); }
+        }
+
+
+        private string noOfRecords;
+
+        public string NoOfRecords
+        {
+            get { return noOfRecords; }
+            set { SetProperty(ref noOfRecords, value); }
+        }
+
+        private string serviceId;
+
+        public string ServiceId
+        {
+            get { return serviceId; }
+            set { SetProperty(ref serviceId, value); }
+        }
+        private long serviceRecID;
+
+        public long ServiceRecID
+        {
+            get { return serviceRecID; }
+            set { SetProperty(ref serviceRecID, value); }
+        }
+
+        private string userID;
+
+        public string UserID
+        {
+            get { return userID; }
+            set { SetProperty(ref userID, value); }
+        }
+
+        private string custAccount;
+
+        public string CustAccount
+        {
+            get { return custAccount; }
+            set { SetProperty(ref custAccount, value); }
         }
 
     }

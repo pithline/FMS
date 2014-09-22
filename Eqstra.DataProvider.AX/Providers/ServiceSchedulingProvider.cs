@@ -172,10 +172,10 @@ namespace Eqstra.DataProvider.AX.Providers
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
                 _client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl"));
-                _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "sahmed";
-                _client.ClientCredentials.UserName.Password = "Password6";
+                _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "rchivukula";
+                _client.ClientCredentials.UserName.Password = "Password10";
                 _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
-                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("sahmed", "Password6", "lfmd");
+                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password10", "lfmd");
             }
             catch (Exception)
             {
@@ -225,7 +225,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getTasks(new SSProxy.CallContext() { Company = "1000" }, "sahmed", "1000");
+                var result = _client.getTasks(new SSProxy.CallContext() { Company = "1000" }, "rchivukula", "1000");
                 List<Eqstra.DataProvider.AX.SSModels.Task> driverTaskList = new List<Eqstra.DataProvider.AX.SSModels.Task>();
                 if (result != null)
                 {

@@ -41,7 +41,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     {
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
@@ -52,7 +51,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             this.PoolofTasks.Clear();
                             await GetTasksFromDbAsync();
                             GetAllCount();
-
+                            GetAppointments();
                             AppSettings.Instance.IsSynchronizing = 0;
                             AppSettings.Instance.Synced = true;
                         }
@@ -106,12 +105,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             }
         }
 
-        private WeatherInfo weatherInfo;
-        public WeatherInfo WeatherInfo
-        {
-            get { return weatherInfo; }
-            set { SetProperty(ref weatherInfo, value); }
-        }
         private int total;
         public int TotalCount
         {
@@ -119,11 +112,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref total, value); }
         }
 
-        private int awaitingTaskCount;
+        private int awaitingConfirmationCount;
         public int AwaitingConfirmationCount
         {
-            get { return awaitingTaskCount; }
-            set { SetProperty(ref awaitingTaskCount, value); }
+            get { return awaitingConfirmationCount; }
+            set { SetProperty(ref awaitingConfirmationCount, value); }
         }
 
         private int myTaskCount;
@@ -203,10 +196,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(w => w.Status != Eqstra.BusinessLogic.Enums.CDTaskStatus.Complete);
+            var list = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != Eqstra.BusinessLogic.Enums.CDTaskStatus.Complete);
             foreach (var item in list)
             {
-                this.PoolofTasks.Add(item);
+                if (item != null)
+                {
+                    this.PoolofTasks.Add(item);
+                }
             }
         }
 

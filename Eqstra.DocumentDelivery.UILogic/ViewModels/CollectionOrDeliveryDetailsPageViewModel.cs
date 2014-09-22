@@ -41,8 +41,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.CollectCommand = new DelegateCommand(async () =>
             {
                 _task.Status = BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery;
-                _task.TaskType = BusinessLogic.Enums.CDTaskTypeEnum.Delivery;
-                await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
+                _task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(_task);
                 foreach (var item in this.SelectedDocuments)
                 {
                     item.IsDelivered = false;
@@ -52,14 +52,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             },
             () =>
             {
-                return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Collection);
+                return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskType.Collect);
             }
             );
 
             this.CompleteCommand = new DelegateCommand(async () =>
                 {
                     _task.Status = BusinessLogic.Enums.CDTaskStatus.Complete;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(_task);
                     foreach (var item in this.SelectedDocuments)
                     {
                         item.IsDelivered = true;
@@ -69,26 +69,30 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }, () =>
                 {
 
-                    return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Delivery);
+                    return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskType.Delivery);
                 });
             this.SelectedDocuments = new ObservableCollection<Document>();
 
-            this._eventAggregator.GetEvent<DestinationContactsEvent>().Subscribe(async (customerContacts) =>
+            this._eventAggregator.GetEvent<ContactPersonEvent>().Subscribe(async (customerContacts) =>
            {
-               this.ProofOfCollection = new CDProof();
-               this.ProofOfCollection.Customers = await SqliteHelper.Storage.LoadTableAsync<DestinationContacts>();
+               this.ProofOfCollection = new DocumentDeliveryDetails();
+               this.ProofOfCollection.Customers = await SqliteHelper.Storage.LoadTableAsync<ContactPerson>();
                this._addCustomerPage.Hide();
            });
 
             this.DocumentsChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
             {
-                this.SelectedDocuments.Clear();
-                foreach (var item in param)
+                if (param is Document)
                 {
-                    this.SelectedDocuments.Add(((Document)item));
+                    this.SelectedDocuments.Clear();
+                    foreach (var item in param)
+                    {
+                        this.SelectedDocuments.Add(((Document)item));
+                    }
+                    this.CompleteCommand.RaiseCanExecuteChanged();
+                    this.CollectCommand.RaiseCanExecuteChanged(); 
                 }
-                this.CompleteCommand.RaiseCanExecuteChanged();
-                this.CollectCommand.RaiseCanExecuteChanged();
+
             });
         }
 
@@ -97,7 +101,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                if (_task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Collection)
+                if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
                     this.ProofTitle = "Proof of Collection";
                     this.AckDialog = string.Empty;
@@ -156,8 +160,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return proofTitle; }
             set { SetProperty(ref proofTitle, value); }
         }
-        private CDProof proofOfCollection;
-        public CDProof ProofOfCollection
+        private DocumentDeliveryDetails proofOfCollection;
+        public DocumentDeliveryDetails ProofOfCollection
         {
             get { return proofOfCollection; }
             set { SetProperty(ref proofOfCollection, value); }
@@ -202,10 +206,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
         async public System.Threading.Tasks.Task GetProofOfCollectionAsync()
         {
-            this.ProofOfCollection = await SqliteHelper.Storage.GetSingleRecordAsync<CDProof>(x => x.VehicleInsRecID == this._task.VehicleInsRecId);
+            this.ProofOfCollection = await SqliteHelper.Storage.GetSingleRecordAsync<DocumentDeliveryDetails>(x => x.VehicleInsRecID == this._task.VehicleInsRecId);
             if (this.ProofOfCollection == null)
             {
-                this.ProofOfCollection = new CDProof();
+                this.ProofOfCollection = new DocumentDeliveryDetails();
                 this.ProofOfCollection.VehicleInsRecID = this._task.VehicleInsRecId;
             }
         }

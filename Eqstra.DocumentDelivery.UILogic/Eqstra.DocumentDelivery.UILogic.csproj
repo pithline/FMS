@@ -155,10 +155,10 @@
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCourierCollectionDetailsResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse.datasource">
@@ -173,31 +173,31 @@
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\RoutingService.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice.xsd">
+    <None Include="Service References\DDServiceProxy\RoutingService1.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice2.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice21.wsdl" />
+    <None Include="Service References\DDServiceProxy\xppservice8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice1.wsdl" />
-    <None Include="Service References\DDServiceProxy\xppservice1.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice81.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice2.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice82.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice3.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice83.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice4.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice84.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice5.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice85.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice6.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice86.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DDServiceProxy\xppservice7.xsd">
+    <None Include="Service References\DDServiceProxy\xppservice87.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -237,7 +237,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DDServiceProxy\xppservice.disco" />
+    <None Include="Service References\DDServiceProxy\xppservice1.disco" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

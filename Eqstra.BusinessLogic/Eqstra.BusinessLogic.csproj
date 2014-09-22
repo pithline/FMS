@@ -128,10 +128,9 @@
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="DocumentDelivery\CDCustomerDetails.cs" />
     <Compile Include="DocumentDelivery\CDUserInfo.cs" />
-    <Compile Include="DocumentDelivery\CustomerContacts.cs" />
-    <Compile Include="DocumentDelivery\CDProof.cs" />
+    <Compile Include="DocumentDelivery\ContactPerson.cs" />
+    <Compile Include="DocumentDelivery\DocumentDeliveryDetails.cs" />
     <Compile Include="Document.cs" />
-    <Compile Include="DocumentDelivery\DocumentsBrief.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Enums\CDTaskStatus.cs">

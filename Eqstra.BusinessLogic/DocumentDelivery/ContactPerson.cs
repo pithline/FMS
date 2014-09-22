@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class DestinationContacts : ValidatableBindableBase
+    public class ContactPerson : ValidatableBindableBase
     {
         private string caseNumber;
         public string CaseNumber
@@ -67,7 +67,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
     }
 
-    public class DestinationContactsEvent : PubSubEvent<DestinationContacts>
+    public class ContactPersonEvent : PubSubEvent<ContactPerson>
     {
     }
 }
