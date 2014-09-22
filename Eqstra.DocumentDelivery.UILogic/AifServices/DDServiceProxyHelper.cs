@@ -4,15 +4,18 @@ using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.DDServiceProxy;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
+using Windows.UI.Core;
 
 namespace Eqstra.DocumentDelivery.UILogic.AifServices
 {
@@ -20,9 +23,11 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
     {
         private static readonly DDServiceProxyHelper instance = new DDServiceProxyHelper();
         private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient client;
+        IEventAggregator _eventAggregator;
         ConnectionProfile _connectionProfile;
         Action _syncExecute;
         private CDUserInfo _userInfo;
+        private Func<Exception, bool> _errorHandler;
 
         public static DDServiceProxyHelper Instance
         {
@@ -31,11 +36,28 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 return instance;
             }
         }
-        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient ConnectAsync(string userName, string password, string domain = "lfmd")
+        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient ConnectAsync(string userName, string password, IEventAggregator eventAggregator, string domain = "lfmd")
         {
             try
             {
-                client = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient();
+                _eventAggregator = eventAggregator;
+                BasicHttpBinding basicHttpBinding = new BasicHttpBinding()
+                {
+                    MaxBufferPoolSize = int.MaxValue,
+                    MaxBufferSize = int.MaxValue,
+                    MaxReceivedMessageSize = int.MaxValue,
+                    OpenTimeout = new TimeSpan(2, 0, 0),
+                    ReceiveTimeout = new TimeSpan(2, 0, 0),
+                    SendTimeout = new TimeSpan(2, 0, 0),
+                    AllowCookies = true
+                };
+
+                basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+                client = new DDServiceProxy.MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc"));
+                client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
+                client.ClientCredentials.UserName.Password = password;
+                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
                 return client;
             }
@@ -84,13 +106,13 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-        async public System.Threading.Tasks.Task<List<CollectDeliveryTask>> SyncTasksFromSvcAsync()
+        async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
         {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return null;
+                    return;
 
                 if (_userInfo == null)
                 {
@@ -129,8 +151,13 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
             catch (Exception ex)
             {
-                AppSettings.Instance.ErrorMessage = ex.Message;
-                return null;
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
+
             }
         }
         async public System.Threading.Tasks.Task<List<Document>> GetDocumentsInfoFromSvcAsync()

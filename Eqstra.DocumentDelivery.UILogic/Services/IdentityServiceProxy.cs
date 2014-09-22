@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.AifServices;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,16 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
 {
    public class IdentityServiceProxy : IIdentityService
     {
-        async public Task<Tuple<CDLogonResult,string>> LogonAsync(string userId, string password)
+        IEventAggregator _eventAggregator;
+        public IdentityServiceProxy(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+        }
+        async public Task<Tuple<CDLogonResult, string>> LogonAsync(string userId, string password)
         {
             try
             {
-                DDServiceProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
+                DDServiceProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
                 var result = await DDServiceProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
                 if (result != null)
                 {
@@ -54,5 +60,6 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }

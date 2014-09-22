@@ -77,9 +77,9 @@ namespace Eqstra.DocumentDelivery
             var accountService = _container.Resolve<IAccountService>();
             var cred = accountService.VerifyUserCredentialsAsync();
 
-            if (cred != null)
+            if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {
-                DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2);                
+                DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2, EventAggregator);       
                 var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
                 PersistentData.Instance.UserInfo = userInfo;
