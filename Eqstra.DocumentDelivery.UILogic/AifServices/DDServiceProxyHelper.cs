@@ -136,7 +136,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskInsertList = new List<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskUpdateList = new List<CollectDeliveryTask>();
-
+                ObservableCollection<long> caseCategoryRecIdList = new ObservableCollection<long>();
                 if (result.response != null)
                 {
                     foreach (var mzkTask in result.response)
@@ -176,7 +176,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         {
                             taskInsertList.Add(taskTosave);
                         }
-
+                        caseCategoryRecIdList.Add(mzkTask.parmCaseCategoryRecID);
                     }
 
                     if (taskUpdateList.Any())
@@ -186,6 +186,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     if (taskInsertList.Any())
                         await SqliteHelper.Storage.InsertAllAsync<CollectDeliveryTask>(taskInsertList);
                 }
+
+               await SyncDocumentsFromSvcAsync(caseCategoryRecIdList);
             }
             catch (Exception ex)
             {
@@ -197,8 +199,9 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 });
 
             }
+
         }
-        async public System.Threading.Tasks.Task SyncDocumentsFromSvcAsync()
+        async public System.Threading.Tasks.Task SyncDocumentsFromSvcAsync(ObservableCollection<long> caseCategoryRecIdList)
         {
             try
             {
@@ -210,7 +213,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var result = await client.getDocumentsInfoAsync(null, _userInfo.CompanyId);
+                var result = await client.getDocumentsInfoAsync(caseCategoryRecIdList, _userInfo.CompanyId);
 
                 var documentData = await SqliteHelper.Storage.LoadTableAsync<Document>();
                 List<Document> documentInsertList = new List<Document>();
@@ -230,8 +233,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               RegistrationNumber = mzkDoc.parmRegNo,
                               DocName = mzkDoc.parmDocuName,
                               CaseCategoryRecID = mzkDoc.parmCaseCategoryRecID
-                             // CaseNumber=mzkDoc.ca
-                            // SerialNumber=mzkDoc.
+                              // CaseNumber=mzkDoc.ca
+                              // SerialNumber=mzkDoc.
 
                           };
 
@@ -281,7 +284,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 List<CDCustomerDetails> customerDetailsList = new List<CDCustomerDetails>();
                 if (result.response != null)
                 {
-                  foreach (var cust in result.response)
+                    foreach (var cust in result.response)
                     {
                         customerDetailsList.Add(new Eqstra.BusinessLogic.DocumentDelivery.CDCustomerDetails
                         {
@@ -373,9 +376,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmEmail = doc.Email,
                             parmPosition = doc.Position,
                             parmSignature = doc.CRSignature,
-                            parmTeliphone = doc.Phone,
-                            parmdeliveryDetailDateTime = doc.DeliveryDate,
+                            parmTelephone = doc.Phone,
+                            parmDeliveryDetailDateTime = doc.DeliveryDate,
                             parmDeliveryPerson = doc.DeliveryPersonName,
+
                         });
                     }
                 }
@@ -440,7 +444,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
                 var tasks = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>());
-                ObservableCollection<MZKCollectDeliverContract> mzkTasks = new ObservableCollection<MZKCollectDeliverContract>();
+                ObservableCollection<MZKCollectDeliverTasksContract> mzkTasks = new ObservableCollection<MZKCollectDeliverTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
                 //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitingDriverCollection, EEPActionStep.AwaitDriverCollection);
@@ -452,7 +456,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     foreach (var task in tasks)
                     {
                         mzkTasks.Add(
-                            new MZKCollectDeliverContract
+                            new MZKCollectDeliverTasksContract
                             {
                                 parmCaseId = task.CaseNumber,
                                 parmStatus = task.Status,

@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,10 +43,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 _task.Status = BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery;
                 _task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
-                await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(_task);
+                await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
                 foreach (var item in this.SelectedDocuments)
                 {
-                    item.IsDelivered = false;
+                    item.IsCollected = true;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
                 }
                 _navigationService.Navigate("Main", string.Empty);
@@ -59,7 +60,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.CompleteCommand = new DelegateCommand(async () =>
                 {
                     _task.Status = BusinessLogic.Enums.CDTaskStatus.Complete;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(_task);
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
                     foreach (var item in this.SelectedDocuments)
                     {
                         item.IsDelivered = true;
@@ -82,18 +83,15 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.DocumentsChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
             {
-                if (param is Document)
+                this.SelectedDocuments.Clear();
+                foreach (var item in param)
                 {
-                    this.SelectedDocuments.Clear();
-                    foreach (var item in param)
-                    {
-                        this.SelectedDocuments.Add(((Document)item));
-                    }
-                    this.CompleteCommand.RaiseCanExecuteChanged();
-                    this.CollectCommand.RaiseCanExecuteChanged(); 
+                    this.SelectedDocuments.Add(((Document)item));
                 }
-
+                this.CompleteCommand.RaiseCanExecuteChanged();
+                this.CollectCommand.RaiseCanExecuteChanged();
             });
+
         }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -137,6 +135,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         public DelegateCommand CollectCommand { get; set; }
         public DelegateCommand CompleteCommand { get; set; }
         public DelegateCommand AddContactCommand { get; set; }
+
         public DelegateCommand<ObservableCollection<object>> DocumentsChangedCommand { get; set; }
 
         private Visibility completeVisibility;
@@ -187,6 +186,23 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+
+        private string selectedContactName;
+        [Ignore]
+        public string SelectedContactName
+        {
+            get { return selectedContactName; }
+            set { SetProperty(ref selectedContactName, value); }
+        }
+
+        private string selectedCollectedFrom;
+        [Ignore]
+        public string SelectedCollectedFrom
+        {
+            get { return selectedCollectedFrom; }
+            set { SetProperty(ref selectedCollectedFrom, value); }
+        }
+
 
         private string ackDialog;
         public string AckDialog

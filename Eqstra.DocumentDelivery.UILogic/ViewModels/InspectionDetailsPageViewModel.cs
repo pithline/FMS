@@ -104,8 +104,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.TasksChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
             {
-                if (param is CollectDeliveryTask)
-                {
                     this.SelectedTaskList.Clear();
                     foreach (var item in param)
                     {
@@ -117,8 +115,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.GetCustomerDetailsAsync();
                     PersistentData.Instance.CustomerDetails = this.CustomerDetails;
                     this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
-                    _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails); 
-                }
+                    _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails);
+                
             });
         }
         #region Overrides
@@ -149,14 +147,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.CollectDeliveryTask item in list.OrderBy(o => o.CustomerName).ThenBy(o => o.Address))
             {
                 this.CDTaskList.Add(item);
-                item.ConfirmedTime = DateTime.Now;//for testing only
                 GetAppointments(item);
             }
             if (this.CDTaskList.Any())
                 this.CDTask = this.CDTaskList.FirstOrDefault();
 
             await GetDocumentsFromDbByCaseNumber();
-      
+
         }
 
         private IEnumerable<Eqstra.BusinessLogic.CollectDeliveryTask> EnumerateTasks(object navigationParameter, IEnumerable<BusinessLogic.CollectDeliveryTask> tasks)
@@ -302,20 +299,29 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
             if (this.CDTask != null)
+            {
                 foreach (var d in docs.Where(w => w.CaseNumber == this.CDTask.CaseNumber))
                 {
                     this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { CaseNumber = d.CaseNumber, DocumentType = d.DocumentType });
+
+
                 }
+                GetCustomerDetailsAsync();
+                this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
+
+            }
+
         }
         private void GetAppointments(CollectDeliveryTask task)
         {
-            task.ConfirmedTime = DateTime.Now;//for testing only
+
             var startTime = new DateTime(task.ConfirmedTime.Year, task.ConfirmedTime.Month, task.ConfirmedTime.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
                        task.ConfirmedTime.Second);
+            startTime = DateTime.Now;//for testing only
             this.CustomerDetails.Appointments.Add(
             new ScheduleAppointment()
             {
-                Subject = task.CaseNumber,
+                Subject = task.CaseNumber + Environment.NewLine + task.CustomerName + Environment.NewLine + task.Address,
                 Location = task.Address,
                 StartTime = startTime,
                 EndTime = startTime.AddHours(1),
@@ -342,6 +348,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.CustomerDetails.RegistrationNumber = this.CDTask.RegistrationNumber;
                     this.CustomerDetails.MakeModel = this.CDTask.Make + Environment.NewLine + this.CDTask.Model;
                     this.CustomerDetails.CaseType = this.CDTask.CaseType;
+                    this.CustomerDetails.Appointments = PersistentData.Instance.Appointments;
                 }
             }
             catch (Exception)

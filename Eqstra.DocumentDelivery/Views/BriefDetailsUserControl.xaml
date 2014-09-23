@@ -14,7 +14,7 @@
         <vms:BriefDetailsUserControlViewModel x:Key="briefDetailsViewModel"/>
     </UserControl.Resources>
     <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="370" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-        <ScrollViewer VerticalScrollMode="Auto">
+        <ScrollViewer VerticalScrollMode="Auto" ZoomMode="Disabled">
             <Grid HorizontalAlignment="Left" Margin="20 15 20 0" VerticalAlignment="Stretch" Width="330" ScrollViewer.VerticalScrollMode="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -37,6 +37,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">
                             <TextBlock Text="Case Number" Style="{StaticResource TextHeaderStyle}"/>
@@ -45,6 +46,11 @@
                         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 10 0 0">
                             <TextBlock Text="Case Type" Style="{StaticResource TextHeaderStyle}"/>
                             <TextBlock Text="{Binding CustomerDetails.CaseType}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10 10 0 0">
+                            <TextBlock Text="Customer Name" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding CustomerDetails.CustomerName}" Style="{StaticResource TextContentStyle}"/>
                         </StackPanel>
 
                     </Grid>
@@ -102,7 +108,7 @@
                                     <schedule:SfSchedule ContextMenuType="RadialMenu" AllowEditing="False" 
                                                      HorizontalAlignment="Center"  Width="350" Height="500" 
                                                      ScheduleType="Day"  EnableReminderTimer="True" 
-                                                     Appointments="{Binding Appointments}"  
+                                                     Appointments="{Binding CustomerDetails.Appointments}"  
                                                      ShowNonWorkingHours="True" 
                                                      TimeInterval="OneHour" Margin="30">
                                     </schedule:SfSchedule>

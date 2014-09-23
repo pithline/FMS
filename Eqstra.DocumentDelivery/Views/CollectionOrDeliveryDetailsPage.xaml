@@ -116,90 +116,85 @@
                         </Grid>
                     </Border>
                 </Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="2">
 
-                <Grid Grid.Column="2" Margin="0 0 0 30" MinWidth="300">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding ProofTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                    <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
-                                    <Button HorizontalAlignment="Left" Command="{Binding AddContactCommand}" VerticalAlignment="Bottom"  Style="{StaticResource TransparentBtn}">
-                                        <Image Source="ms-appx:///Assets/add_icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
-                                    </Button>
-                                </StackPanel>
-                                <ComboBox  HorizontalAlignment="Left" ItemsSource="{Binding ProofOfCollection.Customers ,Mode=TwoWay}" Width="200">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=FirstName}" Margin="1,0,1,0" />
-                                                <TextBlock Text="{Binding Path=Surname}" Margin="1,0,0,0" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </StackPanel>
-                            <mzk:MzkSignature Title="" FileName="{Binding Path=ProofOfCollection.CRSignature ,Mode=TwoWay }" Margin="0 10" HorizontalAlignment="Left" Grid.Row="1"/>
-                            <Grid Grid.Row="2" Margin="0 0 0 20">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="2" Margin="0 0 0 30" MinWidth="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding ProofTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                        <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                            <Grid Margin="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Customer/Representative Signature" VerticalAlignment="Center" Style="{StaticResource TextHeaderStyle}"/>
-                                <input:SfDatePicker IsHitTestVisible="False" Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}" BorderThickness="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10 0 0 0" Foreground="#FF666666" FontSize="12"/>
-                                <StackPanel Grid.Row="1" Visibility="{Binding CompleteVisibility}">
-                                    <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
-                                    <TextBlock Text="{Binding ProofOfCollection.DeliveryPersonName}" Style="{StaticResource TextContentStyle}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0 10">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
+                                        <ComboBox  x:Name="ContactName" HorizontalAlignment="Left" SelectedValue="{Binding SelectedContactName,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding ProofOfCollection.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                        </ComboBox>
+                                    </StackPanel>
+
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Button HorizontalAlignment="Left" Command="{Binding AddContactCommand}" VerticalAlignment="Bottom"  Style="{StaticResource TransparentBtn}">
+                                            <Image Source="ms-appx:///Assets/add_icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
-                                    <TextBlock Text="Delivered At" Style="{StaticResource TextHeaderStyle}"/>
-                                    <TextBlock Text="{Binding ProofOfCollection.DeliveredAt}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
+                                <TextBlock Text="Customer/Representative Signature" Margin="0 10" VerticalAlignment="Bottom" Style="{StaticResource TextHeaderStyle}" Grid.Row="1"/>
+                                <mzk:MzkSignature Title="" FileName="{Binding Path=ProofOfCollection.CRSignature ,Mode=TwoWay }" Margin="0 10" HorizontalAlignment="Left" Grid.Row="2"/>
+                                <Grid Grid.Row="3" Margin="0 0 0 20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}"/>
+                                        <input:SfDatePicker IsHitTestVisible="False" Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}" BorderThickness="0"  HorizontalAlignment="Left"  Foreground="#FF666666" FontSize="12"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Visibility="{Binding CompleteVisibility}">
+                                        <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
+                                        <TextBlock Text="{Binding ProofOfCollection.DeliveryPersonName}" Style="{StaticResource TextContentStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
+                                        <TextBlock Text="Delivered At" Style="{StaticResource TextHeaderStyle}"/>
+                                        <TextBlock Text="{Binding ProofOfCollection.DeliveredAt}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
+                                        <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
+                                        <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding ProofOfCollection.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
+                                        <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}" Margin="10 0 0 0"/>
+                                        <input:SfDatePicker Grid.Row="1"  Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}"  Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Grid.Row="4">
+                                    <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
+                                    <TextBox Grid.Row="3" HorizontalAlignment="Left" AcceptsReturn="True" Width="500" Margin="0" Text="{Binding ProofOfCollection.Comment,Mode=TwoWay}" Height="150"></TextBox>
                                 </StackPanel>
 
-                                <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
-                                    <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
-                                    <ComboBox Grid.Row="1" Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ProofOfCollection.Customers,Mode=TwoWay}" >
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Path=FirstName}" Margin="0,0,1,0" />
-                                                    <TextBlock Text="{Binding Path=Surname}" Margin="1,0,0,0" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
-                                    <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}" Margin="10 0 0 0"/>
-                                    <input:SfDatePicker Grid.Row="1"  Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}"  Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
-                                </StackPanel>
                             </Grid>
-
-                            <StackPanel Grid.Row="3">
-                                <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
-                                <TextBox Grid.Row="3" AcceptsReturn="True" Margin="0" Text="{Binding ProofOfCollection.Comment,Mode=TwoWay}" Height="150"></TextBox>
-                            </StackPanel>
-
-                        </Grid>
-                    </Border>
-                </Grid>
+                        </Border>
+                    </Grid>
+                </ScrollViewer>
             </Grid>
         </ScrollViewer>
     </Grid>

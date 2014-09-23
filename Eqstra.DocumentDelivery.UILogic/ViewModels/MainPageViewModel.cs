@@ -32,6 +32,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.PoolofTasks = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
             this.Appointments = new ScheduleAppointmentCollection();
             _eventAggregator = eventAggregator;
+            CreateTableAsync();
             this.SyncCommand = new DelegateCommand(() =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
@@ -98,6 +99,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                     });
                 }
+
+                PersistentData.Instance.Appointments = this.Appointments;
             }
             catch (Exception ex)
             {
@@ -167,30 +170,40 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         private async System.Threading.Tasks.Task CreateTableAsync()
         {
 
-
+            //await SqliteHelper.Storage.DropTableAsync<Document>();
+            //await SqliteHelper.Storage.CreateTableAsync<Document>();
             //var d = new ObservableCollection<Document>
             //  {
-            //      new Document{VehicleInsRecID=123, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=234, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=345, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=456, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=789, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=985, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=741, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=852, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=145, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=963, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=123, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=234, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=345, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=456, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=789, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=985, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=741, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=852, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=145, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{VehicleInsRecID=963, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
             //  };
-            //  await SqliteHelper.Storage.InsertAllAsync<Document>(d);
+            //await SqliteHelper.Storage.InsertAllAsync<Document>(d);
+
 
             //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
+            //await SqliteHelper.Storage.DropTableAsync<ContactPerson>();
+            //await SqliteHelper.Storage.DropTableAsync<Document>();
+            //await SqliteHelper.Storage.DropTableAsync<CollectDeliveryTask>();
+            //await SqliteHelper.Storage.DropTableAsync<CDCustomerDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
+
 
             //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-            //await SqliteHelper.Storage.CreateTableAsync<DestinationContacts>();
+            //await SqliteHelper.Storage.CreateTableAsync<ContactPerson>();
             //await SqliteHelper.Storage.CreateTableAsync<Document>();
             //await SqliteHelper.Storage.CreateTableAsync<CollectDeliveryTask>();
             //await SqliteHelper.Storage.CreateTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<CDProof>();
+            //await SqliteHelper.Storage.CreateTableAsync<DocumentDeliveryDetails>();
+
+            
 
         }
 
@@ -230,15 +243,16 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         private void GetAppointments()
         {
 
-            foreach (var item in this.PoolofTasks.Where(x => x.Status.Equals(BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery) || x.Status.Equals(BusinessLogic.Enums.CDTaskStatus.AwaitingDriverCollection)))
+            foreach (var item in this.PoolofTasks.Where(x => !x.Status.Equals(BusinessLogic.Enums.CDTaskStatus.Complete)))
             {
                 var startTime = new DateTime(item.DeliveryDate.Year, item.DeliveryDate.Month, item.DeliveryDate.Day, item.DeliveryDate.Hour, item.DeliveryDate.Minute,
                            item.DeliveryDate.Second);
+              
                 this.Appointments.Add(
 
                               new ScheduleAppointment()
                               {
-                                  Subject = item.CaseNumber,
+                                  Subject = item.CaseNumber + Environment.NewLine + item.CustomerName,
                                   Location = item.Address,
                                   StartTime = startTime,
                                   EndTime = startTime.AddHours(1),

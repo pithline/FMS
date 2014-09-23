@@ -22,14 +22,33 @@
         </Grid.RowDefinitions>
         <TextBox Header="First Name" Margin="0 10" Grid.Row="0" Height="60" Text="{Binding Model.FirstName,Mode=TwoWay}"/>
         <TextBox Header="Surname" Margin="0 10" Grid.Row="1" Height="60" Text="{Binding Model.Surname ,Mode=TwoWay}"/>
-        <TextBox Header="Cell Phone" Margin="0 10" Grid.Row="2" Height="60" Text="{Binding Model.CellPhone ,Mode=TwoWay}"/>
+        <TextBox Header="Cell Phone" Name="CellNumber" KeyDown="CellNumber_KeyDown" Margin="0 10" Grid.Row="2" Height="60" Text="{Binding Model.CellPhone ,Mode=TwoWay}"/>
         <TextBox Header="Email" Margin="0 10" Grid.Row="3" Height="60" Text="{Binding Model.Email ,Mode=TwoWay}"/>
         <TextBox Header="Position" Margin="0 10" Grid.Row="4" Height="60" Text="{Binding Model.Position ,Mode=TwoWay}"/>
-        <Button  Grid.Row="5" Style="{StaticResource TransparentBtn}" VerticalAlignment="Bottom" Height="60" Command="{Binding AddCustomerCommand }">
+
+        <StackPanel Orientation="Horizontal" Grid.Row="5">
+
+            <AppBarButton  VerticalAlignment="Bottom" Margin="10,10"
+                                                       Icon="Add"
+                                                       RequestedTheme="Light"
+                                                       Command="{Binding AddCustomerCommand }"
+                                                       IsCompact="True"/>
+
+            <AppBarButton  VerticalAlignment="Bottom" Margin="10,10"
+                                                       Icon="Clear" 
+                                                       RequestedTheme="Light"
+                                                      Command="{Binding ClearCustomerCommand }"
+                                                       IsCompact="True" />
+
+        </StackPanel>
+
+
+
+        <!--<Button  Grid.Row="5" Style="{StaticResource TransparentBtn}" VerticalAlignment="Bottom" Height="60" Command="{Binding AddCustomerCommand }">
             <StackPanel Orientation="Horizontal">
                 <Image Source="ms-appx:///Assets/add_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                 <TextBlock Text="Add" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center" Margin="5 0 0 0"/>
             </StackPanel>
-        </Button>
+        </Button>-->
     </Grid>
 </SettingsFlyout>

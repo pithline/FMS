@@ -46,14 +46,14 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("DetailsItemsSourceFile.json");
+                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json");
                 if (result != null)
                 {
                     this.sfDataGrid.ItemsSource = result.Where(x => x.CustomerName.Equals(args.QueryText) ||
                                       Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
                                      Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
                                      Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryTime).Equals(args.QueryText) || Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
+                                    Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
                 }
             }
             catch (Exception ex)
@@ -70,12 +70,12 @@ namespace Eqstra.DocumentDelivery.Views
             {
                 if (!isCached)
                 {
-                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "DetailsItemsSourceFile.json");
+                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "CDTaskDetailsFile.json");
                     isCached = true;
                 }
 
                 var searchSuggestionList = new List<string>();
-                foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("DetailsItemsSourceFile.json"))
+                foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json"))
                 {
                     foreach (var propInfo in task.GetType().GetRuntimeProperties())
                     {

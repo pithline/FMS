@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.DocumentDelivery;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 return !string.IsNullOrEmpty(address);
             });
+
+            this.CustomerDetails = PersistentData.Instance.CustomerDetails;
         }
         public DelegateCommand<string> MailToCommand { get; set; }
 

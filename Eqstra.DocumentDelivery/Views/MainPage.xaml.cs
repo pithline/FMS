@@ -38,14 +38,14 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.json");
+                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskFile.json");
                 if (result != null)
                 {
                     this.mainGrid.ItemsSource = result.Where(x => x.CustomerName.Equals(args.QueryText) ||
                                       Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
                                      Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
                                      Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryTime).Equals(args.QueryText) || Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
+                                     Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
 
                     
                 }
@@ -60,19 +60,19 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                if (this.mainGrid.ItemsSource != null & ((IEnumerable<CollectDeliveryTask>)this.mainGrid.ItemsSource).Any())
+                if (this.mainGrid.ItemsSource != null)
                 {
                     var deferral = args.Request.GetDeferral();
                     if (!string.IsNullOrEmpty(args.QueryText))
                     {
                         if (!isCached)
                         {
-                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.json");
+                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "CDTaskFile.json");
                             isCached = true;
                         }
 
                         var searchSuggestionList = new List<string>();
-                        foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("MainItemsSourceFile.json"))
+                        foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskFile.json"))
                         {
                             foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {

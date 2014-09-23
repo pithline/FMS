@@ -41,6 +41,15 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref surname, value); }
         }
 
+
+        private string fullName;
+        [Ignore]
+        public string FullName
+        {
+            get { return (this.FirstName + String.Empty.PadLeft(2)+ this.Surname); }
+            set { SetProperty(ref fullName, value); }
+        }
+
         private string cellPhone;
 
         public string CellPhone
@@ -62,6 +71,8 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         public string Position
         {
             get { return position; }
+
+
             set { SetProperty(ref position, value); }
         }
 

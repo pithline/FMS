@@ -83,6 +83,13 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref isDelivered, value); }
         }
 
+        private bool isCollected;
+        public bool IsCollected
+        {
+            get { return isCollected; }
+            set { SetProperty(ref isCollected, value); }
+        }
+
         private bool shouldSave;
 
         public bool ShouldSave

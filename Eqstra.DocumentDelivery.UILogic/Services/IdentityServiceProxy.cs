@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.DeliveryModel;
+using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.AifServices;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
@@ -39,7 +40,8 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
                             UserId = result.response.parmUserID,
                             CompanyId = result.response.parmCompany,
                             CompanyName = result.response.parmCompanyName,
-                            Name = result.response.parmUserName
+                            Name = result.response.parmUserName,
+                            CDUserType = (CDUserType)Enum.Parse(typeof(CDUserType), result.response.parmLoginType.ToString()),
                         };
                     string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                     ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
