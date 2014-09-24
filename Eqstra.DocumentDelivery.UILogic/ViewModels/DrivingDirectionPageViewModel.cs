@@ -1,31 +1,24 @@
 ﻿using Bing.Maps;
 using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
-using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI;
-using Windows.UI.Xaml.Media;
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
     public class DrivingDirectionPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private Eqstra.BusinessLogic.CollectDeliveryTask _deliveryTask;
+        private CollectDeliveryTask _deliveryTask;
         public DrivingDirectionPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -51,15 +44,15 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.IsStartDriving = false;
                 this.IsArrived = true;
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString()) });
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new CDDrivingDuration { StartDateTime = DateTime.Now, CaseCategoryRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"].ToString()) });
             });
 
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
                 if (this._deliveryTask != null)
                 {
-                    var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
-                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
+                    var CaseCategoryRecID = Int64.Parse(ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"].ToString());
+                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseCategoryRecID.Equals(CaseCategoryRecID));
                     dd.StopDateTime = DateTime.Now;
                     this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._deliveryTask);
@@ -75,7 +68,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _deliveryTask.VehicleInsRecId);
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseCategoryRecID == _deliveryTask.CaseCategoryRecID);
                 if (dd != null)
                 {
                     this.IsArrived = dd.StopDateTime == DateTime.MinValue;

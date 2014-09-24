@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.DeliveryModel;
+using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.AifServices;
@@ -60,8 +61,8 @@ namespace Eqstra.DocumentDelivery
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Helpers.TaskStatus));
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
-            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask>));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.DocumentDelivery.CDCustomerDetails));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<CollectDeliveryTask>));
             SessionStateService.RegisterKnownType(typeof(List<string>));
         }
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)

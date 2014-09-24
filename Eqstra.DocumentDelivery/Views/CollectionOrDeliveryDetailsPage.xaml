@@ -137,7 +137,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0 10">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
-                                        <ComboBox  x:Name="ContactName" HorizontalAlignment="Left" SelectedValue="{Binding SelectedContactName,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding ProofOfCollection.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                        <ComboBox  x:Name="ContactName" HorizontalAlignment="Left" SelectedValue="{Binding SelectedContactName,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.ContactPersons ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
                                         </ComboBox>
                                     </StackPanel>
 
@@ -150,7 +150,7 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <TextBlock Text="Customer/Representative Signature" Margin="0 10" VerticalAlignment="Bottom" Style="{StaticResource TextHeaderStyle}" Grid.Row="1"/>
-                                <mzk:MzkSignature Title="" FileName="{Binding Path=ProofOfCollection.CRSignature ,Mode=TwoWay }" Margin="0 10" HorizontalAlignment="Left" Grid.Row="2"/>
+                                <mzk:MzkSignature Title="" FileName="{Binding Path=DocuDeliveryDetails.CRSignature ,Mode=TwoWay }" Margin="0 10" HorizontalAlignment="Left" Grid.Row="2"/>
                                 <Grid Grid.Row="3" Margin="0 0 0 20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -162,33 +162,33 @@
                                     </Grid.RowDefinitions>
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}"/>
-                                        <input:SfDatePicker IsHitTestVisible="False" Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}" BorderThickness="0"  HorizontalAlignment="Left"  Foreground="#FF666666" FontSize="12"/>
+                                        <input:SfDatePicker IsHitTestVisible="False" Value="{Binding DocuDeliveryDetails.CollectedAt,Mode=TwoWay}" BorderThickness="0"  HorizontalAlignment="Left"  Foreground="#FF666666" FontSize="12"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="1" Visibility="{Binding CompleteVisibility}">
                                         <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
-                                        <TextBlock Text="{Binding ProofOfCollection.DeliveryPersonName}" Style="{StaticResource TextContentStyle}"/>
+                                        <TextBlock Text="{Binding DocuDeliveryDetails.DeliveryPersonName}" Style="{StaticResource TextContentStyle}"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
                                         <TextBlock Text="Delivered At" Style="{StaticResource TextHeaderStyle}"/>
-                                        <TextBlock Text="{Binding ProofOfCollection.DeliveredAt}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
+                                        <TextBlock Text="{Binding DocuDeliveryDetails.DeliveredAt}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
                                         <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
-                                        <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding ProofOfCollection.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                        <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
                                         </ComboBox>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
                                         <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}" Margin="10 0 0 0"/>
-                                        <input:SfDatePicker Grid.Row="1"  Value="{Binding ProofOfCollection.CollectedAt,Mode=TwoWay}"  Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
+                                        <input:SfDatePicker Grid.Row="1"  Value="{Binding DocuDeliveryDetails.CollectedAt,Mode=TwoWay}"  Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
                                     </StackPanel>
                                 </Grid>
 
                                 <StackPanel Grid.Row="4">
                                     <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
-                                    <TextBox Grid.Row="3" HorizontalAlignment="Left" AcceptsReturn="True" Width="500" Margin="0" Text="{Binding ProofOfCollection.Comment,Mode=TwoWay}" Height="150"></TextBox>
+                                    <TextBox Grid.Row="3" HorizontalAlignment="Left" AcceptsReturn="True" Width="500" Margin="0" Text="{Binding DocuDeliveryDetails.Comment,Mode=TwoWay}" Height="150"></TextBox>
                                 </StackPanel>
 
                             </Grid>

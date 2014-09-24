@@ -14,15 +14,23 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
     {
         public DocumentDeliveryDetails()
         {
-            this.Customers = (SqliteHelper.Storage.LoadTableAsync<ContactPerson>()).Result;
+            this.ContactPersons = (SqliteHelper.Storage.LoadTableAsync<ContactPerson>()).Result;
         }
 
-        private List<ContactPerson> customers;
-        [Ignore]
-        public List<ContactPerson> Customers
+        private long caseCategoryRecID;
+        [PrimaryKey]
+        public long CaseCategoryRecID
         {
-            get { return customers; }
-            set { SetProperty(ref customers, value); }
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
+        }
+
+        private List<ContactPerson> contactPersons;
+        [Ignore]
+        public List<ContactPerson> ContactPersons
+        {
+            get { return contactPersons; }
+            set { SetProperty(ref contactPersons, value); }
         }
 
         private string deliveryPersonName;
@@ -72,7 +80,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref comment, value); }
         }
 
-
         private string email;
 
         public string Email
@@ -120,7 +127,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             get { return phone; }
             set { SetProperty(ref phone, value); }
         }
-
 
         private bool isCollected;
 

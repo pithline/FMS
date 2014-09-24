@@ -9,22 +9,17 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic
+namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class CollectDeliveryTask : ValidatableBindableBase
     {
-        public CollectDeliveryTask()
-        {
-            this.Make = "45755";
-            this.Model = "ASD457";
-        }
-
-        private long vehicleInsRecId;
+      
+        private long caseCategoryRecID;
         [PrimaryKey]
-        public long VehicleInsRecId
+        public long CaseCategoryRecID
         {
-            get { return vehicleInsRecId; }
-            set { SetProperty(ref vehicleInsRecId, value); }
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
 
         }
         private string caseNumber;
@@ -236,7 +231,13 @@ namespace Eqstra.BusinessLogic
             get { return custAccount; }
             set { SetProperty(ref custAccount, value); }
         }
+        private bool isAssignTask;
 
+        public bool IsAssignTask
+        {
+            get { return isAssignTask; }
+            set { SetProperty(ref isAssignTask, value); }
+        }
     }
 
     public class TasksFetchedEvent : PubSubEvent<CollectDeliveryTask>

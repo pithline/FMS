@@ -19,12 +19,12 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { caseNumber = value; }
         }
 
-        private long vehicleInsRecID;
+        private long caseCategoryRecID;
 
-        public long VehicleInsRecID
+        public long CaseCategoryRecID
         {
-            get { return vehicleInsRecID; }
-            set { SetProperty(ref vehicleInsRecID, value); }
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
         }
 
 

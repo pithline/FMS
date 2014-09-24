@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic
+namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class Document : ValidatableBindableBase
     {

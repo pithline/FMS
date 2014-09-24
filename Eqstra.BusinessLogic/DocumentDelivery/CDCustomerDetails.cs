@@ -13,12 +13,12 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class CDCustomerDetails : ValidatableBindableBase
     {
-        private long vehicleInsRecId;
+        private long caseCategoryRecID;
         [PrimaryKey]
-        public long VehicleInsRecId
+        public long CaseCategoryRecID
         {
-            get { return vehicleInsRecId; }
-            set { SetProperty(ref vehicleInsRecId, value); }
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
 
         }
         private string caseNumber;

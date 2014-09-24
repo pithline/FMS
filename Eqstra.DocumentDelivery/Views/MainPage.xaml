@@ -233,7 +233,7 @@
                     </Grid>
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:NavigateToPageAction TargetPage="Eqstra.DocumentDelivery.Views.InspectionDetailsPage" Parameter="InProgress"/>
+                            <Core:NavigateToPageAction TargetPage="Eqstra.DocumentDelivery.Views.InspectionDetailsPage" Parameter="MyTasks"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Border>

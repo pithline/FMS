@@ -24,13 +24,11 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
     public class DDServiceProxyHelper
     {
         private static readonly DDServiceProxyHelper instance = new DDServiceProxyHelper();
-        private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient client;
+        private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient _client;
         IEventAggregator _eventAggregator;
         ConnectionProfile _connectionProfile;
         Action _syncExecute;
         private CDUserInfo _userInfo;
-        private Func<Exception, bool> _errorHandler;
-
         public static DDServiceProxyHelper Instance
         {
             get
@@ -56,17 +54,17 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-                client = new DDServiceProxy.MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliverService/xppservice.svc"));
-                client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
-                client.ClientCredentials.UserName.Password = password;
-                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
-                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
-                return client;
+                _client = new DDServiceProxy.MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliverService/xppservice.svc"));
+                _client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
+                _client.ClientCredentials.UserName.Password = password;
+                _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
+                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
+                return _client;
             }
             catch (Exception ex)
             {
                 Util.ShowToast(ex.Message);
-                return client;
+                return _client;
             }
         }
 
@@ -74,8 +72,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         {
             try
             {
-
-                return !(await client.validateUserAsync(userId, password)).response;
+                return !(await _client.validateUserAsync(userId, password)).response;
             }
             catch (Exception)
             {
@@ -85,7 +82,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
 
         async public System.Threading.Tasks.Task<MzkCollectDeliveryServiceGetUserDetailsResponse> GetUserInfo(string userId)
         {
-            return await client.getUserDetailsAsync(userId);
+            return await _client.getUserDetailsAsync(userId);
         }
 
         public void Synchronize(Action syncExecute)
@@ -96,7 +93,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             if (_connectionProfile != null && _connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(syncExecute);
-                //_syncExecute.Invoke();
+          
             }
         }
         void NetworkInformation_NetworkStatusChanged(object sender)
@@ -120,6 +117,56 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
+
+        async public System.Threading.Tasks.Task SynchronizeAllAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                if (AppSettings.Instance.IsSynchronizing == 0)
+                {
+                    Synchronize(async () =>
+                       {
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                           {
+
+                               AppSettings.Instance.IsSynchronizing = 1;
+                           });
+
+
+                           await this.SyncTasksFromSvcAsync();
+                           await this.InsertContactDetailsToSvcAsync();
+                           await this.InsertDocumentCollectedDetailsToSvcAsync();
+                           await this.InsertDocumentDeliveryDetailsToSvcAsync();
+                           await this.UpdateTaskStatusAsync();
+
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                           {
+
+                               AppSettings.Instance.IsSynchronizing = 0;
+                           });
+
+                       });
+                }
+            }
+            catch (Exception ex)
+            {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
+                });
+            }
+        }
+
         async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
         {
             try
@@ -132,7 +179,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
+                var result = await _client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskInsertList = new List<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskUpdateList = new List<CollectDeliveryTask>();
@@ -153,7 +200,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               AllocatedTo = _userInfo.Name,
                               Make = mzkTask.parmMake,
                               Model = mzkTask.parmModel,
-                              VehicleInsRecId = mzkTask.parmCaseCategoryRecID,
+                              CaseCategoryRecID = mzkTask.parmCaseCategoryRecID,
                               //CaseType = mzkTask.parmCaseCategory,
                               DeliveryDate = mzkTask.parmDeliveryDateTime,
                               EmailId = mzkTask.parmCustomerEmail,
@@ -187,7 +234,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         await SqliteHelper.Storage.InsertAllAsync<CollectDeliveryTask>(taskInsertList);
                 }
 
-               await SyncDocumentsFromSvcAsync(caseCategoryRecIdList);
+                await SyncDocumentsFromSvcAsync(caseCategoryRecIdList);
             }
             catch (Exception ex)
             {
@@ -213,7 +260,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var result = await client.getDocumentsInfoAsync(caseCategoryRecIdList, _userInfo.CompanyId);
+                var result = await _client.getDocumentsInfoAsync(caseCategoryRecIdList, _userInfo.CompanyId);
 
                 var documentData = await SqliteHelper.Storage.LoadTableAsync<Document>();
                 List<Document> documentInsertList = new List<Document>();
@@ -279,7 +326,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var result = await client.getCustomerInfoAsync(partyId, _userInfo.CompanyId);
+                var result = await _client.getCustomerInfoAsync(partyId, _userInfo.CompanyId);
 
                 List<CDCustomerDetails> customerDetailsList = new List<CDCustomerDetails>();
                 if (result.response != null)
@@ -315,17 +362,21 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         {
             try
             {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
                 if (_userInfo == null)
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.ShouldSave && x.IsCollected);
-                ObservableCollection<MZKDocumentCollectedDetailsContract> MZKDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
+                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.ShouldSave && x.IsCollected && !x.IsDelivered);
+                ObservableCollection<MZKDocumentCollectedDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
                 if (DocumentData != null)
                 {
                     foreach (var doc in DocumentData)
                     {
-                        MZKDocumentCollectedDetailsContractColl.Add(new MZKDocumentCollectedDetailsContract()
+                        mzkDocumentCollectedDetailsContractColl.Add(new MZKDocumentCollectedDetailsContract()
                         {
                             parmCaseId = doc.CaseNumber,
                             parmCollectedFrom = doc.CollectedFrom,
@@ -336,12 +387,12 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmReceivedDate = doc.ReceivedDate,
                             parmReferenceNo = doc.ReferenceNo,
                             parmSignature = doc.CRSignature,
-                            parmTelePhone = doc.Phone,
-
+                            parmTelePhone = doc.Phone
+                            
                         });
                     }
                 }
-                var res = await client.insertDocumentCollectedDetailsAsync(MZKDocumentCollectedDetailsContractColl[0], _userInfo.CompanyId);
+                var res = await _client.insertDocumentCollectedDetailsAsync(mzkDocumentCollectedDetailsContractColl[0], _userInfo.CompanyId);
             }
             catch (Exception ex)
             {
@@ -359,17 +410,21 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         {
             try
             {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
                 if (_userInfo == null)
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.ShouldSave);
-                ObservableCollection<MzkDocumentDeliveryDetailsContrcat> MZKDocumentDeliverDetailsContractColl = new ObservableCollection<MzkDocumentDeliveryDetailsContrcat>();
+                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.ShouldSave && x.IsDelivered);
+                ObservableCollection<MzkDocumentDeliveryDetailsContrcat> mzkDocumentDeliverDetailsContractColl = new ObservableCollection<MzkDocumentDeliveryDetailsContrcat>();
                 if (DocumentData != null)
                 {
                     foreach (var doc in DocumentData)
                     {
-                        MZKDocumentDeliverDetailsContractColl.Add(new MzkDocumentDeliveryDetailsContrcat()
+                        mzkDocumentDeliverDetailsContractColl.Add(new MzkDocumentDeliveryDetailsContrcat()
                         {
                             parmCaseId = doc.CaseNumber,
                             parmComment = doc.Comment,
@@ -379,20 +434,19 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmTelephone = doc.Phone,
                             parmDeliveryDetailDateTime = doc.DeliveryDate,
                             parmDeliveryPerson = doc.DeliveryPersonName,
-
                         });
                     }
                 }
-                var res = await client.insertDocumentDeliveryDetailsAsync(MZKDocumentDeliverDetailsContractColl[0], _userInfo.CompanyId);
+                var res = await _client.insertDocumentDeliveryDetailsAsync(mzkDocumentDeliverDetailsContractColl[0], _userInfo.CompanyId);
             }
             catch (Exception ex)
             {
                 Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
+                  {
 
-                    AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
-                });
+                      AppSettings.Instance.IsSynchronizing = 0;
+                      AppSettings.Instance.ErrorMessage = ex.Message;
+                  });
             }
         }
 
@@ -401,17 +455,21 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         {
             try
             {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
                 if (_userInfo == null)
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
                 var ContactsData = (await SqliteHelper.Storage.LoadTableAsync<ContactPerson>());
-                ObservableCollection<MZKDocumentNewContactPersonContract> MZKDocumentNewContactPersonContractColl = new ObservableCollection<MZKDocumentNewContactPersonContract>();
+                ObservableCollection<MZKDocumentNewContactPersonContract> mzkDocumentNewContactPersonContractColl = new ObservableCollection<MZKDocumentNewContactPersonContract>();
                 if (ContactsData != null)
                 {
                     foreach (var contact in ContactsData)
                     {
-                        MZKDocumentNewContactPersonContractColl.Add(new MZKDocumentNewContactPersonContract()
+                        mzkDocumentNewContactPersonContractColl.Add(new MZKDocumentNewContactPersonContract()
                         {
                             parmEmail = contact.Email,
                             parmFirstName = contact.FirstName,
@@ -420,7 +478,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         });
                     }
                 }
-                var res = await client.insertDocumentNewContactPersonAsync(MZKDocumentNewContactPersonContractColl[0], _userInfo.CompanyId);
+                var res = await _client.insertDocumentNewContactPersonAsync(mzkDocumentNewContactPersonContractColl[0], _userInfo.CompanyId);
             }
             catch (Exception ex)
             {
@@ -447,9 +505,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 ObservableCollection<MZKCollectDeliverTasksContract> mzkTasks = new ObservableCollection<MZKCollectDeliverTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitingDriverCollection, EEPActionStep.AwaitDriverCollection);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitingCourierCollection, EEPActionStep.AwaitingCourierCollection);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery, EEPActionStep.AwaitingDelivery);
+                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitLicenceDisc, EEPActionStep.AwaitLicenceDisc);
+                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.Completed, EEPActionStep.Completed);
+                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitInvoice, EEPActionStep.AwaitInvoice);
+                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitDeliveryConfirmation);
 
                 if (tasks != null)
                 {
@@ -464,7 +523,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                                 parmEEPActionStep = actionStepMapping[task.Status]
                             });
                     }
-                    var res = await client.updateStatusListAsync(mzkTasks, MzkLoginType.Driver, _userInfo.CompanyId);
+                    var res = await _client.updateStatusListAsync(mzkTasks, (MzkLoginType)Enum.Parse(typeof(MzkLoginType), _userInfo.CDUserType.ToString()), _userInfo.CompanyId);
 
                     var taskList = new ObservableCollection<CollectDeliveryTask>();
                     if (res.response != null)
@@ -483,7 +542,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                                 AllocatedTo = _userInfo.Name,
                                 Make = x.parmMake,
                                 Model = x.parmModel,
-                                VehicleInsRecId = x.parmCaseCategoryRecID,
+                                CaseCategoryRecID = x.parmCaseCategoryRecID,
                                 // CaseType = mzkTask.parmCaseCategory,
                                 DeliveryDate = x.parmDeliveryDateTime,
                                 DeliveryTime = x.parmDeliveryDateTime,

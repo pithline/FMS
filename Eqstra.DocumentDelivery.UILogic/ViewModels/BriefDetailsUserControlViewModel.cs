@@ -40,7 +40,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 return !string.IsNullOrEmpty(address);
             });
 
-            this.CustomerDetails = PersistentData.Instance.CustomerDetails;
         }
         public DelegateCommand<string> MailToCommand { get; set; }
 

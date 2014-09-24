@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.Common;
 using Eqstra.DocumentDelivery.UILogic;

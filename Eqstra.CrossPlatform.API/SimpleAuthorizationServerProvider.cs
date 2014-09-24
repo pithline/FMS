@@ -16,23 +16,30 @@ namespace Eqstra.CrossPlatform.API
         }
         async public override System.Threading.Tasks.Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            
-            using (SSRepository ssRepo = new SSRepository())
-            {                
-                if (await ssRepo.ValidateUserAsync(null, context.UserName, context.Password))
+            try
+            {
+                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
+                using (SSRepository ssRepo = new SSRepository())
                 {
-                    context.SetError("invalid_grant", "The username or password is incorrect.");
-                    return;
+                    if (await ssRepo.ValidateUserAsync(null, context.UserName, context.Password))
+                    {
+                        context.SetError("invalid_grant", "The username or password is incorrect.");
+                        return;
+                    }
+
+
                 }
-                
-                
+                var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                identity.AddClaim(new Claim("sub", context.UserName));
+                identity.AddClaim(new Claim("role", "user"));
+                context.Validated(identity);
             }
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
-            context.Validated(identity);     
-          
+            catch (Exception ex)
+            {
+                context.SetError("serviceunreachable", ex.Message.ToString());
+                return;
+            }
             
         }
     }
