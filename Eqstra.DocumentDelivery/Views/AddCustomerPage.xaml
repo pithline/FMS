@@ -35,7 +35,7 @@
                                                        IsCompact="True"/>
 
             <AppBarButton  VerticalAlignment="Bottom" Margin="10,10"
-                                                       Icon="Clear" 
+                                                       Icon="Cancel" 
                                                        RequestedTheme="Light"
                                                       Command="{Binding ClearCustomerCommand }"
                                                        IsCompact="True" />

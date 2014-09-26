@@ -13,24 +13,23 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class CollectDeliveryTask : ValidatableBindableBase
     {
-      
-        private long caseCategoryRecID;
-        [PrimaryKey]
-        public long CaseCategoryRecID
-        {
-            get { return caseCategoryRecID; }
-            set { SetProperty(ref caseCategoryRecID, value); }
-
-        }
         private string caseNumber;
 
-        [RestorableState]
+        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }
             set { caseNumber = value; }
-
         }
+      
+        private long caseCategoryRecID;
+      
+        public long CaseCategoryRecID
+        {
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
+        }
+     
         private string customerNumber;
         public string CustomerNumber
         {
@@ -43,6 +42,14 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         {
             get { return customerName; }
             set { SetProperty(ref customerName, value); }
+        }
+
+        private string contactName;
+
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
         }
         private string cdTaskStatus;
         public string CDTaskStatus
@@ -193,14 +200,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
 
-        private string noOfRecords;
-
-        public string NoOfRecords
-        {
-            get { return noOfRecords; }
-            set { SetProperty(ref noOfRecords, value); }
-        }
-
         private string serviceId;
 
         public string ServiceId
@@ -224,13 +223,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref userID, value); }
         }
 
-        private string custAccount;
-
-        public string CustAccount
-        {
-            get { return custAccount; }
-            set { SetProperty(ref custAccount, value); }
-        }
         private bool isAssignTask;
 
         public bool IsAssignTask

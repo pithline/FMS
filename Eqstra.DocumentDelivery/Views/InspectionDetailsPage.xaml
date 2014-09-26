@@ -12,6 +12,7 @@
     xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d">
 
@@ -22,8 +23,11 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Save" Icon="Save" Command="{Binding SaveTaskCommand}" Visibility="{Binding SaveVisibility}"/>
+            </CommandBar.SecondaryCommands>
+            <CommandBar.PrimaryCommands>
+
                 <AppBarButton Label="Next Step" Icon="Forward" Command="{Binding NextStepCommand}" Visibility="{Binding NextStepVisibility}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -34,7 +38,11 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
+                          AnimationType="DoubleCircle">
+        
+  
+        <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -143,4 +151,5 @@
             </Grid>
         </Grid>
     </Grid>
+    </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

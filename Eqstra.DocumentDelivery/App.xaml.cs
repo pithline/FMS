@@ -71,7 +71,7 @@ namespace Eqstra.DocumentDelivery
             if (db == null)
             {
                 var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-                // var packDb = await sqliteDBFolder.GetFileAsync("eqstramobility.sqlite");
+        
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();

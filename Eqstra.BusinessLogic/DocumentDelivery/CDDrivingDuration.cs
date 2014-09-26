@@ -11,7 +11,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
     public class CDDrivingDuration : ValidatableBindableBase
     {
         private string caseNumber;
-        [RestorableState]
+        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }
@@ -19,7 +19,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private long caseCategoryRecID;
-        [PrimaryKey]
+       
         public long CaseCategoryRecID
         {
             get { return caseCategoryRecID; }

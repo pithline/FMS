@@ -44,14 +44,24 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             _eventAggregator = eventAggregator;
             this.SaveTaskCommand = new DelegateCommand(async () =>
             {
-                foreach (var item in this.SelectedTaskList)
+                try
                 {
-                    item.IsAssignTask = true;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(item);
+                    this.isBusy = true;
+                    foreach (var item in this.SelectedTaskList)
+                    {
+                        item.IsAssignTask = true;
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectDeliveryTask>(item);
 
-                    //await DDServiceProxyHelper.Instance.UpdateTaskStatusAsync();
+                        //await DDServiceProxyHelper.Instance.UpdateTaskStatusAsync();
 
-                    this._navigationService.Navigate("Main", string.Empty);
+                        this._navigationService.Navigate("Main", string.Empty);
+                    }
+                    this.IsBusy = false;
+                }
+                catch (Exception ex)
+                {
+                    this.IsBusy = false;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             },
             () =>
@@ -62,8 +72,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 try
                 {
+                    this.IsBusy = true;
                     PersistentData.Instance.CollectDeliveryTask = this.CDTask;
-                    ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"] = this.CDTask.CaseCategoryRecID;
+                    ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.CDTask.CaseNumber;
                     if (this.CDTask.TaskType == CDTaskType.Collect)
                     {
                         this._navigationService.Navigate("CollectionOrDeliveryDetails", string.Empty);
@@ -72,9 +83,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     {
                         _navigationService.Navigate("DrivingDirection", string.Empty);
                     }
+                    this.IsBusy = false;
                 }
                 catch (Exception ex)
                 {
+                    this.IsBusy = false;
                     AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             },
@@ -86,18 +99,25 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this.TasksChangedCommand = new DelegateCommand<ObservableCollection<object>>((param) =>
             {
-                this.SelectedTaskList.Clear();
-                foreach (var item in param)
+                try
                 {
-                    this.SelectedTaskList.Add((CollectDeliveryTask)item);
-                }
+                    this.SelectedTaskList.Clear();
+                    foreach (var item in param)
+                    {
+                        this.SelectedTaskList.Add((CollectDeliveryTask)item);
+                    }
 
-                this.SaveTaskCommand.RaiseCanExecuteChanged();
-                this.NextStepCommand.RaiseCanExecuteChanged();
-                this.GetCustomerDetailsAsync();
-                PersistentData.Instance.CustomerDetails = this.CustomerDetails;
-                this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
-                _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails);
+                    this.SaveTaskCommand.RaiseCanExecuteChanged();
+                    this.NextStepCommand.RaiseCanExecuteChanged();
+                    this.GetCustomerDetailsAsync();
+                    PersistentData.Instance.CustomerDetails = this.CustomerDetails;
+                    this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
+                    _eventAggregator.GetEvent<CustomerDetailsEvent>().Publish(this.CustomerDetails);
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
 
             });
         }
@@ -106,35 +126,48 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             try
             {
+                this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 _eventAggregator.GetEvent<TasksFetchedEvent>().Subscribe(async o =>
                 {
                     await ShowTasksAsync(navigationParameter);
                 }, ThreadOption.UIThread);
                 await ShowTasksAsync(navigationParameter);
+                this.IsBusy = false;
             }
             catch (Exception ex)
             {
+                this.IsBusy = false;
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
 
         private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
         {
-            var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed);
-            this.CDTaskList.Clear();
-            foreach (CollectDeliveryTask item in list.OrderBy(o => o.CustomerName).ThenBy(o => o.Address))
+            try
             {
-                if (item!=null)
+                this.IsBusy = true;
+                var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).GroupBy(g => g.CustomerId).Select(f => f.First()).Where(w => w.Status != CDTaskStatus.Completed);
+                this.CDTaskList.Clear();
+                foreach (CollectDeliveryTask item in list)
                 {
-                    this.CDTaskList.Add(item);
-                    GetAppointments(item); 
+                    if (item != null)
+                    {
+                        this.CDTaskList.Add(item);
+                        GetAppointments(item);
+                    }
                 }
-            }
-            if (this.CDTaskList.Any())
-                this.CDTask = this.CDTaskList.FirstOrDefault();
+                if (this.CDTaskList.Any())
+                    this.CDTask = this.CDTaskList.FirstOrDefault();
 
-            await GetDocumentsFromDbByCaseNumber();
+                await GetAllDocumentFromDbByCusomer();
+                this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                this.IsBusy = false;
+            }
 
         }
 
@@ -149,14 +182,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.DetailTitle = "Awaiting Tasks";
                     this.SaveVisibility = Visibility.Visible;
                     this.NextStepVisibility = Visibility.Collapsed;
-                    list = (tasks).Where(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status == CDTaskStatus.AwaitDriverCollection);
+                    list = (tasks).Where(x => !x.IsAssignTask).Where(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status == CDTaskStatus.AwaitDriverCollection);
                 }
                 if (navigationParameter.Equals("Total"))
                 {
                     this.DetailTitle = "Todays's Tasks";
                     this.SaveVisibility = Visibility.Collapsed;
                     this.NextStepVisibility = Visibility.Visible;
-                    list = (tasks).Where(x => x.DeliveryDate.Date.Date.Equals(DateTime.Today));
+                    list = (tasks).Where(x => x.IsAssignTask && x.DeliveryDate.Date.Equals(DateTime.Today));
                 }
                 if (navigationParameter.Equals("MyTasks"))
                 {
@@ -238,6 +271,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref customer, value); }
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
+
         private CDCustomerDetails customerDetails;
         public CDCustomerDetails CustomerDetails
         {
@@ -262,22 +303,21 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         #region Methods
 
-        public async System.Threading.Tasks.Task GetDocumentsFromDbByCaseNumber()
+        public async System.Threading.Tasks.Task GetAllDocumentFromDbByCusomer()
         {
-            var docs = await SqliteHelper.Storage.LoadTableAsync<Document>();
-
-            this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
             if (this.CDTask != null)
             {
-                foreach (var d in docs.Where(w => w.CaseNumber == this.CDTask.CaseNumber))
+                var docList = (await SqliteHelper.Storage.LoadTableAsync<Document>()).Where(d => !d.IsDelivered); ;
+                var allTaskOfCustomer = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.CustomerId == this.CDTask.CustomerId).ToList();
+                this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
+
+                foreach (var d in docList)
                 {
-                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { CaseNumber = d.CaseNumber, DocumentType = d.DocumentType });
-
-
+                    if (allTaskOfCustomer.Any(t => t.CaseCategoryRecID == d.CaseCategoryRecID))
+                        this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { SerialNumber = d.SerialNumber, DocumentType = d.DocumentType });
                 }
                 GetCustomerDetailsAsync();
                 this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
-
             }
 
         }
@@ -317,6 +357,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.CustomerDetails.RegistrationNumber = this.CDTask.RegistrationNumber;
                     this.CustomerDetails.MakeModel = this.CDTask.Make + Environment.NewLine + this.CDTask.Model;
                     this.CustomerDetails.CaseType = this.CDTask.CaseType;
+                    this.CustomerDetails.ContactName = this.CDTask.ContactName;
+
                     this.CustomerDetails.Appointments = PersistentData.Instance.Appointments;
                 }
             }

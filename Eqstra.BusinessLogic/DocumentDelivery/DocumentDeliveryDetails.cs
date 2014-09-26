@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,22 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class DocumentDeliveryDetails : BaseModel
+    public class DocumentDeliveryDetails : ValidatableBindableBase
     {
         public DocumentDeliveryDetails()
         {
             this.ContactPersons = (SqliteHelper.Storage.LoadTableAsync<ContactPerson>()).Result;
         }
 
-        private long caseCategoryRecID;
+        private string caseNumber;
         [PrimaryKey]
+        public string CaseNumber
+        {
+            get { return caseNumber; }
+            set { SetProperty(ref caseNumber, value); }
+        }
+
+        private long caseCategoryRecID;
         public long CaseCategoryRecID
         {
             get { return caseCategoryRecID; }
@@ -150,10 +158,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref deliveryDate, value); }
         }
 
-        public override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
-        {
-            throw new NotImplementedException();
-        }
         
     }
 }

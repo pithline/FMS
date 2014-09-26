@@ -23,8 +23,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             LogoutCommand = new DelegateCommand(() =>
             {
                 _accountService.SignOut();
-                _navigationService.Navigate("Login", string.Empty);
                 _navigationService.ClearHistory();
+                _navigationService.Navigate("Login", string.Empty);
+                
             });
         }
         private string networkIcon;
@@ -41,7 +42,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return userInfo; }
             set { SetProperty(ref userInfo, value); }
         }
-        public void GetNetworkStatus()
+       public void GetNetworkStatus()
         {
             try
             {
@@ -49,7 +50,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 NetworkInformation.NetworkStatusChanged += (s) =>
                 {
                     if (connectionProfile != null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-                       Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetConnected.png"; });
+                      Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High,() => { NetworkIcon = "ms-appx:///Assets/NetConnected.png"; });
                     else
                         Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetDisconnected.png"; });
 

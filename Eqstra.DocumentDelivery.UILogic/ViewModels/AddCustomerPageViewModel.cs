@@ -21,7 +21,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this._eventAggregator = eventAggregator;
             this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                this.Model.CaseCategoryRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"].ToString());
+                this.Model.CaseNumber =ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
                 await SqliteHelper.Storage.InsertSingleRecordAsync<ContactPerson>(this.Model);
                 this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
             });

@@ -11,14 +11,9 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class Document : ValidatableBindableBase
     {
-        private long vehicleInsRecID;
-        [PrimaryKey]
-        public long VehicleInsRecID
-        {
-            get { return vehicleInsRecID; }
-            set { SetProperty(ref vehicleInsRecID, value); }
-        }
+
         private string caseNumber;
+        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }

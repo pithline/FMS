@@ -46,6 +46,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         });
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
@@ -69,12 +70,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             try
             {
+                this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.UserInfo = PersistentData.Instance.UserInfo;
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
-
+                this.IsBusy = false;
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
                     DDServiceProxyHelper.Instance.Synchronize(async () =>
@@ -85,6 +87,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         });
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
@@ -102,10 +105,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 PersistentData.Instance.Appointments = this.Appointments;
+             
             }
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+                this.IsBusy = false;
             }
         }
 
@@ -164,6 +169,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref userInfo, value); }
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
+        
         /// <summary>
         /// / testing temporary code.
         /// </summary>
@@ -194,7 +207,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<Document>();
             //await SqliteHelper.Storage.DropTableAsync<CollectDeliveryTask>();
             //await SqliteHelper.Storage.DropTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
+            ////await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
 
 
             //await SqliteHelper.Storage.CreateTableAsync<CDDrivingDuration>();
@@ -210,7 +223,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed);
+            var list = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).GroupBy(g=>g.CustomerId).Select(f=>f.First()).Where(w => w.Status != CDTaskStatus.Completed);
             foreach (var item in list)
             {
                 if (item != null)
@@ -223,9 +236,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         private void GetAllCount()
         {
-            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status ==CDTaskStatus.AwaitDriverCollection);
+            this.AwaitingConfirmationCount = this.PoolofTasks.Where(x => !x.IsAssignTask).Count(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status == CDTaskStatus.AwaitDriverCollection);
             this.MyTaskCount = this.PoolofTasks.Count(x => x.IsAssignTask && x.Status != CDTaskStatus.Completed);
-            this.TotalCount = this.PoolofTasks.Count(x => x.DeliveryDate.Date.Equals(DateTime.Today));
+            this.TotalCount = this.PoolofTasks.Count(x =>  x.IsAssignTask && x.DeliveryDate.Date.Equals(DateTime.Today));
         }
         private void GetAppointments()
         {

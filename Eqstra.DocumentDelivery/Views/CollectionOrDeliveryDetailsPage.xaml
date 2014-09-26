@@ -13,6 +13,7 @@
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
     xmlns:mzk="using:Mazik.WinRT.Components.Controls"
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d" d:DesignWidth="3000">
@@ -36,7 +37,7 @@
             </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
-
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}">
     <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -198,4 +199,5 @@
             </Grid>
         </ScrollViewer>
     </Grid>
+    </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

@@ -13,6 +13,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
     public class ContactPerson : ValidatableBindableBase
     {
         private string caseNumber;
+         [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }

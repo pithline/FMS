@@ -44,15 +44,15 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.IsStartDriving = false;
                 this.IsArrived = true;
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new CDDrivingDuration { StartDateTime = DateTime.Now, CaseCategoryRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"].ToString()) });
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new CDDrivingDuration { StartDateTime = DateTime.Now, CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString()});
             });
 
             this.ArrivedCommand = new DelegateCommand(async () =>
             {
                 if (this._deliveryTask != null)
                 {
-                    var CaseCategoryRecID = Int64.Parse(ApplicationData.Current.LocalSettings.Values["CaseCategoryRecID"].ToString());
-                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseCategoryRecID.Equals(CaseCategoryRecID));
+                    var CaseNumber = Int64.Parse(ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString());
+                    var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseNumber.Equals(CaseNumber));
                     dd.StopDateTime = DateTime.Now;
                     this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._deliveryTask);
@@ -68,7 +68,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseCategoryRecID == _deliveryTask.CaseCategoryRecID);
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseNumber == _deliveryTask.CaseNumber);
                 if (dd != null)
                 {
                     this.IsArrived = dd.StopDateTime == DateTime.MinValue;
