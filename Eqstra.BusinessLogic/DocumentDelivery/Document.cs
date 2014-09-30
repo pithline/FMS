@@ -12,13 +12,14 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
     public class Document : ValidatableBindableBase
     {
 
-        private string caseNumber;
+        private long caseCategoryRecID;
         [PrimaryKey]
-        public string CaseNumber
+        public long CaseCategoryRecID
         {
-            get { return caseNumber; }
-            set { caseNumber = value; }
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
         }
+
         private string documentType;
 
         public string DocumentType
@@ -35,27 +36,13 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref serialNumber, value); }
         }
 
-        private long caseCategoryRecID;
-
-        public long CaseCategoryRecID
+        private string makeModel;
+        public string MakeModel
         {
-            get { return caseCategoryRecID; }
-            set { SetProperty(ref caseCategoryRecID, value); }
+            get { return makeModel; }
+            set { SetProperty(ref makeModel, value); }
         }
 
-        private string make;
-        public string Make
-        {
-            get { return make; }
-            set { SetProperty(ref make, value); }
-        }
-
-        private string model;
-        public string Model
-        {
-            get { return model; }
-            set { SetProperty(ref model, value); }
-        }
         private string registrationNumber;
         public string RegistrationNumber
         {
@@ -70,28 +57,5 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             get { return docName; }
             set { SetProperty(ref docName, value); }
         }
-
-        private bool isDelivered;
-        public bool IsDelivered
-        {
-            get { return isDelivered; }
-            set { SetProperty(ref isDelivered, value); }
-        }
-
-        private bool isCollected;
-        public bool IsCollected
-        {
-            get { return isCollected; }
-            set { SetProperty(ref isCollected, value); }
-        }
-
-        private bool shouldSave;
-
-        public bool ShouldSave
-        {
-            get { return shouldSave; }
-            set { SetProperty(ref shouldSave, value); }
-        }
-
     }
 }

@@ -152,6 +152,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                            await this.InsertDocumentCollectedDetailsToSvcAsync();
                            await this.InsertDocumentDeliveryDetailsToSvcAsync();
                            await this.UpdateTaskStatusAsync();
+                           await this.GetCollectedFromSvcAsync();
 
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                            {
@@ -168,6 +169,53 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
         }
 
+        public async System.Threading.Tasks.Task<ObservableCollection<CollectDeliveryTask>> GroupTasksByCustomer()
+        {
+            try
+            {
+                var allTaskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed);
+                var taskbuckets = allTaskList.GroupBy(x => new { x.CustomerId, x.TaskType }).Select(s => s.First());
+
+                ObservableCollection<CollectDeliveryTask> tasks = new ObservableCollection<CollectDeliveryTask>();
+                foreach (var singleTask in taskbuckets)
+                {
+                    singleTask.CDTasksDetails = new ObservableCollection<CDTaskDetails>();
+                    foreach (var item in allTaskList)
+                    {
+                        if (item != null && item.CustomerId == singleTask.CustomerId && item.TaskType == singleTask.TaskType)
+                        {
+                            singleTask.CDTasksDetails.Add(new CDTaskDetails
+                            {
+                                CaseNumber = item.CaseNumber,
+                                CustomerName = item.CustomerName,
+                                TaskType = item.TaskType,
+                                ContactName = item.ContactName,
+                                Address =  item.Address.Replace(System.Environment.NewLine, ","),
+                                DocumentCount = item.DocumentCount,
+                                AllocatedTo = item.AllocatedTo,
+                                CaseCategoryRecID = item.CaseCategoryRecID,
+                                SerialNumber = item.SerialNumber,
+                                RegistrationNumber = item.RegistrationNumber,
+                                MakeModel = item.MakeModel,
+                                Status = item.Status,
+                                StatusDueDate = item.StatusDueDate,
+                                DeliveryDate = item.DeliveryDate,
+
+                            });
+
+                        }
+                    }
+                    tasks.Add(singleTask);
+                }
+                return tasks;
+            }
+            catch (Exception ex)
+            {
+                this.SendMessageToUIThread(ex.Message);
+                throw;
+            }
+        }
+
         async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
         {
             try
@@ -180,6 +228,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
+              
                 var result = await _client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskInsertList = new List<CollectDeliveryTask>();
@@ -194,34 +243,29 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               CaseNumber = mzkTask.parmCaseId,
                               Address = mzkTask.parmCustAddress,
                               CustomerName = mzkTask.parmCustName,
-                              ContactName = "ContactNameDummy",
                               CustomerNumber = mzkTask.parmCustPhone,
                               Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail,
                               StatusDueDate = mzkTask.parmStatusDueDate,
                               RegistrationNumber = mzkTask.parmRegNo,
                               AllocatedTo = _userInfo.Name,
-                              Make = mzkTask.parmMake,
-                              Model = mzkTask.parmModel,
+                              MakeModel = mzkTask.parmMake + Environment.NewLine + mzkTask.parmModel,
                               CaseCategoryRecID = mzkTask.parmCaseCategoryRecID,
-                              //CaseType = mzkTask.parmCaseCategory,
+
                               DeliveryDate = mzkTask.parmDeliveryDateTime,
                               EmailId = mzkTask.parmCustomerEmail,
                               CustPartyId = mzkTask.parmCustPartyId,
                               CaseRecID = mzkTask.parmCaseRecID,
                               CaseServiceRecID = mzkTask.parmCaseServiceRecID,
                               TaskType = (CDTaskType)Enum.Parse(typeof(CDTaskType), mzkTask.parmCollectDeliverType.ToString()),
-                              //CustomerId = mzkTask.parmCustAccount,
-                              CustomerId = "0050859",
-                              //DocumentCount =Int32.Parse(mzkTask.parmNoOfRecords),
+                              CustomerId = mzkTask.parmCustAccount,
+                              //DocumentCount = Int32.Parse(mzkTask.parmNoOfRecords),
                               ServiceId = mzkTask.parmServiceId,
                               ServiceRecID = mzkTask.parmServiceRecID,
                               UserID = mzkTask.parmUserID,
-                              DocumentCount=112//testing
-
-
+                              SerialNumber = mzkTask.parmSerialNumber,
+                              ContactName = mzkTask.parmContactPersonName,
+                             // DocumentType
                           };
-
-
                         if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseId))
                         {
                             taskUpdateList.Add(taskTosave);
@@ -241,8 +285,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     if (taskInsertList.Any())
                         await SqliteHelper.Storage.InsertAllAsync<CollectDeliveryTask>(taskInsertList);
                 }
-
-                await SyncDocumentsFromSvcAsync(caseCategoryRecIdList);
+                await GetCollectedFromSvcAsync();
             }
             catch (Exception ex)
             {
@@ -251,7 +294,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-        async public System.Threading.Tasks.Task SyncDocumentsFromSvcAsync(ObservableCollection<long> caseCategoryRecIdList)
+    
+        async public System.Threading.Tasks.Task GetCollectedFromSvcAsync()
         {
             try
             {
@@ -263,46 +307,22 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var result = await _client.getDocumentsInfoAsync(caseCategoryRecIdList, _userInfo.CompanyId);
-
-                var documentData = await SqliteHelper.Storage.LoadTableAsync<Document>();
-                List<Document> documentInsertList = new List<Document>();
-                List<Document> documenUpdateList = new List<Document>();
-
+                var collectedFromData = (await SqliteHelper.Storage.LoadTableAsync<CollectedFromData>());
+                 var result = await _client.getCollectedFromAsync(_userInfo.CompanyId);
                 if (result.response != null)
                 {
-                    foreach (var mzkDoc in result.response)
+                    foreach (var mzk in result.response)
                     {
-                        var docTosave = new Document
-                          {
-                              DocumentType = mzkDoc.parmDocuTypeID,
-                              Make = mzkDoc.parmMake,
-                              Model = mzkDoc.parmModel,
-                              RegistrationNumber = mzkDoc.parmRegNo,
-                              DocName = mzkDoc.parmDocuName,
-                              CaseCategoryRecID = mzkDoc.parmCaseCategoryRecID
-                              
-                              // CaseNumber=mzkDoc.ca
-                              // SerialNumber=mzkDoc.
-
-                          };
-
-                        if (documentData.Any(s => s.RegistrationNumber == mzkDoc.parmRegNo))
+                        if (collectedFromData != null && collectedFromData.Any(a => a.UserID != mzk.parmUserID))
                         {
-                            documenUpdateList.Add(docTosave);
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName });
                         }
                         else
                         {
-                            documentInsertList.Add(docTosave);
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName });
                         }
 
                     }
-
-                    if (documenUpdateList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync<Document>(documenUpdateList);
-
-                    if (documentInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<Document>(documentInsertList);
                 }
             }
             catch (Exception ex)
@@ -310,8 +330,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
-
         async public System.Threading.Tasks.Task InsertDocumentCollectedDetailsToSvcAsync()
         {
             try
@@ -324,16 +342,16 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsCollected && !x.IsDelivered);
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsCollected && !x.IsDelivered);
                 ObservableCollection<MZKDocumentCollectedDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
-                if (DocumentData != null)
+                if (cdDataList != null)
                 {
-                    foreach (var doc in DocumentData)
+                    foreach (var doc in cdDataList)
                     {
                         mzkDocumentCollectedDetailsContractColl.Add(new MZKDocumentCollectedDetailsContract()
                         {
                             parmCaseId = doc.CaseNumber,
-                            parmCollectedFrom = doc.CollectedFrom,
+                            parmCollectedFrom = doc.SelectedCollectedFrom,
                             parmComment = doc.Comment,
                             parmEmail = doc.Email,
                             parmPosition = doc.Position,
@@ -367,11 +385,11 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var DocumentData = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x =>x.IsDelivered);
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsDelivered);
                 ObservableCollection<MzkDocumentDeliveryDetailsContrcat> mzkDocumentDeliverDetailsContractColl = new ObservableCollection<MzkDocumentDeliveryDetailsContrcat>();
-                if (DocumentData != null)
+                if (cdDataList != null)
                 {
-                    foreach (var doc in DocumentData)
+                    foreach (var doc in cdDataList)
                     {
                         mzkDocumentDeliverDetailsContractColl.Add(new MzkDocumentDeliveryDetailsContrcat()
                         {
@@ -430,6 +448,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
+
+
         public async System.Threading.Tasks.Task UpdateTaskStatusAsync()
         {
             try
@@ -480,8 +500,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                                 StatusDueDate = x.parmStatusDueDate,
                                 RegistrationNumber = x.parmRegNo,
                                 AllocatedTo = _userInfo.Name,
-                                Make = x.parmMake,
-                                Model = x.parmModel,
                                 CaseCategoryRecID = x.parmCaseCategoryRecID,
                                 // CaseType = mzkTask.parmCaseCategory,
                                 DeliveryDate = x.parmDeliveryDateTime,

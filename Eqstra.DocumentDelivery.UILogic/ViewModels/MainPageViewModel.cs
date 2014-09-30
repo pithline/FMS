@@ -32,7 +32,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.PoolofTasks = new ObservableCollection<CollectDeliveryTask>();
             this.Appointments = new ScheduleAppointmentCollection();
             _eventAggregator = eventAggregator;
-            CreateTableAsync();
+
             this.SyncCommand = new DelegateCommand(() =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
@@ -70,6 +70,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             try
             {
+     
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.UserInfo = PersistentData.Instance.UserInfo;
@@ -105,7 +106,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 PersistentData.Instance.Appointments = this.Appointments;
-             
+
             }
             catch (Exception ex)
             {
@@ -176,69 +177,23 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
-        
+
         /// <summary>
         /// / testing temporary code.
         /// </summary>
         /// <returns></returns>
-        private async System.Threading.Tasks.Task CreateTableAsync()
-        {
-
-            //await SqliteHelper.Storage.DropTableAsync<Document>();
-            //await SqliteHelper.Storage.CreateTableAsync<Document>();
-            //var d = new ObservableCollection<Document>
-            //  {
-            //      new Document{CaseCategoryRecID=123, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=234, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=345, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=456, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=789, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=985, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=741, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=852, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=145, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{CaseCategoryRecID=963, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //  };
-           // await SqliteHelper.Storage.InsertAllAsync<Document>(d);
-
-
-            //await SqliteHelper.Storage.DropTableAsync<CDDrivingDuration>();
-            //await SqliteHelper.Storage.DropTableAsync<ContactPerson>();
-            //await SqliteHelper.Storage.DropTableAsync<Document>();
-            //await SqliteHelper.Storage.DropTableAsync<CollectDeliveryTask>();
-            //await SqliteHelper.Storage.DropTableAsync<CDCustomerDetails>();
-            ////await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
-
-
-            //await SqliteHelper.Storage.CreateTableAsync<CDDrivingDuration>();
-            //await SqliteHelper.Storage.CreateTableAsync<ContactPerson>();
-            //await SqliteHelper.Storage.CreateTableAsync<Document>();
-            //await SqliteHelper.Storage.CreateTableAsync<CollectDeliveryTask>();
-            //await SqliteHelper.Storage.CreateTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<DocumentDeliveryDetails>();
-
-            
-
-        }
+       
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).GroupBy(g=>g.CustomerId).Select(f=>f.First()).Where(w => w.Status != CDTaskStatus.Completed);
-            foreach (var item in list)
-            {
-                if (item != null)
-                {
-                    this.PoolofTasks.Add(item);
-                }
-            }
+           this.PoolofTasks.AddRange(await DDServiceProxyHelper.Instance.GroupTasksByCustomer());
         }
-
 
         private void GetAllCount()
         {
             this.AwaitingConfirmationCount = this.PoolofTasks.Where(x => !x.IsAssignTask).Count(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status == CDTaskStatus.AwaitDriverCollection);
             this.MyTaskCount = this.PoolofTasks.Count(x => x.IsAssignTask && x.Status != CDTaskStatus.Completed);
-            this.TotalCount = this.PoolofTasks.Count(x =>  x.IsAssignTask && x.DeliveryDate.Date.Equals(DateTime.Today));
+            this.TotalCount = this.PoolofTasks.Count(x => x.IsAssignTask && x.DeliveryDate.Date.Equals(DateTime.Today));
         }
         private void GetAppointments()
         {
@@ -247,7 +202,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 var startTime = new DateTime(item.DeliveryDate.Year, item.DeliveryDate.Month, item.DeliveryDate.Day, item.DeliveryDate.Hour, item.DeliveryDate.Minute,
                            item.DeliveryDate.Second);
-              
+
                 this.Appointments.Add(
 
                               new ScheduleAppointment()

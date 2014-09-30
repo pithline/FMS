@@ -12,11 +12,10 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class CollectDeliveryTask : ValidatableBindableBase
+    public class CDTaskDetails : ValidatableBindableBase
     {
         private string caseNumber;
 
-        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }
@@ -217,14 +216,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref userID, value); }
         }
 
-        private bool isAssignTask;
-
-        public bool IsAssignTask
-        {
-            get { return isAssignTask; }
-            set { SetProperty(ref isAssignTask, value); }
-        }
-
 
         private string serialNumber;
 
@@ -234,26 +225,17 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref serialNumber, value); }
         }
 
-        private ObservableCollection<CDTaskDetails> cdTasksDetails;
-        [Ignore]
-        public ObservableCollection<CDTaskDetails> CDTasksDetails
-        {
-            get { return cdTasksDetails; }
-            set { SetProperty(ref cdTasksDetails, value); }
-        }
 
-        public void Dispose()
+        private bool isAssignTask;
+
+        public bool IsAssignTask
         {
-            if (CDTasksDetails != null)
-                CDTasksDetails.Clear();
+            get { return isAssignTask; }
+            set { SetProperty(ref isAssignTask, value); }
         }
 
     }
 
-    public class TasksFetchedEvent : PubSubEvent<CollectDeliveryTask>
-    {
-
-    }
 }
 
 

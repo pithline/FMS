@@ -37,8 +37,9 @@
             </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
-    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}">
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
+                          AnimationType="DoubleCircle">
+        <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -97,7 +98,11 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding AckDialog}" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{StaticResource FontFamilyStyle}"/>
-                            <grid:SfDataGrid x:Name="sfDataGrid" Grid.Row="1" NavigationMode="Row" AllowEditing="True" ShowBusyIndicator="True" ItemsSource="{Binding DocumentList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ColumnSizer="Auto" AutoGenerateColumns="False" SelectionMode="Multiple" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+                            <grid:SfDataGrid x:Name="sfDataGrid" Grid.Row="1" NavigationMode="Row" 
+                                             AllowEditing="True"
+                                             ItemsSource="{Binding DocumentList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                             ColumnSizer="Auto" AutoGenerateColumns="False" SelectionMode="Multiple"
+                                             BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
                                 <grid:SfDataGrid.Columns>
                                     <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
                                     <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
@@ -177,7 +182,7 @@
 
                                     <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
                                         <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
-                                        <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.Customers ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                            <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.CollectedFrom ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
                                         </ComboBox>
                                     </StackPanel>
 

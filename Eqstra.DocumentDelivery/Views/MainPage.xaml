@@ -14,6 +14,7 @@
 	DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
 	prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:Conv="using:Eqstra.DocumentDelivery.Converter"
 	xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
 	xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
@@ -23,6 +24,7 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Eqstra</x:String>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Conv:DateTimeConverter x:Key="DateTimeConverter"/>
     </prism:VisualStateAwarePage.Resources>
 
     <!--
@@ -151,39 +153,84 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <grid:SfDataGrid  x:Name="mainGrid" Grid.Row="1" NavigationMode="Row" SelectedItem="{Binding InspectionTask, Mode=TwoWay}" ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks}" ColumnSizer="SizeToHeader" AutoGenerateColumns="False" SelectionMode="Single" AllowEditing="False" BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+                            <grid:SfDataGrid  x:Name="mainGrid" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                HideEmptyGridViewDefinition="True"
+                                               ShowGroupDropArea="False" SelectionMode="None"
+                                               NavigationMode="Row"
+                                              ShowBusyIndicator="True" ItemsSource="{Binding PoolofTasks,Mode=TwoWay}"
+                                              ColumnSizer="SizeToHeader" AutoGenerateColumns="False" 
+                                              AllowEditing="False" BorderBrush="Transparent" 
+                                              BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+
+                                <grid:SfDataGrid.DetailsViewDefinition>
+                                    <grid:GridViewDefinition RelationalColumn="CDTasksDetails">
+                                        <grid:GridViewDefinition.DataGrid>
+                                            <grid:SfDataGrid x:Name="FirstDetailsViewGrid"  SelectionMode="None"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                                <grid:SfDataGrid.Columns>
+
+                                                    <grid:GridTextColumn MappingName="TaskType" HeaderText="TASK TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="Address" HeaderText="ADDRESS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="270" TextWrapping="WrapWholeWords" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="DocumentCount" HeaderText="NO OF DOCUMENTS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                                    <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="220" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridTextColumn MappingName="MakeModel" HeaderText="MAKE MODEL" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="220" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridDateTimeColumn MappingName="StatusDueDate"  HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridDateTimeColumn  ValueBinding="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter},ConverterParameter=d}" HeaderText="DELIVERY DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                    <grid:GridDateTimeColumn  ValueBinding="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter},ConverterParameter=t}" HeaderText="DELIVERY TIME" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                                </grid:SfDataGrid.Columns>
+                                            </grid:SfDataGrid>
+                                        </grid:GridViewDefinition.DataGrid>
+                                    </grid:GridViewDefinition>
+                                </grid:SfDataGrid.DetailsViewDefinition>
+
+
                                 <grid:SfDataGrid.Columns>
-                                    <!--<grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="120" HorizontalHeaderContentAlignment="Left"/>-->
-                                    <!--<grid:GridTextColumn MappingName="CaseType" HeaderText="CASE TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="100" HorizontalHeaderContentAlignment="Left"/>-->
-                                    <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTemplateColumn HeaderText="CUSTOMER NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left">
-                                        <grid:GridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image />
-                                                    <TextBlock Text="{Binding CustomerNumber}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </grid:GridTemplateColumn.CellTemplate>
-                                    </grid:GridTemplateColumn>
                                     <grid:GridTextColumn MappingName="TaskType" HeaderText="TASK TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridTextColumn MappingName="ContactName" HeaderText="CONTACT NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridTextColumn MappingName="Address" HeaderText="ADDRESS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="270" TextWrapping="WrapWholeWords" HorizontalHeaderContentAlignment="Left"/>
 
                                     <grid:GridTextColumn MappingName="DocumentCount" HeaderText="NO OF DOCUMENTS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
 
-                                    <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
-
                                     <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
 
-                                    <grid:GridDateTimeColumn MappingName="DeliveryDate" FormatString="MM/dd/yyyy" HeaderText="DELIVERY DATE" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
 
-                                    <grid:GridTemplateColumn HeaderText="DELIVERY TIME" AllowEditing="True" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left">
-                                        <grid:GridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <input:SfTimePicker Value="{Binding DeliveryDate,Mode=TwoWay}" BorderThickness="0" Background="Transparent"/>
-                                            </DataTemplate>
-                                        </grid:GridTemplateColumn.CellTemplate>
-                                    </grid:GridTemplateColumn>
+                                    <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+                                    <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="220" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridTextColumn MappingName="MakeModel" HeaderText="MAKE MODEL" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridComboBoxColumn MappingName="Status" AllowEditing="False" HeaderText="STATUS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" Width="220" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridDateTimeColumn MappingName="StatusDueDate" HeaderText="STATUS DUE DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridDateTimeColumn  ValueBinding="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter},ConverterParameter=d}" HeaderText="DELIVERY DATE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
+                                    <grid:GridDateTimeColumn  ValueBinding="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter},ConverterParameter=t}" HeaderText="DELIVERY TIME" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  Width="150" HorizontalHeaderContentAlignment="Left"/>
+
                                 </grid:SfDataGrid.Columns>
                             </grid:SfDataGrid>
                         </Grid>

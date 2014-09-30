@@ -35,6 +35,15 @@ namespace Eqstra.DocumentDelivery.Views
 
 
         }
+
+        public void Dispose()
+        {
+            this.mainGrid.ItemsSource = null;
+            this.mainGrid.Dispose();
+            (this.DataContext as IDisposable).Dispose();
+            this.DataContext = null;
+
+        }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             try
@@ -46,15 +55,19 @@ namespace Eqstra.DocumentDelivery.Views
                                       Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
                                      Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
                                      Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
+                                     Convert.ToString(x.DeliveryDate).Equals(args.QueryText) || Convert.ToString(x.Address).Equals(args.QueryText) |
+                                      Convert.ToString(x.CaseNumber).Equals(args.QueryText) || Convert.ToString(x.CDTaskStatus).Equals(args.QueryText)
+                                      || Convert.ToString(x.CustomerId).Equals(args.QueryText) || Convert.ToString(x.ContactName).Equals(args.QueryText)
+                                      || Convert.ToString(x.CustPartyId).Equals(args.QueryText) || Convert.ToString(x.EmailId).Equals(args.QueryText)
+                                     );
 
-                    
+
                 }
             }
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
-               
+
             }
         }
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
@@ -77,10 +90,10 @@ namespace Eqstra.DocumentDelivery.Views
                         {
                             foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {
-                                if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.Name.Equals("VehicleInsRecId") ||
-                                    propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) ||
-                                    propInfo.Name.Equals("Address"))
+                                if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) ||
+                                    propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name))
                                     continue;
+
                                 var propVal = Convert.ToString(propInfo.GetValue(task));
                                 if (propVal.ToLowerInvariant().Contains(args.QueryText.ToLowerInvariant()))
                                 {

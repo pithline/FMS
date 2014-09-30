@@ -12,7 +12,15 @@ namespace Eqstra.CrossPlatform.API
     {
        async public override System.Threading.Tasks.Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-             context.Validated();
+            try
+            {
+                context.Validated();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         async public override System.Threading.Tasks.Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {

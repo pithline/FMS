@@ -16,6 +16,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         public DocumentDeliveryDetails()
         {
             this.ContactPersons = (SqliteHelper.Storage.LoadTableAsync<ContactPerson>()).Result;
+            this.CollectedFrom = (SqliteHelper.Storage.LoadTableAsync<CollectedFromData>()).Result;
         }
 
         private string caseNumber;
@@ -41,6 +42,22 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref contactPersons, value); }
         }
 
+        private List<CollectedFromData> collectedFrom;
+        [Ignore]
+        public List<CollectedFromData> CollectedFrom
+        {
+            get { return collectedFrom; }
+            set { SetProperty(ref collectedFrom, value); }
+        }
+
+        private string selectedCollectedFrom;
+        public string SelectedCollectedFrom
+        {
+            get { return selectedCollectedFrom; }
+            set { SetProperty(ref selectedCollectedFrom, value); }
+        }
+
+
         private string deliveryPersonName;
         public string DeliveryPersonName
         {
@@ -56,13 +73,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref cRSignature, value); }
         }
 
-        private string collectedFrom;
 
-        public string CollectedFrom
-        {
-            get { return collectedFrom; }
-            set { SetProperty(ref collectedFrom, value); }
-        }
 
         private string deliveredAt;
 
@@ -158,6 +169,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref deliveryDate, value); }
         }
 
-        
+
     }
 }

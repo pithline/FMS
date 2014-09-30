@@ -78,13 +78,13 @@ namespace Eqstra.DocumentDelivery
             var accountService = _container.Resolve<IAccountService>();
             var cred = accountService.VerifyUserCredentialsAsync();
 
-            if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Eqstra.BusinessLogic.Helpers.Constants.UserInfo))
             {
-                DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2, EventAggregator);       
-                var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2, EventAggregator);
+                var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Eqstra.BusinessLogic.Helpers.Constants.UserInfo].ToString());
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
                 PersistentData.Instance.UserInfo = userInfo;
-               
+               CreateTableAsync();
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
@@ -147,6 +147,50 @@ namespace Eqstra.DocumentDelivery
         protected override object Resolve(Type type)
         {
             return _container.Resolve(type);
+        }
+
+
+
+        private async System.Threading.Tasks.Task CreateTableAsync()
+        {
+
+            //await SqliteHelper.Storage.DropTableAsync<Document>();
+            //await SqliteHelper.Storage.CreateTableAsync<Document>();
+            //var d = new ObservableCollection<Document>
+            //  {
+            //      new Document{CaseCategoryRecID=123, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=234, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=345, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=456, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=789, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=985, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=741, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=852, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=145, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //      new Document{CaseCategoryRecID=963, CaseNumber = "Case000454",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
+            //  };
+            // await SqliteHelper.Storage.InsertAllAsync<Document>(d);
+
+
+            await SqliteHelper.Storage.DropTableAsync<CDDrivingDuration>();
+            await SqliteHelper.Storage.DropTableAsync<ContactPerson>();
+            await SqliteHelper.Storage.DropTableAsync<Document>();
+            await SqliteHelper.Storage.DropTableAsync<CollectDeliveryTask>();
+            await SqliteHelper.Storage.DropTableAsync<CDCustomerDetails>();
+            await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
+            await SqliteHelper.Storage.DropTableAsync<CollectedFromData>();
+
+            await SqliteHelper.Storage.CreateTableAsync<CDDrivingDuration>();
+            await SqliteHelper.Storage.CreateTableAsync<ContactPerson>();
+            await SqliteHelper.Storage.CreateTableAsync<Document>();
+            await SqliteHelper.Storage.CreateTableAsync<CollectDeliveryTask>();
+            await SqliteHelper.Storage.CreateTableAsync<CDCustomerDetails>();
+            await SqliteHelper.Storage.CreateTableAsync<DocumentDeliveryDetails>();
+
+            await SqliteHelper.Storage.CreateTableAsync<CollectedFromData>();
+
+
+
         }
     }
 }

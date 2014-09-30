@@ -111,6 +111,7 @@
     <Compile Include="Base\ValidationError.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
+    <Compile Include="DocumentDelivery\CDTaskDetail.cs" />
     <Compile Include="DocumentDelivery\CollectDeliveryTask.cs" />
     <Compile Include="Commercial\CAccessories.cs" />
     <Compile Include="Commercial\CCabTrimInter.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="DocumentDelivery\ContactPerson.cs" />
     <Compile Include="DocumentDelivery\DocumentDeliveryDetails.cs" />
     <Compile Include="DocumentDelivery\Document.cs" />
+    <Compile Include="DocumentDelivery\CollectedFromData.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Helpers\CDTaskStatus.cs">
