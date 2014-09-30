@@ -17,20 +17,27 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         private IEventAggregator _eventAggregator;
         public AddCustomerPageViewModel(IEventAggregator eventAggregator)
         {
-            this.Model = new DestinationContacts();
+            this.Model = new ContactPerson();
             this._eventAggregator = eventAggregator;
-            this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async() =>
+            this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                this.Model.VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
-                await SqliteHelper.Storage.InsertSingleRecordAsync<DestinationContacts>(this.Model);
-                this._eventAggregator.GetEvent<DestinationContactsEvent>().Publish(this.Model);
+                this.Model.CaseNumber =ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
+                await SqliteHelper.Storage.InsertSingleRecordAsync<ContactPerson>(this.Model);
+                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
             });
-          
+
+            this.ClearCustomerCommand = new DelegateCommand(() =>
+            {
+                this.Model = new ContactPerson();
+                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
+            });
+
         }
         public DelegateCommand AddCustomerCommand { get; set; }
+        public DelegateCommand ClearCustomerCommand { get; set; }
 
-        private DestinationContacts model;
-        public DestinationContacts Model
+        private ContactPerson model;
+        public ContactPerson Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }

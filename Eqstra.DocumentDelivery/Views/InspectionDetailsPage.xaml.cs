@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Eqstra.DocumentDelivery.UILogic;
+using Eqstra.BusinessLogic.DocumentDelivery;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.DocumentDelivery.Views
@@ -46,14 +47,18 @@ namespace Eqstra.DocumentDelivery.Views
         {
             try
             {
-                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("DetailsItemsSourceFile.json");
+                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json");
                 if (result != null)
                 {
                     this.sfDataGrid.ItemsSource = result.Where(x => x.CustomerName.Equals(args.QueryText) ||
                                       Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
                                      Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
                                      Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryTime).Equals(args.QueryText) || Convert.ToString(x.DeliveryDate).Equals(args.QueryText));
+                                     Convert.ToString(x.DeliveryDate).Equals(args.QueryText) || Convert.ToString(x.Address).Equals(args.QueryText) |
+                                      Convert.ToString(x.CaseNumber).Equals(args.QueryText) || Convert.ToString(x.CDTaskStatus).Equals(args.QueryText)
+                                      || Convert.ToString(x.CustomerId).Equals(args.QueryText) || Convert.ToString(x.ContactName).Equals(args.QueryText)
+                                      || Convert.ToString(x.CustPartyId).Equals(args.QueryText) || Convert.ToString(x.EmailId).Equals(args.QueryText)
+                                     );
                 }
             }
             catch (Exception ex)
@@ -70,17 +75,17 @@ namespace Eqstra.DocumentDelivery.Views
             {
                 if (!isCached)
                 {
-                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "DetailsItemsSourceFile.json");
+                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "CDTaskDetailsFile.json");
                     isCached = true;
                 }
 
                 var searchSuggestionList = new List<string>();
-                foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("DetailsItemsSourceFile.json"))
+                foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json"))
                 {
                     foreach (var propInfo in task.GetType().GetRuntimeProperties())
                     {
-                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.Name.Equals("VehicleInsRecId") ||
-                            propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
+                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) ||
+                            propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name))
                             continue;
                         var propVal = Convert.ToString(propInfo.GetValue(task));
                         if (propVal.ToLowerInvariant().Contains(args.QueryText))
@@ -101,7 +106,7 @@ namespace Eqstra.DocumentDelivery.Views
             try
             {
                 var dc = (InspectionDetailsPageViewModel)this.DataContext;
-                await dc.GetDocumentsFromDbByCaseNumber();
+                await dc.GetAllDocumentFromDbByCusomer();
             }
             catch (Exception ex)
             {

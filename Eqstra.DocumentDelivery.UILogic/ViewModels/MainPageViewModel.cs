@@ -29,9 +29,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         IEventAggregator _eventAggregator;
         public MainPageViewModel(IEventAggregator eventAggregator)
         {
-            this.PoolofTasks = new ObservableCollection<BusinessLogic.CollectDeliveryTask>();
+            this.PoolofTasks = new ObservableCollection<CollectDeliveryTask>();
             this.Appointments = new ScheduleAppointmentCollection();
             _eventAggregator = eventAggregator;
+
             this.SyncCommand = new DelegateCommand(() =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
@@ -41,23 +42,24 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     {
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
                             await GetTasksFromDbAsync();
                             GetAllCount();
-
+                            GetAppointments();
                             AppSettings.Instance.IsSynchronizing = 0;
                             AppSettings.Instance.Synced = true;
                         }
-                              );
+                         );
 
+                        PersistentData.Instance.Appointments = this.Appointments;
                     });
                 }
             });
@@ -68,12 +70,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             try
             {
+     
+                this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.UserInfo = PersistentData.Instance.UserInfo;
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
-
+                this.IsBusy = false;
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
                     DDServiceProxyHelper.Instance.Synchronize(async () =>
@@ -84,6 +88,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         });
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
@@ -95,23 +100,21 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 0;
                             AppSettings.Instance.Synced = true;
                         }
-                              );
+                         );
 
                     });
                 }
+
+                PersistentData.Instance.Appointments = this.Appointments;
+
             }
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+                this.IsBusy = false;
             }
         }
 
-        private WeatherInfo weatherInfo;
-        public WeatherInfo WeatherInfo
-        {
-            get { return weatherInfo; }
-            set { SetProperty(ref weatherInfo, value); }
-        }
         private int total;
         public int TotalCount
         {
@@ -119,11 +122,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref total, value); }
         }
 
-        private int awaitingTaskCount;
+        private int awaitingConfirmationCount;
         public int AwaitingConfirmationCount
         {
-            get { return awaitingTaskCount; }
-            set { SetProperty(ref awaitingTaskCount, value); }
+            get { return awaitingConfirmationCount; }
+            set { SetProperty(ref awaitingConfirmationCount, value); }
         }
 
         private int myTaskCount;
@@ -134,8 +137,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         }
         public DelegateCommand SyncCommand { get; set; }
 
-        private Eqstra.BusinessLogic.CollectDeliveryTask task;
-        public Eqstra.BusinessLogic.CollectDeliveryTask _cdTask
+        private CollectDeliveryTask task;
+        public CollectDeliveryTask _cdTask
         {
             get { return task; }
             set
@@ -143,8 +146,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 SetProperty(ref task, value);
             }
         }
-        private ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> poolofTasks;
-        public ObservableCollection<Eqstra.BusinessLogic.CollectDeliveryTask> PoolofTasks
+        private ObservableCollection<CollectDeliveryTask> poolofTasks;
+        public ObservableCollection<CollectDeliveryTask> PoolofTasks
         {
             get { return poolofTasks; }
             set
@@ -167,82 +170,44 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref userInfo, value); }
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
+        }
+
         /// <summary>
         /// / testing temporary code.
         /// </summary>
         /// <returns></returns>
-        private async System.Threading.Tasks.Task CreateTableAsync()
-        {
-
-
-            //var d = new ObservableCollection<Document>
-            //  {
-            //      new Document{VehicleInsRecID=123, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=234, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=345, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=456, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=789, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=985, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=741, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=852, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=145, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //      new Document{VehicleInsRecID=963, CaseNumber = "E4323",DocumentType  = "License Disc",RegistrationNumber="Registration Number", Make = "Make",Model = "Model",SerialNumber = "Serial Number"},
-            //  };
-            //  await SqliteHelper.Storage.InsertAllAsync<Document>(d);
-
-            //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
-
-            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
-            //await SqliteHelper.Storage.CreateTableAsync<DestinationContacts>();
-            //await SqliteHelper.Storage.CreateTableAsync<Document>();
-            //await SqliteHelper.Storage.CreateTableAsync<CollectDeliveryTask>();
-            //await SqliteHelper.Storage.CreateTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<CDProof>();
-
-        }
+       
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.CollectDeliveryTask>()).Where(w => w.Status != Eqstra.BusinessLogic.Enums.CDTaskStatus.Complete);
-            foreach (var item in list)
-            {
-                this.PoolofTasks.Add(item);
-            }
+           this.PoolofTasks.AddRange(await DDServiceProxyHelper.Instance.GroupTasksByCustomer());
         }
-
 
         private void GetAllCount()
         {
-            string _cdtaskStatus = CDTaskStatus.AwaitingDelivery;
-            if (this.UserInfo.CDUserType == CDUserType.Driver)
-            {
-                _cdtaskStatus = CDTaskStatus.AwaitingDriverCollection;
-            }
-            if (this.UserInfo.CDUserType == CDUserType.Customer)
-            {
-                _cdtaskStatus = CDTaskStatus.AwaitingCustomerCollection;
-            }
-            if (this.UserInfo.CDUserType == CDUserType.Courier)
-            {
-                _cdtaskStatus = CDTaskStatus.AwaitingCourierCollection;
-            }
-
-            this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation || x.Status == _cdtaskStatus || x.Status == BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery);
-            this.MyTaskCount = this.PoolofTasks.Count(x => (x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.Complete && x.CDTaskStatus != BusinessLogic.Enums.CDTaskStatus.AwaitingConfirmation));
-            this.TotalCount = this.PoolofTasks.Count(x => x.DeliveryDate.Date.Equals(DateTime.Today));
+            this.AwaitingConfirmationCount = this.PoolofTasks.Where(x => !x.IsAssignTask).Count(x => x.Status == CDTaskStatus.AwaitCollectionDetail || x.Status == CDTaskStatus.AwaitCourierCollection || x.Status == CDTaskStatus.AwaitDriverCollection);
+            this.MyTaskCount = this.PoolofTasks.Count(x => x.IsAssignTask && x.Status != CDTaskStatus.Completed);
+            this.TotalCount = this.PoolofTasks.Count(x => x.IsAssignTask && x.DeliveryDate.Date.Equals(DateTime.Today));
         }
         private void GetAppointments()
         {
 
-            foreach (var item in this.PoolofTasks.Where(x => x.Status.Equals(BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery) || x.Status.Equals(BusinessLogic.Enums.CDTaskStatus.AwaitingDriverCollection)))
+            foreach (var item in this.PoolofTasks.Where(x => !x.Status.Equals(CDTaskStatus.Completed)))
             {
                 var startTime = new DateTime(item.DeliveryDate.Year, item.DeliveryDate.Month, item.DeliveryDate.Day, item.DeliveryDate.Hour, item.DeliveryDate.Minute,
                            item.DeliveryDate.Second);
+
                 this.Appointments.Add(
 
                               new ScheduleAppointment()
                               {
-                                  Subject = item.CaseNumber,
+                                  Subject = item.CaseNumber + Environment.NewLine + item.CustomerName,
                                   Location = item.Address,
                                   StartTime = startTime,
                                   EndTime = startTime.AddHours(1),

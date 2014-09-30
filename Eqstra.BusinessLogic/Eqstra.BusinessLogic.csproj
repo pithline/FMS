@@ -111,7 +111,8 @@
     <Compile Include="Base\ValidationError.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
-    <Compile Include="CollectDeliveryTask.cs" />
+    <Compile Include="DocumentDelivery\CDTaskDetail.cs" />
+    <Compile Include="DocumentDelivery\CollectDeliveryTask.cs" />
     <Compile Include="Commercial\CAccessories.cs" />
     <Compile Include="Commercial\CCabTrimInter.cs" />
     <Compile Include="Commercial\CChassisBody.cs" />
@@ -127,14 +128,15 @@
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="DocumentDelivery\CDCustomerDetails.cs" />
+    <Compile Include="DocumentDelivery\CDDrivingDuration.cs" />
     <Compile Include="DocumentDelivery\CDUserInfo.cs" />
-    <Compile Include="DocumentDelivery\CustomerContacts.cs" />
-    <Compile Include="DocumentDelivery\CDProof.cs" />
-    <Compile Include="Document.cs" />
-    <Compile Include="DocumentDelivery\DocumentsBrief.cs" />
+    <Compile Include="DocumentDelivery\ContactPerson.cs" />
+    <Compile Include="DocumentDelivery\DocumentDeliveryDetails.cs" />
+    <Compile Include="DocumentDelivery\Document.cs" />
+    <Compile Include="DocumentDelivery\CollectedFromData.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
-    <Compile Include="Enums\CDTaskStatus.cs">
+    <Compile Include="Helpers\CDTaskStatus.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\CDTaskTypeEnum.cs" />

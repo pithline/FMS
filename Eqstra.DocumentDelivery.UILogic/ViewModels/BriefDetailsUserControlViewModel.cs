@@ -1,4 +1,6 @@
-﻿using Eqstra.BusinessLogic.DocumentDelivery;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DocumentDelivery;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 return !string.IsNullOrEmpty(address);
             });
+
         }
         public DelegateCommand<string> MailToCommand { get; set; }
 
@@ -46,8 +49,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         public DelegateCommand<string> MakeSkypeCallCommand { get; set; }
 
-        private ObservableCollection<DocumentsBrief> documentsBriefs;
-        public ObservableCollection<DocumentsBrief> DocumentsBriefs
+        private ObservableCollection<Document> documentsBriefs;
+        public ObservableCollection<Document> DocumentsBriefs
         {
             get { return documentsBriefs; }
             set { SetProperty(ref documentsBriefs, value); }

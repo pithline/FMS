@@ -118,6 +118,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     if (this.Model.DestinationTypes != null)
                     {
                         this.Model.DestinationTypes.Clear();
+                        this.Model.SelectedDestinationType = null;
                     }
                     if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Driver && this._task != null)
                     {

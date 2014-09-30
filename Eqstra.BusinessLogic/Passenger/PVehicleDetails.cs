@@ -40,31 +40,25 @@ namespace Eqstra.BusinessLogic.Passenger
 
         }
 
-
-       
-
         private bool isLicenseDiscCurrent;
-        [RestorableState]
+
         public bool IsLicenseDiscCurrent
         {
             get { return isLicenseDiscCurrent; }
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
 
-        
-
         private DateTime licenseDiscExpiryDate;
-        [RestorableState]
+
         public DateTime LicenseDiscExpireDate
         {
             get { return licenseDiscExpiryDate; }
             set { SetProperty(ref licenseDiscExpiryDate, value); }
         }
 
-       
 
         private bool isSpareKeysShown;
-        [RestorableState]
+
 
         public bool IsSpareKeysShown
         {
@@ -73,13 +67,13 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private bool isSpareKeysTested;
-        [RestorableState]
+
         public bool IsSpareKeysTested
         {
             get { return isSpareKeysTested; }
             set { SetProperty(ref isSpareKeysTested, value); }
         }
-               
+
         private ImageCapture licenseDiscSnapshot;
 
         [RestorableState, Ignore]
@@ -144,8 +138,6 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref topSnapshot, value); }
         }
 
-
-
         public string leftSnapshotPath;
         public string LeftSnapshotPath
         {
@@ -194,5 +186,62 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return ODOReadingSnapshot.ImagePath; }
             set { SetProperty(ref oDOReadingSnapshotPath, value); }
         }
+
+        private string color;
+
+        public string Color
+        {
+            get { return color; }
+            set { SetProperty(ref color, value); }
+        }
+
+        private string odoReading;
+
+        public string ODOReading
+        {
+            get { return odoReading; }
+            set { SetProperty(ref odoReading, value); }
+        }
+
+        private string registrationNumber;
+
+        public string RegistrationNumber
+        {
+            get { return registrationNumber; }
+            set { SetProperty(ref registrationNumber, value); }
+        }
+
+        private string engineNumber;
+
+        public string EngineNumber
+        {
+            get { return engineNumber; }
+            set { SetProperty(ref engineNumber, value); }
+        }
+
+        private string chassisNumber;
+        public string ChassisNumber
+        {
+            get { return chassisNumber; }
+            set { SetProperty(ref chassisNumber, value); }
+        }
+
+        private string make;
+
+        public string Make
+        {
+            get { return make; }
+            set { SetProperty(ref make, value); }
+        }
+
+        private string year;
+
+        public string Year
+        {
+            get { return year; }
+            set { SetProperty(ref year, value); }
+        }
+
+
     }
 }

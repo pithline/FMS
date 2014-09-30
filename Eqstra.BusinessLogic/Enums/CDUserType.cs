@@ -9,7 +9,7 @@ namespace Eqstra.BusinessLogic.Enums
     public enum CDUserType
     {
         Driver,
-        Customer,
-        Courier
+        Courier,
+        Customer
     }
 }

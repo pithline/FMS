@@ -29,7 +29,7 @@ namespace Eqstra.BusinessLogic.Commercial
             get { return isLicenseDiscCurrent; }
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
-        
+
         private DateTime licenseDiscExpiryDate;
 
         public DateTime LicenseDiscExpireDate
@@ -38,7 +38,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref licenseDiscExpiryDate, value); }
         }
 
-       
+
         private bool isSpareKeysShown;
 
         public bool IsSpareKeysShown
@@ -55,7 +55,7 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref isSpareKeysTested, value); }
         }
 
-        
+
 
         private ImageCapture licenseDiscSnapshot;
         [Ignore]
@@ -164,9 +164,66 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref oDOReadingSnapshotPath, value); }
         }
 
+        private string color;
+
+        public string Color
+        {
+            get { return color; }
+            set { SetProperty(ref color, value); }
+        }
+        private string odoReading;
+
+        public string ODOReading
+        {
+            get { return odoReading; }
+            set { SetProperty(ref odoReading, value); }
+        }
+
+        private string registrationNumber;
+
+        public string RegistrationNumber
+        {
+            get { return registrationNumber; }
+            set { SetProperty(ref registrationNumber, value); }
+        }
+
+        private string engineNumber;
+
+        public string EngineNumber
+        {
+            get { return engineNumber; }
+            set { SetProperty(ref engineNumber, value); }
+        }
+
+
+        private string chassisNumber;
+
+        public string ChassisNumber
+        {
+            get { return chassisNumber; }
+            set { SetProperty(ref chassisNumber, value); }
+        }
+
+        private string make;
+
+        public string Make
+        {
+            get { return make; }
+            set { SetProperty(ref make, value); }
+        }
+        private string year;
+
+        public string Year
+        {
+            get { return year; }
+            set { SetProperty(ref year, value); }
+        }
+
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
+
             return await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.VehicleInsRecID == vehicleInsRecID);
         }
+
     }
 }

@@ -1,19 +1,11 @@
-﻿using Eqstra.BusinessLogic;
-using Eqstra.BusinessLogic.DeliveryModel;
-using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Services;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Networking.Connectivity;
-using Windows.Storage;
 
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
@@ -27,14 +19,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             _navigationService = navigationService;
             _accountService = accountService;
             UserInfo = PersistentData.Instance.UserInfo;
-            UserInfo.Name = "kasif";
-            UserInfo.CompanyName = "Mazik";
             GetNetworkStatus();
             LogoutCommand = new DelegateCommand(() =>
             {
                 _accountService.SignOut();
-                _navigationService.Navigate("Login", string.Empty);
                 _navigationService.ClearHistory();
+                _navigationService.Navigate("Login", string.Empty);
+                
             });
         }
         private string networkIcon;
@@ -51,7 +42,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return userInfo; }
             set { SetProperty(ref userInfo, value); }
         }
-        public void GetNetworkStatus()
+       public void GetNetworkStatus()
         {
             try
             {
@@ -59,7 +50,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 NetworkInformation.NetworkStatusChanged += (s) =>
                 {
                     if (connectionProfile != null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
-                        Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetConnected.png"; });
+                      Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High,() => { NetworkIcon = "ms-appx:///Assets/NetConnected.png"; });
                     else
                         Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => { NetworkIcon = "ms-appx:///Assets/NetDisconnected.png"; });
 

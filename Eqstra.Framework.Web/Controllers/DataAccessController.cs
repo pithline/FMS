@@ -43,7 +43,9 @@ namespace Eqstra.Framework.Web.Controllers
             catch (Exception ex)
             {
                 MefHelper.Error(ex);
-                return this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                var msg = new HttpResponseMessage() {Content = new StringContent( ex.Message),ReasonPhrase = ex.Source};
+                throw new HttpResponseException(msg);
+               // return this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
 

@@ -13,19 +13,20 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class CDCustomerDetails : ValidatableBindableBase
     {
-        private long vehicleInsRecId;
-        [PrimaryKey]
-        public long VehicleInsRecId
-        {
-            get { return vehicleInsRecId; }
-            set { SetProperty(ref vehicleInsRecId, value); }
-
-        }
         private string caseNumber;
+        [PrimaryKey]
         public string CaseNumber
         {
             get { return caseNumber; }
             set { SetProperty(ref caseNumber, value); }
+        }
+        private long caseCategoryRecID;
+
+        public long CaseCategoryRecID
+        {
+            get { return caseCategoryRecID; }
+            set { SetProperty(ref caseCategoryRecID, value); }
+
         }
 
         private CaseTypeEnum caseType;
@@ -35,13 +36,21 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             get { return caseType; }
             set { SetProperty(ref caseType, value); }
         }
-        
+
         private string customerName;
         public string CustomerName
         {
             get { return customerName; }
             set { SetProperty(ref customerName, value); }
         }
+        private string contactName;
+
+        public string ContactName
+        {
+            get { return contactName; }
+            set { SetProperty(ref contactName, value); }
+        }
+
         private string customerNumber;
         public string CustomerNumber
         {
@@ -99,10 +108,27 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref appointments, value); }
         }
 
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty(ref name, value); }
+        }
+
+
     }
 
-     public class CustomerDetailsEvent : PubSubEvent<CDCustomerDetails>
-     {
+    public class CustomerDetailsEvent : PubSubEvent<CDCustomerDetails>
+    {
 
-     }
+    }
 }

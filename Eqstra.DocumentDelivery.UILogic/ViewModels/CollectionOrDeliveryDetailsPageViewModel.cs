@@ -1,11 +1,14 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.DocumentDelivery;
+using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.AifServices;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,43 +43,114 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             });
             this.CollectCommand = new DelegateCommand(async () =>
             {
-                _task.Status = BusinessLogic.Enums.CDTaskStatus.AwaitingDelivery;
-                _task.TaskType = BusinessLogic.Enums.CDTaskTypeEnum.Delivery;
-                await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
-                foreach (var item in this.SelectedDocuments)
+                try
                 {
-                    item.IsDelivered = false;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
+                    this.IsBusy = true;
+                    if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Driver || PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
+                    {
+                        foreach (var task in this.SelectedTaskBucket)
+                        {
+                            if (this.SelectedDocuments.Any(a => a.CaseCategoryRecID == task.CaseCategoryRecID))
+                            {
+                                task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
+                                task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                            }
+                        }
+
+                    }
+                    if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Customer)
+                    {
+                        foreach (var task in this.SelectedTaskBucket)
+                        {
+                            if (this.SelectedDocuments.Any(a => a.CaseCategoryRecID == task.CaseCategoryRecID))
+                            {
+                                task.Status = CDTaskStatus.Completed;
+                                task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                            }
+                        }
+                        this.docuDeliveryDetails.IsDelivered = true;
+                    }
+
+                    this.docuDeliveryDetails.ReceivedBy = this.SelectedContactName;
+                    this.docuDeliveryDetails.IsCollected = true;
+                    this.docuDeliveryDetails.SelectedCollectedFrom = this.SelectedCollectedFrom;
+
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.docuDeliveryDetails);
+
+                    await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
+                    this.IsBusy = false;
+                    _navigationService.Navigate("Main", string.Empty);
                 }
-                _navigationService.Navigate("Main", string.Empty);
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    this.IsBusy = false;
+                }
             },
             () =>
             {
-                return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Collection);
+                return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == CDTaskType.Collect);
             }
             );
 
             this.CompleteCommand = new DelegateCommand(async () =>
                 {
-                    _task.Status = BusinessLogic.Enums.CDTaskStatus.Complete;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(_task);
-                    foreach (var item in this.SelectedDocuments)
+                    try
                     {
-                        item.IsDelivered = true;
-                        await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
+                        this.IsBusy = true;
+                        if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
+                        {
+                            foreach (var task in this.SelectedTaskBucket)
+                            {
+                                if (this.SelectedDocuments.Any(a => a.CaseCategoryRecID == task.CaseCategoryRecID))
+                                {
+                                    task.Status = CDTaskStatus.AwaitInvoice;
+                                    await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var task in this.SelectedTaskBucket)
+                            {
+                                if (this.SelectedDocuments.Any(a => a.CaseCategoryRecID == task.CaseCategoryRecID))
+                                {
+                                    task.Status = CDTaskStatus.Completed;
+                                    await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                }
+                            }
+                        }
+
+                        this.docuDeliveryDetails.IsDelivered = true;
+                        this.docuDeliveryDetails.ReceivedBy = this.SelectedContactName;
+                        this.docuDeliveryDetails.SelectedCollectedFrom = this.SelectedCollectedFrom;
+
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.docuDeliveryDetails);
+
+                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
+                        this.IsBusy = false;
+                        _navigationService.Navigate("Main", string.Empty);
+
                     }
-                    _navigationService.Navigate("Main", string.Empty);
+                    catch (Exception ex)
+                    {
+                        AppSettings.Instance.ErrorMessage = ex.Message;
+                        this.IsBusy = false;
+                    }
+
                 }, () =>
                 {
 
-                    return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Delivery);
+                    return (this.SelectedDocuments != null && this.SelectedDocuments.Any() && _task.TaskType == BusinessLogic.Enums.CDTaskType.Delivery);
                 });
             this.SelectedDocuments = new ObservableCollection<Document>();
 
-            this._eventAggregator.GetEvent<DestinationContactsEvent>().Subscribe(async (customerContacts) =>
+            this._eventAggregator.GetEvent<ContactPersonEvent>().Subscribe(async (customerContacts) =>
            {
-               this.ProofOfCollection = new CDProof();
-               this.ProofOfCollection.Customers = await SqliteHelper.Storage.LoadTableAsync<DestinationContacts>();
+               this.DocuDeliveryDetails = new DocumentDeliveryDetails();
+               this.DocuDeliveryDetails.ContactPersons = await SqliteHelper.Storage.LoadTableAsync<ContactPerson>();
                this._addCustomerPage.Hide();
            });
 
@@ -90,14 +164,16 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.CompleteCommand.RaiseCanExecuteChanged();
                 this.CollectCommand.RaiseCanExecuteChanged();
             });
+
         }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
             {
+                this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                if (_task.TaskType == BusinessLogic.Enums.CDTaskTypeEnum.Collection)
+                if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
                     this.ProofTitle = "Proof of Collection";
                     this.AckDialog = string.Empty;
@@ -110,29 +186,39 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     this.CompleteVisibility = Visibility.Visible;
                     this.CollectVisibility = Visibility.Collapsed;
                     this.ProofTitle = "Proof of Delivery";
-                    this.AckDialog = "I hereby confirm that i have received the following documents ";
+                    this.AckDialog = "I hereby confirm that i have received the following documents";
                     this.CDTitle = "Acknowledgement";
                 }
 
-                var docList = (await SqliteHelper.Storage.LoadTableAsync<Document>()).Where(d => !d.IsDelivered);
-                foreach (var d in docList)
+                this.SelectedTaskBucket = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this._task.CustomerId && d.TaskType == this._task.TaskType).ToList();
+                foreach (var d in this.SelectedTaskBucket)
                 {
-                    if (d.CaseNumber == this.CustomerDetails.CaseNumber)
-                        this.DocumentList.Add(d);
+
+                    this.DocumentList.Add(new Document
+                    {
+                        SerialNumber = d.SerialNumber,
+                        CaseCategoryRecID = d.CaseCategoryRecID,
+                        DocumentType = "DocumentType",
+                        MakeModel = d.MakeModel,
+                        RegistrationNumber = d.RegistrationNumber
+                    });
                 }
 
-                await GetProofOfCollectionAsync();
-                this.ProofOfCollection.DeliveredAt = this.CustomerDetails.Address;
-                this.ProofOfCollection.DeliveryPersonName = this.CustomerDetails.CustomerName;
+                await GetProofOfCDAsync();
+                this.DocuDeliveryDetails.DeliveredAt = this.CustomerDetails.Address;
+                this.DocuDeliveryDetails.DeliveryPersonName = this.CustomerDetails.CustomerName;
+                this.IsBusy = false;
             }
             catch (Exception ex)
             {
                 AppSettings.Instance.ErrorMessage = ex.Message;
+                this.IsBusy = false;
             }
         }
         public DelegateCommand CollectCommand { get; set; }
         public DelegateCommand CompleteCommand { get; set; }
         public DelegateCommand AddContactCommand { get; set; }
+
         public DelegateCommand<ObservableCollection<object>> DocumentsChangedCommand { get; set; }
 
         private Visibility completeVisibility;
@@ -156,11 +242,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return proofTitle; }
             set { SetProperty(ref proofTitle, value); }
         }
-        private CDProof proofOfCollection;
-        public CDProof ProofOfCollection
+        private DocumentDeliveryDetails docuDeliveryDetails;
+        public DocumentDeliveryDetails DocuDeliveryDetails
         {
-            get { return proofOfCollection; }
-            set { SetProperty(ref proofOfCollection, value); }
+            get { return docuDeliveryDetails; }
+            set { SetProperty(ref docuDeliveryDetails, value); }
         }
         private ObservableCollection<Document> documentList;
         public ObservableCollection<Document> DocumentList
@@ -184,11 +270,42 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             set { SetProperty(ref title, value); }
         }
 
+        private string selectedContactName;
+        [Ignore]
+        public string SelectedContactName
+        {
+            get { return selectedContactName; }
+            set { SetProperty(ref selectedContactName, value); }
+        }
+
+        private string selectedCollectedFrom;
+        [Ignore]
+        public string SelectedCollectedFrom
+        {
+            get { return selectedCollectedFrom; }
+            set { SetProperty(ref selectedCollectedFrom, value); }
+        }
+
+
         private string ackDialog;
         public string AckDialog
         {
             get { return ackDialog; }
             set { SetProperty(ref ackDialog, value); }
+        }
+
+        private List<CollectDeliveryTask> allTaskOfCustomer;
+
+        public List<CollectDeliveryTask> SelectedTaskBucket
+        {
+            get { return allTaskOfCustomer; }
+            set { SetProperty(ref allTaskOfCustomer, value); }
+        }
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
         }
 
         private ObservableCollection<Document> selectedDocuments;
@@ -200,13 +317,22 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 SetProperty(ref selectedDocuments, value);
             }
         }
-        async public System.Threading.Tasks.Task GetProofOfCollectionAsync()
+        async public System.Threading.Tasks.Task GetProofOfCDAsync()
         {
-            this.ProofOfCollection = await SqliteHelper.Storage.GetSingleRecordAsync<CDProof>(x => x.VehicleInsRecID == this._task.VehicleInsRecId);
-            if (this.ProofOfCollection == null)
+            try
             {
-                this.ProofOfCollection = new CDProof();
-                this.ProofOfCollection.VehicleInsRecID = this._task.VehicleInsRecId;
+
+                this.DocuDeliveryDetails = await SqliteHelper.Storage.GetSingleRecordAsync<DocumentDeliveryDetails>(x => x.CaseNumber == this._task.CaseNumber);
+                if (this.DocuDeliveryDetails == null)
+                {
+                    this.DocuDeliveryDetails = new DocumentDeliveryDetails();
+                    this.DocuDeliveryDetails.CaseNumber = this._task.CaseNumber;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
     }

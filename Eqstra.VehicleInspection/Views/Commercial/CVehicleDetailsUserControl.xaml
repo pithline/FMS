@@ -1,0 +1,199 @@
+﻿<UserControl
+    x:Class="Eqstra.VehicleInspection.Views.CVehicleDetailsUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Eqstra.VehicleInspection.Views.Commercial"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+    xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <SynchronizingSetting:AppSettings x:Key="VM" />
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Left" >
+        <Grid Grid.Column="0" Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Vehicle Details" Style="{StaticResource GroupHeaderStyle}"  VerticalAlignment="Bottom" Margin="0 0 0 5"/>
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}"  CommandParameter="{Binding Model}">
+                    <Image Source="ms-appx:///Assets/save.png"/>
+                </Button>
+            </StackPanel>
+            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White" Margin="0" >
+                <ScrollViewer VerticalScrollMode="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20 20 0 10" ZoomMode="Disabled">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Take Pictures of the Vehicle" VerticalAlignment="Top" Style="{StaticResource TextContentStyle}" Grid.ColumnSpan="4"/>
+                        <ProgressBar 
+                                     Grid.ColumnSpan="4" 
+                                     IsIndeterminate="True"
+                                     VerticalAlignment="Top"
+                                     Opacity="{Binding Source={StaticResource VM}, Path=Instance.IsSyncingVehDetails}"
+                                     VerticalContentAlignment="Top" />
+
+                        <Grid Grid.Row="1" Grid.Column="1" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="175" Height="150" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Path= Model.LeftSnapshot}">
+                                <Image Margin="-10" Source="{Binding Path= Model.LeftSnapshot.ImagePath}"   Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Height="150"/>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Path= Model.FrontSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path= Model.FrontSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="3" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Width="175" Height="150" Style="{StaticResource SnapshotButtonStyle}" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Path=Model.RightSnapshot}">
+                                <Image Source="{Binding Path=Model.RightSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>
+                        <!--<Grid Grid.Row="1" Grid.Column="3" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Path=Model.FrontSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path=Model.FrontSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button >
+                        </Grid>-->
+                        <Grid Grid.Row="1" Grid.Column="0" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding TakePictureCommand}" CommandParameter="{Binding Path=Model.LicenseDiscSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path=Model.LicenseDiscSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Path=Model.ODOReadingSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Width="370" Height="150" Command="{Binding GoToImageMarkupPageCommand}">
+                                <Image Source="ms-appx:///Assets/truck_marks.png" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>
+
+                        <!--<Grid Grid.Row="2" Grid.Column="3" Background="#FFE6E6E6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource SnapshotButtonStyle}" Command="{Binding Path=TakePictureCommand}" CommandParameter="{Binding Path=Model.TopSnapshot}" Width="175" Height="150">
+                                <Image Source="{Binding Path=Model.TopSnapshot.ImagePath}" Grid.Row="0" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </Grid>-->
+
+                        <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="License Disc Current" Style="{StaticResource TextHeaderStyle}"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsLicenseDiscCurrent,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="ODO Reading" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.ODOReading}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Registration Number" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path=Model.RegistrationNumber}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Engine Number" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.EngineNumber}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="License Disc Expiry Date" Style="{StaticResource TextHeaderStyle}"/>
+                            <input:SfDatePicker Value="{Binding Path= Model.LicenseDiscExpireDate}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Color" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Color}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Chasis Number" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.ChassisNumber}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Make/Model" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Make}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="0" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Spare Keys Shown" Style="{StaticResource TextHeaderStyle}"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysShown,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Spare Keys Tested" Style="{StaticResource TextHeaderStyle}"/>
+                            <ToggleSwitch IsOn="{Binding Path= Model.IsSpareKeysTested,Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" OffContent="No" OnContent="Yes"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
+                            <TextBlock Text="Year" Style="{StaticResource TextHeaderStyle}"/>
+                            <TextBlock Text="{Binding Path= Model.Year}" Style="{StaticResource TextContentStyle}"/>
+                        </StackPanel>
+
+
+                        <!--<Rectangle Fill="#FFE6E6E6" Grid.Column="0" Grid.Row="1" Width="175" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

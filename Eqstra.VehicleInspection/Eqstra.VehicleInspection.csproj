@@ -138,8 +138,8 @@
     <Compile Include="Views\Commercial\ChassisBodyUserControl.xaml.cs">
       <DependentUpon>ChassisBodyUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Commercial\CommercialVehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>CommercialVehicleDetailsUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Commercial\CVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>CVehicleDetailsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Commercial\CPOIUserControl.xaml.cs">
       <DependentUpon>CPOIUserControl.xaml</DependentUpon>
@@ -202,8 +202,8 @@
     <Compile Include="Views\Passenger\TyreConditionUserControl.xaml.cs">
       <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Passenger\VehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>VehicleDetailsUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Passenger\PVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>PVehicleDetailsUserControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -323,7 +323,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Commercial\CommercialVehicleDetailsUserControl.xaml">
+    <Page Include="Views\Commercial\CVehicleDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -407,7 +407,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Passenger\VehicleDetailsUserControl.xaml">
+    <Page Include="Views\Passenger\PVehicleDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
