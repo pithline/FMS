@@ -237,10 +237,19 @@
     <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceGetUserDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadDrivingTimeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceReadVehicleDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceUpdateConfirmationDateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceUpdateDrivingTimeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceUpdateStatusListResponse.datasource">

@@ -97,6 +97,19 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 throw;
             }
         }
+
+        async public System.Threading.Tasks.Task<MzkVehicleInspectionServiceGetUserDetailsResponse> GetUserInfoAsync(string userId)
+        {
+            try
+            {
+                return await client.getUserDetailsAsync(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         async public System.Threading.Tasks.Task SyncFromSvcAsync(BaseModel baseModel)
         {
             try

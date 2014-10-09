@@ -24,25 +24,34 @@ namespace Eqstra.VehicleInspection.UILogic.Services
         {
             try
             {
-                VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(),_eventAggregator);
+                VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(), _eventAggregator);
                 var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
-                
-                if (result != null)
+
+                if (result.response)
                 {
-                    var userInfo = new UserInfo
+                    var ui = await VIServiceHelper.Instance.GetUserInfoAsync(userId.Trim());
+                    if (ui.response != null)
+                    {
+                        var userInfo = new UserInfo
+                                        {
+                                            UserId = ui.response.parmUserID,
+                                            CompanyId = ui.response.parmCompany,
+                                            CompanyName = ui.response.parmCompanyName,
+                                            Name = ui.response.parmUserName
+                                        };
+                        string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+                        ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
+                        return new Tuple<LogonResult, string>(new LogonResult
                         {
-                            UserId = result.response.parmUserID,
-                            CompanyId = result.response.parmCompany,
-                            CompanyName = result.response.parmCompanyName,
-                            Name = result.response.parmUserName
-                        };
-                    string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
-                    ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
+                            UserInfo = userInfo
+
+                        }, "");
+                    }
                     return new Tuple<LogonResult, string>(new LogonResult
                     {
-                        UserInfo = userInfo
+                        UserInfo = new UserInfo()
 
-                    }, "");
+                    }, ""); ;
                 }
                 else
                 {
