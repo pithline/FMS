@@ -82,7 +82,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     });
                     this.SaveCommand.RaiseCanExecuteChanged();
                     this.IsCommandBarOpen = false;
-                   // await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
                     navigationService.GoBack();
                 }
                 IsBusy = false;

@@ -26,8 +26,12 @@ namespace Eqstra.CrossPlatform.API
         {
             try
             {
-                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-
+                //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+                var header = context.OwinContext.Response.Headers.SingleOrDefault(h => h.Key == "Access-Control-Allow-Origin");
+                if (header.Equals(default(KeyValuePair<string, string[]>)))
+                {
+                    context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+                }
                 using (SSRepository ssRepo = new SSRepository())
                 {
                     if (await ssRepo.ValidateUserAsync(null, context.UserName, context.Password))
