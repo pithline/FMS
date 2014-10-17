@@ -366,13 +366,13 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     foreach (var mzk in result.response)
                     {
-                        if (customerData != null && customerData.Any(a => a.UserID == mzk.parmCustAccount))
+                        if (customerData != null && customerData.Any(a => a.UserID == mzk.parmContactPersonId))
                         {
-                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmCustAccount, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmContactPersonId, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
                         }
                         else
                         {
-                            await SqliteHelper.Storage.InsertSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmCustAccount, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmContactPersonId, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
                         }
                     }
                 }
