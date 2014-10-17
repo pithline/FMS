@@ -26,6 +26,8 @@ namespace Eqstra.Framework.Web.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
+        /// 
+
         public HttpResponseMessage Post(CallObject obj)
         {
             try
@@ -43,8 +45,9 @@ namespace Eqstra.Framework.Web.Controllers
             catch (Exception ex)
             {
                 MefHelper.Error(ex);
-                var msg = new HttpResponseMessage() {Content = new StringContent( ex.Message),ReasonPhrase = ex.Source};
-                throw new HttpResponseException(msg);
+                
+                return this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, new HttpError(ex,true));
+                
                // return this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }

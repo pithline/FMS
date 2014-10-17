@@ -231,6 +231,7 @@
     <Content Include="Assets\eqstra_badge_logo.scale-140.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
+    <Content Include="Assets\pic me.jpg" />
     <Content Include="Assets\license_disc.png" />
     <Content Include="Assets\mail_blue.png" />
     <Content Include="Assets\message_blue.png" />
