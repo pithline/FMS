@@ -130,10 +130,14 @@
     <Compile Include="DocumentDelivery\CDCustomerDetails.cs" />
     <Compile Include="DocumentDelivery\CDDrivingDuration.cs" />
     <Compile Include="DocumentDelivery\CDUserInfo.cs" />
-    <Compile Include="DocumentDelivery\ContactPerson.cs" />
+    <Compile Include="DocumentDelivery\AlternateContactPerson.cs" />
+    <Compile Include="DocumentDelivery\CDCustomer.cs" />
+    <Compile Include="DocumentDelivery\Courier.cs" />
     <Compile Include="DocumentDelivery\DocumentDeliveryDetails.cs" />
     <Compile Include="DocumentDelivery\Document.cs" />
     <Compile Include="DocumentDelivery\CollectedFromData.cs" />
+    <Compile Include="DocumentDelivery\DocumentsCollector.cs" />
+    <Compile Include="DocumentDelivery\Driver.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />
     <Compile Include="Helpers\CDTaskStatus.cs">

@@ -40,5 +40,15 @@ namespace Eqstra.DocumentDelivery.Views
             this.InitializeComponent();
 
         }
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            sfDataGrid.SelectAll();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            sfDataGrid.ClearSelections(false);
+        }
+
     }
 }

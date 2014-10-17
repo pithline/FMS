@@ -20,6 +20,22 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref caseCategoryRecID, value); }
         }
 
+        private bool isMarked;
+        [Ignore]
+        public bool IsMarked
+        {
+            get { return isMarked; }
+            set { SetProperty(ref isMarked, value); }
+        }
+
+        private string caseNumber;
+        [Ignore]
+        public string CaseNumber
+        {
+            get { return caseNumber; }
+            set { SetProperty(ref caseNumber, value); }
+        }
+
         private string documentType;
 
         public string DocumentType
@@ -52,7 +68,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
         private string docName;
 
-        public string DocName
+        public string DocumentName
         {
             get { return docName; }
             set { SetProperty(ref docName, value); }

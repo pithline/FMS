@@ -27,22 +27,13 @@ namespace Eqstra.DocumentDelivery.UILogic.Services
             try
             {
                 await DDServiceProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(), _eventAggregator);
-                if (await DDServiceProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim()))
+                var userInfo = await DDServiceProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
+                if (userInfo == null)
                 {
                     return new Tuple<CDLogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");
                 }
-
-                var result = await DDServiceProxyHelper.Instance.GetUserInfo(userId.Trim());
-                if (result != null && result.response != null)
+                else if (!String.IsNullOrWhiteSpace(userInfo.UserId))
                 {
-                    var userInfo = new CDUserInfo
-                        {
-                            UserId = result.response.parmUserID,
-                            CompanyId = result.response.parmCompany,
-                            CompanyName = result.response.parmCompanyName,
-                            Name = result.response.parmUserName,
-                            CDUserType = (CDUserType)Enum.Parse(typeof(CDUserType), result.response.parmLoginType.ToString()),
-                        };
                     string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                     ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
                     return new Tuple<CDLogonResult, string>(new CDLogonResult

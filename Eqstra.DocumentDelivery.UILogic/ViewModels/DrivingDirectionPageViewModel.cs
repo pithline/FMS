@@ -51,7 +51,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 if (this._deliveryTask != null)
                 {
-                    var CaseNumber = Int64.Parse(ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString());
+                    var CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<CDDrivingDuration>(x => x.CaseNumber.Equals(CaseNumber));
                     dd.StopDateTime = DateTime.Now;
                     this._deliveryTask.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;

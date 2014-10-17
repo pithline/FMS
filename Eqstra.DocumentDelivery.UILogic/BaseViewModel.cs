@@ -17,7 +17,7 @@ namespace Eqstra.DocumentDelivery.UILogic
             this.GoHomeCommand = new DelegateCommand(() =>
             {
                 _navigationService.ClearHistory();
-                _navigationService.Navigate("Main", string.Empty);
+                _navigationService.Navigate("InspectionDetails", string.Empty);
             });
         }
         public DelegateCommand GoHomeCommand { get; set; }

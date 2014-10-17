@@ -124,6 +124,21 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref name, value); }
         }
 
+        private int collectCount;
+        [Ignore]
+        public int CollectCount
+        {
+            get { return collectCount; }
+            set { SetProperty(ref collectCount, value); }
+        }
+
+        private int deliverCount;
+        [Ignore]
+        public int DeliverCount
+        {
+            get { return deliverCount; }
+            set { SetProperty(ref deliverCount, value); }
+        }
 
     }
 

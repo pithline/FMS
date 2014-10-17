@@ -30,7 +30,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         if (result.Item1 != null)
                         {
                             string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
-                            navigationService.Navigate("Main", jsonUserInfo);
+                            navigationService.Navigate("InspectionDetails", jsonUserInfo);
                         }
                         else
                         {

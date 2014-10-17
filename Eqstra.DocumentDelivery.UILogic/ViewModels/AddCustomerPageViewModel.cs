@@ -17,27 +17,37 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         private IEventAggregator _eventAggregator;
         public AddCustomerPageViewModel(IEventAggregator eventAggregator)
         {
-            this.Model = new ContactPerson();
+            this.Model = new AlternateContactPerson();
             this._eventAggregator = eventAggregator;
             this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                this.Model.CaseNumber =ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
-                await SqliteHelper.Storage.InsertSingleRecordAsync<ContactPerson>(this.Model);
-                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
+                this.Model.CaseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
+
+                var alternateData = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
+                if ( alternateData!=null && alternateData.Any(a => a.CaseNumber == this.Model.CaseNumber))
+                {
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<AlternateContactPerson>(this.Model);
+                }
+                else
+                {
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<AlternateContactPerson>(this.Model);
+                }
+             
+                this._eventAggregator.GetEvent<AlternateContactPersonEvent>().Publish(this.Model);
             });
 
             this.ClearCustomerCommand = new DelegateCommand(() =>
             {
-                this.Model = new ContactPerson();
-                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
+                this.Model = new AlternateContactPerson();
+                this._eventAggregator.GetEvent<AlternateContactPersonEvent>().Publish(this.Model);
             });
 
         }
         public DelegateCommand AddCustomerCommand { get; set; }
         public DelegateCommand ClearCustomerCommand { get; set; }
 
-        private ContactPerson model;
-        public ContactPerson Model
+        private AlternateContactPerson model;
+        public AlternateContactPerson Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }
