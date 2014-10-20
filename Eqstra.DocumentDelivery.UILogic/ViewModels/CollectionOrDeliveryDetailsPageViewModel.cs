@@ -39,6 +39,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.DocumentList = new ObservableCollection<Document>();
             this.CollectVisibility = Visibility.Collapsed;
             this.CompleteVisibility = Visibility.Collapsed;
+            this.DocuDeliveryDetails = new DocumentDeliveryDetails();
             this.AddContactCommand = new DelegateCommand(() =>
             {
                 addCustomerPage.ShowIndependent();
@@ -48,6 +49,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
+                    var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
                     if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Driver || PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
                     {
                         foreach (var task in this.SelectedTaskBucket)
@@ -57,6 +59,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
                                 task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                CollectedDocumnetsFromTaskBucket(task, markedDoc, false);
                             }
                         }
 
@@ -70,37 +73,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 task.Status = CDTaskStatus.Completed;
                                 task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                CollectedDocumnetsFromTaskBucket(task, markedDoc, true);
                             }
                         }
-                        this.DocuDeliveryDetails.IsDelivered = true;
-                        this.DocuDeliveryDetails.IsColletedByCustomer = true;
-                    }
 
-                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedContact.UserName;
-                    this.DocuDeliveryDetails.IsCollected = true;
-                    this.DocuDeliveryDetails.CollectedAt = this.SelectedCollectedFrom.Address;
-
-                    this.DocuDeliveryDetails.SelectedCollectedFrom = this.SelectedCollectedFrom.UserName;
-
-
-                    if (this.IsAlternateOn)
-                    {
-                        this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
-                        this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
-
-                        this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
-                        this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
-                        this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
-
-                    }
-                    var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
-                    if (markedDoc.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
-                    {
-                        await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
-                    }
-                    else
-                    {
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
                     }
                     await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                     this.IsBusy = false;
@@ -124,6 +100,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     try
                     {
                         this.IsBusy = true;
+                        var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
                         if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
                         {
                             foreach (var task in this.SelectedTaskBucket)
@@ -132,6 +109,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 {
                                     task.Status = CDTaskStatus.AwaitInvoice;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                    DeliveredDocumentsFromTaskBucket(task, markedDoc);
                                 }
                             }
                         }
@@ -143,34 +121,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 {
                                     task.Status = CDTaskStatus.Completed;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                    DeliveredDocumentsFromTaskBucket(task, markedDoc);
                                 }
                             }
                         }
-
-                        this.DocuDeliveryDetails.IsDelivered = true;
-                        this.DocuDeliveryDetails.ReceivedBy = this.SelectedContact.UserName;
-                        this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedContact.UserName;
-
-                        if (this.IsAlternateOn)
-                        {
-                            this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
-                            this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
-
-                            this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
-                            this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
-                            this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
-
-                        }
-                        var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
-                        if (markedDoc.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
-                        {
-                            await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
-                        }
-                        else
-                        {
-                            await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
-                        }
-
                         await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         this.IsBusy = false;
                         _navigationService.Navigate("InspectionDetails", string.Empty);
@@ -192,7 +146,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
             this._eventAggregator.GetEvent<AlternateContactPersonEvent>().Subscribe(async (customerContacts) =>
            {
-               this.DocuDeliveryDetails = new DocumentDeliveryDetails();
                this.AlternateContactPersons = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
                this._addCustomerPage.Hide();
            });
@@ -213,6 +166,90 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
 
+        async private void CollectedDocumnetsFromTaskBucket(CollectDeliveryTask task, List<DocumentDeliveryDetails> markedDocDeliDetails, bool collectedByCustomer)
+        {
+            try
+            {
+                this.DocuDeliveryDetails.IsDelivered = collectedByCustomer;
+                this.DocuDeliveryDetails.IsColletedByCustomer = collectedByCustomer;
+
+                this.DocuDeliveryDetails.IsCollected = true;
+                this.DocuDeliveryDetails.CollectedAt = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.Address : string.Empty;
+                this.DocuDeliveryDetails.SelectedCollectedFrom = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.UserName : string.Empty;
+
+                if (this.IsAlternateOn && SelectedAlternateContact != null)
+                {
+                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
+                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
+
+                    this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
+                    this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
+                    this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
+
+                }
+                else
+                {
+                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
+                }
+
+                this.DocuDeliveryDetails.CaseNumber = task.CaseNumber;
+                this.DocuDeliveryDetails.CaseServiceRecId = task.CaseServiceRecID;
+
+                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
+                {
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                }
+                else
+                {
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
+
+        }
+
+        async private void DeliveredDocumentsFromTaskBucket(CollectDeliveryTask task, List<DocumentDeliveryDetails> markedDocDeliDetails)
+        {
+            try
+            {
+                this.DocuDeliveryDetails.IsDelivered = true;
+
+                if (this.IsAlternateOn && SelectedAlternateContact != null)
+                {
+                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
+                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
+                    this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
+                    this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
+                    this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
+
+                }
+                else
+                {
+                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
+                }
+
+                this.DocuDeliveryDetails.CaseNumber = task.CaseNumber;
+                this.DocuDeliveryDetails.CaseServiceRecId = task.CaseServiceRecID;
+
+                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
+                {
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                }
+                else
+                {
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                }
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
+        }
+
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -222,7 +259,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.IsCollSignatureDate = Visibility.Collapsed;
                 this.ContactNameBorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                await GetProofOfCDAsync();
                 if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
                     this.ProofTitle = "Proof of Collection";
@@ -275,7 +311,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 this.CollectedFrom = await SqliteHelper.Storage.LoadTableAsync<CollectedFromData>();
-                this.AlternateContactPersons = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
+                this.AlternateContactPersons = (await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>()).Where(u => u.UserId == PersistentData.Instance.UserInfo.UserId);
                 this.IsBusy = false;
             }
             catch (Exception ex)
@@ -532,24 +568,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         //        SetProperty(ref selectedDocuments, value);
         //    }
         //}
-        async public System.Threading.Tasks.Task GetProofOfCDAsync()
-        {
-            try
-            {
 
-                this.DocuDeliveryDetails = await SqliteHelper.Storage.GetSingleRecordAsync<DocumentDeliveryDetails>(x => x.CaseNumber == this._task.CaseNumber);
-                if (this.DocuDeliveryDetails == null)
-                {
-                    this.DocuDeliveryDetails = new DocumentDeliveryDetails();
-                    this.DocuDeliveryDetails.CaseNumber = this._task.CaseNumber;
-                    this.DocuDeliveryDetails.CaseServiceRecId = this._task.CaseServiceRecID;
-                }
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-        }
     }
 }

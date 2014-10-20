@@ -420,7 +420,9 @@
           <xs:element minOccurs="0" name="parmCourierSignature" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmDateTime" type="xs:dateTime" />
           <xs:element minOccurs="0" name="parmEmail" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPosition" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmReceivedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmTelePhone" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -541,18 +543,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkUserContract" nillable="true" type="tns:ArrayOfMzkUserContract" />
-  <xs:complexType name="ArrayOfMzkCustomerContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
   <xs:complexType name="ArrayOfMZKCollectDeliverTasksContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKCollectDeliverTasksContract" nillable="true" type="tns:MZKCollectDeliverTasksContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMZKCollectDeliverTasksContract" nillable="true" type="tns:ArrayOfMZKCollectDeliverTasksContract" />
+  <xs:complexType name="ArrayOfMzkCustomerContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
   <xs:complexType name="ArrayOfMZKDocumentCollectedDetailsContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKDocumentCollectedDetailsContract" nillable="true" type="tns:MZKDocumentCollectedDetailsContract" />

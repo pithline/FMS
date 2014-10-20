@@ -67,7 +67,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 return _client;
             }
         }
-
         public async System.Threading.Tasks.Task SendMessageToUIThread(string receivedMsg)
         {
             CoreDispatcher dispatcher = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher;
@@ -78,7 +77,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 AppSettings.Instance.ErrorMessage = receivedMsg;
             });
         }
-
         async public System.Threading.Tasks.Task<CDUserInfo> ValidateUser(string userId, string password)
         {
             try
@@ -95,6 +93,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         Name = result.response.parmUserName,
                         CDUserType = (CDUserType)Enum.Parse(typeof(CDUserType), result.response.parmLoginType.ToString()),
                     };
+                    PersistentData.Instance.UserInfo = userInfo;
                     return userInfo;
                 }
                 return null;
@@ -104,7 +103,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 throw;
             }
         }
-
         public void Synchronize(Action syncExecute)
         {
             _syncExecute = syncExecute;
@@ -132,7 +130,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-
         async public System.Threading.Tasks.Task SynchronizeAllAsync()
         {
             try
@@ -179,7 +176,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
         public async System.Threading.Tasks.Task<ObservableCollection<CollectDeliveryTask>> GroupTasksByCustomer()
         {
             try
@@ -231,7 +227,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 throw;
             }
         }
-
         async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
         {
             try
@@ -310,7 +305,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-
         async public System.Threading.Tasks.Task GetCollectedFromSvcAsync()
         {
             try
@@ -346,8 +340,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
-
         async public System.Threading.Tasks.Task GetCustomerListFromSvcAsync(string customerId)
         {
             try
@@ -416,7 +408,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
         async public System.Threading.Tasks.Task GetDriverListFromSvcAsync()
         {
             try
@@ -507,6 +498,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmReceivedBy = doc.ReceivedBy,
                             parmReceivedDate = doc.ReceivedDate,
                             parmReferenceNo = doc.ReferenceNo,
+
                             // parmSignature = doc.CRSignature,
                             parmTelePhone = doc.Phone
 
@@ -520,7 +512,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);//need to fix in AX
             }
         }
-
         async public System.Threading.Tasks.Task InsertDocumentCollectedByDriverOrCourierToSvcAsync()
         {
             try
@@ -547,6 +538,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmEmail = doc.Email,
                             parmCaseServiceRecId = doc.CaseServiceRecId,
                             parmContactPerson = doc.ReceivedBy,
+                            parmCollectedBy = doc.ReceivedBy,
+                            parmPosition = doc.Position,
+                            parmTelePhone = doc.Phone,
+                            // parmContactNumber
                             // parmCourierSignature = doc.CRSignature.,
                             parmReceivedBy = doc.ReceivedBy,
                             parmDateTime = doc.ReceivedDate,
@@ -561,7 +556,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
         async public System.Threading.Tasks.Task InsertDocumentDeliveryDetailsToSvcAsync()
         {
             try
@@ -602,7 +596,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
         public async System.Threading.Tasks.Task UpdateTaskStatusAsync()
         {
             try
@@ -669,7 +662,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             taskList.Add(new CollectDeliveryTask
                             {
                                 CaseNumber = mzkTask.parmCaseId,
-                                Status = mzkTask.parmStatus,
                                 TaskType = (CDTaskType)Enum.Parse(typeof(CDTaskType), mzkTask.parmCollectDeliverType.ToString()),
                                 ServiceId = mzkTask.parmServiceId,
                                 ServiceRecID = mzkTask.parmServiceRecID,

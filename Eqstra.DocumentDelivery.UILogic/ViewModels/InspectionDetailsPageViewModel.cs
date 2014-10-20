@@ -149,6 +149,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             this.CDTaskList.Clear();
             this.CDTaskList.AddRange(await DDServiceProxyHelper.Instance.GroupTasksByCustomer());
+            GetAllCount();
         }
 
         private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
@@ -164,13 +165,14 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     if (item != null)
                     {
                         this.CDTaskList.Add(item);
-                       // GetAppointments(item);
+                        // GetAppointments(item);
                     }
                 }
+
                 if (this.CDTaskList.Any())
                     this.CDTask = this.CDTaskList.FirstOrDefault();
-
                 await GetAllDocumentFromDbByCustomer();
+                GetAllCount();
                 this.IsBusy = false;
             }
             catch (Exception ex)
@@ -180,7 +182,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             }
 
         }
-
+        private void GetAllCount()
+        {
+            this.CustomerDetails.CollectCount = this.CDTaskList.Count(c => c.TaskType == CDTaskType.Collect);
+            this.CustomerDetails.DeliverCount = this.CDTaskList.Count(c => c.TaskType == CDTaskType.Delivery);
+            this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
+        }
         private IEnumerable<CollectDeliveryTask> EnumerateTasks(object navigationParameter, IEnumerable<CollectDeliveryTask> tasks)
         {
             try
@@ -204,6 +211,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         {
                             this.CDTaskList.Clear();
                             await GetTasksFromDbAsync();
+                            GetAllCount();
                             AppSettings.Instance.IsSynchronizing = 0;
                             AppSettings.Instance.Synced = true;
 
@@ -239,12 +247,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.DetailTitle = "Tasks";
                 this.SaveVisibility = Visibility.Collapsed;
                 this.NextStepVisibility = Visibility.Visible;
-                list = (tasks).Where(x => x.Status != CDTaskStatus.Completed);
-                this.CustomerDetails.CollectCount = tasks.Count(c => c.TaskType == CDTaskType.Collect);
-                this.CustomerDetails.DeliverCount = tasks.Count(c => c.TaskType == CDTaskType.Delivery);
-                if (this.CDTaskList.Any())
-                    this.CDTask = this.CDTaskList.FirstOrDefault();
-                return list;
+
+                return tasks;
             }
             catch (Exception ex)
             {
@@ -357,7 +361,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                 foreach (var d in allTaskOfCustomer)
                 {
-                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { SerialNumber = d.SerialNumber, DocumentType = d.DocumentType});
+                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { SerialNumber = d.SerialNumber, DocumentType = d.DocumentType });
                 }
                 GetCustomerDetailsAsync();
                 this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;

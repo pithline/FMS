@@ -32,7 +32,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return instance;
             }
         }
-        public async System.Threading.Tasks.Task<Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient> ConnectAsync(string userName, string password, string domain = "lfmd")
+        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient ConnectAsync(string userName, string password, string domain = "lfmd")
         {
             try
             {
