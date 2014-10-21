@@ -133,10 +133,12 @@
     <Compile Include="DocumentDelivery\AlternateContactPerson.cs" />
     <Compile Include="DocumentDelivery\CDCustomer.cs" />
     <Compile Include="DocumentDelivery\Courier.cs" />
-    <Compile Include="DocumentDelivery\DocumentDeliveryDetails.cs" />
+    <Compile Include="DocumentDelivery\DocumentCollectDetail.cs" />
+    <Compile Include="DocumentDelivery\CollectDeliveryDetail.cs" />
     <Compile Include="DocumentDelivery\Document.cs" />
     <Compile Include="DocumentDelivery\CollectedFromData.cs" />
     <Compile Include="DocumentDelivery\DocumentsCollector.cs" />
+    <Compile Include="DocumentDelivery\DocumnetDeliverDetail.cs" />
     <Compile Include="DocumentDelivery\Driver.cs" />
     <Compile Include="DrivingDuration.cs" />
     <Compile Include="Enums\CaseTypeEnum.cs" />

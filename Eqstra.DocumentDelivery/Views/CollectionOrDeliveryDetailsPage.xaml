@@ -221,7 +221,7 @@
 
                                         <StackPanel Grid.Row="2" Visibility="{Binding CompleteVisibility}">
                                             <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
-                                            <TextBlock Text="{Binding ElementName=ContactName,Path=SelectedItem.UserName}"  Style="{StaticResource TextContentStyle}"/>
+                                            <TextBlock Text="{Binding DocuDeliveryDetails.DeliveryPersonName}"  Style="{StaticResource TextContentStyle}"/>
                                         </StackPanel>
 
 

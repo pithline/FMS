@@ -34,6 +34,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
                         };
                     string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                     ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
+                    
                     return new Tuple<LogonResult, string>(new LogonResult
                     {
                         UserInfo = userInfo

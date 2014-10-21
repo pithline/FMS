@@ -39,7 +39,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.DocumentList = new ObservableCollection<Document>();
             this.CollectVisibility = Visibility.Collapsed;
             this.CompleteVisibility = Visibility.Collapsed;
-            this.DocuDeliveryDetails = new DocumentDeliveryDetails();
+            this.DocuDeliveryDetails = new CollectDeliveryDetail();
+            this.DocumentCollectDetail = new DocumentCollectDetail();
+            this.DocumnetDeliverDetail = new DocumnetDeliverDetail();
             this.AddContactCommand = new DelegateCommand(() =>
             {
                 addCustomerPage.ShowIndependent();
@@ -49,7 +51,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
-                    var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
+                    var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>();
                     if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Driver || PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
                     {
                         foreach (var task in this.SelectedTaskBucket)
@@ -58,6 +60,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             {
                                 task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
                                 task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                task.IsNotSyncedWithAX = true;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                 CollectedDocumnetsFromTaskBucket(task, markedDoc, false);
                             }
@@ -72,6 +75,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             {
                                 task.Status = CDTaskStatus.Completed;
                                 task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                task.IsNotSyncedWithAX = true;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                 CollectedDocumnetsFromTaskBucket(task, markedDoc, true);
                             }
@@ -100,7 +104,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     try
                     {
                         this.IsBusy = true;
-                        var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>();
+                        var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumnetDeliverDetail>();
                         if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
                         {
                             foreach (var task in this.SelectedTaskBucket)
@@ -108,6 +112,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber & a.IsMarked))
                                 {
                                     task.Status = CDTaskStatus.AwaitInvoice;
+                                    task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                     DeliveredDocumentsFromTaskBucket(task, markedDoc);
                                 }
@@ -120,6 +125,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
                                 {
                                     task.Status = CDTaskStatus.Completed;
+                                    task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                     DeliveredDocumentsFromTaskBucket(task, markedDoc);
                                 }
@@ -166,42 +172,42 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
 
-        async private void CollectedDocumnetsFromTaskBucket(CollectDeliveryTask task, List<DocumentDeliveryDetails> markedDocDeliDetails, bool collectedByCustomer)
+        async private void CollectedDocumnetsFromTaskBucket(CollectDeliveryTask task, List<DocumentCollectDetail> markedDocDeliDetails, bool iscollectedByCustomer)
         {
             try
             {
-                this.DocuDeliveryDetails.IsDelivered = collectedByCustomer;
-                this.DocuDeliveryDetails.IsColletedByCustomer = collectedByCustomer;
-
-                this.DocuDeliveryDetails.IsCollected = true;
-                this.DocuDeliveryDetails.CollectedAt = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.Address : string.Empty;
-                this.DocuDeliveryDetails.SelectedCollectedFrom = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.UserName : string.Empty;
+                this.DocumentCollectDetail.Comment = this.DocuDeliveryDetails.Comment;
+                this.DocumentCollectDetail.ReceivedDate = this.DocuDeliveryDetails.ReceivedDate;
+                this.DocumentCollectDetail.IsColletedByCustomer = iscollectedByCustomer;
+           
+                this.DocumentCollectDetail.CollectedAt = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.Address : string.Empty;
+                this.DocumentCollectDetail.SelectedCollectedFrom = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.UserName : string.Empty;
 
                 if (this.IsAlternateOn && SelectedAlternateContact != null)
                 {
-                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
-                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
+                    this.DocumentCollectDetail.ReceivedBy = this.SelectedAlternateContact.FullName;
+                    this.DocumentCollectDetail.DeliveryPersonName = this.SelectedAlternateContact.FullName;
 
-                    this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
-                    this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
-                    this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
+                    this.DocumentCollectDetail.Email = this.SelectedAlternateContact.Email;
+                    this.DocumentCollectDetail.Position = this.SelectedAlternateContact.Position;
+                    this.DocumentCollectDetail.Phone = this.SelectedAlternateContact.CellPhone;
 
                 }
                 else
                 {
-                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
+                    this.DocumentCollectDetail.ReceivedBy = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
                 }
 
-                this.DocuDeliveryDetails.CaseNumber = task.CaseNumber;
-                this.DocuDeliveryDetails.CaseServiceRecId = task.CaseServiceRecID;
+                this.DocumentCollectDetail.CaseNumber = task.CaseNumber;
+                this.DocumentCollectDetail.CaseServiceRecId = task.CaseServiceRecID;
 
-                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
+                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocumentCollectDetail.CaseNumber))
                 {
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentCollectDetail>(this.DocumentCollectDetail);
                 }
                 else
                 {
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentCollectDetail>(this.DocumentCollectDetail);
                 }
             }
             catch (Exception ex)
@@ -212,36 +218,37 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
 
-        async private void DeliveredDocumentsFromTaskBucket(CollectDeliveryTask task, List<DocumentDeliveryDetails> markedDocDeliDetails)
+        async private void DeliveredDocumentsFromTaskBucket(CollectDeliveryTask task, List<DocumnetDeliverDetail> markedDocDeliDetails)
         {
             try
             {
-                this.DocuDeliveryDetails.IsDelivered = true;
+                this.DocumnetDeliverDetail.Comment = this.DocuDeliveryDetails.Comment;
+                this.DocumnetDeliverDetail.DeliveryDate = this.DocuDeliveryDetails.DeliveryDate;
 
                 if (this.IsAlternateOn && SelectedAlternateContact != null)
                 {
-                    this.DocuDeliveryDetails.ReceivedBy = this.SelectedAlternateContact.FullName;
-                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedAlternateContact.FullName;
-                    this.DocuDeliveryDetails.Email = this.SelectedAlternateContact.Email;
-                    this.DocuDeliveryDetails.Position = this.SelectedAlternateContact.Position;
-                    this.DocuDeliveryDetails.Phone = this.SelectedAlternateContact.CellPhone;
+                    this.DocumnetDeliverDetail.ReceivedBy = this.SelectedAlternateContact.FullName;
+                    this.DocumnetDeliverDetail.DeliveryPersonName = this.SelectedAlternateContact.FullName;
+                    this.DocumnetDeliverDetail.Email = this.SelectedAlternateContact.Email;
+                    this.DocumnetDeliverDetail.Position = this.SelectedAlternateContact.Position;
+                    this.DocumnetDeliverDetail.Phone = this.SelectedAlternateContact.CellPhone;
 
                 }
                 else
                 {
-                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
+                    this.DocumnetDeliverDetail.DeliveryPersonName = this.SelectedContact != null ? this.SelectedContact.UserName : string.Empty;
                 }
 
-                this.DocuDeliveryDetails.CaseNumber = task.CaseNumber;
-                this.DocuDeliveryDetails.CaseServiceRecId = task.CaseServiceRecID;
+                this.DocumnetDeliverDetail.CaseNumber = task.CaseNumber;
+                this.DocumnetDeliverDetail.CaseServiceRecId = task.CaseServiceRecID;
 
                 if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
                 {
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumnetDeliverDetail>(this.DocumnetDeliverDetail);
                 }
                 else
                 {
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumentDeliveryDetails>(this.DocuDeliveryDetails);
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<DocumnetDeliverDetail>(this.DocumnetDeliverDetail);
                 }
             }
             catch (Exception ex)
@@ -306,7 +313,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     case CDUserType.Customer:
                         var contactPersonsData = await SqliteHelper.Storage.LoadTableAsync<CDCustomer>();
                         this.ContactPersons = contactPersonsData;
-                        this.SelectedContact = contactPersonsData.Where(s => s.Isprimary).First();
+                        this.SelectedContact = contactPersonsData.Where(s => s.Isprimary).FirstOrDefault();
                         break;
                 }
 
@@ -332,6 +339,23 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             get { return completeVisibility; }
             set { SetProperty(ref completeVisibility, value); }
+        }
+
+
+        private DocumentCollectDetail documentCollectDetail;
+
+        public DocumentCollectDetail DocumentCollectDetail
+        {
+            get { return documentCollectDetail; }
+            set { SetProperty(ref documentCollectDetail, value); }
+        }
+
+        private DocumnetDeliverDetail documnetDeliverDetail;
+
+        public DocumnetDeliverDetail DocumnetDeliverDetail
+        {
+            get { return documnetDeliverDetail; }
+            set { SetProperty(ref documnetDeliverDetail, value); }
         }
 
         private Visibility collectVisibility;
@@ -397,8 +421,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return proofTitle; }
             set { SetProperty(ref proofTitle, value); }
         }
-        private DocumentDeliveryDetails docuDeliveryDetails;
-        public DocumentDeliveryDetails DocuDeliveryDetails
+        private CollectDeliveryDetail docuDeliveryDetails;
+        public CollectDeliveryDetail DocuDeliveryDetails
         {
             get { return docuDeliveryDetails; }
             set { SetProperty(ref docuDeliveryDetails, value); }
@@ -435,6 +459,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 if (SetProperty(ref selectedContact, value))
                 {
                     this.ContactNameBorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.SlateBlue);
+                    this.DocuDeliveryDetails.DeliveryPersonName = this.SelectedContact.UserName;
                     this.CompleteCommand.RaiseCanExecuteChanged();
                     this.CollectCommand.RaiseCanExecuteChanged();
                 }
@@ -452,6 +477,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 if (SetProperty(ref selectedAlternateContact, value))
                 {
                     this.ContactNameBorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.SlateBlue);
+                    this.DocuDeliveryDetails.DeliveryPersonName = this.selectedAlternateContact.FullName;
                     this.CompleteCommand.RaiseCanExecuteChanged();
                     this.CollectCommand.RaiseCanExecuteChanged();
                 }

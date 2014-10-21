@@ -98,6 +98,18 @@ namespace Eqstra.BusinessLogic.Helpers
             }
         }
 
+        public async Task<int> DeleteSingleRecordAsync<T>(T obj)
+        {
+            try
+            {
+                return await this.Connection.DeleteAsync(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         async public Task<int> UpdateSingleRecordAsync<T>(T obj)
         {
             try

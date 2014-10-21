@@ -71,7 +71,7 @@ namespace Eqstra.DocumentDelivery
             if (db == null)
             {
                 var packDb = await Package.Current.InstalledLocation.GetFileAsync("SqliteDB\\eqstramobility.sqlite");
-        
+
                 await packDb.CopyAsync(await ApplicationData.Current.RoamingFolder.CreateFolderAsync("SQLiteDB"));
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
@@ -84,8 +84,8 @@ namespace Eqstra.DocumentDelivery
                 var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Eqstra.BusinessLogic.Helpers.Constants.UserInfo].ToString());
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
                 PersistentData.Instance.UserInfo = userInfo;
-               CreateTableAsync();
-               NavigationService.Navigate("InspectionDetails", string.Empty);
+                CreateTableAsync();
+                NavigationService.Navigate("InspectionDetails", string.Empty);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Eqstra.DocumentDelivery
             base.OnInitialize(args);
             EventAggregator = new EventAggregator();
 
-           
+
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
@@ -176,24 +176,29 @@ namespace Eqstra.DocumentDelivery
             //await SqliteHelper.Storage.DropTableAsync<Document>();
             //await SqliteHelper.Storage.DropTableAsync<CollectDeliveryTask>();
             //await SqliteHelper.Storage.DropTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.DropTableAsync<DocumentDeliveryDetails>();
+
             //await SqliteHelper.Storage.DropTableAsync<CollectedFromData>();
             //await SqliteHelper.Storage.DropTableAsync<Driver>();
             //await SqliteHelper.Storage.DropTableAsync<Courier>();
             //await SqliteHelper.Storage.DropTableAsync<AlternateContactPerson>();
             //await SqliteHelper.Storage.DropTableAsync<CDCustomer>();
 
+            //await SqliteHelper.Storage.DropTableAsync<DocumentCollectDetail>();
+            //await SqliteHelper.Storage.DropTableAsync<DocumnetDeliverDetail>();
+
             //await SqliteHelper.Storage.CreateTableAsync<CDDrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<Document>();
             //await SqliteHelper.Storage.CreateTableAsync<CollectDeliveryTask>();
             //await SqliteHelper.Storage.CreateTableAsync<CDCustomerDetails>();
-            //await SqliteHelper.Storage.CreateTableAsync<DocumentDeliveryDetails>();
+
             //await SqliteHelper.Storage.CreateTableAsync<CollectedFromData>();
             //await SqliteHelper.Storage.CreateTableAsync<Driver>();
             //await SqliteHelper.Storage.CreateTableAsync<Courier>();
             //await SqliteHelper.Storage.CreateTableAsync<AlternateContactPerson>();
             //await SqliteHelper.Storage.CreateTableAsync<CDCustomer>();
-            
+
+            //await SqliteHelper.Storage.CreateTableAsync<DocumentCollectDetail>();
+            //await SqliteHelper.Storage.CreateTableAsync<DocumnetDeliverDetail>();
 
         }
     }

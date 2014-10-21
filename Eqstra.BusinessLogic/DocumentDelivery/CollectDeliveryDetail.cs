@@ -13,10 +13,8 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class DocumentDeliveryDetails : ValidatableBindableBase
+    public class CollectDeliveryDetail : ValidatableBindableBase
     {
-
-
         private string caseNumber;
         [PrimaryKey]
         public string CaseNumber
@@ -30,13 +28,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         {
             get { return caseServiceRecId; }
             set { SetProperty(ref caseServiceRecId, value); }
-        }
-
-        private long caseCategoryRecID;
-        public long CaseCategoryRecID
-        {
-            get { return caseCategoryRecID; }
-            set { SetProperty(ref caseCategoryRecID, value); }
         }
 
         private string selectedCollectedFrom;
@@ -53,7 +44,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref deliveryPersonName, value); }
         }
 
-    
+
         private string crSignFileName;
 
         public string CRSignFileName
@@ -130,21 +121,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         {
             get { return phone; }
             set { SetProperty(ref phone, value); }
-        }
-
-        private bool isCollected;
-
-        public bool IsCollected
-        {
-            get { return isCollected; }
-            set { SetProperty(ref isCollected, value); }
-        }
-        private bool isDelivered;
-
-        public bool IsDelivered
-        {
-            get { return isDelivered; }
-            set { SetProperty(ref isDelivered, value); }
         }
         private DateTime deliveryDate;
 

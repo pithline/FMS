@@ -15,7 +15,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
     public class CollectDeliveryTask : ValidatableBindableBase
     {
         private string caseNumber;
-
         [PrimaryKey]
         public string CaseNumber
         {
@@ -24,7 +23,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private long caseCategoryRecID;
-
         public long CaseCategoryRecID
         {
             get { return caseCategoryRecID; }
@@ -89,7 +87,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
 
         private long custPartyId;
-
         public long CustPartyId
         {
             get { return custPartyId; }
@@ -105,7 +102,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private string status;
-
         public string Status
         {
             get { return status; }
@@ -121,7 +117,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private DateTime confirmedTime;
-
         public DateTime ConfirmedTime
         {
             get { return confirmedTime; }
@@ -177,7 +172,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private long caseRecID;
-
         public long CaseRecID
         {
             get { return caseRecID; }
@@ -186,7 +180,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
 
         private long caseServiceRecID;
-
         public long CaseServiceRecID
         {
             get { return caseServiceRecID; }
@@ -195,14 +188,12 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
 
         private string serviceId;
-
         public string ServiceId
         {
             get { return serviceId; }
             set { SetProperty(ref serviceId, value); }
         }
         private long serviceRecID;
-
         public long ServiceRecID
         {
             get { return serviceRecID; }
@@ -210,7 +201,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private string userID;
-
         public string UserID
         {
             get { return userID; }
@@ -218,7 +208,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
         }
 
         private bool isAssignTask;
-
         public bool IsAssignTask
         {
             get { return isAssignTask; }
@@ -227,7 +216,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
 
         private string serialNumber;
-
         public string SerialNumber
         {
             get { return serialNumber; }
@@ -250,8 +238,15 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
 
         public string DocumentType { get; set; }
-
         public string DocumentName { get; set; }
+
+        private bool isNotSyncedWithAX;
+        public bool IsNotSyncedWithAX
+        {
+            get { return isNotSyncedWithAX; }
+            set { SetProperty(ref isNotSyncedWithAX, value); }
+        }
+
     }
 
     public class TasksFetchedEvent : PubSubEvent<CollectDeliveryTask>
