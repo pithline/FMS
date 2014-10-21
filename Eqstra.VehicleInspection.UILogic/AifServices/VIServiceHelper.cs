@@ -64,7 +64,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 client = new VIService.MzkVehicleInspectionServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/VehicleInspection/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
-                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
+                client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
                 return client;
             }
