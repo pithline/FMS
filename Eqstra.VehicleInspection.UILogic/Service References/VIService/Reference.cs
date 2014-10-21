@@ -5580,6 +5580,8 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkValidateUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkValidateUserContract : Eqstra.VehicleInspection.UILogic.VIService.XppObjectBase {
         
+        private string parmAddressField;
+        
         private string parmCompanyField;
         
         private string parmCompanyNameField;
@@ -5589,6 +5591,19 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
         private string parmUserIDField;
         
         private string parmUserNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAddress {
+            get {
+                return this.parmAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmAddressField, value) != true)) {
+                    this.parmAddressField = value;
+                    this.RaisePropertyChanged("parmAddress");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmCompany {
@@ -6347,13 +6362,16 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
     public enum MzkLoginType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Driver = 0,
+        Driver = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Courier = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Customer = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
