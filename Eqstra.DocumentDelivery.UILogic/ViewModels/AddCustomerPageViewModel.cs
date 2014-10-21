@@ -1,6 +1,7 @@
 ﻿
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
@@ -17,27 +18,36 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         private IEventAggregator _eventAggregator;
         public AddCustomerPageViewModel(IEventAggregator eventAggregator)
         {
-            this.Model = new ContactPerson();
+            this.Model = new AlternateContactPerson();
             this._eventAggregator = eventAggregator;
             this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                this.Model.CaseNumber =ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
-                await SqliteHelper.Storage.InsertSingleRecordAsync<ContactPerson>(this.Model);
-                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
+                this.Model.UserId = PersistentData.Instance.UserInfo.UserId;
+                var alternateData = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
+                if (alternateData != null && alternateData.Any(a => a.FirstName == this.Model.FirstName && a.Surname == this.Model.Surname))
+                {
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<AlternateContactPerson>(this.Model);
+                }
+                else
+                {
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<AlternateContactPerson>(this.Model);
+                }
+
+                this._eventAggregator.GetEvent<AlternateContactPersonEvent>().Publish(this.Model);
             });
 
             this.ClearCustomerCommand = new DelegateCommand(() =>
             {
-                this.Model = new ContactPerson();
-                this._eventAggregator.GetEvent<ContactPersonEvent>().Publish(this.Model);
+                this.Model = new AlternateContactPerson();
+                this._eventAggregator.GetEvent<AlternateContactPersonEvent>().Publish(this.Model);
             });
 
         }
         public DelegateCommand AddCustomerCommand { get; set; }
         public DelegateCommand ClearCustomerCommand { get; set; }
 
-        private ContactPerson model;
-        public ContactPerson Model
+        private AlternateContactPerson model;
+        public AlternateContactPerson Model
         {
             get { return model; }
             set { SetProperty(ref model, value); }

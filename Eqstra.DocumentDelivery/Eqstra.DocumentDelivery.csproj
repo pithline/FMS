@@ -133,6 +133,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\InvertOpacityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
@@ -185,6 +186,7 @@
     <Content Include="Assets\car_right.png" />
     <Content Include="Assets\car_top.png" />
     <Content Include="Assets\details_image.png" />
+    <Content Include="Assets\direction.png" />
     <Content Include="Assets\eqstra_badge_logo.scale-140.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\Eqstra_logo.png" />

@@ -1,4 +1,5 @@
 ﻿using Eqstra.DocumentDelivery.UILogic.Services;
+using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -8,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 {
@@ -19,31 +23,35 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             _navigationService = navigationService;
             _accountService = accountService;
-
+            ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
                     try
                     {
+                        ProgressDialogPopup.Open(this);
                         IsLoggingIn = true;
                         var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
                         if (result.Item1 != null)
                         {
                             string jsonUserInfo = JsonConvert.SerializeObject(result.Item1);
-                            navigationService.Navigate("Main", jsonUserInfo);
+                            navigationService.Navigate("InspectionDetails", jsonUserInfo);
                         }
                         else
                         {
+                            ProgressDialogPopup.Close();
                             ErrorMessage = result.Item2;
                         }
 
                     }
                     catch (Exception ex)
                     {
+                    
                         AppSettings.Instance.ErrorMessage = ex.Message;
                     }
                     finally
                     {
+                        ProgressDialogPopup.Close();
                         IsLoggingIn = false;
                     }
                 },
@@ -74,6 +82,13 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 if (SetProperty(ref password, value))
                     LoginCommand.RaiseCanExecuteChanged();
             }
+        }
+        private ProgressDialog progressDialogPopup;
+
+        public ProgressDialog ProgressDialogPopup
+        {
+            get { return progressDialogPopup; }
+            set { SetProperty(ref progressDialogPopup, value); }
         }
 
         private bool shouldSaveCredential;

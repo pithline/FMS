@@ -152,19 +152,16 @@
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDocumentsInfoResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCollectedDetailsResponse.datasource">
@@ -174,9 +171,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDeliveryDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentNewContactPersonResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateStatusListResponse.datasource">
@@ -217,6 +211,11 @@
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.Controls\Eqstra.WinRT.Components.Controls.csproj">
+      <Project>{567f62b5-9cde-4241-8675-c92a3e9546a8}</Project>
+      <Name>Eqstra.WinRT.Components.Controls</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

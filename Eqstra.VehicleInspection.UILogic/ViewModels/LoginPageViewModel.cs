@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic.Services;
+using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -19,16 +20,19 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     {
         private INavigationService _navigationService;
         private IAccountService _accountService;
+
         public LoginPageViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
             _accountService = accountService;
+            ProgressDialogPopup = new ProgressDialog();
 
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
                     try
                     {
+                        ProgressDialogPopup.Open(this);
                         IsLoggingIn = true;
                         var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
                         if (result.Item1 != null)
@@ -38,6 +42,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                         }
                         else
                         {
+                            ProgressDialogPopup.Close();
                             ErrorMessage = result.Item2;
                         }
                         
@@ -48,6 +53,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     }
                     finally
                     {
+                        ProgressDialogPopup.Close();
                         IsLoggingIn = false;
                     }
                 },
@@ -76,6 +82,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     LoginCommand.RaiseCanExecuteChanged();
                 }
             }
+        }
+        private ProgressDialog progressDialogPopup;
+
+        public ProgressDialog ProgressDialogPopup
+        {
+            get { return progressDialogPopup; }
+            set { SetProperty(ref progressDialogPopup, value); }
         }
 
         private string password;

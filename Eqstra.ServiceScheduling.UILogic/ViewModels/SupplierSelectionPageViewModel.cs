@@ -171,7 +171,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             });
 
-            this.RegionChangedCommand = new DelegateCommand<object>(async (param) =>
+            this.RegionChangedCommand = new DelegateCommand<object>( (param) =>
             {
                 try
                 {
@@ -193,7 +193,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
             });
 
-            this.SubmitQueryCommand = new DelegateCommand<string>(async (param) =>
+            this.SubmitQueryCommand = new DelegateCommand<string>( (param) =>
             {
 
             });

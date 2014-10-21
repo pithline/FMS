@@ -10,24 +10,14 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class ContactPerson : ValidatableBindableBase
+    public class AlternateContactPerson : ValidatableBindableBase
     {
-        private string caseNumber;
-         [PrimaryKey]
-        public string CaseNumber
+        private string userId;
+        public string UserId
         {
-            get { return caseNumber; }
-            set { caseNumber = value; }
+            get { return userId; }
+            set { userId = value; }
         }
-
-        private long caseCategoryRecID;
-
-        public long CaseCategoryRecID
-        {
-            get { return caseCategoryRecID; }
-            set { SetProperty(ref caseCategoryRecID, value); }
-        }
-
 
         private string firstName;
         public string FirstName
@@ -79,7 +69,7 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
 
     }
 
-    public class ContactPersonEvent : PubSubEvent<ContactPerson>
+    public class AlternateContactPersonEvent : PubSubEvent<AlternateContactPerson>
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public class CollectedFromData : ValidatableBindableBase
+    public class DocumentsReceiver : ValidatableBindableBase
     {
         private string userID;
         [PrimaryKey]

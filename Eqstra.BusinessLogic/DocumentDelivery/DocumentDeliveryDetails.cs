@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
@@ -8,16 +9,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.BusinessLogic.DocumentDelivery
 {
     public class DocumentDeliveryDetails : ValidatableBindableBase
     {
-        public DocumentDeliveryDetails()
-        {
-            this.ContactPersons = (SqliteHelper.Storage.LoadTableAsync<ContactPerson>()).Result;
-            this.CollectedFrom = (SqliteHelper.Storage.LoadTableAsync<CollectedFromData>()).Result;
-        }
+
 
         private string caseNumber;
         [PrimaryKey]
@@ -27,27 +25,18 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref caseNumber, value); }
         }
 
+        private long caseServiceRecId;
+        public long CaseServiceRecId
+        {
+            get { return caseServiceRecId; }
+            set { SetProperty(ref caseServiceRecId, value); }
+        }
+
         private long caseCategoryRecID;
         public long CaseCategoryRecID
         {
             get { return caseCategoryRecID; }
             set { SetProperty(ref caseCategoryRecID, value); }
-        }
-
-        private List<ContactPerson> contactPersons;
-        [Ignore]
-        public List<ContactPerson> ContactPersons
-        {
-            get { return contactPersons; }
-            set { SetProperty(ref contactPersons, value); }
-        }
-
-        private List<CollectedFromData> collectedFrom;
-        [Ignore]
-        public List<CollectedFromData> CollectedFrom
-        {
-            get { return collectedFrom; }
-            set { SetProperty(ref collectedFrom, value); }
         }
 
         private string selectedCollectedFrom;
@@ -57,7 +46,6 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref selectedCollectedFrom, value); }
         }
 
-
         private string deliveryPersonName;
         public string DeliveryPersonName
         {
@@ -65,34 +53,31 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref deliveryPersonName, value); }
         }
 
-        private string cRSignature;
+    
+        private string crSignFileName;
 
-        public string CRSignature
+        public string CRSignFileName
         {
-            get { return cRSignature; }
-            set { SetProperty(ref cRSignature, value); }
+            get { return crSignFileName; }
+            set { SetProperty(ref crSignFileName, value); }
         }
 
-
-
         private string deliveredAt;
-
         public string DeliveredAt
         {
             get { return deliveredAt; }
             set { SetProperty(ref deliveredAt, value); }
         }
 
-        private DateTime collectedAt;
+        private string collectedAt;
 
-        public DateTime CollectedAt
+        public string CollectedAt
         {
             get { return collectedAt; }
             set { SetProperty(ref collectedAt, value); }
         }
 
         private string comment;
-
         public string Comment
         {
             get { return comment; }
@@ -169,6 +154,13 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             set { SetProperty(ref deliveryDate, value); }
         }
 
+        private bool isColletedByCustomer;
+
+        public bool IsColletedByCustomer
+        {
+            get { return isColletedByCustomer; }
+            set { SetProperty(ref isColletedByCustomer, value); }
+        }
 
     }
 }

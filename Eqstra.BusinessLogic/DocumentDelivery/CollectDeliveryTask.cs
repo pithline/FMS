@@ -248,6 +248,10 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
                 CDTasksDetails.Clear();
         }
 
+
+        public string DocumentType { get; set; }
+
+        public string DocumentName { get; set; }
     }
 
     public class TasksFetchedEvent : PubSubEvent<CollectDeliveryTask>

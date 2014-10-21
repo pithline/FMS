@@ -17,7 +17,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Services
         {
             try
             {
-                await SSProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
+                 SSProxyHelper.Instance.ConnectAsync(userId.Trim(), password.Trim());
                 if (await SSProxyHelper.Instance.ValidateUser(userId.Trim(), password.Trim()))
                 {
                     return new Tuple<LogonResult, string>(null, "Whoa! The entered password is incorrect, please verify the password you entered.");

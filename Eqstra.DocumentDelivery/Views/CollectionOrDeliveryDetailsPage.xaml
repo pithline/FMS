@@ -15,12 +15,15 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
     xmlns:mzk="using:Mazik.WinRT.Components.Controls"
+    xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
     prism:ViewModelLocator.AutoWireViewModel="True"    
     mc:Ignorable="d" d:DesignWidth="3000">
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
@@ -40,169 +43,207 @@
     <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
                           AnimationType="DoubleCircle">
         <Grid Style="{StaticResource LayoutRootStyle}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Back button and page title -->
-        <Grid Background="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
+            <!-- Back button and page title -->
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="39,0,39,0" Command="{Binding GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Center"
                        />
 
-            <Button Command="{Binding GoHomeCommand}" Grid.Column="1" Style="{StaticResource TransparentBtn}">
-                <Button.Content>
-                    <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
-                </Button.Content>
-            </Button>
-            <local:ProfileUserControl Grid.Column="2"/>
-        </Grid>
+                <Button Command="{Binding GoHomeCommand}" Grid.Column="1" Style="{StaticResource TransparentBtn}">
+                    <Button.Content>
+                        <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Width="235" Height="64"/>
+                    </Button.Content>
+                </Button>
+                <local:ProfileUserControl Grid.Column="2"/>
+            </Grid>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
-            <Grid Margin="30">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                    <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}" Margin="0 0 0 30"/>
-                </Grid>
-                <Grid Grid.Column="1"  Margin="10 0 10 29">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding CDTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                    <Border Grid.Row="3" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="{Binding AckDialog}" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{StaticResource FontFamilyStyle}"/>
-                            <grid:SfDataGrid x:Name="sfDataGrid" Grid.Row="1" NavigationMode="Row" 
-                                             AllowEditing="True"
-                                             ItemsSource="{Binding DocumentList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                             ColumnSizer="Auto" AutoGenerateColumns="False" SelectionMode="Multiple"
-                                             BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
-                                <grid:SfDataGrid.Columns>
-                                    <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="Make" HeaderText="MAKE" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="Model" HeaderText="MODEL" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
-                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
-                                </grid:SfDataGrid.Columns>
-
-                                <Interactivity:Interaction.Behaviors>
-                                    <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                        <Core:InvokeCommandAction Command="{Binding DocumentsChangedCommand}"
-                                              CommandParameter="{Binding ElementName=sfDataGrid,Path=SelectedItems}"/>
-                                    </Core:EventTriggerBehavior>
-                                </Interactivity:Interaction.Behaviors>
-                            </grid:SfDataGrid>
-                        </Grid>
-                    </Border>
-                </Grid>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="2">
-
-                    <Grid Grid.Column="2" Margin="0 0 0 30" MinWidth="300">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
+                <Grid Margin="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding ProofTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
-                        <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                        <TextBlock Text="Customer Details" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                        <local:CustomerDetailUserControl Grid.Row="1" DataContext="{Binding CustomerDetails}" Margin="0 0 0 30"/>
+                    </Grid>
+                    <Grid Grid.Column="1"  Margin="10 0 10 29">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding CDTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                        <Border Grid.Row="3" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
                             <Grid Margin="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Orientation="Horizontal" Margin="0 10">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
-                                        <ComboBox  x:Name="ContactName" HorizontalAlignment="Left" SelectedValue="{Binding SelectedContactName,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.ContactPersons ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
-                                        </ComboBox>
-                                    </StackPanel>
+                                <TextBlock Grid.Row="0" Text="{Binding AckDialog}" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{StaticResource FontFamilyStyle}"/>
+                                <ScrollViewer Grid.Row="1">
+
+                                    <grid:SfDataGrid x:Name="sfDataGrid" Grid.Row="1" NavigationMode="Row"  AllowRowHoverHighlighting="False" 
+                                             AllowEditing="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                             ItemsSource="{Binding DocumentList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                             ColumnSizer="Auto" AutoGenerateColumns="False" SelectionMode="Multiple" 
+                                             BorderBrush="Transparent" BorderThickness="0" CellStyle="{StaticResource SyncGridCellStyle}">
+
+                                        <grid:SfDataGrid.Columns>
+                                            <grid:GridCheckBoxColumn MappingName="IsMarked">
+                                                <grid:GridCheckBoxColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"  IsChecked="{Binding ElementName=pageRoot,Path=DataContext.MasterIsChecked,Mode=TwoWay}" />
+                                                    </DataTemplate>
+                                                </grid:GridCheckBoxColumn.HeaderTemplate>
+
+                                            </grid:GridCheckBoxColumn>
 
 
-                                    <StackPanel Orientation="Horizontal">
+                                            <grid:GridTextColumn MappingName="DocumentType" HeaderText="DOCUMENT TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                            <grid:GridTextColumn MappingName="DocumentName" HeaderText="DOCUMENT NAME" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                            <grid:GridTextColumn MappingName="RegistrationNumber" HeaderText="REGISTRATION NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                            <grid:GridTextColumn MappingName="MakeModel" HeaderText="MAKE MODEL" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
+                                            <!--<grid:GridTextColumn MappingName="Model" HeaderText="MODEL" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>-->
+                                            <grid:GridTextColumn MappingName="SerialNumber" HeaderText="SERIAL NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
+                                            <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
+                                        </grid:SfDataGrid.Columns>
 
-                                        <Button HorizontalAlignment="Left" Command="{Binding AddContactCommand}" VerticalAlignment="Bottom"  Style="{StaticResource TransparentBtn}">
-                                            <Image Source="ms-appx:///Assets/add_icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
-                                        </Button>
-                                    </StackPanel>
-                                </StackPanel>
-                                <TextBlock Text="Customer/Representative Signature" Margin="0 10" VerticalAlignment="Bottom" Style="{StaticResource TextHeaderStyle}" Grid.Row="1"/>
-                                <mzk:MzkSignature Title="" FileName="{Binding Path=DocuDeliveryDetails.CRSignature ,Mode=TwoWay }" Margin="0 10" HorizontalAlignment="Left" Grid.Row="2"/>
-                                <Grid Grid.Row="3" Margin="0 0 0 20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                                <Core:InvokeCommandAction Command="{Binding DocumentsChangedCommand}"
+                                              CommandParameter="{Binding ElementName=sfDataGrid,Path=SelectedItems}"/>
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+                                    </grid:SfDataGrid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Grid.Column="2">
+
+                        <Grid Grid.Column="2" Margin="0 0 0 30" MinWidth="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding ProofTitle}" Style="{StaticResource GroupHeaderStyle}" Margin="0 0 0 10"/>
+                            <Border Grid.Row="1" BorderBrush="#FFE0E0E0" BorderThickness="1" Background="White">
+                                <Grid Margin="10">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}"/>
-                                        <input:SfDatePicker IsHitTestVisible="False" Value="{Binding DocuDeliveryDetails.CollectedAt,Mode=TwoWay}" BorderThickness="0"  HorizontalAlignment="Left"  Foreground="#FF666666" FontSize="12"/>
+                                        <TextBlock Text="Has Alternate Contacts" Style="{StaticResource TextHeaderStyle}"/>
+                                        <ToggleSwitch  VerticalAlignment="Bottom" IsOn="{Binding Path=IsAlternateOn,Mode=TwoWay}" x:Name="AlternateToggle" Style="{StaticResource DamagedToggleSwitch}"/>
+
+                                    </StackPanel>
+                                   <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                        
+                                        <StackPanel Orientation="Vertical" Visibility="{Binding IsOn, Converter={StaticResource InverseBooleanToVisibilityConverter}, ElementName=AlternateToggle}">
+                                            <TextBlock Text="Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
+                                            <ComboBox  x:Name="ContactName" BorderBrush="{Binding ContactNameBorderBrush}" BorderThickness="1"  HorizontalAlignment="Left" SelectedItem="{Binding SelectedContact,Mode=TwoWay}"  ItemsSource="{Binding ContactPersons ,Mode=TwoWay}" DisplayMemberPath="UserName" Width="200">
+                                            </ComboBox>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AlternateToggle}">
+                                            <TextBlock Text="Alternate Contact Name" Margin="0 10 10 0"  Style="{StaticResource TextHeaderStyle}"/>
+                                            <ComboBox  x:Name="AlternateContactName" BorderBrush="{Binding ContactNameBorderBrush}" BorderThickness="1"  HorizontalAlignment="Left" SelectedItem="{Binding SelectedAlternateContact,Mode=TwoWay}"  ItemsSource="{Binding AlternateContactPersons ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
+                                            </ComboBox>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AlternateToggle}">
+
+                                            <Button HorizontalAlignment="Left" Command="{Binding AddContactCommand}" VerticalAlignment="Bottom"  Style="{StaticResource TransparentBtn}">
+                                                <Image Source="ms-appx:///Assets/add_icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="Customer/Representative Signature" Margin="0 10" VerticalAlignment="Bottom" Style="{StaticResource TextHeaderStyle}" Grid.Row="2"/>
+
+                                    <mzk:MzkSignature Title="" FileName="{Binding DocuDeliveryDetails.CRSignFileName,Mode=TwoWay}"  ImageSource="{Binding CRSignature ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0 10" HorizontalAlignment="Left" Grid.Row="3"/>
+                                    <Grid Grid.Row="4" Margin="0 0 0 20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Orientation="Vertical" Grid.Row="0" Visibility="{Binding IsCollSignatureDate}">
+                                            <TextBlock Text="Collected On" Style="{StaticResource TextHeaderStyle}"/>
+                                            <TextBlock Text="{Binding Path=DocuDeliveryDetails.ReceivedDate}" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center" Margin="10 0" FontSize="30"/>
+                                        </StackPanel>
+
+                                        <StackPanel  Grid.Row="1" Orientation="Vertical" Visibility="{Binding CollectVisibility}">
+                                            <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}"/>
+                                            <TextBlock Text="{Binding ElementName=collectedFrom,Path=SelectedItem.Address}" Style="{StaticResource TextContentStyle}"/>
+                                        </StackPanel>
+
+
+                                        <StackPanel Grid.Row="0" Visibility="{Binding IsDelSignatureDate}">
+                                            <TextBlock Text="Delivered On" Style="{StaticResource TextHeaderStyle}"/>
+                                            <TextBlock Text="{Binding DocuDeliveryDetails.DeliveryDate}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
+                                        </StackPanel>
+
+
+                                        <StackPanel Grid.Row="1" Visibility="{Binding CompleteVisibility}">
+                                            <TextBlock Text="Delivery At" Style="{StaticResource TextHeaderStyle}"/>
+                                            <TextBlock Text="{Binding DocuDeliveryDetails.DeliveredAt}"  Style="{StaticResource TextContentStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="2" Visibility="{Binding CompleteVisibility}">
+                                            <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
+                                            <TextBlock Text="{Binding ElementName=ContactName,Path=SelectedItem.UserName}"  Style="{StaticResource TextContentStyle}"/>
+                                        </StackPanel>
+
+
+                                        <StackPanel Grid.Row="2" Visibility="{Binding CollectVisibility}">
+                                            <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
+                                            <ComboBox  x:Name="collectedFrom" HorizontalAlignment="Left" SelectedItem="{Binding SelectedCollectedFrom,Mode=TwoWay}"  ItemsSource="{Binding CollectedFrom ,Mode=TwoWay}" DisplayMemberPath="UserName" Width="200">
+                                            </ComboBox>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <StackPanel Grid.Row="5">
+                                        <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
+                                        <TextBox Grid.Row="3" HorizontalAlignment="Left" AcceptsReturn="True" Width="500" Margin="0" Text="{Binding DocuDeliveryDetails.Comment,Mode=TwoWay}" Height="150"></TextBox>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Column="1" Visibility="{Binding CompleteVisibility}">
-                                        <TextBlock Text="Delivery Person" Style="{StaticResource TextHeaderStyle}"/>
-                                        <TextBlock Text="{Binding DocuDeliveryDetails.DeliveryPersonName}" Style="{StaticResource TextContentStyle}"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CompleteVisibility}">
-                                        <TextBlock Text="Delivered At" Style="{StaticResource TextHeaderStyle}"/>
-                                        <TextBlock Text="{Binding DocuDeliveryDetails.DeliveredAt}"  TextWrapping="WrapWholeWords" Style="{StaticResource TextContentStyle}"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="1" Visibility="{Binding CollectVisibility}">
-                                        <TextBlock Text="Collected From" Style="{StaticResource TextHeaderStyle}"/>
-                                            <ComboBox  HorizontalAlignment="Left" SelectedValue="{Binding SelectedCollectedFrom,Mode=TwoWay}" SelectedValuePath="FullName" ItemsSource="{Binding DocuDeliveryDetails.CollectedFrom ,Mode=TwoWay}" DisplayMemberPath="FullName" Width="200">
-                                        </ComboBox>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding CollectVisibility}">
-                                        <TextBlock Text="Collected At" Style="{StaticResource TextHeaderStyle}" Margin="10 0 0 0"/>
-                                        <input:SfDatePicker Grid.Row="1"  Value="{Binding DocuDeliveryDetails.CollectedAt,Mode=TwoWay}"  Grid.Column="1" IsHitTestVisible="False" BorderThickness="0" Foreground="#FF666666" />
-                                    </StackPanel>
                                 </Grid>
-
-                                <StackPanel Grid.Row="4">
-                                    <TextBlock Text="Comment" Style="{StaticResource TextHeaderStyle}" Margin="0 0 0 5"/>
-                                    <TextBox Grid.Row="3" HorizontalAlignment="Left" AcceptsReturn="True" Width="500" Margin="0" Text="{Binding DocuDeliveryDetails.Comment,Mode=TwoWay}" Height="150"></TextBox>
-                                </StackPanel>
-
-                            </Grid>
-                        </Border>
-                    </Grid>
-                </ScrollViewer>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </busy:SfBusyIndicator>
 </prism:VisualStateAwarePage>

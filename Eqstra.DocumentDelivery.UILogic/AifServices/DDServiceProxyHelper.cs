@@ -57,7 +57,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 _client = new DDServiceProxy.MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliverService/xppservice.svc"));
                 _client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 _client.ClientCredentials.UserName.Password = password;
-                _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
+                _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential(userName, password, domain);
                 return _client;
             }
@@ -67,7 +67,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 return _client;
             }
         }
-
         public async System.Threading.Tasks.Task SendMessageToUIThread(string receivedMsg)
         {
             CoreDispatcher dispatcher = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher;
@@ -78,24 +77,32 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 AppSettings.Instance.ErrorMessage = receivedMsg;
             });
         }
-
-        async public System.Threading.Tasks.Task<bool> ValidateUser(string userId, string password)
+        async public System.Threading.Tasks.Task<CDUserInfo> ValidateUser(string userId, string password)
         {
             try
             {
-                return !(await _client.validateUserAsync(userId, password)).response;
+                var result = await _client.validateUserAsync(userId, password);
+
+                if (result != null && result.response != null)
+                {
+                    var userInfo = new CDUserInfo
+                    {
+                        UserId = result.response.parmUserID,
+                        CompanyId = result.response.parmCompany,
+                        CompanyName = result.response.parmCompanyName,
+                        Name = result.response.parmUserName,
+                        CDUserType = (CDUserType)Enum.Parse(typeof(CDUserType), result.response.parmLoginType.ToString()),
+                    };
+                    PersistentData.Instance.UserInfo = userInfo;
+                    return userInfo;
+                }
+                return null;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-        async public System.Threading.Tasks.Task<MzkCollectDeliveryServiceGetUserDetailsResponse> GetUserInfo(string userId)
-        {
-            return await _client.getUserDetailsAsync(userId);
-        }
-
         public void Synchronize(Action syncExecute)
         {
             _syncExecute = syncExecute;
@@ -123,7 +130,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-
         async public System.Threading.Tasks.Task SynchronizeAllAsync()
         {
             try
@@ -136,76 +142,82 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                if (AppSettings.Instance.IsSynchronizing == 0)
-                {
-                    Synchronize(async () =>
+
+                Synchronize(async () =>
+                   {
+                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                        {
-                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                           {
-
-                               AppSettings.Instance.IsSynchronizing = 1;
-                           });
-
-
-                           await this.SyncTasksFromSvcAsync();
-                           await this.InsertContactDetailsToSvcAsync();
-                           await this.InsertDocumentCollectedDetailsToSvcAsync();
-                           await this.InsertDocumentDeliveryDetailsToSvcAsync();
-                           await this.UpdateTaskStatusAsync();
-                           await this.GetCollectedFromSvcAsync();
-
-                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                           {
-
-                               AppSettings.Instance.IsSynchronizing = 0;
-                           });
-
+                           AppSettings.Instance.IsSynchronizing = 1;
                        });
-                }
+
+                       await this.SendMessageToUIThread(String.Empty);
+
+                       System.Threading.Tasks.Task.WaitAll(
+                           this.InsertDocumentCollectedDetailsToSvcAsync(),
+                           this.GetDriverListFromSvcAsync(),
+
+                           this.GetCourierListFromSvcAsync(),
+                           this.InsertDocumentCollectedByDriverOrCourierToSvcAsync(),
+                           this.UpdateTaskStatusAsync(),
+                           this.GetCollectedFromSvcAsync(),
+                           this.InsertDocumentDeliveryDetailsToSvcAsync(),
+                           this.SyncTasksFromSvcAsync());
+                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                       {
+
+                           AppSettings.Instance.IsSynchronizing = 0;
+                       });
+
+                   });
+
             }
             catch (Exception ex)
             {
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
         public async System.Threading.Tasks.Task<ObservableCollection<CollectDeliveryTask>> GroupTasksByCustomer()
         {
             try
             {
-                var allTaskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed);
-                var taskbuckets = allTaskList.GroupBy(x => new { x.CustomerId, x.TaskType }).Select(s => s.First());
+                var allTaskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
+                var taskbuckets = allTaskList.GroupBy(x => new { x.CustomerId, x.Address, x.TaskType }).Select(s => new { taskdata = s.First(), count = s.Count() });
 
                 ObservableCollection<CollectDeliveryTask> tasks = new ObservableCollection<CollectDeliveryTask>();
                 foreach (var singleTask in taskbuckets)
                 {
-                    singleTask.CDTasksDetails = new ObservableCollection<CDTaskDetails>();
-                    foreach (var item in allTaskList)
+                    if (singleTask != null)
                     {
-                        if (item != null && item.CustomerId == singleTask.CustomerId && item.TaskType == singleTask.TaskType)
-                        {
-                            singleTask.CDTasksDetails.Add(new CDTaskDetails
-                            {
-                                CaseNumber = item.CaseNumber,
-                                CustomerName = item.CustomerName,
-                                TaskType = item.TaskType,
-                                ContactName = item.ContactName,
-                                Address =  item.Address.Replace(System.Environment.NewLine, ","),
-                                DocumentCount = item.DocumentCount,
-                                AllocatedTo = item.AllocatedTo,
-                                CaseCategoryRecID = item.CaseCategoryRecID,
-                                SerialNumber = item.SerialNumber,
-                                RegistrationNumber = item.RegistrationNumber,
-                                MakeModel = item.MakeModel,
-                                Status = item.Status,
-                                StatusDueDate = item.StatusDueDate,
-                                DeliveryDate = item.DeliveryDate,
+                        //singleTask.CDTasksDetails = new ObservableCollection<CDTaskDetails>();
+                        //foreach (var item in allTaskList)
+                        //{
+                        //    if (item != null && item.CustomerId == singleTask.CustomerId && item.TaskType == singleTask.TaskType)
+                        //    {
+                        //        singleTask.CDTasksDetails.Add(new CDTaskDetails
+                        //        {
+                        //            CaseNumber = item.CaseNumber,
+                        //            CustomerName = item.CustomerName,
+                        //            TaskType = item.TaskType,
+                        //            ContactName = item.ContactName,
+                        //            Address = item.Address.Replace(System.Environment.NewLine, ","),
+                        //            DocumentCount = item.DocumentCount,
+                        //            AllocatedTo = item.AllocatedTo,
+                        //            CaseCategoryRecID = item.CaseCategoryRecID,
+                        //            SerialNumber = item.SerialNumber,
+                        //            RegistrationNumber = item.RegistrationNumber,
+                        //            MakeModel = item.MakeModel,
+                        //            Status = item.Status,
+                        //            StatusDueDate = item.StatusDueDate,
+                        //            DeliveryDate = item.DeliveryDate,
 
-                            });
+                        //        });
 
-                        }
+                        //    }
+                        //}
+
+                        singleTask.taskdata.DocumentCount = singleTask.count;
+                        tasks.Add(singleTask.taskdata);
                     }
-                    tasks.Add(singleTask);
                 }
                 return tasks;
             }
@@ -215,7 +227,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 throw;
             }
         }
-
         async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
         {
             try
@@ -228,7 +239,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-              
+
                 var result = await _client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>();
                 List<CollectDeliveryTask> taskInsertList = new List<CollectDeliveryTask>();
@@ -244,7 +255,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               Address = mzkTask.parmCustAddress,
                               CustomerName = mzkTask.parmCustName,
                               CustomerNumber = mzkTask.parmCustPhone,
-                              Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDetail,
+                              Status = mzkTask.parmStatus,
                               StatusDueDate = mzkTask.parmStatusDueDate,
                               RegistrationNumber = mzkTask.parmRegNo,
                               AllocatedTo = _userInfo.Name,
@@ -258,13 +269,13 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               CaseServiceRecID = mzkTask.parmCaseServiceRecID,
                               TaskType = (CDTaskType)Enum.Parse(typeof(CDTaskType), mzkTask.parmCollectDeliverType.ToString()),
                               CustomerId = mzkTask.parmCustAccount,
-                              //DocumentCount = Int32.Parse(mzkTask.parmNoOfRecords),
                               ServiceId = mzkTask.parmServiceId,
                               ServiceRecID = mzkTask.parmServiceRecID,
-                              UserID = mzkTask.parmUserID,
+                              UserID = PersistentData.Instance.UserInfo.UserId,
                               SerialNumber = mzkTask.parmSerialNumber,
                               ContactName = mzkTask.parmContactPersonName,
-                             // DocumentType
+                              DocumentType = mzkTask.parmDocuTypeID,
+                              DocumentName = mzkTask.parmDocuName
                           };
                         if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseId))
                         {
@@ -275,7 +286,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             taskInsertList.Add(taskTosave);
                         }
                         caseCategoryRecIdList.Add(mzkTask.parmCaseCategoryRecID);
-
+                        await this.GetCustomerListFromSvcAsync(mzkTask.parmCustAccount);
                     }
 
                     if (taskUpdateList.Any())
@@ -294,7 +305,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
 
         }
-    
         async public System.Threading.Tasks.Task GetCollectedFromSvcAsync()
         {
             try
@@ -308,18 +318,18 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
                 var collectedFromData = (await SqliteHelper.Storage.LoadTableAsync<CollectedFromData>());
-                 var result = await _client.getCollectedFromAsync(_userInfo.CompanyId);
+                var result = await _client.getCollectedFromAsync(_userInfo.CompanyId);
                 if (result.response != null)
                 {
                     foreach (var mzk in result.response)
                     {
-                        if (collectedFromData != null && collectedFromData.Any(a => a.UserID != mzk.parmUserID))
+                        if (collectedFromData != null && collectedFromData.Any(a => a.UserID == mzk.parmUserID))
                         {
-                            await SqliteHelper.Storage.InsertSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName });
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
                         }
                         else
                         {
-                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName });
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
                         }
 
                     }
@@ -330,19 +340,149 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-        async public System.Threading.Tasks.Task InsertDocumentCollectedDetailsToSvcAsync()
+        async public System.Threading.Tasks.Task GetCustomerListFromSvcAsync(string customerId)
         {
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Customer)
                     return;
 
                 if (_userInfo == null)
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsCollected && !x.IsDelivered);
+                var customerData = (await SqliteHelper.Storage.LoadTableAsync<CDCustomer>());
+                var result = await _client.getCustomerInfoAsync(customerId, _userInfo.CompanyId);
+                if (result.response != null)
+                {
+                    foreach (var mzk in result.response)
+                    {
+                        if (customerData != null && customerData.Any(a => a.UserID == mzk.parmContactPersonId))
+                        {
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmContactPersonId, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
+                        }
+                        else
+                        {
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<CDCustomer>(new CDCustomer { UserID = mzk.parmContactPersonId, UserName = mzk.parmContactPersonName, Address = mzk.parmCustAddress });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.SendMessageToUIThread(ex.Message);
+            }
+        }
+        async public System.Threading.Tasks.Task GetCourierListFromSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Courier)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                var courierData = (await SqliteHelper.Storage.LoadTableAsync<Courier>());
+                var result = await _client.getCourierListAsync(_userInfo.CompanyId);
+                if (result.response != null)
+                {
+                    foreach (var mzk in result.response)
+                    {
+                        if (courierData != null && courierData.Any(a => a.UserID == mzk.parmUserID))
+                        {
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<Courier>(new Courier { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
+                        }
+                        else
+                        {
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<Courier>(new Courier { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.SendMessageToUIThread(ex.Message);
+            }
+        }
+        async public System.Threading.Tasks.Task GetDriverListFromSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Driver)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                var courierData = (await SqliteHelper.Storage.LoadTableAsync<Driver>());
+                var result = await _client.getDriversAsync(_userInfo.CompanyId);
+                if (result.response != null)
+                {
+                    foreach (var mzk in result.response)
+                    {
+                        if (courierData != null && courierData.Any(a => a.UserID == mzk.parmUserID))
+                        {
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<Driver>(new Driver { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
+                        }
+                        else
+                        {
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<Driver>(new Driver { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.SendMessageToUIThread(ex.Message);
+            }
+        }
+        //async public System.Threading.Tasks.Task GetCollectedFromAddressSvcAsync()
+        //{
+        //    try
+        //    {
+        //        var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+        //        if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+        //            return;
+
+        //        if (_userInfo == null)
+        //        {
+        //            _userInfo = PersistentData.Instance.UserInfo;
+        //        }
+        //        var collectedFromData = (await SqliteHelper.Storage.LoadTableAsync<CollectedFromData>());
+        //        var result = await _client.getCollectedFromAddressAsync(_userInfo.UserId, _userInfo.CompanyId);
+        //        if (result.response != null)
+        //        {
+        //            foreach (var mzk in result.response)
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.SendMessageToUIThread(ex.Message);
+        //    }
+        //}
+        async public System.Threading.Tasks.Task InsertDocumentCollectedDetailsToSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Customer)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsColletedByCustomer);
                 ObservableCollection<MZKDocumentCollectedDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
                 if (cdDataList != null)
                 {
@@ -358,7 +498,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmReceivedBy = doc.ReceivedBy,
                             parmReceivedDate = doc.ReceivedDate,
                             parmReferenceNo = doc.ReferenceNo,
-                            parmSignature = doc.CRSignature,
+
+                            // parmSignature = doc.CRSignature,
                             parmTelePhone = doc.Phone
 
                         });
@@ -368,11 +509,53 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
             catch (Exception ex)
             {
+                this.SendMessageToUIThread(ex.Message);//need to fix in AX
+            }
+        }
+        async public System.Threading.Tasks.Task InsertDocumentCollectedByDriverOrCourierToSvcAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType == CDUserType.Customer)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryDetails>()).Where(x => x.IsCollected && !x.IsDelivered);
+                ObservableCollection<MZKCourierCollectionDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKCourierCollectionDetailsContract>();
+                if (cdDataList != null)
+                {
+                    foreach (var doc in cdDataList)
+                    {
+                        mzkDocumentCollectedDetailsContractColl.Add(new MZKCourierCollectionDetailsContract()
+                        {
+                            parmCaseId = doc.CaseNumber,
+                            parmCollectedFrom = doc.SelectedCollectedFrom,
+                            parmComment = doc.Comment,
+                            parmEmail = doc.Email,
+                            parmCaseServiceRecId = doc.CaseServiceRecId,
+                            parmContactPerson = doc.ReceivedBy,
+                            parmCollectedBy = doc.ReceivedBy,
+                            parmPosition = doc.Position,
+                            parmTelePhone = doc.Phone,
+                            // parmContactNumber
+                            // parmCourierSignature = doc.CRSignature.,
+                            parmReceivedBy = doc.ReceivedBy,
+                            parmDateTime = doc.ReceivedDate,
+
+                        });
+                    }
+                }
+                var res = await _client.insertDocumentCourierCollectionDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
+            }
+            catch (Exception ex)
+            {
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
-
         async public System.Threading.Tasks.Task InsertDocumentDeliveryDetailsToSvcAsync()
         {
             try
@@ -397,10 +580,12 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             parmComment = doc.Comment,
                             parmEmail = doc.Email,
                             parmPosition = doc.Position,
-                            parmSignature = doc.CRSignature,
+                            // parmSignature = doc.CRSignature,
                             parmTelephone = doc.Phone,
                             parmDeliveryDetailDateTime = doc.DeliveryDate,
                             parmDeliveryPerson = doc.DeliveryPersonName,
+                            parmCaseServiceRecID = doc.CaseServiceRecId,
+
                         });
                     }
                 }
@@ -411,45 +596,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-
-
-        async public System.Threading.Tasks.Task InsertContactDetailsToSvcAsync()
-        {
-            try
-            {
-                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return;
-
-                if (_userInfo == null)
-                {
-                    _userInfo = PersistentData.Instance.UserInfo;
-                }
-                var ContactsData = (await SqliteHelper.Storage.LoadTableAsync<ContactPerson>());
-                ObservableCollection<MZKDocumentNewContactPersonContract> mzkDocumentNewContactPersonContractColl = new ObservableCollection<MZKDocumentNewContactPersonContract>();
-                if (ContactsData != null)
-                {
-                    foreach (var contact in ContactsData)
-                    {
-                        mzkDocumentNewContactPersonContractColl.Add(new MZKDocumentNewContactPersonContract()
-                        {
-                            parmEmail = contact.Email,
-                            parmFirstName = contact.FirstName,
-                            parmSurname = contact.Surname,
-                            parmPhone = contact.CellPhone
-
-                        });
-                    }
-                }
-                var res = await _client.insertDocumentNewContactPersonAsync(mzkDocumentNewContactPersonContractColl, _userInfo.CompanyId);
-            }
-            catch (Exception ex)
-            {
-                this.SendMessageToUIThread(ex.Message);
-            }
-        }
-
-
         public async System.Threading.Tasks.Task UpdateTaskStatusAsync()
         {
             try
@@ -461,14 +607,36 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var tasks = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>());
+                var tasks = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.UserID == _userInfo.UserId);
+
                 ObservableCollection<MZKCollectDeliverTasksContract> mzkTasks = new ObservableCollection<MZKCollectDeliverTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitLicenceDisc, EEPActionStep.AwaitLicenceDisc);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.Completed, EEPActionStep.Completed);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitInvoice, EEPActionStep.AwaitInvoice);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Enums.CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitDeliveryConfirmation);
+                //actionStepMapping.Add(CDTaskStatus.AwaitLicenceDisc, EEPActionStep.AwaitLicenceDisc);
+
+
+                switch (_userInfo.CDUserType)
+                {
+                    case CDUserType.Driver:
+
+                        actionStepMapping.Add(CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitDriverCollection);
+                        actionStepMapping.Add(CDTaskStatus.Completed, EEPActionStep.AwaitDeliveryConfirmation);
+                        tasks = tasks.Where(w => w.Status == CDTaskStatus.AwaitDeliveryConfirmation || w.Status == CDTaskStatus.Completed);
+                        break;
+
+                    case CDUserType.Courier:
+
+                        actionStepMapping.Add(CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitCourierCollection);
+                        actionStepMapping.Add(CDTaskStatus.AwaitInvoice, EEPActionStep.AwaitDeliveryConfirmation);
+                        tasks = tasks.Where(w => w.Status == CDTaskStatus.AwaitDeliveryConfirmation || w.Status == CDTaskStatus.AwaitInvoice);
+                        break;
+
+                    case CDUserType.Customer:
+                        actionStepMapping.Add(CDTaskStatus.Completed, EEPActionStep.AwaitCollectionDetail);
+                        tasks = tasks.Where(w => w.Status == CDTaskStatus.Completed);
+                        break;
+
+                }
 
                 if (tasks != null)
                 {
@@ -478,7 +646,8 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                             new MZKCollectDeliverTasksContract
                             {
                                 parmCaseId = task.CaseNumber,
-                                parmStatus = task.Status,
+                                parmCaseServiceRecID = task.CaseServiceRecID,
+                                parmServiceRecID = task.ServiceRecID,
                                 parmStatusDueDate = task.StatusDueDate,
                                 parmEEPActionStep = actionStepMapping[task.Status]
                             });
@@ -488,24 +657,15 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     var taskList = new ObservableCollection<CollectDeliveryTask>();
                     if (res.response != null)
                     {
-                        foreach (var x in res.response.Where(x => x != null))
+                        foreach (var mzkTask in res.response.Where(x => x != null))
                         {
                             taskList.Add(new CollectDeliveryTask
                             {
-                                CaseNumber = x.parmCaseId,
-                                Address = x.parmCustAddress,
-                                CustomerName = x.parmCustName,
-                                CustomerNumber = x.parmCustPhone,
-                                Status = x.parmStatus,
-                                StatusDueDate = x.parmStatusDueDate,
-                                RegistrationNumber = x.parmRegNo,
-                                AllocatedTo = _userInfo.Name,
-                                CaseCategoryRecID = x.parmCaseCategoryRecID,
-                                // CaseType = mzkTask.parmCaseCategory,
-                                DeliveryDate = x.parmDeliveryDateTime,
-                                DeliveryTime = x.parmDeliveryDateTime,
-                                EmailId = x.parmCustomerEmail,
-                                CustPartyId = x.parmCustPartyId
+                                CaseNumber = mzkTask.parmCaseId,
+                                TaskType = (CDTaskType)Enum.Parse(typeof(CDTaskType), mzkTask.parmCollectDeliverType.ToString()),
+                                ServiceId = mzkTask.parmServiceId,
+                                ServiceRecID = mzkTask.parmServiceRecID,
+                                UserID = PersistentData.Instance.UserInfo.UserId,
 
                             });
                         }

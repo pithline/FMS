@@ -1,4 +1,5 @@
 ﻿using Eqstra.ServiceScheduling.UILogic.Services;
+using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Newtonsoft.Json;
@@ -20,12 +21,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             _navigationService = navigationService;
             _accountService = accountService;
-
+            ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
                     try
                     {
+                        ProgressDialogPopup.Open(this);
                         IsLoggingIn = true;
                         var result = await _accountService.SignInAsync(this.UserName, this.Password, this.ShouldSaveCredential);
                         if (result.Item1 != null)
@@ -35,6 +37,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         }
                         else
                         {
+                            ProgressDialogPopup.Close();
                             ErrorMessage = result.Item2;
                         }
 
@@ -45,6 +48,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     }
                     finally
                     {
+                        ProgressDialogPopup.Close();
                         IsLoggingIn = false;
                     }
                 },
@@ -64,6 +68,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (SetProperty(ref username, value))
                     LoginCommand.RaiseCanExecuteChanged();
             }
+        }
+        private ProgressDialog progressDialogPopup;
+
+        public ProgressDialog ProgressDialogPopup
+        {
+            get { return progressDialogPopup; }
+            set { SetProperty(ref progressDialogPopup, value); }
         }
 
         private string password;

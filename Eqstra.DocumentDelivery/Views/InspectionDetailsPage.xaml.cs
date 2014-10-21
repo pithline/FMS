@@ -106,7 +106,7 @@ namespace Eqstra.DocumentDelivery.Views
             try
             {
                 var dc = (InspectionDetailsPageViewModel)this.DataContext;
-                await dc.GetAllDocumentFromDbByCusomer();
+                await dc.GetAllDocumentFromDbByCustomer();
             }
             catch (Exception ex)
             {
