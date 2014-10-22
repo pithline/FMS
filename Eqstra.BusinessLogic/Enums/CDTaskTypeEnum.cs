@@ -9,6 +9,7 @@ namespace Eqstra.BusinessLogic.Enums
     public enum CDTaskType
     {
         Collect,
-        Delivery
+        Delivery,
+        None
     }
 }

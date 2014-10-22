@@ -520,7 +520,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
             catch (Exception ex)
             {
-                this.SendMessageToUIThread(ex.Message);//need to fix in AX
+                this.SendMessageToUIThread(ex.Message);
             }
         }
         async public System.Threading.Tasks.Task InsertDocumentCollectedByDriverOrCourierToSvcAsync()
@@ -696,9 +696,9 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     {
                         foreach (var task in tasks)
                         {
-                            if (res.response.Any(a => a.parmCaseId == task.CaseNumber && a.parmStatus == task.Status && a.parmCollectDeliverType.Equals(task.TaskType)))
+                            if (res.response.Any(a => a.parmCaseId == task.CaseNumber && a.parmStatus == task.Status && a.parmCollectDeliverType.ToString().Equals(task.TaskType.ToString())))
                             {
-                                if ((task.Status == CDTaskStatus.Completed || task.Status == CDTaskStatus.AwaitInvoice))
+                                if (task.TaskType == CDTaskType.None)
                                 {
                                     await SqliteHelper.Storage.DeleteSingleRecordAsync<CollectDeliveryTask>(task);
                                 }

@@ -26,7 +26,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 var alternateData = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
                 if (alternateData != null && alternateData.Any(a => a.FirstName == this.Model.FirstName && a.Surname == this.Model.Surname))
                 {
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<AlternateContactPerson>(this.Model);
+                    //await SqliteHelper.Storage.UpdateSingleRecordAsync<AlternateContactPerson>(this.Model);
                 }
                 else
                 {

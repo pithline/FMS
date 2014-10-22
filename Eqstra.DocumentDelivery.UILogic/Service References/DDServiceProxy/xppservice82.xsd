@@ -526,24 +526,12 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkLoginType" nillable="true" type="tns:MzkLoginType" />
-  <xs:complexType name="ArrayOfMZKCollectDeliverTasksContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKCollectDeliverTasksContract" nillable="true" type="tns:MZKCollectDeliverTasksContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKCollectDeliverTasksContract" nillable="true" type="tns:ArrayOfMZKCollectDeliverTasksContract" />
   <xs:complexType name="ArrayOfMzkUserContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkUserContract" nillable="true" type="tns:MzkUserContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkUserContract" nillable="true" type="tns:ArrayOfMzkUserContract" />
-  <xs:complexType name="ArrayOfMzkCustomerContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
   <xs:complexType name="ArrayOfMZKDocumentCollectedDetailsContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKDocumentCollectedDetailsContract" nillable="true" type="tns:MZKDocumentCollectedDetailsContract" />
@@ -556,4 +544,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMZKCourierCollectionDetailsContract" nillable="true" type="tns:ArrayOfMZKCourierCollectionDetailsContract" />
+  <xs:complexType name="ArrayOfMZKCollectDeliverTasksContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKCollectDeliverTasksContract" nillable="true" type="tns:MZKCollectDeliverTasksContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKCollectDeliverTasksContract" nillable="true" type="tns:ArrayOfMZKCollectDeliverTasksContract" />
+  <xs:complexType name="ArrayOfMzkCustomerContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
 </xs:schema>

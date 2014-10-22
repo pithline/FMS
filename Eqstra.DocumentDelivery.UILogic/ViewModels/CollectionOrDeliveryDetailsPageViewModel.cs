@@ -59,7 +59,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
                             {
                                 task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
-                                task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                task.TaskType =CDTaskType.Delivery;
                                 task.IsNotSyncedWithAX = true;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                 CollectedDocumnetsFromTaskBucket(task, markedDoc, false);
@@ -74,7 +74,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
                             {
                                 task.Status = CDTaskStatus.Completed;
-                                task.TaskType = BusinessLogic.Enums.CDTaskType.Delivery;
+                                task.TaskType =CDTaskType.None;
                                 task.IsNotSyncedWithAX = true;
                                 await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                 CollectedDocumnetsFromTaskBucket(task, markedDoc, true);
@@ -112,6 +112,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber & a.IsMarked))
                                 {
                                     task.Status = CDTaskStatus.AwaitInvoice;
+                                    task.TaskType = CDTaskType.None;
                                     task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                     DeliveredDocumentsFromTaskBucket(task, markedDoc);
@@ -125,6 +126,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                 if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
                                 {
                                     task.Status = CDTaskStatus.Completed;
+                                    task.TaskType = CDTaskType.None;
                                     task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
                                     DeliveredDocumentsFromTaskBucket(task, markedDoc);
