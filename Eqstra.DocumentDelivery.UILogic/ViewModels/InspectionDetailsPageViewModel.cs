@@ -131,11 +131,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                await ShowTasksAsync(navigationParameter);
                 _eventAggregator.GetEvent<TasksFetchedEvent>().Subscribe(async o =>
                 {
                     await ShowTasksAsync(navigationParameter);
                 }, ThreadOption.UIThread);
-                await ShowTasksAsync(navigationParameter);
+           
                 this.IsBusy = false;
             }
             catch (Exception ex)
