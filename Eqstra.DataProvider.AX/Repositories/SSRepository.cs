@@ -52,9 +52,9 @@ namespace Eqstra.DataProvider.AX.Repositories
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
                 client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl"));
                 client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "rchivukula";
-                client.ClientCredentials.UserName.Password = "Password1";
+                client.ClientCredentials.UserName.Password = "Password9";
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
-                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password10", "lfmd");
+                client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password9", "lfmd");
                 return client;
             }
             catch (Exception)
