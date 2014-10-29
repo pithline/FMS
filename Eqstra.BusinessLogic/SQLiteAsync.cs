@@ -210,6 +210,7 @@ namespace SQLite
             });
 
         }
+
 		public Task<int> InsertAllAsync (IEnumerable items)
 		{
 			return Task.Factory.StartNew (() => {

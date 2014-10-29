@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic.Enums
+namespace Eqstra.BusinessLogic.DocumentDelivery
 {
-    public enum CDTaskType
+    public class DocumnetDeliverDetail :CollectDeliveryDetail
     {
-        Collect,
-        Delivery,
-        None
+
     }
 }

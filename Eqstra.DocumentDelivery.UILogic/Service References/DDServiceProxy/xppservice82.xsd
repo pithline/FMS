@@ -403,6 +403,13 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="ProvideVehicleInspectionDetails">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">142</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EEPActionStep" nillable="true" type="tns:EEPActionStep" />
@@ -471,27 +478,9 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MZKDocumentCollectedDetailsContract" nillable="true" type="tns:MZKDocumentCollectedDetailsContract" />
-  <xs:complexType name="MzkDocumentDeliveryDetailsContrcat">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="parmCaseId" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmCaseServiceRecID" type="xs:long" />
-          <xs:element minOccurs="0" name="parmComment" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmDeliveryDetailDateTime" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="parmDeliveryPerson" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmEmail" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmPosition" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmSignature" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmTelephone" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="MzkDocumentDeliveryDetailsContrcat" nillable="true" type="tns:MzkDocumentDeliveryDetailsContrcat" />
   <xs:complexType name="MzkUserContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q6:XppObjectBase">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmUserID" nillable="true" type="xs:string" />
@@ -503,7 +492,7 @@
   <xs:element name="MzkUserContract" nillable="true" type="tns:MzkUserContract" />
   <xs:complexType name="MzkValidateUserContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q7:XppObjectBase">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q6:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCompany" nillable="true" type="xs:string" />
@@ -543,18 +532,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkUserContract" nillable="true" type="tns:ArrayOfMzkUserContract" />
-  <xs:complexType name="ArrayOfMZKCollectDeliverTasksContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKCollectDeliverTasksContract" nillable="true" type="tns:MZKCollectDeliverTasksContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKCollectDeliverTasksContract" nillable="true" type="tns:ArrayOfMZKCollectDeliverTasksContract" />
-  <xs:complexType name="ArrayOfMzkCustomerContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
   <xs:complexType name="ArrayOfMZKDocumentCollectedDetailsContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKDocumentCollectedDetailsContract" nillable="true" type="tns:MZKDocumentCollectedDetailsContract" />
@@ -567,10 +544,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMZKCourierCollectionDetailsContract" nillable="true" type="tns:ArrayOfMZKCourierCollectionDetailsContract" />
-  <xs:complexType name="ArrayOfMzkDocumentDeliveryDetailsContrcat">
+  <xs:complexType name="ArrayOfMZKCollectDeliverTasksContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDocumentDeliveryDetailsContrcat" nillable="true" type="tns:MzkDocumentDeliveryDetailsContrcat" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKCollectDeliverTasksContract" nillable="true" type="tns:MZKCollectDeliverTasksContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkDocumentDeliveryDetailsContrcat" nillable="true" type="tns:ArrayOfMzkDocumentDeliveryDetailsContrcat" />
+  <xs:element name="ArrayOfMZKCollectDeliverTasksContract" nillable="true" type="tns:ArrayOfMZKCollectDeliverTasksContract" />
+  <xs:complexType name="ArrayOfMzkCustomerContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustomerContract" nillable="true" type="tns:MzkCustomerContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCustomerContract" nillable="true" type="tns:ArrayOfMzkCustomerContract" />
 </xs:schema>
