@@ -107,6 +107,365 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class AifFault : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string CustomDetailXmlField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessageList> FaultMessageListArrayField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessage> InfologMessageListField;
+        
+        private string StackTraceField;
+        
+        private int XppExceptionTypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomDetailXml {
+            get {
+                return this.CustomDetailXmlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomDetailXmlField, value) != true)) {
+                    this.CustomDetailXmlField = value;
+                    this.RaisePropertyChanged("CustomDetailXml");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessageList> FaultMessageListArray {
+            get {
+                return this.FaultMessageListArrayField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FaultMessageListArrayField, value) != true)) {
+                    this.FaultMessageListArrayField = value;
+                    this.RaisePropertyChanged("FaultMessageListArray");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessage> InfologMessageList {
+            get {
+                return this.InfologMessageListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InfologMessageListField, value) != true)) {
+                    this.InfologMessageListField = value;
+                    this.RaisePropertyChanged("InfologMessageList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StackTrace {
+            get {
+                return this.StackTraceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StackTraceField, value) != true)) {
+                    this.StackTraceField = value;
+                    this.RaisePropertyChanged("StackTrace");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int XppExceptionType {
+            get {
+                return this.XppExceptionTypeField;
+            }
+            set {
+                if ((this.XppExceptionTypeField.Equals(value) != true)) {
+                    this.XppExceptionTypeField = value;
+                    this.RaisePropertyChanged("XppExceptionType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessageList", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class FaultMessageList : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string DocumentField;
+        
+        private string DocumentOperationField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessage> FaultMessageArrayField;
+        
+        private string FieldField;
+        
+        private string ServiceField;
+        
+        private string ServiceOperationField;
+        
+        private string ServiceOperationParameterField;
+        
+        private string XPathField;
+        
+        private string XmlLineField;
+        
+        private string XmlPositionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Document {
+            get {
+                return this.DocumentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
+                    this.DocumentField = value;
+                    this.RaisePropertyChanged("Document");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentOperation {
+            get {
+                return this.DocumentOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentOperationField, value) != true)) {
+                    this.DocumentOperationField = value;
+                    this.RaisePropertyChanged("DocumentOperation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessage> FaultMessageArray {
+            get {
+                return this.FaultMessageArrayField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FaultMessageArrayField, value) != true)) {
+                    this.FaultMessageArrayField = value;
+                    this.RaisePropertyChanged("FaultMessageArray");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Field {
+            get {
+                return this.FieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FieldField, value) != true)) {
+                    this.FieldField = value;
+                    this.RaisePropertyChanged("Field");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Service {
+            get {
+                return this.ServiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceField, value) != true)) {
+                    this.ServiceField = value;
+                    this.RaisePropertyChanged("Service");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ServiceOperation {
+            get {
+                return this.ServiceOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceOperationField, value) != true)) {
+                    this.ServiceOperationField = value;
+                    this.RaisePropertyChanged("ServiceOperation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ServiceOperationParameter {
+            get {
+                return this.ServiceOperationParameterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceOperationParameterField, value) != true)) {
+                    this.ServiceOperationParameterField = value;
+                    this.RaisePropertyChanged("ServiceOperationParameter");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XPath {
+            get {
+                return this.XPathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XPathField, value) != true)) {
+                    this.XPathField = value;
+                    this.RaisePropertyChanged("XPath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XmlLine {
+            get {
+                return this.XmlLineField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XmlLineField, value) != true)) {
+                    this.XmlLineField = value;
+                    this.RaisePropertyChanged("XmlLine");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XmlPosition {
+            get {
+                return this.XmlPositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XmlPositionField, value) != true)) {
+                    this.XmlPositionField = value;
+                    this.RaisePropertyChanged("XmlPosition");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessage", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
+    public partial class InfologMessage : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessageType InfologMessageTypeField;
+        
+        private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessageType InfologMessageType {
+            get {
+                return this.InfologMessageTypeField;
+            }
+            set {
+                if ((this.InfologMessageTypeField.Equals(value) != true)) {
+                    this.InfologMessageTypeField = value;
+                    this.RaisePropertyChanged("InfologMessageType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessage", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class FaultMessage : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string CodeField;
+        
+        private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessageType", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
+    public enum InfologMessageType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Info = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Warning = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Error = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkUserContract : Eqstra.DocumentDelivery.UILogic.DDServiceProxy.XppObjectBase {
         
@@ -1394,372 +1753,22 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         None = 0,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class AifFault : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string CustomDetailXmlField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessageList> FaultMessageListArrayField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessage> InfologMessageListField;
-        
-        private string StackTraceField;
-        
-        private int XppExceptionTypeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CustomDetailXml {
-            get {
-                return this.CustomDetailXmlField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomDetailXmlField, value) != true)) {
-                    this.CustomDetailXmlField = value;
-                    this.RaisePropertyChanged("CustomDetailXml");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessageList> FaultMessageListArray {
-            get {
-                return this.FaultMessageListArrayField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FaultMessageListArrayField, value) != true)) {
-                    this.FaultMessageListArrayField = value;
-                    this.RaisePropertyChanged("FaultMessageListArray");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessage> InfologMessageList {
-            get {
-                return this.InfologMessageListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.InfologMessageListField, value) != true)) {
-                    this.InfologMessageListField = value;
-                    this.RaisePropertyChanged("InfologMessageList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StackTrace {
-            get {
-                return this.StackTraceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StackTraceField, value) != true)) {
-                    this.StackTraceField = value;
-                    this.RaisePropertyChanged("StackTrace");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int XppExceptionType {
-            get {
-                return this.XppExceptionTypeField;
-            }
-            set {
-                if ((this.XppExceptionTypeField.Equals(value) != true)) {
-                    this.XppExceptionTypeField = value;
-                    this.RaisePropertyChanged("XppExceptionType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessageList", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class FaultMessageList : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string DocumentField;
-        
-        private string DocumentOperationField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessage> FaultMessageArrayField;
-        
-        private string FieldField;
-        
-        private string ServiceField;
-        
-        private string ServiceOperationField;
-        
-        private string ServiceOperationParameterField;
-        
-        private string XPathField;
-        
-        private string XmlLineField;
-        
-        private string XmlPositionField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Document {
-            get {
-                return this.DocumentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
-                    this.DocumentField = value;
-                    this.RaisePropertyChanged("Document");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DocumentOperation {
-            get {
-                return this.DocumentOperationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentOperationField, value) != true)) {
-                    this.DocumentOperationField = value;
-                    this.RaisePropertyChanged("DocumentOperation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.FaultMessage> FaultMessageArray {
-            get {
-                return this.FaultMessageArrayField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FaultMessageArrayField, value) != true)) {
-                    this.FaultMessageArrayField = value;
-                    this.RaisePropertyChanged("FaultMessageArray");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Field {
-            get {
-                return this.FieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FieldField, value) != true)) {
-                    this.FieldField = value;
-                    this.RaisePropertyChanged("Field");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Service {
-            get {
-                return this.ServiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceField, value) != true)) {
-                    this.ServiceField = value;
-                    this.RaisePropertyChanged("Service");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ServiceOperation {
-            get {
-                return this.ServiceOperationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceOperationField, value) != true)) {
-                    this.ServiceOperationField = value;
-                    this.RaisePropertyChanged("ServiceOperation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ServiceOperationParameter {
-            get {
-                return this.ServiceOperationParameterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceOperationParameterField, value) != true)) {
-                    this.ServiceOperationParameterField = value;
-                    this.RaisePropertyChanged("ServiceOperationParameter");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XPath {
-            get {
-                return this.XPathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XPathField, value) != true)) {
-                    this.XPathField = value;
-                    this.RaisePropertyChanged("XPath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XmlLine {
-            get {
-                return this.XmlLineField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XmlLineField, value) != true)) {
-                    this.XmlLineField = value;
-                    this.RaisePropertyChanged("XmlLine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XmlPosition {
-            get {
-                return this.XmlPositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XmlPositionField, value) != true)) {
-                    this.XmlPositionField = value;
-                    this.RaisePropertyChanged("XmlPosition");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessage", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
-    public partial class InfologMessage : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessageType InfologMessageTypeField;
-        
-        private string MessageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.InfologMessageType InfologMessageType {
-            get {
-                return this.InfologMessageTypeField;
-            }
-            set {
-                if ((this.InfologMessageTypeField.Equals(value) != true)) {
-                    this.InfologMessageTypeField = value;
-                    this.RaisePropertyChanged("InfologMessageType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessage", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class FaultMessage : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string CodeField;
-        
-        private string MessageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessageType", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
-    public enum InfologMessageType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Info = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Warning = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Error = 2,
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="DDServiceProxy.MzkCollectDeliveryService")]
     public interface MzkCollectDeliveryService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddress", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddressResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddressAifFaultFault" +
+            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> getCollectedFromAddressAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getDrivers", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getDriversResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getDriversAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversResponse> getDriversAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getTasks", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> getTasksAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCustomerDetails", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/insertDocumentCustomerDetailsRespons" +
             "e")]
@@ -1767,15 +1776,19 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
             "tFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCustomerDetailsResponse> insertDocumentCustomerDetailsAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCustomerDetailsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/validateUser", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> validateUserAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDriverCourierDetails", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDriverCourierDetailsRe" +
             "sponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/insertDocumentDriverCourierDetailsAi" +
             "fFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse> insertDocumentDriverCourierDetailsAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCourierList", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCourierListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCourierListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> getCourierListAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFrom", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> getCollectedFromAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/updateStatusList", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/updateStatusListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
@@ -1785,22 +1798,47 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfoAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoResponse> getCustomerInfoAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCourierList", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCourierListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCourierListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> getCourierListAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/validateUser", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> validateUserAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromAddressRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCollectedFromAddressRequest {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddress", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddressResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddressAifFaultFault" +
-            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> getCollectedFromAddressAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFrom", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> getCollectedFromAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkCollectDeliveryService/getTasks", ReplyAction="http://tempuri.org/MzkCollectDeliveryService/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.AifFault), Action="http://tempuri.org/MzkCollectDeliveryService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> getTasksAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest request);
+        public MzkCollectDeliveryServiceGetCollectedFromAddressRequest() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCollectedFromAddressRequest(string _userID, string _company) {
+            this._userID = _userID;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromAddressResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCollectedFromAddressResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string response;
+        
+        public MzkCollectDeliveryServiceGetCollectedFromAddressResponse() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCollectedFromAddressResponse(string response) {
+            this.response = response;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1833,6 +1871,44 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         }
         
         public MzkCollectDeliveryServiceGetDriversResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetTasksRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkCollectDeliveryServiceGetTasksRequest() {
+        }
+        
+        public MzkCollectDeliveryServiceGetTasksRequest(string _userID, string _company) {
+            this._userID = _userID;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetTasksResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MZKCollectDeliverTasksContract> response;
+        
+        public MzkCollectDeliveryServiceGetTasksResponse() {
+        }
+        
+        public MzkCollectDeliveryServiceGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MZKCollectDeliverTasksContract> response) {
             this.response = response;
         }
     }
@@ -1878,44 +1954,6 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceValidateUserRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
-        
-        public MzkCollectDeliveryServiceValidateUserRequest() {
-        }
-        
-        public MzkCollectDeliveryServiceValidateUserRequest(string _userID, string _password) {
-            this._userID = _userID;
-            this._password = _password;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceValidateUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkValidateUserContract response;
-        
-        public MzkCollectDeliveryServiceValidateUserResponse() {
-        }
-        
-        public MzkCollectDeliveryServiceValidateUserResponse(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkValidateUserContract response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
     public partial class MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest {
         
@@ -1947,6 +1985,74 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         }
         
         public MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MZKCourierCollectionDetailsContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCourierListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCourierListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _company;
+        
+        public MzkCollectDeliveryServiceGetCourierListRequest() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCourierListRequest(string _company) {
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCourierListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCourierListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response;
+        
+        public MzkCollectDeliveryServiceGetCourierListResponse() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCourierListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCollectedFromRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _company;
+        
+        public MzkCollectDeliveryServiceGetCollectedFromRequest() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCollectedFromRequest(string _company) {
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceGetCollectedFromResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response;
+        
+        public MzkCollectDeliveryServiceGetCollectedFromResponse() {
+        }
+        
+        public MzkCollectDeliveryServiceGetCollectedFromResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response) {
             this.response = response;
         }
     }
@@ -2034,143 +2140,37 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCourierListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCourierListRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
-        
-        public MzkCollectDeliveryServiceGetCourierListRequest() {
-        }
-        
-        public MzkCollectDeliveryServiceGetCourierListRequest(string _company) {
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCourierListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCourierListResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response;
-        
-        public MzkCollectDeliveryServiceGetCourierListResponse() {
-        }
-        
-        public MzkCollectDeliveryServiceGetCourierListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromAddressRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCollectedFromAddressRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceValidateUserRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
         public string _userID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
+        public string _password;
         
-        public MzkCollectDeliveryServiceGetCollectedFromAddressRequest() {
+        public MzkCollectDeliveryServiceValidateUserRequest() {
         }
         
-        public MzkCollectDeliveryServiceGetCollectedFromAddressRequest(string _userID, string _company) {
+        public MzkCollectDeliveryServiceValidateUserRequest(string _userID, string _password) {
             this._userID = _userID;
-            this._company = _company;
+            this._password = _password;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromAddressResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCollectedFromAddressResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkCollectDeliveryServiceValidateUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string response;
+        public Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkValidateUserContract response;
         
-        public MzkCollectDeliveryServiceGetCollectedFromAddressResponse() {
+        public MzkCollectDeliveryServiceValidateUserResponse() {
         }
         
-        public MzkCollectDeliveryServiceGetCollectedFromAddressResponse(string response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCollectedFromRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
-        
-        public MzkCollectDeliveryServiceGetCollectedFromRequest() {
-        }
-        
-        public MzkCollectDeliveryServiceGetCollectedFromRequest(string _company) {
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetCollectedFromResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetCollectedFromResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response;
-        
-        public MzkCollectDeliveryServiceGetCollectedFromResponse() {
-        }
-        
-        public MzkCollectDeliveryServiceGetCollectedFromResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkUserContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetTasksRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkCollectDeliveryServiceGetTasksRequest() {
-        }
-        
-        public MzkCollectDeliveryServiceGetTasksRequest(string _userID, string _company) {
-            this._userID = _userID;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkCollectDeliveryServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkCollectDeliveryServiceGetTasksResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MZKCollectDeliverTasksContract> response;
-        
-        public MzkCollectDeliveryServiceGetTasksResponse() {
-        }
-        
-        public MzkCollectDeliveryServiceGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MZKCollectDeliverTasksContract> response) {
+        public MzkCollectDeliveryServiceValidateUserResponse(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -2219,6 +2219,18 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCollectedFromAddressAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest request) {
+            return base.Channel.getCollectedFromAddressAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> getCollectedFromAddressAsync(string _userID, string _company) {
+            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest();
+            inValue._userID = _userID;
+            inValue._company = _company;
+            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCollectedFromAddressAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getDriversAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversRequest request) {
             return base.Channel.getDriversAsync(request);
         }
@@ -2227,6 +2239,18 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
             Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversRequest();
             inValue._company = _company;
             return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getDriversAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getTasksAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest request) {
+            return base.Channel.getTasksAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> getTasksAsync(string _userID, string _company) {
+            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest();
+            inValue._userID = _userID;
+            inValue._company = _company;
+            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2242,18 +2266,6 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.validateUserAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> validateUserAsync(string _userID, string _password) {
-            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest();
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).validateUserAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.insertDocumentDriverCourierDetailsAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest request) {
             return base.Channel.insertDocumentDriverCourierDetailsAsync(request);
         }
@@ -2263,6 +2275,28 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
             inValue._lstCourierCollectionDetails = _lstCourierCollectionDetails;
             inValue._company = _company;
             return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).insertDocumentDriverCourierDetailsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCourierListAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest request) {
+            return base.Channel.getCourierListAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> getCourierListAsync(string _company) {
+            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest();
+            inValue._company = _company;
+            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCourierListAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCollectedFromAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest request) {
+            return base.Channel.getCollectedFromAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> getCollectedFromAsync(string _company) {
+            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest();
+            inValue._company = _company;
+            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCollectedFromAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2291,49 +2325,15 @@ namespace Eqstra.DocumentDelivery.UILogic.DDServiceProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCourierListAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest request) {
-            return base.Channel.getCourierListAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.validateUserAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse> getCourierListAsync(string _company) {
-            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListRequest();
-            inValue._company = _company;
-            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCourierListAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCollectedFromAddressAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest request) {
-            return base.Channel.getCollectedFromAddressAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse> getCollectedFromAddressAsync(string _userID, string _company) {
-            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressRequest();
+        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse> validateUserAsync(string _userID, string _password) {
+            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserRequest();
             inValue._userID = _userID;
-            inValue._company = _company;
-            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCollectedFromAddressAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getCollectedFromAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest request) {
-            return base.Channel.getCollectedFromAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse> getCollectedFromAsync(string _company) {
-            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromRequest();
-            inValue._company = _company;
-            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getCollectedFromAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService.getTasksAsync(Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest request) {
-            return base.Channel.getTasksAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse> getTasksAsync(string _userID, string _company) {
-            Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest inValue = new Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksRequest();
-            inValue._userID = _userID;
-            inValue._company = _company;
-            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).getTasksAsync(inValue);
+            inValue._password = _password;
+            return ((Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryService)(this)).validateUserAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

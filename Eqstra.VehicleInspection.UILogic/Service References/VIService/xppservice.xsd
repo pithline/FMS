@@ -38,54 +38,9 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkInspectionHistoryContract" nillable="true" type="tns:MzkInspectionHistoryContract" />
-  <xs:complexType name="MzkMechanicalConditionContract">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q4:XppObjectBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="parmComments" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmCommercialMechCondition" type="tns:MzkCommercialMechanicalCondition" />
-          <xs:element minOccurs="0" name="parmEngineType" type="tns:MZKEngineTypeEnum" />
-          <xs:element minOccurs="0" name="parmIsDamaged" type="tns:NoYes" />
-          <xs:element minOccurs="0" name="parmIsRunning" type="tns:NoYes" />
-          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
-          <xs:element minOccurs="0" name="parmRemarks" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
-          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="MzkMechanicalConditionContract" nillable="true" type="tns:MzkMechanicalConditionContract" />
-  <xs:simpleType name="MzkCommercialMechanicalCondition">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Engine" />
-      <xs:enumeration value="FrontSuppression" />
-      <xs:enumeration value="RearSuppression" />
-      <xs:enumeration value="Steering" />
-      <xs:enumeration value="Exhaust" />
-      <xs:enumeration value="Battery" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="MzkCommercialMechanicalCondition" nillable="true" type="tns:MzkCommercialMechanicalCondition" />
-  <xs:simpleType name="MZKEngineTypeEnum">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Petrol" />
-      <xs:enumeration value="Diesel" />
-      <xs:enumeration value="LPG" />
-      <xs:enumeration value="MainsBattery" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="MZKEngineTypeEnum" nillable="true" type="tns:MZKEngineTypeEnum" />
-  <xs:simpleType name="NoYes">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="No" />
-      <xs:enumeration value="Yes" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="NoYes" nillable="true" type="tns:NoYes" />
   <xs:complexType name="MzkMobiCommercialAccessoriesContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q4:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmBullbarComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmEngineProtectionUnitComments" nillable="true" type="xs:string" />
@@ -110,6 +65,8 @@
           <xs:element minOccurs="0" name="parmReflectiveTapeComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmServiceBooksComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmSignWritingComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSparseKeyShown" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmSparseKeyTested" type="tns:NoYes" />
           <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
           <xs:element minOccurs="0" name="parmToolComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmTrackingDeviceComments" nillable="true" type="xs:string" />
@@ -119,9 +76,16 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkMobiCommercialAccessoriesContract" nillable="true" type="tns:MzkMobiCommercialAccessoriesContract" />
+  <xs:simpleType name="NoYes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="No" />
+      <xs:enumeration value="Yes" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NoYes" nillable="true" type="tns:NoYes" />
   <xs:complexType name="MzkMobiCommercialChassisBodyContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q6:XppObjectBase">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q5:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmChassisComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmChevronComments" nillable="true" type="xs:string" />
@@ -159,7 +123,7 @@
   <xs:element name="MzkMobiCommercialChassisBodyContract" nillable="true" type="tns:MzkMobiCommercialChassisBodyContract" />
   <xs:complexType name="MzkMobiCommercialMechConditionContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q7:XppObjectBase">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q6:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAutoTransmissionComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmBatteryComments" nillable="true" type="xs:string" />
@@ -167,6 +131,7 @@
           <xs:element minOccurs="0" name="parmEngineComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmExhaustComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmFootBrakeComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmFrontSuppressionComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmGearBoxComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmHandBrakeComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmHydraulicPowerSteeringComments" nillable="true" type="xs:string" />
@@ -189,7 +154,6 @@
           <xs:element minOccurs="0" name="parmSteeringComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
           <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
-          <xs:element minOccurs="0" name="parmfrontSuppressionComments" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -197,7 +161,7 @@
   <xs:element name="MzkMobiCommercialMechConditionContract" nillable="true" type="tns:MzkMobiCommercialMechConditionContract" />
   <xs:complexType name="MZKMobiCommercialTrimInteriorContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q8:XppObjectBase">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q7:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmBumperComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmDoorHandleLeftComments" nillable="true" type="xs:string" />
@@ -249,7 +213,7 @@
   <xs:element name="MZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:MZKMobiCommercialTrimInteriorContract" />
   <xs:complexType name="MzkMobiCommercialTyresContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q9:XppObjectBase">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q8:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmLFComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmLFCondition" type="tns:MZKConditionEnum" />
@@ -316,7 +280,7 @@
   <xs:element name="MZKConditionEnum" nillable="true" type="tns:MZKConditionEnum" />
   <xs:complexType name="MzkMobiPassengerAccessoriesContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q10:XppObjectBase">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q9:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAirconComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmAlarmComments" nillable="true" type="xs:string" />
@@ -361,6 +325,8 @@
           <xs:element minOccurs="0" name="parmServiceBooksComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmSpareKeysComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmSpareTypeComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSparseKeyShown" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmSparseKeyTested" type="tns:NoYes" />
           <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
           <xs:element minOccurs="0" name="parmToolComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmTrackLineComments" nillable="true" type="xs:string" />
@@ -372,7 +338,7 @@
   <xs:element name="MzkMobiPassengerAccessoriesContract" nillable="true" type="tns:MzkMobiPassengerAccessoriesContract" />
   <xs:complexType name="MzkMobiPassengerBodyworkContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q11:XppObjectBase">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q10:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmBonetComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmBootComments" nillable="true" type="xs:string" />
@@ -426,7 +392,7 @@
   <xs:element name="MzkMobiPassengerBodyworkContract" nillable="true" type="tns:MzkMobiPassengerBodyworkContract" />
   <xs:complexType name="MzkMobiPassengerGlassContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q12:XppObjectBase">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q11:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmExitRearViewMirrorComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmHeadLightsComments" nillable="true" type="xs:string" />
@@ -460,7 +426,7 @@
   <xs:element name="MzkVehicleType" nillable="true" type="tns:MzkVehicleType" />
   <xs:complexType name="MzkMobiPassengerMechConditionContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q13:XppObjectBase">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q12:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmRemarks" nillable="true" type="xs:string" />
@@ -472,7 +438,7 @@
   <xs:element name="MzkMobiPassengerMechConditionContract" nillable="true" type="tns:MzkMobiPassengerMechConditionContract" />
   <xs:complexType name="MzkMobiPassengerTrimInteriorContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q14:XppObjectBase">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q13:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmCarpetsComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmDashComments" nillable="true" type="xs:string" />
@@ -504,7 +470,7 @@
   <xs:element name="MzkMobiPassengerTrimInteriorContract" nillable="true" type="tns:MzkMobiPassengerTrimInteriorContract" />
   <xs:complexType name="MZKMobiPassengerTyreConditionContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q15:XppObjectBase">
+      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q14:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmLFComments" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmLFCondition" type="tns:MZKConditionEnum" />
@@ -534,9 +500,247 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MZKMobiPassengerTyreConditionContract" nillable="true" type="tns:MZKMobiPassengerTyreConditionContract" />
-  <xs:complexType name="MzkTasksContract">
+  <xs:complexType name="MzkMobiTrailorAccessoriesContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q15:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmHasDecals" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmHasReflectiveTape" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedReflectiveTape" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedSignWriting" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmReflectiveTapeComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSignWritingComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
+          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkMobiTrailorAccessoriesContract" nillable="true" type="tns:MzkMobiTrailorAccessoriesContract" />
+  <xs:complexType name="MzkMobiTrailorChassisBodyContract">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q16:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmABSActivator" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmChassisComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmChevronComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmFictionPlates" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmFloorComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmHeadBoardComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmIsDamagedABSActivator" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedChassis" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedChevron" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedFictionPlates" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedFloor" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedHeadBoard" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedKingpin" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedLandingLegs" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedPanelFront" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedPanelLeft" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedPanelRear" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedPanelRight" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedSpareWheelCarrier" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedSuzieFitments" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedUnderRunBumper" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmKingpin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmLandingLegsComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPanelFrontComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPanelLeftComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPanelRearComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPanelRightComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmSpareWheelCarrierComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmSuzieFitments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
+          <xs:element minOccurs="0" name="parmUnderRunBumperComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkMobiTrailorChassisBodyContract" nillable="true" type="tns:MzkMobiTrailorChassisBodyContract" />
+  <xs:complexType name="MzkMobiTrailorGlassContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q17:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmIndicatorLensesComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmIsDamagedIndicatorLenses" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedReflectors" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedTailLights" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmReflectorsComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
+          <xs:element minOccurs="0" name="parmTailLightsComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkMobiTrailorGlassContract" nillable="true" type="tns:MzkMobiTrailorGlassContract" />
+  <xs:complexType name="MzkMobiTrailorMechConditionContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q18:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmFootBrakeComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmFrontSuppressionComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmHandBrakeComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmIsDamagedFootBrake" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedFrontSuppression" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedHandBrake" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmIsDamagedRearSuppression" type="tns:NoYes" />
+          <xs:element minOccurs="0" name="parmRearSuppressionComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
+          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MzkMobiTrailorMechConditionContract" nillable="true" type="tns:MzkMobiTrailorMechConditionContract" />
+  <xs:complexType name="MZKMobiTrailorProofOfInspection">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MZKVehicleInspectionTableContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCompanyRepSignDateTime1" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="parmCustomerRepSignDateTime1" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MZKMobiTrailorProofOfInspection" nillable="true" type="tns:MZKMobiTrailorProofOfInspection" />
+  <xs:complexType name="MZKVehicleInspectionTableContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q19="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q19:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmCaseId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCompanyRepSignDateTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="parmCustomerComments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCustomerRepSignDateTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="parmGeneralCondition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmRecommendation" type="tns:MZKRecommendationEnum" />
+          <xs:element minOccurs="0" name="parmTaskId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmVehicleInspector" type="xs:long" />
+          <xs:element minOccurs="0" name="parmVehicleType" type="tns:MzkVehicleType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
+  <xs:simpleType name="MZKRecommendationEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sell">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotFeasible">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Retain">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MZKRecommendationEnum" nillable="true" type="tns:MZKRecommendationEnum" />
+  <xs:complexType name="MZKMobiTrailorTyreConditionContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q20="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q20:XppObjectBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parmPS10Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS10Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS10Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS10Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS11Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS11Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS11Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS12Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS12Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS12Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS12Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS13Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS13Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS13Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS13Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS14Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS14Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS14Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS14Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS15Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS15Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS15Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS15Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS16Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS16Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS16Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS16Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS1Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS1Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS1Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS1Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS2Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS2Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS2Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS2Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS3Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS3Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS3Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS3Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS4Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS4Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS4Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS4Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS5Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS5Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS5Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS5Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS6Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS6Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS6Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS6Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS7Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS7Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS7Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS7Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS8Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS8Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS8Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS8Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS9Comments" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS9Condition" type="tns:MZKConditionEnum" />
+          <xs:element minOccurs="0" name="parmPS9Depth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmPS9Make" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmTableId" type="xs:int" />
+          <xs:element minOccurs="0" name="parmVehicleInsRecID" type="xs:long" />
+          <xs:element minOccurs="0" name="parmps11Depth" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MZKMobiTrailorTyreConditionContract" nillable="true" type="tns:MZKMobiTrailorTyreConditionContract" />
+  <xs:complexType name="MzkTasksContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q21="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q21:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmCaseCategory" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCaseID" nillable="true" type="xs:string" />
@@ -925,23 +1129,28 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="ProvideVehicleInspectionDetails">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">142</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EEPActionStep" nillable="true" type="tns:EEPActionStep" />
   <xs:simpleType name="MzkVehicleCollectionAction">
     <xs:restriction base="xs:string">
       <xs:enumeration value="AwaitCollectionDetail" />
-      <xs:enumeration value="AwaitVendorSelection" />
-      <xs:enumeration value="AwaitCollectionConfirmation" />
+      <xs:enumeration value="AwaitDeliverytoHyper" />
       <xs:enumeration value="AwaitCollectionDataCapture" />
       <xs:enumeration value="AwaitDamageConfirmation" />
-      <xs:enumeration value="AwaitDeliverytoHyper" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkVehicleCollectionAction" nillable="true" type="tns:MzkVehicleCollectionAction" />
   <xs:complexType name="MzkValidateUserContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q17:XppObjectBase">
+      <xs:extension xmlns:q22="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q22:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmAddress" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCompany" nillable="true" type="xs:string" />
@@ -977,11 +1186,12 @@
   <xs:element name="MzkLoginType" nillable="true" type="tns:MzkLoginType" />
   <xs:complexType name="MzkVehicleDetailsContract">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q18:XppObjectBase">
+      <xs:extension xmlns:q23="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q23:XppObjectBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="parmChassisNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmColor" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmEngineNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmJobCardNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmLisenceDiscCurrent" type="tns:NoYes" />
           <xs:element minOccurs="0" name="parmMake" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmModel" nillable="true" type="xs:string" />
@@ -1000,107 +1210,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
-  <xs:complexType name="MZKVehicleInspectionTableContract">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q19="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q19:XppObjectBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="parmCaseId" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmComments" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmCompanyRepSignDateTime" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="parmCustomerComments" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmCustomerRepSignDateTime" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="parmGeneralCondition" type="tns:MZKConditionEnum" />
-          <xs:element minOccurs="0" name="parmRecID" type="xs:long" />
-          <xs:element minOccurs="0" name="parmRecommendation" type="tns:MZKRecommendationEnum" />
-          <xs:element minOccurs="0" name="parmTaskId" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="parmVehicleInspector" type="xs:long" />
-          <xs:element minOccurs="0" name="parmVehicleType" type="tns:MzkVehicleType" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
-  <xs:simpleType name="MZKRecommendationEnum">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Sell">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotFeasible">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Retain">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="None">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="MZKRecommendationEnum" nillable="true" type="tns:MZKRecommendationEnum" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialAccessoriesContract">
+  <xs:complexType name="ArrayOfMzkTasksContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialAccessoriesContract" nillable="true" type="tns:MzkMobiCommercialAccessoriesContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTasksContract" nillable="true" type="tns:MzkTasksContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialAccessoriesContract" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialChassisBodyContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialChassisBodyContract" nillable="true" type="tns:MzkMobiCommercialChassisBodyContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialChassisBodyContract" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialMechConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialMechConditionContract" nillable="true" type="tns:MzkMobiCommercialMechConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialMechConditionContract" />
-  <xs:complexType name="ArrayOfMZKMobiCommercialTrimInteriorContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:MZKMobiCommercialTrimInteriorContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:ArrayOfMZKMobiCommercialTrimInteriorContract" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialTyresContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialTyresContract" nillable="true" type="tns:MzkMobiCommercialTyresContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialTyresContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialTyresContract" />
-  <xs:complexType name="ArrayOfMzkMobiPassengerGlassContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerGlassContract" nillable="true" type="tns:MzkMobiPassengerGlassContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiPassengerGlassContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerGlassContract" />
-  <xs:complexType name="ArrayOfMzkMechanicalConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMechanicalConditionContract" nillable="true" type="tns:MzkMechanicalConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMechanicalConditionContract" nillable="true" type="tns:ArrayOfMzkMechanicalConditionContract" />
-  <xs:complexType name="ArrayOfMzkMobiPassengerAccessoriesContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerAccessoriesContract" nillable="true" type="tns:MzkMobiPassengerAccessoriesContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiPassengerAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerAccessoriesContract" />
+  <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
   <xs:complexType name="ArrayOfMzkMobiPassengerBodyworkContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerBodyworkContract" nillable="true" type="tns:MzkMobiPassengerBodyworkContract" />
@@ -1125,6 +1240,36 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMZKMobiPassengerTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiPassengerTyreConditionContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorAccessoriesContract" nillable="true" type="tns:MzkMobiTrailorAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorAccessoriesContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorChassisBodyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorChassisBodyContract" nillable="true" type="tns:MzkMobiTrailorChassisBodyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorChassisBodyContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorGlassContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorGlassContract" nillable="true" type="tns:MzkMobiTrailorGlassContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorGlassContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorGlassContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorMechConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorMechConditionContract" nillable="true" type="tns:MzkMobiTrailorMechConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorMechConditionContract" />
+  <xs:complexType name="ArrayOfMZKMobiTrailorTyreConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiTrailorTyreConditionContract" nillable="true" type="tns:MZKMobiTrailorTyreConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKMobiTrailorTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiTrailorTyreConditionContract" />
   <xs:complexType name="ArrayOfMzkVehicleDetailsContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
@@ -1149,16 +1294,52 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkInspectionHistoryContract" nillable="true" type="tns:ArrayOfMzkInspectionHistoryContract" />
-  <xs:complexType name="ArrayOfMzkTasksContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTasksContract" nillable="true" type="tns:MzkTasksContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
   <xs:complexType name="ArrayOfMzkDrivingTimeContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDrivingTimeContract" nillable="true" type="tns:MzkDrivingTimeContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkDrivingTimeContract" nillable="true" type="tns:ArrayOfMzkDrivingTimeContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialTyresContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialTyresContract" nillable="true" type="tns:MzkMobiCommercialTyresContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialTyresContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialTyresContract" />
+  <xs:complexType name="ArrayOfMzkMobiPassengerGlassContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerGlassContract" nillable="true" type="tns:MzkMobiPassengerGlassContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiPassengerGlassContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerGlassContract" />
+  <xs:complexType name="ArrayOfMzkMobiPassengerAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerAccessoriesContract" nillable="true" type="tns:MzkMobiPassengerAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiPassengerAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerAccessoriesContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialAccessoriesContract" nillable="true" type="tns:MzkMobiCommercialAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialAccessoriesContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialChassisBodyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialChassisBodyContract" nillable="true" type="tns:MzkMobiCommercialChassisBodyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialChassisBodyContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialMechConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialMechConditionContract" nillable="true" type="tns:MzkMobiCommercialMechConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialMechConditionContract" />
+  <xs:complexType name="ArrayOfMZKMobiCommercialTrimInteriorContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:MZKMobiCommercialTrimInteriorContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:ArrayOfMZKMobiCommercialTrimInteriorContract" />
 </xs:schema>

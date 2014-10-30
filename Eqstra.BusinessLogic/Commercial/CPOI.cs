@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace Eqstra.BusinessLogic.Commercial
             }
 
             private BitmapImage custSignature;
-
+                [Ignore]
             public BitmapImage CustSignature
             {
                 get { return custSignature; }
@@ -85,7 +86,7 @@ namespace Eqstra.BusinessLogic.Commercial
             }
 
             private BitmapImage eqstraRepSignature;
-
+                    [Ignore]
             public BitmapImage EqstraRepSignature
             {
                 get { return eqstraRepSignature; }
