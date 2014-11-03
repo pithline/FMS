@@ -109,7 +109,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
       
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                 //await CreateTableAsync();
+                 await CreateTableAsync();
                 //SyncData();
                 var weather = await SqliteHelper.Storage.LoadTableAsync<WeatherInfo>();
                 this.WeatherInfo = weather.FirstOrDefault();
@@ -360,6 +360,20 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
             //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
+
+
+
+            //await SqliteHelper.Storage.DropTableAsync<TTyreCond>();
+            //await SqliteHelper.Storage.DropTableAsync<TMechanicalCond>();
+
+            //await SqliteHelper.Storage.CreateTableAsync<TVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<TAccessories>();
+            //await SqliteHelper.Storage.CreateTableAsync<TChassisBody>();
+            //await SqliteHelper.Storage.CreateTableAsync<TGlass>();
+            //await SqliteHelper.Storage.CreateTableAsync<TMechanicalCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<TPOI>();
+            //await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
+
 
 
         }

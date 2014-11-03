@@ -180,7 +180,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             try
             {
                 var allTaskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
-                var taskbuckets = allTaskList.GroupBy(x => new { x.CustomerId, x.Address, x.TaskType }).Select(s => new { taskdata = s.First(), count = s.Count() });
+                var taskbuckets = allTaskList.GroupBy(x => new { x.CustomerId, x.ContactPersonAddress, x.TaskType }).Select(s => new { taskdata = s.First(), count = s.Count() });
 
                 ObservableCollection<CollectDeliveryTask> tasks = new ObservableCollection<CollectDeliveryTask>();
                 foreach (var singleTask in taskbuckets)
@@ -273,8 +273,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               UserID = PersistentData.Instance.UserInfo.UserId,
                               SerialNumber = mzkTask.parmSerialNumber,
                               ContactName = mzkTask.parmContactPersonName,
+                              ContactPersonAddress=mzkTask.parmContactPersonAddress,
                               DocumentType = mzkTask.parmDocuTypeID,
-                              DocumentName = mzkTask.parmDocuName
+                              DocumentName = mzkTask.parmDocuName,
+                              
                           };
                         if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseId))
                         {

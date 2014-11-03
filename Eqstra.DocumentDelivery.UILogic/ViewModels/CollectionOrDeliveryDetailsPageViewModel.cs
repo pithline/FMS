@@ -287,7 +287,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 this.SelectedTaskBucket = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this._task.CustomerId &&
-                    d.Address == this._task.Address && d.TaskType == this._task.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
+                    d.ContactPersonAddress == this._task.ContactPersonAddress && d.TaskType == this._task.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
                 foreach (var d in this.SelectedTaskBucket)
                 {
                     this.DocumentList.Add(new Document

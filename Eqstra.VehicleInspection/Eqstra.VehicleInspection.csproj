@@ -188,6 +188,30 @@
     <Compile Include="Views\SchedulerUserControl.xaml.cs">
       <DependentUpon>SchedulerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Trailer\TPOIUserControl.xaml.cs">
+      <DependentUpon>TPOIUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TMechanicalCondUserControl.xaml.cs">
+      <DependentUpon>TMechanicalCondUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TAccessoriesUserControl.xaml.cs">
+      <DependentUpon>TAccessoriesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TBodyworkUserControl.xaml.cs">
+      <DependentUpon>TBodyworkUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TChassisBodyUserControl.xaml.cs">
+      <DependentUpon>TChassisBodyUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TGlassUserControl.xaml.cs">
+      <DependentUpon>TGlassUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TTyreConditionUserControl.xaml.cs">
+      <DependentUpon>TTyreConditionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Trailer\TVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>TVehicleDetailsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehicleInspectionPage.xaml.cs">
       <DependentUpon>VehicleInspectionPage.xaml</DependentUpon>
     </Compile>
@@ -232,6 +256,11 @@
     <Content Include="Assets\Save.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
+    <Content Include="Assets\trailer_back.png" />
+    <Content Include="Assets\trailer_front.png" />
+    <Content Include="Assets\trailer_left.png" />
+    <Content Include="Assets\trailer_mark.png" />
+    <Content Include="Assets\trailer_right.png" />
     <Content Include="Assets\truck_front.png" />
     <Content Include="Assets\truck_left.png" />
     <Content Include="Assets\truck_marks.png" />
@@ -355,6 +384,38 @@
     <Page Include="Views\SchedulerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Trailer\TPOIUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TMechanicalCondUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TAccessoriesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TBodyworkUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TChassisBodyUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TGlassUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TTyreConditionUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trailer\TVehicleDetailsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\VehicleInspectionPage.xaml">
       <SubType>Designer</SubType>

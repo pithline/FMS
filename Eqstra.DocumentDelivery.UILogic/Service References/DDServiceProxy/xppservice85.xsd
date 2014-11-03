@@ -16,62 +16,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetDriversRequest">
+  <xs:element name="MzkCollectDeliveryServiceGetCollectedFromRequest">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetDriversResponse">
+  <xs:element name="MzkCollectDeliveryServiceGetCollectedFromResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q1:ArrayOfMzkUserContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetTasksRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetTasksResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q2:ArrayOfMZKCollectDeliverTasksContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceInsertDocumentCustomerDetailsRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstDocumentCollection" nillable="true" type="q3:ArrayOfMZKDocumentCollectedDetailsContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceInsertDocumentCustomerDetailsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q4:ArrayOfMZKDocumentCollectedDetailsContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstCourierCollectionDetails" nillable="true" type="q5:ArrayOfMZKCourierCollectionDetailsContract" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q6:ArrayOfMZKCourierCollectionDetailsContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,52 +40,7 @@
   <xs:element name="MzkCollectDeliveryServiceGetCourierListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q7:ArrayOfMzkUserContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetCollectedFromRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetCollectedFromResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q8:ArrayOfMzkUserContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceUpdateStatusListRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q9:ArrayOfMZKCollectDeliverTasksContract" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_loginType" type="q10:MzkLoginType" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceUpdateStatusListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q11:ArrayOfMZKCollectDeliverTasksContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetCustomerInfoRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_accountNum" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkCollectDeliveryServiceGetCustomerInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q12:ArrayOfMzkCustomerContract" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q2:ArrayOfMzkUserContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -145,7 +55,97 @@
   <xs:element name="MzkCollectDeliveryServiceValidateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q13:MzkValidateUserContract" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q3:MzkValidateUserContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceUpdateStatusListRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstTasks" nillable="true" type="q4:ArrayOfMZKCollectDeliverTasksContract" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_loginType" type="q5:MzkLoginType" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceUpdateStatusListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q6:ArrayOfMZKCollectDeliverTasksContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstCourierCollectionDetails" nillable="true" type="q7:ArrayOfMZKCourierCollectionDetailsContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q8:ArrayOfMZKCourierCollectionDetailsContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceInsertDocumentCustomerDetailsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_lstDocumentCollection" nillable="true" type="q9:ArrayOfMZKDocumentCollectedDetailsContract" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceInsertDocumentCustomerDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q10:ArrayOfMZKDocumentCollectedDetailsContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetTasksRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetTasksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q11:ArrayOfMZKCollectDeliverTasksContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetDriversRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetDriversResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q12:ArrayOfMzkUserContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetCustomerInfoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_accountNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkCollectDeliveryServiceGetCustomerInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q13:ArrayOfMzkCustomerContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -50,6 +50,15 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             get { return contactName; }
             set { SetProperty(ref contactName, value); }
         }
+
+        private string contactPersonAddress;
+
+        public string ContactPersonAddress
+        {
+            get { return contactPersonAddress; }
+            set { SetProperty(ref contactPersonAddress, value); }
+        }
+
         private string cdTaskStatus;
         public string CDTaskStatus
         {
