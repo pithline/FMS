@@ -154,7 +154,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ServiceRecID = mzkTask.parmServiceRecID,
                             ConfirmationDate = mzkTask.parmConfirmationDate,
                             CustomerId = mzkTask.parmCustAccount,
-                            ContactName = mzkTask.parmContactPersonName
+                            ContactName = mzkTask.parmContactPersonName,
+                           // ScheduledTime=DateTime.Now
                         });
 
                     }

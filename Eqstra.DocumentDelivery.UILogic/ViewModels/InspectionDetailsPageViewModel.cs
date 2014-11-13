@@ -45,7 +45,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     this.IsBusy = true;
                     var taskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.TaskType == this.CDTask.TaskType && w.CustomerId == this.CDTask.CustomerId &&
-                        w.Address == this.CDTask.Address && w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
+                        w.ContactPersonAddress == this.CDTask.ContactPersonAddress && w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
                     foreach (var item in taskList)
                     {
                         item.IsAssignTask = true;
@@ -356,8 +356,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             if (this.CDTask != null)
             {
-                var allTaskOfCustomer = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this.CDTask.CustomerId &&
-                    d.Address == this.CDTask.Address && d.TaskType == this.CDTask.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
+                var allTaskOfCustomer = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this.CDTask.CustomerId && 
+                    d.ContactPersonAddress == this.CDTask.ContactPersonAddress && d.TaskType == this.CDTask.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
                 this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
 
                 foreach (var d in allTaskOfCustomer)

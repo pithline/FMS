@@ -65,13 +65,13 @@ namespace Eqstra.VehicleInspection.ViewModels
                     }
                     else if (vm is CPOIUserControlViewModel)
                     {
-                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);   
+                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);
                     }
                     else
                     {
                         return (this.NextViewStack.Count == 1);
                     }
-                    
+
                 });
 
                 this._eventAggregator.GetEvent<SignChangedEvent>().Subscribe(p =>
@@ -128,7 +128,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
 
-                    if (currentModel is PInspectionProof )
+                    if (currentModel is PInspectionProof)
                     {
                         ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
                         ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
@@ -140,7 +140,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                         ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
                         SetFrameContent();
                     }
-                                
+
                     else
                     {
                         if (currentModel.ValidateModel())
@@ -158,7 +158,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                             Errors = currentModel.Errors;
                             OnPropertyChanged("Errors");
                             ShowValidationSummary = true;
-                        } 
+                        }
                     }
 
                 }, () =>
@@ -219,7 +219,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
                 LoadAppointments();
                 await GetCustomerDetailsAsync();
-                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
+                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger )
                 {
                     this.InspectionUserControls.Add(new PVehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new TrimIntUserControl());
@@ -230,7 +230,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.InspectionUserControls.Add(new MechanicalCondUserControl());
                     this.InspectionUserControls.Add(new InspectionProofUserControl());
                 }
-                else
+                else if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Commercial)
                 {
                     this.InspectionUserControls.Add(new CVehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new CabTrimInterUserControl());
@@ -241,6 +241,17 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this.InspectionUserControls.Add(new CMechanicalCondUserControl());
                     this.InspectionUserControls.Add(new CPOIUserControl());
                 }
+                else
+                {
+                    this.InspectionUserControls.Add(new TVehicleDetailsUserControl());
+                    this.InspectionUserControls.Add(new TAccessoriesUserControl());
+                    this.InspectionUserControls.Add(new TChassisBodyUserControl());
+                    this.InspectionUserControls.Add(new TGlassUserControl());
+                    this.InspectionUserControls.Add(new TTyreConditionUserControl());
+                    this.InspectionUserControls.Add(new TMechanicalCondUserControl());
+                    this.InspectionUserControls.Add(new TPOIUserControl());
+                }
+
                 NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
                 this.FrameContent = this.inpectionUserControls[0];
                 _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
