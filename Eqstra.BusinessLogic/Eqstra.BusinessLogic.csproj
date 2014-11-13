@@ -189,6 +189,7 @@
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="TIData.cs" />
+    <Compile Include="TI\SubComponent.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleDetails.cs" />

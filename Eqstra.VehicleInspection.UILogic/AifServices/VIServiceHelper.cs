@@ -126,8 +126,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
 
                                AppSettings.Instance.IsSynchronizing = 1;
-                           }
-                                );
+                           });
 
                            if (baseModel is PAccessories)
                            {
@@ -404,7 +403,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             RegistrationNumber = v.parmRegNo,
                             IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
                             LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate
-                           
+
                         };
 
                         if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
@@ -478,8 +477,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CaseNumber = caseNumber,
                                TableId = v.parmTableId,
                                RegistrationNumber = v.parmRegNo,
-                               IsLicenseDiscCurrent=v.parmLisenceDiscCurrent==NoYes.Yes? true:false,
-                               LicenseDiscExpireDate =v.parmlisenceDiscExpiryDate
+                               IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                               LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate
                            };
 
                         if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
