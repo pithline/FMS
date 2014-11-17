@@ -126,8 +126,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                            {
 
                                AppSettings.Instance.IsSynchronizing = 1;
-                           }
-                                );
+                           });
 
                            if (baseModel is PAccessories)
                            {

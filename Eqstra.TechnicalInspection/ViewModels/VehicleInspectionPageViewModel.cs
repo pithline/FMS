@@ -65,13 +65,13 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     }
                     else if (vm is CPOIUserControlViewModel)
                     {
-                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);   
+                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);
                     }
                     else
                     {
                         return (this.NextViewStack.Count == 1);
                     }
-                    
+
                 });
 
                 this._eventAggregator.GetEvent<SignChangedEvent>().Subscribe(p =>
@@ -128,7 +128,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
 
-                    if (currentModel is PInspectionProof )
+                    if (currentModel is PInspectionProof)
                     {
                         ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
                         ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
@@ -140,7 +140,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
                         SetFrameContent();
                     }
-                                
+
                     else
                     {
                         if (currentModel.ValidateModel())
@@ -158,7 +158,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                             Errors = currentModel.Errors;
                             OnPropertyChanged("Errors");
                             ShowValidationSummary = true;
-                        } 
+                        }
                     }
 
                 }, () =>
@@ -243,6 +243,8 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     this.InspectionUserControls.Add(new TechnicalInspectionUserControl());
                     this.InspectionUserControls.Add(new CPOIUserControl());
                 }
+
+
                 NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
                 this.FrameContent = this.inpectionUserControls[0];
                 _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>

@@ -196,6 +196,7 @@
     <Compile Include="Trailer\TMechanicalCond.cs" />
     <Compile Include="Trailer\TTyreCond.cs" />
     <Compile Include="Trailer\TVehicleDetails.cs" />
+    <Compile Include="TI\SubComponent.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleDetails.cs" />

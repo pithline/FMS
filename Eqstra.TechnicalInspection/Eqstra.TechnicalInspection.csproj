@@ -117,71 +117,110 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Converters\InvertOpacityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\TIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\VIService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs" />
-    <Compile Include="Views\Commercial\CAccessoriesUserControl.xaml.cs">
-      <DependentUpon>CAccessoriesUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
-      <DependentUpon>CGlassUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Commercial\CMechanicalCondUserControl.xaml.cs">
-      <DependentUpon>CMechanicalCondUserControl.xaml</DependentUpon>
+    <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Commercial\CabTrimInterUserControl.xaml.cs">
       <DependentUpon>CabTrimInterUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Commercial\CAccessoriesUserControl.xaml.cs">
+      <DependentUpon>CAccessoriesUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
+      <DependentUpon>CGlassUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Commercial\ChassisBodyUserControl.xaml.cs">
       <DependentUpon>ChassisBodyUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Commercial\CVehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>CVehicleDetailsUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Commercial\CMechanicalCondUserControl.xaml.cs">
+      <DependentUpon>CMechanicalCondUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Commercial\CPOIUserControl.xaml.cs">
       <DependentUpon>CPOIUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Commercial\CTyresUserControl.xaml.cs">
       <DependentUpon>CTyresUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\ImageMarkupPage.xaml.cs">
-      <DependentUpon>ImageMarkupPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\AccessoriesUserControl.xaml.cs">
-      <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\BodyworkUserControl.xaml.cs">
-      <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Commercial\CVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>CVehicleDetailsUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\CustomerDetailUserControl.xaml.cs">
       <DependentUpon>CustomerDetailUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\DrivingDirectionPage.xaml.cs">
       <DependentUpon>DrivingDirectionPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Passenger\GlassUserControl.xaml.cs">
-      <DependentUpon>GlassUserControl.xaml</DependentUpon>
+    <Compile Include="Views\ImageMarkupPage.xaml.cs">
+      <DependentUpon>ImageMarkupPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\InspectionDetailsPage.xaml.cs">
       <DependentUpon>InspectionDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\InspectionProofUserControl.xaml.cs">
-      <DependentUpon>InspectionProofUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\AccessoriesUserControl.xaml.cs">
+      <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\BodyworkUserControl.xaml.cs">
+      <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\GlassUserControl.xaml.cs">
+      <DependentUpon>GlassUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\InspectionProofUserControl.xaml.cs">
+      <DependentUpon>InspectionProofUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Passenger\MechanicalCondUserControl.xaml.cs">
       <DependentUpon>MechanicalCondUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\PVehicleDetailsUserControl.xaml.cs">
+      <DependentUpon>PVehicleDetailsUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\TrimIntUserControl.xaml.cs">
+      <DependentUpon>TrimIntUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Passenger\TyreConditionUserControl.xaml.cs">
+      <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\ProfileUserControl.xaml.cs">
       <DependentUpon>ProfileUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\ResetPasswordPage.xaml.cs">
       <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
@@ -189,24 +228,19 @@
     </Compile>
     <Compile Include="Views\SchedulerPage.xaml.cs">
       <DependentUpon>SchedulerPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\SchedulerUserControl.xaml.cs">
       <DependentUpon>SchedulerUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\TechnicalInspectionUserControl.xaml.cs">
       <DependentUpon>TechnicalInspectionUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\VehicleInspectionPage.xaml.cs">
       <DependentUpon>VehicleInspectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\TrimIntUserControl.xaml.cs">
-      <DependentUpon>TrimIntUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\TyreConditionUserControl.xaml.cs">
-      <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Passenger\PVehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>PVehicleDetailsUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +283,51 @@
     <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetTasksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionValidateUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TIService\RoutingService.wsdl" />
+    <None Include="Service References\TIService\xppservice.wsdl" />
+    <None Include="Service References\TIService\xppservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice1.wsdl" />
+    <None Include="Service References\TIService\xppservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TIService\xppservice7.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -322,6 +401,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\TIService\xppservice.disco" />
+    <None Include="Service References\TIService\configuration91.svcinfo" />
+    <None Include="Service References\TIService\configuration.svcinfo" />
+    <None Include="Service References\TIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -373,6 +459,10 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Views\Commercial\CabTrimInterUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Commercial\CAccessoriesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -381,19 +471,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Commercial\CMechanicalCondUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CabTrimInterUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Commercial\ChassisBodyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Commercial\CVehicleDetailsUserControl.xaml">
+    <Page Include="Views\Commercial\CMechanicalCondUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,15 +487,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ImageMarkupPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\AccessoriesUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\BodyworkUserControl.xaml">
+    <Page Include="Views\Commercial\CVehicleDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,15 +499,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Passenger\GlassUserControl.xaml">
+    <Page Include="Views\ImageMarkupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InspectionDetailsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\InspectionProofUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -445,7 +515,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Passenger\AccessoriesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\BodyworkUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\GlassUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\InspectionProofUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Passenger\MechanicalCondUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\PVehicleDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\TrimIntUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Passenger\TyreConditionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -473,18 +571,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Passenger\TrimIntUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\TyreConditionUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\PVehicleDetailsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mazik.WinRT.Components, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -499,6 +585,7 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\win8\Microsoft.Practices.Unity.dll</HintPath>
@@ -522,7 +609,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.7">
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.7.1">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
@@ -533,12 +620,17 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TIService\" />
     <WCFMetadataStorage Include="Service References\VIService\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.TechnicalInspection.UILogic\Eqstra.TechnicalInspection.UILogic.csproj">
+      <Project>{181eecdc-99d9-433a-ba67-ce3821684c2f}</Project>
+      <Name>Eqstra.TechnicalInspection.UILogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>

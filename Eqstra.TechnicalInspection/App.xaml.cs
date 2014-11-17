@@ -21,8 +21,7 @@ using Microsoft.Practices.Unity;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Eqstra.BusinessLogic.Helpers;
-using Eqstra.TechnicalInspection.Views;
-using Eqstra.TechnicalInspection.ViewModels;
+
 using Windows.UI.ApplicationSettings;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Eqstra.VehicleInspection.UILogic.Services;
@@ -35,6 +34,8 @@ using Eqstra.TechnicalInspection.Common;
 using Eqstra.VehicleInspection.UILogic;
 using Newtonsoft.Json;
 using Eqstra.VehicleInspection.UILogic.AifServices;
+using Eqstra.TechnicalInspection.Views;
+using Eqstra.TechnicalInspection.ViewModels;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -131,7 +132,7 @@ namespace Eqstra.TechnicalInspection
 
                 ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
                 {
-                    var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
+                    var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.TechnicalInspection.UILogic.ViewModels.{0}ViewModel,Eqstra.TechnicalInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
                     return Type.GetType(viewModelTypeName);
                 });
                 //ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
