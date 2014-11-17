@@ -355,5 +355,6 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref lRImgPathList, value); }
         }
 
+
     }
 }

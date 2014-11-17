@@ -330,7 +330,7 @@
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVFictionPlates,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FictionPlatesToggle}" Margin="5 0" Grid.Row="6" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.FictionPlatesComment PlatesComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.FictionPlatesComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVFictionPlates" ItemsSource="{Binding Path= Model.FictionPlatesImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FictionPlatesToggle}" Grid.Column="10" Grid.Row="6" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -350,7 +350,7 @@
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVABSActivator,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ABSActivatorToggle}" Margin="5 0" Grid.Row="7" Grid.Column="8"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
-                    <TextBox Text="{Binding Path= Model.ABSActivatorComment PlatesComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="9"/>
+                    <TextBox Text="{Binding Path=Model.ABSActivatorComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="7" Grid.Column="9"/>
                     <GridView common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="GVABSActivator" ItemsSource="{Binding Path= Model.ABSActivatorImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ABSActivatorToggle}" Grid.Column="10" Grid.Row="7" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

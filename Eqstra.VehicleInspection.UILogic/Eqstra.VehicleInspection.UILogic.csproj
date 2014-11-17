@@ -132,9 +132,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TasksFetchedEvent.cs" />
+    <Compile Include="ViewModels\Trailer\TGlassUserControlViewModel.cs" />
     <Compile Include="ViewModels\Trailer\TPOIUserControlViewModel.cs" />
     <Compile Include="ViewModels\Trailer\TMechanicalCondUserControlViewModel.cs" />
-    <Compile Include="ViewModels\Trailer\TGlassUserControlViewModel.cs" />
     <Compile Include="ViewModels\Trailer\TChassisBodyUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CabTrimInterUserControlViewModel.cs" />
     <Compile Include="ViewModels\Commercial\CAccessoriesUserControlViewModel.cs" />

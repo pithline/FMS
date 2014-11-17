@@ -54,24 +54,6 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref licenseDiscExpiryDate, value); }
         }
 
-
-        private bool isSpareKeysShown;
-
-
-        public bool IsSpareKeysShown
-        {
-            get { return isSpareKeysShown; }
-            set { SetProperty(ref isSpareKeysShown, value); }
-        }
-
-        private bool isSpareKeysTested;
-
-        public bool IsSpareKeysTested
-        {
-            get { return isSpareKeysTested; }
-            set { SetProperty(ref isSpareKeysTested, value); }
-        }
-
         private ImageCapture licenseDiscSnapshot;
 
         [RestorableState, Ignore]
@@ -79,15 +61,6 @@ namespace Eqstra.BusinessLogic
         {
             get { return licenseDiscSnapshot; }
             set { SetProperty(ref licenseDiscSnapshot, value); }
-        }
-
-        private ImageCapture odoReadingSnapshot;
-
-        [RestorableState, Ignore]
-        public ImageCapture ODOReadingSnapshot
-        {
-            get { return odoReadingSnapshot; }
-            set { SetProperty(ref odoReadingSnapshot, value); }
         }
 
 
@@ -127,15 +100,6 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref frontSnapshot, value); }
         }
 
-        private ImageCapture topSnapshot;
-
-        [RestorableState, Ignore]
-        public ImageCapture TopSnapshot
-        {
-            get { return topSnapshot; }
-            set { SetProperty(ref topSnapshot, value); }
-        }
-
         public string leftSnapshotPath;
         public string LeftSnapshotPath
         {
@@ -164,12 +128,6 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref frontSnapshotPath, value); }
         }
 
-        public string topSnapshotPath;
-        public string TopSnapshotPath
-        {
-            get { return TopSnapshot.ImagePath; }
-            set { SetProperty(ref topSnapshotPath, value); }
-        }
 
         public string licenseDiscSnapshotPath;
         public string LicenseDiscSnapshotPath
@@ -178,12 +136,6 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref licenseDiscSnapshotPath, value); }
         }
 
-        public string oDOReadingSnapshotPath;
-        public string ODOReadingSnapshotPath
-        {
-            get { return ODOReadingSnapshot.ImagePath; }
-            set { SetProperty(ref oDOReadingSnapshotPath, value); }
-        }
 
         private string color;
 
@@ -191,14 +143,6 @@ namespace Eqstra.BusinessLogic
         {
             get { return color; }
             set { SetProperty(ref color, value); }
-        }
-
-        private string odoReading;
-
-        public string ODOReading
-        {
-            get { return odoReading; }
-            set { SetProperty(ref odoReading, value); }
         }
 
         private string registrationNumber;
@@ -247,6 +191,6 @@ namespace Eqstra.BusinessLogic
             get { return jobCardNumber; }
             set { SetProperty(ref jobCardNumber, value); }
         }
-        
+
     }
 }

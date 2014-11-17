@@ -95,16 +95,16 @@
                                     <StackPanel Orientation="Horizontal" Margin="0" Grid.Row="1" Grid.Column="1">
                                         <RadioButton Content="G" Margin="0 0 10 0" IsChecked="{Binding Path=IsGood, Mode=TwoWay}"/>
                                         <RadioButton Content="F" Margin="0 0 10 0" IsChecked="{Binding Path=IsFair, Mode=TwoWay}"/>
-                                        <RadioButton Content="P" Margin="0 0 10 0" IsChecked="{Binding Path=IsPoor, Mode=TwoWay}" x:Name="RFRadio"/>
+                                        <RadioButton Content="P" Margin="0 0 10 0" IsChecked="{Binding Path=IsPoor, Mode=TwoWay}" x:Name="poorRadio"/>
                                     </StackPanel>
 
-                                    <Button Grid.Column="2" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=RFRadio,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=RFImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
+                                    <Button Grid.Column="2" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=poorRadio,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=RFImg}" Margin="5 0" Style="{StaticResource TransparentBtn}">
                                         <Image Source="ms-appx:///Assets/camera_icon.png"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                                     </Button>
-                                    <TextBox Text="{Binding Path=TreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0"  Grid.Column="3" />
+                                    <TextBox Text="{Binding Path=ThreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0"  Grid.Column="3" />
                                     <TextBox Text="{Binding Path=Make,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0"  Grid.Column="4"/>
                                     <TextBox Text="{Binding Path=Comment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="5"/>
-                                    <GridView IsEnabled="{Binding ElementName=RFRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path= Model.RFImgList}"  Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                                    <GridView IsEnabled="{Binding ElementName=poorRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path= Model.SnapshotImgList}"  Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
                                         <GridView.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <VirtualizingStackPanel Orientation="Horizontal"/>

@@ -49,9 +49,17 @@ namespace Eqstra.VehicleInspection.ViewModels
                     this._task.ProcessStep = ProcessStep.AcceptInspection;
                     this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model;
+                    var currentViewModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext);
+                    var currentModel = currentViewModel.Model;
 
-                    this.SaveCurrentUIDataAsync(currentModel);
+                    if (currentViewModel is TTyreConditionUserControlViewModel)
+                    {
+                        await ((TTyreConditionUserControlViewModel)currentViewModel).SaveTrailerTyreConditions(this._task.VehicleInsRecId);
+                    }
+                    else
+                    {
+                        this.SaveCurrentUIDataAsync(currentModel);
+                    }
                     _navigationService.Navigate("Main", null);
 
                     await VIServiceHelper.Instance.UpdateTaskStatusAsync();
@@ -92,13 +100,22 @@ namespace Eqstra.VehicleInspection.ViewModels
                     //this.IsCommandBarOpen = false;
                     //this.IsFlyoutOpen = true;
                     ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
+                    var currentViewModel = (BaseViewModel)this.NextViewStack.Peek().DataContext;
+                    var currentModel = currentViewModel.Model as BaseModel;
 
                     if (currentModel.ValidateModel())
                     {
 
                         this.PrevViewStack.Push(this.NextViewStack.Pop());
-                        this.SaveCurrentUIDataAsync(currentModel);
+                        if (currentViewModel is TTyreConditionUserControlViewModel)
+                        {
+                            await ((TTyreConditionUserControlViewModel)currentViewModel).SaveTrailerTyreConditions(this._task.VehicleInsRecId);
+                        }
+                        else
+                        {
+                            this.SaveCurrentUIDataAsync(currentModel);
+                        }
+
                         this.FrameContent = this.NextViewStack.Peek();
                         CompleteCommand.RaiseCanExecuteChanged();
                         NextCommand.RaiseCanExecuteChanged();
@@ -126,7 +143,8 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     this.IsCommandBarOpen = false;
                     ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
+                    var currentViewModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext);
+                    var currentModel = currentViewModel.Model as BaseModel;
 
                     if (currentModel is PInspectionProof)
                     {
@@ -146,7 +164,17 @@ namespace Eqstra.VehicleInspection.ViewModels
                         if (currentModel.ValidateModel())
                         {
                             SetFrameContent();
-                            this.SaveCurrentUIDataAsync(currentModel);
+
+
+                            if (currentViewModel is TTyreConditionUserControlViewModel)
+                            {
+                                await ((TTyreConditionUserControlViewModel)currentViewModel).SaveTrailerTyreConditions(this._task.VehicleInsRecId);
+                            }
+                            else
+                            {
+                                this.SaveCurrentUIDataAsync(currentModel);
+                            }
+
                             if (this.PrevViewStack.FirstOrDefault() != null)
                             {
                                 BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
@@ -219,7 +247,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
                 LoadAppointments();
                 await GetCustomerDetailsAsync();
-                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger )
+                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
                 {
                     this.InspectionUserControls.Add(new PVehicleDetailsUserControl());
                     this.InspectionUserControls.Add(new TrimIntUserControl());

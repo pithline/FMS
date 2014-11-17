@@ -26,6 +26,11 @@ namespace Eqstra.BusinessLogic
             this.ChevronImgList = new ObservableCollection<ImageCapture>();
             this.LandingLegsImgList = new ObservableCollection<ImageCapture>();
 
+            this.suzieFitmentsImgList = new ObservableCollection<ImageCapture>();
+            this.kingpinImgList = new ObservableCollection<ImageCapture>();
+            this.fictionPlatesImgList = new ObservableCollection<ImageCapture>();
+            this.ABSActivatorImgList = new ObservableCollection<ImageCapture>();
+
         }
 
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
@@ -319,6 +324,112 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref  landingLegsImgList, value); }
         }
 
+        private string suzieFitmentsComment;
+        public string SuzieFitmentsComment
+        {
+            get { return suzieFitmentsComment; }
+
+            set { SetProperty(ref  suzieFitmentsComment, value); }
+        }
+        private bool isSuzieFitmentsDmg;
+        public bool IsSuzieFitmentsDmg
+        {
+            get { return isSuzieFitmentsDmg; }
+
+            set { SetProperty(ref  isSuzieFitmentsDmg, value); }
+        }
+        private ObservableCollection<ImageCapture> suzieFitmentsImgList;
+
+        [Ignore, DamageSnapshotRequired("Landing legs snapshot(s) required", "IsSuzieFitmentsDmg")]
+        public ObservableCollection<ImageCapture> SuzieFitmentsImgList
+        {
+            get { return suzieFitmentsImgList; }
+
+            set { SetProperty(ref  suzieFitmentsImgList, value); }
+        }
+
+        private string kingpinComment;
+
+        public string KingpinComment
+        {
+            get { return kingpinComment; }
+
+            set { SetProperty(ref  kingpinComment, value); }
+        }
+        private bool isKingpinDmg;
+
+        public bool IsKingpinDmg
+        {
+            get { return isKingpinDmg; }
+
+            set { SetProperty(ref  isKingpinDmg, value); }
+        }
+        private ObservableCollection<ImageCapture> kingpinImgList;
+
+        [Ignore, DamageSnapshotRequired("Landing legs snapshot(s) required", "IsKingpinDmg")]
+        public ObservableCollection<ImageCapture> KingpinImgList
+        {
+            get { return kingpinImgList; }
+
+            set { SetProperty(ref  kingpinImgList, value); }
+        }
+
+
+
+        private string fictionPlatesComment;
+
+        public string FictionPlatesComment
+        {
+            get { return fictionPlatesComment; }
+
+            set { SetProperty(ref  fictionPlatesComment, value); }
+        }
+        private bool isFictionPlatesDmg;
+
+        public bool IsFictionPlatesDmg
+        {
+            get { return isFictionPlatesDmg; }
+
+            set { SetProperty(ref  isFictionPlatesDmg, value); }
+        }
+        private ObservableCollection<ImageCapture> fictionPlatesImgList;
+
+        [Ignore, DamageSnapshotRequired("Landing legs snapshot(s) required", "IsFictionPlatesDmg")]
+        public ObservableCollection<ImageCapture> FictionPlatesImgList
+        {
+            get { return fictionPlatesImgList; }
+
+            set { SetProperty(ref  fictionPlatesImgList, value); }
+        }
+
+
+        private string absActivatorComment;
+
+        public string ABSActivatorComment
+        {
+            get { return absActivatorComment; }
+
+            set { SetProperty(ref  absActivatorComment, value); }
+        }
+        private bool isABSActivatorDmg;
+
+        public bool IsABSActivatorDmg
+        {
+            get { return isABSActivatorDmg; }
+
+            set { SetProperty(ref  isABSActivatorDmg, value); }
+        }
+        private ObservableCollection<ImageCapture> absActivatorImgList;
+
+        [Ignore, DamageSnapshotRequired("Landing legs snapshot(s) required", "IsABSActivatorDmg")]
+        public ObservableCollection<ImageCapture> ABSActivatorImgList
+        {
+            get { return absActivatorImgList; }
+
+            set { SetProperty(ref  absActivatorImgList, value); }
+        }
+
+
         public string chassisImgPathList;
         public string ChassisImgPathList
         {
@@ -394,6 +505,34 @@ namespace Eqstra.BusinessLogic
         {
             get { return string.Join("~", LandingLegsImgList.Select(x => x.ImagePath)); }
             set { SetProperty(ref landingLegsImgPathList, value); }
+        }
+
+        public string suzieFitmentsImgPathList;
+        public string SuzieFitmentsImgPathList
+        {
+            get { return string.Join("~", SuzieFitmentsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref suzieFitmentsImgPathList, value); }
+        }
+
+        public string kingpinImgPathList;
+        public string KingpinImgPathList
+        {
+            get { return string.Join("~", KingpinImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref kingpinImgPathList, value); }
+        }
+
+        public string fictionPlatesImgPathList;
+        public string FictionPlatesImgPathList
+        {
+            get { return string.Join("~", FictionPlatesImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref fictionPlatesImgPathList, value); }
+        }
+
+        public string absActivatorImgPathList;
+        public string ABSActivatorImgPathList
+        {
+            get { return string.Join("~", ABSActivatorImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref absActivatorImgPathList, value); }
         }
     }
 }

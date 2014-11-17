@@ -191,12 +191,10 @@
     <Compile Include="TIData.cs" />
     <Compile Include="Trailer\TAccessories.cs" />
     <Compile Include="Trailer\TChassisBody.cs" />
-    <Compile Include="Trailer\TBodywork.cs" />
     <Compile Include="Trailer\TGlass.cs" />
     <Compile Include="Trailer\TPOI.cs" />
     <Compile Include="Trailer\TMechanicalCond.cs" />
     <Compile Include="Trailer\TTyreCond.cs" />
-    <Compile Include="Trailer\TTyreCondition.cs" />
     <Compile Include="Trailer\TVehicleDetails.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />

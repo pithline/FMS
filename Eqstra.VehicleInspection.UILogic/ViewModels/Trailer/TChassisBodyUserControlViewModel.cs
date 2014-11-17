@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
-   public class TChassisBodyUserControlViewModel : BaseViewModel
+    public class TChassisBodyUserControlViewModel : BaseViewModel
     {
-       public TChassisBodyUserControlViewModel(IEventAggregator eventAggregator)
-           : base(eventAggregator)
+        public TChassisBodyUserControlViewModel(IEventAggregator eventAggregator)
+            : base(eventAggregator)
         {
             this.Model = new TChassisBody();
         }
 
-       public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
-       {
-           this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TChassisBody>(x => x.VehicleInsRecID == vehicleInsRecID);
-           if (this.Model == null)
-           {
-               this.Model = new TChassisBody();
-           }
-           BaseModel viBaseObject = (TChassisBody)this.Model;
-           viBaseObject.LoadSnapshotsFromDb();
-           PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
-           viBaseObject.ShouldSave = false;
-       }
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
+        {
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TChassisBody>(x => x.VehicleInsRecID == vehicleInsRecID);
+            if (this.Model == null)
+            {
+                this.Model = new TChassisBody();
+            }
+            BaseModel viBaseObject = (TChassisBody)this.Model;
+            viBaseObject.LoadSnapshotsFromDb();
+            PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+            viBaseObject.ShouldSave = false;
+        }
     }
 }

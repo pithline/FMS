@@ -197,9 +197,6 @@
     <Compile Include="Views\Trailer\TAccessoriesUserControl.xaml.cs">
       <DependentUpon>TAccessoriesUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Trailer\TBodyworkUserControl.xaml.cs">
-      <DependentUpon>TBodyworkUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Trailer\TChassisBodyUserControl.xaml.cs">
       <DependentUpon>TChassisBodyUserControl.xaml</DependentUpon>
     </Compile>
@@ -394,10 +391,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Trailer\TAccessoriesUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Trailer\TBodyworkUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

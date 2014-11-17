@@ -17,6 +17,7 @@ namespace Eqstra.BusinessLogic
         {
             this.GVTailLightsImgList = new ObservableCollection<ImageCapture>();
             this.GVInductorLensesImgList = new ObservableCollection<ImageCapture>();
+            this.ReflectorsImgList = new ObservableCollection<ImageCapture>();
             this.ShouldSave = false;
         }
 
@@ -39,6 +40,7 @@ namespace Eqstra.BusinessLogic
             get { return gVInductorLensesImgList; }
             set { SetProperty(ref  gVInductorLensesImgList, value); }
         }
+
 
         private string gVTailLightsComment;
 
@@ -86,6 +88,39 @@ namespace Eqstra.BusinessLogic
         {
             get { return string.Join("~", GVInductorLensesImgList.Select(x => x.ImagePath)); }
             set { SetProperty(ref gVInductorLensesImgPathList, value); }
+        }
+
+        private ObservableCollection<ImageCapture> reflectorsImgList;
+        [Ignore, DamageSnapshotRequired("Reflectors snapshot(s) required", "IsReflectors")]
+        public ObservableCollection<ImageCapture> ReflectorsImgList
+        {
+            get { return reflectorsImgList; }
+            set { SetProperty(ref  reflectorsImgList, value); }
+        }
+        private string reflectorsComment;
+
+        public string ReflectorsComment
+        {
+            get { return reflectorsComment; }
+
+            set { SetProperty(ref  reflectorsComment, value); }
+        }
+
+        private bool isReflectors;
+
+        public bool IsReflectors
+        {
+            get { return isReflectors; }
+
+            set { SetProperty(ref  isReflectors, value); }
+        }
+
+
+        public string reflectorsImgPathList;
+        public string ReflectorsImgPathList
+        {
+            get { return string.Join("~", reflectorsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref reflectorsImgPathList, value); }
         }
 
     }

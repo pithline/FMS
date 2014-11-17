@@ -206,5 +206,6 @@ namespace Eqstra.VehicleInspection.UILogic
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
         }
+       
     }
 }

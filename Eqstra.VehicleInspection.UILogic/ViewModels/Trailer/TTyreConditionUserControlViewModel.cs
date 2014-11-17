@@ -8,7 +8,9 @@ using Microsoft.Practices.Prism.StoreApps;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Navigation;
-
+using System.Linq;
+using Eqstra.VehicleInspection.UILogic.AifServices;
+using System;
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class TTyreConditionUserControlViewModel : BaseViewModel
@@ -16,6 +18,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public TTyreConditionUserControlViewModel(IEventAggregator eventAggregator)
             : base(eventAggregator)
         {
+            this.Model = new TTyreCond();
             this.PoolOfTyreCondions = new ObservableCollection<TTyreCond>();
 
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion1" });
@@ -40,13 +43,68 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         }
 
+
+        public async System.Threading.Tasks.Task SaveTrailerTyreConditions(long vehicleInsRecId)
+        {
+            foreach (var tyre in PoolOfTyreCondions)
+            {
+                var successFlag = 0;
+                if (tyre.ShouldSave)
+                {
+                    var tyreList = (await SqliteHelper.Storage.LoadTableAsync<TTyreCond>()).Where(x => x.VehicleInsRecID == vehicleInsRecId);
+                    if (tyreList.Any(a => a.TyreCondID == tyre.TyreCondID))
+                    {
+                        successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(tyre);
+                    }
+                    else
+                    {
+                        tyre.VehicleInsRecID = vehicleInsRecId;
+                        successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(tyre);
+                    }
+                }
+
+                if (successFlag != 0)
+                {
+                    await VIServiceHelper.Instance.SyncFromSvcAsync((TTyreCond)this.Model);
+                }
+            }
+        }
+
+        private void loadDataFromDb(long vehicleInsRecID)
+        {
+            try
+            {
+                var tyredata = (SqliteHelper.Storage.LoadTableAsync<TTyreCond>()).Result;
+
+                if (tyredata != null && tyredata.Any())
+                {
+                    foreach (var item in tyredata)
+                    {
+                        if (item.VehicleInsRecID == vehicleInsRecID)
+                        {
+                            var itemToRemove = this.PoolOfTyreCondions.Where(w => w.Position == item.Position).FirstOrDefault();
+                            this.PoolOfTyreCondions.Insert(this.PoolOfTyreCondions.IndexOf(itemToRemove), item);
+                            this.PoolOfTyreCondions.Remove(itemToRemove);
+
+                        }
+
+                    }
+                }
+                BaseModel viBaseObject = (TTyreCond)this.Model;
+                viBaseObject.LoadSnapshotsFromDb();
+                PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+                viBaseObject.ShouldSave = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            this.Model = new TTyreCond();
-            //BaseModel viBaseObject = (TTyreCond)this.Model;
-            //viBaseObject.LoadSnapshotsFromDb();
-            //PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
-            //viBaseObject.ShouldSave = false;
+            loadDataFromDb(vehicleInsRecID);
         }
 
         private ObservableCollection<TTyreCond> poolOfTyreCondions;
