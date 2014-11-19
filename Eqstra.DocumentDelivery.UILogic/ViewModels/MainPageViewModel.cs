@@ -47,7 +47,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
                         await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
-                        _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
@@ -70,7 +70,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         {
             try
             {
-     
+
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.UserInfo = PersistentData.Instance.UserInfo;
@@ -89,7 +89,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
                         await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
-                        _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.task);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
@@ -99,9 +99,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                             AppSettings.Instance.IsSynchronizing = 0;
                             AppSettings.Instance.Synced = true;
-                        }
-                         );
-
+                        });
                     });
                 }
 
@@ -182,11 +180,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         /// / testing temporary code.
         /// </summary>
         /// <returns></returns>
-       
+
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-           this.PoolofTasks.AddRange(await DDServiceProxyHelper.Instance.GroupTasksByCustomer());
+            this.PoolofTasks.AddRange(await DDServiceProxyHelper.Instance.GroupTasksByCustomer());
         }
 
         private void GetAllCount()

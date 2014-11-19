@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.TI
 {
-    public class TechnicalInsp : BaseModel
+    public class TIData : ValidatableBindableBase
     {
         private string causeOfDamage;
 
@@ -45,7 +45,7 @@ namespace Eqstra.BusinessLogic.TI
             set { SetProperty(ref completionDate, value); }
         }
         private long caseServiceRecID;
-
+        [PrimaryKey]
         public long CaseServiceRecID
         {
             get { return caseServiceRecID; }
@@ -59,9 +59,19 @@ namespace Eqstra.BusinessLogic.TI
             get { return caseCategoryAuthList; }
             set { SetProperty(ref caseCategoryAuthList, value); }
         }
-        public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
+
+        private bool shouldSave;
+
+        public bool ShouldSave
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<TechnicalInsp>(x => x.VehicleInsRecID == vehicleInsRecID);
+            get { return shouldSave; }
+            set { SetProperty(ref shouldSave, value); }
+        }
+
+
+        public async  Task<ValidatableBindableBase> GetDataAsync(long caseServiceRecId)
+        {
+            return await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == caseServiceRecId);
         }
 
     }

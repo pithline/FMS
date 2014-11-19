@@ -93,7 +93,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
 
         }
 
-        public async System.Threading.Tasks.Task Synchronize()
+        public void Synchronize()
         {
             try
             {
@@ -101,6 +101,10 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 {
                     Synchronize(async () =>
                        {
+
+                           await InsertTechnicalInspectionAsync();
+                           await UpdateTaskStatusAsync();
+
 
 
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -162,7 +166,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                        if (baseModel is TechnicalInsp)
+                        if (baseModel is TIData)
                         {
                             await this.InsertTechnicalInspectionAsync();
                         }
@@ -294,7 +298,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var technicalInspData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>()).Where(x => x.ShouldSave);
+                var technicalInspData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TI.TIData>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkCaseServiceAuthorizationContract> mzkMobiTrailerAccessoriesContractColl = new ObservableCollection<MzkCaseServiceAuthorizationContract>();
                 if (technicalInspData != null)
                 {
@@ -314,23 +318,24 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 }
                 var res = await client.insertTechnicalInspectionAsync(mzkMobiTrailerAccessoriesContractColl, _userInfo.CompanyId);
 
-                var technicalInspList = new ObservableCollection<TechnicalInsp>();
+                var technicalInspList = new ObservableCollection<TIData>();
                 if (res.response != null)
                 {
                     foreach (var x in res.response.Where(x => x != null))
                     {
-                        technicalInspList.Add(new TechnicalInsp
+                        technicalInspList.Add(new TIData
                         {
                             CauseOfDamage = x.parmDamageCause,
                             Remedy = x.parmRemedy,
                             Recommendation = x.parmRecommendation,
                             CompletionDate = x.parmCompletionDate,
+                            ShouldSave = false,
                             // parmCaseCategoryAuthList = x.CaseCategoryAuthList,
                             CaseServiceRecID = x.parmCaseServiceRecID
 
                         });
                     }
-                    await SqliteHelper.Storage.UpdateAllAsync<TechnicalInsp>(technicalInspList);
+                    await SqliteHelper.Storage.UpdateAllAsync<TIData>(technicalInspList);
                 }
             }
             catch (Exception ex)
@@ -357,13 +362,13 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
                 ObservableCollection<MzkTechnicalTasksContract> mzkTasks = new ObservableCollection<MzkTechnicalTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitTechnicalInspection);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, EEPActionStep.AwaitTechnicalInspection);
 
                 if (tasks != null)
                 {
 
                     foreach (var task in tasks.Where(x =>
-                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture))
+                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.Completed))
                     {
                         mzkTasks.Add(
                             new MzkTechnicalTasksContract

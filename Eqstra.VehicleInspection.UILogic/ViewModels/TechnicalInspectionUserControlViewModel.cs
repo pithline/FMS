@@ -17,7 +17,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public override System.Threading.Tasks.Task LoadModelFromDbAsync(long vehicleInsRecID)
         {
-            this.Model = new TIData();
+           // this.Model = new TIData();
             return System.Threading.Tasks.Task.FromResult<object>(null);
         }
     }

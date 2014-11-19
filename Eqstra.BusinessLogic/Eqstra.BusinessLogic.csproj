@@ -185,10 +185,13 @@
     <Compile Include="ServiceSchedule\Suburb.cs" />
     <Compile Include="ServiceSchedule\Supplier.cs" />
     <Compile Include="ServiceSchedule\SupplierSelection.cs" />
+    <Compile Include="SnapshotsViewer.xaml.cs">
+      <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TI\TechnicalInsp.cs" />
+    <Compile Include="TI\TIData.cs" />
     <Compile Include="Trailer\TAccessories.cs" />
     <Compile Include="Trailer\TChassisBody.cs" />
     <Compile Include="Trailer\TGlass.cs" />
@@ -217,7 +220,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>Behaviors SDK %28XAML%29</Name>
@@ -228,6 +230,12 @@
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
       <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="SnapshotsViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

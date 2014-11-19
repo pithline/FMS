@@ -18,22 +18,29 @@
         <x:String x:Key="AppName">My Application</x:String>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-        <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="TabNavigation" Value="Local"/>
-            <Setter Property="IsHoldingEnabled" Value="False"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Style x:Key="ListViewItemStyle1"
+               TargetType="ListViewItem">
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="TabNavigation"
+                    Value="Local" />
+            <Setter Property="IsHoldingEnabled"
+                    Value="False" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Top" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter
-                            SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedForeground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
+                        <ListViewItemPresenter SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}"
+                                               SelectedForeground="{ThemeResource TextBoxButtonBorderThemeBrush}"
+                                               SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"
+                                               SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
 
                     </ControlTemplate>
                 </Setter.Value>
@@ -167,11 +174,14 @@
                                 <Button Style="{StaticResource TransparentBtn}"
                                         Margin="10 0 0 0"
                                         VerticalAlignment="Center"
-                                        IsEnabled="{Binding Model.ShouldSave}">
+                                        IsEnabled="{Binding Model.ShouldSave}"
+                                        Visibility="Collapsed">
                                     <Image Source="ms-appx:///Assets/save.png" />
                                 </Button>
                             </StackPanel>
-                            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                            <ScrollViewer Grid.Row="1"
+                                          HorizontalScrollBarVisibility="Visible"
+                                          VerticalScrollBarVisibility="Visible">
                                 <Border Grid.Row="1"
                                         BorderBrush="#FFE0E0E0"
                                         BorderThickness="1"
@@ -197,31 +207,36 @@
                                             </Grid.RowDefinitions>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="220"/>
-                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="220" />
+                                                    <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Text="Inspection Completion Date" HorizontalAlignment="Left"
+                                                <TextBlock Text="Inspection Completion Date"
+                                                           HorizontalAlignment="Left"
                                                            Style="{StaticResource FormTextStyle}"
                                                            VerticalAlignment="Center" />
-                                                <DatePicker Grid.Column="1" HorizontalAlignment="Left" Margin="5" Date="{Binding Path=Model.CompletionDate,Mode=TwoWay}"
-                                                            />
+                                                <DatePicker Grid.Column="1"
+                                                            HorizontalAlignment="Left"
+                                                            Margin="5"
+                                                            Date="{Binding Path=Model.CompletionDate,Mode=TwoWay}" />
                                             </Grid>
 
 
 
-                                            <ListView Grid.Row="1" SelectionMode="None"
-                                                      ItemsSource="{Binding TechnicalInspList}"
-                                                      IsZoomedInView="False" SelectedIndex="-1"
+                                            <ListView Grid.Row="1"
+                                                      SelectionMode="None"
+                                                      ItemsSource="{Binding MaintenanceRepairList}"
+                                                      IsZoomedInView="False"
+                                                      SelectedIndex="-1"
                                                       ItemContainerStyle="{StaticResource ListViewItemStyle1}"
                                                       Margin="0 10 0 0">
                                                 <ListView.HeaderTemplate>
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="180"/>
-                                                                <ColumnDefinition Width="180"/>
-                                                                <ColumnDefinition Width="100"/>
-                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="180" />
+                                                                <ColumnDefinition Width="180" />
+                                                                <ColumnDefinition Width="100" />
+                                                                <ColumnDefinition Width="100" />
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Text="Major Component"
                                                                        Style="{StaticResource  TitleTextBlockStyle}" />
@@ -251,7 +266,6 @@
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Text="{Binding MajorComponent}" />
                                                                 <Button Command="{Binding TakeSnapshotCommand}"
-                       
                                                                         Style="{StaticResource TransparentBtn}">
                                                                     <Image Source="ms-appx:///Assets/camera_icon.png"
                                                                            HorizontalAlignment="Center"
@@ -264,7 +278,6 @@
                                                                         Grid.Column="1">
                                                                 <TextBlock Text="{Binding SubComponent}" />
                                                                 <Button Command="{Binding TakeSnapshotCommand}"
-                       
                                                                         Style="{StaticResource TransparentBtn}">
                                                                     <Image Source="ms-appx:///Assets/camera_icon.png"
                                                                            HorizontalAlignment="Center"
@@ -278,31 +291,57 @@
                                                             <TextBlock Text="{Binding Action}"
                                                                        Grid.Column="3" />
 
-                                                            <GridView  Grid.Column="4" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True"  ItemsSource="{Binding Path= Model.MajorComponentImgList}"  Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                                                            <GridView  Grid.Column="4"
+                                                                       common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
+                                                                       IsItemClickEnabled="True"
+                                                                       ItemsSource="{Binding Path= MajorComponentImgList}"
+                                                                       Margin="5 0"
+                                                                       Height="45"
+                                                                       Width="140"
+                                                                       Padding="0 0 0 0"
+                                                                       HorizontalAlignment="Left"
+                                                                       SelectionMode="None">
                                                                 <GridView.ItemsPanel>
                                                                     <ItemsPanelTemplate>
-                                                                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                                                                        <VirtualizingStackPanel Orientation="Horizontal" />
                                                                     </ItemsPanelTemplate>
                                                                 </GridView.ItemsPanel>
                                                                 <GridView.ItemTemplate>
                                                                     <DataTemplate>
-                                                                        <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
-                                                                            <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                                                        <Border BorderBrush="#FFA6A6A6"
+                                                                                BorderThickness="1"
+                                                                                CornerRadius="1">
+                                                                            <Image Source="{Binding ImagePath,Mode=TwoWay}"
+                                                                                   Stretch="Uniform"
+                                                                                   Margin="1" />
                                                                         </Border>
                                                                     </DataTemplate>
                                                                 </GridView.ItemTemplate>
                                                             </GridView>
 
-                                                            <GridView  Grid.Column="5" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" ItemsSource="{Binding Path= Model.SubComponentImgList}"  Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                                                            <GridView  Grid.Column="5"
+                                                                       common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
+                                                                       IsItemClickEnabled="True"
+                                                                       ItemsSource="{Binding Path= SubComponentImgList}"
+                                                                       Margin="5 0"
+                                                                       Height="45"
+                                                                       Width="140"
+                                                                       Padding="0 0 0 0"
+                                                                       HorizontalAlignment="Left"
+                                                                       SelectionMode="None">
                                                                 <GridView.ItemsPanel>
                                                                     <ItemsPanelTemplate>
-                                                                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                                                                        <VirtualizingStackPanel Orientation="Horizontal" />
                                                                     </ItemsPanelTemplate>
                                                                 </GridView.ItemsPanel>
                                                                 <GridView.ItemTemplate>
                                                                     <DataTemplate>
-                                                                        <Border BorderBrush="#FFA6A6A6" BorderThickness="1" CornerRadius="1">
-                                                                            <Image Source="{Binding ImagePath,Mode=TwoWay}" Stretch="Uniform" Margin="1"/>
+                                                                        <Border BorderBrush="#FFA6A6A6"
+                                                                                BorderThickness="1"
+                                                                                CornerRadius="1">
+                                                                            <Image Source="{Binding ImagePath,Mode=TwoWay}"
+                                                                                   Stretch="Uniform"
+                                                                                   Margin="1" />
                                                                         </Border>
                                                                     </DataTemplate>
                                                                 </GridView.ItemTemplate>
@@ -331,7 +370,8 @@
                                                        Style="{StaticResource FormTextStyle}"
                                                        VerticalAlignment="Top"
                                                        Margin="0 20 0 0" />
-                                            <TextBox AcceptsReturn="True" Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
+                                            <TextBox AcceptsReturn="True"
+                                                     Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
                                                      IsTextPredictionEnabled="True"
                                                      Grid.Row="0"
                                                      Grid.Column="1"
@@ -347,7 +387,8 @@
                                                        Style="{StaticResource FormTextStyle}"
                                                        VerticalAlignment="Top"
                                                        Margin="0 20 0 0" />
-                                            <TextBox AcceptsReturn="True"  Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
+                                            <TextBox AcceptsReturn="True"
+                                                     Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
                                                      IsTextPredictionEnabled="True"
                                                      Grid.Row="1"
                                                      Grid.Column="1"
@@ -363,7 +404,8 @@
                                                        Style="{StaticResource FormTextStyle}"
                                                        VerticalAlignment="Top"
                                                        Margin="0 20 0 0" />
-                                            <TextBox AcceptsReturn="True"  Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
+                                            <TextBox AcceptsReturn="True"
+                                                     Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
                                                      IsTextPredictionEnabled="True"
                                                      Grid.Row="2"
                                                      Grid.Column="1"

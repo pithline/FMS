@@ -103,7 +103,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
                             await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
 
-                            _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.CDTask);
+                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.CDTask);
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
                                 this.CDTaskList.Clear();
@@ -132,7 +132,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 await ShowTasksAsync(navigationParameter);
-                _eventAggregator.GetEvent<TasksFetchedEvent>().Subscribe(async o =>
+                _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Subscribe(async o =>
                 {
                     await ShowTasksAsync(navigationParameter);
                 }, ThreadOption.UIThread);
@@ -207,7 +207,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
                         await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
 
-                        _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.CDTask);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.CDTask);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.CDTaskList.Clear();

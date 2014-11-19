@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.TI;
 using Eqstra.TechnicalInspection.UILogic.AifServices;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
@@ -41,7 +42,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                 ApplicationData.Current.LocalSettings.Values["CaseServiceRecID"] = this.InspectionTask.CaseServiceRecID;
 
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
-                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == this.InspectionTask.CaseNumber);
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == this.InspectionTask.CaseServiceRecID);
 
                 if (dd != null && !dd.StopDateTime.Equals(DateTime.MinValue))
                 {
@@ -72,7 +73,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
-
+                        TIServiceHelper.Instance.Synchronize();
                         await TIServiceHelper.Instance.GetTasksAsync();
                         _eventAggregator.GetEvent<Eqstra.BusinessLogic.TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -97,6 +98,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             try
             {
+                
+
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
@@ -240,10 +243,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         public DelegateCommand SyncCommand { get; set; }
 
         public DelegateCommand DrivingDirectionCommand { get; set; }
-        /// <summary>
-        ///  this is  Temporary method for create tables in DB
-        /// </summary>
-
+        
       
     }
 }
