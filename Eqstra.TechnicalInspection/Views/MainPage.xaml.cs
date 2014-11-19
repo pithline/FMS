@@ -1,30 +1,17 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.TechnicalInspection.Common;
-using Eqstra.VehicleInspection.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
+using System.Reflection;
 using Windows.System;
-using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Reflection;
-using Windows.UI.ViewManagement;
-using System.Collections;
-using Eqstra.BusinessLogic.Helpers;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -45,7 +32,6 @@ namespace Eqstra.TechnicalInspection.Views
         public MainPage()
         {
             this.InitializeComponent();
-            Window.Current.SizeChanged += (s, e) => UpdateVisualState();
         }
         private void UpdateVisualState()
         {
@@ -76,7 +62,7 @@ namespace Eqstra.TechnicalInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadFromDiskAsync<Task>("VITasksFile.txt");
+            var result = await Util.ReadFromDiskAsync<Task>("TITasksFile.txt");
             if (result != null)
             {
                 this.mainGrid.ItemsSource = result.Where(x => x.CaseCategory.Contains(args.QueryText) ||
@@ -97,12 +83,12 @@ namespace Eqstra.TechnicalInspection.Views
                 {
                     if (!isCached)
                     {
-                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "VITasksFile.txt");
+                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "TITasksFile.txt");
                         isCached = true;
                     }
 
                     var searchSuggestionList = new List<string>();
-                    foreach (var task in await Util.ReadFromDiskAsync<Task>("VITasksFile.txt"))
+                    foreach (var task in await Util.ReadFromDiskAsync<Task>("TITasksFile.txt"))
                     {
                         foreach (var propInfo in task.GetType().GetRuntimeProperties())
                         {

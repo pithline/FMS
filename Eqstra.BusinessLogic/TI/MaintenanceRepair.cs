@@ -1,22 +1,25 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Helpers;
+using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.TI
 {
-    public class MaintenanceRepair : ValidatableBindableBase
+    public class MaintenanceRepair : BaseModel
     {
-
-        private long recId;
+        private long repairid;
         [PrimaryKey]
-        public long RecId
+        public long Repairid
         {
-            get { return recId; }
-            set { SetProperty(ref recId, value); }
+            get { return repairid; }
+            set { SetProperty(ref repairid, value); }
+        }
+
+        private long vehicleInsRecID;
+        public new long VehicleInsRecID
+        {
+            get { return vehicleInsRecID; }
+            set { SetProperty(ref vehicleInsRecID, value); }
         }
 
         private long caseServiceRecId;
@@ -45,9 +48,7 @@ namespace Eqstra.BusinessLogic.TI
             set { SetProperty(ref subComponent, value); }
         }
 
-
         private string cause;
-
         public string Cause
         {
             get { return cause; }
@@ -62,7 +63,9 @@ namespace Eqstra.BusinessLogic.TI
             set { SetProperty(ref action, value); }
         }
 
-
-
+        public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID)
+        {
+            return await SqliteHelper.Storage.GetSingleRecordAsync<MaintenanceRepair>(x => x.VehicleInsRecID == vehicleInsRecID);
+        }
     }
 }

@@ -1,41 +1,23 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.TechnicalInspection.ViewModels;
+using Eqstra.TechnicalInspection.Views;
+using Eqstra.TechnicalInspection.UILogic.AifServices;
+using Eqstra.TechnicalInspection.UILogic.Services;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Microsoft.Practices.Unity;
-
-using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using Eqstra.BusinessLogic.Helpers;
-
 using Windows.UI.ApplicationSettings;
-using Microsoft.Practices.Prism.PubSubEvents;
-using Eqstra.VehicleInspection.UILogic.Services;
-using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Windows.UI.Popups;
-using System.Collections.ObjectModel;
-using Eqstra.BusinessLogic;
-using Eqstra.VehicleInspection.UILogic.ViewModels;
-using Eqstra.TechnicalInspection.Common;
-using Eqstra.VehicleInspection.UILogic;
-using Newtonsoft.Json;
-using Eqstra.VehicleInspection.UILogic.AifServices;
-using Eqstra.TechnicalInspection.Views;
-using Eqstra.TechnicalInspection.ViewModels;
+using Windows.UI.Xaml;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -80,7 +62,7 @@ namespace Eqstra.TechnicalInspection
             SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.Task>));
             SessionStateService.RegisterKnownType(typeof(LogonResult));
             SessionStateService.RegisterKnownType(typeof(List<string>));
-            
+
         }
 
         async protected override System.Threading.Tasks.Task OnLaunchApplication(LaunchActivatedEventArgs args)
@@ -96,12 +78,12 @@ namespace Eqstra.TechnicalInspection
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             var accountService = _container.Resolve<IAccountService>();
-            var cred =  accountService.VerifyUserCredentialsAsync();
+            var cred = accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             {
                 //string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
                 //ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = jsonUserInfo;
-                VIServiceHelper.Instance.ConnectAsync(cred.Item1,cred.Item2,EventAggregator);
+                TIServiceHelper.Instance.ConnectAsync(cred.Item1, cred.Item2, EventAggregator);
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
@@ -109,6 +91,7 @@ namespace Eqstra.TechnicalInspection
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
+            CreateTableAsync();
 
         }
 
@@ -128,7 +111,7 @@ namespace Eqstra.TechnicalInspection
                 _container.RegisterType<ICredentialStore, RoamingCredentialStore>(new ContainerControlledLifetimeManager());
                 _container.RegisterType<IIdentityService, IdentityServiceProxy>(new ContainerControlledLifetimeManager());
 
-                ViewModelLocator.Register(typeof(VehicleInspectionPage).ToString(), () => new VehicleInspectionPageViewModel(NavigationService,EventAggregator));
+                ViewModelLocator.Register(typeof(TechnicalInspectionPage).ToString(), () => new TechnicalInspectionPageViewModel(NavigationService, EventAggregator));
 
                 ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
                 {
@@ -137,7 +120,7 @@ namespace Eqstra.TechnicalInspection
                 });
                 //ViewModelLocator.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
                 //    {
-                //        var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.VehicleInspection.UILogic.ViewModels.Passenger.{0}ViewModel,Eqstra.VehicleInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
+                //        var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.TechnicalInspection.UILogic.ViewModels.Passenger.{0}ViewModel,Eqstra.TechnicalInspection.UILogic,Version 1.0.0.0, Culture=neutral", viewType.Name);
                 //        return Type.GetType(viewModelTypeName);
                 //    });
             }
@@ -148,7 +131,7 @@ namespace Eqstra.TechnicalInspection
 
         }
 
-        
+
 
         protected override object Resolve(Type type)
         {
@@ -185,5 +168,27 @@ namespace Eqstra.TechnicalInspection
         {
             this._container.Dispose();
         }
+
+
+        private async System.Threading.Tasks.Task CreateTableAsync()
+        {
+
+            ////Drop Existing tables
+
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+
+           // await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.CustomerDetails>();
+            
+        }
+
     }
 }

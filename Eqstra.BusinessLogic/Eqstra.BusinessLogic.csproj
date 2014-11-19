@@ -188,7 +188,7 @@
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TIData.cs" />
+    <Compile Include="TI\TechnicalInsp.cs" />
     <Compile Include="Trailer\TAccessories.cs" />
     <Compile Include="Trailer\TChassisBody.cs" />
     <Compile Include="Trailer\TGlass.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="Trailer\TMechanicalCond.cs" />
     <Compile Include="Trailer\TTyreCond.cs" />
     <Compile Include="Trailer\TVehicleDetails.cs" />
-    <Compile Include="TI\SubComponent.cs" />
+    <Compile Include="TI\MaintenanceRepair.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleDetails.cs" />

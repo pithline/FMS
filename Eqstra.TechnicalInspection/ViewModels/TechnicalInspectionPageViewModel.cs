@@ -1,12 +1,11 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Base;
-using Eqstra.BusinessLogic.Commercial;
+using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
-using Eqstra.BusinessLogic.Passenger;
-using Eqstra.VehicleInspection.UILogic;
-using Eqstra.VehicleInspection.UILogic.AifServices;
-using Eqstra.VehicleInspection.UILogic.Events;
-using Eqstra.VehicleInspection.UILogic.ViewModels;
+using Eqstra.BusinessLogic.TI;
+using Eqstra.TechnicalInspection.UILogic;
+using Eqstra.TechnicalInspection.UILogic.AifServices;
+using Eqstra.TechnicalInspection.UILogic.Events;
 using Eqstra.TechnicalInspection.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
@@ -24,13 +23,13 @@ using Windows.UI.Xaml.Media;
 
 namespace Eqstra.TechnicalInspection.ViewModels
 {
-    public class VehicleInspectionPageViewModel : BaseViewModel
+    public class TechnicalInspectionPageViewModel : BaseViewModel
     {
         private Eqstra.BusinessLogic.Task _task;
         private INavigationService _navigationService;
         private IEventAggregator _eventAggregator;
 
-        public VehicleInspectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
+        public TechnicalInspectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
             try
@@ -39,9 +38,11 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 this._eventAggregator = eventAggregator;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
+                this.TechnicalInspList = new ObservableCollection<MaintenanceRepair>();
+                this.Model = new TechnicalInsp();
 
                 this.PrevViewStack = new Stack<UserControl>();
-                // LoadDemoAppointments();
+
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
@@ -54,24 +55,11 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     this.SaveCurrentUIDataAsync(currentModel);
                     _navigationService.Navigate("Main", null);
 
-                    await VIServiceHelper.Instance.UpdateTaskStatusAsync();
+                    // await TIServiceHelper.Instance.UpdateTaskStatusAsync();
                     this.IsBusy = false;
                 }, () =>
                 {
-                    var vm = ((BaseViewModel)this.NextViewStack.Peek().DataContext);
-                    if (vm is InspectionProofUserControlViewModel)
-                    {
-                        return (this.NextViewStack.Count == 1) && (((InspectionProofUserControlViewModel)vm).CustSignature != null) && (((InspectionProofUserControlViewModel)vm).EqstraRepSignature != null);
-                    }
-                    else if (vm is CPOIUserControlViewModel)
-                    {
-                        return (this.NextViewStack.Count == 1) && (((CPOIUserControlViewModel)vm).CustSignature != null) && (((CPOIUserControlViewModel)vm).EqstraRepSignature != null);
-                    }
-                    else
-                    {
-                        return (this.NextViewStack.Count == 1);
-                    }
-
+                    return (this.NextViewStack.Count == 1);
                 });
 
                 this._eventAggregator.GetEvent<SignChangedEvent>().Subscribe(p =>
@@ -87,25 +75,18 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     OnPropertyChanged("ShowValidationSummary");
                 }, ThreadOption.UIThread);
 
-                this.NextCommand = new DelegateCommand(async () =>
+                this.PreviousCommand = new DelegateCommand(async () =>
                 {
-                    //this.IsCommandBarOpen = false;
-                    //this.IsFlyoutOpen = true;
+                    this.IsCommandBarOpen = false;
                     ShowValidationSummary = false;
                     var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
-
                     if (currentModel.ValidateModel())
                     {
-
-                        this.PrevViewStack.Push(this.NextViewStack.Pop());
+                        SetFrameContent();
                         this.SaveCurrentUIDataAsync(currentModel);
-                        this.FrameContent = this.NextViewStack.Peek();
-                        CompleteCommand.RaiseCanExecuteChanged();
-                        NextCommand.RaiseCanExecuteChanged();
-                        PreviousCommand.RaiseCanExecuteChanged();
-                        if (this.NextViewStack.FirstOrDefault() != null)
+                        if (this.PrevViewStack.FirstOrDefault() != null)
                         {
-                            BaseViewModel nextViewModel = this.NextViewStack.FirstOrDefault().DataContext as BaseViewModel;
+                            BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
                             await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
                         }
                     }
@@ -116,50 +97,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         ShowValidationSummary = true;
                     }
 
-                }, () =>
-                {
-                    return this.NextViewStack.Count > 1;
-                });
-
-
-                this.PreviousCommand = new DelegateCommand(async () =>
-                {
-                    this.IsCommandBarOpen = false;
-                    ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
-
-                    if (currentModel is PInspectionProof)
-                    {
-                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
-                        ((InspectionProofUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
-                        SetFrameContent();
-                    }
-                    else if (currentModel is CPOI)
-                    {
-                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).CustSignature = null;
-                        ((CPOIUserControlViewModel)this.NextViewStack.Peek().DataContext).EqstraRepSignature = null;
-                        SetFrameContent();
-                    }
-
-                    else
-                    {
-                        if (currentModel.ValidateModel())
-                        {
-                            SetFrameContent();
-                            this.SaveCurrentUIDataAsync(currentModel);
-                            if (this.PrevViewStack.FirstOrDefault() != null)
-                            {
-                                BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                                await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
-                            }
-                        }
-                        else
-                        {
-                            Errors = currentModel.Errors;
-                            OnPropertyChanged("Errors");
-                            ShowValidationSummary = true;
-                        }
-                    }
 
                 }, () =>
                 {
@@ -181,7 +118,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
             this.NextViewStack.Push(item);
             CompleteCommand.RaiseCanExecuteChanged();
             PreviousCommand.RaiseCanExecuteChanged();
-            NextCommand.RaiseCanExecuteChanged();
         }
 
         private void LoadAppointments()
@@ -203,6 +139,44 @@ namespace Eqstra.TechnicalInspection.ViewModels
                                
             };
         }
+
+
+        private void loadDataFromDb(long CaseServiceRecId)
+        {
+            try
+            {
+                var maintenanceRepairdata = (SqliteHelper.Storage.LoadTableAsync<MaintenanceRepair>()).Result;
+
+                if (maintenanceRepairdata != null && maintenanceRepairdata.Any())
+                {
+                    foreach (var item in maintenanceRepairdata)
+                    {
+                        this.TechnicalInspList.Add(item);
+                    }
+                }
+                TechnicalInsp viBaseObject = (TechnicalInsp)this.Model;
+                //viBaseObject.LoadSnapshotsFromDb();
+                PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+                viBaseObject.ShouldSave = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long CaseServiceRecId)
+        {
+
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TechnicalInsp>(x => x.CaseServiceRecID == CaseServiceRecId);
+            if (this.Model == null)
+            {
+                this.Model = new TechnicalInsp();
+            }
+            loadDataFromDb(CaseServiceRecId);
+        }
+
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -215,42 +189,19 @@ namespace Eqstra.TechnicalInspection.ViewModels
             };
                 _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
                 App.Task = _task;
-                //var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
+
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
                 LoadAppointments();
                 await GetCustomerDetailsAsync();
-                if (_task.VehicleType == BusinessLogic.Enums.VehicleTypeEnum.Passenger)
-                {
-                    this.InspectionUserControls.Add(new PVehicleDetailsUserControl());
-                    this.InspectionUserControls.Add(new TrimIntUserControl());
-                    this.InspectionUserControls.Add(new BodyworkUserControl());
-                    this.InspectionUserControls.Add(new GlassUserControl());
-                    this.InspectionUserControls.Add(new AccessoriesUserControl());
-                    this.InspectionUserControls.Add(new TyreConditionUserControl());
-                    this.InspectionUserControls.Add(new MechanicalCondUserControl());
-                    this.InspectionUserControls.Add(new TechnicalInspectionUserControl());
-                    this.InspectionUserControls.Add(new InspectionProofUserControl());
-                }
-                else
-                {
-                    this.InspectionUserControls.Add(new CVehicleDetailsUserControl());
-                    this.InspectionUserControls.Add(new CabTrimInterUserControl());
-                    this.InspectionUserControls.Add(new ChassisBodyUserControl());
-                    this.InspectionUserControls.Add(new CGlassUserControl());
-                    this.InspectionUserControls.Add(new CAccessoriesUserControl());
-                    this.InspectionUserControls.Add(new CTyresUserControl());
-                    this.InspectionUserControls.Add(new CMechanicalCondUserControl());
-                    this.InspectionUserControls.Add(new TechnicalInspectionUserControl());
-                    this.InspectionUserControls.Add(new CPOIUserControl());
-                }
 
-
-                NextViewStack = new Stack<UserControl>(this.InspectionUserControls.Reverse());
-                this.FrameContent = this.inpectionUserControls[0];
                 _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
                 {
                     await GetCustomerDetailsAsync();
                 });
+
+                await this.LoadModelFromDbAsync(this._task.CaseServiceRecID);
+                this.CustomerDetails = PersistentData.Instance.CustomerDetails;
+
             }
             catch (Exception)
             {
@@ -283,19 +234,15 @@ namespace Eqstra.TechnicalInspection.ViewModels
         }
 
 
-        private DelegateCommand nextCommand;
-
-        public DelegateCommand NextCommand
+        private ObservableCollection<MaintenanceRepair> technicalInspList;
+        public ObservableCollection<MaintenanceRepair> TechnicalInspList
         {
-            get { return nextCommand; }
-            set
-            {
-                SetProperty(ref nextCommand, value);
-            }
+            get { return technicalInspList; }
+            set { SetProperty(ref technicalInspList, value); }
         }
 
-        private DelegateCommand previousCommand;
 
+        private DelegateCommand previousCommand;
         public DelegateCommand PreviousCommand
         {
             get { return previousCommand; }
@@ -303,7 +250,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
         }
 
         private Stack<UserControl> nextViewStack;
-
         public Stack<UserControl> NextViewStack
         {
             get { return nextViewStack; }
@@ -354,9 +300,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
             set { SetProperty(ref customerDetails, value); }
         }
 
-
         private Customer customer;
-
         public Customer Customer
         {
             get { return customer; }
@@ -372,7 +316,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
         }
 
         private ObservableCollection<ValidationError> errors;
-
         public ObservableCollection<ValidationError> Errors
         {
             get { return errors; }
@@ -441,7 +384,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     if (successFlag != 0)
                     {
                         m.ShouldSave = false;
-                        await VIServiceHelper.Instance.SyncFromSvcAsync(m);
+                        await TIServiceHelper.Instance.SyncFromSvcAsync(m);
                     }
                 }
 

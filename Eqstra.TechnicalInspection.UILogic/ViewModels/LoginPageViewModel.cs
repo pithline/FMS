@@ -1,4 +1,4 @@
-﻿using Eqstra.VehicleInspection.UILogic.Services;
+﻿using Eqstra.TechnicalInspection.UILogic.Services;
 using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Eqstra.VehicleInspection.UILogic.ViewModels
+namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 {
     public class LoginPageViewModel : ViewModel
     {

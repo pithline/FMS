@@ -22,7 +22,7 @@ namespace Eqstra.TechnicalInspection.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class VehicleInspectionPage : VisualStateAwarePage
+    public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
 
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -31,7 +31,7 @@ namespace Eqstra.TechnicalInspection.Views
         {
             get { return this.defaultViewModel; }
         }
-        public VehicleInspectionPage()
+        public TechnicalInspectionPage()
         {
             this.InitializeComponent();
 

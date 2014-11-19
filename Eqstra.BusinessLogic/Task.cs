@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Practices.Prism.PubSubEvents;
 namespace Eqstra.BusinessLogic
 {
     public class Task : ValidatableBindableBase
@@ -213,6 +214,11 @@ namespace Eqstra.BusinessLogic
             get { return allowEditing; }
             set { SetProperty(ref allowEditing, value); }
         }
+
+    }
+
+    public class TasksFetchedEvent : PubSubEvent<Task>
+    {
 
     }
 }

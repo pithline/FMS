@@ -32,6 +32,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
+
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;

@@ -22,6 +22,7 @@ namespace Eqstra.TechnicalInspection.Views
         public TechnicalInspectionUserControl()
         {
             this.InitializeComponent();
+            
         }
     }
 }
