@@ -124,497 +124,13 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialMechConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiCommercialMechConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmAutoTransmissionCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBatteryCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDifferentialCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmEngineCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmExhaustCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmFootBrakeCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmGearBoxCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHandBrakeCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHydraulicPowerSteeringCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmissionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferentialField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngineField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaustField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppressionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBoxField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteeringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppressionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteeringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmOilLeaksCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRearSuppressionCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSteeringCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmfrontSuppressionCommentsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAutoTransmissionComments {
-            get {
-                return this.parmAutoTransmissionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmAutoTransmissionCommentsField, value) != true)) {
-                    this.parmAutoTransmissionCommentsField = value;
-                    this.RaisePropertyChanged("parmAutoTransmissionComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBatteryComments {
-            get {
-                return this.parmBatteryCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmBatteryCommentsField, value) != true)) {
-                    this.parmBatteryCommentsField = value;
-                    this.RaisePropertyChanged("parmBatteryComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDifferentialComments {
-            get {
-                return this.parmDifferentialCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDifferentialCommentsField, value) != true)) {
-                    this.parmDifferentialCommentsField = value;
-                    this.RaisePropertyChanged("parmDifferentialComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmEngineComments {
-            get {
-                return this.parmEngineCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmEngineCommentsField, value) != true)) {
-                    this.parmEngineCommentsField = value;
-                    this.RaisePropertyChanged("parmEngineComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmExhaustComments {
-            get {
-                return this.parmExhaustCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmExhaustCommentsField, value) != true)) {
-                    this.parmExhaustCommentsField = value;
-                    this.RaisePropertyChanged("parmExhaustComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmFootBrakeComments {
-            get {
-                return this.parmFootBrakeCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmFootBrakeCommentsField, value) != true)) {
-                    this.parmFootBrakeCommentsField = value;
-                    this.RaisePropertyChanged("parmFootBrakeComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmGearBoxComments {
-            get {
-                return this.parmGearBoxCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmGearBoxCommentsField, value) != true)) {
-                    this.parmGearBoxCommentsField = value;
-                    this.RaisePropertyChanged("parmGearBoxComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHandBrakeComments {
-            get {
-                return this.parmHandBrakeCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHandBrakeCommentsField, value) != true)) {
-                    this.parmHandBrakeCommentsField = value;
-                    this.RaisePropertyChanged("parmHandBrakeComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHydraulicPowerSteeringComments {
-            get {
-                return this.parmHydraulicPowerSteeringCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHydraulicPowerSteeringCommentsField, value) != true)) {
-                    this.parmHydraulicPowerSteeringCommentsField = value;
-                    this.RaisePropertyChanged("parmHydraulicPowerSteeringComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAutoTransmission {
-            get {
-                return this.parmIsDamagedAutoTransmissionField;
-            }
-            set {
-                if ((this.parmIsDamagedAutoTransmissionField.Equals(value) != true)) {
-                    this.parmIsDamagedAutoTransmissionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedAutoTransmission");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBatteryComments {
-            get {
-                return this.parmIsDamagedBatteryCommentsField;
-            }
-            set {
-                if ((this.parmIsDamagedBatteryCommentsField.Equals(value) != true)) {
-                    this.parmIsDamagedBatteryCommentsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBatteryComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDifferential {
-            get {
-                return this.parmIsDamagedDifferentialField;
-            }
-            set {
-                if ((this.parmIsDamagedDifferentialField.Equals(value) != true)) {
-                    this.parmIsDamagedDifferentialField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDifferential");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngine {
-            get {
-                return this.parmIsDamagedEngineField;
-            }
-            set {
-                if ((this.parmIsDamagedEngineField.Equals(value) != true)) {
-                    this.parmIsDamagedEngineField = value;
-                    this.RaisePropertyChanged("parmIsDamagedEngine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExhaust {
-            get {
-                return this.parmIsDamagedExhaustField;
-            }
-            set {
-                if ((this.parmIsDamagedExhaustField.Equals(value) != true)) {
-                    this.parmIsDamagedExhaustField = value;
-                    this.RaisePropertyChanged("parmIsDamagedExhaust");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFootBrake {
-            get {
-                return this.parmIsDamagedFootBrakeField;
-            }
-            set {
-                if ((this.parmIsDamagedFootBrakeField.Equals(value) != true)) {
-                    this.parmIsDamagedFootBrakeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFootBrake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontSuppression {
-            get {
-                return this.parmIsDamagedFrontSuppressionField;
-            }
-            set {
-                if ((this.parmIsDamagedFrontSuppressionField.Equals(value) != true)) {
-                    this.parmIsDamagedFrontSuppressionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFrontSuppression");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGearBox {
-            get {
-                return this.parmIsDamagedGearBoxField;
-            }
-            set {
-                if ((this.parmIsDamagedGearBoxField.Equals(value) != true)) {
-                    this.parmIsDamagedGearBoxField = value;
-                    this.RaisePropertyChanged("parmIsDamagedGearBox");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHandBrake {
-            get {
-                return this.parmIsDamagedHandBrakeField;
-            }
-            set {
-                if ((this.parmIsDamagedHandBrakeField.Equals(value) != true)) {
-                    this.parmIsDamagedHandBrakeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHandBrake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHydraulicPowerSteering {
-            get {
-                return this.parmIsDamagedHydraulicPowerSteeringField;
-            }
-            set {
-                if ((this.parmIsDamagedHydraulicPowerSteeringField.Equals(value) != true)) {
-                    this.parmIsDamagedHydraulicPowerSteeringField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHydraulicPowerSteering");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedOilLeeks {
-            get {
-                return this.parmIsDamagedOilLeeksField;
-            }
-            set {
-                if ((this.parmIsDamagedOilLeeksField.Equals(value) != true)) {
-                    this.parmIsDamagedOilLeeksField = value;
-                    this.RaisePropertyChanged("parmIsDamagedOilLeeks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSuppression {
-            get {
-                return this.parmIsDamagedRearSuppressionField;
-            }
-            set {
-                if ((this.parmIsDamagedRearSuppressionField.Equals(value) != true)) {
-                    this.parmIsDamagedRearSuppressionField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRearSuppression");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSteering {
-            get {
-                return this.parmIsDamagedSteeringField;
-            }
-            set {
-                if ((this.parmIsDamagedSteeringField.Equals(value) != true)) {
-                    this.parmIsDamagedSteeringField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSteering");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmOilLeaksComments {
-            get {
-                return this.parmOilLeaksCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmOilLeaksCommentsField, value) != true)) {
-                    this.parmOilLeaksCommentsField = value;
-                    this.RaisePropertyChanged("parmOilLeaksComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRearSuppressionComments {
-            get {
-                return this.parmRearSuppressionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRearSuppressionCommentsField, value) != true)) {
-                    this.parmRearSuppressionCommentsField = value;
-                    this.RaisePropertyChanged("parmRearSuppressionComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSteeringComments {
-            get {
-                return this.parmSteeringCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSteeringCommentsField, value) != true)) {
-                    this.parmSteeringCommentsField = value;
-                    this.RaisePropertyChanged("parmSteeringComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmfrontSuppressionComments {
-            get {
-                return this.parmfrontSuppressionCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmfrontSuppressionCommentsField, value) != true)) {
-                    this.parmfrontSuppressionCommentsField = value;
-                    this.RaisePropertyChanged("parmfrontSuppressionComments");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract))]
     public partial class XppObjectBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -642,70 +158,38 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCustAddressContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Mzk_ImageContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     [System.SerializableAttribute()]
-    public partial class MzkCustAddressContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+    public partial class Mzk_ImageContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustAddressField;
+        private string parmImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustEmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustPhoneField;
+        private string parmImageNameField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustAddress {
+        public string parmImage {
             get {
-                return this.parmCustAddressField;
+                return this.parmImageField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmCustAddressField, value) != true)) {
-                    this.parmCustAddressField = value;
-                    this.RaisePropertyChanged("parmCustAddress");
+                if ((object.ReferenceEquals(this.parmImageField, value) != true)) {
+                    this.parmImageField = value;
+                    this.RaisePropertyChanged("parmImage");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustEmail {
+        public string parmImageName {
             get {
-                return this.parmCustEmailField;
+                return this.parmImageNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmCustEmailField, value) != true)) {
-                    this.parmCustEmailField = value;
-                    this.RaisePropertyChanged("parmCustEmail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustName {
-            get {
-                return this.parmCustNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustNameField, value) != true)) {
-                    this.parmCustNameField = value;
-                    this.RaisePropertyChanged("parmCustName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustPhone {
-            get {
-                return this.parmCustPhoneField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustPhoneField, value) != true)) {
-                    this.parmCustPhoneField = value;
-                    this.RaisePropertyChanged("parmCustPhone");
+                if ((object.ReferenceEquals(this.parmImageNameField, value) != true)) {
+                    this.parmImageNameField = value;
+                    this.RaisePropertyChanged("parmImageName");
                 }
             }
         }
@@ -713,137 +197,76 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkInspectionHistoryContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseCategoryAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     [System.SerializableAttribute()]
-    public partial class MzkInspectionHistoryContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+    public partial class MzkCaseCategoryAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmConfirmedDueDateField;
+        private string parmActionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmConfirmedDueDate {
-            get {
-                return this.parmConfirmedDueDateField;
-            }
-            set {
-                if ((this.parmConfirmedDueDateField.Equals(value) != true)) {
-                    this.parmConfirmedDueDateField = value;
-                    this.RaisePropertyChanged("parmConfirmedDueDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserID {
-            get {
-                return this.parmUserIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
-                    this.parmUserIDField = value;
-                    this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMechanicalConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMechanicalConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        private long parmCaseServiceRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCommentsField;
+        private string parmCauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkCommercialMechanicalCondition parmCommercialMechConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKEngineTypeEnum parmEngineTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsRunningField;
+        private string parmMajorComponentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long parmRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRemarksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
+        private string parmSubComponentField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmComments {
+        public string parmAction {
             get {
-                return this.parmCommentsField;
+                return this.parmActionField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmCommentsField, value) != true)) {
-                    this.parmCommentsField = value;
-                    this.RaisePropertyChanged("parmComments");
+                if ((object.ReferenceEquals(this.parmActionField, value) != true)) {
+                    this.parmActionField = value;
+                    this.RaisePropertyChanged("parmAction");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkCommercialMechanicalCondition parmCommercialMechCondition {
+        public long parmCaseServiceRecID {
             get {
-                return this.parmCommercialMechConditionField;
+                return this.parmCaseServiceRecIDField;
             }
             set {
-                if ((this.parmCommercialMechConditionField.Equals(value) != true)) {
-                    this.parmCommercialMechConditionField = value;
-                    this.RaisePropertyChanged("parmCommercialMechCondition");
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKEngineTypeEnum parmEngineType {
+        public string parmCause {
             get {
-                return this.parmEngineTypeField;
+                return this.parmCauseField;
             }
             set {
-                if ((this.parmEngineTypeField.Equals(value) != true)) {
-                    this.parmEngineTypeField = value;
-                    this.RaisePropertyChanged("parmEngineType");
+                if ((object.ReferenceEquals(this.parmCauseField, value) != true)) {
+                    this.parmCauseField = value;
+                    this.RaisePropertyChanged("parmCause");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamaged {
+        public string parmMajorComponent {
             get {
-                return this.parmIsDamagedField;
+                return this.parmMajorComponentField;
             }
             set {
-                if ((this.parmIsDamagedField.Equals(value) != true)) {
-                    this.parmIsDamagedField = value;
-                    this.RaisePropertyChanged("parmIsDamaged");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsRunning {
-            get {
-                return this.parmIsRunningField;
-            }
-            set {
-                if ((this.parmIsRunningField.Equals(value) != true)) {
-                    this.parmIsRunningField = value;
-                    this.RaisePropertyChanged("parmIsRunning");
+                if ((object.ReferenceEquals(this.parmMajorComponentField, value) != true)) {
+                    this.parmMajorComponentField = value;
+                    this.RaisePropertyChanged("parmMajorComponent");
                 }
             }
         }
@@ -862,40 +285,14 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRemarks {
+        public string parmSubComponent {
             get {
-                return this.parmRemarksField;
+                return this.parmSubComponentField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmRemarksField, value) != true)) {
-                    this.parmRemarksField = value;
-                    this.RaisePropertyChanged("parmRemarks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
+                if ((object.ReferenceEquals(this.parmSubComponentField, value) != true)) {
+                    this.parmSubComponentField = value;
+                    this.RaisePropertyChanged("parmSubComponent");
                 }
             }
         }
@@ -903,334 +300,79 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialAccessoriesContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseServiceAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     [System.SerializableAttribute()]
-    public partial class MzkMobiCommercialAccessoriesContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+    public partial class MzkCaseServiceAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBullbarCommentsField;
+        private Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthListField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmEngineProtectionUnitCommentsField;
+        private long parmCaseServiceRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasBullbarField;
+        private System.DateTime parmCompletionDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasDecalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasEngineProtectionUnitField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasJackField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasReflectiveTapeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasServiceBookField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasToolsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTrackingDeviceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBullbarField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngineProtectionUnitField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedJackField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedReflectiveTapeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedServicesBookField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSignWritingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedToolsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTrackingDeviceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmJackCommentsField;
+        private string parmDamageCauseField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long parmRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmReflectiveTapeCommentsField;
+        private string parmRecommendationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmServiceBooksCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSignWritingCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmToolCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmTrackingDeviceCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
+        private string parmRemedyField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBullbarComments {
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthList {
             get {
-                return this.parmBullbarCommentsField;
+                return this.parmCaseCategoryAuthListField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmBullbarCommentsField, value) != true)) {
-                    this.parmBullbarCommentsField = value;
-                    this.RaisePropertyChanged("parmBullbarComments");
+                if ((object.ReferenceEquals(this.parmCaseCategoryAuthListField, value) != true)) {
+                    this.parmCaseCategoryAuthListField = value;
+                    this.RaisePropertyChanged("parmCaseCategoryAuthList");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmEngineProtectionUnitComments {
+        public long parmCaseServiceRecID {
             get {
-                return this.parmEngineProtectionUnitCommentsField;
+                return this.parmCaseServiceRecIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmEngineProtectionUnitCommentsField, value) != true)) {
-                    this.parmEngineProtectionUnitCommentsField = value;
-                    this.RaisePropertyChanged("parmEngineProtectionUnitComments");
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasBullbar {
+        public System.DateTime parmCompletionDate {
             get {
-                return this.parmHasBullbarField;
+                return this.parmCompletionDateField;
             }
             set {
-                if ((this.parmHasBullbarField.Equals(value) != true)) {
-                    this.parmHasBullbarField = value;
-                    this.RaisePropertyChanged("parmHasBullbar");
+                if ((this.parmCompletionDateField.Equals(value) != true)) {
+                    this.parmCompletionDateField = value;
+                    this.RaisePropertyChanged("parmCompletionDate");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasDecals {
+        public string parmDamageCause {
             get {
-                return this.parmHasDecalsField;
+                return this.parmDamageCauseField;
             }
             set {
-                if ((this.parmHasDecalsField.Equals(value) != true)) {
-                    this.parmHasDecalsField = value;
-                    this.RaisePropertyChanged("parmHasDecals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasEngineProtectionUnit {
-            get {
-                return this.parmHasEngineProtectionUnitField;
-            }
-            set {
-                if ((this.parmHasEngineProtectionUnitField.Equals(value) != true)) {
-                    this.parmHasEngineProtectionUnitField = value;
-                    this.RaisePropertyChanged("parmHasEngineProtectionUnit");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasJack {
-            get {
-                return this.parmHasJackField;
-            }
-            set {
-                if ((this.parmHasJackField.Equals(value) != true)) {
-                    this.parmHasJackField = value;
-                    this.RaisePropertyChanged("parmHasJack");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasReflectiveTape {
-            get {
-                return this.parmHasReflectiveTapeField;
-            }
-            set {
-                if ((this.parmHasReflectiveTapeField.Equals(value) != true)) {
-                    this.parmHasReflectiveTapeField = value;
-                    this.RaisePropertyChanged("parmHasReflectiveTape");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasServiceBook {
-            get {
-                return this.parmHasServiceBookField;
-            }
-            set {
-                if ((this.parmHasServiceBookField.Equals(value) != true)) {
-                    this.parmHasServiceBookField = value;
-                    this.RaisePropertyChanged("parmHasServiceBook");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTools {
-            get {
-                return this.parmHasToolsField;
-            }
-            set {
-                if ((this.parmHasToolsField.Equals(value) != true)) {
-                    this.parmHasToolsField = value;
-                    this.RaisePropertyChanged("parmHasTools");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTrackingDevice {
-            get {
-                return this.parmHasTrackingDeviceField;
-            }
-            set {
-                if ((this.parmHasTrackingDeviceField.Equals(value) != true)) {
-                    this.parmHasTrackingDeviceField = value;
-                    this.RaisePropertyChanged("parmHasTrackingDevice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBullbar {
-            get {
-                return this.parmIsDamagedBullbarField;
-            }
-            set {
-                if ((this.parmIsDamagedBullbarField.Equals(value) != true)) {
-                    this.parmIsDamagedBullbarField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBullbar");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedEngineProtectionUnit {
-            get {
-                return this.parmIsDamagedEngineProtectionUnitField;
-            }
-            set {
-                if ((this.parmIsDamagedEngineProtectionUnitField.Equals(value) != true)) {
-                    this.parmIsDamagedEngineProtectionUnitField = value;
-                    this.RaisePropertyChanged("parmIsDamagedEngineProtectionUnit");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedJack {
-            get {
-                return this.parmIsDamagedJackField;
-            }
-            set {
-                if ((this.parmIsDamagedJackField.Equals(value) != true)) {
-                    this.parmIsDamagedJackField = value;
-                    this.RaisePropertyChanged("parmIsDamagedJack");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedReflectiveTape {
-            get {
-                return this.parmIsDamagedReflectiveTapeField;
-            }
-            set {
-                if ((this.parmIsDamagedReflectiveTapeField.Equals(value) != true)) {
-                    this.parmIsDamagedReflectiveTapeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedReflectiveTape");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedServicesBook {
-            get {
-                return this.parmIsDamagedServicesBookField;
-            }
-            set {
-                if ((this.parmIsDamagedServicesBookField.Equals(value) != true)) {
-                    this.parmIsDamagedServicesBookField = value;
-                    this.RaisePropertyChanged("parmIsDamagedServicesBook");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSignWriting {
-            get {
-                return this.parmIsDamagedSignWritingField;
-            }
-            set {
-                if ((this.parmIsDamagedSignWritingField.Equals(value) != true)) {
-                    this.parmIsDamagedSignWritingField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSignWriting");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTools {
-            get {
-                return this.parmIsDamagedToolsField;
-            }
-            set {
-                if ((this.parmIsDamagedToolsField.Equals(value) != true)) {
-                    this.parmIsDamagedToolsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedTools");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTrackingDevice {
-            get {
-                return this.parmIsDamagedTrackingDeviceField;
-            }
-            set {
-                if ((this.parmIsDamagedTrackingDeviceField.Equals(value) != true)) {
-                    this.parmIsDamagedTrackingDeviceField = value;
-                    this.RaisePropertyChanged("parmIsDamagedTrackingDevice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmJackComments {
-            get {
-                return this.parmJackCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmJackCommentsField, value) != true)) {
-                    this.parmJackCommentsField = value;
-                    this.RaisePropertyChanged("parmJackComments");
+                if ((object.ReferenceEquals(this.parmDamageCauseField, value) != true)) {
+                    this.parmDamageCauseField = value;
+                    this.RaisePropertyChanged("parmDamageCause");
                 }
             }
         }
@@ -1249,92 +391,27 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmReflectiveTapeComments {
+        public string parmRecommendation {
             get {
-                return this.parmReflectiveTapeCommentsField;
+                return this.parmRecommendationField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmReflectiveTapeCommentsField, value) != true)) {
-                    this.parmReflectiveTapeCommentsField = value;
-                    this.RaisePropertyChanged("parmReflectiveTapeComments");
+                if ((object.ReferenceEquals(this.parmRecommendationField, value) != true)) {
+                    this.parmRecommendationField = value;
+                    this.RaisePropertyChanged("parmRecommendation");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmServiceBooksComments {
+        public string parmRemedy {
             get {
-                return this.parmServiceBooksCommentsField;
+                return this.parmRemedyField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmServiceBooksCommentsField, value) != true)) {
-                    this.parmServiceBooksCommentsField = value;
-                    this.RaisePropertyChanged("parmServiceBooksComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSignWritingComments {
-            get {
-                return this.parmSignWritingCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSignWritingCommentsField, value) != true)) {
-                    this.parmSignWritingCommentsField = value;
-                    this.RaisePropertyChanged("parmSignWritingComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmToolComments {
-            get {
-                return this.parmToolCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmToolCommentsField, value) != true)) {
-                    this.parmToolCommentsField = value;
-                    this.RaisePropertyChanged("parmToolComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmTrackingDeviceComments {
-            get {
-                return this.parmTrackingDeviceCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmTrackingDeviceCommentsField, value) != true)) {
-                    this.parmTrackingDeviceCommentsField = value;
-                    this.RaisePropertyChanged("parmTrackingDeviceComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
+                if ((object.ReferenceEquals(this.parmRemedyField, value) != true)) {
+                    this.parmRemedyField = value;
+                    this.RaisePropertyChanged("parmRemedy");
                 }
             }
         }
@@ -1342,4189 +419,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialChassisBodyContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkTechnicalTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     [System.SerializableAttribute()]
-    public partial class MzkMobiCommercialChassisBodyContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmChassisCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmChevronCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDoorsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmFloorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmFuelTanksCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHeadBoardCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedChassisField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedChevronField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFloorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFuelTanksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHeadBoardField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLandingLegsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelFrontField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelLeftField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelRearField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelRightField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSpareWheelCarrierField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedUnderRunBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLandingLegsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPanelFrontCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPanelLeftCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPanelRearCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPanelRightCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareWheelCarrierCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUnderRunBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmChassisComments {
-            get {
-                return this.parmChassisCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmChassisCommentsField, value) != true)) {
-                    this.parmChassisCommentsField = value;
-                    this.RaisePropertyChanged("parmChassisComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmChevronComments {
-            get {
-                return this.parmChevronCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmChevronCommentsField, value) != true)) {
-                    this.parmChevronCommentsField = value;
-                    this.RaisePropertyChanged("parmChevronComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDoorsComments {
-            get {
-                return this.parmDoorsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDoorsCommentsField, value) != true)) {
-                    this.parmDoorsCommentsField = value;
-                    this.RaisePropertyChanged("parmDoorsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmFloorComments {
-            get {
-                return this.parmFloorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmFloorCommentsField, value) != true)) {
-                    this.parmFloorCommentsField = value;
-                    this.RaisePropertyChanged("parmFloorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmFuelTanksComments {
-            get {
-                return this.parmFuelTanksCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmFuelTanksCommentsField, value) != true)) {
-                    this.parmFuelTanksCommentsField = value;
-                    this.RaisePropertyChanged("parmFuelTanksComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHeadBoardComments {
-            get {
-                return this.parmHeadBoardCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHeadBoardCommentsField, value) != true)) {
-                    this.parmHeadBoardCommentsField = value;
-                    this.RaisePropertyChanged("parmHeadBoardComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedChassis {
-            get {
-                return this.parmIsDamagedChassisField;
-            }
-            set {
-                if ((this.parmIsDamagedChassisField.Equals(value) != true)) {
-                    this.parmIsDamagedChassisField = value;
-                    this.RaisePropertyChanged("parmIsDamagedChassis");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedChevron {
-            get {
-                return this.parmIsDamagedChevronField;
-            }
-            set {
-                if ((this.parmIsDamagedChevronField.Equals(value) != true)) {
-                    this.parmIsDamagedChevronField = value;
-                    this.RaisePropertyChanged("parmIsDamagedChevron");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoors {
-            get {
-                return this.parmIsDamagedDoorsField;
-            }
-            set {
-                if ((this.parmIsDamagedDoorsField.Equals(value) != true)) {
-                    this.parmIsDamagedDoorsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDoors");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFloor {
-            get {
-                return this.parmIsDamagedFloorField;
-            }
-            set {
-                if ((this.parmIsDamagedFloorField.Equals(value) != true)) {
-                    this.parmIsDamagedFloorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFloor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFuelTanks {
-            get {
-                return this.parmIsDamagedFuelTanksField;
-            }
-            set {
-                if ((this.parmIsDamagedFuelTanksField.Equals(value) != true)) {
-                    this.parmIsDamagedFuelTanksField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFuelTanks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHeadBoard {
-            get {
-                return this.parmIsDamagedHeadBoardField;
-            }
-            set {
-                if ((this.parmIsDamagedHeadBoardField.Equals(value) != true)) {
-                    this.parmIsDamagedHeadBoardField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHeadBoard");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLandingLegs {
-            get {
-                return this.parmIsDamagedLandingLegsField;
-            }
-            set {
-                if ((this.parmIsDamagedLandingLegsField.Equals(value) != true)) {
-                    this.parmIsDamagedLandingLegsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLandingLegs");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelFront {
-            get {
-                return this.parmIsDamagedPanelFrontField;
-            }
-            set {
-                if ((this.parmIsDamagedPanelFrontField.Equals(value) != true)) {
-                    this.parmIsDamagedPanelFrontField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPanelFront");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelLeft {
-            get {
-                return this.parmIsDamagedPanelLeftField;
-            }
-            set {
-                if ((this.parmIsDamagedPanelLeftField.Equals(value) != true)) {
-                    this.parmIsDamagedPanelLeftField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPanelLeft");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelRear {
-            get {
-                return this.parmIsDamagedPanelRearField;
-            }
-            set {
-                if ((this.parmIsDamagedPanelRearField.Equals(value) != true)) {
-                    this.parmIsDamagedPanelRearField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPanelRear");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPanelRight {
-            get {
-                return this.parmIsDamagedPanelRightField;
-            }
-            set {
-                if ((this.parmIsDamagedPanelRightField.Equals(value) != true)) {
-                    this.parmIsDamagedPanelRightField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPanelRight");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSpareWheelCarrier {
-            get {
-                return this.parmIsDamagedSpareWheelCarrierField;
-            }
-            set {
-                if ((this.parmIsDamagedSpareWheelCarrierField.Equals(value) != true)) {
-                    this.parmIsDamagedSpareWheelCarrierField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSpareWheelCarrier");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedUnderRunBumper {
-            get {
-                return this.parmIsDamagedUnderRunBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedUnderRunBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedUnderRunBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedUnderRunBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLandingLegsComments {
-            get {
-                return this.parmLandingLegsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLandingLegsCommentsField, value) != true)) {
-                    this.parmLandingLegsCommentsField = value;
-                    this.RaisePropertyChanged("parmLandingLegsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPanelFrontComments {
-            get {
-                return this.parmPanelFrontCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPanelFrontCommentsField, value) != true)) {
-                    this.parmPanelFrontCommentsField = value;
-                    this.RaisePropertyChanged("parmPanelFrontComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPanelLeftComments {
-            get {
-                return this.parmPanelLeftCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPanelLeftCommentsField, value) != true)) {
-                    this.parmPanelLeftCommentsField = value;
-                    this.RaisePropertyChanged("parmPanelLeftComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPanelRearComments {
-            get {
-                return this.parmPanelRearCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPanelRearCommentsField, value) != true)) {
-                    this.parmPanelRearCommentsField = value;
-                    this.RaisePropertyChanged("parmPanelRearComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPanelRightComments {
-            get {
-                return this.parmPanelRightCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPanelRightCommentsField, value) != true)) {
-                    this.parmPanelRightCommentsField = value;
-                    this.RaisePropertyChanged("parmPanelRightComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareWheelCarrierComments {
-            get {
-                return this.parmSpareWheelCarrierCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareWheelCarrierCommentsField, value) != true)) {
-                    this.parmSpareWheelCarrierCommentsField = value;
-                    this.RaisePropertyChanged("parmSpareWheelCarrierComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUnderRunBumperComments {
-            get {
-                return this.parmUnderRunBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUnderRunBumperCommentsField, value) != true)) {
-                    this.parmUnderRunBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmUnderRunBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKMobiCommercialTrimInteriorContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MZKMobiCommercialTrimInteriorContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDoorHandleLeftCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDoorHandleRightCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDriverSeatCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmFrontViewCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmGrillCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmInternalTriesCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandleLeftField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandleRightField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDriversSeatField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontviewField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGrillField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedInternalTriesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFQuarterPanelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRQuarterPanelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLeftDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedMatsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPassengerSeatField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFQuarterPanelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRQuarterPanelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearViewMirrorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRightDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRoofField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWheelArchesLeftField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWheelArchesRightField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWipersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFQuarterPanelCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRQuarterPanelCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLeftDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmMatsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPassengerSeatCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFQuarterPanelCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRQuarterPanelCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRearViewMirrorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRightDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRoofCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmWheelArchesLeftCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmWheelArchesRightCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmWipersCommentsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBumperComments {
-            get {
-                return this.parmBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmBumperCommentsField, value) != true)) {
-                    this.parmBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDoorHandleLeftComments {
-            get {
-                return this.parmDoorHandleLeftCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDoorHandleLeftCommentsField, value) != true)) {
-                    this.parmDoorHandleLeftCommentsField = value;
-                    this.RaisePropertyChanged("parmDoorHandleLeftComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDoorHandleRightComments {
-            get {
-                return this.parmDoorHandleRightCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDoorHandleRightCommentsField, value) != true)) {
-                    this.parmDoorHandleRightCommentsField = value;
-                    this.RaisePropertyChanged("parmDoorHandleRightComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDriverSeatComments {
-            get {
-                return this.parmDriverSeatCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDriverSeatCommentsField, value) != true)) {
-                    this.parmDriverSeatCommentsField = value;
-                    this.RaisePropertyChanged("parmDriverSeatComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmFrontViewComments {
-            get {
-                return this.parmFrontViewCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmFrontViewCommentsField, value) != true)) {
-                    this.parmFrontViewCommentsField = value;
-                    this.RaisePropertyChanged("parmFrontViewComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmGrillComments {
-            get {
-                return this.parmGrillCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmGrillCommentsField, value) != true)) {
-                    this.parmGrillCommentsField = value;
-                    this.RaisePropertyChanged("parmGrillComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmInternalTriesComments {
-            get {
-                return this.parmInternalTriesCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmInternalTriesCommentsField, value) != true)) {
-                    this.parmInternalTriesCommentsField = value;
-                    this.RaisePropertyChanged("parmInternalTriesComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBumper {
-            get {
-                return this.parmIsDamagedBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandleLeft {
-            get {
-                return this.parmIsDamagedDoorHandleLeftField;
-            }
-            set {
-                if ((this.parmIsDamagedDoorHandleLeftField.Equals(value) != true)) {
-                    this.parmIsDamagedDoorHandleLeftField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDoorHandleLeft");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandleRight {
-            get {
-                return this.parmIsDamagedDoorHandleRightField;
-            }
-            set {
-                if ((this.parmIsDamagedDoorHandleRightField.Equals(value) != true)) {
-                    this.parmIsDamagedDoorHandleRightField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDoorHandleRight");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDriversSeat {
-            get {
-                return this.parmIsDamagedDriversSeatField;
-            }
-            set {
-                if ((this.parmIsDamagedDriversSeatField.Equals(value) != true)) {
-                    this.parmIsDamagedDriversSeatField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDriversSeat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedFrontview {
-            get {
-                return this.parmIsDamagedFrontviewField;
-            }
-            set {
-                if ((this.parmIsDamagedFrontviewField.Equals(value) != true)) {
-                    this.parmIsDamagedFrontviewField = value;
-                    this.RaisePropertyChanged("parmIsDamagedFrontview");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedGrill {
-            get {
-                return this.parmIsDamagedGrillField;
-            }
-            set {
-                if ((this.parmIsDamagedGrillField.Equals(value) != true)) {
-                    this.parmIsDamagedGrillField = value;
-                    this.RaisePropertyChanged("parmIsDamagedGrill");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedInternalTries {
-            get {
-                return this.parmIsDamagedInternalTriesField;
-            }
-            set {
-                if ((this.parmIsDamagedInternalTriesField.Equals(value) != true)) {
-                    this.parmIsDamagedInternalTriesField = value;
-                    this.RaisePropertyChanged("parmIsDamagedInternalTries");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFQuarterPanel {
-            get {
-                return this.parmIsDamagedLFQuarterPanelField;
-            }
-            set {
-                if ((this.parmIsDamagedLFQuarterPanelField.Equals(value) != true)) {
-                    this.parmIsDamagedLFQuarterPanelField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLFQuarterPanel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRQuarterPanel {
-            get {
-                return this.parmIsDamagedLRQuarterPanelField;
-            }
-            set {
-                if ((this.parmIsDamagedLRQuarterPanelField.Equals(value) != true)) {
-                    this.parmIsDamagedLRQuarterPanelField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLRQuarterPanel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLeftDoor {
-            get {
-                return this.parmIsDamagedLeftDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedLeftDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedLeftDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLeftDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedMats {
-            get {
-                return this.parmIsDamagedMatsField;
-            }
-            set {
-                if ((this.parmIsDamagedMatsField.Equals(value) != true)) {
-                    this.parmIsDamagedMatsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedMats");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPassengerSeat {
-            get {
-                return this.parmIsDamagedPassengerSeatField;
-            }
-            set {
-                if ((this.parmIsDamagedPassengerSeatField.Equals(value) != true)) {
-                    this.parmIsDamagedPassengerSeatField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPassengerSeat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFQuarterPanel {
-            get {
-                return this.parmIsDamagedRFQuarterPanelField;
-            }
-            set {
-                if ((this.parmIsDamagedRFQuarterPanelField.Equals(value) != true)) {
-                    this.parmIsDamagedRFQuarterPanelField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRFQuarterPanel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRQuarterPanel {
-            get {
-                return this.parmIsDamagedRRQuarterPanelField;
-            }
-            set {
-                if ((this.parmIsDamagedRRQuarterPanelField.Equals(value) != true)) {
-                    this.parmIsDamagedRRQuarterPanelField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRRQuarterPanel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearViewMirror {
-            get {
-                return this.parmIsDamagedRearViewMirrorField;
-            }
-            set {
-                if ((this.parmIsDamagedRearViewMirrorField.Equals(value) != true)) {
-                    this.parmIsDamagedRearViewMirrorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRearViewMirror");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRightDoor {
-            get {
-                return this.parmIsDamagedRightDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedRightDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedRightDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRightDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRoof {
-            get {
-                return this.parmIsDamagedRoofField;
-            }
-            set {
-                if ((this.parmIsDamagedRoofField.Equals(value) != true)) {
-                    this.parmIsDamagedRoofField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRoof");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWheelArchesLeft {
-            get {
-                return this.parmIsDamagedWheelArchesLeftField;
-            }
-            set {
-                if ((this.parmIsDamagedWheelArchesLeftField.Equals(value) != true)) {
-                    this.parmIsDamagedWheelArchesLeftField = value;
-                    this.RaisePropertyChanged("parmIsDamagedWheelArchesLeft");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWheelArchesRight {
-            get {
-                return this.parmIsDamagedWheelArchesRightField;
-            }
-            set {
-                if ((this.parmIsDamagedWheelArchesRightField.Equals(value) != true)) {
-                    this.parmIsDamagedWheelArchesRightField = value;
-                    this.RaisePropertyChanged("parmIsDamagedWheelArchesRight");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWipers {
-            get {
-                return this.parmIsDamagedWipersField;
-            }
-            set {
-                if ((this.parmIsDamagedWipersField.Equals(value) != true)) {
-                    this.parmIsDamagedWipersField = value;
-                    this.RaisePropertyChanged("parmIsDamagedWipers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFQuarterPanelComments {
-            get {
-                return this.parmLFQuarterPanelCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFQuarterPanelCommentsField, value) != true)) {
-                    this.parmLFQuarterPanelCommentsField = value;
-                    this.RaisePropertyChanged("parmLFQuarterPanelComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRQuarterPanelComments {
-            get {
-                return this.parmLRQuarterPanelCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRQuarterPanelCommentsField, value) != true)) {
-                    this.parmLRQuarterPanelCommentsField = value;
-                    this.RaisePropertyChanged("parmLRQuarterPanelComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLeftDoorComments {
-            get {
-                return this.parmLeftDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLeftDoorCommentsField, value) != true)) {
-                    this.parmLeftDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmLeftDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmMatsComments {
-            get {
-                return this.parmMatsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmMatsCommentsField, value) != true)) {
-                    this.parmMatsCommentsField = value;
-                    this.RaisePropertyChanged("parmMatsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPassengerSeatComments {
-            get {
-                return this.parmPassengerSeatCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPassengerSeatCommentsField, value) != true)) {
-                    this.parmPassengerSeatCommentsField = value;
-                    this.RaisePropertyChanged("parmPassengerSeatComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFQuarterPanelComments {
-            get {
-                return this.parmRFQuarterPanelCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFQuarterPanelCommentsField, value) != true)) {
-                    this.parmRFQuarterPanelCommentsField = value;
-                    this.RaisePropertyChanged("parmRFQuarterPanelComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRQuarterPanelComments {
-            get {
-                return this.parmRRQuarterPanelCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRQuarterPanelCommentsField, value) != true)) {
-                    this.parmRRQuarterPanelCommentsField = value;
-                    this.RaisePropertyChanged("parmRRQuarterPanelComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRearViewMirrorComments {
-            get {
-                return this.parmRearViewMirrorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRearViewMirrorCommentsField, value) != true)) {
-                    this.parmRearViewMirrorCommentsField = value;
-                    this.RaisePropertyChanged("parmRearViewMirrorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRightDoorComments {
-            get {
-                return this.parmRightDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRightDoorCommentsField, value) != true)) {
-                    this.parmRightDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmRightDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRoofComments {
-            get {
-                return this.parmRoofCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRoofCommentsField, value) != true)) {
-                    this.parmRoofCommentsField = value;
-                    this.RaisePropertyChanged("parmRoofComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmWheelArchesLeftComments {
-            get {
-                return this.parmWheelArchesLeftCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmWheelArchesLeftCommentsField, value) != true)) {
-                    this.parmWheelArchesLeftCommentsField = value;
-                    this.RaisePropertyChanged("parmWheelArchesLeftComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmWheelArchesRightComments {
-            get {
-                return this.parmWheelArchesRightCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmWheelArchesRightCommentsField, value) != true)) {
-                    this.parmWheelArchesRightCommentsField = value;
-                    this.RaisePropertyChanged("parmWheelArchesRightComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmWipersComments {
-            get {
-                return this.parmWipersCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmWipersCommentsField, value) != true)) {
-                    this.parmWipersCommentsField = value;
-                    this.RaisePropertyChanged("parmWipersComments");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiCommercialTyresContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiCommercialTyresContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLFConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLInnerAxleInCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLInnerAxleInConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLInnerAxleOutCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLInnerAxleOutConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRInnerCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLRInnerConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLROuterCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLROuterConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRFConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRInnerAxleInCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRInnerAxleInConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRInnerAxleOutCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRInnerAxleOutConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRInnerCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRRInnerConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRROuterCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRROuterConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmSpareConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFComments {
-            get {
-                return this.parmLFCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFCommentsField, value) != true)) {
-                    this.parmLFCommentsField = value;
-                    this.RaisePropertyChanged("parmLFComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLFCondition {
-            get {
-                return this.parmLFConditionField;
-            }
-            set {
-                if ((this.parmLFConditionField.Equals(value) != true)) {
-                    this.parmLFConditionField = value;
-                    this.RaisePropertyChanged("parmLFCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLInnerAxleInComments {
-            get {
-                return this.parmLInnerAxleInCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLInnerAxleInCommentsField, value) != true)) {
-                    this.parmLInnerAxleInCommentsField = value;
-                    this.RaisePropertyChanged("parmLInnerAxleInComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLInnerAxleInCondition {
-            get {
-                return this.parmLInnerAxleInConditionField;
-            }
-            set {
-                if ((this.parmLInnerAxleInConditionField.Equals(value) != true)) {
-                    this.parmLInnerAxleInConditionField = value;
-                    this.RaisePropertyChanged("parmLInnerAxleInCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLInnerAxleOutComments {
-            get {
-                return this.parmLInnerAxleOutCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLInnerAxleOutCommentsField, value) != true)) {
-                    this.parmLInnerAxleOutCommentsField = value;
-                    this.RaisePropertyChanged("parmLInnerAxleOutComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLInnerAxleOutCondition {
-            get {
-                return this.parmLInnerAxleOutConditionField;
-            }
-            set {
-                if ((this.parmLInnerAxleOutConditionField.Equals(value) != true)) {
-                    this.parmLInnerAxleOutConditionField = value;
-                    this.RaisePropertyChanged("parmLInnerAxleOutCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRInnerComments {
-            get {
-                return this.parmLRInnerCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRInnerCommentsField, value) != true)) {
-                    this.parmLRInnerCommentsField = value;
-                    this.RaisePropertyChanged("parmLRInnerComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLRInnerCondition {
-            get {
-                return this.parmLRInnerConditionField;
-            }
-            set {
-                if ((this.parmLRInnerConditionField.Equals(value) != true)) {
-                    this.parmLRInnerConditionField = value;
-                    this.RaisePropertyChanged("parmLRInnerCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLROuterComments {
-            get {
-                return this.parmLROuterCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLROuterCommentsField, value) != true)) {
-                    this.parmLROuterCommentsField = value;
-                    this.RaisePropertyChanged("parmLROuterComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLROuterCondition {
-            get {
-                return this.parmLROuterConditionField;
-            }
-            set {
-                if ((this.parmLROuterConditionField.Equals(value) != true)) {
-                    this.parmLROuterConditionField = value;
-                    this.RaisePropertyChanged("parmLROuterCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFComments {
-            get {
-                return this.parmRFCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFCommentsField, value) != true)) {
-                    this.parmRFCommentsField = value;
-                    this.RaisePropertyChanged("parmRFComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRFCondition {
-            get {
-                return this.parmRFConditionField;
-            }
-            set {
-                if ((this.parmRFConditionField.Equals(value) != true)) {
-                    this.parmRFConditionField = value;
-                    this.RaisePropertyChanged("parmRFCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRInnerAxleInComments {
-            get {
-                return this.parmRInnerAxleInCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRInnerAxleInCommentsField, value) != true)) {
-                    this.parmRInnerAxleInCommentsField = value;
-                    this.RaisePropertyChanged("parmRInnerAxleInComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRInnerAxleInCondition {
-            get {
-                return this.parmRInnerAxleInConditionField;
-            }
-            set {
-                if ((this.parmRInnerAxleInConditionField.Equals(value) != true)) {
-                    this.parmRInnerAxleInConditionField = value;
-                    this.RaisePropertyChanged("parmRInnerAxleInCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRInnerAxleOutComments {
-            get {
-                return this.parmRInnerAxleOutCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRInnerAxleOutCommentsField, value) != true)) {
-                    this.parmRInnerAxleOutCommentsField = value;
-                    this.RaisePropertyChanged("parmRInnerAxleOutComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRInnerAxleOutCondition {
-            get {
-                return this.parmRInnerAxleOutConditionField;
-            }
-            set {
-                if ((this.parmRInnerAxleOutConditionField.Equals(value) != true)) {
-                    this.parmRInnerAxleOutConditionField = value;
-                    this.RaisePropertyChanged("parmRInnerAxleOutCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRInnerComments {
-            get {
-                return this.parmRRInnerCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRInnerCommentsField, value) != true)) {
-                    this.parmRRInnerCommentsField = value;
-                    this.RaisePropertyChanged("parmRRInnerComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRRInnerCondition {
-            get {
-                return this.parmRRInnerConditionField;
-            }
-            set {
-                if ((this.parmRRInnerConditionField.Equals(value) != true)) {
-                    this.parmRRInnerConditionField = value;
-                    this.RaisePropertyChanged("parmRRInnerCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRROuterComments {
-            get {
-                return this.parmRROuterCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRROuterCommentsField, value) != true)) {
-                    this.parmRROuterCommentsField = value;
-                    this.RaisePropertyChanged("parmRROuterComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRROuterCondition {
-            get {
-                return this.parmRROuterConditionField;
-            }
-            set {
-                if ((this.parmRROuterConditionField.Equals(value) != true)) {
-                    this.parmRROuterConditionField = value;
-                    this.RaisePropertyChanged("parmRROuterCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareComments {
-            get {
-                return this.parmSpareCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareCommentsField, value) != true)) {
-                    this.parmSpareCommentsField = value;
-                    this.RaisePropertyChanged("parmSpareComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmSpareCondition {
-            get {
-                return this.parmSpareConditionField;
-            }
-            set {
-                if ((this.parmSpareConditionField.Equals(value) != true)) {
-                    this.parmSpareConditionField = value;
-                    this.RaisePropertyChanged("parmSpareCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiPassengerAccessoriesContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiPassengerAccessoriesContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmAirconCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmAlarmCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCDShuttleCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCanopyCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasAirconField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasAlarmField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasCDShuttleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasCanopyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasJackField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasMapsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasNavigationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasOthersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasRadioField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasServicesBookField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasSpareTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasSparekeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasToolsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTrackingUnitField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAirconField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAlarmField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCDShuttleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCanopyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedJackField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedMapsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedNavigationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRadioField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedServicesBookField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSpareTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSparekeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedToolsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTrackingUnitField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmJackCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmKeyCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmMapsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmNavigationCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmOtherCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRadioCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmServiceBooksCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareKeysCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareTypeCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmToolCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmTrackLineCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAirconComments {
-            get {
-                return this.parmAirconCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmAirconCommentsField, value) != true)) {
-                    this.parmAirconCommentsField = value;
-                    this.RaisePropertyChanged("parmAirconComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAlarmComments {
-            get {
-                return this.parmAlarmCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmAlarmCommentsField, value) != true)) {
-                    this.parmAlarmCommentsField = value;
-                    this.RaisePropertyChanged("parmAlarmComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCDShuttleComments {
-            get {
-                return this.parmCDShuttleCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCDShuttleCommentsField, value) != true)) {
-                    this.parmCDShuttleCommentsField = value;
-                    this.RaisePropertyChanged("parmCDShuttleComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCanopyComments {
-            get {
-                return this.parmCanopyCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCanopyCommentsField, value) != true)) {
-                    this.parmCanopyCommentsField = value;
-                    this.RaisePropertyChanged("parmCanopyComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasAircon {
-            get {
-                return this.parmHasAirconField;
-            }
-            set {
-                if ((this.parmHasAirconField.Equals(value) != true)) {
-                    this.parmHasAirconField = value;
-                    this.RaisePropertyChanged("parmHasAircon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasAlarm {
-            get {
-                return this.parmHasAlarmField;
-            }
-            set {
-                if ((this.parmHasAlarmField.Equals(value) != true)) {
-                    this.parmHasAlarmField = value;
-                    this.RaisePropertyChanged("parmHasAlarm");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasCDShuttle {
-            get {
-                return this.parmHasCDShuttleField;
-            }
-            set {
-                if ((this.parmHasCDShuttleField.Equals(value) != true)) {
-                    this.parmHasCDShuttleField = value;
-                    this.RaisePropertyChanged("parmHasCDShuttle");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasCanopy {
-            get {
-                return this.parmHasCanopyField;
-            }
-            set {
-                if ((this.parmHasCanopyField.Equals(value) != true)) {
-                    this.parmHasCanopyField = value;
-                    this.RaisePropertyChanged("parmHasCanopy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasJack {
-            get {
-                return this.parmHasJackField;
-            }
-            set {
-                if ((this.parmHasJackField.Equals(value) != true)) {
-                    this.parmHasJackField = value;
-                    this.RaisePropertyChanged("parmHasJack");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasKey {
-            get {
-                return this.parmHasKeyField;
-            }
-            set {
-                if ((this.parmHasKeyField.Equals(value) != true)) {
-                    this.parmHasKeyField = value;
-                    this.RaisePropertyChanged("parmHasKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasMaps {
-            get {
-                return this.parmHasMapsField;
-            }
-            set {
-                if ((this.parmHasMapsField.Equals(value) != true)) {
-                    this.parmHasMapsField = value;
-                    this.RaisePropertyChanged("parmHasMaps");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasNavigation {
-            get {
-                return this.parmHasNavigationField;
-            }
-            set {
-                if ((this.parmHasNavigationField.Equals(value) != true)) {
-                    this.parmHasNavigationField = value;
-                    this.RaisePropertyChanged("parmHasNavigation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasOthers {
-            get {
-                return this.parmHasOthersField;
-            }
-            set {
-                if ((this.parmHasOthersField.Equals(value) != true)) {
-                    this.parmHasOthersField = value;
-                    this.RaisePropertyChanged("parmHasOthers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasRadio {
-            get {
-                return this.parmHasRadioField;
-            }
-            set {
-                if ((this.parmHasRadioField.Equals(value) != true)) {
-                    this.parmHasRadioField = value;
-                    this.RaisePropertyChanged("parmHasRadio");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasServicesBook {
-            get {
-                return this.parmHasServicesBookField;
-            }
-            set {
-                if ((this.parmHasServicesBookField.Equals(value) != true)) {
-                    this.parmHasServicesBookField = value;
-                    this.RaisePropertyChanged("parmHasServicesBook");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasSpareType {
-            get {
-                return this.parmHasSpareTypeField;
-            }
-            set {
-                if ((this.parmHasSpareTypeField.Equals(value) != true)) {
-                    this.parmHasSpareTypeField = value;
-                    this.RaisePropertyChanged("parmHasSpareType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasSparekey {
-            get {
-                return this.parmHasSparekeyField;
-            }
-            set {
-                if ((this.parmHasSparekeyField.Equals(value) != true)) {
-                    this.parmHasSparekeyField = value;
-                    this.RaisePropertyChanged("parmHasSparekey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTools {
-            get {
-                return this.parmHasToolsField;
-            }
-            set {
-                if ((this.parmHasToolsField.Equals(value) != true)) {
-                    this.parmHasToolsField = value;
-                    this.RaisePropertyChanged("parmHasTools");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmHasTrackingUnit {
-            get {
-                return this.parmHasTrackingUnitField;
-            }
-            set {
-                if ((this.parmHasTrackingUnitField.Equals(value) != true)) {
-                    this.parmHasTrackingUnitField = value;
-                    this.RaisePropertyChanged("parmHasTrackingUnit");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAircon {
-            get {
-                return this.parmIsDamagedAirconField;
-            }
-            set {
-                if ((this.parmIsDamagedAirconField.Equals(value) != true)) {
-                    this.parmIsDamagedAirconField = value;
-                    this.RaisePropertyChanged("parmIsDamagedAircon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedAlarm {
-            get {
-                return this.parmIsDamagedAlarmField;
-            }
-            set {
-                if ((this.parmIsDamagedAlarmField.Equals(value) != true)) {
-                    this.parmIsDamagedAlarmField = value;
-                    this.RaisePropertyChanged("parmIsDamagedAlarm");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCDShuttle {
-            get {
-                return this.parmIsDamagedCDShuttleField;
-            }
-            set {
-                if ((this.parmIsDamagedCDShuttleField.Equals(value) != true)) {
-                    this.parmIsDamagedCDShuttleField = value;
-                    this.RaisePropertyChanged("parmIsDamagedCDShuttle");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCanopy {
-            get {
-                return this.parmIsDamagedCanopyField;
-            }
-            set {
-                if ((this.parmIsDamagedCanopyField.Equals(value) != true)) {
-                    this.parmIsDamagedCanopyField = value;
-                    this.RaisePropertyChanged("parmIsDamagedCanopy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedJack {
-            get {
-                return this.parmIsDamagedJackField;
-            }
-            set {
-                if ((this.parmIsDamagedJackField.Equals(value) != true)) {
-                    this.parmIsDamagedJackField = value;
-                    this.RaisePropertyChanged("parmIsDamagedJack");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedKey {
-            get {
-                return this.parmIsDamagedKeyField;
-            }
-            set {
-                if ((this.parmIsDamagedKeyField.Equals(value) != true)) {
-                    this.parmIsDamagedKeyField = value;
-                    this.RaisePropertyChanged("parmIsDamagedKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedMaps {
-            get {
-                return this.parmIsDamagedMapsField;
-            }
-            set {
-                if ((this.parmIsDamagedMapsField.Equals(value) != true)) {
-                    this.parmIsDamagedMapsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedMaps");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedNavigation {
-            get {
-                return this.parmIsDamagedNavigationField;
-            }
-            set {
-                if ((this.parmIsDamagedNavigationField.Equals(value) != true)) {
-                    this.parmIsDamagedNavigationField = value;
-                    this.RaisePropertyChanged("parmIsDamagedNavigation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRadio {
-            get {
-                return this.parmIsDamagedRadioField;
-            }
-            set {
-                if ((this.parmIsDamagedRadioField.Equals(value) != true)) {
-                    this.parmIsDamagedRadioField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRadio");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedServicesBook {
-            get {
-                return this.parmIsDamagedServicesBookField;
-            }
-            set {
-                if ((this.parmIsDamagedServicesBookField.Equals(value) != true)) {
-                    this.parmIsDamagedServicesBookField = value;
-                    this.RaisePropertyChanged("parmIsDamagedServicesBook");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSpareType {
-            get {
-                return this.parmIsDamagedSpareTypeField;
-            }
-            set {
-                if ((this.parmIsDamagedSpareTypeField.Equals(value) != true)) {
-                    this.parmIsDamagedSpareTypeField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSpareType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSparekey {
-            get {
-                return this.parmIsDamagedSparekeyField;
-            }
-            set {
-                if ((this.parmIsDamagedSparekeyField.Equals(value) != true)) {
-                    this.parmIsDamagedSparekeyField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSparekey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTools {
-            get {
-                return this.parmIsDamagedToolsField;
-            }
-            set {
-                if ((this.parmIsDamagedToolsField.Equals(value) != true)) {
-                    this.parmIsDamagedToolsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedTools");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTrackingUnit {
-            get {
-                return this.parmIsDamagedTrackingUnitField;
-            }
-            set {
-                if ((this.parmIsDamagedTrackingUnitField.Equals(value) != true)) {
-                    this.parmIsDamagedTrackingUnitField = value;
-                    this.RaisePropertyChanged("parmIsDamagedTrackingUnit");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmJackComments {
-            get {
-                return this.parmJackCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmJackCommentsField, value) != true)) {
-                    this.parmJackCommentsField = value;
-                    this.RaisePropertyChanged("parmJackComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmKeyComments {
-            get {
-                return this.parmKeyCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmKeyCommentsField, value) != true)) {
-                    this.parmKeyCommentsField = value;
-                    this.RaisePropertyChanged("parmKeyComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmMapsComments {
-            get {
-                return this.parmMapsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmMapsCommentsField, value) != true)) {
-                    this.parmMapsCommentsField = value;
-                    this.RaisePropertyChanged("parmMapsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmNavigationComments {
-            get {
-                return this.parmNavigationCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmNavigationCommentsField, value) != true)) {
-                    this.parmNavigationCommentsField = value;
-                    this.RaisePropertyChanged("parmNavigationComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmOtherComments {
-            get {
-                return this.parmOtherCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmOtherCommentsField, value) != true)) {
-                    this.parmOtherCommentsField = value;
-                    this.RaisePropertyChanged("parmOtherComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRadioComments {
-            get {
-                return this.parmRadioCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRadioCommentsField, value) != true)) {
-                    this.parmRadioCommentsField = value;
-                    this.RaisePropertyChanged("parmRadioComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmServiceBooksComments {
-            get {
-                return this.parmServiceBooksCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmServiceBooksCommentsField, value) != true)) {
-                    this.parmServiceBooksCommentsField = value;
-                    this.RaisePropertyChanged("parmServiceBooksComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareKeysComments {
-            get {
-                return this.parmSpareKeysCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareKeysCommentsField, value) != true)) {
-                    this.parmSpareKeysCommentsField = value;
-                    this.RaisePropertyChanged("parmSpareKeysComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareTypeComments {
-            get {
-                return this.parmSpareTypeCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareTypeCommentsField, value) != true)) {
-                    this.parmSpareTypeCommentsField = value;
-                    this.RaisePropertyChanged("parmSpareTypeComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmToolComments {
-            get {
-                return this.parmToolCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmToolCommentsField, value) != true)) {
-                    this.parmToolCommentsField = value;
-                    this.RaisePropertyChanged("parmToolComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmTrackLineComments {
-            get {
-                return this.parmTrackLineCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmTrackLineCommentsField, value) != true)) {
-                    this.parmTrackLineCommentsField = value;
-                    this.RaisePropertyChanged("parmTrackLineComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiPassengerBodyworkContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiPassengerBodyworkContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBonetCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmBootCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDoorHandlesCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHailDamageCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHubcapsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBonnetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBootField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandlesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHailDamageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHubcapsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFWheelArchField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRWheelArchField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLeftSideField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFWheelArchField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRBumperField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRDoorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRWheelArchField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRightSideField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRoofField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWipersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFWheelArchCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRWheelArchCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFWheelArchCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRDoorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRWheelArchCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRightSideCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRoofCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmWipersCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmlFBumperCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmleftSideCommentsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBonetComments {
-            get {
-                return this.parmBonetCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmBonetCommentsField, value) != true)) {
-                    this.parmBonetCommentsField = value;
-                    this.RaisePropertyChanged("parmBonetComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmBootComments {
-            get {
-                return this.parmBootCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmBootCommentsField, value) != true)) {
-                    this.parmBootCommentsField = value;
-                    this.RaisePropertyChanged("parmBootComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDoorHandlesComments {
-            get {
-                return this.parmDoorHandlesCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDoorHandlesCommentsField, value) != true)) {
-                    this.parmDoorHandlesCommentsField = value;
-                    this.RaisePropertyChanged("parmDoorHandlesComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHailDamageComments {
-            get {
-                return this.parmHailDamageCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHailDamageCommentsField, value) != true)) {
-                    this.parmHailDamageCommentsField = value;
-                    this.RaisePropertyChanged("parmHailDamageComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHubcapsComments {
-            get {
-                return this.parmHubcapsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHubcapsCommentsField, value) != true)) {
-                    this.parmHubcapsCommentsField = value;
-                    this.RaisePropertyChanged("parmHubcapsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBonnet {
-            get {
-                return this.parmIsDamagedBonnetField;
-            }
-            set {
-                if ((this.parmIsDamagedBonnetField.Equals(value) != true)) {
-                    this.parmIsDamagedBonnetField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBonnet");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedBoot {
-            get {
-                return this.parmIsDamagedBootField;
-            }
-            set {
-                if ((this.parmIsDamagedBootField.Equals(value) != true)) {
-                    this.parmIsDamagedBootField = value;
-                    this.RaisePropertyChanged("parmIsDamagedBoot");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDoorHandles {
-            get {
-                return this.parmIsDamagedDoorHandlesField;
-            }
-            set {
-                if ((this.parmIsDamagedDoorHandlesField.Equals(value) != true)) {
-                    this.parmIsDamagedDoorHandlesField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDoorHandles");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHailDamage {
-            get {
-                return this.parmIsDamagedHailDamageField;
-            }
-            set {
-                if ((this.parmIsDamagedHailDamageField.Equals(value) != true)) {
-                    this.parmIsDamagedHailDamageField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHailDamage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHubcaps {
-            get {
-                return this.parmIsDamagedHubcapsField;
-            }
-            set {
-                if ((this.parmIsDamagedHubcapsField.Equals(value) != true)) {
-                    this.parmIsDamagedHubcapsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHubcaps");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFBumper {
-            get {
-                return this.parmIsDamagedLFBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedLFBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedLFBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLFBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFDoor {
-            get {
-                return this.parmIsDamagedLFDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedLFDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedLFDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLFDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFWheelArch {
-            get {
-                return this.parmIsDamagedLFWheelArchField;
-            }
-            set {
-                if ((this.parmIsDamagedLFWheelArchField.Equals(value) != true)) {
-                    this.parmIsDamagedLFWheelArchField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLFWheelArch");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRBumper {
-            get {
-                return this.parmIsDamagedLRBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedLRBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedLRBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLRBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRDoor {
-            get {
-                return this.parmIsDamagedLRDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedLRDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedLRDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLRDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRWheelArch {
-            get {
-                return this.parmIsDamagedLRWheelArchField;
-            }
-            set {
-                if ((this.parmIsDamagedLRWheelArchField.Equals(value) != true)) {
-                    this.parmIsDamagedLRWheelArchField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLRWheelArch");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLeftSide {
-            get {
-                return this.parmIsDamagedLeftSideField;
-            }
-            set {
-                if ((this.parmIsDamagedLeftSideField.Equals(value) != true)) {
-                    this.parmIsDamagedLeftSideField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLeftSide");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFBumper {
-            get {
-                return this.parmIsDamagedRFBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedRFBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedRFBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRFBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFDoor {
-            get {
-                return this.parmIsDamagedRFDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedRFDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedRFDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRFDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFWheelArch {
-            get {
-                return this.parmIsDamagedRFWheelArchField;
-            }
-            set {
-                if ((this.parmIsDamagedRFWheelArchField.Equals(value) != true)) {
-                    this.parmIsDamagedRFWheelArchField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRFWheelArch");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRBumper {
-            get {
-                return this.parmIsDamagedRRBumperField;
-            }
-            set {
-                if ((this.parmIsDamagedRRBumperField.Equals(value) != true)) {
-                    this.parmIsDamagedRRBumperField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRRBumper");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRDoor {
-            get {
-                return this.parmIsDamagedRRDoorField;
-            }
-            set {
-                if ((this.parmIsDamagedRRDoorField.Equals(value) != true)) {
-                    this.parmIsDamagedRRDoorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRRDoor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRWheelArch {
-            get {
-                return this.parmIsDamagedRRWheelArchField;
-            }
-            set {
-                if ((this.parmIsDamagedRRWheelArchField.Equals(value) != true)) {
-                    this.parmIsDamagedRRWheelArchField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRRWheelArch");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRightSide {
-            get {
-                return this.parmIsDamagedRightSideField;
-            }
-            set {
-                if ((this.parmIsDamagedRightSideField.Equals(value) != true)) {
-                    this.parmIsDamagedRightSideField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRightSide");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRoof {
-            get {
-                return this.parmIsDamagedRoofField;
-            }
-            set {
-                if ((this.parmIsDamagedRoofField.Equals(value) != true)) {
-                    this.parmIsDamagedRoofField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRoof");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWipers {
-            get {
-                return this.parmIsDamagedWipersField;
-            }
-            set {
-                if ((this.parmIsDamagedWipersField.Equals(value) != true)) {
-                    this.parmIsDamagedWipersField = value;
-                    this.RaisePropertyChanged("parmIsDamagedWipers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFDoorComments {
-            get {
-                return this.parmLFDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFDoorCommentsField, value) != true)) {
-                    this.parmLFDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmLFDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFWheelArchComments {
-            get {
-                return this.parmLFWheelArchCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFWheelArchCommentsField, value) != true)) {
-                    this.parmLFWheelArchCommentsField = value;
-                    this.RaisePropertyChanged("parmLFWheelArchComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRBumperComments {
-            get {
-                return this.parmLRBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRBumperCommentsField, value) != true)) {
-                    this.parmLRBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmLRBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRDoorComments {
-            get {
-                return this.parmLRDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRDoorCommentsField, value) != true)) {
-                    this.parmLRDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmLRDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRWheelArchComments {
-            get {
-                return this.parmLRWheelArchCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRWheelArchCommentsField, value) != true)) {
-                    this.parmLRWheelArchCommentsField = value;
-                    this.RaisePropertyChanged("parmLRWheelArchComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFBumperComments {
-            get {
-                return this.parmRFBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFBumperCommentsField, value) != true)) {
-                    this.parmRFBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmRFBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFDoorComments {
-            get {
-                return this.parmRFDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFDoorCommentsField, value) != true)) {
-                    this.parmRFDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmRFDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFWheelArchComments {
-            get {
-                return this.parmRFWheelArchCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFWheelArchCommentsField, value) != true)) {
-                    this.parmRFWheelArchCommentsField = value;
-                    this.RaisePropertyChanged("parmRFWheelArchComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRBumperComments {
-            get {
-                return this.parmRRBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRBumperCommentsField, value) != true)) {
-                    this.parmRRBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmRRBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRDoorComments {
-            get {
-                return this.parmRRDoorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRDoorCommentsField, value) != true)) {
-                    this.parmRRDoorCommentsField = value;
-                    this.RaisePropertyChanged("parmRRDoorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRWheelArchComments {
-            get {
-                return this.parmRRWheelArchCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRWheelArchCommentsField, value) != true)) {
-                    this.parmRRWheelArchCommentsField = value;
-                    this.RaisePropertyChanged("parmRRWheelArchComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRightSideComments {
-            get {
-                return this.parmRightSideCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRightSideCommentsField, value) != true)) {
-                    this.parmRightSideCommentsField = value;
-                    this.RaisePropertyChanged("parmRightSideComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRoofComments {
-            get {
-                return this.parmRoofCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRoofCommentsField, value) != true)) {
-                    this.parmRoofCommentsField = value;
-                    this.RaisePropertyChanged("parmRoofComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmWipersComments {
-            get {
-                return this.parmWipersCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmWipersCommentsField, value) != true)) {
-                    this.parmWipersCommentsField = value;
-                    this.RaisePropertyChanged("parmWipersComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmlFBumperComments {
-            get {
-                return this.parmlFBumperCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmlFBumperCommentsField, value) != true)) {
-                    this.parmlFBumperCommentsField = value;
-                    this.RaisePropertyChanged("parmlFBumperComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmleftSideComments {
-            get {
-                return this.parmleftSideCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmleftSideCommentsField, value) != true)) {
-                    this.parmleftSideCommentsField = value;
-                    this.RaisePropertyChanged("parmleftSideComments");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiPassengerGlassContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiPassengerGlassContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmExitRearViewMirrorCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmHeadLightsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmIndicatorLensesCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExitRearViewMirrorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHeadLightsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedIndicatorLensesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearGlassField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSideGlassField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTailLightsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWindScreenField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRearGlassCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSideGlassCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmTailLightsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmWindScreenCommentsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmExitRearViewMirrorComments {
-            get {
-                return this.parmExitRearViewMirrorCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmExitRearViewMirrorCommentsField, value) != true)) {
-                    this.parmExitRearViewMirrorCommentsField = value;
-                    this.RaisePropertyChanged("parmExitRearViewMirrorComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmHeadLightsComments {
-            get {
-                return this.parmHeadLightsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmHeadLightsCommentsField, value) != true)) {
-                    this.parmHeadLightsCommentsField = value;
-                    this.RaisePropertyChanged("parmHeadLightsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmIndicatorLensesComments {
-            get {
-                return this.parmIndicatorLensesCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmIndicatorLensesCommentsField, value) != true)) {
-                    this.parmIndicatorLensesCommentsField = value;
-                    this.RaisePropertyChanged("parmIndicatorLensesComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedExitRearViewMirror {
-            get {
-                return this.parmIsDamagedExitRearViewMirrorField;
-            }
-            set {
-                if ((this.parmIsDamagedExitRearViewMirrorField.Equals(value) != true)) {
-                    this.parmIsDamagedExitRearViewMirrorField = value;
-                    this.RaisePropertyChanged("parmIsDamagedExitRearViewMirror");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedHeadLights {
-            get {
-                return this.parmIsDamagedHeadLightsField;
-            }
-            set {
-                if ((this.parmIsDamagedHeadLightsField.Equals(value) != true)) {
-                    this.parmIsDamagedHeadLightsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedHeadLights");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedIndicatorLenses {
-            get {
-                return this.parmIsDamagedIndicatorLensesField;
-            }
-            set {
-                if ((this.parmIsDamagedIndicatorLensesField.Equals(value) != true)) {
-                    this.parmIsDamagedIndicatorLensesField = value;
-                    this.RaisePropertyChanged("parmIsDamagedIndicatorLenses");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearGlass {
-            get {
-                return this.parmIsDamagedRearGlassField;
-            }
-            set {
-                if ((this.parmIsDamagedRearGlassField.Equals(value) != true)) {
-                    this.parmIsDamagedRearGlassField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRearGlass");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedSideGlass {
-            get {
-                return this.parmIsDamagedSideGlassField;
-            }
-            set {
-                if ((this.parmIsDamagedSideGlassField.Equals(value) != true)) {
-                    this.parmIsDamagedSideGlassField = value;
-                    this.RaisePropertyChanged("parmIsDamagedSideGlass");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedTailLights {
-            get {
-                return this.parmIsDamagedTailLightsField;
-            }
-            set {
-                if ((this.parmIsDamagedTailLightsField.Equals(value) != true)) {
-                    this.parmIsDamagedTailLightsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedTailLights");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedWindScreen {
-            get {
-                return this.parmIsDamagedWindScreenField;
-            }
-            set {
-                if ((this.parmIsDamagedWindScreenField.Equals(value) != true)) {
-                    this.parmIsDamagedWindScreenField = value;
-                    this.RaisePropertyChanged("parmIsDamagedWindScreen");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRearGlassComments {
-            get {
-                return this.parmRearGlassCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRearGlassCommentsField, value) != true)) {
-                    this.parmRearGlassCommentsField = value;
-                    this.RaisePropertyChanged("parmRearGlassComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSideGlassComments {
-            get {
-                return this.parmSideGlassCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSideGlassCommentsField, value) != true)) {
-                    this.parmSideGlassCommentsField = value;
-                    this.RaisePropertyChanged("parmSideGlassComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmTailLightsComments {
-            get {
-                return this.parmTailLightsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmTailLightsCommentsField, value) != true)) {
-                    this.parmTailLightsCommentsField = value;
-                    this.RaisePropertyChanged("parmTailLightsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleType {
-            get {
-                return this.parmVehicleTypeField;
-            }
-            set {
-                if ((this.parmVehicleTypeField.Equals(value) != true)) {
-                    this.parmVehicleTypeField = value;
-                    this.RaisePropertyChanged("parmVehicleType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmWindScreenComments {
-            get {
-                return this.parmWindScreenCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmWindScreenCommentsField, value) != true)) {
-                    this.parmWindScreenCommentsField = value;
-                    this.RaisePropertyChanged("parmWindScreenComments");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiPassengerMechConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiPassengerMechConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRemarksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRemarks {
-            get {
-                return this.parmRemarksField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRemarksField, value) != true)) {
-                    this.parmRemarksField = value;
-                    this.RaisePropertyChanged("parmRemarks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkMobiPassengerTrimInteriorContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkMobiPassengerTrimInteriorContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCarpetsCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDashCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDriversSeatCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmInternalTrimCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCarpetsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDriversSeatField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedInternalTrimField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFDoorTrimField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRDoorTrimField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPassengerSeatField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFDoorTrimField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRDoorTrimField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSeatField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFDoorTrimCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRDoorTrimCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmPassengerSeatCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFDoorTrimCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRDoorTrimCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRearSeatCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCarpetsComments {
-            get {
-                return this.parmCarpetsCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCarpetsCommentsField, value) != true)) {
-                    this.parmCarpetsCommentsField = value;
-                    this.RaisePropertyChanged("parmCarpetsComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDashComments {
-            get {
-                return this.parmDashCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDashCommentsField, value) != true)) {
-                    this.parmDashCommentsField = value;
-                    this.RaisePropertyChanged("parmDashComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDriversSeatComments {
-            get {
-                return this.parmDriversSeatCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDriversSeatCommentsField, value) != true)) {
-                    this.parmDriversSeatCommentsField = value;
-                    this.RaisePropertyChanged("parmDriversSeatComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmInternalTrimComments {
-            get {
-                return this.parmInternalTrimCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmInternalTrimCommentsField, value) != true)) {
-                    this.parmInternalTrimCommentsField = value;
-                    this.RaisePropertyChanged("parmInternalTrimComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedCarpets {
-            get {
-                return this.parmIsDamagedCarpetsField;
-            }
-            set {
-                if ((this.parmIsDamagedCarpetsField.Equals(value) != true)) {
-                    this.parmIsDamagedCarpetsField = value;
-                    this.RaisePropertyChanged("parmIsDamagedCarpets");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDash {
-            get {
-                return this.parmIsDamagedDashField;
-            }
-            set {
-                if ((this.parmIsDamagedDashField.Equals(value) != true)) {
-                    this.parmIsDamagedDashField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDash");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedDriversSeat {
-            get {
-                return this.parmIsDamagedDriversSeatField;
-            }
-            set {
-                if ((this.parmIsDamagedDriversSeatField.Equals(value) != true)) {
-                    this.parmIsDamagedDriversSeatField = value;
-                    this.RaisePropertyChanged("parmIsDamagedDriversSeat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedInternalTrim {
-            get {
-                return this.parmIsDamagedInternalTrimField;
-            }
-            set {
-                if ((this.parmIsDamagedInternalTrimField.Equals(value) != true)) {
-                    this.parmIsDamagedInternalTrimField = value;
-                    this.RaisePropertyChanged("parmIsDamagedInternalTrim");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLFDoorTrim {
-            get {
-                return this.parmIsDamagedLFDoorTrimField;
-            }
-            set {
-                if ((this.parmIsDamagedLFDoorTrimField.Equals(value) != true)) {
-                    this.parmIsDamagedLFDoorTrimField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLFDoorTrim");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedLRDoorTrim {
-            get {
-                return this.parmIsDamagedLRDoorTrimField;
-            }
-            set {
-                if ((this.parmIsDamagedLRDoorTrimField.Equals(value) != true)) {
-                    this.parmIsDamagedLRDoorTrimField = value;
-                    this.RaisePropertyChanged("parmIsDamagedLRDoorTrim");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedPassengerSeat {
-            get {
-                return this.parmIsDamagedPassengerSeatField;
-            }
-            set {
-                if ((this.parmIsDamagedPassengerSeatField.Equals(value) != true)) {
-                    this.parmIsDamagedPassengerSeatField = value;
-                    this.RaisePropertyChanged("parmIsDamagedPassengerSeat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRFDoorTrim {
-            get {
-                return this.parmIsDamagedRFDoorTrimField;
-            }
-            set {
-                if ((this.parmIsDamagedRFDoorTrimField.Equals(value) != true)) {
-                    this.parmIsDamagedRFDoorTrimField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRFDoorTrim");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRRDoorTrim {
-            get {
-                return this.parmIsDamagedRRDoorTrimField;
-            }
-            set {
-                if ((this.parmIsDamagedRRDoorTrimField.Equals(value) != true)) {
-                    this.parmIsDamagedRRDoorTrimField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRRDoorTrim");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmIsDamagedRearSeat {
-            get {
-                return this.parmIsDamagedRearSeatField;
-            }
-            set {
-                if ((this.parmIsDamagedRearSeatField.Equals(value) != true)) {
-                    this.parmIsDamagedRearSeatField = value;
-                    this.RaisePropertyChanged("parmIsDamagedRearSeat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFDoorTrimComments {
-            get {
-                return this.parmLFDoorTrimCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFDoorTrimCommentsField, value) != true)) {
-                    this.parmLFDoorTrimCommentsField = value;
-                    this.RaisePropertyChanged("parmLFDoorTrimComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRDoorTrimComments {
-            get {
-                return this.parmLRDoorTrimCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRDoorTrimCommentsField, value) != true)) {
-                    this.parmLRDoorTrimCommentsField = value;
-                    this.RaisePropertyChanged("parmLRDoorTrimComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmPassengerSeatComments {
-            get {
-                return this.parmPassengerSeatCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmPassengerSeatCommentsField, value) != true)) {
-                    this.parmPassengerSeatCommentsField = value;
-                    this.RaisePropertyChanged("parmPassengerSeatComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFDoorTrimComments {
-            get {
-                return this.parmRFDoorTrimCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFDoorTrimCommentsField, value) != true)) {
-                    this.parmRFDoorTrimCommentsField = value;
-                    this.RaisePropertyChanged("parmRFDoorTrimComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRDoorTrimComments {
-            get {
-                return this.parmRRDoorTrimCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRDoorTrimCommentsField, value) != true)) {
-                    this.parmRRDoorTrimCommentsField = value;
-                    this.RaisePropertyChanged("parmRRDoorTrimComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRearSeatComments {
-            get {
-                return this.parmRearSeatCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRearSeatCommentsField, value) != true)) {
-                    this.parmRearSeatCommentsField = value;
-                    this.RaisePropertyChanged("parmRearSeatComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKMobiPassengerTyreConditionContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MZKMobiPassengerTyreConditionContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLFConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFDepthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLFMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLRConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRDepthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmLRMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRFConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFDepthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRFMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRRConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRDepthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRRMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmSpareConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareDepthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSpareMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFComments {
-            get {
-                return this.parmLFCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFCommentsField, value) != true)) {
-                    this.parmLFCommentsField = value;
-                    this.RaisePropertyChanged("parmLFComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLFCondition {
-            get {
-                return this.parmLFConditionField;
-            }
-            set {
-                if ((this.parmLFConditionField.Equals(value) != true)) {
-                    this.parmLFConditionField = value;
-                    this.RaisePropertyChanged("parmLFCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFDepth {
-            get {
-                return this.parmLFDepthField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFDepthField, value) != true)) {
-                    this.parmLFDepthField = value;
-                    this.RaisePropertyChanged("parmLFDepth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLFMake {
-            get {
-                return this.parmLFMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLFMakeField, value) != true)) {
-                    this.parmLFMakeField = value;
-                    this.RaisePropertyChanged("parmLFMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRComments {
-            get {
-                return this.parmLRCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRCommentsField, value) != true)) {
-                    this.parmLRCommentsField = value;
-                    this.RaisePropertyChanged("parmLRComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmLRCondition {
-            get {
-                return this.parmLRConditionField;
-            }
-            set {
-                if ((this.parmLRConditionField.Equals(value) != true)) {
-                    this.parmLRConditionField = value;
-                    this.RaisePropertyChanged("parmLRCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRDepth {
-            get {
-                return this.parmLRDepthField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRDepthField, value) != true)) {
-                    this.parmLRDepthField = value;
-                    this.RaisePropertyChanged("parmLRDepth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmLRMake {
-            get {
-                return this.parmLRMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmLRMakeField, value) != true)) {
-                    this.parmLRMakeField = value;
-                    this.RaisePropertyChanged("parmLRMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFComments {
-            get {
-                return this.parmRFCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFCommentsField, value) != true)) {
-                    this.parmRFCommentsField = value;
-                    this.RaisePropertyChanged("parmRFComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRFCondition {
-            get {
-                return this.parmRFConditionField;
-            }
-            set {
-                if ((this.parmRFConditionField.Equals(value) != true)) {
-                    this.parmRFConditionField = value;
-                    this.RaisePropertyChanged("parmRFCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFDepth {
-            get {
-                return this.parmRFDepthField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFDepthField, value) != true)) {
-                    this.parmRFDepthField = value;
-                    this.RaisePropertyChanged("parmRFDepth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRFMake {
-            get {
-                return this.parmRFMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRFMakeField, value) != true)) {
-                    this.parmRFMakeField = value;
-                    this.RaisePropertyChanged("parmRFMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRComments {
-            get {
-                return this.parmRRCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRCommentsField, value) != true)) {
-                    this.parmRRCommentsField = value;
-                    this.RaisePropertyChanged("parmRRComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmRRCondition {
-            get {
-                return this.parmRRConditionField;
-            }
-            set {
-                if ((this.parmRRConditionField.Equals(value) != true)) {
-                    this.parmRRConditionField = value;
-                    this.RaisePropertyChanged("parmRRCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRDepth {
-            get {
-                return this.parmRRDepthField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRDepthField, value) != true)) {
-                    this.parmRRDepthField = value;
-                    this.RaisePropertyChanged("parmRRDepth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRRMake {
-            get {
-                return this.parmRRMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRRMakeField, value) != true)) {
-                    this.parmRRMakeField = value;
-                    this.RaisePropertyChanged("parmRRMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareComments {
-            get {
-                return this.parmSpareCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareCommentsField, value) != true)) {
-                    this.parmSpareCommentsField = value;
-                    this.RaisePropertyChanged("parmSpareComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmSpareCondition {
-            get {
-                return this.parmSpareConditionField;
-            }
-            set {
-                if ((this.parmSpareConditionField.Equals(value) != true)) {
-                    this.parmSpareConditionField = value;
-                    this.RaisePropertyChanged("parmSpareCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareDepth {
-            get {
-                return this.parmSpareDepthField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareDepthField, value) != true)) {
-                    this.parmSpareDepthField = value;
-                    this.RaisePropertyChanged("parmSpareDepth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSpareMake {
-            get {
-                return this.parmSpareMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSpareMakeField, value) != true)) {
-                    this.parmSpareMakeField = value;
-                    this.RaisePropertyChanged("parmSpareMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkTasksContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+    public partial class MzkTechnicalTasksContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmCaseCategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCaseIDField;
+        private string parmCaseIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCaseServiceRecIdField;
+        private long parmCaseRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCategoryTypeField;
+        private long parmCaseServiceRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCollectionRecIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmConfirmedDueDateField;
+        private string parmContactPersonAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmContactPersonNameField;
@@ -5533,10 +445,10 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         private string parmContactPersonPhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustAddressField;
+        private string parmCustAccountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustIdField;
+        private string parmCustAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmCustNameField;
@@ -5548,19 +460,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         private Eqstra.DataProvider.AX.TIProxy.EEPActionStep parmEEPActionStepField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmProcessStepField;
+        private string parmEmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmProcessStepRecIDField;
+        private System.DateTime parmInspectionDueDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
+        private string parmServiceIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRegistrationNumField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmServiceRecIdField;
+        private long parmServiceRecIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmStatusField;
@@ -5569,19 +478,7 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         private System.DateTime parmStatusDueDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmTaskIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmUserIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkVehicleCollectionAction parmVehicleCollectionActionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleTypeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmCaseCategory {
@@ -5597,79 +494,53 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCaseID {
+        public string parmCaseId {
             get {
-                return this.parmCaseIDField;
+                return this.parmCaseIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmCaseIDField, value) != true)) {
-                    this.parmCaseIDField = value;
-                    this.RaisePropertyChanged("parmCaseID");
+                if ((object.ReferenceEquals(this.parmCaseIdField, value) != true)) {
+                    this.parmCaseIdField = value;
+                    this.RaisePropertyChanged("parmCaseId");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecId {
+        public long parmCaseRecID {
             get {
-                return this.parmCaseServiceRecIdField;
+                return this.parmCaseRecIDField;
             }
             set {
-                if ((this.parmCaseServiceRecIdField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIdField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecId");
+                if ((this.parmCaseRecIDField.Equals(value) != true)) {
+                    this.parmCaseRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseRecID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCategoryType {
+        public long parmCaseServiceRecID {
             get {
-                return this.parmCategoryTypeField;
+                return this.parmCaseServiceRecIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmCategoryTypeField, value) != true)) {
-                    this.parmCategoryTypeField = value;
-                    this.RaisePropertyChanged("parmCategoryType");
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCollectionRecId {
+        public string parmContactPersonAddress {
             get {
-                return this.parmCollectionRecIdField;
+                return this.parmContactPersonAddressField;
             }
             set {
-                if ((this.parmCollectionRecIdField.Equals(value) != true)) {
-                    this.parmCollectionRecIdField = value;
-                    this.RaisePropertyChanged("parmCollectionRecId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmComments {
-            get {
-                return this.parmCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCommentsField, value) != true)) {
-                    this.parmCommentsField = value;
-                    this.RaisePropertyChanged("parmComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmConfirmedDueDate {
-            get {
-                return this.parmConfirmedDueDateField;
-            }
-            set {
-                if ((this.parmConfirmedDueDateField.Equals(value) != true)) {
-                    this.parmConfirmedDueDateField = value;
-                    this.RaisePropertyChanged("parmConfirmedDueDate");
+                if ((object.ReferenceEquals(this.parmContactPersonAddressField, value) != true)) {
+                    this.parmContactPersonAddressField = value;
+                    this.RaisePropertyChanged("parmContactPersonAddress");
                 }
             }
         }
@@ -5701,6 +572,19 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCustAccount {
+            get {
+                return this.parmCustAccountField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCustAccountField, value) != true)) {
+                    this.parmCustAccountField = value;
+                    this.RaisePropertyChanged("parmCustAccount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmCustAddress {
             get {
                 return this.parmCustAddressField;
@@ -5709,19 +593,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
                 if ((object.ReferenceEquals(this.parmCustAddressField, value) != true)) {
                     this.parmCustAddressField = value;
                     this.RaisePropertyChanged("parmCustAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustId {
-            get {
-                return this.parmCustIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustIdField, value) != true)) {
-                    this.parmCustIdField = value;
-                    this.RaisePropertyChanged("parmCustId");
                 }
             }
         }
@@ -5766,66 +637,53 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmProcessStep {
+        public string parmEmail {
             get {
-                return this.parmProcessStepField;
+                return this.parmEmailField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmProcessStepField, value) != true)) {
-                    this.parmProcessStepField = value;
-                    this.RaisePropertyChanged("parmProcessStep");
+                if ((object.ReferenceEquals(this.parmEmailField, value) != true)) {
+                    this.parmEmailField = value;
+                    this.RaisePropertyChanged("parmEmail");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmProcessStepRecID {
+        public System.DateTime parmInspectionDueDate {
             get {
-                return this.parmProcessStepRecIDField;
+                return this.parmInspectionDueDateField;
             }
             set {
-                if ((this.parmProcessStepRecIDField.Equals(value) != true)) {
-                    this.parmProcessStepRecIDField = value;
-                    this.RaisePropertyChanged("parmProcessStepRecID");
+                if ((this.parmInspectionDueDateField.Equals(value) != true)) {
+                    this.parmInspectionDueDateField = value;
+                    this.RaisePropertyChanged("parmInspectionDueDate");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
+        public string parmServiceId {
             get {
-                return this.parmRecIDField;
+                return this.parmServiceIdField;
             }
             set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
+                if ((object.ReferenceEquals(this.parmServiceIdField, value) != true)) {
+                    this.parmServiceIdField = value;
+                    this.RaisePropertyChanged("parmServiceId");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRegistrationNum {
+        public long parmServiceRecID {
             get {
-                return this.parmRegistrationNumField;
+                return this.parmServiceRecIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.parmRegistrationNumField, value) != true)) {
-                    this.parmRegistrationNumField = value;
-                    this.RaisePropertyChanged("parmRegistrationNum");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmServiceRecId {
-            get {
-                return this.parmServiceRecIdField;
-            }
-            set {
-                if ((this.parmServiceRecIdField.Equals(value) != true)) {
-                    this.parmServiceRecIdField = value;
-                    this.RaisePropertyChanged("parmServiceRecId");
+                if ((this.parmServiceRecIDField.Equals(value) != true)) {
+                    this.parmServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmServiceRecID");
                 }
             }
         }
@@ -5857,32 +715,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmTaskID {
-            get {
-                return this.parmTaskIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmTaskIDField, value) != true)) {
-                    this.parmTaskIDField = value;
-                    this.RaisePropertyChanged("parmTaskID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmUserID {
             get {
                 return this.parmUserIDField;
@@ -5891,32 +723,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
                 if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
                     this.parmUserIDField = value;
                     this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleCollectionAction parmVehicleCollectionAction {
-            get {
-                return this.parmVehicleCollectionActionField;
-            }
-            set {
-                if ((this.parmVehicleCollectionActionField.Equals(value) != true)) {
-                    this.parmVehicleCollectionActionField = value;
-                    this.RaisePropertyChanged("parmVehicleCollectionAction");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleType {
-            get {
-                return this.parmVehicleTypeField;
-            }
-            set {
-                if ((this.parmVehicleTypeField.Equals(value) != true)) {
-                    this.parmVehicleTypeField = value;
-                    this.RaisePropertyChanged("parmVehicleType");
                 }
             }
         }
@@ -5929,16 +735,35 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     public partial class MzkValidateUserContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmCompanyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmCompanyNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmUserIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parmUserNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAddress {
+            get {
+                return this.parmAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmAddressField, value) != true)) {
+                    this.parmAddressField = value;
+                    this.RaisePropertyChanged("parmAddress");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmCompany {
@@ -5962,6 +787,19 @@ namespace Eqstra.DataProvider.AX.TIProxy {
                 if ((object.ReferenceEquals(this.parmCompanyNameField, value) != true)) {
                     this.parmCompanyNameField = value;
                     this.RaisePropertyChanged("parmCompanyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginType {
+            get {
+                return this.parmLoginTypeField;
+            }
+            set {
+                if ((this.parmLoginTypeField.Equals(value) != true)) {
+                    this.parmLoginTypeField = value;
+                    this.RaisePropertyChanged("parmLoginType");
                 }
             }
         }
@@ -5993,529 +831,21 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkVehicleDetailsContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkVehicleDetailsContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmChassisNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmColorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmEngineNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmLisenceDiscCurrentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmMakeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal parmODOReadingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRegNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmSparseKeyShownField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.NoYes parmSparseKeyTestedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int parmTableIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInsRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmlisenceDiscExpiryDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmyearField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmChassisNumber {
-            get {
-                return this.parmChassisNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmChassisNumberField, value) != true)) {
-                    this.parmChassisNumberField = value;
-                    this.RaisePropertyChanged("parmChassisNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmColor {
-            get {
-                return this.parmColorField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmColorField, value) != true)) {
-                    this.parmColorField = value;
-                    this.RaisePropertyChanged("parmColor");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmEngineNumber {
-            get {
-                return this.parmEngineNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmEngineNumberField, value) != true)) {
-                    this.parmEngineNumberField = value;
-                    this.RaisePropertyChanged("parmEngineNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmLisenceDiscCurrent {
-            get {
-                return this.parmLisenceDiscCurrentField;
-            }
-            set {
-                if ((this.parmLisenceDiscCurrentField.Equals(value) != true)) {
-                    this.parmLisenceDiscCurrentField = value;
-                    this.RaisePropertyChanged("parmLisenceDiscCurrent");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmMake {
-            get {
-                return this.parmMakeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmMakeField, value) != true)) {
-                    this.parmMakeField = value;
-                    this.RaisePropertyChanged("parmMake");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmModel {
-            get {
-                return this.parmModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmModelField, value) != true)) {
-                    this.parmModelField = value;
-                    this.RaisePropertyChanged("parmModel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal parmODOReading {
-            get {
-                return this.parmODOReadingField;
-            }
-            set {
-                if ((this.parmODOReadingField.Equals(value) != true)) {
-                    this.parmODOReadingField = value;
-                    this.RaisePropertyChanged("parmODOReading");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRegNo {
-            get {
-                return this.parmRegNoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRegNoField, value) != true)) {
-                    this.parmRegNoField = value;
-                    this.RaisePropertyChanged("parmRegNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmSparseKeyShown {
-            get {
-                return this.parmSparseKeyShownField;
-            }
-            set {
-                if ((this.parmSparseKeyShownField.Equals(value) != true)) {
-                    this.parmSparseKeyShownField = value;
-                    this.RaisePropertyChanged("parmSparseKeyShown");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.NoYes parmSparseKeyTested {
-            get {
-                return this.parmSparseKeyTestedField;
-            }
-            set {
-                if ((this.parmSparseKeyTestedField.Equals(value) != true)) {
-                    this.parmSparseKeyTestedField = value;
-                    this.RaisePropertyChanged("parmSparseKeyTested");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int parmTableId {
-            get {
-                return this.parmTableIdField;
-            }
-            set {
-                if ((this.parmTableIdField.Equals(value) != true)) {
-                    this.parmTableIdField = value;
-                    this.RaisePropertyChanged("parmTableId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInsRecID {
-            get {
-                return this.parmVehicleInsRecIDField;
-            }
-            set {
-                if ((this.parmVehicleInsRecIDField.Equals(value) != true)) {
-                    this.parmVehicleInsRecIDField = value;
-                    this.RaisePropertyChanged("parmVehicleInsRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleType {
-            get {
-                return this.parmVehicleTypeField;
-            }
-            set {
-                if ((this.parmVehicleTypeField.Equals(value) != true)) {
-                    this.parmVehicleTypeField = value;
-                    this.RaisePropertyChanged("parmVehicleType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmlisenceDiscExpiryDate {
-            get {
-                return this.parmlisenceDiscExpiryDateField;
-            }
-            set {
-                if ((this.parmlisenceDiscExpiryDateField.Equals(value) != true)) {
-                    this.parmlisenceDiscExpiryDateField = value;
-                    this.RaisePropertyChanged("parmlisenceDiscExpiryDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmyear {
-            get {
-                return this.parmyearField;
-            }
-            set {
-                if ((this.parmyearField.Equals(value) != true)) {
-                    this.parmyearField = value;
-                    this.RaisePropertyChanged("parmyear");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKVehicleInspectionTableContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MZKVehicleInspectionTableContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCaseIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmCompanyRepSignDateTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustomerCommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmCustomerRepSignDateTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmGeneralConditionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MZKRecommendationEnum parmRecommendationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmTaskIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmVehicleInspectorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleTypeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCaseId {
-            get {
-                return this.parmCaseIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCaseIdField, value) != true)) {
-                    this.parmCaseIdField = value;
-                    this.RaisePropertyChanged("parmCaseId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmComments {
-            get {
-                return this.parmCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCommentsField, value) != true)) {
-                    this.parmCommentsField = value;
-                    this.RaisePropertyChanged("parmComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmCompanyRepSignDateTime {
-            get {
-                return this.parmCompanyRepSignDateTimeField;
-            }
-            set {
-                if ((this.parmCompanyRepSignDateTimeField.Equals(value) != true)) {
-                    this.parmCompanyRepSignDateTimeField = value;
-                    this.RaisePropertyChanged("parmCompanyRepSignDateTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustomerComments {
-            get {
-                return this.parmCustomerCommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustomerCommentsField, value) != true)) {
-                    this.parmCustomerCommentsField = value;
-                    this.RaisePropertyChanged("parmCustomerComments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmCustomerRepSignDateTime {
-            get {
-                return this.parmCustomerRepSignDateTimeField;
-            }
-            set {
-                if ((this.parmCustomerRepSignDateTimeField.Equals(value) != true)) {
-                    this.parmCustomerRepSignDateTimeField = value;
-                    this.RaisePropertyChanged("parmCustomerRepSignDateTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKConditionEnum parmGeneralCondition {
-            get {
-                return this.parmGeneralConditionField;
-            }
-            set {
-                if ((this.parmGeneralConditionField.Equals(value) != true)) {
-                    this.parmGeneralConditionField = value;
-                    this.RaisePropertyChanged("parmGeneralCondition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MZKRecommendationEnum parmRecommendation {
-            get {
-                return this.parmRecommendationField;
-            }
-            set {
-                if ((this.parmRecommendationField.Equals(value) != true)) {
-                    this.parmRecommendationField = value;
-                    this.RaisePropertyChanged("parmRecommendation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmTaskId {
-            get {
-                return this.parmTaskIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmTaskIdField, value) != true)) {
-                    this.parmTaskIdField = value;
-                    this.RaisePropertyChanged("parmTaskId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmVehicleInspector {
-            get {
-                return this.parmVehicleInspectorField;
-            }
-            set {
-                if ((this.parmVehicleInspectorField.Equals(value) != true)) {
-                    this.parmVehicleInspectorField = value;
-                    this.RaisePropertyChanged("parmVehicleInspector");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleType parmVehicleType {
-            get {
-                return this.parmVehicleTypeField;
-            }
-            set {
-                if ((this.parmVehicleTypeField.Equals(value) != true)) {
-                    this.parmVehicleTypeField = value;
-                    this.RaisePropertyChanged("parmVehicleType");
-                }
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NoYes", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum NoYes : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkLoginType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public enum MzkLoginType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        No = 0,
+        Driver = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Yes = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCommercialMechanicalCondition", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MzkCommercialMechanicalCondition : int {
+        Courier = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Engine = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        FrontSuppression = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RearSuppression = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Steering = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Exhaust = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Battery = 5,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKEngineTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MZKEngineTypeEnum : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Petrol = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Diesel = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        LPG = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MainsBattery = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKConditionEnum", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MZKConditionEnum : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Poor = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Fair = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Good = 3,
+        Customer = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         None = 0,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkVehicleType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MzkVehicleType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Passenger = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Commercial = 1,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -6662,43 +992,33 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ReceiveFuelCard = 134,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkVehicleCollectionAction", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MzkVehicleCollectionAction : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionDetail = 0,
+        AwaitDriverCollection = 135,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitVendorSelection = 1,
+        AwaitDeliveryConfirmation = 136,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionConfirmation = 2,
+        AwaitCourierCollection = 137,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionDataCapture = 3,
+        AwaitInvoice = 138,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDamageConfirmation = 4,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MZKRecommendationEnum", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MZKRecommendationEnum : int {
+        CaptureETagReplacementReason = 139,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Sell = 1,
+        ReceiveETag = 140,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotFeasible = 2,
+        AwaitDeliverytoHyper = 141,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Retain = 3,
+        ProvideVehicleInspectionDetails = 142,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
+        AwaitTechnicalInspection = 143,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -7169,249 +1489,100 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIProxy.MzkVehicleInspectionService")]
-    public interface MzkVehicleInspectionService {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIProxy.MzkTechnicalInspection")]
+    public interface MzkTechnicalInspection {
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialMechConditionRequest) of message MzkVehicleInspectionServiceEditCommercialMechConditionRequest does not match the default value (editCommercialMechCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
-            "e")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionAifFaul" +
-            "tFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetUserDetailsRequest) of message MzkTechnicalInspectionGetUserDetailsRequest does not match the default value (getUserDetails)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getUserDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialMechConditionRespons" +
-            "e")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceReadVehicleDetailsRequest) of message MzkVehicleInspectionServiceReadVehicleDetailsRequest does not match the default value (readVehicleDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse readVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionValidateUserRequest) of message MzkTechnicalInspectionValidateUserRequest does not match the default value (validateUser)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse validateUser(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/readVehicleDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse> readVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialChassisBodyRequest) of message MzkVehicleInspectionServiceEditCommercialChassisBodyRequest does not match the default value (editCommercialChassisBody)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetSubComponentsRequest) of message MzkTechnicalInspectionGetSubComponentsRequest does not match the default value (getSubComponents)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBody", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialChassisBodyResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateStatusListRequest) of message MzkVehicleInspectionServiceUpdateStatusListRequest does not match the default value (updateStatusList)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionSaveImageRequest) of message MzkTechnicalInspectionSaveImageRequest does not match the default value (saveImage)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/saveImageAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse saveImage(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateStatusList", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateStatusListResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerTyreConditionRequest) of message MzkVehicleInspectionServiceEditPassengerTyreConditionRequest does not match the default value (editPassengerTyreCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreConditionResponse" +
-            "")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreConditionAifFault" +
-            "Fault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse editPassengerTyreCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionInsertTechnicalInspectionRequest) of message MzkTechnicalInspectionInsertTechnicalInspectionRequest does not match the default value (insertTechnicalInspection)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse insertTechnicalInspection(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTyreConditionResponse" +
-            "")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse> editPassengerTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerAccessoriesRequest) of message MzkVehicleInspectionServiceEditPassengerAccessoriesRequest does not match the default value (editPassengerAccessories)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesAifFaultFa" +
-            "ult", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetTasksRequest) of message MzkTechnicalInspectionGetTasksRequest does not match the default value (getTasks)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerAccessoriesResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceValidateUserRequest) of message MzkVehicleInspectionServiceValidateUserRequest does not match the default value (validateUser)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionUpdateStatusListRequest) of message MzkTechnicalInspectionUpdateStatusListRequest does not match the default value (updateStatusList)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/validateUser", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/validateUserResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest) of message MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest does not match the default value (editCommercialTrimInterior)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInteriorResponse" +
-            "")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInteriorAifFault" +
-            "Fault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse editCommercialTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialTrimInteriorResponse" +
-            "")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse> editCommercialTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialTyreConditionRequest) of message MzkVehicleInspectionServiceEditCommercialTyreConditionRequest does not match the default value (editCommercialTyreCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTyreCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialTyreConditionRespons" +
-            "e")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTyreConditionAifFaul" +
-            "tFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse editCommercialTyreCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialTyreCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialTyreConditionRespons" +
-            "e")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse> editCommercialTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleInspectionRequest) of message MzkVehicleInspectionServiceEditVehicleInspectionRequest does not match the default value (editVehicleInspection)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionAifFaultFault" +
-            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspection", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleInspectionResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditVehicleDetailsRequest) of message MzkVehicleInspectionServiceEditVehicleDetailsRequest does not match the default value (editVehicleDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editVehicleDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetTasksRequest) of message MzkVehicleInspectionServiceGetTasksRequest does not match the default value (getTasks)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getTasks", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getTasksResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditMechConditionRequest) of message MzkVehicleInspectionServiceEditMechConditionRequest does not match the default value (editMechCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editMechConditionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editMechConditionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse editMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editMechConditionResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse> editMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerMechConditionRequest) of message MzkVehicleInspectionServiceEditPassengerMechConditionRequest does not match the default value (editPassengerMechCondition)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
-            "")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionAifFault" +
-            "Fault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechCondition", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerMechConditionResponse" +
-            "")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetCustDetailsRequest) of message MzkVehicleInspectionServiceGetCustDetailsRequest does not match the default value (getCustDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getCustDetails", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getCustDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest) of message MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest does not match the default value (createVehicleInspectionTable)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTable", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTableRespon" +
-            "se")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTableAifFau" +
-            "ltFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse createVehicleInspectionTable(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTable", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/createVehicleInspectionTableRespon" +
-            "se")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse> createVehicleInspectionTableAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerBodyworkRequest) of message MzkVehicleInspectionServiceEditPassengerBodyworkRequest does not match the default value (editPassengerBodywork)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkAifFaultFault" +
-            "", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodywork", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerBodyworkResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditGlassRequest) of message MzkVehicleInspectionServiceEditGlassRequest does not match the default value (editGlass)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editGlassAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editGlass", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editGlassResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest) of message MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest does not match the default value (editPassengerTrimInterior)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInterior", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editPassengerTrimInteriorResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceGetInspectionHistoryRequest) of message MzkVehicleInspectionServiceGetInspectionHistoryRequest does not match the default value (getInspectionHistory)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistory", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/getInspectionHistoryResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceEditCommercialAccessoriesRequest) of message MzkVehicleInspectionServiceEditCommercialAccessoriesRequest does not match the default value (editCommercialAccessories)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesAifFaultF" +
-            "ault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessories", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/editCommercialAccessoriesResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkVehicleInspectionServiceUpdateConfirmationDateRequest) of message MzkVehicleInspectionServiceUpdateConfirmationDateRequest does not match the default value (updateConfirmationDate)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateAifFaultFaul" +
-            "t", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDate", ReplyAction="http://tempuri.org/MzkVehicleInspectionService/updateConfirmationDateResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition;
+        public string _userID;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest() {
+        public MzkTechnicalInspectionGetUserDetailsRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
+        public MzkTechnicalInspectionGetUserDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
             this.CallContext = CallContext;
-            this._lstCommercialMechCondition = _lstCommercialMechCondition;
-            this._company = _company;
+            this._userID = _userID;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialMechConditionResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
         
-        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse() {
+        public MzkTechnicalInspectionGetUserDetailsResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] response) {
+        public MzkTechnicalInspectionGetUserDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -7419,218 +1590,8 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceReadVehicleDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceReadVehicleDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _caseId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceReadVehicleDetailsRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceReadVehicleDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _caseId, string _company) {
-            this.CallContext = CallContext;
-            this._caseId = _caseId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceReadVehicleDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceReadVehicleDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response;
-        
-        public MzkVehicleInspectionServiceReadVehicleDetailsResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceReadVehicleDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            this.CallContext = CallContext;
-            this._lstCommercialChassisBody = _lstCommercialChassisBody;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialChassisBodyResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialChassisBodyResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response;
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialChassisBodyResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateStatusListRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceUpdateStatusListRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            this.CallContext = CallContext;
-            this._lstTasks = _lstTasks;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateStatusListResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
-        
-        public MzkVehicleInspectionServiceUpdateStatusListResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTyreConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTyreConditionRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] _lstPassengerTyreCondition;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditPassengerTyreConditionRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerTyreConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] _lstPassengerTyreCondition, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerTyreCondition = _lstPassengerTyreCondition;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTyreConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTyreConditionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerTyreConditionResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerTyreConditionResponse(Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerAccessory = _lstPassengerAccessory;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerAccessoriesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceValidateUserRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
@@ -7641,10 +1602,10 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _password;
         
-        public MzkVehicleInspectionServiceValidateUserRequest() {
+        public MzkTechnicalInspectionValidateUserRequest() {
         }
         
-        public MzkVehicleInspectionServiceValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+        public MzkTechnicalInspectionValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
             this.CallContext = CallContext;
             this._userID = _userID;
             this._password = _password;
@@ -7654,16 +1615,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceValidateUserResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
+        public bool response;
         
-        public MzkVehicleInspectionServiceValidateUserResponse() {
+        public MzkTechnicalInspectionValidateUserResponse() {
         }
         
-        public MzkVehicleInspectionServiceValidateUserResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
+        public MzkTechnicalInspectionValidateUserResponse(bool response) {
             this.response = response;
         }
     }
@@ -7671,24 +1632,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetSubComponentsRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] _lstCommercialtrimInterior;
+        public long[] _lstCaseService;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest() {
+        public MzkTechnicalInspectionGetSubComponentsRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] _lstCommercialtrimInterior, string _company) {
+        public MzkTechnicalInspectionGetSubComponentsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
             this.CallContext = CallContext;
-            this._lstCommercialtrimInterior = _lstCommercialtrimInterior;
+            this._lstCaseService = _lstCaseService;
             this._company = _company;
         }
     }
@@ -7696,16 +1657,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetSubComponentsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response;
         
-        public MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse() {
+        public MzkTechnicalInspectionGetSubComponentsResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse(Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] response) {
+        public MzkTechnicalInspectionGetSubComponentsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response) {
             this.response = response;
         }
     }
@@ -7713,24 +1674,55 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialTyreConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialTyreConditionRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] _lstCommercialTyreCondition;
+        public Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract[] _imageInfo;
+        
+        public MzkTechnicalInspectionSaveImageRequest() {
+        }
+        
+        public MzkTechnicalInspectionSaveImageRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract[] _imageInfo) {
+            this.CallContext = CallContext;
+            this._imageInfo = _imageInfo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageResponse {
+        
+        public MzkTechnicalInspectionSaveImageResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] _caseServiceAuthorization;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditCommercialTyreConditionRequest() {
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialTyreConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] _lstCommercialTyreCondition, string _company) {
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] _caseServiceAuthorization, string _company) {
             this.CallContext = CallContext;
-            this._lstCommercialTyreCondition = _lstCommercialTyreCondition;
+            this._caseServiceAuthorization = _caseServiceAuthorization;
             this._company = _company;
         }
     }
@@ -7738,16 +1730,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialTyreConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialTyreConditionResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] response;
         
-        public MzkVehicleInspectionServiceEditCommercialTyreConditionResponse() {
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditCommercialTyreConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] response) {
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse(Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] response) {
             this.response = response;
         }
     }
@@ -7755,62 +1747,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleInspectionRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp;
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            this.CallContext = CallContext;
-            this._lstVehicleInsp = _lstVehicleInsp;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleInspectionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response;
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditVehicleInspectionResponse(Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails;
+        public string _userId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditVehicleDetailsRequest() {
+        public MzkTechnicalInspectionGetTasksRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditVehicleDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
+        public MzkTechnicalInspectionGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
             this.CallContext = CallContext;
-            this._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
+            this._userId = _userId;
             this._company = _company;
         }
     }
@@ -7818,16 +1772,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditVehicleDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditVehicleDetailsResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
         
-        public MzkVehicleInspectionServiceEditVehicleDetailsResponse() {
+        public MzkTechnicalInspectionGetTasksResponse() {
         }
         
-        public MzkVehicleInspectionServiceEditVehicleDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] response) {
+        public MzkTechnicalInspectionGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
             this.response = response;
         }
     }
@@ -7835,427 +1789,22 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetTasksRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _company;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _userID;
-        
-        public MzkVehicleInspectionServiceGetTasksRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
-            this.CallContext = CallContext;
-            this._company = _company;
-            this._userID = _userID;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetTasksResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
-        
-        public MzkVehicleInspectionServiceGetTasksResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditMechConditionRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract[] _lstMechCondition;
-        
-        public MzkVehicleInspectionServiceEditMechConditionRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract[] _lstMechCondition) {
-            this.CallContext = CallContext;
-            this._lstMechCondition = _lstMechCondition;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditMechConditionResponse {
-        
-        public MzkVehicleInspectionServiceEditMechConditionResponse() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest() {
+        public MzkTechnicalInspectionUpdateStatusListRequest() {
         }
         
-        public MzkVehicleInspectionServiceEditPassengerMechConditionRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerMechCondition = _lstPassengerMechCondition;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerMechConditionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerMechConditionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerMechConditionResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetCustDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _custId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceGetCustDetailsRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceGetCustDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            this.CallContext = CallContext;
-            this._custId = _custId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetCustDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetCustDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response;
-        
-        public MzkVehicleInspectionServiceGetCustDetailsResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceGetCustDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract contract;
-        
-        public MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract contract) {
-            this.CallContext = CallContext;
-            this.contract = contract;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public long response;
-        
-        public MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse(long response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerBodywork = _lstPassengerBodywork;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerBodyworkResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerBodyworkResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerBodyworkResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditGlassRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditGlassRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditGlassRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
-            this.CallContext = CallContext;
-            this._lstGlass = _lstGlass;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditGlassResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditGlassResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response;
-        
-        public MzkVehicleInspectionServiceEditGlassResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditGlassResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
-            this.CallContext = CallContext;
-            this._lstPassengerTrimInterior = _lstPassengerTrimInterior;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response;
-        
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetInspectionHistoryRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _regNo;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            this.CallContext = CallContext;
-            this._regNo = _regNo;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceGetInspectionHistoryResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceGetInspectionHistoryResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response;
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceGetInspectionHistoryResponse(Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            this.CallContext = CallContext;
-            this._lstCommercialAccessory = _lstCommercialAccessory;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceEditCommercialAccessoriesResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceEditCommercialAccessoriesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response;
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse() {
-        }
-        
-        public MzkVehicleInspectionServiceEditCommercialAccessoriesResponse(Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest() {
-        }
-        
-        public MzkVehicleInspectionServiceUpdateConfirmationDateRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
+        public MzkTechnicalInspectionUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
             this.CallContext = CallContext;
             this._lstTasks = _lstTasks;
             this._company = _company;
@@ -8265,632 +1814,229 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkVehicleInspectionServiceUpdateConfirmationDateResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkVehicleInspectionServiceUpdateConfirmationDateResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
         
-        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse() {
+        public MzkTechnicalInspectionUpdateStatusListResponse() {
         }
         
-        public MzkVehicleInspectionServiceUpdateConfirmationDateResponse(Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] response) {
+        public MzkTechnicalInspectionUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
             this.response = response;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface MzkVehicleInspectionServiceChannel : Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService, System.ServiceModel.IClientChannel {
+    public interface MzkTechnicalInspectionChannel : Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MzkVehicleInspectionServiceClient : System.ServiceModel.ClientBase<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService>, Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService {
+    public partial class MzkTechnicalInspectionClient : System.ServiceModel.ClientBase<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection>, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection {
         
-        public MzkVehicleInspectionServiceClient() {
+        public MzkTechnicalInspectionClient() {
         }
         
-        public MzkVehicleInspectionServiceClient(string endpointConfigurationName) : 
+        public MzkTechnicalInspectionClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public MzkVehicleInspectionServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public MzkTechnicalInspectionClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public MzkVehicleInspectionServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MzkTechnicalInspectionClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public MzkVehicleInspectionServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MzkTechnicalInspectionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
-            return base.Channel.editCommercialMechCondition(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetails(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] editCommercialMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract getUserDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechCondition(inValue);
+            inValue._userID = _userID;
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetails(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest request) {
-            return base.Channel.editCommercialMechConditionAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetailsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse> editCommercialMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract[] _lstCommercialMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialMechCondition = _lstCommercialMechCondition;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialMechConditionAsync(inValue);
+            inValue._userID = _userID;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetailsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.readVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest request) {
-            return base.Channel.readVehicleDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] readVehicleDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _caseId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._caseId = _caseId;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).readVehicleDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.readVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest request) {
-            return base.Channel.readVehicleDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse> readVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _caseId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._caseId = _caseId;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).readVehicleDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
-            return base.Channel.editCommercialChassisBody(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] editCommercialChassisBody(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBody(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest request) {
-            return base.Channel.editCommercialChassisBodyAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse> editCommercialChassisBodyAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract[] _lstCommercialChassisBody, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialChassisBody = _lstCommercialChassisBody;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialChassisBodyAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
-            return base.Channel.updateStatusList(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusList(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest request) {
-            return base.Channel.updateStatusListAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateStatusListAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTyreCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest request) {
-            return base.Channel.editPassengerTyreCondition(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] editPassengerTyreCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] _lstPassengerTyreCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerTyreCondition = _lstPassengerTyreCondition;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTyreCondition(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest request) {
-            return base.Channel.editPassengerTyreConditionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse> editPassengerTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract[] _lstPassengerTyreCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerTyreCondition = _lstPassengerTyreCondition;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTyreConditionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
-            return base.Channel.editPassengerAccessories(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] editPassengerAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerAccessory = _lstPassengerAccessory;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessories(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest request) {
-            return base.Channel.editPassengerAccessoriesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse> editPassengerAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract[] _lstPassengerAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerAccessory = _lstPassengerAccessory;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerAccessoriesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUser(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUser(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
             return base.Channel.validateUser(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
+        public bool validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
             inValue.CallContext = CallContext;
             inValue._userID = _userID;
             inValue._password = _password;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUser(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUser(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest request) {
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
             return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
             inValue.CallContext = CallContext;
             inValue._userID = _userID;
             inValue._password = _password;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).validateUserAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest request) {
-            return base.Channel.editCommercialTrimInterior(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
+            return base.Channel.getSubComponents(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] editCommercialTrimInterior(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] _lstCommercialtrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] getSubComponents(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialtrimInterior = _lstCommercialtrimInterior;
+            inValue._lstCaseService = _lstCaseService;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialTrimInterior(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponents(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest request) {
-            return base.Channel.editCommercialTrimInteriorAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
+            return base.Channel.getSubComponentsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse> editCommercialTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract[] _lstCommercialtrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialtrimInterior = _lstCommercialtrimInterior;
+            inValue._lstCaseService = _lstCaseService;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialTrimInteriorAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponentsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialTyreCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest request) {
-            return base.Channel.editCommercialTyreCondition(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.saveImage(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest request) {
+            return base.Channel.saveImage(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] editCommercialTyreCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] _lstCommercialTyreCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest();
+        public void saveImage(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract[] _imageInfo) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialTyreCondition = _lstCommercialTyreCondition;
+            inValue._imageInfo = _imageInfo;
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).saveImage(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.saveImageAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest request) {
+            return base.Channel.saveImageAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract[] _imageInfo) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageRequest();
+            inValue.CallContext = CallContext;
+            inValue._imageInfo = _imageInfo;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).saveImageAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.insertTechnicalInspection(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
+            return base.Channel.insertTechnicalInspection(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] insertTechnicalInspection(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] _caseServiceAuthorization, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
+            inValue.CallContext = CallContext;
+            inValue._caseServiceAuthorization = _caseServiceAuthorization;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialTyreCondition(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).insertTechnicalInspection(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest request) {
-            return base.Channel.editCommercialTyreConditionAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.insertTechnicalInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
+            return base.Channel.insertTechnicalInspectionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse> editCommercialTyreConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract[] _lstCommercialTyreCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract[] _caseServiceAuthorization, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCommercialTyreCondition = _lstCommercialTyreCondition;
+            inValue._caseServiceAuthorization = _caseServiceAuthorization;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialTyreConditionAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).insertTechnicalInspectionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
-            return base.Channel.editVehicleInspection(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] editVehicleInspection(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstVehicleInsp = _lstVehicleInsp;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspection(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest request) {
-            return base.Channel.editVehicleInspectionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse> editVehicleInspectionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract[] _lstVehicleInsp) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstVehicleInsp = _lstVehicleInsp;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleInspectionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
-            return base.Channel.editVehicleDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] editVehicleDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest request) {
-            return base.Channel.editVehicleDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse> editVehicleDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract[] _lstPassengerVehicleDetails, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerVehicleDetails = _lstPassengerVehicleDetails;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editVehicleDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
             return base.Channel.getTasks(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
             inValue.CallContext = CallContext;
+            inValue._userId = _userId;
             inValue._company = _company;
-            inValue._userID = _userID;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasks(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasks(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest request) {
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
             return base.Channel.getTasksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _company, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
             inValue.CallContext = CallContext;
+            inValue._userId = _userId;
             inValue._company = _company;
-            inValue._userID = _userID;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getTasksAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest request) {
-            return base.Channel.editMechCondition(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusList(request);
         }
         
-        public void editMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract[] _lstMechCondition) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstMechCondition = _lstMechCondition;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editMechCondition(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest request) {
-            return base.Channel.editMechConditionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse> editMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMechanicalConditionContract[] _lstMechCondition) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstMechCondition = _lstMechCondition;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editMechConditionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
-            return base.Channel.editPassengerMechCondition(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] editPassengerMechCondition(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechCondition(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest request) {
-            return base.Channel.editPassengerMechConditionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse> editPassengerMechConditionAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract[] _lstPassengerMechCondition, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerMechCondition = _lstPassengerMechCondition;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerMechConditionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetails(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
-            return base.Channel.getCustDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract[] getCustDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._custId = _custId;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest request) {
-            return base.Channel.getCustDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse> getCustDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _custId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._custId = _custId;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getCustDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.createVehicleInspectionTable(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest request) {
-            return base.Channel.createVehicleInspectionTable(request);
-        }
-        
-        public long createVehicleInspectionTable(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract contract) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest();
-            inValue.CallContext = CallContext;
-            inValue.contract = contract;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).createVehicleInspectionTable(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.createVehicleInspectionTableAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest request) {
-            return base.Channel.createVehicleInspectionTableAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse> createVehicleInspectionTableAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract contract) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableRequest();
-            inValue.CallContext = CallContext;
-            inValue.contract = contract;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).createVehicleInspectionTableAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
-            return base.Channel.editPassengerBodywork(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] editPassengerBodywork(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerBodywork = _lstPassengerBodywork;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodywork(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest request) {
-            return base.Channel.editPassengerBodyworkAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse> editPassengerBodyworkAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract[] _lstPassengerBodywork, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerBodywork = _lstPassengerBodywork;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerBodyworkAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlass(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
-            return base.Channel.editGlass(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] editGlass(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstGlass = _lstGlass;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlass(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editGlassAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest request) {
-            return base.Channel.editGlassAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse> editGlassAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract[] _lstGlass, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstGlass = _lstGlass;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editGlassAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
-            return base.Channel.editPassengerTrimInterior(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] editPassengerTrimInterior(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInterior(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest request) {
-            return base.Channel.editPassengerTrimInteriorAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse> editPassengerTrimInteriorAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract[] _lstPassengerTrimInterior, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstPassengerTrimInterior = _lstPassengerTrimInterior;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editPassengerTrimInteriorAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
-            return base.Channel.getInspectionHistory(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract[] getInspectionHistory(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
-            inValue.CallContext = CallContext;
-            inValue._regNo = _regNo;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistory(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest request) {
-            return base.Channel.getInspectionHistoryAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse> getInspectionHistoryAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _regNo, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryRequest();
-            inValue.CallContext = CallContext;
-            inValue._regNo = _regNo;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).getInspectionHistoryAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
-            return base.Channel.editCommercialAccessories(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] editCommercialAccessories(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialAccessory = _lstCommercialAccessory;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessories(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest request) {
-            return base.Channel.editCommercialAccessoriesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse> editCommercialAccessoriesAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract[] _lstCommercialAccessory, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstCommercialAccessory = _lstCommercialAccessory;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).editCommercialAccessoriesAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
-            return base.Channel.updateConfirmationDate(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] updateConfirmationDate(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
             inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDate(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusList(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService.updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest request) {
-            return base.Channel.updateConfirmationDateAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse> updateConfirmationDateAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
             inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionService)(this)).updateConfirmationDateAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
         }
     }
 }

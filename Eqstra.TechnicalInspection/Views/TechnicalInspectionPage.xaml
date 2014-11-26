@@ -46,6 +46,54 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ListViewItemStyle2"
+               TargetType="ListViewItem">
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="TabNavigation"
+                    Value="Local" />
+            <Setter Property="IsHoldingEnabled"
+                    Value="True" />
+            <Setter Property="Margin"
+                    Value="0,0,18,2" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Top" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}"
+                                               CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}"
+                                               ContentMargin="4"
+                                               ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}"
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               FocusBorderBrush="{ThemeResource ListViewItemFocusBorderThemeBrush}"
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               Padding="{TemplateBinding Padding}"
+                                               PointerOverBackgroundMargin="1"
+                                               PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                               PointerOverBackground="{ThemeResource ListViewItemPointerOverBackgroundThemeBrush}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}"
+                                               SelectionCheckMarkVisualEnabled="True"
+                                               SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}"
+                                               SelectedPointerOverBackground="{ThemeResource ListViewItemSelectedPointerOverBackgroundThemeBrush}"
+                                               SelectedBorderThickness="{ThemeResource ListViewItemCompactSelectedBorderThemeThickness}"
+                                               SelectedBackground="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <prism:VisualStateAwarePage.TopAppBar>
         <AppBar x:Name="TopAppBarShowValidationSummary"
@@ -227,28 +275,36 @@
                                                       ItemsSource="{Binding MaintenanceRepairList}"
                                                       IsZoomedInView="False"
                                                       SelectedIndex="-1"
-                                                      ItemContainerStyle="{StaticResource ListViewItemStyle1}"
-                                                      Margin="0 10 0 0">
+                                                      Margin="0 10 0 20"
+                                                      ItemContainerStyle="{StaticResource ListViewItemStyle2}">
                                                 <ListView.HeaderTemplate>
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="180" />
-                                                                <ColumnDefinition Width="180" />
-                                                                <ColumnDefinition Width="100" />
-                                                                <ColumnDefinition Width="100" />
+                                                                <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition />
+                                                                <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Text="Major Component"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
+                                                                       Style="{StaticResource FormTextStyle}" />
                                                             <TextBlock Text="Sub Component"
                                                                        Grid.Column="1"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
+                                                                       Style="{StaticResource FormTextStyle}" />
                                                             <TextBlock Text="Cause"
                                                                        Grid.Column="2"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
+                                                                       Style="{StaticResource FormTextStyle}" />
                                                             <TextBlock Text="Action"
                                                                        Grid.Column="3"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
+                                                                       Style="{StaticResource FormTextStyle}" />
+                                                            <TextBlock Text="Major Component Snaps"
+                                                                       Grid.Column="4"
+                                                                       Style="{StaticResource FormTextStyle}" Margin="10 0 0 0 " />
+                                                            <TextBlock Text="Sub Component Snaps"
+                                                                       Grid.Column="5" Margin="10 0 0 0"
+                                                                       Style="{StaticResource FormTextStyle}" />
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ListView.HeaderTemplate>
@@ -256,15 +312,18 @@
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
                                                                 <ColumnDefinition />
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <TextBlock Text="{Binding MajorComponent}" />
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        VerticalAlignment="Center">
+                                                                <TextBlock Text="{Binding MajorComponent}"
+                                                                           TextWrapping="Wrap"
+                                                                           VerticalAlignment="Center" />
                                                                 <Button Command="{Binding TakeSnapshotCommand}"
                                                                         Style="{StaticResource TransparentBtn}">
                                                                     <Image Source="ms-appx:///Assets/camera_icon.png"
@@ -275,8 +334,11 @@
                                                                 </Button>
                                                             </StackPanel>
                                                             <StackPanel Orientation="Horizontal"
+                                                                        VerticalAlignment="Center"
                                                                         Grid.Column="1">
-                                                                <TextBlock Text="{Binding SubComponent}" />
+                                                                <TextBlock Text="{Binding SubComponent}"
+                                                                           TextWrapping="Wrap"
+                                                                           VerticalAlignment="Center" />
                                                                 <Button Command="{Binding TakeSnapshotCommand}"
                                                                         Style="{StaticResource TransparentBtn}">
                                                                     <Image Source="ms-appx:///Assets/camera_icon.png"
@@ -287,9 +349,13 @@
                                                                 </Button>
                                                             </StackPanel>
                                                             <TextBlock Text="{Binding Cause}"
-                                                                       Grid.Column="2" />
+                                                                       TextWrapping="Wrap"
+                                                                       Grid.Column="2"
+                                                                       VerticalAlignment="Center" />
                                                             <TextBlock Text="{Binding Action}"
-                                                                       Grid.Column="3" />
+                                                                       TextWrapping="Wrap"
+                                                                       Grid.Column="3"
+                                                                       VerticalAlignment="Center" />
 
                                                             <GridView  Grid.Column="4"
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"

@@ -18,7 +18,7 @@
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>433BCB3248F4A23494BFE9E16EF3F1B7695F5CEB</PackageCertificateThumbprint>
     <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -601,7 +601,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.7.1">
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.7.2">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">

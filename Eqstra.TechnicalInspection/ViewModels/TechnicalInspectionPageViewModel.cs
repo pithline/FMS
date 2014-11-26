@@ -49,20 +49,33 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     try
                     {
                         this.IsBusy = true;
-
+                        AppSettings.Instance.IsSynchronizing = 1;
                         this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.Completed;
                         await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
-                        ((TIData)this.Model).ShouldSave = true;
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<TIData>(this.Model as TIData);
+                        var model = ((TIData)this.Model);
+                        model.ShouldSave = true;
+                        model.CaseServiceRecID = _task.CaseServiceRecID;
+                        var tiDataTable = await SqliteHelper.Storage.LoadTableAsync<TIData>()                        ;
+                        if (tiDataTable.Any(x => x.CaseServiceRecID == model.CaseServiceRecID))
+                        {
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<TIData>(model);
+                        }
+                        else
+                        {
+                           await SqliteHelper.Storage.InsertSingleRecordAsync<TIData>(model); 
+                        }
                         TIServiceHelper.Instance.Synchronize();
                         // this.SaveCurrentUIDataAsync(currentModel);
                         _navigationService.Navigate("Main", null);
 
                         // await TIServiceHelper.Instance.UpdateTaskStatusAsync();
                         this.IsBusy = false;
+                        
                     }
                     catch (Exception ex)
                     {
+                        this.IsBusy = false;
+                        AppSettings.Instance.IsSynchronizing = 0;
                         AppSettings.Instance.ErrorMessage = ex.Message;
                     }
                 });

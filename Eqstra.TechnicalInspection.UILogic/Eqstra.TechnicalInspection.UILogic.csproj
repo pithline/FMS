@@ -179,6 +179,9 @@
     <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
