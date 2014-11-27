@@ -131,7 +131,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 var maintenanceRepairdata = await (SqliteHelper.Storage.LoadTableAsync<MaintenanceRepair>());
 
 
-                foreach (var item in maintenanceRepairdata)
+                foreach (var item in maintenanceRepairdata.Where(x=>x.CaseServiceRecId == _task.CaseServiceRecID))
                 {
                     this.MaintenanceRepairList.Add(item);
                 }

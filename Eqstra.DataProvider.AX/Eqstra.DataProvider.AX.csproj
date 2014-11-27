@@ -93,6 +93,7 @@
     <Compile Include="TIModels\CVehicle\CPOI.cs" />
     <Compile Include="TIModels\CVehicle\CTyres.cs" />
     <Compile Include="TIModels\CVehicle\CVehicleDetails.cs" />
+    <Compile Include="TIModels\MaintenanceRepair.cs" />
     <Compile Include="TIModels\PVehicle\PAccessories.cs" />
     <Compile Include="TIModels\PVehicle\PassengerVehicle.cs" />
     <Compile Include="TIModels\PVehicle\PBodywork.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="TIModels\PVehicle\PVehicleDetails.cs" />
     <Compile Include="TIModels\PVehicle\VehicleDetails.cs" />
     <Compile Include="TIModels\Task.cs" />
+    <Compile Include="TIModels\TIData.cs" />
+    <Compile Include="TIModels\TITask.cs" />
     <Compile Include="TIModels\UserInfo.cs" />
     <Compile Include="TIModels\VehicleDetails.cs" />
     <Compile Include="UserInfo.cs" />

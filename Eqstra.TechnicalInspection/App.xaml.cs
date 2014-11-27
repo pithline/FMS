@@ -18,6 +18,7 @@ using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Eqstra.BusinessLogic.TI;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -48,12 +49,8 @@ namespace Eqstra.TechnicalInspection
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Task));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Customer));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PAccessories));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PBodywork));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.ImageCapture));
             SessionStateService.RegisterKnownType(typeof(ObservableCollection<ImageCapture>));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PGlass));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Passenger.PInspectionProof));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.CaseTypeEnum));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Helpers.TaskStatus));
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
@@ -61,6 +58,8 @@ namespace Eqstra.TechnicalInspection
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
             SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.Task>));
             SessionStateService.RegisterKnownType(typeof(LogonResult));
+            SessionStateService.RegisterKnownType(typeof(TIData));
+            SessionStateService.RegisterKnownType(typeof(MaintenanceRepair));
             SessionStateService.RegisterKnownType(typeof(List<string>));
 
         }
@@ -91,7 +90,7 @@ namespace Eqstra.TechnicalInspection
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-            CreateTableAsync();
+            
 
         }
 
@@ -185,9 +184,9 @@ namespace Eqstra.TechnicalInspection
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
 
-           // await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            // await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.CustomerDetails>();
-            
+
         }
 
     }

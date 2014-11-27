@@ -173,9 +173,9 @@ namespace Eqstra.DataProvider.AX.Providers
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
                 _client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl"));
                 _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "rchivukula";
-                _client.ClientCredentials.UserName.Password = "Password9";
+                _client.ClientCredentials.UserName.Password = "Password8";
                 _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
-                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password9", "lfmd");
+                _client.ClientCredentials.Windows.ClientCredential = new NetworkCredential("rchivukula", "Password8", "lfmd");
             }
             catch (Exception)
             {
