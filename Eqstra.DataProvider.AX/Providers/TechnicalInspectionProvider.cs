@@ -95,8 +95,9 @@ namespace Eqstra.DataProvider.AX.Providers
 
                                 subComponentList.Add(subComponent);
                             }
+                            tiTask.ComponentList = subComponentList;
                         }
-
+                        
                         taskList.Add(tiTask);
                     }
                 }

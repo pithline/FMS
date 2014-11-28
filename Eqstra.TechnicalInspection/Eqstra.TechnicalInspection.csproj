@@ -620,6 +620,10 @@
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Eqstra.TechnicalInspection.UILogic\Eqstra.TechnicalInspection.UILogic.csproj">
+      <Project>{181eecdc-99d9-433a-ba67-ce3821684c2f}</Project>
+      <Name>Eqstra.TechnicalInspection.UILogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>
       <Name>Eqstra.VehicleInspection.UILogic</Name>

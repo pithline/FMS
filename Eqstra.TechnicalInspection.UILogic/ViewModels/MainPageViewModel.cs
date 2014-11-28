@@ -105,8 +105,6 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             try
             {
-
-
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);

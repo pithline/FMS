@@ -16,7 +16,7 @@ namespace Eqstra.DataProvider.AX.TI
         {
             get { return causeOfDamage; }
             set { causeOfDamage = value; }
-        }
+        }        
 
         private string remedy;
 

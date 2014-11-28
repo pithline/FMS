@@ -76,13 +76,16 @@ namespace Eqstra.BusinessLogic.TI
             popup.IsOpen = true;
 
         }
-
+        [Ignore]
         public ICommand OpenSnapshotViewerCommand { get; set; }
-
+        [Ignore]
         public ICommand TakeSnapshotCommand { get; set; }
 
+        [PrimaryKey,AutoIncrement]
+        public int Id { get; set; }
+
         private long repairid;
-        [PrimaryKey]
+        
         public long Repairid
         {
             get { return repairid; }
@@ -132,7 +135,7 @@ namespace Eqstra.BusinessLogic.TI
         }
 
         private ObservableCollection<ImageCapture> majorComponentImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> MajorComponentImgList
         {
             get { return majorComponentImgList; }
@@ -140,7 +143,7 @@ namespace Eqstra.BusinessLogic.TI
         }
 
         private ObservableCollection<ImageCapture> subComponentImgList;
-
+        [Ignore]
         public ObservableCollection<ImageCapture> SubComponentImgList
         {
             get { return subComponentImgList; }

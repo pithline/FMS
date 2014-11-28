@@ -274,7 +274,9 @@
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="80" />
                                                                 <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="80" />
                                                                 <ColumnDefinition Width="200" />
                                                                 <ColumnDefinition Width="200" />
                                                                 <ColumnDefinition Width="Auto" />
@@ -282,21 +284,21 @@
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Text="Major Component"
-                                                                       Style="{StaticResource FormTextStyle}" />
+                                                                       Style="{StaticResource FormTextStyle}" Grid.Column="1" />
                                                             <TextBlock Text="Sub Component"
-                                                                       Grid.Column="1"
-                                                                       Style="{StaticResource FormTextStyle}" />
-                                                            <TextBlock Text="Cause"
-                                                                       Grid.Column="2"
-                                                                       Style="{StaticResource FormTextStyle}" />
-                                                            <TextBlock Text="Action"
                                                                        Grid.Column="3"
                                                                        Style="{StaticResource FormTextStyle}" />
-                                                            <TextBlock Text="Major Component Snaps"
+                                                            <TextBlock Text="Cause"
                                                                        Grid.Column="4"
+                                                                       Style="{StaticResource FormTextStyle}" />
+                                                            <TextBlock Text="Action"
+                                                                       Grid.Column="5"
+                                                                       Style="{StaticResource FormTextStyle}" />
+                                                            <TextBlock Text="Major Component Snaps"
+                                                                       Grid.Column="6"
                                                                        Style="{StaticResource FormTextStyle}" Margin="10 0 0 0 " />
                                                             <TextBlock Text="Sub Component Snaps"
-                                                                       Grid.Column="5" Margin="10 0 0 0"
+                                                                       Grid.Column="7" Margin="10 0 0 0"
                                                                        Style="{StaticResource FormTextStyle}" />
                                                         </Grid>
                                                     </DataTemplate>
@@ -305,52 +307,53 @@
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="200"/>
-                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="200" />
                                                                 <ColumnDefinition Width="200"/>
                                                                 <ColumnDefinition Width="200"/>
                                                                 <ColumnDefinition />
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
-                                                            <StackPanel Orientation="Horizontal"
-                                                                        VerticalAlignment="Center">
+                                                            <Button Command="{Binding TakeSnapshotCommand}" HorizontalAlignment="Center"
+                                                                    Style="{StaticResource TransparentBtn}" Grid.Column="0">
+                                                                <Image Source="ms-appx:///Assets/camera_icon.png"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       Width="25"
+                                                                       Height="25"  />
+                                                                </Button>
                                                                 <TextBlock Text="{Binding MajorComponent}"
                                                                            TextWrapping="Wrap"
-                                                                           VerticalAlignment="Center" />
-                                                                <Button Command="{Binding TakeSnapshotCommand}"
-                                                                        Style="{StaticResource TransparentBtn}">
-                                                                    <Image Source="ms-appx:///Assets/camera_icon.png"
-                                                                           HorizontalAlignment="Center"
-                                                                           VerticalAlignment="Center"
-                                                                           Width="25"
-                                                                           Height="25" />
-                                                                </Button>
-                                                            </StackPanel>
-                                                            <StackPanel Orientation="Horizontal"
-                                                                        VerticalAlignment="Center"
-                                                                        Grid.Column="1">
-                                                                <TextBlock Text="{Binding SubComponent}"
+                                                                           VerticalAlignment="Center" Grid.Column="1" />
+                                                               
+                                                            
+                                                            <Button Command="{Binding TakeSnapshotCommand}"
+                                                                    Style="{StaticResource TransparentBtn}" HorizontalAlignment="Center" Grid.Column="2" >
+                                                                <Image Source="ms-appx:///Assets/camera_icon.png"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       Width="25"
+                                                                       Height="25" />
+                                                            </Button>
+                                                            
+                                                            
+                                                                <TextBlock Grid.Column="3" Text="{Binding SubComponent}"
                                                                            TextWrapping="Wrap"
                                                                            VerticalAlignment="Center" />
-                                                                <Button Command="{Binding TakeSnapshotCommand}"
-                                                                        Style="{StaticResource TransparentBtn}">
-                                                                    <Image Source="ms-appx:///Assets/camera_icon.png"
-                                                                           HorizontalAlignment="Center"
-                                                                           VerticalAlignment="Center"
-                                                                           Width="25"
-                                                                           Height="25" />
-                                                                </Button>
-                                                            </StackPanel>
+
+                                                            
                                                             <TextBlock Text="{Binding Cause}"
                                                                        TextWrapping="Wrap"
-                                                                       Grid.Column="2"
+                                                                       Grid.Column="4"
                                                                        VerticalAlignment="Center" />
                                                             <TextBlock Text="{Binding Action}"
                                                                        TextWrapping="Wrap"
-                                                                       Grid.Column="3"
+                                                                       Grid.Column="5"
                                                                        VerticalAlignment="Center" />
 
-                                                            <GridView  Grid.Column="4"
+                                                            <GridView  Grid.Column="6"
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path= MajorComponentImgList}"
@@ -378,7 +381,7 @@
                                                                 </GridView.ItemTemplate>
                                                             </GridView>
 
-                                                            <GridView  Grid.Column="5"
+                                                            <GridView  Grid.Column="7"
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path= SubComponentImgList}"

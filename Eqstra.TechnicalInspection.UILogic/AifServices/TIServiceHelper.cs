@@ -246,7 +246,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                     MajorComponent = item.parmMajorComponent,
                                     Action = item.parmAction,
                                     Cause = item.parmCause,
-                                    CaseServiceRecId = item.parmCaseServiceRecID,
+                                    CaseServiceRecId = tiTask.CaseServiceRecID,
                                     Repairid = item.parmRecID
 
                                 };
