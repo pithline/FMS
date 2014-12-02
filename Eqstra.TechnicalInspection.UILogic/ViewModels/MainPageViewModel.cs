@@ -55,7 +55,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             }, () =>
             {
-                return (this.InspectionTask != null && Regex.Replace(this.InspectionTask.Status.ToLower().Trim(), "\t", "") == Regex.Replace(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitTechnicalInspection.ToLower().Trim(), "\t", ""));
+                return (this.InspectionTask != null);
+                //return (this.InspectionTask != null && Regex.Replace(this.InspectionTask.Status.ToLower().Trim(), "\t", "") == Regex.Replace(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitTechnicalInspection.ToLower().Trim(), "\t", ""));
             }
             );
 
@@ -77,7 +78,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             });
                             TIServiceHelper.Instance.Synchronize();
                             await TIServiceHelper.Instance.GetTasksAsync();
-                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TasksFetchedEvent>().Publish(this.task);
+                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
                                 this.PoolofTasks.Clear();
@@ -127,7 +128,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                         await TIServiceHelper.Instance.GetTasksAsync();
-                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TasksFetchedEvent>().Publish(this.task);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
@@ -183,8 +184,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             foreach (Eqstra.BusinessLogic.Task item in list)
             {
                 this.PoolofTasks.Add(item);
-                this.InspectionTask = this.PoolofTasks.FirstOrDefault();
             }
+            this.InspectionTask = this.PoolofTasks.FirstOrDefault();
         }
 
 
@@ -244,11 +245,9 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             set { SetProperty(ref appointments, value); }
         }
 
-
         public DelegateCommand SyncCommand { get; set; }
 
         public DelegateCommand DrivingDirectionCommand { get; set; }
-
 
     }
 }

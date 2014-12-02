@@ -90,7 +90,7 @@ namespace Eqstra.TechnicalInspection
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-            
+            CreateTableAsync();
 
         }
 
@@ -174,18 +174,17 @@ namespace Eqstra.TechnicalInspection
 
             ////Drop Existing tables
 
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TIData>();
 
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
-
-            // await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.CustomerDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
 
         }
 

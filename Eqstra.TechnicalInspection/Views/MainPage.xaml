@@ -22,7 +22,7 @@
         <Converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
         <x:String x:Key="AppName">Eqstra</x:String>
     </prism:VisualStateAwarePage.Resources>
-    
+
 
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
@@ -218,7 +218,8 @@
 
 
                             <grid:SfDataGrid Grid.Row="1"
-                                             x:Name="mainGrid"
+                                             x:Name="mainGrid"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Visible"
                                              SelectedIndex="0"
                                              NavigationMode="Row"
                                              ShowBusyIndicator="True"

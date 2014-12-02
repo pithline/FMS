@@ -16,8 +16,12 @@ namespace Eqstra.BusinessLogic.TI
     public class MaintenanceRepair : ValidatableBindableBase
     {
         SnapshotsViewer _snapShotsPopup;
+
         public MaintenanceRepair()
         {
+            this.MajorComponentImgList = new ObservableCollection<ImageCapture>();
+            this.SubComponentImgList = new ObservableCollection<ImageCapture>();
+
             TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
             {
                 await TakeSnapshotAsync(param);
@@ -81,17 +85,17 @@ namespace Eqstra.BusinessLogic.TI
         [Ignore]
         public ICommand TakeSnapshotCommand { get; set; }
 
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         private long repairid;
-        
+
         public long Repairid
         {
             get { return repairid; }
             set { SetProperty(ref repairid, value); }
         }
-       
+
 
         private long caseServiceRecId;
 

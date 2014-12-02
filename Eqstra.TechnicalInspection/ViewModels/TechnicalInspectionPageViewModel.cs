@@ -55,7 +55,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         var model = ((TIData)this.Model);
                         model.ShouldSave = true;
                         model.CaseServiceRecID = _task.CaseServiceRecID;
-                        var tiDataTable = await SqliteHelper.Storage.LoadTableAsync<TIData>()                        ;
+                        var tiDataTable = await SqliteHelper.Storage.LoadTableAsync<TIData>();
                         if (tiDataTable.Any(x => x.CaseServiceRecID == model.CaseServiceRecID))
                         {
                             await SqliteHelper.Storage.UpdateSingleRecordAsync<TIData>(model);
