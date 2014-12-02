@@ -103,7 +103,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             PersistentData.RefreshInstance();
             PersistentData.Instance.CustomerDetails = this.CustomerDetails;
             PersistentData.Instance.Task = this._task;
-            
+
             LoadAppointments();
             var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == _task.VehicleInsRecId);
             if (dd != null)

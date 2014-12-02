@@ -217,7 +217,7 @@ namespace Eqstra.BusinessLogic
 
     }
 
-    public class TasksFetchedEvent : PubSubEvent<Task>
+    public class TaskFetchedEvent : PubSubEvent<Task>
     {
 
     }

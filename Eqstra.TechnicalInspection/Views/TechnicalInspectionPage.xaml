@@ -24,16 +24,17 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="TabNavigation" Value="Local"/>
             <Setter Property="IsHoldingEnabled" Value="False"/>
+            <Setter Property="Margin" Value="0,0,18,2"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <ListViewItemPresenter
-                            SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedForeground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                            SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
+                                               SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
+                                               SelectedForeground="{ThemeResource TextBoxForegroundThemeBrush}" 
+                                               SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
+                                               SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
 
                     </ControlTemplate>
                 </Setter.Value>
@@ -209,31 +210,33 @@
 
 
 
-                                            <ListView Grid.Row="1" SelectionMode="None"
-                                                      ItemsSource="{Binding TechnicalInspList}"
+                                            <ListView Grid.Row="1" SelectionMode="None" 
+                                                      ItemsSource="{Binding TechnicalInspList,Mode=TwoWay}"
                                                       IsZoomedInView="False" SelectedIndex="-1"
                                                       ItemContainerStyle="{StaticResource ListViewItemStyle1}"
-                                                      Margin="0 10 0 0">
+                                                      Margin="0 20 0 0">
                                                 <ListView.HeaderTemplate>
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="180"/>
-                                                                <ColumnDefinition Width="180"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
                                                                 <ColumnDefinition Width="100"/>
                                                                 <ColumnDefinition Width="100"/>
                                                             </Grid.ColumnDefinitions>
-                                                            <TextBlock Text="Major Component"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
-                                                            <TextBlock Text="Sub Component"
+                                                            <TextBlock Text="Major Component" Height="40"
+                                                                       Style="{StaticResource  TitleTextBlockStyle}"  VerticalAlignment="Center"/>
+                                                            <TextBlock Text="Sub Component" Height="40"
                                                                        Grid.Column="1"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
-                                                            <TextBlock Text="Cause"
+                                                                       Style="{StaticResource  TitleTextBlockStyle}" VerticalAlignment="Center" />
+                                                            <TextBlock Text="Cause" Height="40"
                                                                        Grid.Column="2"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
-                                                            <TextBlock Text="Action"
+                                                                       Style="{StaticResource  TitleTextBlockStyle}"  VerticalAlignment="Center"/>
+                                                            <TextBlock Text="Action" Height="40"
                                                                        Grid.Column="3"
-                                                                       Style="{StaticResource  TitleTextBlockStyle}" />
+                                                                       Style="{StaticResource  TitleTextBlockStyle}" VerticalAlignment="Center"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ListView.HeaderTemplate>
@@ -241,13 +244,14 @@
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
                                                             </Grid.ColumnDefinitions>
+
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Text="{Binding MajorComponent}" />
                                                                 <Button Command="{Binding TakeSnapshotCommand}"
@@ -260,6 +264,7 @@
                                                                            Height="25" />
                                                                 </Button>
                                                             </StackPanel>
+
                                                             <StackPanel Orientation="Horizontal"
                                                                         Grid.Column="1">
                                                                 <TextBlock Text="{Binding SubComponent}" />

@@ -26,7 +26,7 @@
                     <ControlTemplate TargetType="ListViewItem">
                         <ListViewItemPresenter
                                                SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                                               SelectedForeground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
+                                               SelectedForeground="{ThemeResource TextBoxForegroundThemeBrush}" 
                                                SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
                                                SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
 

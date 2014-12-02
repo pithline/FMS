@@ -2,6 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
+using System.Collections.ObjectModel;
 
 namespace Eqstra.BusinessLogic.TI
 {
@@ -61,6 +62,22 @@ namespace Eqstra.BusinessLogic.TI
         {
             get { return action; }
             set { SetProperty(ref action, value); }
+        }
+
+        private ObservableCollection<ImageCapture> majorComponentImgList;
+        [Ignore]
+        public ObservableCollection<ImageCapture> MajorComponentImgList
+        {
+            get { return majorComponentImgList; }
+            set { SetProperty(ref majorComponentImgList, value); }
+        }
+
+        private ObservableCollection<ImageCapture> subComponentImgList;
+        [Ignore]
+        public ObservableCollection<ImageCapture> SubComponentImgList
+        {
+            get { return subComponentImgList; }
+            set { SetProperty(ref subComponentImgList, value); }
         }
 
         public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID)
