@@ -1,0 +1,15 @@
+﻿using Eqstra.DataProvider.AX.TI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Eqstra.DataProvider.AX.TIModels
+{
+    public class TITask : Task
+    {
+        public string CustEmailId { get; set; }
+        public List<MaintenanceRepair> ComponentList { get; set; }
+    }
+}

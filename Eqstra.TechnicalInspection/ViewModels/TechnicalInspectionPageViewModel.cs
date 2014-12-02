@@ -38,28 +38,46 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 this._eventAggregator = eventAggregator;
                 this.InspectionUserControls = new ObservableCollection<UserControl>();
                 this.CustomerDetails = new CustomerDetails();
-                this.TechnicalInspList = new ObservableCollection<MaintenanceRepair>();
-                this.Model = new TechnicalInsp();
+                this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
+                this.Model = new TIData();
 
-                this.PrevViewStack = new Stack<UserControl>();
+                
 
 
                 this.CompleteCommand = new DelegateCommand(async () =>
                 {
-                    this.IsBusy = true;
-                    this._task.ProcessStep = ProcessStep.AcceptInspection;
-                    this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model;
+                    try
+                    {
+                        this.IsBusy = true;
+                        AppSettings.Instance.IsSynchronizing = 1;
+                        this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.Completed;
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
+                        var model = ((TIData)this.Model);
+                        model.ShouldSave = true;
+                        model.CaseServiceRecID = _task.CaseServiceRecID;
+                        var tiDataTable = await SqliteHelper.Storage.LoadTableAsync<TIData>()                        ;
+                        if (tiDataTable.Any(x => x.CaseServiceRecID == model.CaseServiceRecID))
+                        {
+                            await SqliteHelper.Storage.UpdateSingleRecordAsync<TIData>(model);
+                        }
+                        else
+                        {
+                           await SqliteHelper.Storage.InsertSingleRecordAsync<TIData>(model); 
+                        }
+                        TIServiceHelper.Instance.Synchronize();
+                        // this.SaveCurrentUIDataAsync(currentModel);
+                        _navigationService.Navigate("Main", null);
 
-                    this.SaveCurrentUIDataAsync(currentModel);
-                    _navigationService.Navigate("Main", null);
-
-                    // await TIServiceHelper.Instance.UpdateTaskStatusAsync();
-                    this.IsBusy = false;
-                }, () =>
-                {
-                    return (this.NextViewStack.Count == 1);
+                        // await TIServiceHelper.Instance.UpdateTaskStatusAsync();
+                        this.IsBusy = false;
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        this.IsBusy = false;
+                        AppSettings.Instance.IsSynchronizing = 0;
+                        AppSettings.Instance.ErrorMessage = ex.Message;
+                    }
                 });
 
                 this._eventAggregator.GetEvent<SignChangedEvent>().Subscribe(p =>
@@ -75,33 +93,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     OnPropertyChanged("ShowValidationSummary");
                 }, ThreadOption.UIThread);
 
-                this.PreviousCommand = new DelegateCommand(async () =>
-                {
-                    this.IsCommandBarOpen = false;
-                    ShowValidationSummary = false;
-                    var currentModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext).Model as BaseModel;
-                    if (currentModel.ValidateModel())
-                    {
-                        SetFrameContent();
-                        this.SaveCurrentUIDataAsync(currentModel);
-                        if (this.PrevViewStack.FirstOrDefault() != null)
-                        {
-                            BaseViewModel nextViewModel = this.PrevViewStack.FirstOrDefault().DataContext as BaseViewModel;
-                            await nextViewModel.LoadModelFromDbAsync(this._task.VehicleInsRecId);
-                        }
-                    }
-                    else
-                    {
-                        Errors = currentModel.Errors;
-                        OnPropertyChanged("Errors");
-                        ShowValidationSummary = true;
-                    }
-
-
-                }, () =>
-                {
-                    return this.PrevViewStack.Count > 0;
-                });
+               
 
             }
             catch (Exception)
@@ -111,14 +103,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
 
         }
 
-        private void SetFrameContent()
-        {
-            var item = this.PrevViewStack.Pop();
-            this.FrameContent = item;
-            this.NextViewStack.Push(item);
-            CompleteCommand.RaiseCanExecuteChanged();
-            PreviousCommand.RaiseCanExecuteChanged();
-        }
 
         private void LoadAppointments()
         {
@@ -134,34 +118,31 @@ namespace Eqstra.TechnicalInspection.ViewModels
                     ReadOnly = true,
                     AppointmentBackground = new SolidColorBrush(Colors.Crimson),                   
                     Status = new ScheduleAppointmentStatus{Status = this._task.Status,Brush = new SolidColorBrush(Colors.Chocolate)}
-
                 },
                                
             };
         }
 
 
-        private void loadDataFromDb(long CaseServiceRecId)
+        async private System.Threading.Tasks.Task LoadFromDbAsync(long CaseServiceRecId)
         {
             try
             {
-                var maintenanceRepairdata = (SqliteHelper.Storage.LoadTableAsync<MaintenanceRepair>()).Result;
+                var maintenanceRepairdata = await (SqliteHelper.Storage.LoadTableAsync<MaintenanceRepair>());
 
-                if (maintenanceRepairdata != null && maintenanceRepairdata.Any())
+
+                foreach (var item in maintenanceRepairdata.Where(x=>x.CaseServiceRecId == _task.CaseServiceRecID))
                 {
-                    foreach (var item in maintenanceRepairdata)
-                    {
-                        this.TechnicalInspList.Add(item);
-                    }
+                    this.MaintenanceRepairList.Add(item);
                 }
-                TechnicalInsp viBaseObject = (TechnicalInsp)this.Model;
+
+                TIData viBaseObject = (TIData)this.Model;
                 //viBaseObject.LoadSnapshotsFromDb();
-                PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+                //  PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
                 viBaseObject.ShouldSave = false;
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -169,12 +150,12 @@ namespace Eqstra.TechnicalInspection.ViewModels
         public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long CaseServiceRecId)
         {
 
-            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TechnicalInsp>(x => x.CaseServiceRecID == CaseServiceRecId);
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == CaseServiceRecId);
             if (this.Model == null)
             {
-                this.Model = new TechnicalInsp();
+                this.Model = new TIData();
             }
-            loadDataFromDb(CaseServiceRecId);
+            await LoadFromDbAsync(CaseServiceRecId);
         }
 
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -192,15 +173,15 @@ namespace Eqstra.TechnicalInspection.ViewModels
 
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
                 LoadAppointments();
-                await GetCustomerDetailsAsync();
+                 GetCustomerDetailsAsync();
 
-                _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe(async b =>
+                _eventAggregator.GetEvent<CustFetchedEvent>().Subscribe( b =>
                 {
-                    await GetCustomerDetailsAsync();
+                     GetCustomerDetailsAsync();
                 });
 
                 await this.LoadModelFromDbAsync(this._task.CaseServiceRecID);
-                this.CustomerDetails = PersistentData.Instance.CustomerDetails;
+              //  this.CustomerDetails = PersistentData.Instance.CustomerDetails;
 
             }
             catch (Exception)
@@ -234,42 +215,14 @@ namespace Eqstra.TechnicalInspection.ViewModels
         }
 
 
-        private ObservableCollection<MaintenanceRepair> technicalInspList;
-        public ObservableCollection<MaintenanceRepair> TechnicalInspList
+        private ObservableCollection<MaintenanceRepair> maintenanceRepairList;
+        public ObservableCollection<MaintenanceRepair> MaintenanceRepairList
         {
-            get { return technicalInspList; }
-            set { SetProperty(ref technicalInspList, value); }
+            get { return maintenanceRepairList; }
+            set { SetProperty(ref maintenanceRepairList, value); }
         }
 
 
-        private DelegateCommand previousCommand;
-        public DelegateCommand PreviousCommand
-        {
-            get { return previousCommand; }
-            set { SetProperty(ref previousCommand, value); }
-        }
-
-        private Stack<UserControl> nextViewStack;
-        public Stack<UserControl> NextViewStack
-        {
-            get { return nextViewStack; }
-            set
-            {
-                SetProperty(ref nextViewStack, value);
-                //NextCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        private Stack<UserControl> prevViewStack;
-        public Stack<UserControl> PrevViewStack
-        {
-            get { return prevViewStack; }
-            set
-            {
-                SetProperty(ref prevViewStack, value);
-                //PreviousCommand.RaiseCanExecuteChanged();
-            }
-        }
         private bool isBusy;
 
         public bool IsBusy
@@ -322,32 +275,32 @@ namespace Eqstra.TechnicalInspection.ViewModels
             set { SetProperty(ref errors, value); }
         }
 
-        async private System.Threading.Tasks.Task GetCustomerDetailsAsync()
+        private void GetCustomerDetailsAsync()
         {
             try
             {
                 if (this._task != null)
                 {
-                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
-                    if (this.Customer == null)
-                    {
-                        AppSettings.Instance.IsSyncingCustDetails = 1;
+                    //this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
+                    //if (this.Customer == null)
+                    //{
+                    //    AppSettings.Instance.IsSyncingCustDetails = 1;
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         AppSettings.Instance.IsSyncingCustDetails = 0;
-                        this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
+                        this.CustomerDetails.ContactNumber = this._task.ContactNumber;
                         this.CustomerDetails.CaseNumber = this._task.CaseNumber;
                         this.CustomerDetails.Status = this._task.Status;
                         this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
-                        this.CustomerDetails.Address = this.Customer.Address;
+                        this.CustomerDetails.Address = this._task.Address;
                         this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                        this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                        this.CustomerDetails.ContactName = this.Customer.ContactName;
+                        this.CustomerDetails.CustomerName = this._task.CustomerName;
+                        this.CustomerDetails.ContactName = this._task.ContactName;
                         this.CustomerDetails.CategoryType = this._task.CategoryType;
-                        this.CustomerDetails.EmailId = this.Customer.EmailId;
-                    }
+                        this.CustomerDetails.EmailId = "";//this._task.EmailId;
+                    //}
                 }
             }
             catch (Exception)
@@ -394,10 +347,5 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 throw;
             }
         }
-
-        /// <summary>
-        /// This function is to create table Only it should run only once.
-        /// </summary>
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.TI;
 using Eqstra.TechnicalInspection.UILogic.AifServices;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
@@ -41,7 +42,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                 ApplicationData.Current.LocalSettings.Values["CaseServiceRecID"] = this.InspectionTask.CaseServiceRecID;
 
                 string jsonInspectionTask = JsonConvert.SerializeObject(this.InspectionTask);
-                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.CaseNumber == this.InspectionTask.CaseNumber);
+                var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID == this.InspectionTask.CaseServiceRecID);
 
                 if (dd != null && !dd.StopDateTime.Equals(DateTime.MinValue))
                 {
@@ -54,7 +55,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             }, () =>
             {
-                return (this.InspectionTask != null );
+                return (this.InspectionTask != null && Regex.Replace(this.InspectionTask.Status.ToLower().Trim(), "\t", "") == Regex.Replace(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitTechnicalInspection.ToLower().Trim(), "\t", ""));
             }
             );
 
@@ -63,30 +64,37 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             this.SyncCommand = new DelegateCommand(() =>
             {
-                if (AppSettings.Instance.IsSynchronizing == 0)
+                try
                 {
-                    TIServiceHelper.Instance.Synchronize(async () =>
+                    if (AppSettings.Instance.IsSynchronizing == 0)
                     {
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        TIServiceHelper.Instance.Synchronize(async () =>
                         {
+                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                            {
 
-                            AppSettings.Instance.IsSynchronizing = 1;
+                                AppSettings.Instance.IsSynchronizing = 1;
+                            });
+                            TIServiceHelper.Instance.Synchronize();
+                            await TIServiceHelper.Instance.GetTasksAsync();
+                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TasksFetchedEvent>().Publish(this.task);
+                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                            {
+                                this.PoolofTasks.Clear();
+                                await GetTasksFromDbAsync();
+                                GetAllCount();
+                                GetAppointments();
+                                AppSettings.Instance.IsSynchronizing = 0;
+                                AppSettings.Instance.Synced = true;
+                            });
+
                         });
-
-                        await TIServiceHelper.Instance.GetTasksAsync();
-                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                        {
-                            this.PoolofTasks.Clear();
-                            await GetTasksFromDbAsync();
-                            GetAllCount();
-                            GetAppointments();
-                            AppSettings.Instance.IsSynchronizing = 0;
-                            AppSettings.Instance.Synced = true;
-                        }
-                              );
-
-                    });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             });
 
@@ -100,7 +108,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                 var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-        
+
                 //SyncData();
 
 
@@ -119,7 +127,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                         await TIServiceHelper.Instance.GetTasksAsync();
-                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
@@ -143,12 +151,12 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
         private void GetAllCount()
         {
-            this.TotalCount = this.PoolofTasks.Count();
+            this.TotalCount = this.PoolofTasks.Where(x=> x.ConfirmedDate.Date == DateTime.Today.Date).Count();
         }
 
         private void GetAppointments()
         {
-            foreach (var item in this.PoolofTasks)
+            foreach (var item in this.PoolofTasks.Where(x => Regex.Replace(x.Status.ToLower().Trim(), "\t", "") == Regex.Replace(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitTechnicalInspection.ToLower().Trim(), "\t", "")))
             {
                 var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
                            item.ConfirmedTime.Second);
@@ -240,11 +248,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         public DelegateCommand SyncCommand { get; set; }
 
         public DelegateCommand DrivingDirectionCommand { get; set; }
-        /// <summary>
-        ///  this is  Temporary method for create tables in DB
-        /// </summary>
 
-      
+
     }
 }
 

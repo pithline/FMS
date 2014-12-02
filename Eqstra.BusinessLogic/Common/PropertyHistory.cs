@@ -32,8 +32,7 @@ namespace Eqstra.BusinessLogic.Common
                 {
                     object value = propInfo.GetValue(baseModel);
                     StorageHistory.Add(propInfo.Name, value);
-                }
-                );
+                });
             }
             catch (Exception)
             {
@@ -46,18 +45,18 @@ namespace Eqstra.BusinessLogic.Common
             {
                 TypeInfo typeInfo = context.GetType().GetTypeInfo();
                 IEnumerable<PropertyInfo> propertyInfoList = typeInfo.DeclaredProperties;
-                
-                foreach(var propInfo in propertyInfoList)
-                      {
-                          string currentValue = Convert.ToString(propInfo.GetValue(context));
-                          object originalvalue;
-                          StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
-                          if (!currentValue.Equals(Convert.ToString(originalvalue)))
-                          {
-                              return  true;
-                              
-                          }
-                      }
+
+                foreach (var propInfo in propertyInfoList)
+                {
+                    string currentValue = Convert.ToString(propInfo.GetValue(context));
+                    object originalvalue;
+                    StorageHistory.TryGetValue(propInfo.Name, out originalvalue);
+                    if (!currentValue.Equals(Convert.ToString(originalvalue)))
+                    {
+                        return true;
+
+                    }
+                }
                 return false;
             }
             catch (Exception)

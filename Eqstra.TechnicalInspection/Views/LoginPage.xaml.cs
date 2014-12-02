@@ -1,4 +1,5 @@
 ﻿using Eqstra.TechnicalInspection.Common;
+using Eqstra.TechnicalInspection.UILogic.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Xaml.Interactions.Core;
 using System;
@@ -37,6 +38,8 @@ namespace Eqstra.TechnicalInspection.Views
         }
         private void PasswordBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
+            var vm = (LoginPageViewModel)this.DataContext;
+            vm.ErrorMessage = string.Empty;
             if(e.Key == Windows.System.VirtualKey.Enter)
             {
                 this.btnLogin.Command.Execute(null);

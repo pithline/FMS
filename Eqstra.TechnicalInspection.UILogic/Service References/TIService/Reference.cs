@@ -107,6 +107,269 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkValidateUserContract))]
+    public partial class XppObjectBase : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Mzk_ImageContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public partial class Mzk_ImageContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
+        
+        private string parmImageField;
+        
+        private string parmImageNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImage {
+            get {
+                return this.parmImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageField, value) != true)) {
+                    this.parmImageField = value;
+                    this.RaisePropertyChanged("parmImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImageName {
+            get {
+                return this.parmImageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageNameField, value) != true)) {
+                    this.parmImageNameField = value;
+                    this.RaisePropertyChanged("parmImageName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseCategoryAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public partial class MzkCaseCategoryAuthorizationContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
+        
+        private string parmActionField;
+        
+        private long parmCaseServiceRecIDField;
+        
+        private string parmCauseField;
+        
+        private string parmMajorComponentField;
+        
+        private long parmRecIDField;
+        
+        private string parmSubComponentField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAction {
+            get {
+                return this.parmActionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmActionField, value) != true)) {
+                    this.parmActionField = value;
+                    this.RaisePropertyChanged("parmAction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseServiceRecID {
+            get {
+                return this.parmCaseServiceRecIDField;
+            }
+            set {
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCause {
+            get {
+                return this.parmCauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCauseField, value) != true)) {
+                    this.parmCauseField = value;
+                    this.RaisePropertyChanged("parmCause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmMajorComponent {
+            get {
+                return this.parmMajorComponentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmMajorComponentField, value) != true)) {
+                    this.parmMajorComponentField = value;
+                    this.RaisePropertyChanged("parmMajorComponent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmRecID {
+            get {
+                return this.parmRecIDField;
+            }
+            set {
+                if ((this.parmRecIDField.Equals(value) != true)) {
+                    this.parmRecIDField = value;
+                    this.RaisePropertyChanged("parmRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmSubComponent {
+            get {
+                return this.parmSubComponentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmSubComponentField, value) != true)) {
+                    this.parmSubComponentField = value;
+                    this.RaisePropertyChanged("parmSubComponent");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseServiceAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public partial class MzkCaseServiceAuthorizationContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract> parmCaseCategoryAuthListField;
+        
+        private long parmCaseServiceRecIDField;
+        
+        private System.DateTime parmCompletionDateField;
+        
+        private string parmDamageCauseField;
+        
+        private long parmRecIDField;
+        
+        private string parmRecommendationField;
+        
+        private string parmRemedyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract> parmCaseCategoryAuthList {
+            get {
+                return this.parmCaseCategoryAuthListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseCategoryAuthListField, value) != true)) {
+                    this.parmCaseCategoryAuthListField = value;
+                    this.RaisePropertyChanged("parmCaseCategoryAuthList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseServiceRecID {
+            get {
+                return this.parmCaseServiceRecIDField;
+            }
+            set {
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime parmCompletionDate {
+            get {
+                return this.parmCompletionDateField;
+            }
+            set {
+                if ((this.parmCompletionDateField.Equals(value) != true)) {
+                    this.parmCompletionDateField = value;
+                    this.RaisePropertyChanged("parmCompletionDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmDamageCause {
+            get {
+                return this.parmDamageCauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmDamageCauseField, value) != true)) {
+                    this.parmDamageCauseField = value;
+                    this.RaisePropertyChanged("parmDamageCause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmRecID {
+            get {
+                return this.parmRecIDField;
+            }
+            set {
+                if ((this.parmRecIDField.Equals(value) != true)) {
+                    this.parmRecIDField = value;
+                    this.RaisePropertyChanged("parmRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmRecommendation {
+            get {
+                return this.parmRecommendationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmRecommendationField, value) != true)) {
+                    this.parmRecommendationField = value;
+                    this.RaisePropertyChanged("parmRecommendation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmRemedy {
+            get {
+                return this.parmRemedyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmRemedyField, value) != true)) {
+                    this.parmRemedyField = value;
+                    this.RaisePropertyChanged("parmRemedy");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkTechnicalTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkTechnicalTasksContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
         
@@ -135,6 +398,8 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         private Eqstra.TechnicalInspection.UILogic.TIService.EEPActionStep parmEEPActionStepField;
         
         private string parmEmailField;
+        
+        private System.DateTime parmInspectionDueDateField;
         
         private string parmServiceIdField;
         
@@ -316,6 +581,19 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime parmInspectionDueDate {
+            get {
+                return this.parmInspectionDueDateField;
+            }
+            set {
+                if ((this.parmInspectionDueDateField.Equals(value) != true)) {
+                    this.parmInspectionDueDateField = value;
+                    this.RaisePropertyChanged("parmInspectionDueDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmServiceId {
             get {
                 return this.parmServiceIdField;
@@ -376,217 +654,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
                 if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
                     this.parmUserIDField = value;
                     this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkValidateUserContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract))]
-    public partial class XppObjectBase : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseCategoryAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public partial class MzkCaseCategoryAuthorizationContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
-        
-        private string parmActionField;
-        
-        private long parmCaseServiceRecIDField;
-        
-        private string parmCauseField;
-        
-        private string parmMajorComponentField;
-        
-        private long parmRecIDField;
-        
-        private string parmSubComponentField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAction {
-            get {
-                return this.parmActionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmActionField, value) != true)) {
-                    this.parmActionField = value;
-                    this.RaisePropertyChanged("parmAction");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecID {
-            get {
-                return this.parmCaseServiceRecIDField;
-            }
-            set {
-                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCause {
-            get {
-                return this.parmCauseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCauseField, value) != true)) {
-                    this.parmCauseField = value;
-                    this.RaisePropertyChanged("parmCause");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmMajorComponent {
-            get {
-                return this.parmMajorComponentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmMajorComponentField, value) != true)) {
-                    this.parmMajorComponentField = value;
-                    this.RaisePropertyChanged("parmMajorComponent");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSubComponent {
-            get {
-                return this.parmSubComponentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSubComponentField, value) != true)) {
-                    this.parmSubComponentField = value;
-                    this.RaisePropertyChanged("parmSubComponent");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseServiceAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public partial class MzkCaseServiceAuthorizationContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract> parmCaseCategoryAuthListField;
-        
-        private long parmCaseServiceRecIDField;
-        
-        private System.DateTime parmCompletionDateField;
-        
-        private string parmDamageCauseField;
-        
-        private string parmRecommendationField;
-        
-        private string parmRemedyField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract> parmCaseCategoryAuthList {
-            get {
-                return this.parmCaseCategoryAuthListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCaseCategoryAuthListField, value) != true)) {
-                    this.parmCaseCategoryAuthListField = value;
-                    this.RaisePropertyChanged("parmCaseCategoryAuthList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecID {
-            get {
-                return this.parmCaseServiceRecIDField;
-            }
-            set {
-                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmCompletionDate {
-            get {
-                return this.parmCompletionDateField;
-            }
-            set {
-                if ((this.parmCompletionDateField.Equals(value) != true)) {
-                    this.parmCompletionDateField = value;
-                    this.RaisePropertyChanged("parmCompletionDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDamageCause {
-            get {
-                return this.parmDamageCauseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDamageCauseField, value) != true)) {
-                    this.parmDamageCauseField = value;
-                    this.RaisePropertyChanged("parmDamageCause");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRecommendation {
-            get {
-                return this.parmRecommendationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRecommendationField, value) != true)) {
-                    this.parmRecommendationField = value;
-                    this.RaisePropertyChanged("parmRecommendation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRemedy {
-            get {
-                return this.parmRemedyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRemedyField, value) != true)) {
-                    this.parmRemedyField = value;
-                    this.RaisePropertyChanged("parmRemedy");
                 }
             }
         }
@@ -686,6 +753,23 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
                 }
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkLoginType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public enum MzkLoginType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Driver = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Courier = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Customer = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -859,23 +943,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         AwaitTechnicalInspection = 143,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkLoginType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MzkLoginType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Driver = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Courier = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Customer = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1333,67 +1400,33 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIService.MzkTechnicalInspection")]
     public interface MzkTechnicalInspection {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getUserDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/saveImageAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetTasksRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkTechnicalInspectionGetTasksRequest() {
-        }
-        
-        public MzkTechnicalInspectionGetTasksRequest(string _userId, string _company) {
-            this._userId = _userId;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetTasksResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract> response;
-        
-        public MzkTechnicalInspectionGetTasksResponse() {
-        }
-        
-        public MzkTechnicalInspectionGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract> response) {
-            this.response = response;
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1433,37 +1466,37 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionInsertTechnicalInspectionRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization;
+        public string _userID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
+        public string _password;
         
-        public MzkTechnicalInspectionInsertTechnicalInspectionRequest() {
+        public MzkTechnicalInspectionValidateUserRequest() {
         }
         
-        public MzkTechnicalInspectionInsertTechnicalInspectionRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
-            this._caseServiceAuthorization = _caseServiceAuthorization;
-            this._company = _company;
+        public MzkTechnicalInspectionValidateUserRequest(string _userID, string _password) {
+            this._userID = _userID;
+            this._password = _password;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionInsertTechnicalInspectionResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response;
+        public bool response;
         
-        public MzkTechnicalInspectionInsertTechnicalInspectionResponse() {
+        public MzkTechnicalInspectionValidateUserResponse() {
         }
         
-        public MzkTechnicalInspectionInsertTechnicalInspectionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response) {
+        public MzkTechnicalInspectionValidateUserResponse(bool response) {
             this.response = response;
         }
     }
@@ -1509,37 +1542,102 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
-        
-        public MzkTechnicalInspectionValidateUserRequest() {
+        public MzkTechnicalInspectionSaveImageRequest() {
         }
         
-        public MzkTechnicalInspectionValidateUserRequest(string _userID, string _password) {
-            this._userID = _userID;
-            this._password = _password;
+        public MzkTechnicalInspectionSaveImageRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
+            this._imageInfo = _imageInfo;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageResponse {
+        
+        public MzkTechnicalInspectionSaveImageResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public bool response;
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization;
         
-        public MzkTechnicalInspectionValidateUserResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest() {
         }
         
-        public MzkTechnicalInspectionValidateUserResponse(bool response) {
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
+            this._caseServiceAuthorization = _caseServiceAuthorization;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response;
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse() {
+        }
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkTechnicalInspectionGetTasksRequest() {
+        }
+        
+        public MzkTechnicalInspectionGetTasksRequest(string _userId, string _company) {
+            this._userId = _userId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract> response;
+        
+        public MzkTechnicalInspectionGetTasksResponse() {
+        }
+        
+        public MzkTechnicalInspectionGetTasksResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract> response) {
             this.response = response;
         }
     }
@@ -1626,18 +1724,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.getTasksAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest request) {
-            return base.Channel.getTasksAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(string _userId, string _company) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest();
-            inValue._userId = _userId;
-            inValue._company = _company;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).getTasksAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.getUserDetailsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsRequest request) {
             return base.Channel.getUserDetailsAsync(request);
         }
@@ -1649,15 +1735,15 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
-            return base.Channel.insertTechnicalInspectionAsync(request);
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
-            inValue._caseServiceAuthorization = _caseServiceAuthorization;
-            inValue._company = _company;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).insertTechnicalInspectionAsync(inValue);
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(string _userID, string _password) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest();
+            inValue._userID = _userID;
+            inValue._password = _password;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1673,15 +1759,38 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request) {
+            return base.Channel.saveImageAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(string _userID, string _password) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest();
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest();
+            inValue._imageInfo = _imageInfo;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).saveImageAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
+            return base.Channel.insertTechnicalInspectionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
+            inValue._caseServiceAuthorization = _caseServiceAuthorization;
+            inValue._company = _company;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).insertTechnicalInspectionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.getTasksAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest request) {
+            return base.Channel.getTasksAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(string _userId, string _company) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksRequest();
+            inValue._userId = _userId;
+            inValue._company = _company;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).getTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

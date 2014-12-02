@@ -404,7 +404,6 @@
     <ProjectReference Include="..\Eqstra.WinRT.Components.Controls\Eqstra.WinRT.Components.Controls.csproj">
       <Project>{567f62b5-9cde-4241-8675-c92a3e9546a8}</Project>
       <Name>Eqstra.WinRT.Components.Controls</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

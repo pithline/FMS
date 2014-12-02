@@ -93,22 +93,28 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
 
         }
 
-        public async System.Threading.Tasks.Task Synchronize()
+        public void Synchronize()
         {
             try
             {
-                if (AppSettings.Instance.IsSynchronizing == 0)
-                {
-                    Synchronize(async () =>
+                
+                    AppSettings.Instance.IsSynchronizing = 1;
+                
+                      
+                Synchronize(async () =>
+                   {
+
+                       await InsertTechnicalInspectionAsync();
+                       await UpdateTaskStatusAsync();
+
+
+
+                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                        {
-
-
-                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                           {
-                               AppSettings.Instance.IsSynchronizing = 0;
-                           });
+                           AppSettings.Instance.IsSynchronizing = 0;
                        });
-                }
+                   });
+
             }
             catch (Exception ex)
             {
@@ -162,7 +168,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                        if (baseModel is TechnicalInsp)
+                        if (baseModel is TIData)
                         {
                             await this.InsertTechnicalInspectionAsync();
                         }
@@ -222,14 +228,15 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                             UserId = task.parmUserID,
                             Address = task.parmCustAddress,
                             CustomerId = task.parmCustAccount,
-                            ConfirmedDate=DateTime.Today// Only Test. Need To add in AX
+                            VehicleInsRecId = task.parmCaseServiceRecID,
+                            ConfirmedDate = task.parmInspectionDueDate
 
                         };
-                        tiTask.CaseServiceRecID = 5637153083;//Testing
+                        
 
                         var subComponents = await client.getSubComponentsAsync(new ObservableCollection<long> { tiTask.CaseServiceRecID }, _userInfo.CompanyId);
 
-                        if (subComponents!=null)
+                        if (subComponents != null)
                         {
                             foreach (var item in subComponents.response)
                             {
@@ -239,7 +246,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                     MajorComponent = item.parmMajorComponent,
                                     Action = item.parmAction,
                                     Cause = item.parmCause,
-                                    CaseServiceRecId = item.parmCaseServiceRecID,
+                                    CaseServiceRecId = tiTask.CaseServiceRecID,
                                     Repairid = item.parmRecID
 
                                 };
@@ -254,24 +261,24 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                 }
 
 
-                            } 
+                            }
                         }
                         await SqliteHelper.Storage.InsertAllAsync(subCompInsertList);
                         await SqliteHelper.Storage.UpdateAllAsync(subCompUpdateList);
-                        if (allTasks.Any(x => x.CaseNumber == task.parmCaseId))
-                        {
-                            updateList.Add(tiTask);
+                        //if (allTasks.Any(x => x.CaseNumber == task.parmCaseId))
+                        //{
+                        //    updateList.Add(tiTask);
 
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
                             insertList.Add(tiTask);
-                        }
+                      
 
                     }
-
+                    await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Task>();
                     await SqliteHelper.Storage.InsertAllAsync(insertList);
-                    await SqliteHelper.Storage.UpdateAllAsync(updateList);
+                    
                 }
             }
             catch (Exception ex)
@@ -290,11 +297,12 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
         {
             try
             {
+
                 if (_userInfo == null)
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var technicalInspData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TI.TechnicalInsp>()).Where(x => x.ShouldSave);
+                var technicalInspData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TI.TIData>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkCaseServiceAuthorizationContract> mzkMobiTrailerAccessoriesContractColl = new ObservableCollection<MzkCaseServiceAuthorizationContract>();
                 if (technicalInspData != null)
                 {
@@ -314,23 +322,24 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 }
                 var res = await client.insertTechnicalInspectionAsync(mzkMobiTrailerAccessoriesContractColl, _userInfo.CompanyId);
 
-                var technicalInspList = new ObservableCollection<TechnicalInsp>();
+                var technicalInspList = new ObservableCollection<TIData>();
                 if (res.response != null)
                 {
                     foreach (var x in res.response.Where(x => x != null))
                     {
-                        technicalInspList.Add(new TechnicalInsp
+                        technicalInspList.Add(new TIData
                         {
                             CauseOfDamage = x.parmDamageCause,
                             Remedy = x.parmRemedy,
                             Recommendation = x.parmRecommendation,
                             CompletionDate = x.parmCompletionDate,
+                            ShouldSave = false,
                             // parmCaseCategoryAuthList = x.CaseCategoryAuthList,
                             CaseServiceRecID = x.parmCaseServiceRecID
 
                         });
                     }
-                    await SqliteHelper.Storage.UpdateAllAsync<TechnicalInsp>(technicalInspList);
+                    await SqliteHelper.Storage.UpdateAllAsync<TIData>(technicalInspList);
                 }
             }
             catch (Exception ex)
@@ -357,18 +366,22 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
                 ObservableCollection<MzkTechnicalTasksContract> mzkTasks = new ObservableCollection<MzkTechnicalTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitTechnicalInspection);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, EEPActionStep.AwaitTechnicalInspection);
 
                 if (tasks != null)
                 {
 
                     foreach (var task in tasks.Where(x =>
-                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture))
+                        x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.Completed))
                     {
                         mzkTasks.Add(
                             new MzkTechnicalTasksContract
 
                             {
+                                parmCaseServiceRecID = task.CaseServiceRecID,
+                                parmServiceRecID = task.ServiceRecID,
+                                parmCaseId = task.CaseNumber,
+                                
                                 parmCustAddress = task.Address,
                                 parmCustName = task.CustomerName,
                                 parmCustPhone = task.CustPhone,
@@ -382,6 +395,8 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                     }
                     var res = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
 
+                    
+
                     var taskList = new ObservableCollection<Eqstra.BusinessLogic.Task>();
                     if (res.response != null)
                     {
@@ -389,6 +404,9 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                         {
                             taskList.Add(new Eqstra.BusinessLogic.Task
                             {
+                                CaseNumber = x.parmCaseId,
+                                ServiceRecID = x.parmServiceRecID,
+                                CaseServiceRecID = x.parmCaseServiceRecID,                                
                                 CaseCategory = x.parmCaseCategory,
                                 Address = x.parmCustAddress,
                                 CustomerName = x.parmCustName,
@@ -399,11 +417,16 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                 StatusDueDate = x.parmStatusDueDate,
                                 UserId = x.parmUserID,
                                 CategoryType = x.parmCaseCategory,
+                                VehicleInsRecId = x.parmCaseServiceRecID,
+                                ConfirmedDate = x.parmInspectionDueDate,
                             });
                         }
                     }
-
-                    await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
+                    foreach (var item in taskList)
+                    {
+                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                    }
+                    //await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
                 }
             }
             catch (SQLite.SQLiteException)

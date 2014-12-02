@@ -93,6 +93,7 @@
     <Compile Include="TIModels\CVehicle\CPOI.cs" />
     <Compile Include="TIModels\CVehicle\CTyres.cs" />
     <Compile Include="TIModels\CVehicle\CVehicleDetails.cs" />
+    <Compile Include="TIModels\MaintenanceRepair.cs" />
     <Compile Include="TIModels\PVehicle\PAccessories.cs" />
     <Compile Include="TIModels\PVehicle\PassengerVehicle.cs" />
     <Compile Include="TIModels\PVehicle\PBodywork.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="TIModels\PVehicle\PVehicleDetails.cs" />
     <Compile Include="TIModels\PVehicle\VehicleDetails.cs" />
     <Compile Include="TIModels\Task.cs" />
+    <Compile Include="TIModels\TIData.cs" />
+    <Compile Include="TIModels\TITask.cs" />
     <Compile Include="TIModels\UserInfo.cs" />
     <Compile Include="TIModels\VehicleDetails.cs" />
     <Compile Include="UserInfo.cs" />
@@ -258,148 +261,64 @@
     <None Include="Service References\SSProxy\xppservice7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCustAddressContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkInspectionHistoryContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialAccessoriesContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialChassisBodyContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialMechConditionContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MZKMobiCommercialTrimInteriorContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiCommercialTyresContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerAccessoriesContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerBodyworkContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerGlassContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerMechConditionContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkMobiPassengerTrimInteriorContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MZKMobiPassengerTyreConditionContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTasksContract.datasource">
+    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleDetailsContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceEditVehicleInspectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetCustDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetInspectionHistoryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceReadVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateConfirmationDateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceUpdateStatusListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkVehicleInspectionServiceValidateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MZKVehicleInspectionTableContract.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIProxy\RoutingService.wsdl" />
-    <None Include="Service References\TIProxy\xppservice.wsdl" />
-    <None Include="Service References\TIProxy\xppservice.xsd">
+    <None Include="Service References\TIProxy\RoutingService1.wsdl" />
+    <None Include="Service References\TIProxy\xppservice2.wsdl" />
+    <None Include="Service References\TIProxy\xppservice21.wsdl" />
+    <None Include="Service References\TIProxy\xppservice8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice1.wsdl" />
-    <None Include="Service References\TIProxy\xppservice1.xsd">
+    <None Include="Service References\TIProxy\xppservice81.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice2.xsd">
+    <None Include="Service References\TIProxy\xppservice82.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice3.xsd">
+    <None Include="Service References\TIProxy\xppservice83.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice4.xsd">
+    <None Include="Service References\TIProxy\xppservice84.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice5.xsd">
+    <None Include="Service References\TIProxy\xppservice85.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice6.xsd">
+    <None Include="Service References\TIProxy\xppservice86.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\xppservice7.xsd">
+    <None Include="Service References\TIProxy\xppservice87.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -426,9 +345,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\TIProxy\xppservice.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\TIProxy\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +355,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TIProxy\xppservice1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

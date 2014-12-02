@@ -8,7 +8,7 @@
              xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
              xmlns:c="using:Eqstra.TechnicalInspection.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"
+             xmlns:SynchronizingSetting="using:Eqstra.TechnicalInspection.UILogic"
              mc:Ignorable="d"
              d:DesignHeight="100"
              d:DesignWidth="350">

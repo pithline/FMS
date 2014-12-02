@@ -53,7 +53,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             this.StartDrivingCommand = new DelegateCommand(async () =>
             {
-                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString()) });
+                await SqliteHelper.Storage.InsertSingleRecordAsync(new DrivingDuration { StartDateTime = DateTime.Now, VehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["CaseServiceRecID"].ToString()) });
                 this.IsStartDriving = false;
                 this.IsArrived = true;
             });
@@ -61,7 +61,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             {
                 if (this._task != null)
                 {
-                    var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"].ToString());
+                    var vehicleInsRecId = Int64.Parse(ApplicationData.Current.LocalSettings.Values["CaseServiceRecID"].ToString());
 
                     var dd = await SqliteHelper.Storage.GetSingleRecordAsync<DrivingDuration>(x => x.VehicleInsRecID.Equals(vehicleInsRecId));
                     dd.StopDateTime = DateTime.Now;
