@@ -88,21 +88,33 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         }
         private void GetAppointments(DriverTask task)
         {
-            var startTime = new DateTime(task.ConfirmationDate.Year, task.ConfirmationDate.Month, task.ConfirmationDate.Day);
-
-            this.Appointments.Add(
-            new ScheduleAppointment()
+            try
             {
-                Subject = task.CaseNumber,
-                Location = task.Address,
-                StartTime = startTime,
-                EndTime = startTime.AddHours(12),
-                ReadOnly = true,
-                AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                AllDay = true,
-                Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                if (!String.IsNullOrEmpty(task.ConfirmationDate))
+                {
 
-            });
+                    var startTime = new DateTime(DateTime.Parse(task.ConfirmationDate).Year, DateTime.Parse(task.ConfirmationDate).Month, DateTime.Parse(task.ConfirmationDate).Day);
+
+                    this.Appointments.Add(
+                    new ScheduleAppointment()
+                    {
+                        Subject = task.CaseNumber,
+                        Location = task.Address,
+                        StartTime = startTime,
+                        EndTime = startTime.AddHours(12),
+                        ReadOnly = true,
+                        AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                        AllDay = true,
+                        Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                    }); 
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         private DriverTask task;

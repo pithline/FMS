@@ -115,9 +115,9 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref allocatedTo, value); }
         }
 
-        private DateTime confirmationDate;
+        private string confirmationDate;
 
-        public DateTime ConfirmationDate
+        public string ConfirmationDate
         {
             get { return confirmationDate; }
             set { SetProperty(ref confirmationDate, value); }

@@ -152,7 +152,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             Description = mzkTask.parmVehicleDescription,
                             CusEmailId = mzkTask.parmEmail,
                             ServiceRecID = mzkTask.parmServiceRecID,
-                            ConfirmationDate = mzkTask.parmConfirmationDate,
+                            ConfirmationDate = mzkTask.parmConfirmationDate == new DateTime(1900, 1, 1) ? string.Empty : mzkTask.parmConfirmationDate.ToString(),
                             CustomerId = mzkTask.parmCustAccount,
                             ContactName = mzkTask.parmContactPersonName,
                            // ScheduledTime=DateTime.Now
