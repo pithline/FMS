@@ -224,7 +224,7 @@
                                              NavigationMode="Row"
                                              ShowBusyIndicator="True"
                                              ItemsSource="{Binding PoolofTasks}"
-                                             ColumnSizer="SizeToCells"
+                                             ColumnSizer="Auto"
                                              AutoGenerateColumns="False" SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
                                              SelectionMode="Single"
                                              AllowEditing="False"
@@ -238,7 +238,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          MinimumWidth="150"
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="CategoryType"
+                                    <grid:GridTextColumn MappingName="CaseCategory"
                                                          HeaderText="CASE TYPE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -276,7 +276,7 @@
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Image />
-                                                    <TextBlock Text="{Binding ContactNumber}" />
+                                                    <TextBlock Text="{Binding ContactNumber}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </grid:GridTemplateColumn.CellTemplate>

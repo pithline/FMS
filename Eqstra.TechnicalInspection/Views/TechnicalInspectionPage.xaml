@@ -7,6 +7,7 @@
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+                            xmlns:conv="using:Eqstra.TechnicalInspection.Converters"
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
                             prism:ViewModelLocator.AutoWireViewModel="True"
@@ -17,6 +18,7 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
 
         <Style x:Key="ListViewItemStyle1"
                TargetType="ListViewItem">
@@ -210,9 +212,8 @@
                                                 <DatePicker Grid.Column="1"
                                                             HorizontalAlignment="Left"
                                                             Margin="5"
-                                                            Date="{Binding Path=Model.CompletionDate,Mode=TwoWay}"/>
+                                                            Date="{Binding Model.CompletionDate,Mode=TwoWay,Converter={StaticResource DateTimeToDateTimeOffsetConverter},UpdateSourceTrigger=PropertyChanged}"/>
                                             </Grid>
-
 
 
                                             <ListView Grid.Row="1"
@@ -231,7 +232,7 @@
                                                                 <ColumnDefinition Width="80" />
                                                                 <ColumnDefinition Width="200" />
                                                                 <ColumnDefinition Width="200" />
-                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="150" />
                                                                 <ColumnDefinition />
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
@@ -259,12 +260,12 @@
                                                     <DataTemplate>
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="80" />
                                                                 <ColumnDefinition Width="200" />
-                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="80" />
                                                                 <ColumnDefinition Width="200" />
-                                                                <ColumnDefinition Width="200"/>
-                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200" />
+                                                                <ColumnDefinition Width="150" />
                                                                 <ColumnDefinition />
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>

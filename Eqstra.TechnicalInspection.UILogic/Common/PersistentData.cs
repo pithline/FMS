@@ -13,7 +13,7 @@ namespace Eqstra.TechnicalInspection
 
         private static PersistentData _instance = new PersistentData();
         public static PersistentData Instance { get { return _instance; } }
-        public Eqstra.BusinessLogic.Task Task { get; set; }
+        public Eqstra.BusinessLogic.TITask Task { get; set; }
         public Eqstra.BusinessLogic.CustomerDetails CustomerDetails { get; set; }
         public static void RefreshInstance()
         {

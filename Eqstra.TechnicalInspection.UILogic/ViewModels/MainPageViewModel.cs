@@ -32,7 +32,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             : base(eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
+            this.PoolofTasks = new ObservableCollection<BusinessLogic.TITask>();
             this.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
 
@@ -78,7 +78,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             });
                             TIServiceHelper.Instance.Synchronize();
                             await TIServiceHelper.Instance.GetTasksAsync();
-                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
+                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
                                 this.PoolofTasks.Clear();
@@ -116,6 +116,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
+          
 
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
@@ -128,7 +129,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                         await TIServiceHelper.Instance.GetTasksAsync();
-                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TaskFetchedEvent>().Publish(this.task);
+                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             this.PoolofTasks.Clear();
@@ -143,6 +144,17 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                     });
                 }
 
+                this._eventAggregator.GetEvent<TaskFetchedEvent>().Subscribe(async p =>
+                {
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                    {
+                        this.PoolofTasks.Clear();
+                        await GetTasksFromDbAsync();
+                        GetAllCount();
+                        GetAppointments();
+                    });
+                });
+
             }
             catch (Exception ex)
             {
@@ -154,6 +166,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         {
             this.TotalCount = this.PoolofTasks.Where(x=> x.ConfirmedDate.Date == DateTime.Today.Date).Count();
         }
+
 
         private void GetAppointments()
         {
@@ -176,12 +189,14 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                               }
                          );
             }
+            PersistentData.Instance.CustomerDetails = new CustomerDetails();
+            PersistentData.Instance.CustomerDetails.Appointments = this.Appointments;
         }
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
-            foreach (Eqstra.BusinessLogic.Task item in list)
+            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
+            foreach (Eqstra.BusinessLogic.TITask item in list)
             {
                 this.PoolofTasks.Add(item);
             }
@@ -189,8 +204,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         }
 
 
-        private Eqstra.BusinessLogic.Task task;
-        public Eqstra.BusinessLogic.Task InspectionTask
+        private Eqstra.BusinessLogic.TITask task;
+        public Eqstra.BusinessLogic.TITask InspectionTask
         {
             get { return task; }
             set
@@ -226,9 +241,9 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             set { SetProperty(ref myTasksCount, value); }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Task> poolofTasks;
+        private ObservableCollection<Eqstra.BusinessLogic.TITask> poolofTasks;
 
-        public ObservableCollection<Eqstra.BusinessLogic.Task> PoolofTasks
+        public ObservableCollection<Eqstra.BusinessLogic.TITask> PoolofTasks
         {
             get { return poolofTasks; }
             set

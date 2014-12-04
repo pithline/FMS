@@ -134,7 +134,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         driverTaskList.Add(new Eqstra.BusinessLogic.ServiceSchedule.DriverTask
                         {
                             CaseNumber = mzkTask.parmCaseID,
-                            Address = mzkTask.parmCustAddress,
+                            Address = mzkTask.parmContactPersonAddress,
                             CustomerName = mzkTask.parmCustName,
                             CustPhone = mzkTask.parmCustPhone,
                             Status = mzkTask.parmStatus,

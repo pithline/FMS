@@ -13,6 +13,10 @@ namespace Eqstra.BusinessLogic.TI
 {
     public class TIData : ValidatableBindableBase
     {
+        public TIData()
+        {
+            this.CompletionDate = DateTime.Now;
+        }
         private string causeOfDamage;
 
         public string CauseOfDamage

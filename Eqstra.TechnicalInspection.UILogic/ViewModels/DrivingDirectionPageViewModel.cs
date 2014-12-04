@@ -23,7 +23,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
     public class DrivingDirectionPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private Eqstra.BusinessLogic.Task _task;
+        private Eqstra.BusinessLogic.TITask _task;
         private IEventAggregator _eventAggregator;
 
         public DrivingDirectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
@@ -98,7 +98,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
+            _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.TITask>(navigationParameter.ToString());
             await GetCustomerDetailsAsync();
             PersistentData.RefreshInstance();
             PersistentData.Instance.CustomerDetails = this.CustomerDetails;
@@ -183,9 +183,9 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                     this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
                     this.CustomerDetails.CustomerName = this._task.CustomerName;
                     this.CustomerDetails.ContactName = this._task.ContactName;
-                    this.CustomerDetails.CategoryType = this._task.CategoryType;
-                    this.CustomerDetails.EmailId = "kasif@m.com";
-
+                    this.CustomerDetails.CategoryType = this._task.CaseCategory;
+                    this.CustomerDetails.EmailId =this._task.Email;
+                    
                 }
             }
             catch (Exception)

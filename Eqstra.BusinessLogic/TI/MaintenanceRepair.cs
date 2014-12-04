@@ -7,8 +7,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.Media.Capture;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.BusinessLogic.TI
@@ -69,8 +71,7 @@ namespace Eqstra.BusinessLogic.TI
                 this._snapShotsPopup = new SnapshotsViewer();
             }
             _snapShotsPopup.DataContext = dc;
-
-
+            
             popup.Child = _snapShotsPopup;
             this._snapShotsPopup.Tag = popup;
 

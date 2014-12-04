@@ -311,7 +311,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task CreateTableAsync()
         {
 
-            ////Drop Existing tables
+            //////Drop Existing tables
 
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
@@ -320,7 +320,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
 
 
-            // await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<PVehicleDetails>();
             //await SqliteHelper.Storage.DropTableAsync<PTyreCondition>();
             //await SqliteHelper.Storage.DropTableAsync<PMechanicalCond>();
             //await SqliteHelper.Storage.DropTableAsync<PInspectionProof>();
@@ -329,7 +329,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<PTrimInterior>();
             //await SqliteHelper.Storage.DropTableAsync<PAccessories>();
 
-            // await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.DropTableAsync<CVehicleDetails>();
             //await SqliteHelper.Storage.DropTableAsync<CTyres>();
             //await SqliteHelper.Storage.DropTableAsync<CAccessories>();
             //await SqliteHelper.Storage.DropTableAsync<CChassisBody>();
@@ -350,7 +350,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<PTrimInterior>();
             //await SqliteHelper.Storage.CreateTableAsync<PAccessories>();
 
-            // await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
+            //await SqliteHelper.Storage.CreateTableAsync<CVehicleDetails>();
             //await SqliteHelper.Storage.CreateTableAsync<CTyres>();
             //await SqliteHelper.Storage.CreateTableAsync<CAccessories>();
             //await SqliteHelper.Storage.CreateTableAsync<CChassisBody>();
@@ -378,7 +378,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<TGlass>();
             //await SqliteHelper.Storage.CreateTableAsync<TMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<TPOI>();
-            // await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
+            //await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
 
 
 

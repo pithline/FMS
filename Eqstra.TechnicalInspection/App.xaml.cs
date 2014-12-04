@@ -29,7 +29,7 @@ namespace Eqstra.TechnicalInspection
     /// </summary>
     sealed partial class App : MvvmAppBase, IDisposable
     {
-        public static Eqstra.BusinessLogic.Task Task { get; set; }
+        public static Eqstra.BusinessLogic.TITask Task { get; set; }
         private readonly IUnityContainer _container = new UnityContainer();
         public IEventAggregator EventAggregator { get; set; }
         /// <summary>
@@ -174,13 +174,13 @@ namespace Eqstra.TechnicalInspection
 
             ////Drop Existing tables
 
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TITask>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TIData>();
 
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
+            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TITask>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();

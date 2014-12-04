@@ -49,14 +49,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="backButton" VerticalAlignment="Center" Click="Close_Click"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}" Background="LightGoldenrodYellow"
                         Margin="10 0 0 0"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
 
                 <Button Content="Delete" Grid.Row="0" Grid.Column="1"  x:Name="DeleteButton" VerticalAlignment="Center" Click="DeleteButton_Click"
-                        AutomationProperties.Name="Delete" AutomationProperties.AutomationId="DeleteAppBarButton" 
+                        AutomationProperties.Name="Delete" Background="LightGoldenrodYellow" AutomationProperties.AutomationId="DeleteAppBarButton" 
                          />
                 <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" />-->

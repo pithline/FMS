@@ -25,7 +25,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
 {
     public class TechnicalInspectionPageViewModel : BaseViewModel
     {
-        private Eqstra.BusinessLogic.Task _task;
+        private Eqstra.BusinessLogic.TITask _task;
         private INavigationService _navigationService;
         private IEventAggregator _eventAggregator;
 
@@ -68,9 +68,9 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         // this.SaveCurrentUIDataAsync(currentModel);
                         _navigationService.Navigate("Main", null);
 
-                        // await TIServiceHelper.Instance.UpdateTaskStatusAsync();
+                         await TIServiceHelper.Instance.UpdateTaskStatusAsync();
                         this.IsBusy = false;
-                        
+                        _eventAggregator.GetEvent<TITaskFetchedEvent>().Publish(this._task);
                     }
                     catch (Exception ex)
                     {
@@ -168,7 +168,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle coolant replacement","Few dent repairs"},CustomerId="1",InspectedBy="Robert Green",InspectedOn = DateTime.Now},
                 new InspectionHistory{InspectionResult=new List<string>{"Vehicle is in perfect condition"},CustomerId="1",InspectedBy="Christopher",InspectedOn = DateTime.Now},
             };
-                _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
+                _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.TITask>(navigationParameter.ToString());
                 App.Task = _task;
 
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
@@ -181,7 +181,6 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 });
 
                 await this.LoadModelFromDbAsync(this._task.CaseServiceRecID);
-              //  this.CustomerDetails = PersistentData.Instance.CustomerDetails;
 
             }
             catch (Exception)
@@ -298,8 +297,10 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
                         this.CustomerDetails.CustomerName = this._task.CustomerName;
                         this.CustomerDetails.ContactName = this._task.ContactName;
-                        this.CustomerDetails.CategoryType = this._task.CategoryType;
-                        this.CustomerDetails.EmailId = "";//this._task.EmailId;
+                        this.CustomerDetails.CategoryType = this._task.CaseCategory;
+                        this.CustomerDetails.EmailId = this._task.Email;
+
+                        this.CustomerDetails.Appointments =PersistentData.Instance.CustomerDetails.Appointments;
                     //}
                 }
             }
@@ -309,6 +310,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
             }
 
         }
+
 
         async private void SaveCurrentUIDataAsync(Object model)
         {

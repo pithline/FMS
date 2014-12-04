@@ -171,7 +171,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
             });
 
-            this.RegionChangedCommand = new DelegateCommand<object>( (param) =>
+            this.RegionChangedCommand = new DelegateCommand<object>((param) =>
             {
                 try
                 {
@@ -193,7 +193,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
             });
 
-            this.SubmitQueryCommand = new DelegateCommand<string>( (param) =>
+            this.SubmitQueryCommand = new DelegateCommand<string>((param) =>
             {
 
             });
@@ -222,7 +222,52 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             );
         }
 
+        private async System.Threading.Tasks.Task DefaultSuplierOnCustomerLocation()
+        {
+            try
+            {
+                this.IsBusy = true;
+                this.Model.Countries = await SSProxyHelper.Instance.GetCountryRegionListFromSvcAsync();
+                if (this.Model.Countries != null)
+                {
+                    this.Model.SelectedCountry = this.Model.Countries.Where(w => this.CustomerDetails.Address.Contains(w.Name)).FirstOrDefault();
 
+                    if (this.Model.SelectedCountry != null)
+                    {
+                        this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(this.Model.SelectedCountry.Id);
+
+                        this.Model.Selectedprovince = this.Model.Provinces.Where(w => this.CustomerDetails.Address.Contains(w.Name)).FirstOrDefault();
+
+                        if (this.Model.Selectedprovince != null)
+                        {
+                            this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.Selectedprovince.Id);
+
+                            this.Model.SelectedCity = this.Model.Cities.Where(w => this.CustomerDetails.Address.Contains(w.Name)).FirstOrDefault();
+
+                            this.Model.Regions = await SSProxyHelper.Instance.GetRegionListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.Selectedprovince.Id);
+
+                            this.Model.SelectedRegion = this.Model.Regions.Where(w => this.CustomerDetails.Address.Contains(w.Name)).FirstOrDefault();
+                        }
+
+                    }
+                }
+
+                string countryId = this.Model.SelectedCountry != null ? this.Model.SelectedCountry.Id : string.Empty;
+                string provinceId = this.Model.Selectedprovince != null ? this.Model.Selectedprovince.Id : string.Empty;
+                string cityId = this.Model.SelectedCity != null ? this.Model.SelectedCity.Id : string.Empty;
+                string suburbId = this.Model.SelectedSuburb != null ? this.Model.SelectedSuburb.Id : string.Empty;
+                string regionId = this.Model.SelectedRegion != null ? this.Model.SelectedRegion.Id : string.Empty;
+
+                this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(countryId, provinceId, cityId, suburbId, regionId);
+
+                this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                this.IsBusy = false;
+            }
+        }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -239,12 +284,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.Model.Countries.AddRange(countries);
                 }
 
-                var geolocator = new Geolocator();
-                Geoposition position = await geolocator.GetGeopositionAsync();
-                if (position.CivicAddress != null)
-                {
-                    this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(position.CivicAddress.Country, position.CivicAddress.State, position.CivicAddress.City, string.Empty, string.Empty);
-                }
+                //var geolocator = new Geolocator();
+                //Geoposition position = await geolocator.GetGeopositionAsync();
+                //if (position.CivicAddress != null)
+                //{
+                //    this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(position.CivicAddress.Country, position.CivicAddress.State, position.CivicAddress.City, string.Empty, string.Empty);
+                //}
+
+                await DefaultSuplierOnCustomerLocation();
+
                 this.IsBusy = false;
             }
             catch (Exception ex)
