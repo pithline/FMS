@@ -336,7 +336,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CollectionRecID = mzkTask.parmCollectionRecId,
                                ConfirmedDate = mzkTask.parmConfirmedDueDate < DateTime.Today ? DateTime.Today : mzkTask.parmConfirmedDueDate.Date,
                                ConfirmedTime = new DateTime(mzkTask.parmConfirmedDueDate.TimeOfDay.Ticks),
-                               Address = mzkTask.parmCustAddress,
+                               Address = mzkTask.parmContactPersonAddress,
                                CustomerId = mzkTask.parmCustId,
                                CustomerName = mzkTask.parmCustName,
                                CustPhone = mzkTask.parmCustPhone,
