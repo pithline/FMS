@@ -315,18 +315,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     else
                     {
                         AppSettings.Instance.IsSyncingCustDetails = 0;
-                        this.CustomerDetails.ContactNumber = this.customer.ContactNumber;
+                        this.CustomerDetails.ContactNumber = this.InspectionTask.ContactNumber;
                         this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
                         this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
                         this.CustomerDetails.Status = this.InspectionTask.Status;
                         this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
-                        this.CustomerDetails.Address = this.customer.Address;
+                        this.CustomerDetails.Address = this.InspectionTask.Address;
                         this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
-                        this.CustomerDetails.CustomerName = this.customer.CustomerName;
-                        this.CustomerDetails.ContactName = this.customer.ContactName;
+                        this.CustomerDetails.CustomerName = this.InspectionTask.CustomerName;
+                        this.CustomerDetails.ContactName = this.InspectionTask.ContactName;
                         this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
 
-                        this.CustomerDetails.EmailId = this.customer.EmailId;
+                        this.CustomerDetails.EmailId = this.Customer.EmailId;
 
                     }
 

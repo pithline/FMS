@@ -358,9 +358,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             GetPVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        else
+                        else if(mzkTask.parmVehicleType == MzkVehicleType.Commercial)
                         {
                             GetCVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
+                        }
+                        else
+                        {
+                            GetTVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
                         if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
                         {
@@ -540,6 +544,85 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 });
             }
         }
+
+
+        async private System.Threading.Tasks.Task GetTVehicleDetailsAsync(string caseNumber, long vRecId)
+        {
+            try
+            {
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
+                });
+                var resp = await client.readVehicleDetailsAsync(caseNumber, _userInfo.CompanyId);
+                var vehicleData = await SqliteHelper.Storage.LoadTableAsync<BusinessLogic.TVehicleDetails>();
+                if (resp.response != null && resp.response.Any())
+                {
+                    List<BusinessLogic.TVehicleDetails> vehicleInsertList = new List<BusinessLogic.TVehicleDetails>();
+                    List<BusinessLogic.TVehicleDetails> vehicleUpdateList = new List<BusinessLogic.TVehicleDetails>();
+                    foreach (var v in resp.response.Where(x => x != null))
+                    {
+                        var vehicleTosave = new BusinessLogic.TVehicleDetails
+                        {
+                            ChassisNumber = v.parmChassisNumber.ToString(),
+                            Color = v.parmColor,
+                            Year = v.parmyear.ToString("MM/dd/yyyy"),
+                            ODOReading = v.parmODOReading.ToString(),
+                            Make = v.parmMake,
+                            EngineNumber = v.parmEngineNumber,
+                            VehicleInsRecID = vRecId,
+                            RecID = v.parmRecID,
+                            CaseNumber = caseNumber,
+                            TableId = v.parmTableId,
+                            RegistrationNumber = v.parmRegNo,
+                            IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate,
+                            JobCardNumber=v.parmJobCardNumber
+
+                        };
+
+                        if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
+                        {
+                            vehicleUpdateList.Add(vehicleTosave);
+                        }
+                        else
+                        {
+                            vehicleInsertList.Add(vehicleTosave);
+                        }
+
+                    }
+
+                    if (vehicleUpdateList.Any())
+                        await SqliteHelper.Storage.UpdateAllAsync<BusinessLogic.TVehicleDetails>(vehicleUpdateList);
+
+                    if (vehicleInsertList.Any())
+                        await SqliteHelper.Storage.InsertAllAsync<BusinessLogic.TVehicleDetails>(vehicleInsertList);
+
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        _eventAggregator.GetEvent<VehicleFetchedEvent>().Publish(true);
+
+                        AppSettings.Instance.IsSyncingVehDetails = 0;
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
+                });
+            }
+        }
+
         async private System.Threading.Tasks.Task EditPassengerVehicleDetailsToSvcAsync()
         {
             try
@@ -2537,7 +2620,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 CollectionRecID = x.parmCollectionRecId,
                                 ConfirmedDate = x.parmConfirmedDueDate,
                                 ConfirmedTime = new DateTime(x.parmConfirmedDueDate.TimeOfDay.Ticks),
-                                Address = x.parmCustAddress,
+                                Address = x.parmContactPersonAddress,
                                 CustomerId = x.parmCustId,
                                 CustomerName = x.parmCustName,
                                 CustPhone = x.parmCustPhone,

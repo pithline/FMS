@@ -10,5 +10,6 @@ namespace Eqstra.BusinessLogic.Enums
     {
         Commercial,
         Passenger,
+        Trailer
     }
 }

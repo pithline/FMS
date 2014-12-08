@@ -37,7 +37,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     Stretch = Stretch.Fill
                 };
             }
-            else
+            else if (navigationParameter is CVehicleDetails)
             {
                 var model = (CVehicleDetails)navigationParameter;
                 this.Snapshots.Add(model.FrontSnapshot);
@@ -48,6 +48,21 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
                 Stretch = Stretch.Fill
             };
+            }
+
+            else
+            {
+                var model = (TVehicleDetails)navigationParameter;
+                this.Snapshots.Add(model.FrontSnapshot);
+                this.Snapshots.Add(model.BackSnapshot);
+                this.Snapshots.Add(model.LeftSnapshot);
+                this.Snapshots.Add(model.RightSnapshot);
+
+                PanelBackground = new ImageBrush()
+                {
+                    ImageSource = new BitmapImage(new Uri(((TVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
+                    Stretch = Stretch.Fill
+                };
             }
 
 

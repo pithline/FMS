@@ -119,11 +119,6 @@
       <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\TIService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\VIService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,51 +192,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.VehicleInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\RoutingService.wsdl" />
-    <None Include="Service References\TIService\xppservice.wsdl" />
-    <None Include="Service References\TIService\xppservice.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice1.wsdl" />
-    <None Include="Service References\TIService\xppservice1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice7.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\VIService\Eqstra.VehicleInspection.UILogic.VIService.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -378,7 +328,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\TIService\" />
     <WCFMetadataStorage Include="Service References\VIService\" />
   </ItemGroup>
   <ItemGroup>
@@ -406,21 +355,6 @@
       <Name>Eqstra.WinRT.Components.Controls</Name>
       <Private>False</Private>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TIService\xppservice.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TIService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TIService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TIService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

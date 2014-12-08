@@ -44,7 +44,17 @@ namespace Eqstra.BusinessLogic
         {
             get { return isLicenseDiscCurrent; }
             set { SetProperty(ref isLicenseDiscCurrent, value); }
+        
         }
+
+        private string odoReading;
+
+        public string ODOReading
+        {
+            get { return odoReading; }
+            set { SetProperty(ref odoReading, value); }
+        }
+        
 
         private DateTime licenseDiscExpiryDate;
 

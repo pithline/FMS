@@ -52,7 +52,6 @@ namespace Eqstra.BusinessLogic.TI
             }
         }
 
-
         public void OpenPopup(dynamic dc)
         {
             CoreWindow currentWindow = Window.Current.CoreWindow;
@@ -97,9 +96,7 @@ namespace Eqstra.BusinessLogic.TI
             set { SetProperty(ref repairid, value); }
         }
 
-
         private long caseServiceRecId;
-
         public long CaseServiceRecId
         {
             get { return caseServiceRecId; }
@@ -154,9 +151,6 @@ namespace Eqstra.BusinessLogic.TI
             get { return subComponentImgList; }
             set { SetProperty(ref subComponentImgList, value); }
         }
-
-
-
         public async System.Threading.Tasks.Task<ValidatableBindableBase> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<MaintenanceRepair>(x => x.Repairid == vehicleInsRecID);
