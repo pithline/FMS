@@ -172,22 +172,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
                 foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
                 {
-                    var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
-                               item.ConfirmedTime.Second);
-                    this.CustomerDetails.Appointments.Add(
+                   
+                        var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                                             item.ConfirmedTime.Second);
+                        this.CustomerDetails.Appointments.Add(
 
-                                  new ScheduleAppointment()
-                                  {
-                                      Subject = item.CaseNumber,
-                                      Location = item.Address,
-                                      StartTime = startTime,
-                                      EndTime = startTime.AddHours(1),
-                                      ReadOnly = true,
-                                      AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                      Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                                      new ScheduleAppointment()
+                                      {
+                                          Subject = item.CaseNumber,
+                                          Location = item.Address,
+                                          StartTime = startTime,
+                                          EndTime = startTime.AddHours(1),
+                                          ReadOnly = true,
+                                          AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                          Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
-                                  }
-                             );
+                                      }
+                                 ); 
+                    
                 }
                 return list;
             }
@@ -306,29 +308,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 if (this.InspectionTask != null)
                 {
-                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this.InspectionTask.CustomerId);
-                    if (this.Customer == null)
-                    {
-                        AppSettings.Instance.IsSyncingCustDetails = 1;
-
-                    }
-                    else
-                    {
-                        AppSettings.Instance.IsSyncingCustDetails = 0;
-                        this.CustomerDetails.ContactNumber = this.InspectionTask.ContactNumber;
-                        this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
-                        this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
-                        this.CustomerDetails.Status = this.InspectionTask.Status;
-                        this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
-                        this.CustomerDetails.Address = this.InspectionTask.Address;
-                        this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
-                        this.CustomerDetails.CustomerName = this.InspectionTask.CustomerName;
-                        this.CustomerDetails.ContactName = this.InspectionTask.ContactName;
-                        this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
-
-                        this.CustomerDetails.EmailId = this.Customer.EmailId;
-
-                    }
+                    AppSettings.Instance.IsSyncingCustDetails = 0;
+                    this.CustomerDetails.ContactNumber = this.InspectionTask.ContactNumber;
+                    this.CustomerDetails.CaseNumber = this.InspectionTask.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this.InspectionTask.VehicleInsRecId;
+                    this.CustomerDetails.Status = this.InspectionTask.Status;
+                    this.CustomerDetails.StatusDueDate = this.InspectionTask.StatusDueDate;
+                    this.CustomerDetails.Address = this.InspectionTask.Address;
+                    this.CustomerDetails.AllocatedTo = this.InspectionTask.AllocatedTo;
+                    this.CustomerDetails.CustomerName = this.InspectionTask.CustomerName;
+                    this.CustomerDetails.ContactName = this.InspectionTask.ContactName;
+                    this.CustomerDetails.CategoryType = this.InspectionTask.CategoryType;
+                    this.CustomerDetails.EmailId = this.InspectionTask.Email;
 
                 }
             }

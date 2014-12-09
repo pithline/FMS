@@ -269,7 +269,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="License Disc Expiry Date"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <input:SfDatePicker  Value="{Binding Path= Model.LicenseDiscExpireDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <input:SfDatePicker AllowInlineEditing="False" Value="{Binding Path= Model.LicenseDiscExpireDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="1"
@@ -353,7 +353,7 @@
                                     Margin="0 20 20 0">
                             <TextBlock Text="Job Card Number"
                                        Style="{StaticResource TextHeaderStyle}" />
-                            <TextBlock Text="{Binding Path= Model.JobCardNumber}"
+                            <TextBlock Text="{Binding Path=Model.JobCardNumber}"
                                        Style="{StaticResource TextContentStyle}" />
                         </StackPanel>
 

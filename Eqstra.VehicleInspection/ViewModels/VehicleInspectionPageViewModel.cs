@@ -215,7 +215,7 @@ namespace Eqstra.VehicleInspection.ViewModels
         private void LoadAppointments()
         {
             var startTime = new DateTime(this._task.ConfirmedDate.Year, this._task.ConfirmedDate.Month, this._task.ConfirmedDate.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
-                               this._task.ConfirmedTime.Second);
+                                 this._task.ConfirmedTime.Second);
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){

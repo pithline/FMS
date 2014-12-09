@@ -292,6 +292,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 //}
 
                 await DefaultSuplierOnCustomerLocation();
+                _navigationService.ClearHistory();
 
                 this.IsBusy = false;
             }

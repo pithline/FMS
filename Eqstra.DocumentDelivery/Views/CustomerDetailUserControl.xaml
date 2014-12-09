@@ -7,11 +7,13 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Eqstra.DocumentDelivery.Views.CustomerDetailUserControl"
     xmlns:vms="using:Eqstra.DocumentDelivery.UILogic.ViewModels"
+    xmlns:convert="using:Eqstra.DocumentDelivery.Converter"
     x:Name="custDetailsUserControl"
     xmlns:schedule="using:Syncfusion.UI.Xaml.Schedule"
     mc:Ignorable="d">
     <UserControl.Resources>
         <vms:CustomerDetailUserControlViewModel x:Key="CustDetailsViewModel"/>
+        <convert:DateTimeConverter x:Key="DateTimeConverter"/>
     </UserControl.Resources>
     <Border BorderBrush="#FFE0E0E0" Grid.Row="1" Margin="0 0 0 0" BorderThickness="1" Background="White" Width="370"  HorizontalAlignment="Left" VerticalAlignment="Stretch">
         <ScrollViewer VerticalScrollMode="Auto" ZoomMode="Disabled">
@@ -73,12 +75,12 @@
                     </StackPanel>
                     <StackPanel Grid.Row="6" Margin="0 15 0 0">
                         <TextBlock Text="Delivery Date" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding DeliveryDate}" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock  Text="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter},ConverterParameter='d'}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="7" Margin="0 15 0 0">
                         <TextBlock Text="Delivery Time" Style="{StaticResource TextHeaderStyle}"/>
-                        <TextBlock Text="{Binding DeliveryTime}" Style="{StaticResource TextContentStyle}"/>
+                        <TextBlock Text="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter}}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" MinHeight="40" Height="70" VerticalAlignment="Bottom" Grid.Row="8" Margin="0 10 0 0">

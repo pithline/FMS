@@ -230,9 +230,9 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                             CustomerId = task.parmCustAccount,
                             VehicleInsRecId = task.parmCaseServiceRecID,
                             ConfirmedDate = task.parmInspectionDueDate,
-                            AllocatedTo=_userInfo.Name,
-                          Email=task.parmEmail
-                            
+                            AllocatedTo = _userInfo.Name,
+                            Email = task.parmEmail
+
                         };
 
 

@@ -12,4 +12,14 @@
     <RemoteDebugEnabled>false</RemoteDebugEnabled>
     <UseSimulator>false</UseSimulator>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <RemoteDebugMachine>172.22.3.13</RemoteDebugMachine>
+    <UseAuthentication>false</UseAuthentication>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <RemoteDebugMachine>MAZIKGLOBAL</RemoteDebugMachine>
+    <UseAuthentication>false</UseAuthentication>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+  </PropertyGroup>
 </Project>

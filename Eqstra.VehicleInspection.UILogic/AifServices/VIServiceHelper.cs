@@ -328,7 +328,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     {
                         var taskTosave = new Eqstra.BusinessLogic.Task
                            {
-
                                CaseCategory = mzkTask.parmCaseCategory,
                                CaseNumber = mzkTask.parmCaseID,
                                CaseServiceRecID = mzkTask.parmCaseServiceRecId,
@@ -350,6 +349,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                RegistrationNumber = mzkTask.parmRegistrationNum,
                                AllocatedTo = _userInfo.Name,
                                VehicleInsRecId = mzkTask.parmRecID,
+                               Email = mzkTask.parmCustEmail,
                                VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), mzkTask.parmVehicleType.ToString())
                            };
 
@@ -358,11 +358,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             GetPVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        else if(mzkTask.parmVehicleType == MzkVehicleType.Commercial)
+                        else if (mzkTask.parmVehicleType == MzkVehicleType.Commercial)
                         {
                             GetCVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        else
+                        else if (mzkTask.parmVehicleType == MzkVehicleType.Trailer)
                         {
                             GetTVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
@@ -582,7 +582,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             RegistrationNumber = v.parmRegNo,
                             IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
                             LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate,
-                            JobCardNumber=v.parmJobCardNumber
+                            JobCardNumber = v.parmJobCardNumber
+
 
                         };
 
@@ -2585,8 +2586,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmCaseCategory = task.CaseCategory,
                                 parmCategoryType = task.CategoryType,
                                 parmCollectionRecId = task.CollectionRecID,
-                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month, task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
-                           task.ConfirmedTime.Second),
                                 parmCustAddress = task.Address,
                                 parmCustId = task.CustomerId,
                                 parmCustName = task.CustomerName,
@@ -2594,6 +2593,10 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmContactPersonPhone = task.ContactNumber,
                                 parmContactPersonName = task.ContactName,
                                 parmRegistrationNum = task.RegistrationNumber,
+
+                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month,task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                                             task.ConfirmedTime.Second),
+
                                 parmStatus = task.Status,
                                 parmStatusDueDate = task.StatusDueDate,
                                 parmUserID = task.UserId,
@@ -2621,6 +2624,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 ConfirmedDate = x.parmConfirmedDueDate,
                                 ConfirmedTime = new DateTime(x.parmConfirmedDueDate.TimeOfDay.Ticks),
                                 Address = x.parmContactPersonAddress,
+                                AllocatedTo = _userInfo.Name,
                                 CustomerId = x.parmCustId,
                                 CustomerName = x.parmCustName,
                                 CustPhone = x.parmCustPhone,

@@ -97,7 +97,7 @@ namespace Eqstra.BusinessLogic
         }
 
         private string customerName;
-   
+
         [RestorableState]
         public string CustomerName
         {
@@ -213,6 +213,14 @@ namespace Eqstra.BusinessLogic
         {
             get { return allowEditing; }
             set { SetProperty(ref allowEditing, value); }
+        }
+
+        private string email;
+
+        public string Email
+        {
+            get { return email; }
+            set { SetProperty(ref email, value); }
         }
 
     }

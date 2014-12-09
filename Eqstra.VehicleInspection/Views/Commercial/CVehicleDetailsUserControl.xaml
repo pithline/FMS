@@ -155,7 +155,7 @@
 
                         <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">
                             <TextBlock Text="License Disc Expiry Date" Style="{StaticResource TextHeaderStyle}"/>
-                            <input:SfDatePicker Value="{Binding Path= Model.LicenseDiscExpireDate}"/>
+                            <input:SfDatePicker AllowInlineEditing="False" Value="{Binding Path= Model.LicenseDiscExpireDate}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 20 20 0">

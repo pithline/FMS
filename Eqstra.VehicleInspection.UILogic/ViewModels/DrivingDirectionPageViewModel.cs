@@ -81,7 +81,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private void LoadAppointments()
         {
             var startTime = new DateTime(this._task.ConfirmedDate.Year, this._task.ConfirmedDate.Month, this._task.ConfirmedDate.Day, this._task.ConfirmedTime.Hour, this._task.ConfirmedTime.Minute,
-                               this._task.ConfirmedTime.Second);
+                             this._task.ConfirmedTime.Second);
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection
             {
                 new ScheduleAppointment(){
@@ -171,27 +171,19 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             {
                 if (this._task != null)
                 {
-                    this.Customer = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(c => c.Id == this._task.CustomerId);
-                    if (this.Customer == null)
-                    {
-                        AppSettings.Instance.IsSyncingCustDetails = 1;
+                    AppSettings.Instance.IsSyncingCustDetails = 0;
+                    this.CustomerDetails.ContactNumber = this._task.ContactNumber;
+                    this.CustomerDetails.CaseNumber = this._task.CaseNumber;
+                    this.CustomerDetails.VehicleInsRecId = this._task.VehicleInsRecId;
+                    this.CustomerDetails.Status = this._task.Status;
+                    this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
+                    this.CustomerDetails.Address = this._task.Address;
+                    this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
+                    this.CustomerDetails.CustomerName = this._task.CustomerName;
+                    this.CustomerDetails.ContactName = this._task.ContactName;
+                    this.CustomerDetails.CategoryType = this._task.CategoryType;
+                    this.CustomerDetails.EmailId = this._task.Email;
 
-                    }
-                    else
-                    {
-                        AppSettings.Instance.IsSyncingCustDetails = 0;
-                        this.CustomerDetails.ContactNumber = this.Customer.ContactNumber;
-                        this.CustomerDetails.CaseNumber = this._task.CaseNumber;
-                        this.CustomerDetails.VehicleInsRecId = this._task.VehicleInsRecId;
-                        this.CustomerDetails.Status = this._task.Status;
-                        this.CustomerDetails.StatusDueDate = this._task.StatusDueDate;
-                        this.CustomerDetails.Address = this.Customer.Address;
-                        this.CustomerDetails.AllocatedTo = this._task.AllocatedTo;
-                        this.CustomerDetails.CustomerName = this.Customer.CustomerName;
-                        this.CustomerDetails.ContactName = this.Customer.ContactName;
-                        this.CustomerDetails.CategoryType = this._task.CategoryType;
-                        this.CustomerDetails.EmailId = this.Customer.EmailId;
-                    }
                 }
             }
             catch (Exception)

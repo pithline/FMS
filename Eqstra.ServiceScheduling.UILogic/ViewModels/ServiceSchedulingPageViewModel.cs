@@ -36,7 +36,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 try
                 {
-                    if (this.Model.ValidateProperties())
+                    if (ODOImageValidate() && this.Model.ValidateProperties())
                     {
                         var messageDialog = new MessageDialog("Details once saved cannot be edited. Do you want to continue ?");
                         messageDialog.Commands.Add(new UICommand("Yes", OnYesButtonClicked));
@@ -177,7 +177,17 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             });
         }
 
-
+        private Boolean ODOImageValidate()
+        {
+            if (this.Model.ODOReadingSnapshot.ImagePath.Equals("ms-appx:///Assets/ODO_meter.png"))
+            {
+                var messageDialog = new MessageDialog("Please capture ODO Image");
+                messageDialog.Commands.Add(new UICommand("Ok"));
+                messageDialog.ShowAsync();
+                return false;
+            }
+            return true;
+        }
 
         async private void OnYesButtonClicked(IUICommand command)
         {

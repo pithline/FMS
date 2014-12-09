@@ -695,6 +695,7 @@
           <xs:element minOccurs="0" name="parmContactPersonName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmContactPersonPhone" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmCustEmail" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmCustPhone" nillable="true" type="xs:string" />
@@ -1160,12 +1161,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
-  <xs:complexType name="ArrayOfMzkVehicleDetailsContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkVehicleDetailsContract" nillable="true" type="tns:ArrayOfMzkVehicleDetailsContract" />
   <xs:complexType name="ArrayOfMzkDrivingTimeContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDrivingTimeContract" nillable="true" type="tns:MzkDrivingTimeContract" />
@@ -1178,6 +1173,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
+  <xs:complexType name="ArrayOfMzkVehicleDetailsContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkVehicleDetailsContract" nillable="true" type="tns:ArrayOfMzkVehicleDetailsContract" />
   <xs:complexType name="ArrayOfMzkInspectionHistoryContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkInspectionHistoryContract" nillable="true" type="tns:MzkInspectionHistoryContract" />

@@ -218,7 +218,7 @@
                                              NavigationMode="Row"
                                              ShowBusyIndicator="True"
                                              ItemsSource="{Binding PoolofTasks}"
-                                             ColumnSizer="SizeToCells"
+                                             ColumnSizer="Auto"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"
                                              AllowEditing="False"

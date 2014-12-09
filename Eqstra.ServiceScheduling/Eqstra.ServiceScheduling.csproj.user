@@ -11,4 +11,9 @@
     <UseAuthentication>false</UseAuthentication>
     <RemoteDebugEnabled>false</RemoteDebugEnabled>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <RemoteDebugMachine>MAZIKGLOBAL</RemoteDebugMachine>
+    <UseAuthentication>false</UseAuthentication>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+  </PropertyGroup>
 </Project>

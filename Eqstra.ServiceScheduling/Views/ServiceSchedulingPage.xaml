@@ -182,14 +182,18 @@
                                            Grid.Row="2"
                                            Grid.Column="0"
                                            Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
+                                           VerticalAlignment="Center" ></TextBlock>
                                 <input:SfDatePicker Width="200"
                                                     VerticalAlignment="Center"
                                                     Value="{Binding Model.ODOReadingDate,Mode=TwoWay}"
                                                     Margin="5 0"
                                                     Grid.Row="2"
                                                     Grid.Column="1"
-                                                    HorizontalAlignment="Left" />
+                                                    HorizontalAlignment="Left" >
+                                    <Interactivity:Interaction.Behaviors>
+                                        <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[ODOReadingDate]}" />
+                                    </Interactivity:Interaction.Behaviors>
+                                </input:SfDatePicker>
 
                                 <Grid Grid.Row="1"
                                       Grid.Column="2"
