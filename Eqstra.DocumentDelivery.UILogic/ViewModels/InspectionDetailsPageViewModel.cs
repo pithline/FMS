@@ -362,7 +362,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                 foreach (var d in allTaskOfCustomer)
                 {
-                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { SerialNumber = d.SerialNumber, DocumentType = d.DocumentType });
+                    this.BriefDetailsUserControlViewModel.DocumentsBriefs.Add(new Document { SerialNumber = d.SerialNumber, DocumentType = d.DocumentType, DocumentName = d.DocumentName });
                 }
                 GetCustomerDetailsAsync();
                 this.BriefDetailsUserControlViewModel.CustomerDetails = this.CustomerDetails;
