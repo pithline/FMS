@@ -45,7 +45,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Snapshots.Add(model.LeftSnapshot);
                 PanelBackground = new ImageBrush()
             {
-                ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
+               // ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
                 Stretch = Stretch.Fill
             };
             }

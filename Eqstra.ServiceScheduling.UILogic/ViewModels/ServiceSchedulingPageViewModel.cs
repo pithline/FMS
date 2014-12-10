@@ -181,7 +181,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             if (this.Model.ODOReadingSnapshot.ImagePath.Equals("ms-appx:///Assets/ODO_meter.png"))
             {
-                var messageDialog = new MessageDialog("Please capture ODO Image");
+                var messageDialog = new MessageDialog("Please take missing images");
                 messageDialog.Commands.Add(new UICommand("Ok"));
                 messageDialog.ShowAsync();
                 return false;

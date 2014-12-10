@@ -9,6 +9,9 @@ using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Eqstra.BusinessLogic.Common;
+using Windows.UI.Popups;
+using Eqstra.BusinessLogic.Passenger;
+using Eqstra.BusinessLogic.Commercial;
 
 namespace Eqstra.BusinessLogic.Base
 {
@@ -107,5 +110,27 @@ namespace Eqstra.BusinessLogic.Base
             }
             return _errors.Count == 0;
         }
+
+        public bool VehicleDetailsImagesValidate()
+        {
+            if (this is PVehicleDetails || this is CVehicleDetails || this is TVehicleDetails)
+            {
+                var propertiesToValidate = this.GetType().GetRuntimeProperties();
+                foreach (var propInfo in propertiesToValidate)
+                {
+                    if (propInfo.PropertyType.FullName.Equals(typeof(ImageCapture).FullName) && ((ImageCapture)propInfo.GetValue(this)).ImagePath.Contains("ms-appx:///Assets"))
+                    {
+                        var messageDialog = new MessageDialog("Please take missing images");
+                        messageDialog.Commands.Add(new UICommand("Ok"));
+                        messageDialog.ShowAsync();
+                        return false;
+
+                    }
+                }
+            }
+            return true;
+        }
+
+
     }
 }

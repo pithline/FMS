@@ -63,7 +63,7 @@
                         <CheckBox IsChecked="{Binding Path=Model.HasDecalSignWritingDmg ,Mode=TwoWay}" x:Name="HasDecalSignWritingChkbox"/>
                         <TextBlock Text="Decal/Signwriting" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ToggleSwitch x:Name="DecalSignWritingToggle" IsOn="{Binding Path=Model.IsDecalSignWritingDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="DecalSignWritingToggle" IsOn="{Binding Path=Model.IsDecalSignWritingDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" OffContent="No" OnContent="Yes" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button IsEnabled="{Binding ElementName=HasDecalSignWritingChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVDecalSignWriting}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DecalSignWritingToggle}" Margin="5 0" Grid.Row="1" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -85,7 +85,7 @@
                         <CheckBox IsChecked="{Binding Path=Model.HasReflectiveTapeDmg ,Mode=TwoWay}" x:Name="HasReflectiveTapeChkbox"/>
                         <TextBlock Text="Reflective Tape" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ToggleSwitch x:Name="ReflectiveTapeToggle" IsOn="{Binding Path=Model.IsReflectiveTapeDmg ,Mode=TwoWay}" IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch x:Name="ReflectiveTapeToggle" IsOn="{Binding Path=Model.IsReflectiveTapeDmg ,Mode=TwoWay}" OffContent="No" OnContent="Yes" IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button IsEnabled="{Binding ElementName=HasReflectiveTapeChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVReflectiveTape}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ReflectiveTapeToggle}" Margin="5 0" Grid.Row="2" Grid.Column="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>

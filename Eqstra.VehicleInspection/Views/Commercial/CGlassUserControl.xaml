@@ -59,7 +59,7 @@
                     <TextBlock Text="Comment" Grid.Row="0" Grid.Column="3" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
 
                     <TextBlock Text="Windscreen" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsWindscreenDmg,Mode=TwoWay}" x:Name="Windscreen" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsWindscreenDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="Windscreen" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVWindscreen}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Windscreen}" Margin="5 0" Grid.Row="1" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -78,7 +78,7 @@
                     </GridView>
 
                     <TextBlock Text="Rear Glass" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearGlassDmg,Mode=TwoWay}" x:Name="RearGlass" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearGlassDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="RearGlass" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRearGlass}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearGlass}" Margin="5 0" Grid.Row="2" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -98,7 +98,7 @@
 
 
                     <TextBlock Text="Side Glass" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsSideGlassDmg,Mode=TwoWay}" x:Name="SideGlassToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsSideGlassDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="SideGlassToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVSideGlass}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SideGlassToggle}" Margin="5 0" Grid.Row="3" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -117,7 +117,7 @@
                     </GridView>
 
                     <TextBlock Text="Head Lights" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsHeadLightsDmg,Mode=TwoWay}" x:Name="HeadLightsToggle" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsHeadLightsDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="HeadLightsToggle" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVHeadLights}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HeadLightsToggle}" Margin="5 0" Grid.Row="4" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -136,7 +136,7 @@
                     </GridView>
 
                     <TextBlock Text="Tail Lights" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch  IsOn="{Binding Path=Model.IsTailLightsDmg,Mode=TwoWay}" x:Name="TailLightsToggle" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch  IsOn="{Binding Path=Model.IsTailLightsDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="TailLightsToggle" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVTailLights}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TailLightsToggle}" Margin="5 0" Grid.Row="5" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -155,7 +155,7 @@
                     </GridView>
 
                     <TextBlock Text="Inductor Lenses" Grid.Row="6" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsInductorLensesDmg,Mode=TwoWay}" x:Name="InductorLensesToggle" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsInductorLensesDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="InductorLensesToggle" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVInductorLenses}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=InductorLensesToggle}" Margin="5 0" Grid.Row="6" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -174,7 +174,7 @@
                     </GridView>
 
                     <TextBlock Text="Ex. Rear View Mirror" Grid.Row="7" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsExtRearViewMirrorDmg,Mode=TwoWay}" x:Name="ExtRearViewMirrorToggle" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsExtRearViewMirrorDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="ExtRearViewMirrorToggle" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVExtRearViewMirror}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ExtRearViewMirrorToggle}" Margin="5 0" Grid.Row="7" Grid.Column="2"  Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>

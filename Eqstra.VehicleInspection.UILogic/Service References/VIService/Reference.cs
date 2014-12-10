@@ -7211,9 +7211,6 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Commercial = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Trailer = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -7398,12 +7395,6 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         AwaitDeliverytoHyper = 141,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProvideVehicleInspectionDetails = 142,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitTechnicalInspection = 143,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -7411,16 +7402,22 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
     public enum MzkVehicleCollectionAction : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionConfirmation = 0,
+        AwaitCollectionDetail = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDeliverytoHyper = 1,
+        AwaitVendorSelection = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionDataCapture = 2,
+        AwaitCollectionConfirmation = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDamageConfirmation = 3,
+        AwaitCollectionDataCapture = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDamageConfirmation = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDeliverytoHyper = 5,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -7428,16 +7425,13 @@ namespace Eqstra.VehicleInspection.UILogic.VIService {
     public enum MzkLoginType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Driver = 3,
+        Driver = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Courier = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Customer = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

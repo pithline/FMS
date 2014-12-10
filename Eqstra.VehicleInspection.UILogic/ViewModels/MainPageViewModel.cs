@@ -164,24 +164,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
             foreach (var item in this.PoolofTasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
             {
-            
-         var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
-                                     item.ConfirmedTime.Second);
-                    this.Appointments.Add(
 
-                                  new ScheduleAppointment()
-                                  {
-                                      Subject = item.CaseNumber,
-                                      Location = item.Address,
-                                      StartTime = startTime,
-                                      EndTime = startTime.AddHours(1),
-                                      ReadOnly = true,
-                                      AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                      Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                                            item.ConfirmedTime.Second);
+                this.Appointments.Add(
 
-                                  }
-                             ); 
-                
+                              new ScheduleAppointment()
+                              {
+                                  Subject = item.CaseNumber,
+                                  Location = item.Address,
+                                  StartTime = startTime,
+                                  EndTime = startTime.AddHours(1),
+                                  ReadOnly = true,
+                                  AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                  Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                              }
+                         );
+
             }
         }
 
@@ -313,7 +313,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task CreateTableAsync()
         {
 
-            ////////Drop Existing tables
+            //////Drop Existing tables
 
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
@@ -341,7 +341,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<CCabTrimInter>();
             //await SqliteHelper.Storage.DropTableAsync<DrivingDuration>();
 
-            //////create new  tables 
+            ////create new  tables 
 
             //await SqliteHelper.Storage.CreateTableAsync<PVehicleDetails>();
             //await SqliteHelper.Storage.CreateTableAsync<PTyreCondition>();
@@ -360,7 +360,6 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
-            //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
 
 

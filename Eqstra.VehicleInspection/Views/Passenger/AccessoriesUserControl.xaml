@@ -373,11 +373,64 @@
                         </GridView.ItemTemplate>
                     </GridView>
 
+
+
+
+
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="6">
+                        <CheckBox IsChecked="{Binding Path=Model.HasSpareKeysShownDmg ,Mode=TwoWay}" x:Name="HasSpareKeysShownChkbox"/>
+                        <TextBlock Text="Spare Keys Shown" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="SpareKeysShownToggle" IsOn="{Binding Path=Model.IsSpareKeysShownDmg ,Mode=TwoWay}" OffContent="No" OnContent="Yes" IsEnabled="{Binding ElementName=HasSpareKeysShownChkbox,Path=IsChecked}" Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasSpareKeysShownChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=SpareKeysShown}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SpareKeysShownToggle}" Margin="5 0" Grid.Row="5" Grid.Column="8" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.SpareKeysShownComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasSpareKeysShownChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="5" Grid.Column="9"/>
+                    <GridView IsEnabled="{Binding ElementName=HasSpareKeysShownChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="SpareKeysShown" ItemsSource="{Binding Path= Model.SpareKeysShownImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SpareKeysShownToggle}" Grid.Column="10" Grid.Row="5" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="6">
+                        <CheckBox IsChecked="{Binding Path=Model.HasSpareKeysTestedDmg ,Mode=TwoWay}" x:Name="HasSpareKeysTestedChkbox"/>
+                        <TextBlock Text=" Spare Keys Tested" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="SpareKeysTestedToggle" IsOn="{Binding Path=Model.IsSpareKeysTestedDmg ,Mode=TwoWay}" OffContent="No" OnContent="Yes" IsEnabled="{Binding ElementName=HasSpareKeysTestedChkbox,Path=IsChecked}" Grid.Row="6" Grid.Column="7" VerticalAlignment="Center" Margin="5 0"/>
+                    <Button IsEnabled="{Binding ElementName=HasSpareKeysTestedChkbox,Path=IsChecked}" Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=SpareKeysTested}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SpareKeysTestedToggle}" Margin="5 0" Grid.Row="6" Grid.Column="8" Style="{StaticResource TransparentBtn}">
+                        <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
+                    </Button>
+                    <TextBox Text="{Binding Path= Model.SpareKeysTestedComment ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding ElementName=HasSpareKeysTestedChkbox,Path=IsChecked}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Row="6" Grid.Column="9"/>
+                    <GridView IsEnabled="{Binding ElementName=HasSpareKeysTestedChkbox,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="SpareKeysTested" ItemsSource="{Binding Path= Model.SpareKeysTestedImgList}" Margin="5 0" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=SpareKeysTestedToggle}" Grid.Column="10" Grid.Row="6" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImagePath}" Width="90" Height="90"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+
+
+
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="6">
                         <CheckBox  IsChecked="{Binding Path= Model.IsOthers,Mode=TwoWay}" x:Name="othersChk"/>
                         <TextBlock Text="Others" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <TextBox Text="{Binding Path=Model.OthersComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding ElementName=othersChk,Path=IsChecked}"  AcceptsReturn="True" IsTextPredictionEnabled="True" IsSpellCheckEnabled="True" Height="220" Margin="10 10 5 0" Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding Path=Model.OthersComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding ElementName=othersChk,Path=IsChecked}"  AcceptsReturn="True" IsTextPredictionEnabled="True" IsSpellCheckEnabled="True" Height="220" Margin="10 10 5 0" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Top"/>
 
                 </Grid>
             </Border>

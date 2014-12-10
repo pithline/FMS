@@ -48,9 +48,9 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
 
-        private DateTime licenseDiscExpiryDate;
+        private string licenseDiscExpiryDate;
 
-        public DateTime LicenseDiscExpireDate
+        public string LicenseDiscExpireDate
         {
             get { return licenseDiscExpiryDate; }
             set { SetProperty(ref licenseDiscExpiryDate, value); }

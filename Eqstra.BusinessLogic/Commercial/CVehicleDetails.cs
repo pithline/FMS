@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,16 @@ namespace Eqstra.BusinessLogic.Commercial
         public CVehicleDetails()
         {
             this.LeftSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_left.png" };
-            this.BackSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/car_back.png" };
             this.RightSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_right.png" };
             this.FrontSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_front.png" };
             this.TopSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/car_top.png" };
             this.LicenseDiscSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/license_disc.png" };
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
         }
+
+
+
+
 
         private bool isLicenseDiscCurrent;
         public bool IsLicenseDiscCurrent
@@ -30,9 +34,9 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref isLicenseDiscCurrent, value); }
         }
 
-        private DateTime licenseDiscExpiryDate;
+        private string licenseDiscExpiryDate;
 
-        public DateTime LicenseDiscExpireDate
+        public string LicenseDiscExpireDate
         {
             get { return licenseDiscExpiryDate; }
             set { SetProperty(ref licenseDiscExpiryDate, value); }
@@ -82,14 +86,6 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref leftSnapshot, value); }
         }
 
-        private ImageCapture backSnapshot;
-        [Ignore]
-        public ImageCapture BackSnapshot
-        {
-            get { return backSnapshot; }
-            set { SetProperty(ref backSnapshot, value); }
-        }
-
         private ImageCapture rightSnapshot;
         [Ignore]
         public ImageCapture RightSnapshot
@@ -120,13 +116,6 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return LeftSnapshot.ImagePath; }
             set { SetProperty(ref leftSnapshotPath, value); }
-        }
-
-        public string backSnapshotPath;
-        public string BackSnapshotPath
-        {
-            get { return BackSnapshot.ImagePath; }
-            set { SetProperty(ref backSnapshotPath, value); }
         }
 
         public string rightSnapshotPath;

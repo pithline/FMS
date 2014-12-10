@@ -35,6 +35,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 _navigationService.Navigate("ImageMarkup", this.Model);
             });
         }
+
         public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);

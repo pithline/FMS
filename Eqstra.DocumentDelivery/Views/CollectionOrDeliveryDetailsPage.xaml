@@ -160,7 +160,7 @@
                                     </Grid.RowDefinitions>
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="Has Alternate Contacts" Style="{StaticResource TextHeaderStyle}"/>
-                                        <ToggleSwitch  VerticalAlignment="Bottom" IsOn="{Binding Path=IsAlternateOn,Mode=TwoWay}" x:Name="AlternateToggle" Style="{StaticResource DamagedToggleSwitch}"/>
+                                        <ToggleSwitch  OffContent="No" OnContent="Yes"  VerticalAlignment="Bottom" IsOn="{Binding Path=IsAlternateOn,Mode=TwoWay}" x:Name="AlternateToggle" Style="{StaticResource DamagedToggleSwitch}"/>
 
                                     </StackPanel>
                                    <StackPanel Orientation="Horizontal" Grid.Row="1">

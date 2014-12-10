@@ -22,7 +22,70 @@ namespace Eqstra.BusinessLogic.Commercial
             this.EngineProtectionUnitImgList = new ObservableCollection<ImageCapture>();
             this.DecalSignWritingImgList = new ObservableCollection<ImageCapture>();
             this.ReflectiveTapeImgList = new ObservableCollection<ImageCapture>();
+            this.SpareKeysShownImgList = new ObservableCollection<ImageCapture>();
+            this.SpareKeysTestedImgList = new ObservableCollection<ImageCapture>();
         }
+
+        private bool hasSpareKeysShownDmg;
+
+        public bool HasSpareKeysShownDmg
+        {
+            get { return hasSpareKeysShownDmg; }
+            set { SetProperty(ref hasSpareKeysShownDmg, value); }
+        }
+        private bool isSpareKeysShownDmg;
+
+        public bool IsSpareKeysShownDmg
+        {
+            get { return isSpareKeysShownDmg; }
+            set { SetProperty(ref isSpareKeysShownDmg, value); }
+        }
+        private string spareKeysShownComment;
+
+        public string SpareKeysShownComment
+        {
+            get { return spareKeysShownComment; }
+            set { SetProperty(ref spareKeysShownComment, value); }
+        }
+        private ObservableCollection<ImageCapture> spareKeysShownImgList;
+        [Ignore, DamageSnapshotRequired("Spare Keys Shown snapshot(s) required", "IsSpareKeysShownDmg")]
+        public ObservableCollection<ImageCapture> SpareKeysShownImgList
+        {
+            get { return spareKeysShownImgList; }
+            set { SetProperty(ref spareKeysShownImgList, value); }
+        }
+
+
+        private bool hasSpareKeysTestedDmg;
+
+        public bool HasSpareKeysTestedDmg
+        {
+            get { return hasSpareKeysTestedDmg; }
+            set { SetProperty(ref hasSpareKeysTestedDmg, value); }
+        }
+        private bool isSpareKeysTestedDmg;
+
+        public bool IsSpareKeysTestedDmg
+        {
+            get { return isSpareKeysTestedDmg; }
+            set { SetProperty(ref isSpareKeysTestedDmg, value); }
+        }
+        private string spareKeysTestedComment;
+
+        public string SpareKeysTestedComment
+        {
+            get { return spareKeysTestedComment; }
+            set { SetProperty(ref spareKeysTestedComment, value); }
+        }
+
+        private ObservableCollection<ImageCapture> spareKeysTestedImgList;
+        [Ignore, DamageSnapshotRequired("Spare Keys Tested snapshot(s) required", "IsSpareKeysTestedDmg")]
+        public ObservableCollection<ImageCapture> SpareKeysTestedImgList
+        {
+            get { return spareKeysTestedImgList; }
+            set { SetProperty(ref spareKeysTestedImgList, value); }
+        }
+
 
         private string serviceBlockComment;
 

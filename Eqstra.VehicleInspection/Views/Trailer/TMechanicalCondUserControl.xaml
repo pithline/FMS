@@ -57,7 +57,7 @@
                     <TextBlock Text="Comment" Grid.Row="0" Grid.Column="3" Style="{StaticResource TextContentStyle}" VerticalAlignment="Center"/>
 
                     <TextBlock Text="Front Suspension" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsFrontSuspDmg,Mode=TwoWay}" x:Name="FrontSuspToggle" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsFrontSuspDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="FrontSuspToggle" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVFrontSusp}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FrontSuspToggle}" Grid.Row="1" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -76,7 +76,7 @@
                     </GridView>
 
                     <TextBlock Text="Rear Suspension" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearSuspDmg,Mode=TwoWay}" x:Name="RearSuspToggle" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsRearSuspDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="RearSuspToggle" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVRearSusp,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RearSuspToggle}" Grid.Row="2" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -95,7 +95,7 @@
                     </GridView>
 
                     <TextBlock Text="Hand Brake" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsHandBrakeDmg,Mode=TwoWay}" x:Name="HandBrakeToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsHandBrakeDmg,Mode=TwoWay}" OffContent="No" OnContent="Yes" x:Name="HandBrakeToggle" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVHandBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HandBrakeToggle}" Grid.Row="3" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
@@ -114,7 +114,7 @@
                     </GridView>
 
                     <TextBlock Text="Foot Brake" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{Binding Path=Model.IsFootBrakeDmg,Mode=TwoWay}" x:Name="FootBrakeToggle" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
+                    <ToggleSwitch IsOn="{Binding Path=Model.IsFootBrakeDmg,Mode=TwoWay}" x:Name="FootBrakeToggle" OffContent="No" OnContent="Yes" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5 0"/>
                     <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ElementName=GVFootBrake,Path=ItemsSource}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FootBrakeToggle}" Grid.Row="4" Grid.Column="2" Margin="5 0" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>

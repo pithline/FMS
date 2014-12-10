@@ -421,7 +421,6 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="Passenger" />
       <xs:enumeration value="Commercial" />
-      <xs:enumeration value="Trailer" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkVehicleType" nillable="true" type="tns:MzkVehicleType" />
@@ -1073,29 +1072,17 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="ProvideVehicleInspectionDetails">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">142</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="AwaitTechnicalInspection">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">143</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EEPActionStep" nillable="true" type="tns:EEPActionStep" />
   <xs:simpleType name="MzkVehicleCollectionAction">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="AwaitCollectionDetail" />
+      <xs:enumeration value="AwaitVendorSelection" />
       <xs:enumeration value="AwaitCollectionConfirmation" />
-      <xs:enumeration value="AwaitDeliverytoHyper" />
       <xs:enumeration value="AwaitCollectionDataCapture" />
       <xs:enumeration value="AwaitDamageConfirmation" />
+      <xs:enumeration value="AwaitDeliverytoHyper" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkVehicleCollectionAction" nillable="true" type="tns:MzkVehicleCollectionAction" />
@@ -1116,22 +1103,9 @@
   <xs:element name="MzkValidateUserContract" nillable="true" type="tns:MzkValidateUserContract" />
   <xs:simpleType name="MzkLoginType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Driver">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
+      <xs:enumeration value="Driver" />
       <xs:enumeration value="Courier" />
       <xs:enumeration value="Customer" />
-      <xs:enumeration value="None">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkLoginType" nillable="true" type="tns:MzkLoginType" />

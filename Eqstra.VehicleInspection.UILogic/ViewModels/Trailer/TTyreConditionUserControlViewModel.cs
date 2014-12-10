@@ -46,27 +46,35 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         public async System.Threading.Tasks.Task SaveTrailerTyreConditions(long vehicleInsRecId)
         {
-            foreach (var tyre in PoolOfTyreCondions)
+            try
             {
                 var successFlag = 0;
-                if (tyre.ShouldSave)
+                foreach (var tyre in PoolOfTyreCondions)
                 {
-                    var tyreList = (await SqliteHelper.Storage.LoadTableAsync<TTyreCond>()).Where(x => x.VehicleInsRecID == vehicleInsRecId);
-                    if (tyreList.Any(a => a.TyreCondID == tyre.TyreCondID))
-                    {
-                        successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(tyre);
-                    }
-                    else
-                    {
-                        tyre.VehicleInsRecID = vehicleInsRecId;
-                        successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(tyre);
-                    }
-                }
 
+                    if (tyre.ShouldSave)
+                    {
+                        var tyreList = (await SqliteHelper.Storage.LoadTableAsync<TTyreCond>()).Where(x => x.VehicleInsRecID == vehicleInsRecId);
+                        if (tyreList.Any(a => a.TyreCondID == tyre.TyreCondID))
+                        {
+                            successFlag = await SqliteHelper.Storage.UpdateSingleRecordAsync(tyre);
+                        }
+                        else
+                        {
+                            tyre.VehicleInsRecID = vehicleInsRecId;
+                            successFlag = await SqliteHelper.Storage.InsertSingleRecordAsync(tyre);
+                        }
+                    }
+
+                }
                 if (successFlag != 0)
                 {
                     await VIServiceHelper.Instance.SyncFromSvcAsync((TTyreCond)this.Model);
                 }
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
 

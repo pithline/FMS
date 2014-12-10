@@ -333,7 +333,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                CaseServiceRecID = mzkTask.parmCaseServiceRecId,
                                CategoryType = mzkTask.parmCategoryType,
                                CollectionRecID = mzkTask.parmCollectionRecId,
-                               ConfirmedDate = mzkTask.parmConfirmedDueDate < DateTime.Today ? DateTime.Today : mzkTask.parmConfirmedDueDate.Date,
+                               ConfirmedDate = mzkTask.parmConfirmedDueDate.Date,
                                ConfirmedTime = new DateTime(mzkTask.parmConfirmedDueDate.TimeOfDay.Ticks),
                                Address = mzkTask.parmContactPersonAddress,
                                CustomerId = mzkTask.parmCustId,
@@ -362,7 +362,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             GetCVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        else if (mzkTask.parmVehicleType == MzkVehicleType.Trailer)
+                        else 
                         {
                             GetTVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
@@ -423,7 +423,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             Color = v.parmColor,
                             Year = v.parmyear.ToString("MM/dd/yyyy"),
                             ODOReading = v.parmODOReading.ToString(),
-                            Make = v.parmMake,
+                            Make = v.parmMake+ Environment.NewLine+v.parmModel,
                             EngineNumber = v.parmEngineNumber,
                             VehicleInsRecID = vRecId,
                             RecID = v.parmRecID,
@@ -431,7 +431,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             TableId = v.parmTableId,
                             RegistrationNumber = v.parmRegNo,
                             IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate
+                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate.ToString()
 
                         };
 
@@ -499,7 +499,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                Color = v.parmColor,
                                Year = v.parmyear.ToString("MM/dd/yyyy"),
                                ODOReading = v.parmODOReading.ToString(),
-                               Make = v.parmMake,
+                               Make = v.parmMake + Environment.NewLine + v.parmModel,
                                EngineNumber = v.parmEngineNumber,
                                VehicleInsRecID = vRecId,
                                RecID = v.parmRecID,
@@ -507,7 +507,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                TableId = v.parmTableId,
                                RegistrationNumber = v.parmRegNo,
                                IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                               LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate
+                               LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate.ToString()
                            };
 
                         if (vehicleData.Any(s => s.VehicleInsRecID == vRecId))
@@ -573,7 +573,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             Color = v.parmColor,
                             Year = v.parmyear.ToString("MM/dd/yyyy"),
                             ODOReading = v.parmODOReading.ToString(),
-                            Make = v.parmMake,
+                            Make = v.parmMake + Environment.NewLine + v.parmModel,
                             EngineNumber = v.parmEngineNumber,
                             VehicleInsRecID = vRecId,
                             RecID = v.parmRecID,
@@ -581,7 +581,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             TableId = v.parmTableId,
                             RegistrationNumber = v.parmRegNo,
                             IsLicenseDiscCurrent = v.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate,
+                            LicenseDiscExpireDate = v.parmlisenceDiscExpiryDate.ToString(),
                             JobCardNumber = v.parmJobCardNumber
 
 
@@ -1333,7 +1333,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                         {
                             parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
-                            parmlisenceDiscExpiryDate = cVehicleDetails.LicenseDiscExpireDate,
+                            parmlisenceDiscExpiryDate = DateTime.Parse(cVehicleDetails.LicenseDiscExpireDate),
                             parmRecID = cVehicleDetails.RecID,
                             parmSparseKeyShown = cVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
                             parmSparseKeyTested = cVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
@@ -1352,7 +1352,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         cVehicleDetailsList.Add(new CVehicleDetails
                         {
                             IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                            LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate,
+                            LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate.ToString(),
                             RecID = x.parmRecID,
                             IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
                             IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,

@@ -180,7 +180,7 @@
 
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Lift Required"/>
-                                <ToggleSwitch  IsEnabled="False"
+                                <ToggleSwitch  OffContent="No" OnContent="Yes"  IsEnabled="False"
                                               IsOn="{Binding ServiceSchedulingDetail.IsLiftRequired,Mode=OneTime}"
                                             />
                             </StackPanel>

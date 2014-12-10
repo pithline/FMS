@@ -305,7 +305,7 @@
                                            Grid.Column="4"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
-                                <ToggleSwitch Grid.Row="2"
+                                <ToggleSwitch Grid.Row="2" OffContent="No" OnContent="Yes"
                                               x:Name="liftRequired"
                                               IsOn="{Binding Model.IsLiftRequired,Mode=TwoWay}"
                                               Grid.Column="5"
