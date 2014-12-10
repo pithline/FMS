@@ -73,5 +73,38 @@ namespace Eqstra.BusinessLogic.DocumentDelivery
             get { return docName; }
             set { SetProperty(ref docName, value); }
         }
+
+        private DateTime actionDate;
+
+        public DateTime ActionDate
+        {
+            get { return actionDate; }
+            set { SetProperty(ref actionDate, value); }
+        }
+
+        private DateTime actionTime;
+
+        public DateTime ActionTime
+        {
+            get { return actionTime; }
+            set { SetProperty(ref actionTime, value); }
+        }
+
+        private DateTime statusDueDate;
+
+        public DateTime StatusDueDate
+        {
+            get { return statusDueDate; }
+            set { SetProperty(ref statusDueDate, value); }
+        }
+
+        private string status;
+
+        public string Status
+        {
+            get { return status; }
+            set { SetProperty(ref status, value); }
+        }
+        
     }
 }

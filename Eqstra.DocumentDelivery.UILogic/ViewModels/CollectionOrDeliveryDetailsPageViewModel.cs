@@ -298,7 +298,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         DocumentType = d.DocumentType,
                         MakeModel = d.MakeModel,
                         RegistrationNumber = d.RegistrationNumber,
-                        DocumentName = d.DocumentName
+                        DocumentName = d.DocumentName,
+                        //ActionDate=d.DeliveryDate,
+                        //ActionTime = d.DeliveryDate,
+                        Status=d.Status,
+                        StatusDueDate=d.StatusDueDate
                     });
                 }
 

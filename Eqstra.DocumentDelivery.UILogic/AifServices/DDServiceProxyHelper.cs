@@ -251,9 +251,9 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         var taskTosave = new CollectDeliveryTask
                           {
                               CaseNumber = mzkTask.parmCaseId,
-                              Address = mzkTask.parmContactPersonAddress,
+                              Address = mzkTask.parmCustAddress,
                               CustomerName = mzkTask.parmCustName,
-                              CustomerNumber = mzkTask.parmCustPhone,
+                              CustomerNumber = mzkTask.parmContactPersonPhone,
                               Status = mzkTask.parmStatus,
                               StatusDueDate = mzkTask.parmStatusDueDate,
                               RegistrationNumber = mzkTask.parmRegNo,
