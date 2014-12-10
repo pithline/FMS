@@ -162,7 +162,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <HyperlinkButton Content="{Binding SerialNumber}" Foreground="#FF35a3dc" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
-                                        <TextBlock Text="{Binding DocumentType}" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}" Margin="0 5 0 0"/>
+                                        <TextBlock Text="{Binding DocumentName}" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource LoginTextBlockStyle}" Margin="0 5 0 0"/>
                                     </Grid>
 
                                 </DataTemplate>
