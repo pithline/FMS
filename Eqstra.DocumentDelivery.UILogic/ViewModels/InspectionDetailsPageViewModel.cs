@@ -204,7 +204,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         {
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
-                        await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        //await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
                         await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
 
                         _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.CDTask);

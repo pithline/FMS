@@ -59,6 +59,9 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 stringBuilder.Append(Location.Longitude);
                 stringBuilder.Append("~adr." + Regex.Replace(address, "\n", ","));
                 await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
+            }, (address) =>
+            {
+                return !string.IsNullOrEmpty(address);
             });
 
         }
