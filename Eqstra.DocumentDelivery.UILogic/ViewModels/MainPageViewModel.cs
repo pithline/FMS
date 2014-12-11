@@ -87,8 +87,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                        await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
-                        await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
+                      // await DDServiceProxyHelper.Instance.SyncTasksFromSvcAsync();
+                        //await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                         _eventAggregator.GetEvent<Eqstra.BusinessLogic.DocumentDelivery.TasksFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {

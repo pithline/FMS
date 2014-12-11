@@ -184,7 +184,7 @@ namespace Eqstra.DocumentDelivery
             //await SqliteHelper.Storage.DropTableAsync<CDCustomer>();
 
             //await SqliteHelper.Storage.DropTableAsync<DocumentCollectDetail>();
-            ////await SqliteHelper.Storage.DropTableAsync<DocumnetDeliverDetail>();
+            //await SqliteHelper.Storage.DropTableAsync<DocumnetDeliverDetail>();
 
             //await SqliteHelper.Storage.CreateTableAsync<CDDrivingDuration>();
             //await SqliteHelper.Storage.CreateTableAsync<Document>();

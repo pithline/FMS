@@ -151,19 +151,17 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                        });
 
 
-                       System.Threading.Tasks.Task.WaitAll(
+                     System.Threading.Tasks.Task.WaitAll(
                            this.InsertDocumentDetailsCollectedByCustomerToSvcAsync(),
                            this.GetDriverListFromSvcAsync(),
-
                            this.GetCourierListFromSvcAsync(),
                            this.InsertDocumentCollectedByDriverOrCourierToSvcAsync(),
                            this.UpdateTaskStatusAsync(),
                            this.GetCollectedFromSvcAsync(),
-                           this.InsertDocumentDeliveredByDriverOrCourierToSvcAsync(),
-                           this.SyncTasksFromSvcAsync());
+                           this.InsertDocumentDeliveredByDriverOrCourierToSvcAsync());
+
                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                        {
-
                            AppSettings.Instance.IsSynchronizing = 0;
                        });
 
@@ -172,7 +170,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             }
             catch (Exception ex)
             {
-                this.SendMessageToUIThread(ex.Message);
+               this.SendMessageToUIThread(ex.Message);
             }
         }
         public async System.Threading.Tasks.Task<ObservableCollection<CollectDeliveryTask>> GroupTasksByCustomer()
@@ -273,10 +271,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                               UserID = PersistentData.Instance.UserInfo.UserId,
                               SerialNumber = mzkTask.parmSerialNumber,
                               ContactName = mzkTask.parmContactPersonName,
-                              ContactPersonAddress=mzkTask.parmContactPersonAddress,
+                              ContactPersonAddress = mzkTask.parmContactPersonAddress,
                               DocumentType = mzkTask.parmDocuTypeID,
                               DocumentName = mzkTask.parmDocuName,
-                              
+
                           };
                         if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseId))
                         {
@@ -700,7 +698,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         {
                             if (res.response.Any(a => a.parmCaseId == task.CaseNumber && a.parmStatus == task.Status && a.parmCollectDeliverType.ToString().Equals(task.TaskType.ToString())))
                             {
-                                if (task.TaskType == CDTaskType.None)
+                                if (task.TaskType == CDTaskType.None|| task.TaskType == CDTaskType.Delivery)
                                 {
                                     await SqliteHelper.Storage.DeleteSingleRecordAsync<CollectDeliveryTask>(task);
                                 }
