@@ -13,6 +13,7 @@ using System.Net;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Linq;
 namespace Eqstra.DataProvider.AX.Providers
 {
     [DataProvider(Name = "TechnicalInspection")]
@@ -269,7 +270,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 if (tasks != null)
                 {
-                    foreach (var task in tasks)
+                    foreach (var task in tasks.Where(x=>x.Status == "Completed"))
                     {
                         taskList.Add(
                             new MzkTechnicalTasksContract
@@ -288,6 +289,7 @@ namespace Eqstra.DataProvider.AX.Providers
                                 
                                 parmUserID = task.UserId,
                                 parmEEPActionStep = actionStepMapping[task.Status]
+
                             });
                     } 
                 }
@@ -304,5 +306,6 @@ namespace Eqstra.DataProvider.AX.Providers
         }
 
 
+      
     }
 }

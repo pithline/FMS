@@ -464,8 +464,6 @@
                                                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                                                   MaxHeight="150"
                                                   MinHeight="150"
-                                                  ScrollViewer.HorizontalScrollMode="Auto"
-                                                  ScrollViewer.VerticalScrollMode="Auto"
                                                   VerticalAlignment="Top"
                                                   x:Name="suppliersGrid"
                                                   SelectionMode="Single"

@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Syncfusion.UI.Xaml.Schedule;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Media;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
@@ -17,7 +19,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         INavigationService _navigationService;
-        public MainPageViewModel(INavigationService navigationService)
+        IEventAggregator _eventAggregator;
+        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(navigationService)
         {
             this.PoolofTasks = new ObservableCollection<DriverTask>();
@@ -25,8 +28,34 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.CustomerDetails = new CustomerDetails();
             this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
-            this.BingWeatherCommand = new DelegateCommand(() =>
+            _eventAggregator = eventAggregator;
+
+
+            this.SyncCommand = new DelegateCommand(() =>
             {
+                if (AppSettings.Instance.IsSynchronizing == 0)
+                {
+
+                    SSProxyHelper.Instance.Synchronize(async () =>
+                    {
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            AppSettings.Instance.IsSynchronizing = 1;
+                        });
+
+                        await SSProxyHelper.Instance.GetTasksFromSvcAsync();
+                        _eventAggregator.GetEvent<DriverTaskFetchedEvent>().Publish(this.task);
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                        {
+
+                            await GetTasksFromDbAsync();
+                            AppSettings.Instance.IsSynchronizing = 0;
+                            AppSettings.Instance.Synced = true;
+                        }
+                         );
+
+                    });
+                }
             });
 
             this.StartSchedulingCommand = new DelegateCommand<object>((obj) =>
@@ -59,11 +88,10 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             });
         }
 
-        async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            this.IsBusy = true;
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             var list = await SSProxyHelper.Instance.GetTasksFromSvcAsync();
+            this.PoolofTasks.Clear();
             try
             {
                 if (list != null)
@@ -77,14 +105,29 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 this.IsBusy = false;
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
+        }
+
+        async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        {
+            this.IsBusy = true;
+            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            await GetTasksFromDbAsync();
             this.IsBusy = false;
+
+            this._eventAggregator.GetEvent<DriverTaskFetchedEvent>().Subscribe(async p =>
+            {
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    await GetTasksFromDbAsync();
+
+                });
+            });
         }
         private void GetAppointments(DriverTask task)
         {
@@ -107,12 +150,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         AllDay = true,
                         Status = new ScheduleAppointmentStatus { Status = task.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
 
-                    }); 
+                    });
                 }
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -136,6 +179,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 SetProperty(ref poolofTasks, value);
             }
         }
+
+        public DelegateCommand SyncCommand { get; set; }
 
         private ScheduleAppointmentCollection appointments;
         public ScheduleAppointmentCollection Appointments

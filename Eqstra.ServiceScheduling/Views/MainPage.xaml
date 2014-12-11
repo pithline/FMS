@@ -15,6 +15,18 @@
                             x:Name="pageRoot"
                             mc:Ignorable="d">
 
+
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Sync"
+                              Label="Sync"
+                              Command="{Binding SyncCommand}" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
+    </prism:VisualStateAwarePage.BottomAppBar>
+
     <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
                           AnimationType="DoubleCircle">
 
@@ -141,7 +153,7 @@
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                            
                                                              HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridComboBoxColumn MappingName="Status"
+                                    <grid:GridTextColumn MappingName="Status" MinimumWidth="250"
                                                              AllowEditing="False"
                                                              HeaderText="STATUS"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -153,7 +165,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                       
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="Make"
+                                    <grid:GridTextColumn MappingName="Make" MinimumWidth="220"
                                                          HeaderText="MAKE"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -165,7 +177,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                     
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTextColumn MappingName="Description"
+                                    <grid:GridTextColumn MappingName="Description" MinimumWidth="250"
                                                          HeaderText="VEHICLE DESCRIPTION"
                                                          AllowEditing="False"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
@@ -186,7 +198,7 @@
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                            
                                                          HorizontalHeaderContentAlignment="Left" />
-                                    <grid:GridTemplateColumn HeaderText="CELL NUMBER"
+                                    <grid:GridTemplateColumn HeaderText="CELL NUMBER" MinimumWidth="250"
                                                              AllowEditing="False"
                                                              HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                          

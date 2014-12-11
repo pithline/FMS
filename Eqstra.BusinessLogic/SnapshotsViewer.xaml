@@ -48,28 +48,20 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="backButton" VerticalAlignment="Center" Click="Close_Click"
+
+            </Grid>
+            <Grid x:Name="accentGrid" Grid.Row="1" Background="LightGoldenrodYellow">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                    <Button x:Name="backButton" VerticalAlignment="Top" Click="Close_Click" HorizontalAlignment="Left"
                         Style="{StaticResource NavigationBackButtonNormalStyle}" Background="LightGoldenrodYellow"
                         Margin="10 0 0 0"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
 
-                <Button Content="Delete" Grid.Row="0" Grid.Column="1"  x:Name="DeleteButton" VerticalAlignment="Center" Click="DeleteButton_Click"
-                        AutomationProperties.Name="Delete" Background="LightGoldenrodYellow" AutomationProperties.AutomationId="DeleteAppBarButton" 
-                         />
-                <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" />-->
-            </Grid>
-            <Grid x:Name="accentGrid" Grid.Row="1" Background="LightGoldenrodYellow">
-                <Viewbox>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="100"/>
-                        </Grid.RowDefinitions>
-
+                    <Viewbox>
                         <FlipView x:Name="fvSnaps" ItemsSource="{Binding Snapshots}"   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
@@ -77,8 +69,12 @@
                                 </DataTemplate>
                             </FlipView.ItemTemplate>
                         </FlipView>
-                    </Grid>
-                </Viewbox>
+                    </Viewbox>
+                    <AppBarButton Label="Delete" Icon="Delete" RequestedTheme="Light"  x:Name="DeleteButton" Click="DeleteButton_Click"
+                                      AutomationProperties.Name="Delete" Background="Black" AutomationProperties.AutomationId="DeleteAppBarButton"  VerticalAlignment="Top" HorizontalAlignment="Left" 
+                                      />
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Grid>

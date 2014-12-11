@@ -107,8 +107,6 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                        await InsertTechnicalInspectionAsync();
                        await UpdateTaskStatusAsync();
 
-
-
                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                        {
                            AppSettings.Instance.IsSynchronizing = 0;
@@ -209,7 +207,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 var allTasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>();
 
                 var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
-                if (result != null)
+                 if (result != null)
                 {
                     foreach (var task in result.response)
                     {

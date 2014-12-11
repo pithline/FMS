@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="Eqstra.TechnicalInspection" Publisher="CN=Syed.Noor" Version="1.0.0.6" />
+  <Identity Name="Eqstra.TechnicalInspection" Publisher="CN=Syed.Noor" Version="1.0.0.7" />
   <Properties>
     <DisplayName>Eqstra Technical Inspection</DisplayName>
     <PublisherDisplayName>syed.noor</PublisherDisplayName>

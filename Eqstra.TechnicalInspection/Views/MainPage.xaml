@@ -274,7 +274,7 @@
                                                              HorizontalHeaderContentAlignment="Left">
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
+                                                <StackPanel Orientation="Horizontal" MinWidth="220">
                                                     <Image />
                                                     <TextBlock Text="{Binding ContactNumber}"/>
                                                 </StackPanel>

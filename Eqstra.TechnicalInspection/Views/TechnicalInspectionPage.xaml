@@ -9,6 +9,7 @@
                             xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
                             xmlns:conv="using:Eqstra.TechnicalInspection.Converters"
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
                             xmlns:busy="using:Syncfusion.UI.Xaml.Controls.Notification"
                             prism:ViewModelLocator.AutoWireViewModel="True"
                             RightTapped="VisualStateAwarePage_RightTapped"
@@ -174,7 +175,7 @@
                                     <Image Source="ms-appx:///Assets/save.png" />
                                 </Button>
                             </StackPanel>
-                            <ScrollViewer Grid.Row="1"
+                            <ScrollViewer Grid.Row="1" ZoomMode="Disabled"
                                           HorizontalScrollBarVisibility="Visible"
                                           VerticalScrollBarVisibility="Visible">
                                 <Border Grid.Row="1"
@@ -209,14 +210,14 @@
                                                            HorizontalAlignment="Left"
                                                            Style="{StaticResource FormTextStyle}"
                                                            VerticalAlignment="Center" />
-                                                <DatePicker Grid.Column="1"
+                                                <input:SfDatePicker Grid.Column="1" IsHitTestVisible="False"
                                                             HorizontalAlignment="Left"
                                                             Margin="5"
-                                                            Date="{Binding Model.CompletionDate,Mode=TwoWay,Converter={StaticResource DateTimeToDateTimeOffsetConverter},UpdateSourceTrigger=PropertyChanged}"/>
+                                                            Value="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}"/>
                                             </Grid>
 
 
-                                            <ListView Grid.Row="1"
+                                            <ListView Grid.Row="1" 
                                                       SelectionMode="None"
                                                       ItemsSource="{Binding MaintenanceRepairList}"
                                                       IsZoomedInView="False"
@@ -311,7 +312,7 @@
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path=MajorComponentImgList}"
                                                                        Margin="5 0"
-                                                                       Height="45"
+                                                                       Height="40"
                                                                        Width="140"
                                                                        Padding="0 0 0 0"
                                                                        HorizontalAlignment="Left"
@@ -338,8 +339,8 @@
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path=SubComponentImgList}"
-                                                                       Margin="5 0"
-                                                                       Height="45"
+                                                                       Margin="20 0"
+                                                                       Height="40"
                                                                        Width="140"
                                                                        Padding="0 0 0 0"
                                                                        HorizontalAlignment="Left"

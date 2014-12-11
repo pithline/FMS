@@ -76,12 +76,14 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                                 AppSettings.Instance.IsSynchronizing = 1;
                             });
-                            TIServiceHelper.Instance.Synchronize();
+
                             await TIServiceHelper.Instance.GetTasksAsync();
                             _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
+
+                            TIServiceHelper.Instance.Synchronize();
+                           
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
-                                this.PoolofTasks.Clear();
                                 await GetTasksFromDbAsync();
                                 GetAllCount();
                                 GetAppointments();
@@ -112,7 +114,6 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                 //SyncData();
 
-
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
@@ -132,7 +133,6 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
-                            this.PoolofTasks.Clear();
                             await GetTasksFromDbAsync();
                             GetAllCount();
                             GetAppointments();
@@ -144,11 +144,10 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                     });
                 }
 
-                this._eventAggregator.GetEvent<TaskFetchedEvent>().Subscribe(async p =>
+                this._eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Subscribe(async p =>
                 {
                     await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
-                        this.PoolofTasks.Clear();
                         await GetTasksFromDbAsync();
                         GetAllCount();
                         GetAppointments();
@@ -195,7 +194,8 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
+             this.PoolofTasks.Clear();
+            var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation && w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.Completed);
             foreach (Eqstra.BusinessLogic.TITask item in list)
             {
                 this.PoolofTasks.Add(item);

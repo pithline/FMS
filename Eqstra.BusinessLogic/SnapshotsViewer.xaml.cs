@@ -32,7 +32,7 @@ namespace Eqstra.BusinessLogic.Popups
         public SnapshotsViewer()
         {
             this.InitializeComponent();
-           
+
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -47,6 +47,10 @@ namespace Eqstra.BusinessLogic.Popups
             {
                 var snaps = fvSnaps.ItemsSource as ObservableCollection<ImageCapture>;
                 snaps.Remove(fvSnaps.SelectedItem as ImageCapture);
+                if (!snaps.Any())
+                {
+                    this.DeleteButton.Visibility = Visibility.Collapsed;
+                }
             }
             catch (Exception ex)
             {

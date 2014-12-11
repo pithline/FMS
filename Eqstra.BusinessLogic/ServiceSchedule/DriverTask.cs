@@ -244,5 +244,8 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
         }
         
     }
+    public class DriverTaskFetchedEvent : PubSubEvent<DriverTask>
+    {
 
+    }
 }
