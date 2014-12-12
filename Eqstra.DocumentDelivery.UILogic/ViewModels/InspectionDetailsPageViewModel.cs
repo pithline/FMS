@@ -44,7 +44,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
-                    var taskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.TaskType == this.CDTask.TaskType && w.CustomerId == this.CDTask.CustomerId &&
+                    var taskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.TaskType == this.CDTask.TaskType && w.CustomerId == this.CDTask.CustomerId  &&
                         w.ContactPersonAddress == this.CDTask.ContactPersonAddress && w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
                     foreach (var item in taskList)
                     {
