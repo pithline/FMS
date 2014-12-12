@@ -161,9 +161,7 @@
                                     </grid:GridViewDefinition>
                                 </grid:SfDataGrid.DetailsViewDefinition>-->
                                 <grid:SfDataGrid.Columns>
-
-                                    <grid:GridTextColumn MappingName="CaseNumber" HeaderText="CASE NUMBER" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
-
+                                   
                                     <grid:GridTextColumn MappingName="TaskType" HeaderText="TASK TYPE" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>
 
                                     <grid:GridTextColumn MappingName="CustomerName" HeaderText="CUSTOMER NAME" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>

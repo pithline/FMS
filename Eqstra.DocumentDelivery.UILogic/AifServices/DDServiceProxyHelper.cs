@@ -249,7 +249,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         var taskTosave = new CollectDeliveryTask
                           {
                               CaseNumber = mzkTask.parmCaseId,
-                              Address = mzkTask.parmCustAddress,
+                              Address = mzkTask.parmContactPersonAddress,
                               CustomerName = mzkTask.parmCustName,
                               CustomerNumber = mzkTask.parmContactPersonPhone,
                               Status = mzkTask.parmStatus,
