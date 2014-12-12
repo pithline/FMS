@@ -698,7 +698,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         {
                             if (res.response.Any(a => a.parmCaseId == task.CaseNumber && a.parmStatus == task.Status && a.parmCollectDeliverType.ToString().Equals(task.TaskType.ToString())))
                             {
-                                if (task.TaskType == CDTaskType.None|| task.TaskType == CDTaskType.Delivery)
+                                if (task.TaskType == CDTaskType.None)
                                 {
                                     await SqliteHelper.Storage.DeleteSingleRecordAsync<CollectDeliveryTask>(task);
                                 }
