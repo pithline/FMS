@@ -237,13 +237,13 @@ namespace Eqstra.DataProvider.AX.Providers
                         driverTaskList.Add(new Eqstra.DataProvider.AX.SSModels.Task
                         {
                             CaseNumber = mzkTask.parmCaseID,
-                            Address = Regex.Replace(mzkTask.parmCustAddress, "\n", ","),
+                            Address = Regex.Replace(mzkTask.parmContactPersonAddress, "\n", ","),
                             CustomerName = mzkTask.parmCustName,
                             CustPhone = mzkTask.parmCustPhone,
                             Status = mzkTask.parmStatus,
                             StatusDueDate = mzkTask.parmStatusDueDate.ToShortDateString(),
                             RegistrationNumber = mzkTask.parmRegistrationNum,
-                            // AllocatedTo = _userInfo.Name,
+                             AllocatedTo = userInfo.Name,
                             UserId = mzkTask.parmUserID,
                             CaseCategory = mzkTask.parmCaseCategory,
                             CaseServiceRecID = mzkTask.parmCaseServiceRecID,
