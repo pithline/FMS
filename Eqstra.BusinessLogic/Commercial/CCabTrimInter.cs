@@ -503,7 +503,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isLeftDoorDmg; }
 
-            set { SetProperty(ref  isLeftDoorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLeftDoorDmg, value) && !this.IsLeftDoorDmg)
+                {
+                    this.LeftDoorImgList.Clear();
+                }
+            }
         }
         private bool isRightDoorDmg;
 
@@ -511,7 +517,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRightDoorDmg; }
 
-            set { SetProperty(ref  isRightDoorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRightDoorDmg, value) && !this.IsRightDoorDmg)
+                {
+                    this.RightDoorImgList.Clear();
+                }
+            }
         }
         private bool isLFQuatPanelDmg;
 
@@ -519,7 +531,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isLFQuatPanelDmg; }
 
-            set { SetProperty(ref  isLFQuatPanelDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLFQuatPanelDmg, value) && !this.IsLFQuatPanelDmg)
+                {
+                    this.LFQuaterPanelImgList.Clear();
+                }
+            }
         }
         private bool isRFQuatPanelDmg;
 
@@ -527,7 +545,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRFQuatPanelDmg; }
 
-            set { SetProperty(ref  isRFQuatPanelDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRFQuatPanelDmg, value) && !this.IsRFQuatPanelDmg)
+                {
+                    this.RFQuaterPanelImgList.Clear();
+                }
+            }
         }
         private bool isLRQuatPanelDmg;
 
@@ -535,7 +559,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isLRQuatPanelDmg; }
 
-            set { SetProperty(ref  isLRQuatPanelDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLRQuatPanelDmg, value) && !this.IsLRQuatPanelDmg)
+                {
+                    this.LRQuaterPanelImgList.Clear();
+                }
+            }
         }
         private bool isRRQuatPanelDmg;
 
@@ -543,7 +573,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRRQuatPanelDmg; }
 
-            set { SetProperty(ref  isRRQuatPanelDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRRQuatPanelDmg, value) && !this.IsRRQuatPanelDmg)
+                {
+                    this.RRQuaterPanelImgList.Clear();
+                }
+            }
         }
         private bool isFrontViewDmg;
 
@@ -551,7 +587,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isFrontViewDmg; }
 
-            set { SetProperty(ref  isFrontViewDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFrontViewDmg, value) && !this.IsFrontViewDmg)
+                {
+                    this.FrontViewImgList.Clear();
+                }
+            }
         }
         private bool isBumperDmg;
 
@@ -559,7 +601,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isBumperDmg; }
 
-            set { SetProperty(ref  isBumperDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isBumperDmg, value) && !this.IsBumperDmg)
+                {
+                    this.BumperImgList.Clear();
+                }
+            }
         }
         private bool isGrillDmg;
 
@@ -567,7 +615,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isGrillDmg; }
 
-            set { SetProperty(ref  isGrillDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isGrillDmg, value) && !this.IsGrillDmg)
+                {
+                    this.GrillImgList.Clear();
+                }
+            }
         }
         private bool isRearMirrorDmg;
 
@@ -575,7 +629,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRearMirrorDmg; }
 
-            set { SetProperty(ref  isRearMirrorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRearMirrorDmg, value) && !this.IsRearMirrorDmg)
+                {
+                    this.RearMirrorImgList.Clear();
+                }
+            }
         }
         private bool isWheelArchLeftDmg;
 
@@ -583,7 +643,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isWheelArchLeftDmg; }
 
-            set { SetProperty(ref isWheelArchLeftDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isWheelArchLeftDmg, value) && !this.IsWheelArchLeftDmg)
+                {
+                    this.WheelArchLeftImgList.Clear();
+                }
+            }
         }
         private bool isWheelArchRightDmg;
 
@@ -591,7 +657,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isWheelArchRightDmg; }
 
-            set { SetProperty(ref  isWheelArchRightDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isWheelArchRightDmg, value) && !this.IsWheelArchRightDmg)
+                {
+                    this.WheelArchRightImgList.Clear();
+                }
+            }
         }
         private bool isRoofDmg;
 
@@ -599,7 +671,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRoofDmg; }
 
-            set { SetProperty(ref  isRoofDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRoofDmg, value) && !this.IsRoofDmg)
+                {
+                    this.RoofImgList.Clear();
+                }
+            }
         }
         private bool isDoorHandleLeftDmg;
 
@@ -607,7 +685,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isDoorHandleLeftDmg; }
 
-            set { SetProperty(ref  isDoorHandleLeftDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDoorHandleLeftDmg, value) && !this.IsDoorHandleLeftDmg)
+                {
+                    this.DoorHandleLeftImgList.Clear();
+                }
+            }
         }
         private bool isDoorHandleRightDmg;
 
@@ -615,7 +699,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isDoorHandleRightDmg; }
 
-            set { SetProperty(ref  isDoorHandleRightDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDoorHandleRightDmg, value) && !this.IsDoorHandleRightDmg)
+                {
+                    this.DoorHandleRightImgList.Clear();
+                }
+            }
         }
         private bool isWipersDmg;
 
@@ -623,7 +713,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isWipersDmg; }
 
-            set { SetProperty(ref  isWipersDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isWipersDmg, value) && !this.IsWipersDmg)
+                {
+                    this.WipersImgList.Clear();
+                }
+            }
         }
         private bool isInternalTrimDmg;
 
@@ -631,7 +727,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isInternalTrimDmg; }
 
-            set { SetProperty(ref  isInternalTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isInternalTrimDmg, value) && !this.IsInternalTrimDmg)
+                {
+                    this.InternalTrimImgList.Clear();
+                }
+            }
         }
         private bool isMatsDmg;
 
@@ -639,7 +741,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isMatsDmg; }
 
-            set { SetProperty(ref  isMatsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isMatsDmg, value) && !this.IsMatsDmg)
+                {
+                    this.MatImgList.Clear();
+                }
+            }
         }
         private bool isDriverSeatDmg;
 
@@ -647,7 +755,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isDriverSeatDmg; }
 
-            set { SetProperty(ref  isDriverSeatDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDriverSeatDmg, value) && !this.IsDriverSeatDmg)
+                {
+                    this.DriverSeatImgList.Clear();
+                }
+            }
         }
         private bool isPassengerSeatDmg;
 
@@ -655,7 +769,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isPassengerSeatDmg; }
 
-            set { SetProperty(ref  isPassengerSeatDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isPassengerSeatDmg, value) && !this.IsPassengerSeatDmg)
+                {
+                    this.PassengerSeatImgList.Clear();
+                }
+            }
         }
 
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)

@@ -41,7 +41,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isFrontSuspDmg; }
 
-            set { SetProperty(ref  isFrontSuspDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFrontSuspDmg, value) && !this.IsFrontSuspDmg)
+                {
+                    this.FrontSuspImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> frontSuspImgList;
 
@@ -67,7 +73,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isRearSuspDmg; }
 
-            set { SetProperty(ref  isRearSuspDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRearSuspDmg, value) && !this.IsRearSuspDmg)
+                {
+                    this.RearSuspImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rearSuspImgList;
 
@@ -93,7 +105,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isHandBrakeDmg; }
 
-            set { SetProperty(ref  isHandBrakeDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isHandBrakeDmg, value) && !this.IsHandBrakeDmg)
+                {
+                    this.HandBrakeImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> handBrakeImgList;
 
@@ -119,7 +137,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isFootBrakeDmg; }
 
-            set { SetProperty(ref  isFootBrakeDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFootBrakeDmg, value) && !this.IsFootBrakeDmg)
+                {
+                    this.FootBrakeImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> footBrakeImgList;
 

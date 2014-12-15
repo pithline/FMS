@@ -75,7 +75,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref  spareImgList, value); }
         }
 
-        
+
 
         private string rFTreadDepth;
 
@@ -220,7 +220,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isRFPChecked; }
 
-            set { SetProperty(ref  isRFPChecked, value); }
+            set
+            {
+                if (SetProperty(ref  isRFPChecked, value) && !this.IsRFPChecked)
+                {
+                    this.RFImgList.Clear();
+                }
+            }
         }
         private bool isLFGChecked;
 
@@ -244,7 +250,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isLFPChecked; }
 
-            set { SetProperty(ref  isLFPChecked, value); }
+            set
+            {
+                if (SetProperty(ref  isLFPChecked, value) && !this.IsLFPChecked)
+                {
+                    this.LFImgList.Clear();
+                }
+            }
         }
         private bool isRRGChecked;
 
@@ -268,7 +280,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isRRPChecked; }
 
-            set { SetProperty(ref  isRRPChecked, value); }
+            set
+            {
+                if (SetProperty(ref  isRRPChecked, value) && !this.IsRRPChecked)
+                {
+                    this.RRImgList.Clear();
+                }
+            }
         }
         private bool isLRGChecked;
 
@@ -292,7 +310,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isLRPChecked; }
 
-            set { SetProperty(ref  isLRPChecked, value); }
+            set
+            {
+                if (SetProperty(ref  isLRPChecked, value) && !this.IsLRPChecked)
+                {
+                    this.LRImgList.Clear();
+                }
+            }
         }
         private bool isSpareGChecked;
 
@@ -316,7 +340,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isSparePChecked; }
 
-            set { SetProperty(ref  isSparePChecked, value); }
+            set
+            {
+                if (SetProperty(ref  isSparePChecked, value) && !this.IsSparePChecked)
+                {
+                    this.SpareImgList.Clear();
+                }
+            }
         }
 
 

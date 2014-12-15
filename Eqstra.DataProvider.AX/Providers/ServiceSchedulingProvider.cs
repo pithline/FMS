@@ -243,7 +243,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             Status = mzkTask.parmStatus,
                             StatusDueDate = mzkTask.parmStatusDueDate.ToShortDateString(),
                             RegistrationNumber = mzkTask.parmRegistrationNum,
-                             AllocatedTo = userInfo.Name,
+                            AllocatedTo = userInfo.Name,
                             UserId = mzkTask.parmUserID,
                             CaseCategory = mzkTask.parmCaseCategory,
                             CaseServiceRecID = mzkTask.parmCaseServiceRecID,
@@ -631,17 +631,17 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
                     parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2),
                     parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                    parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocType.RecID,
-                    parmSupplierId = serviceSchedulingDetail.SelectedDestinationType.Id,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocType.LocationName,
+                    parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocType == null ? default(long) : serviceSchedulingDetail.SelectedLocType.RecID,
+                    parmSupplierId = serviceSchedulingDetail.SelectedDestinationType == null ? string.Empty : serviceSchedulingDetail.SelectedDestinationType.Id,
+                    parmLocationType = serviceSchedulingDetail.SelectedLocType == null ? string.Empty : serviceSchedulingDetail.SelectedLocType.LocationName,
                     parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
                 };
+                var recID = serviceSchedulingDetail.SelectedDestinationType == null ? default(long) : serviceSchedulingDetail.SelectedDestinationType.RecID;
 
-
-                var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, Convert.ToInt64(serviceSchedulingDetail.SelectedDestinationType.RecID), mzkServiceDetailsContract
+                var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
                       , mzkAddressContract, userInfo.CompanyId);
 
-                return true;
+                return result;
 
             }
 

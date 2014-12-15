@@ -22,7 +22,7 @@ namespace Eqstra.BusinessLogic.Commercial
             this.InductorLensesImgList = new ObservableCollection<ImageCapture>();
             this.ExtRearViewMirrorImgList = new ObservableCollection<ImageCapture>();
         }
-       
+
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CGlass>(x => x.VehicleInsRecID == vehicleInsRecID);
@@ -42,7 +42,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isWindscreenDmg; }
 
-            set { SetProperty(ref  isWindscreenDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isWindscreenDmg, value) && !this.IsWindscreenDmg)
+                {
+                    this.WindscreenImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> windscreenImgList;
 
@@ -68,7 +74,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRearGlassDmg; }
 
-            set { SetProperty(ref  isRearGlassDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRearGlassDmg, value) && !this.IsRearGlassDmg)
+                {
+                    this.RearGlassImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rearGlassImgList;
 
@@ -94,7 +106,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isSideGlassDmg; }
 
-            set { SetProperty(ref  isSideGlassDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSideGlassDmg, value) && !this.IsSideGlassDmg)
+                {
+                    this.SideGlassImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> sideGlassImgList;
 
@@ -120,7 +138,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isHeadLightsDmg; }
 
-            set { SetProperty(ref  isHeadLightsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isHeadLightsDmg, value) && !this.IsHeadLightsDmg)
+                {
+                    this.HeadLightsImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> headLightsImgList;
 
@@ -147,7 +171,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isTailLightsDmg; }
 
-            set { SetProperty(ref  isTailLightsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isTailLightsDmg, value) && !this.IsTailLightsDmg)
+                {
+                    this.TailLightsImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> tailLightsImgList;
 
@@ -173,7 +203,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isInductorLensesDmg; }
 
-            set { SetProperty(ref  isInductorLensesDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isInductorLensesDmg, value) && !this.IsInductorLensesDmg)
+                {
+                    this.InductorLensesImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> inductorLensesImgList;
 
@@ -199,7 +235,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isExtRearViewMirrorDmg; }
 
-            set { SetProperty(ref  isExtRearViewMirrorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isExtRearViewMirrorDmg, value) && !this.IsExtRearViewMirrorDmg)
+                {
+                    this.ExtRearViewMirrorImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> extRearViewMirrorImgList;
 

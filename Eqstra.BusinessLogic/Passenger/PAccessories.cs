@@ -63,7 +63,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsSpareKeysShownDmg
         {
             get { return isSpareKeysShownDmg; }
-            set { SetProperty(ref isSpareKeysShownDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSpareKeysShownDmg, value) && !this.IsSpareKeysShownDmg)
+                {
+                    this.SpareKeysShownImgList.Clear();
+                }
+            }
         }
         private string spareKeysShownComment;
 
@@ -92,7 +98,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsSpareKeysTestedDmg
         {
             get { return isSpareKeysTestedDmg; }
-            set { SetProperty(ref isSpareKeysTestedDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSpareKeysTestedDmg, value) && !this.IsSpareKeysTestedDmg)
+                {
+                    this.SpareKeysTestedImgList.Clear();
+                }
+            }
         }
         private string spareKeysTestedComment;
 
@@ -115,7 +127,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsRadioDmg
         {
             get { return isRadioDmg; }
-            set { SetProperty(ref isRadioDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRadioDmg, value) && !this.IsRadioDmg)
+                {
+                    this.RadioImgList.Clear();
+                }
+            }
         }
 
         private string radioComment;
@@ -147,7 +165,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsCDShuffleDmg
         {
             get { return isCDShuffleDmg; }
-            set { SetProperty(ref isCDShuffleDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isCDShuffleDmg, value) && !this.IsCDShuffleDmg)
+                {
+                    this.CDShuffleImgList.Clear();
+                }
+            }
         }
 
         private string cdShuffleComment;
@@ -178,7 +202,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsNavigationDmg
         {
             get { return isNavigationDmg; }
-            set { SetProperty(ref isNavigationDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isNavigationDmg, value) && !this.IsNavigationDmg)
+                {
+                    this.NavigationImgList.Clear();
+                }
+            }
         }
 
         private string navigationComment;
@@ -210,7 +240,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsAirconDmg
         {
             get { return isAirconDmg; }
-            set { SetProperty(ref isAirconDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isAirconDmg, value) && !this.IsAirconDmg)
+                {
+                    this.AirconImgList.Clear();
+                }
+            }
         }
 
         private string airconComment;
@@ -242,7 +278,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsAlarmDmg
         {
             get { return isAlarmDmg; }
-            set { SetProperty(ref isAlarmDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isAlarmDmg, value) && !this.IsAlarmDmg)
+                {
+                    this.AlarmImgList.Clear();
+                }
+            }
         }
 
         private string alarmComment;
@@ -273,7 +315,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsKeyDmg
         {
             get { return isKeyDmg; }
-            set { SetProperty(ref isKeyDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isKeyDmg, value) && !this.IsKeyDmg)
+                {
+                    this.KeyImgList.Clear();
+                }
+            }
         }
 
         private string keyComment;
@@ -304,7 +352,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsSpareKeysDmg
         {
             get { return isSpareKeysDmg; }
-            set { SetProperty(ref isSpareKeysDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSpareKeysDmg, value) && !this.IsSpareKeysDmg)
+                {
+                    this.SpareKeysImgList.Clear();
+                }
+            }
         }
         private string spareKeysComment;
 
@@ -334,7 +388,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsServicesBookDmg
         {
             get { return isServicesBookDmg; }
-            set { SetProperty(ref isServicesBookDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isServicesBookDmg, value) && !this.IsServicesBookDmg)
+                {
+                    this.ServicesBookImgList.Clear();
+                }
+            }
         }
         private string servicesBookComment;
 
@@ -364,7 +424,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsSpareTyreDmg
         {
             get { return isSpareTyreDmg; }
-            set { SetProperty(ref isSpareTyreDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSpareTyreDmg, value) && !this.IsSpareTyreDmg)
+                {
+                    this.SpareTyreImgList.Clear();
+                }
+            }
         }
 
         private string spareTyreComment;
@@ -396,7 +462,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsToolsDmg
         {
             get { return isToolsDmg; }
-            set { SetProperty(ref isToolsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isToolsDmg, value) && !this.IsToolsDmg)
+                {
+                    this.ToolsImgList.Clear();
+                }
+            }
         }
 
         private string toolsComment;
@@ -428,7 +500,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsJackDmg
         {
             get { return isJackDmg; }
-            set { SetProperty(ref isJackDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isJackDmg, value) && !this.IsJackDmg)
+                {
+                    this.JackImgList.Clear();
+                }
+            }
         }
 
         private string jackComment;
@@ -460,7 +538,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsCanopyDmg
         {
             get { return isCanopyDmg; }
-            set { SetProperty(ref isCanopyDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isCanopyDmg, value) && !this.IsCanopyDmg)
+                {
+                    this.CanopyImgList.Clear();
+                }
+            }
         }
 
         private string canopyComment;
@@ -492,7 +576,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsTrackingUnitDmg
         {
             get { return isTrackingUnitDmg; }
-            set { SetProperty(ref isTrackingUnitDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isTrackingUnitDmg, value) && !this.IsTrackingUnitDmg)
+                {
+                    this.TrackingUnitImgList.Clear();
+                }
+            }
         }
 
         private string trackingUnitComment;
@@ -524,7 +614,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsMagsDmg
         {
             get { return isMagsDmg; }
-            set { SetProperty(ref isMagsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isMagsDmg, value) && !this.IsMagsDmg)
+                {
+                    this.MagsImgList.Clear();
+                }
+            }
         }
 
         private string magsComment;

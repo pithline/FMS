@@ -313,7 +313,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task CreateTableAsync()
         {
 
-            //////Drop Existing tables
+            ////Drop Existing tables
 
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();

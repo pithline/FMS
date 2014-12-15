@@ -35,7 +35,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> internalTrimImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Internal snapshot(s) required", "IsInternalTrimDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Internal snapshot(s) required", "IsInternalTrimDmg")]
         public ObservableCollection<ImageCapture> InternalTrimImgList
         {
             get { return internalTrimImgList; }
@@ -43,7 +43,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rrDoorTrimiImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("RR door snapshot(s) required", "IsRRDoorTrimDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("RR door snapshot(s) required", "IsRRDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> RRDoorTrimImgList
         {
@@ -52,7 +52,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lrDoorTrimImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("LR door snapshot(s) required", "IsLRDoorTrimDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("LR door snapshot(s) required", "IsLRDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> LRDoorTrimImgList
         {
@@ -61,7 +61,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> rfDoorTrimImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("RF door snapshot(s) required", "IsRFDoorTrimDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("RF door snapshot(s) required", "IsRFDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> RFDoorTrimImgList
         {
@@ -70,7 +70,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> lfDoorTrimImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("LF door snapshot(s) required", "IsLFDoorTrimDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("LF door snapshot(s) required", "IsLFDoorTrimDmg")]
 
         public ObservableCollection<ImageCapture> LFDoorTrimImgList
         {
@@ -78,7 +78,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref lfDoorTrimImgList, value); }
         }
         private ObservableCollection<ImageCapture> driverSeatImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Driver seat snapshot(s) required", "IsDriverSeatDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Driver seat snapshot(s) required", "IsDriverSeatDmg")]
 
         public ObservableCollection<ImageCapture> DriverSeatImgList
         {
@@ -87,7 +87,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> passengerSeatImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Passenger seat snapshot(s) required", "IsPassengerSeatDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Passenger seat snapshot(s) required", "IsPassengerSeatDmg")]
 
         public ObservableCollection<ImageCapture> PassengerSeatImgList
         {
@@ -95,7 +95,7 @@ namespace Eqstra.BusinessLogic.Passenger
             set { SetProperty(ref passengerSeatImgList, value); }
         }
         private ObservableCollection<ImageCapture> rearSeatImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Rear seat snapshot(s) required", "IsRearSeatDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Rear seat snapshot(s) required", "IsRearSeatDmg")]
 
         public ObservableCollection<ImageCapture> RearSeatImgList
         {
@@ -104,7 +104,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> dashImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Dash snapshot(s) required", "IsDashDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Dash snapshot(s) required", "IsDashDmg")]
 
         public ObservableCollection<ImageCapture> DashImgList
         {
@@ -113,7 +113,7 @@ namespace Eqstra.BusinessLogic.Passenger
         }
 
         private ObservableCollection<ImageCapture> carpetImgList;
-        [RestorableState , Ignore, DamageSnapshotRequired("Carpet snapshot(s) required", "IsCarpetDmg")]
+        [RestorableState, Ignore, DamageSnapshotRequired("Carpet snapshot(s) required", "IsCarpetDmg")]
         public ObservableCollection<ImageCapture> CarpetImgList
         {
             get { return carpetImgList; }
@@ -156,7 +156,6 @@ namespace Eqstra.BusinessLogic.Passenger
             get { return string.Join("~", LFDoorTrimImgList.Select(x => x.ImagePath)); }
             set { SetProperty(ref lFDoorTrimImgPathList, value); }
         }
-
 
         public string driverSeatImgPathList;
         public string DriverSeatImgPathList
@@ -209,7 +208,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsInternalTrimDmg
         {
             get { return isInternalTrimDmg; }
-            set { SetProperty(ref isInternalTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isInternalTrimDmg, value) && !this.IsInternalTrimDmg)
+                {
+                    this.InternalTrimImgList.Clear();
+                }
+            }
         }
 
         private bool isRRDoorTrimDmg;
@@ -217,7 +222,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsRRDoorTrimDmg
         {
             get { return isRRDoorTrimDmg; }
-            set { SetProperty(ref isRRDoorTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRRDoorTrimDmg, value) && !this.IsRRDoorTrimDmg)
+                {
+                    this.RRDoorTrimImgList.Clear();
+                }
+            }
         }
 
         private string rrDoorTrimComment;
@@ -233,7 +244,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsLFDoorTrimDmg
         {
             get { return isLFDoorTrimDmg; }
-            set { SetProperty(ref isLFDoorTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLFDoorTrimDmg, value) && !this.IsLFDoorTrimDmg)
+                {
+                    this.LFDoorTrimImgList.Clear();
+                }
+            }
         }
 
         private string lfDoorTrimComment;
@@ -257,7 +274,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsRFDoorTrimDmg
         {
             get { return isRFDoorTrimDmg; }
-            set { SetProperty(ref isRFDoorTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRFDoorTrimDmg, value) && !this.IsRFDoorTrimDmg)
+                {
+                    this.RFDoorTrimImgList.Clear();
+                }
+            }
         }
 
         private string lrDoorTrimComment;
@@ -273,7 +296,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsLRDoorTrimDmg
         {
             get { return isLRDoorTrimDmg; }
-            set { SetProperty(ref isLRDoorTrimDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLRDoorTrimDmg, value) && !this.IsLRDoorTrimDmg)
+                {
+                    this.LRDoorTrimImgList.Clear();
+                }
+            }
         }
 
         private bool isDriverSeatDmg;
@@ -281,7 +310,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsDriverSeatDmg
         {
             get { return isDriverSeatDmg; }
-            set { SetProperty(ref isDriverSeatDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDriverSeatDmg, value) && !this.IsDriverSeatDmg)
+                {
+                    this.DriverSeatImgList.Clear();
+                }
+            }
         }
 
         private string driverSeatComment;
@@ -297,7 +332,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsPassengerSeatDmg
         {
             get { return isPassengerSeatDmg; }
-            set { SetProperty(ref isPassengerSeatDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isPassengerSeatDmg, value) && !this.IsPassengerSeatDmg)
+                {
+                    this.PassengerSeatImgList.Clear();
+                }
+            }
         }
 
         private string passengerSeatComment;
@@ -313,7 +354,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsRearSeatDmg
         {
             get { return isRearSeatDmg; }
-            set { SetProperty(ref isRearSeatDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRearSeatDmg, value) && !this.IsRearSeatDmg)
+                {
+                    this.RearSeatImgList.Clear();
+                }
+            }
         }
 
         private string rearSeatComment;
@@ -329,7 +376,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsDashDmg
         {
             get { return isDashDmg; }
-            set { SetProperty(ref isDashDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDashDmg, value) && !this.IsDashDmg)
+                {
+                    this.DashImgList.Clear();
+                }
+            }
         }
 
         private string dashComment;
@@ -345,7 +398,13 @@ namespace Eqstra.BusinessLogic.Passenger
         public bool IsCarpetDmg
         {
             get { return isCarpetDmg; }
-            set { SetProperty(ref isCarpetDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isCarpetDmg, value) && !this.IsCarpetDmg)
+                {
+                    this.CarpetImgList.Clear();
+                }
+            }
         }
         private string carpetComment;
         [RestorableState]

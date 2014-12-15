@@ -421,6 +421,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="Passenger" />
       <xs:enumeration value="Commercial" />
+      <xs:enumeration value="Trailer" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkVehicleType" nillable="true" type="tns:MzkVehicleType" />
@@ -1072,17 +1073,29 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="ProvideVehicleInspectionDetails">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">142</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AwaitTechnicalInspection">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">143</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EEPActionStep" nillable="true" type="tns:EEPActionStep" />
   <xs:simpleType name="MzkVehicleCollectionAction">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="AwaitCollectionDetail" />
-      <xs:enumeration value="AwaitVendorSelection" />
       <xs:enumeration value="AwaitCollectionConfirmation" />
+      <xs:enumeration value="AwaitDeliverytoHyper" />
       <xs:enumeration value="AwaitCollectionDataCapture" />
       <xs:enumeration value="AwaitDamageConfirmation" />
-      <xs:enumeration value="AwaitDeliverytoHyper" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkVehicleCollectionAction" nillable="true" type="tns:MzkVehicleCollectionAction" />
@@ -1103,9 +1116,22 @@
   <xs:element name="MzkValidateUserContract" nillable="true" type="tns:MzkValidateUserContract" />
   <xs:simpleType name="MzkLoginType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Driver" />
+      <xs:enumeration value="Driver">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="Courier" />
       <xs:enumeration value="Customer" />
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MzkLoginType" nillable="true" type="tns:MzkLoginType" />
@@ -1135,114 +1161,120 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
-  <xs:complexType name="ArrayOfMzkDrivingTimeContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDrivingTimeContract" nillable="true" type="tns:MzkDrivingTimeContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkDrivingTimeContract" nillable="true" type="tns:ArrayOfMzkDrivingTimeContract" />
   <xs:complexType name="ArrayOfMzkTasksContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkTasksContract" nillable="true" type="tns:MzkTasksContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkTasksContract" nillable="true" type="tns:ArrayOfMzkTasksContract" />
-  <xs:complexType name="ArrayOfMzkVehicleDetailsContract">
+  <xs:complexType name="ArrayOfMzkDrivingTimeContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkDrivingTimeContract" nillable="true" type="tns:MzkDrivingTimeContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkVehicleDetailsContract" nillable="true" type="tns:ArrayOfMzkVehicleDetailsContract" />
-  <xs:complexType name="ArrayOfMzkInspectionHistoryContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkInspectionHistoryContract" nillable="true" type="tns:MzkInspectionHistoryContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkInspectionHistoryContract" nillable="true" type="tns:ArrayOfMzkInspectionHistoryContract" />
-  <xs:complexType name="ArrayOfMzkCustAddressContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustAddressContract" nillable="true" type="tns:MzkCustAddressContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCustAddressContract" nillable="true" type="tns:ArrayOfMzkCustAddressContract" />
-  <xs:complexType name="ArrayOfMZKVehicleInspectionTableContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKVehicleInspectionTableContract" nillable="true" type="tns:ArrayOfMZKVehicleInspectionTableContract" />
-  <xs:complexType name="ArrayOfMZKMobiTrailorTyreConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiTrailorTyreConditionContract" nillable="true" type="tns:MZKMobiTrailorTyreConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKMobiTrailorTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiTrailorTyreConditionContract" />
-  <xs:complexType name="ArrayOfMzkMobiTrailorMechConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorMechConditionContract" nillable="true" type="tns:MzkMobiTrailorMechConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiTrailorMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorMechConditionContract" />
+  <xs:element name="ArrayOfMzkDrivingTimeContract" nillable="true" type="tns:ArrayOfMzkDrivingTimeContract" />
   <xs:complexType name="ArrayOfMzkMobiTrailorGlassContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorGlassContract" nillable="true" type="tns:MzkMobiTrailorGlassContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkMobiTrailorGlassContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorGlassContract" />
-  <xs:complexType name="ArrayOfMzkMobiTrailorChassisBodyContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorChassisBodyContract" nillable="true" type="tns:MzkMobiTrailorChassisBodyContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiTrailorChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorChassisBodyContract" />
-  <xs:complexType name="ArrayOfMzkMobiTrailorAccessoriesContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorAccessoriesContract" nillable="true" type="tns:MzkMobiTrailorAccessoriesContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiTrailorAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorAccessoriesContract" />
-  <xs:complexType name="ArrayOfMZKMobiPassengerTyreConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiPassengerTyreConditionContract" nillable="true" type="tns:MZKMobiPassengerTyreConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMZKMobiPassengerTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiPassengerTyreConditionContract" />
-  <xs:complexType name="ArrayOfMzkMobiPassengerTrimInteriorContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerTrimInteriorContract" nillable="true" type="tns:MzkMobiPassengerTrimInteriorContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiPassengerTrimInteriorContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerTrimInteriorContract" />
-  <xs:complexType name="ArrayOfMzkMobiPassengerMechConditionContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerMechConditionContract" nillable="true" type="tns:MzkMobiPassengerMechConditionContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiPassengerMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerMechConditionContract" />
   <xs:complexType name="ArrayOfMzkMobiPassengerBodyworkContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerBodyworkContract" nillable="true" type="tns:MzkMobiPassengerBodyworkContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkMobiPassengerBodyworkContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerBodyworkContract" />
-  <xs:complexType name="ArrayOfMzkMobiPassengerAccessoriesContract">
+  <xs:complexType name="ArrayOfMzkVehicleDetailsContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerAccessoriesContract" nillable="true" type="tns:MzkMobiPassengerAccessoriesContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkVehicleDetailsContract" nillable="true" type="tns:MzkVehicleDetailsContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiPassengerAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerAccessoriesContract" />
+  <xs:element name="ArrayOfMzkVehicleDetailsContract" nillable="true" type="tns:ArrayOfMzkVehicleDetailsContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialAccessoriesContract" nillable="true" type="tns:MzkMobiCommercialAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialAccessoriesContract" />
+  <xs:complexType name="ArrayOfMzkMobiPassengerTrimInteriorContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerTrimInteriorContract" nillable="true" type="tns:MzkMobiPassengerTrimInteriorContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiPassengerTrimInteriorContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerTrimInteriorContract" />
+  <xs:complexType name="ArrayOfMZKMobiPassengerTyreConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiPassengerTyreConditionContract" nillable="true" type="tns:MZKMobiPassengerTyreConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKMobiPassengerTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiPassengerTyreConditionContract" />
+  <xs:complexType name="ArrayOfMzkCustAddressContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCustAddressContract" nillable="true" type="tns:MzkCustAddressContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCustAddressContract" nillable="true" type="tns:ArrayOfMzkCustAddressContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorChassisBodyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorChassisBodyContract" nillable="true" type="tns:MzkMobiTrailorChassisBodyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorChassisBodyContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorMechConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorMechConditionContract" nillable="true" type="tns:MzkMobiTrailorMechConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorMechConditionContract" />
   <xs:complexType name="ArrayOfMzkMobiPassengerGlassContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerGlassContract" nillable="true" type="tns:MzkMobiPassengerGlassContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkMobiPassengerGlassContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerGlassContract" />
+  <xs:complexType name="ArrayOfMzkMobiCommercialChassisBodyContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialChassisBodyContract" nillable="true" type="tns:MzkMobiCommercialChassisBodyContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiCommercialChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialChassisBodyContract" />
+  <xs:complexType name="ArrayOfMzkMobiTrailorAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiTrailorAccessoriesContract" nillable="true" type="tns:MzkMobiTrailorAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiTrailorAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiTrailorAccessoriesContract" />
+  <xs:complexType name="ArrayOfMzkMobiPassengerMechConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerMechConditionContract" nillable="true" type="tns:MzkMobiPassengerMechConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiPassengerMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerMechConditionContract" />
+  <xs:complexType name="ArrayOfMZKVehicleInspectionTableContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKVehicleInspectionTableContract" nillable="true" type="tns:MZKVehicleInspectionTableContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKVehicleInspectionTableContract" nillable="true" type="tns:ArrayOfMZKVehicleInspectionTableContract" />
+  <xs:complexType name="ArrayOfMzkMobiPassengerAccessoriesContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiPassengerAccessoriesContract" nillable="true" type="tns:MzkMobiPassengerAccessoriesContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkMobiPassengerAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiPassengerAccessoriesContract" />
   <xs:complexType name="ArrayOfMzkMobiCommercialTyresContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialTyresContract" nillable="true" type="tns:MzkMobiCommercialTyresContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkMobiCommercialTyresContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialTyresContract" />
+  <xs:complexType name="ArrayOfMZKMobiTrailorTyreConditionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiTrailorTyreConditionContract" nillable="true" type="tns:MZKMobiTrailorTyreConditionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMZKMobiTrailorTyreConditionContract" nillable="true" type="tns:ArrayOfMZKMobiTrailorTyreConditionContract" />
   <xs:complexType name="ArrayOfMZKMobiCommercialTrimInteriorContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MZKMobiCommercialTrimInteriorContract" nillable="true" type="tns:MZKMobiCommercialTrimInteriorContract" />
@@ -1255,16 +1287,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkMobiCommercialMechConditionContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialMechConditionContract" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialChassisBodyContract">
+  <xs:complexType name="ArrayOfMzkInspectionHistoryContract">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialChassisBodyContract" nillable="true" type="tns:MzkMobiCommercialChassisBodyContract" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkInspectionHistoryContract" nillable="true" type="tns:MzkInspectionHistoryContract" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialChassisBodyContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialChassisBodyContract" />
-  <xs:complexType name="ArrayOfMzkMobiCommercialAccessoriesContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkMobiCommercialAccessoriesContract" nillable="true" type="tns:MzkMobiCommercialAccessoriesContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkMobiCommercialAccessoriesContract" nillable="true" type="tns:ArrayOfMzkMobiCommercialAccessoriesContract" />
+  <xs:element name="ArrayOfMzkInspectionHistoryContract" nillable="true" type="tns:ArrayOfMzkInspectionHistoryContract" />
 </xs:schema>

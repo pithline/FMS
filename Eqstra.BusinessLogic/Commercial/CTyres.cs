@@ -27,7 +27,7 @@ namespace Eqstra.BusinessLogic.Commercial
             this.RInnerAxleOutImgList = new ObservableCollection<ImageCapture>();
         }
 
-        
+
         public async override System.Threading.Tasks.Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<CTyres>(x => x.VehicleInsRecID == vehicleInsRecID);
@@ -78,7 +78,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPLF; }
 
-            set { SetProperty(ref  hasPLF, value); }
+            set
+            {
+                if (SetProperty(ref  hasPLF, value) && !this.HasPLF)
+                {
+                    this.LFImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> lFImgList;
 
@@ -137,7 +143,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPLRInner; }
 
-            set { SetProperty(ref  hasPLRInner, value); }
+            set
+            {
+                if (SetProperty(ref  hasPLRInner, value) && !this.HasPLRInner)
+                {
+                    this.LRInnerImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> lRInnerImgList;
 
@@ -196,7 +208,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPLROuter; }
 
-            set { SetProperty(ref  hasPLROuter, value); }
+            set
+            {
+                if (SetProperty(ref  hasPLROuter, value) && !this.HasPLROuter)
+                {
+                    this.LROuterImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> lROuterImgList;
 
@@ -254,7 +272,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPLInnerAxleIn; }
 
-            set { SetProperty(ref  hasPLInnerAxleIn, value); }
+            set
+            {
+                if (SetProperty(ref  hasPLInnerAxleIn, value) && !this.HasPLInnerAxleIn)
+                {
+                    this.LInnerAxleInImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> lInnerAxleInImgList;
 
@@ -312,7 +336,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPLInnerAxleOut; }
 
-            set { SetProperty(ref  hasPLInnerAxleOut, value); }
+            set
+            {
+                if (SetProperty(ref  hasPLInnerAxleOut, value) && !this.HasPLInnerAxleOut)
+                {
+                    this.LInnerAxleOutImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> lInnerAxleOutImgList;
 
@@ -370,7 +400,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPRF; }
 
-            set { SetProperty(ref  hasPRF, value); }
+            set
+            {
+                if (SetProperty(ref  hasPRF, value) && !this.HasPRF)
+                {
+                    this.RFImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rFImgList;
 
@@ -428,7 +464,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPRRInner; }
 
-            set { SetProperty(ref  hasPRRInner, value); }
+            set
+            {
+                if (SetProperty(ref  hasPRRInner, value) && !this.HasPRRInner)
+                {
+                    this.RRInnerImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rRInnerImgList;
 
@@ -486,7 +528,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPRROuter; }
 
-            set { SetProperty(ref  hasPRROuter, value); }
+            set
+            {
+                if (SetProperty(ref  hasPRROuter, value) && !this.HasPRROuter)
+                {
+                    this.RROuterImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rROuterImgList;
 
@@ -544,7 +592,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPRInnerAxleIn; }
 
-            set { SetProperty(ref  hasPRInnerAxleIn, value); }
+            set
+            {
+                if (SetProperty(ref  hasPRInnerAxleIn, value) && !this.HasPRInnerAxleIn)
+                {
+                    this.RInnerAxleInImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rInnerAxleInImgList;
 
@@ -602,7 +656,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPRInnerAxleOut; }
 
-            set { SetProperty(ref  hasPRInnerAxleOut, value); }
+            set
+            {
+                if (SetProperty(ref  hasPRInnerAxleOut, value) && !this.HasPRInnerAxleOut)
+                {
+                    this.RInnerAxleOutImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rInnerAxleOutImgList;
 
@@ -661,7 +721,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return hasPSpare; }
 
-            set { SetProperty(ref  hasPSpare, value); }
+            set
+            {
+                if (SetProperty(ref  hasPSpare, value) && !this.HasPSpare)
+                {
+                    this.SpareImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> spareImgList;
 

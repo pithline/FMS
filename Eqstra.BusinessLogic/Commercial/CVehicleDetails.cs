@@ -18,14 +18,9 @@ namespace Eqstra.BusinessLogic.Commercial
             this.LeftSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_left.png" };
             this.RightSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_right.png" };
             this.FrontSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/truck_front.png" };
-            this.TopSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/car_top.png" };
             this.LicenseDiscSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/license_disc.png" };
             this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
         }
-
-
-
-
 
         private bool isLicenseDiscCurrent;
         public bool IsLicenseDiscCurrent
@@ -102,15 +97,6 @@ namespace Eqstra.BusinessLogic.Commercial
             set { SetProperty(ref frontSnapshot, value); }
         }
 
-        private ImageCapture topSnapshot;
-
-        [Ignore]
-        public ImageCapture TopSnapshot
-        {
-            get { return topSnapshot; }
-            set { SetProperty(ref topSnapshot, value); }
-        }
-
         public string leftSnapshotPath;
         public string LeftSnapshotPath
         {
@@ -130,13 +116,6 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return FrontSnapshot.ImagePath; }
             set { SetProperty(ref frontSnapshotPath, value); }
-        }
-
-        public string topSnapshotPath;
-        public string TopSnapshotPath
-        {
-            get { return TopSnapshot.ImagePath; }
-            set { SetProperty(ref topSnapshotPath, value); }
         }
 
         public string licenseDiscSnapshotPath;

@@ -53,7 +53,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isChassisDmg; }
 
-            set { SetProperty(ref  isChassisDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isChassisDmg, value) && !this.IsChassisDmg)
+                {
+                    this.ChassisImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> chassisImgList;
 
@@ -79,7 +85,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isFloorDmg; }
 
-            set { SetProperty(ref  isFloorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFloorDmg, value) && !this.IsFloorDmg)
+                {
+                    this.FloorImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> floorImgList;
 
@@ -105,7 +117,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isHeadboardDmg; }
 
-            set { SetProperty(ref  isHeadboardDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isHeadboardDmg, value) && !this.IsHeadboardDmg)
+                {
+                    this.HeadboardImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> headboardImgList;
 
@@ -130,7 +148,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isDropSideLeftDmg; }
 
-            set { SetProperty(ref  isDropSideLeftDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDropSideLeftDmg, value) && !this.IsDropSideLeftDmg)
+                {
+                    this.DropSideLeftImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> dropSideLeftImgList;
 
@@ -156,7 +180,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isDropSideRightDmg; }
 
-            set { SetProperty(ref  isDropSideRightDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDropSideRightDmg, value) && !this.IsDropSideRightDmg)
+                {
+                    this.DropSideRightImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> dropSideRightImgList;
 
@@ -182,7 +212,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isDropSideFrontDmg; }
 
-            set { SetProperty(ref  isDropSideFrontDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDropSideFrontDmg, value) && !this.IsDropSideFrontDmg)
+                {
+                    this.DropSideFrontImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> dropSideFrontImgList;
 
@@ -208,7 +244,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isDropSideRearDmg; }
 
-            set { SetProperty(ref  isDropSideRearDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDropSideRearDmg, value) && !this.IsDropSideRearDmg)
+                {
+                    this.DropSideRearImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> dropSideRearImgList;
 
@@ -234,7 +276,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isSpareWheelCarrierDmg; }
 
-            set { SetProperty(ref  isSpareWheelCarrierDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSpareWheelCarrierDmg, value) && !this.IsSpareWheelCarrierDmg)
+                {
+                    this.SpareWheelCarrierImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> spareWheelCarrierImgList;
 
@@ -260,7 +308,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isUnderRunBumperDmg; }
 
-            set { SetProperty(ref  isUnderRunBumperDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isUnderRunBumperDmg, value) && !this.IsUnderRunBumperDmg)
+                {
+                    this.UnderRunBumperImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> underRunBumperImgList;
 
@@ -286,7 +340,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isChevronDmg; }
 
-            set { SetProperty(ref  isChevronDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isChevronDmg, value) && !this.IsChevronDmg)
+                {
+                    this.ChevronImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> chevronImgList;
 
@@ -312,7 +372,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isLandingLegsDmg; }
 
-            set { SetProperty(ref  isLandingLegsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isLandingLegsDmg, value) && !this.IsLandingLegsDmg)
+                {
+                    this.LandingLegsImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> landingLegsImgList;
 
@@ -336,7 +402,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isSuzieFitmentsDmg; }
 
-            set { SetProperty(ref  isSuzieFitmentsDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSuzieFitmentsDmg, value) && !this.IsSuzieFitmentsDmg)
+                {
+                    this.SuzieFitmentsImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> suzieFitmentsImgList;
 
@@ -362,7 +434,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isKingpinDmg; }
 
-            set { SetProperty(ref  isKingpinDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isKingpinDmg, value) && !this.IsKingpinDmg)
+                {
+                    this.KingpinImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> kingpinImgList;
 
@@ -390,7 +468,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isFictionPlatesDmg; }
 
-            set { SetProperty(ref  isFictionPlatesDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFictionPlatesDmg, value) && !this.IsFictionPlatesDmg)
+                {
+                    this.FictionPlatesImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> fictionPlatesImgList;
 
@@ -417,7 +501,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isABSActivatorDmg; }
 
-            set { SetProperty(ref  isABSActivatorDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isABSActivatorDmg, value) && !this.IsABSActivatorDmg)
+                {
+                    this.ABSActivatorImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> absActivatorImgList;
 

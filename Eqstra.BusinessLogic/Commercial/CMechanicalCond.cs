@@ -49,7 +49,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isEngineDmg; }
 
-            set { SetProperty(ref  isEngineDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isEngineDmg, value) && !this.IsEngineDmg)
+                {
+                    this.EngineImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> engineImgList;
 
@@ -75,7 +81,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isFrontSuspDmg; }
 
-            set { SetProperty(ref  isFrontSuspDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFrontSuspDmg, value) && !this.IsFrontSuspDmg)
+                {
+                    this.FrontSuspImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> frontSuspImgList;
 
@@ -101,7 +113,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRearSuspDmg; }
 
-            set { SetProperty(ref  isRearSuspDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRearSuspDmg, value) && !this.IsRearSuspDmg)
+                {
+                    this.RearSuspImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> rearSuspImgList;
 
@@ -127,7 +145,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isSteeringDmg; }
 
-            set { SetProperty(ref  isSteeringDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isSteeringDmg, value) && !this.IsSteeringDmg)
+                {
+                    this.SteeringImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> steeringImgList;
 
@@ -154,7 +178,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isExhaustDmg; }
 
-            set { SetProperty(ref  isExhaustDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isExhaustDmg, value) && !this.IsExhaustDmg)
+                {
+                    this.ExhaustImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> exhaustImgList;
 
@@ -180,7 +210,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isBatteryDmg; }
 
-            set { SetProperty(ref  isBatteryDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isBatteryDmg, value) && !this.IsBatteryDmg)
+                {
+                    this.BatteryImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> batteryImgList;
 
@@ -206,7 +242,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isHandBrakeDmg; }
 
-            set { SetProperty(ref  isHandBrakeDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isHandBrakeDmg, value) && !this.IsHandBrakeDmg)
+                {
+                    this.HandBrakeImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> handBrakeImgList;
 
@@ -232,7 +274,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isFootBrakeDmg; }
 
-            set { SetProperty(ref  isFootBrakeDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isFootBrakeDmg, value) && !this.IsFootBrakeDmg)
+                {
+                    this.FootBrakeImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> footBrakeImgList;
 
@@ -259,7 +307,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isGearboxDmg; }
 
-            set { SetProperty(ref  isGearboxDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isGearboxDmg, value) && !this.IsGearboxDmg)
+                {
+                    this.GearboxImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> gearboxImgList;
 
@@ -285,7 +339,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isDifferentialDmg; }
 
-            set { SetProperty(ref  isDifferentialDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDifferentialDmg, value) && !this.IsDifferentialDmg)
+                {
+                    this.DifferentialImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> differentialImgList;
 
@@ -311,7 +371,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isAutoTransmissionDmg; }
 
-            set { SetProperty(ref  isAutoTransmissionDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isAutoTransmissionDmg, value) && !this.IsAutoTransmissionDmg)
+                {
+                    this.AutoTransmissionImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> autoTransmissionImgList;
 
@@ -337,7 +403,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isOilLeaksDmg; }
 
-            set { SetProperty(ref  isOilLeaksDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isOilLeaksDmg, value) && !this.IsOilLeaksDmg)
+                {
+                    this.OilLeaksImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> oilLeaksImgList;
 
@@ -363,7 +435,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isHPSDmg; }
 
-            set { SetProperty(ref  isHPSDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isHPSDmg, value) && !this.IsHPSDmg)
+                {
+                    this.HPSImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> hPSImgList;
 
@@ -382,7 +460,13 @@ namespace Eqstra.BusinessLogic.Commercial
         {
             get { return isRunningDmg; }
 
-            set { SetProperty(ref  isRunningDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isRunningDmg, value) && !this.IsRunning)
+                {
+
+                }
+            }
         }
 
         private bool hasPetrol;

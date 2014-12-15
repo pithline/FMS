@@ -65,7 +65,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isTailLights; }
 
-            set { SetProperty(ref  isTailLights, value); }
+            set
+            {
+                if (SetProperty(ref  isTailLights, value) && !this.IsTailLights)
+                {
+                    this.GVTailLightsImgList.Clear();
+                }
+            }
         }
         private bool isInductorLenses;
 
@@ -73,7 +79,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isInductorLenses; }
 
-            set { SetProperty(ref  isInductorLenses, value); }
+            set
+            {
+                if (SetProperty(ref  isInductorLenses, value) && !this.IsInductorLenses)
+                {
+                    this.GVInductorLensesImgList.Clear();
+                }
+            }
         }
 
         public string gVTailLightsImgPathList;
@@ -112,7 +124,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isReflectors; }
 
-            set { SetProperty(ref  isReflectors, value); }
+            set
+            {
+                if (SetProperty(ref  isReflectors, value) && !this.IsReflectors)
+                {
+                    this.ReflectorsImgList.Clear();
+                }
+            }
         }
 
 

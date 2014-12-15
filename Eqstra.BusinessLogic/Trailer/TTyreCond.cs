@@ -150,7 +150,13 @@ namespace Eqstra.BusinessLogic
         public bool IsPoor
         {
             get { return isPoor; }
-            set { SetProperty(ref isPoor, value); }
+            set
+            {
+                if (SetProperty(ref  isPoor, value) && !this.IsPoor)
+                {
+                    this.SnapshotImgList.Clear();
+                }
+            }
         }
 
 

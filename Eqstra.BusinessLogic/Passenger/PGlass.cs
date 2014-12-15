@@ -25,7 +25,7 @@ namespace Eqstra.BusinessLogic.Passenger
             this.GVExtRearViewMirrorImgList = new ObservableCollection<ImageCapture>();
             this.ShouldSave = false;
         }
-        
+
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<PGlass>(x => x.VehicleInsRecID == vehicleInsRecID);
@@ -97,9 +97,10 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return gVRearGlassComment; }
 
-            set {
+            set
+            {
                 SetProperty(ref  gVRearGlassComment, value);
-              
+
             }
         }
         private string gVSideGlassComment;
@@ -150,7 +151,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isWindscreen; }
 
-            set { SetProperty(ref  isWindscreen, value); }
+            set
+            {
+                if (SetProperty(ref  isWindscreen, value) && !this.IsWindscreen)
+                {
+                    this.GVWindscreenImgList.Clear();
+                }
+            }
         }
         private bool isRearGlass;
 
@@ -158,7 +165,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isRearGlass; }
 
-            set { SetProperty(ref  isRearGlass, value); }
+            set
+            {
+                if (SetProperty(ref  isRearGlass, value) && !this.IsRearGlass)
+                {
+                    this.GVRearGlassImgList.Clear();
+                }
+            }
         }
         private bool isSideGlass;
 
@@ -166,7 +179,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isSideGlass; }
 
-            set { SetProperty(ref  isSideGlass, value); }
+            set
+            {
+                if (SetProperty(ref  isSideGlass, value) && !this.IsSideGlass)
+                {
+                    this.GVSideGlassImgList.Clear();
+                }
+            }
         }
         private bool isHeadLights;
 
@@ -174,7 +193,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isHeadLights; }
 
-            set { SetProperty(ref  isHeadLights, value); }
+            set
+            {
+                if (SetProperty(ref  isHeadLights, value) && !this.IsHeadLights)
+                {
+                    this.GVHeadLightsImgList.Clear();
+                }
+            }
         }
         private bool isTailLights;
 
@@ -182,7 +207,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isTailLights; }
 
-            set { SetProperty(ref  isTailLights, value); }
+            set
+            {
+                if (SetProperty(ref  isTailLights, value) && !this.IsTailLights)
+                {
+                    this.GVTailLightsImgList.Clear();
+                }
+            }
         }
         private bool isInductorLenses;
 
@@ -190,7 +221,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isInductorLenses; }
 
-            set { SetProperty(ref  isInductorLenses, value); }
+            set
+            {
+                if (SetProperty(ref  isInductorLenses, value) && !this.IsInductorLenses)
+                {
+                    this.GVInductorLensesImgList.Clear();
+                }
+            }
         }
         private bool isExtRearViewMirror;
 
@@ -198,7 +235,13 @@ namespace Eqstra.BusinessLogic.Passenger
         {
             get { return isExtRearViewMirror; }
 
-            set { SetProperty(ref  isExtRearViewMirror, value); }
+            set
+            {
+                if (SetProperty(ref  isExtRearViewMirror, value) && !this.IsExtRearViewMirror)
+                {
+                    this.GVExtRearViewMirrorImgList.Clear();
+                }
+            }
         }
 
 

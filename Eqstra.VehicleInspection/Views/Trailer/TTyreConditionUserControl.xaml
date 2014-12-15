@@ -104,7 +104,10 @@
                                     <TextBox Text="{Binding Path=ThreadDepth,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0"  Grid.Column="3" />
                                     <TextBox Text="{Binding Path=Make,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0"  Grid.Column="4"/>
                                     <TextBox Text="{Binding Path=Comment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="5"/>
-                                    <GridView IsEnabled="{Binding ElementName=poorRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path=SnapshotImgList}"  Grid.Column="6" Margin="5 0" Height="45" Width="140" Padding="0 0 0 0" HorizontalAlignment="Left" SelectionMode="None">
+                                    <GridView IsEnabled="{Binding ElementName=poorRadio,Path=IsChecked}" common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}" 
+                                              IsItemClickEnabled="True" x:Name="RFImg" ItemsSource="{Binding Path=SnapshotImgList}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                              Grid.Column="6" Margin="5 0" Height="40" Width="145" Padding="0 0 0 0"
+                                              HorizontalAlignment="Left" SelectionMode="None">
                                         <GridView.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <VirtualizingStackPanel Orientation="Horizontal"/>

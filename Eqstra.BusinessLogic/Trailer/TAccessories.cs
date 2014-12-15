@@ -32,7 +32,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isDecalSignWritingDmg; }
 
-            set { SetProperty(ref  isDecalSignWritingDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isDecalSignWritingDmg, value) && !this.IsDecalSignWritingDmg)
+                {
+                    this.DecalSignWritingImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> decalSignWritingImgList;
 
@@ -58,7 +64,13 @@ namespace Eqstra.BusinessLogic
         {
             get { return isReflectiveTapeDmg; }
 
-            set { SetProperty(ref  isReflectiveTapeDmg, value); }
+            set
+            {
+                if (SetProperty(ref  isReflectiveTapeDmg, value) && !this.IsReflectiveTapeDmg)
+                {
+                    this.ReflectiveTapeImgList.Clear();
+                }
+            }
         }
         private ObservableCollection<ImageCapture> reflectiveTapeImgList;
 
