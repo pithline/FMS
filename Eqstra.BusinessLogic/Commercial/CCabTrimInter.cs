@@ -34,6 +34,18 @@ namespace Eqstra.BusinessLogic.Commercial
             this.MatImgList = new ObservableCollection<ImageCapture>();
             this.DriverSeatImgList = new ObservableCollection<ImageCapture>();
             this.PassengerSeatImgList = new ObservableCollection<ImageCapture>();
+
+            this.DashboardImgList = new ObservableCollection<ImageCapture>();
+            this.EmblemsImgList = new ObservableCollection<ImageCapture>();
+            this.SteeringWheelsImgList = new ObservableCollection<ImageCapture>();
+            this.InstrumentClusterImgList = new ObservableCollection<ImageCapture>();
+            this.ControlLeversImgList = new ObservableCollection<ImageCapture>();
+            this.BackUpWarningImgList = new ObservableCollection<ImageCapture>();
+            this.OverheadGuardImgList = new ObservableCollection<ImageCapture>();
+            this.RainGuardImgList = new ObservableCollection<ImageCapture>();
+            this.MastHydraulicsImgList = new ObservableCollection<ImageCapture>();
+            this.MastImgList = new ObservableCollection<ImageCapture>();
+            this.ForksImgList = new ObservableCollection<ImageCapture>();
         }
 
         private ObservableCollection<ImageCapture> leftDoorImgList;
@@ -777,6 +789,460 @@ namespace Eqstra.BusinessLogic.Commercial
                 }
             }
         }
+
+
+
+
+        private ObservableCollection<ImageCapture> dashboardImgList;
+        [Ignore, DamageSnapshotRequired("Dashboard snapshot(s) required", "IsDashboardDmg")]
+        public ObservableCollection<ImageCapture> DashboardImgList
+        {
+            get { return dashboardImgList; }
+
+            set { SetProperty(ref  dashboardImgList, value); }
+        }
+
+        public string dashboardImgPathList;
+        public string DashboardImgPathList
+        {
+            get { return string.Join("~", DashboardImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref dashboardImgPathList, value); }
+        }
+
+        private string dashboardComment;
+
+        public string DashboardComment
+        {
+            get { return dashboardComment; }
+
+            set { SetProperty(ref  dashboardComment, value); }
+        }
+
+        private bool isdashboardDmg;
+
+        public bool IsDashboardDmg
+        {
+            get { return isdashboardDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isdashboardDmg, value) && !this.IsDashboardDmg)
+                {
+                    this.DashboardImgList.Clear();
+                }
+            }
+        }
+
+
+        private ObservableCollection<ImageCapture> emblemsImgList;
+        [Ignore, DamageSnapshotRequired("Emblems snapshot(s) required", "IsEmblemsDmg")]
+        public ObservableCollection<ImageCapture> EmblemsImgList
+        {
+            get { return emblemsImgList; }
+
+            set { SetProperty(ref  emblemsImgList, value); }
+        }
+
+        public string emblemsImgPathList;
+        public string EmblemsImgPathList
+        {
+            get { return string.Join("~", EmblemsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref emblemsImgPathList, value); }
+        }
+
+        private string emblemsComment;
+
+        public string EmblemsComment
+        {
+            get { return emblemsComment; }
+
+            set { SetProperty(ref  emblemsComment, value); }
+        }
+
+        private bool isemblemsDmg;
+
+        public bool IsEmblemsDmg
+        {
+            get { return isemblemsDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isemblemsDmg, value) && !this.IsEmblemsDmg)
+                {
+                    this.EmblemsImgList.Clear();
+                }
+            }
+        }
+
+
+
+        private ObservableCollection<ImageCapture> steeringwheelsImgList;
+        [Ignore, DamageSnapshotRequired("Steering Wheels snapshot(s) required", "IsSteeringWheelsDmg")]
+        public ObservableCollection<ImageCapture> SteeringWheelsImgList
+        {
+            get { return steeringwheelsImgList; }
+
+            set { SetProperty(ref  steeringwheelsImgList, value); }
+        }
+
+        public string steeringwheelsImgPathList;
+        public string SteeringWheelsImgPathList
+        {
+            get { return string.Join("~", SteeringWheelsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref steeringwheelsImgPathList, value); }
+        }
+
+        private string steeringwheelsComment;
+
+        public string SteeringWheelsComment
+        {
+            get { return steeringwheelsComment; }
+
+            set { SetProperty(ref  steeringwheelsComment, value); }
+        }
+
+        private bool issteeringwheelsDmg;
+
+        public bool IsSteeringWheelsDmg
+        {
+            get { return issteeringwheelsDmg; }
+
+            set
+            {
+                if (SetProperty(ref  issteeringwheelsDmg, value) && !this.IsSteeringWheelsDmg)
+                {
+                    this.SteeringWheelsImgList.Clear();
+                }
+            }
+        }
+
+
+        private ObservableCollection<ImageCapture> instrumentclusterImgList;
+        [Ignore, DamageSnapshotRequired("Instrument Cluster snapshot(s) required", "IsInstrumentClusterDmg")]
+        public ObservableCollection<ImageCapture> InstrumentClusterImgList
+        {
+            get { return instrumentclusterImgList; }
+
+            set { SetProperty(ref  instrumentclusterImgList, value); }
+        }
+
+        public string instrumentclusterImgPathList;
+        public string InstrumentClusterImgPathList
+        {
+            get { return string.Join("~", InstrumentClusterImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref instrumentclusterImgPathList, value); }
+        }
+
+        private string instrumentclusterComment;
+
+        public string InstrumentClusterComment
+        {
+            get { return instrumentclusterComment; }
+
+            set { SetProperty(ref  instrumentclusterComment, value); }
+        }
+
+        private bool isinstrumentclusterDmg;
+
+        public bool IsInstrumentClusterDmg
+        {
+            get { return isinstrumentclusterDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isinstrumentclusterDmg, value) && !this.IsInstrumentClusterDmg)
+                {
+                    this.InstrumentClusterImgList.Clear();
+                }
+            }
+        }
+
+
+        private ObservableCollection<ImageCapture> controlleversImgList;
+        [Ignore, DamageSnapshotRequired("Control Levers snapshot(s) required", "IsControlLeversDmg")]
+        public ObservableCollection<ImageCapture> ControlLeversImgList
+        {
+            get { return controlleversImgList; }
+
+            set { SetProperty(ref  controlleversImgList, value); }
+        }
+
+        public string controlleversImgPathList;
+        public string ControlLeversImgPathList
+        {
+            get { return string.Join("~", ControlLeversImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref controlleversImgPathList, value); }
+        }
+
+        private string controlleversComment;
+
+        public string ControlLeversComment
+        {
+            get { return controlleversComment; }
+
+            set { SetProperty(ref  controlleversComment, value); }
+        }
+
+        private bool iscontrolleversDmg;
+
+        public bool IsControlLeversDmg
+        {
+            get { return iscontrolleversDmg; }
+
+            set
+            {
+                if (SetProperty(ref  iscontrolleversDmg, value) && !this.IsControlLeversDmg)
+                {
+                    this.ControlLeversImgList.Clear();
+                }
+            }
+        }
+
+        private ObservableCollection<ImageCapture> backupwarningImgList;
+        [Ignore, DamageSnapshotRequired("BackUp Warning snapshot(s) required", "IsBackUpWarningDmg")]
+        public ObservableCollection<ImageCapture> BackUpWarningImgList
+        {
+            get { return backupwarningImgList; }
+
+            set { SetProperty(ref  backupwarningImgList, value); }
+        }
+
+        public string backupwarningImgPathList;
+        public string BackUpWarningImgPathList
+        {
+            get { return string.Join("~", BackUpWarningImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref backupwarningImgPathList, value); }
+        }
+
+        private string backupwarningComment;
+
+        public string BackUpWarningComment
+        {
+            get { return backupwarningComment; }
+
+            set { SetProperty(ref  backupwarningComment, value); }
+        }
+
+        private bool isbackupwarningDmg;
+
+        public bool IsBackUpWarningDmg
+        {
+            get { return isbackupwarningDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isbackupwarningDmg, value) && !this.IsBackUpWarningDmg)
+                {
+                    this.BackUpWarningImgList.Clear();
+                }
+            }
+        }
+
+
+
+        private ObservableCollection<ImageCapture> overheadguardImgList;
+        [Ignore, DamageSnapshotRequired("OverheadGuard snapshot(s) required", "IsOverheadGuardDmg")]
+        public ObservableCollection<ImageCapture> OverheadGuardImgList
+        {
+            get { return overheadguardImgList; }
+
+            set { SetProperty(ref  overheadguardImgList, value); }
+        }
+
+        public string overheadguardImgPathList;
+        public string OverheadGuardImgPathList
+        {
+            get { return string.Join("~", OverheadGuardImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref overheadguardImgPathList, value); }
+        }
+
+        private string overheadguardComment;
+
+        public string OverheadGuardComment
+        {
+            get { return overheadguardComment; }
+
+            set { SetProperty(ref  overheadguardComment, value); }
+        }
+
+        private bool isoverheadguardDmg;
+
+        public bool IsOverheadGuardDmg
+        {
+            get { return isoverheadguardDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isoverheadguardDmg, value) && !this.IsOverheadGuardDmg)
+                {
+                    this.OverheadGuardImgList.Clear();
+                }
+            }
+        }
+
+        private ObservableCollection<ImageCapture> rainguardImgList;
+        [Ignore, DamageSnapshotRequired("Rain Guard snapshot(s) required", "IsRainGuardDmg")]
+        public ObservableCollection<ImageCapture> RainGuardImgList
+        {
+            get { return rainguardImgList; }
+
+            set { SetProperty(ref  rainguardImgList, value); }
+        }
+
+        public string rainguardImgPathList;
+        public string RainGuardImgPathList
+        {
+            get { return string.Join("~", RainGuardImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref rainguardImgPathList, value); }
+        }
+
+        private string rainguardComment;
+
+        public string RainGuardComment
+        {
+            get { return rainguardComment; }
+
+            set { SetProperty(ref  rainguardComment, value); }
+        }
+
+        private bool israinguardDmg;
+
+        public bool IsRainGuardDmg
+        {
+            get { return israinguardDmg; }
+
+            set
+            {
+                if (SetProperty(ref  israinguardDmg, value) && !this.IsRainGuardDmg)
+                {
+                    this.RainGuardImgList.Clear();
+                }
+            }
+        }
+
+
+
+        private ObservableCollection<ImageCapture> mastImgList;
+        [Ignore, DamageSnapshotRequired("Mast snapshot(s) required", "IsMastDmg")]
+        public ObservableCollection<ImageCapture> MastImgList
+        {
+            get { return mastImgList; }
+
+            set { SetProperty(ref  mastImgList, value); }
+        }
+
+        public string mastImgPathList;
+        public string MastImgPathList
+        {
+            get { return string.Join("~", MastImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref mastImgPathList, value); }
+        }
+
+        private string mastComment;
+
+        public string MastComment
+        {
+            get { return mastComment; }
+
+            set { SetProperty(ref  mastComment, value); }
+        }
+
+        private bool ismastDmg;
+
+        public bool IsMastDmg
+        {
+            get { return ismastDmg; }
+
+            set
+            {
+                if (SetProperty(ref  ismastDmg, value) && !this.IsMastDmg)
+                {
+                    this.MastImgList.Clear();
+                }
+            }
+        }
+
+        private ObservableCollection<ImageCapture> masthydraulicsImgList;
+        [Ignore, DamageSnapshotRequired("Mast Hydraulics snapshot(s) required", "IsMastHydraulicsDmg")]
+        public ObservableCollection<ImageCapture> MastHydraulicsImgList
+        {
+            get { return masthydraulicsImgList; }
+
+            set { SetProperty(ref  masthydraulicsImgList, value); }
+        }
+
+        public string masthydraulicsImgPathList;
+        public string MastHydraulicsImgPathList
+        {
+            get { return string.Join("~", MastHydraulicsImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref masthydraulicsImgPathList, value); }
+        }
+
+        private string masthydraulicsComment;
+
+        public string MastHydraulicsComment
+        {
+            get { return masthydraulicsComment; }
+
+            set { SetProperty(ref  masthydraulicsComment, value); }
+        }
+
+        private bool ismasthydraulicsDmg;
+
+        public bool IsMastHydraulicsDmg
+        {
+            get { return ismasthydraulicsDmg; }
+
+            set
+            {
+                if (SetProperty(ref  ismasthydraulicsDmg, value) && !this.IsMastHydraulicsDmg)
+                {
+                    this.MastHydraulicsImgList.Clear();
+                }
+            }
+        }
+
+
+        private ObservableCollection<ImageCapture> forksImgList;
+        [Ignore, DamageSnapshotRequired("Forks snapshot(s) required", "IsForksDmg")]
+        public ObservableCollection<ImageCapture> ForksImgList
+        {
+            get { return forksImgList; }
+
+            set { SetProperty(ref  forksImgList, value); }
+        }
+
+        public string forksImgPathList;
+        public string ForksImgPathList
+        {
+            get { return string.Join("~", ForksImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref forksImgPathList, value); }
+        }
+
+        private string forksComment;
+
+        public string ForksComment
+        {
+            get { return forksComment; }
+
+            set { SetProperty(ref  forksComment, value); }
+        }
+
+        private bool isforksDmg;
+
+        public bool IsForksDmg
+        {
+            get { return isforksDmg; }
+
+            set
+            {
+                if (SetProperty(ref  isforksDmg, value) && !this.IsForksDmg)
+                {
+                    this.ForksImgList.Clear();
+                }
+            }
+        }
+
 
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {

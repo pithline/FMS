@@ -181,7 +181,7 @@ namespace Eqstra.BusinessLogic.Commercial
             {
                 if (SetProperty(ref  isDropSideLeftDmg, value) && !this.IsDropSideLeftDmg)
                 {
-                    this.DropSideFrontImgList.Clear();
+                    this.DropSideLeftImgList.Clear();
                 }
             }
         }
