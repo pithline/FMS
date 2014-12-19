@@ -19,6 +19,7 @@
     <RestorePackages>true</RestorePackages>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <NuGetPackageImportStamp>9291fb29</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

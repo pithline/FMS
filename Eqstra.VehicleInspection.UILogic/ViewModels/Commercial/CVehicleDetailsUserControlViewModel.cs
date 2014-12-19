@@ -3,16 +3,12 @@ using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Commercial;
 using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
-using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic.Events;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Storage;
 
 
@@ -59,6 +55,25 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
                 viBaseObject.ShouldSave = false;
             }
+
+            DataStamp dataStamp = new DataStamp();
+            var d=(CVehicleDetails)this.Model;
+
+            var geolocator = new Geolocator();
+            var position = await geolocator.GetGeopositionAsync();
+            if (position != null && position.Coordinate != null)
+            {
+                dataStamp.Gps = position.Coordinate.Longitude.ToString() + Environment.NewLine + position.Coordinate.Longitude.ToString();
+            }
+            dataStamp.CaseNo = d.CaseNumber;
+            dataStamp.CusName =  StampPersistData.Instance.Task.CustomerName;
+            dataStamp.DateOfFirstReg = "";
+            dataStamp.InspectorName = StampPersistData.Instance.Task.AllocatedTo;
+            dataStamp.KMReading = "";
+            dataStamp.Make = d.Make;
+            dataStamp.VehRegNo = d.RegistrationNumber;
+            StampPersistData.Instance.DataStamp = dataStamp;
+
         }
 
         async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)

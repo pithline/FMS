@@ -1,19 +1,16 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Eqstra.BusinessLogic.Passenger;
-using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Base;
-using Windows.Storage;
-using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Common;
-using Microsoft.Practices.Prism.PubSubEvents;
+using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Passenger;
 using Eqstra.VehicleInspection.UILogic.Events;
-
+using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using System.Collections.Generic;
+using Windows.Devices.Geolocation;
+using Windows.Storage;
+using System;
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class PVehicleDetailsUserControlViewModel : BaseViewModel
@@ -61,6 +58,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 viBaseObject.ShouldSave = false;
                 PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
             }
+
+            DataStamp dataStamp = new DataStamp();
+            var d = (PVehicleDetails)this.Model;
+
+            var geolocator = new Geolocator();
+            var position = await geolocator.GetGeopositionAsync();
+            if (position != null && position.Coordinate != null)
+            {
+                dataStamp.Gps = position.Coordinate.Longitude.ToString() + Environment.NewLine + position.Coordinate.Longitude.ToString();
+            }
+            dataStamp.CaseNo = d.CaseNumber;
+            dataStamp.CusName = StampPersistData.Instance.Task.CustomerName;
+            dataStamp.DateOfFirstReg = "";
+            dataStamp.InspectorName = StampPersistData.Instance.Task.AllocatedTo;
+            dataStamp.KMReading = "";
+            dataStamp.Make = d.Make;
+            dataStamp.VehRegNo = d.RegistrationNumber;
+            StampPersistData.Instance.DataStamp = dataStamp;
         }
 
         async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)

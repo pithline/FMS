@@ -345,7 +345,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                ServiceRecID = mzkTask.parmServiceRecId,
                                Status = mzkTask.parmStatus,
                                StatusDueDate = mzkTask.parmStatusDueDate,
-                               UserId = mzkTask.parmUserID,
+                               UserId = _userInfo.UserId,
                                RegistrationNumber = mzkTask.parmRegistrationNum,
                                AllocatedTo = _userInfo.Name,
                                VehicleInsRecId = mzkTask.parmRecID,

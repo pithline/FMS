@@ -6,22 +6,15 @@ using Eqstra.VehicleInspection.UILogic.Popups;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.IO;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Media.Capture;
-using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
 
@@ -32,7 +25,7 @@ namespace Eqstra.VehicleInspection.UILogic
     {
         SnapshotsViewer _snapShotsPopup;
         INavigationService _navigationService;
-        
+
 
         public BaseViewModel(IEventAggregator eventAggregator)
         {
@@ -75,7 +68,7 @@ namespace Eqstra.VehicleInspection.UILogic
                             {
                                 baseModel.ShouldSave = false;
                                 await VIServiceHelper.Instance.SyncFromSvcAsync(baseModel);
-                            } 
+                            }
                         }
                         else
                         {
@@ -121,9 +114,22 @@ namespace Eqstra.VehicleInspection.UILogic
             try
             {
                 CameraCaptureUI ccui = new CameraCaptureUI();
-                var file = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
+                var storagefile = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (storagefile != null)
                 {
+
+                    var ms = await RenderDataStampOnSnap.RenderStaticTextToBitmap(storagefile);
+                    var msrandom = new MemoryRandomAccessStream(ms);
+                    Byte[] bytes = new Byte[ms.Length];
+                    await ms.ReadAsync(bytes, 0, (int)ms.Length);
+                    // StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Image.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+
+                    StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + storagefile.Name, CreationCollisionOption.ReplaceExisting);
+                    using (var strm = await file.OpenStreamForWriteAsync())
+                    {
+                        await strm.WriteAsync(bytes, 0, bytes.Length);
+                        strm.Flush();
+                    }
                     list.Add(new ImageCapture { ImagePath = file.Path });
                 }
             }
@@ -139,11 +145,28 @@ namespace Eqstra.VehicleInspection.UILogic
             {
                 CameraCaptureUI cam = new CameraCaptureUI();
 
-                var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
+                var storagefile = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (storagefile != null)
                 {
+
+                    var ms = await RenderDataStampOnSnap.RenderStaticTextToBitmap(storagefile);
+                    var msrandom = new MemoryRandomAccessStream(ms);
+                    Byte[] bytes = new Byte[ms.Length];
+                    await ms.ReadAsync(bytes, 0, (int)ms.Length);
+                    // StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Image.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+
+                    StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + storagefile.Name, CreationCollisionOption.ReplaceExisting);
+                    using (var strm = await file.OpenStreamForWriteAsync())
+                    {
+                        await strm.WriteAsync(bytes, 0, bytes.Length);
+                        strm.Flush();
+                    }
+
                     param.ImagePath = file.Path;
+
+
                 }
+
             }
             catch (Exception)
             {
@@ -185,7 +208,6 @@ namespace Eqstra.VehicleInspection.UILogic
         }
 
 
-
         /// <summary>
         /// /  This metod is only for testing suspension ,later we can remove it
         /// </summary>
@@ -206,6 +228,6 @@ namespace Eqstra.VehicleInspection.UILogic
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
         }
-       
+
     }
 }

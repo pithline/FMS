@@ -243,6 +243,7 @@ namespace Eqstra.VehicleInspection.ViewModels
             };
                 _task = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Task>(navigationParameter.ToString());
                 App.Task = _task;
+                StampPersistData.Instance.Task = _task;
                 //var vt = await SqliteHelper.Storage.LoadTableAsync<Vehicle>();
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = _task.CaseNumber;
                 LoadAppointments();

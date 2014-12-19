@@ -1,5 +1,4 @@
-﻿using Eqstra.BusinessLogic.Base;
-using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
@@ -7,10 +6,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.Media.Capture;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.BusinessLogic.TI

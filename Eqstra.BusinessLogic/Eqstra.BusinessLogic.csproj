@@ -111,6 +111,10 @@
     <Compile Include="Base\ValidationError.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
+    <Compile Include="Common\MemoryRandomAccessStream.cs" />
+    <Compile Include="Common\RenderDataStampOnSnap.cs" />
+    <Compile Include="Common\StampPersistData.cs" />
+    <Compile Include="DataStamp.cs" />
     <Compile Include="DocumentDelivery\CDTaskDetail.cs" />
     <Compile Include="DocumentDelivery\CollectDeliveryTask.cs" />
     <Compile Include="Commercial\CAccessories.cs" />
@@ -216,6 +220,18 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.DXGI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

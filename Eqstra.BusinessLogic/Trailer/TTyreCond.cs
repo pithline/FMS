@@ -4,17 +4,15 @@ using Eqstra.BusinessLogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Media.Capture;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
-
 namespace Eqstra.BusinessLogic
 {
     public class TTyreCond : BaseModel
@@ -40,12 +38,26 @@ namespace Eqstra.BusinessLogic
         {
             try
             {
+                
                 CameraCaptureUI ccui = new CameraCaptureUI();
-                var file = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
+                var storagefile = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (storagefile != null)
                 {
+
+                    var ms = await RenderDataStampOnSnap.RenderStaticTextToBitmap(storagefile);
+                    var msrandom = new MemoryRandomAccessStream(ms);
+                    Byte[] bytes = new Byte[ms.Length];
+                    await ms.ReadAsync(bytes, 0, (int)ms.Length);
+
+                    StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + storagefile.Name, CreationCollisionOption.ReplaceExisting);
+                    using (var strm = await file.OpenStreamForWriteAsync())
+                    {
+                        await strm.WriteAsync(bytes, 0, bytes.Length);
+                        strm.Flush();
+                    }
                     list.Add(new ImageCapture { ImagePath = file.Path });
                 }
+              
             }
             catch (Exception)
             {
