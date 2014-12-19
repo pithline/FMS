@@ -222,16 +222,13 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\netcore45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.dll</HintPath>
+      <HintPath>..\packages\SharpDX.2.1.0\lib\winrt\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11">
-      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\packages\SharpDX.Direct2D1.2.1.0\lib\winrt\SharpDX.Direct2D1.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI">
-      <HintPath>..\Eqstra.VehicleInspection.UILogic\bin\x86\Debug\SharpDX.DXGI.dll</HintPath>
+      <HintPath>..\packages\SharpDX.DXGI.2.1.0\lib\winrt\SharpDX.DXGI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
