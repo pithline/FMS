@@ -8,6 +8,9 @@
     mc:Ignorable="d"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:common="using:Eqstra.VehicleInspection.Common"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+                          
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     prism:ViewModelLocator.AutoWireViewModel="true"
     >
     <UserControl.Resources>
@@ -25,10 +28,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <ListViewItemPresenter
-                                               SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                                               SelectedForeground="{ThemeResource TextBoxForegroundThemeBrush}" 
-                                               SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
-                                               SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
+                            SelectedPointerOverBorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}" 
+                            SelectedForeground="{ThemeResource TextBoxForegroundThemeBrush}" 
+                            SelectedPointerOverBackground="{ThemeResource TextBoxButtonBorderThemeBrush}" 
+                            SelectedBackground="{ThemeResource TextBoxButtonBorderThemeBrush}"></ListViewItemPresenter>
 
                     </ControlTemplate>
                 </Setter.Value>
@@ -44,7 +47,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Tyre Condition" Style="{StaticResource GroupHeaderStyle}" VerticalAlignment="Bottom" Margin="0 0 0 5"/>
-                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding Model.ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
+                <Button Style="{StaticResource TransparentBtn}" Margin="10 0 0 0"  VerticalAlignment="Center" IsEnabled="{Binding ShouldSave}" Command="{Binding SaveModelCommand}" CommandParameter="{Binding Model}">
                     <Image Source="ms-appx:///Assets/save.png"/>
                 </Button>
             </StackPanel>
@@ -124,6 +127,14 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="PointerMoved">
+                                <Core:InvokeCommandAction Command="{Binding ChangedCommand}"
+                                                          />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+
                     </ListView>
                 </Border>
             </ScrollViewer>

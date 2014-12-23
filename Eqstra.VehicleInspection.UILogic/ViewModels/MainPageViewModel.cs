@@ -359,7 +359,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<CGlass>();
             //await SqliteHelper.Storage.CreateTableAsync<CMechanicalCond>();
             //await SqliteHelper.Storage.CreateTableAsync<CPOI>();
-           // await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
+            //await SqliteHelper.Storage.CreateTableAsync<CCabTrimInter>();
             //await SqliteHelper.Storage.CreateTableAsync<DrivingDuration>();
 
 

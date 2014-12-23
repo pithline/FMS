@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Base;
+using Eqstra.BusinessLogic.Common;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.Popups;
 using Microsoft.Practices.Prism.StoreApps;
@@ -6,6 +7,7 @@ using SQLite;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Media.Capture;
@@ -13,6 +15,7 @@ using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using System.Linq;
 namespace Eqstra.BusinessLogic
 {
     public class TTyreCond : BaseModel
@@ -184,7 +187,6 @@ namespace Eqstra.BusinessLogic
             get { return snapshotImgList; }
             set { SetProperty(ref snapshotImgList, value); }
         }
-
         public async override Task<BaseModel> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<TTyreCond>(x => x.VehicleInsRecID == vehicleInsRecID);

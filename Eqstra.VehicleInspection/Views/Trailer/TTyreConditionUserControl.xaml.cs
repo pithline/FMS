@@ -25,6 +25,5 @@ namespace Eqstra.VehicleInspection.Views
         {
             this.InitializeComponent();
         }
-
     }
 }

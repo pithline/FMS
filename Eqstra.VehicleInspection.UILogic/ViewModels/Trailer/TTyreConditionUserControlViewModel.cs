@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Linq;
 using Eqstra.VehicleInspection.UILogic.AifServices;
 using System;
+using System.Runtime.CompilerServices;
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class TTyreConditionUserControlViewModel : BaseViewModel
@@ -40,7 +41,11 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion15" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion16" });
 
+            this.ChangedCommand = new DelegateCommand(() =>
+            {
+                this.ShouldSave= PropertyHistory.Instance.IsPropertiesOriginalValuesChanged(this.PoolOfTyreCondions);
 
+            });
         }
 
 
@@ -100,7 +105,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
                 BaseModel viBaseObject = (TTyreCond)this.Model;
                 viBaseObject.LoadSnapshotsFromDb();
-                PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
+                PropertyHistory.Instance.SetPropertyHistory(this.PoolOfTyreCondions);
                 viBaseObject.ShouldSave = false;
             }
             catch (Exception ex)
@@ -120,8 +125,21 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public ObservableCollection<TTyreCond> PoolOfTyreCondions
         {
             get { return poolOfTyreCondions; }
-            set { SetProperty(ref poolOfTyreCondions, value); }
+            set
+            {
+                SetProperty(ref poolOfTyreCondions, value);
+            }
         }
+
+        private bool shouldSave;
+
+        public bool ShouldSave
+        {
+            get { return shouldSave; }
+            set { SetProperty(ref shouldSave, value); }
+        }
+        
+        public DelegateCommand ChangedCommand { get; set; }
 
     }
 }
