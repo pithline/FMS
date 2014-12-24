@@ -151,7 +151,7 @@
                                              
                                              SelectionChanged="sfDataGrid_SelectionChanged"
                                              ItemsSource="{Binding InspectionList,Mode=TwoWay}"
-                                             ColumnSizer="SizeToCells"
+                                             ColumnSizer="Auto"
                                              AutoGenerateColumns="False"
                                              SelectionMode="Single"                                       
                                              AllowEditing="{Binding AllowEditing}"

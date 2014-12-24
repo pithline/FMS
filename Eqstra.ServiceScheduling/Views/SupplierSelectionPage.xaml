@@ -41,9 +41,9 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <!--
-        This grid acts as a root panel for the page that defines two rows:
-        * Row 0 contains the back button and page title
-        * Row 1 contains the rest of the page layout
+         This grid acts as a root panel for the page that defines two rows:
+         * Row 0 contains the back button and page title
+         * Row 1 contains the rest of the page layout
     -->
 
     <busy:SfBusyIndicator IsBusy="{Binding IsBusy}"
@@ -68,13 +68,13 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!--<Button x:Name="backButton"
-                        Margin="39,0,39,0"
-                        Command="{Binding GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Center"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button" />-->
+                     Margin="39,0,39,0"
+                     Command="{Binding GoBackCommand, ElementName=pageRoot}"
+                     Style="{StaticResource NavigationBackButtonNormalStyle}"
+                     VerticalAlignment="Center"
+                     AutomationProperties.Name="Back"
+                     AutomationProperties.AutomationId="BackButton"
+                     AutomationProperties.ItemType="Navigation Button" />-->
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal">
 
@@ -124,390 +124,392 @@
                                    HorizontalAlignment="Left"
                                    Style="{StaticResource GroupHeaderStyle}"
                                    Margin="0 0 0 10" />
-
+                       
                         <Border Grid.Row="1"
                                 BorderBrush="#FFE0E0E0"
                                 BorderThickness="1"
                                 Background="White"
                                 HorizontalAlignment="Stretch">
-                            <Grid Margin="20 20 0 10"
-                                  HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="50" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
+                            <ScrollViewer> 
+                                <Grid Margin="20 20 0 10" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                      HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
 
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="50" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="10" />
-                                    <RowDefinition Height="150" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <ProgressBar Grid.ColumnSpan="6"
-                                             VerticalAlignment="Top"
-                                             IsIndeterminate="True"
-                                             Visibility="{Binding LoadingCriteriaProgressVisibility}"
-                                             HorizontalAlignment="Stretch"
-                                             Margin="0 -15 0 0" />
-                                <TextBlock Text="Select the preferred suppliers"
-                                           Style="{StaticResource TextContentStyle}"
-                                           Grid.ColumnSpan="2"
-                                           VerticalAlignment="Center" />
-                                <AppBarButton Icon="Filter"
-                                              VerticalAlignment="Top"
-                                              Command="{Binding SupplierFilterCommand}"
-                                              Margin="10 0"
-                                              RequestedTheme="Light"
-                                              Grid.Column="1" />
-                                <TextBlock Text="Country"
-                                           Grid.Row="1"
-                                           Grid.Column="0"
-                                           Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
-                                <!--<ComboBox Grid.Row="1"
-                                          Grid.Column="1"
-                                          ItemsSource="{Binding Model.Countries}"
-                                          DisplayMemberPath="Name"
-                                          x:Name="ddCountry"
-                                          SelectedValuePath="{Binding Id, Mode=TwoWay}"
-                                          SelectedItem="{Binding Model.SelectedCountry, Mode=TwoWay}"
-                                          Width="250"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
-                                                                      CommandParameter="{Binding Model.SelectedCountry}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </ComboBox>-->
-
-
-                                <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="1"
-                                                         Margin="5,0"
-                                                         Grid.Column="1"
-                                                         x:Name="AutoCountry"
-                                                         Watermark="Enter country..."
-                                                         ShowSuggestionsOnFocus="True"
-                                                         AutoCompleteMode="Suggest"
-                                                         SearchItemPath="Name"
-                                                         SelectedItem="{Binding Model.SelectedCountry.Name ,Mode=TwoWay}"
-                                                         Width="250"
-                                                         Height="35"
-                                                         SuggestionMode="Contains"
-                                                         AutoCompleteSource="{Binding Model.Countries}"
-                                                         WatermarkTemplate="{StaticResource WatermarkTemplate}">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="TextChanged">
-                                            <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoCountry,Path=SelectedItem}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-
-
-                                    <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="country"
-                                                           TextWrapping="Wrap"
-                                                           Width="250"
-                                                           Text="{Binding Name}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                </syncfusion:SfTextBoxExt>
-
-
-                                <TextBlock Text="Provice"
-                                           Grid.Row="1"
-                                           Grid.Column="3"
-                                           Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
-                                <!--<ComboBox Grid.Row="1"
-                                          Grid.Column="4"
-                                          ItemsSource="{Binding Model.Provinces}"
-                                          DisplayMemberPath="Name"
-                                          x:Name="ddProvince"
-                                          SelectedValuePath="{Binding Id, Mode=TwoWay}"
-                                          SelectedItem="{Binding Model.Selectedprovince, Mode=TwoWay}"
-                                          HorizontalAlignment="Left"
-                                          Width="250"
-                                          Margin="10 10"
-                                          VerticalAlignment="Center">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding ProvinceChangedCommand}"
-                                                                      CommandParameter="{Binding Model.Selectedprovince}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </ComboBox>-->
-
-                                <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="1"
-                                                         Grid.Column="4"
-                                                         x:Name="AutoProvince"
-                                                         Watermark="Enter province..."
-                                                         ShowSuggestionsOnFocus="True"
-                                                         AutoCompleteMode="Suggest"
-                                                         SearchItemPath="Name"
-                                                         SelectedItem="{Binding Model.Selectedprovince.Name ,Mode=TwoWay}"
-                                                         AutoCompleteSource="{Binding Model.Provinces}"
-                                                         Width="250"
-                                                         Height="35"
-                                                         SuggestionMode="Contains"
-                                                         WatermarkTemplate="{StaticResource WatermarkTemplate}">
-
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="TextChanged">
-                                            <Core:InvokeCommandAction Command="{Binding ProvinceChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoProvince,Path=SelectedItem}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-
-                                    <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="province"
-                                                           TextWrapping="Wrap"
-                                                           Width="250"
-                                                           Text="{Binding Name}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                </syncfusion:SfTextBoxExt>
-
-
-                                <TextBlock Text="Region"
-                                           Grid.Row="3"
-                                           Grid.Column="0"
-                                           Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
-                                <!--<ComboBox Grid.Row="3"
-                                          Grid.Column="1"
-                                          ItemsSource="{Binding Model.Region}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="{Binding Id, Mode=TwoWay}"
-                                          HorizontalAlignment="Left"
-                                          Width="250"
-                                          Margin="0 10"
-                                          VerticalAlignment="Center" />-->
-
-                                <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="3"
-                                                         Grid.Column="1"
-                                                         x:Name="AutoRegion"
-                                                         Watermark="Enter region..."
-                                                         AutoCompleteSource="{Binding Model.Regions}"
-                                                         ShowSuggestionsOnFocus="True"
-                                                         AutoCompleteMode="Suggest"
-                                                         SearchItemPath="Name"
-                                                         SelectedItem="{Binding Model.SelectedRegion.Name ,Mode=TwoWay}"
-                                                         Width="250"
-                                                         Height="35"
-                                                         SuggestionMode="Contains"
-                                                         WatermarkTemplate="{StaticResource WatermarkTemplate}">
-
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="TextChanged">
-                                            <Core:InvokeCommandAction Command="{Binding RegionChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoRegion,Path=SelectedItem}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-
-                                    <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="region"
-                                                           TextWrapping="Wrap"
-                                                           Width="250"
-                                                           Text="{Binding Name}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                </syncfusion:SfTextBoxExt>
-
-                                <TextBlock Text="City"
-                                           Grid.Row="2"
-                                           Grid.Column="0"
-                                           Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
-                                <!--<ComboBox Grid.Row="2"
-                                          Grid.Column="1"
-                                          ItemsSource="{Binding Model.Cities}"
-                                          DisplayMemberPath=" Name"
-                                          SelectedValuePath="{Binding Id, Mode=TwoWay}"
-                                          SelectedItem="{Binding Model.SelectedCity, Mode=TwoWay}"
-                                          x:Name="ddCity"
-                                          HorizontalAlignment="Left"
-                                          Width="250"
-                                          Margin="0 10"
-                                          VerticalAlignment="Center">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
-                                                                      CommandParameter="{Binding Model.SelectedCity}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </ComboBox>-->
-
-
-                                <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="2"
-                                                         Margin="5,0"
-                                                         Grid.Column="1"
-                                                         x:Name="AutoCity"
-                                                         Watermark="Enter city..."
-                                                         ShowSuggestionsOnFocus="True"
-                                                         SelectedItem="{Binding Model.SelectedCity.Name ,Mode=TwoWay}"
-                                                         AutoCompleteMode="Suggest"
-                                                         SearchItemPath="Name"
-                                                         Width="250"
-                                                         Height="35"
-                                                         AutoCompleteSource="{Binding Model.Cities}"
-                                                         SuggestionMode="Contains"
-                                                         WatermarkTemplate="{StaticResource WatermarkTemplate}">
-
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="TextChanged">
-                                            <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoCity,Path=SelectedItem}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-
-                                    <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="city"
-                                                           TextWrapping="Wrap"
-                                                           Width="250"
-                                                           Text="{Binding Name}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                </syncfusion:SfTextBoxExt>
-
-                                <TextBlock Text="Suburb"
-                                           Grid.Row="2"
-                                           Grid.Column="3"
-                                           Style="{StaticResource FormTextStyle}"
-                                           VerticalAlignment="Center" />
-                                <!--<ComboBox Grid.Row="2"
-                                          Grid.Column="4"
-                                          ItemsSource="{Binding Model.Suburbs}"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="{Binding Id, Mode=TwoWay}"
-                                          SelectedItem="{Binding Model.SelectedSuburb, Mode=TwoWay}"
-                                          HorizontalAlignment="Left"
-                                          Width="250"
-                                          Margin="10 10"
-                                          VerticalAlignment="Center">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                            <Core:InvokeCommandAction Command="{ Binding SuburbChangedCommand}"
-                                                                      CommandParameter="{Binding Model.SelectedSuburb}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </ComboBox>-->
-
-                                <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
-                                                         Grid.Row="2"
-                                                         Grid.Column="4"
-                                                         x:Name="AutoSuburb"
-                                                         Watermark="Enter suburb..."
-                                                         ShowSuggestionsOnFocus="True"
-                                                         AutoCompleteSource="{Binding Model.Suburbs}"
-                                                         AutoCompleteMode="Suggest"
-                                                         SearchItemPath="Name"
-                                                         Width="250"
-                                                         Height="35"
-                                                         SuggestionMode="Contains"
-                                                         WatermarkTemplate="{StaticResource WatermarkTemplate}">
-
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="TextChanged">
-                                            <Core:InvokeCommandAction Command="{Binding SuburbChangedCommand}"
-                                                                      CommandParameter="{Binding ElementName=AutoSuburb,Path=SelectedItem}" />
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-
-                                    <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="suburb"
-                                                           TextWrapping="Wrap"
-                                                           Width="250"
-                                                           Text="{Binding Name}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
-                                </syncfusion:SfTextBoxExt>
-
-                                <TextBlock Text="Preferred Suppliers"
-                                           VerticalAlignment="Center"
-                                           Style="{StaticResource TextContentStyle}"
-                                           Grid.ColumnSpan="4"
-                                           Grid.Row="5" />
-
-                                <grid:SfDataGrid  ItemsSource="{Binding ElementName=sfDataPager,
-                                                                     Path=PagedSource}"
-                                                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                                  MaxHeight="150"
-                                                  MinHeight="150"
+                                        <RowDefinition Height="70" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="50" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <ProgressBar Grid.ColumnSpan="6"
+                                                 VerticalAlignment="Top"
+                                                 IsIndeterminate="True"
+                                                 Visibility="{Binding LoadingCriteriaProgressVisibility}"
+                                                 HorizontalAlignment="Stretch"
+                                                 Margin="0 -15 0 0" />
+                                    <TextBlock Text="Select the preferred suppliers"
+                                               Style="{StaticResource TextContentStyle}"
+                                               Grid.ColumnSpan="2"
+                                               VerticalAlignment="Center" />
+                                    <AppBarButton Icon="Filter"
                                                   VerticalAlignment="Top"
-                                                  x:Name="suppliersGrid"
-                                                  SelectionMode="Single"
-                                                  NavigationMode="Row"
-                                                  SelectedItem="{Binding SelectedSupplier, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                  AutoGenerateColumns="False"
-                                                  BorderThickness=".5"
-                                                  Grid.Row="7"
-                                                  Grid.ColumnSpan="3"
-                                                  CellStyle="{StaticResource SyncGridCellStyle}">
-                                    <grid:SfDataGrid.Columns>
-                                        <grid:GridTextColumn MappingName="SupplierName"
-                                                             HeaderText="NAME"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="200"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                        <grid:GridTextColumn MappingName="SupplierContactName"
-                                                             HeaderText="CONTACT NAME"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="200"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                        <grid:GridTextColumn MappingName="SupplierContactNumber"
-                                                             HeaderText="CONTACT NUMBER"
-                                                             HeaderStyle="{StaticResource SyncGridHeaderStyle}"
-                                                             Width="200"
-                                                             HorizontalHeaderContentAlignment="Left" />
-                                    </grid:SfDataGrid.Columns>
-
-                                </grid:SfDataGrid>
+                                                  Command="{Binding SupplierFilterCommand}"
+                                                  Margin="40 0"
+                                                  RequestedTheme="Light"
+                                                  Grid.Column="1" />
+                                    <TextBlock Text="Country"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               Style="{StaticResource FormTextStyle}"
+                                               VerticalAlignment="Center" />
+                                    <!--<ComboBox Grid.Row="1"
+                                         Grid.Column="1"
+                                         ItemsSource="{Binding Model.Countries}"
+                                         DisplayMemberPath="Name"
+                                         x:Name="ddCountry"
+                                         SelectedValuePath="{Binding Id, Mode=TwoWay}"
+                                         SelectedItem="{Binding Model.SelectedCountry, Mode=TwoWay}"
+                                         Width="250"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center">
+                                         <Interactivity:Interaction.Behaviors>
+                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                         <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
+                                         CommandParameter="{Binding Model.SelectedCountry}" />
+                                         </Core:EventTriggerBehavior>
+                                         </Interactivity:Interaction.Behaviors>
+                                         </ComboBox>-->
 
 
-                                <datapager:SfDataPager x:Name="sfDataPager"
-                                                       Grid.ColumnSpan="3"
-                                                       Height="50"
-                                                       Grid.Row="8"
-                                                       HorizontalAlignment="Center"
-                                                       DisplayMode="PreviousNextNumeric"
-                                                       NumericButtonCount="5"
-                                                       PageSize="10"
-                                                       Source="{Binding Model.Suppliers}" />
+                                    <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                                             Grid.Row="1"
+                                                             Margin="5,0"
+                                                             Grid.Column="1"
+                                                             x:Name="AutoCountry"
+                                                             Watermark="Enter country..."
+                                                             ShowSuggestionsOnFocus="True"
+                                                             AutoCompleteMode="Suggest"
+                                                             SearchItemPath="Name"
+                                                             SelectedItem="{Binding Model.SelectedCountry.Name ,Mode=TwoWay}"
+                                                             Width="250"
+                                                             Height="35"
+                                                             SuggestionMode="Contains"
+                                                             AutoCompleteSource="{Binding Model.Countries}"
+                                                             WatermarkTemplate="{StaticResource WatermarkTemplate}">
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="TextChanged">
+                                                <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
+                                                                          CommandParameter="{Binding ElementName=AutoCountry,Path=SelectedItem}" />
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
 
 
-                            </Grid>
+                                        <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="country"
+                                                               TextWrapping="Wrap"
+                                                               Width="250"
+                                                               Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                    </syncfusion:SfTextBoxExt>
+
+
+                                    <TextBlock Text="Provice"
+                                               Grid.Row="1"
+                                               Grid.Column="3"
+                                               Style="{StaticResource FormTextStyle}"
+                                               VerticalAlignment="Center" />
+                                    <!--<ComboBox Grid.Row="1"
+                                         Grid.Column="4"
+                                         ItemsSource="{Binding Model.Provinces}"
+                                         DisplayMemberPath="Name"
+                                         x:Name="ddProvince"
+                                         SelectedValuePath="{Binding Id, Mode=TwoWay}"
+                                         SelectedItem="{Binding Model.Selectedprovince, Mode=TwoWay}"
+                                         HorizontalAlignment="Left"
+                                         Width="250"
+                                         Margin="10 10"
+                                         VerticalAlignment="Center">
+                                         <Interactivity:Interaction.Behaviors>
+                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                         <Core:InvokeCommandAction Command="{Binding ProvinceChangedCommand}"
+                                         CommandParameter="{Binding Model.Selectedprovince}" />
+                                         </Core:EventTriggerBehavior>
+                                         </Interactivity:Interaction.Behaviors>
+                                         </ComboBox>-->
+
+                                    <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                                             Grid.Row="1"
+                                                             Grid.Column="4"
+                                                             x:Name="AutoProvince"
+                                                             Watermark="Enter province..."
+                                                             ShowSuggestionsOnFocus="True"
+                                                             AutoCompleteMode="Suggest"
+                                                             SearchItemPath="Name"
+                                                             SelectedItem="{Binding Model.Selectedprovince.Name ,Mode=TwoWay}"
+                                                             AutoCompleteSource="{Binding Model.Provinces}"
+                                                             Width="250"
+                                                             Height="35"
+                                                             SuggestionMode="Contains"
+                                                             WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="TextChanged">
+                                                <Core:InvokeCommandAction Command="{Binding ProvinceChangedCommand}"
+                                                                          CommandParameter="{Binding ElementName=AutoProvince,Path=SelectedItem}" />
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+
+                                        <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="province"
+                                                               TextWrapping="Wrap"
+                                                               Width="250"
+                                                               Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                    </syncfusion:SfTextBoxExt>
+
+
+                                    <TextBlock Text="Region"
+                                               Grid.Row="3"
+                                               Grid.Column="0"
+                                               Style="{StaticResource FormTextStyle}"
+                                               VerticalAlignment="Center" />
+                                    <!--<ComboBox Grid.Row="3"
+                                         Grid.Column="1"
+                                         ItemsSource="{Binding Model.Region}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValuePath="{Binding Id, Mode=TwoWay}"
+                                         HorizontalAlignment="Left"
+                                         Width="250"
+                                         Margin="0 10"
+                                         VerticalAlignment="Center" />-->
+
+                                    <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                                             Grid.Row="3"
+                                                             Grid.Column="1"
+                                                             x:Name="AutoRegion"
+                                                             Watermark="Enter region..."
+                                                             AutoCompleteSource="{Binding Model.Regions}"
+                                                             ShowSuggestionsOnFocus="True"
+                                                             AutoCompleteMode="Suggest"
+                                                             SearchItemPath="Name"
+                                                             SelectedItem="{Binding Model.SelectedRegion.Name ,Mode=TwoWay}"
+                                                             Width="250"
+                                                             Height="35"
+                                                             SuggestionMode="Contains"
+                                                             WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="TextChanged">
+                                                <Core:InvokeCommandAction Command="{Binding RegionChangedCommand}"
+                                                                          CommandParameter="{Binding ElementName=AutoRegion,Path=SelectedItem}" />
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+
+                                        <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="region"
+                                                               TextWrapping="Wrap"
+                                                               Width="250"
+                                                               Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                    </syncfusion:SfTextBoxExt>
+
+                                    <TextBlock Text="City"
+                                               Grid.Row="2"
+                                               Grid.Column="0"
+                                               Style="{StaticResource FormTextStyle}"
+                                               VerticalAlignment="Center" />
+                                    <!--<ComboBox Grid.Row="2"
+                                         Grid.Column="1"
+                                         ItemsSource="{Binding Model.Cities}"
+                                         DisplayMemberPath=" Name"
+                                         SelectedValuePath="{Binding Id, Mode=TwoWay}"
+                                         SelectedItem="{Binding Model.SelectedCity, Mode=TwoWay}"
+                                         x:Name="ddCity"
+                                         HorizontalAlignment="Left"
+                                         Width="250"
+                                         Margin="0 10"
+                                         VerticalAlignment="Center">
+                                         <Interactivity:Interaction.Behaviors>
+                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                         <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
+                                         CommandParameter="{Binding Model.SelectedCity}" />
+                                         </Core:EventTriggerBehavior>
+                                         </Interactivity:Interaction.Behaviors>
+                                         </ComboBox>-->
+
+
+                                    <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                                             Grid.Row="2"
+                                                             Margin="5,0"
+                                                             Grid.Column="1"
+                                                             x:Name="AutoCity"
+                                                             Watermark="Enter city..."
+                                                             ShowSuggestionsOnFocus="True"
+                                                             SelectedItem="{Binding Model.SelectedCity.Name ,Mode=TwoWay}"
+                                                             AutoCompleteMode="Suggest"
+                                                             SearchItemPath="Name"
+                                                             Width="250"
+                                                             Height="35"
+                                                             AutoCompleteSource="{Binding Model.Cities}"
+                                                             SuggestionMode="Contains"
+                                                             WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="TextChanged">
+                                                <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
+                                                                          CommandParameter="{Binding ElementName=AutoCity,Path=SelectedItem}" />
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+
+                                        <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="city"
+                                                               TextWrapping="Wrap"
+                                                               Width="250"
+                                                               Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                    </syncfusion:SfTextBoxExt>
+
+                                    <TextBlock Text="Suburb"
+                                               Grid.Row="2"
+                                               Grid.Column="3"
+                                               Style="{StaticResource FormTextStyle}"
+                                               VerticalAlignment="Center" />
+                                    <!--<ComboBox Grid.Row="2"
+                                         Grid.Column="4"
+                                         ItemsSource="{Binding Model.Suburbs}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValuePath="{Binding Id, Mode=TwoWay}"
+                                         SelectedItem="{Binding Model.SelectedSuburb, Mode=TwoWay}"
+                                         HorizontalAlignment="Left"
+                                         Width="250"
+                                         Margin="10 10"
+                                         VerticalAlignment="Center">
+                                         <Interactivity:Interaction.Behaviors>
+                                         <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                         <Core:InvokeCommandAction Command="{ Binding SuburbChangedCommand}"
+                                         CommandParameter="{Binding Model.SelectedSuburb}" />
+                                         </Core:EventTriggerBehavior>
+                                         </Interactivity:Interaction.Behaviors>
+                                         </ComboBox>-->
+
+                                    <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                                             Grid.Row="2"
+                                                             Grid.Column="4"
+                                                             x:Name="AutoSuburb"
+                                                             Watermark="Enter suburb..."
+                                                             ShowSuggestionsOnFocus="True"
+                                                             AutoCompleteSource="{Binding Model.Suburbs}"
+                                                             AutoCompleteMode="Suggest"
+                                                             SearchItemPath="Name"
+                                                             Width="250"
+                                                             Height="35"
+                                                             SuggestionMode="Contains"
+                                                             WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="TextChanged">
+                                                <Core:InvokeCommandAction Command="{Binding SuburbChangedCommand}"
+                                                                          CommandParameter="{Binding ElementName=AutoSuburb,Path=SelectedItem}" />
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+
+                                        <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="suburb"
+                                                               TextWrapping="Wrap"
+                                                               Width="250"
+                                                               Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                                    </syncfusion:SfTextBoxExt>
+
+                                    <TextBlock Text="Preferred Suppliers"
+                                               VerticalAlignment="Center"
+                                               Style="{StaticResource TextContentStyle}"
+                                               Grid.ColumnSpan="4"
+                                               Grid.Row="5" />
+
+                                    <grid:SfDataGrid  ItemsSource="{Binding ElementName=sfDataPager,
+                                                      Path=PagedSource}"
+                                                       Height="300"
+                                                      ColumnSizer="Auto"
+                                                      VerticalAlignment="Top"
+                                                      x:Name="suppliersGrid"
+                                                      SelectionMode="Single"
+                                                      NavigationMode="Row"
+                                                      SelectedItem="{Binding SelectedSupplier, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                      AutoGenerateColumns="False"
+                                                      BorderThickness="0"
+                                                      Grid.Row="7"
+                                                      Grid.ColumnSpan="4"
+                                                      CellStyle="{StaticResource SyncGridCellStyle}">
+                                        <grid:SfDataGrid.Columns>
+                                            <grid:GridTextColumn MappingName="SupplierName"
+                                                                 HeaderText="NAME"
+                                                                 HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                                 Width="250"
+                                                                 HorizontalHeaderContentAlignment="Left" />
+                                            <grid:GridTextColumn MappingName="SupplierContactName"
+                                                                 HeaderText="CONTACT NAME"
+                                                                 HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                                 Width="250"
+                                                                 HorizontalHeaderContentAlignment="Left" />
+                                            <grid:GridTextColumn MappingName="SupplierContactNumber"
+                                                                 HeaderText="CONTACT NUMBER"
+                                                                 HeaderStyle="{StaticResource SyncGridHeaderStyle}"
+                                                                 Width="250"
+                                                                 HorizontalHeaderContentAlignment="Left" />
+                                        </grid:SfDataGrid.Columns>
+
+                                    </grid:SfDataGrid>
+
+
+                                    <datapager:SfDataPager x:Name="sfDataPager"
+                                                           Grid.ColumnSpan="3"
+                                                           Height="50"
+                                                           Grid.Row="8"
+                                                           PageCount="3"
+                                                           PageSize="10"
+                                                           HorizontalAlignment="Center"
+                                                           DisplayMode="PreviousNextNumeric"
+                                                           Source="{Binding Model.Suppliers}" />
+
+
+                                </Grid>
+                            </ScrollViewer>
                         </Border>
+                    
+                     
                     </Grid>
 
                 </Grid>

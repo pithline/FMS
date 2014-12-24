@@ -266,7 +266,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.IsBusy = true;
                 this.IsDelSignatureDate = Visibility.Collapsed;
                 this.IsCollSignatureDate = Visibility.Collapsed;
-                this.ContactNameBorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red);
+               
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
