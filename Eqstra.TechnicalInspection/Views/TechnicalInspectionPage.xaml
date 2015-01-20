@@ -19,7 +19,8 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
+        <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter" />
+        <conv:CommandParameterConverter x:Key="CPConverter" />
 
         <Style x:Key="ListViewItemStyle1"
                TargetType="ListViewItem">
@@ -175,7 +176,8 @@
                                     <Image Source="ms-appx:///Assets/save.png" />
                                 </Button>
                             </StackPanel>
-                            <ScrollViewer Grid.Row="1" ZoomMode="Disabled"
+                            <ScrollViewer Grid.Row="1"
+                                          ZoomMode="Disabled"
                                           HorizontalScrollBarVisibility="Visible"
                                           VerticalScrollBarVisibility="Visible">
                                 <Border Grid.Row="1"
@@ -210,14 +212,15 @@
                                                            HorizontalAlignment="Left"
                                                            Style="{StaticResource FormTextStyle}"
                                                            VerticalAlignment="Center" />
-                                                <input:SfDatePicker Grid.Column="1" IsHitTestVisible="False"
-                                                            HorizontalAlignment="Left"
-                                                            Margin="5"
-                                                            Value="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}"/>
+                                                <input:SfDatePicker Grid.Column="1"
+                                                                    IsHitTestVisible="False"
+                                                                    HorizontalAlignment="Left"
+                                                                    Margin="5"
+                                                                    Value="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" />
                                             </Grid>
 
 
-                                            <ListView Grid.Row="1" 
+                                            <ListView Grid.Row="1"
                                                       SelectionMode="None"
                                                       ItemsSource="{Binding MaintenanceRepairList}"
                                                       IsZoomedInView="False"
@@ -238,7 +241,8 @@
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Text="Major Component"
-                                                                       Style="{StaticResource FormTextStyle}" Grid.Column="1" />
+                                                                       Style="{StaticResource FormTextStyle}"
+                                                                       Grid.Column="1" />
                                                             <TextBlock Text="Sub Component"
                                                                        Grid.Column="3"
                                                                        Style="{StaticResource FormTextStyle}" />
@@ -250,9 +254,11 @@
                                                                        Style="{StaticResource FormTextStyle}" />
                                                             <TextBlock Text="Major Component Snaps"
                                                                        Grid.Column="6"
-                                                                       Style="{StaticResource FormTextStyle}" Margin="10 0 0 0 " />
+                                                                       Style="{StaticResource FormTextStyle}"
+                                                                       Margin="10 0 0 0 " />
                                                             <TextBlock Text="Sub Component Snaps"
-                                                                       Grid.Column="7" Margin="10 0 0 0"
+                                                                       Grid.Column="7"
+                                                                       Margin="10 0 0 0"
                                                                        Style="{StaticResource FormTextStyle}" />
                                                         </Grid>
                                                     </DataTemplate>
@@ -270,21 +276,30 @@
                                                                 <ColumnDefinition />
                                                                 <ColumnDefinition />
                                                             </Grid.ColumnDefinitions>
-                                                            <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=MajorComponentImgGrid}" HorizontalAlignment="Center"
-                                                                    Style="{StaticResource TransparentBtn}" Grid.Column="0">
+                                                            <Button Command="{Binding TakeSnapshotCommand}"
+                                                                    CommandParameter="{Binding ItemsSource, ElementName=MajorComponentImgGrid, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=MajorComponent}"
+                                                                    HorizontalAlignment="Center"
+                                                                    Style="{StaticResource TransparentBtn}"
+                                                                    Grid.Column="0">
                                                                 <Image Source="ms-appx:///Assets/camera_icon.png"
                                                                        HorizontalAlignment="Center"
                                                                        VerticalAlignment="Center"
                                                                        Width="25"
-                                                                       Height="25"  />
+                                                                       Height="25" />
                                                             </Button>
                                                             <TextBlock Text="{Binding MajorComponent}"
                                                                        TextWrapping="Wrap"
-                                                                       VerticalAlignment="Center" Grid.Column="1" />
+                                                                       VerticalAlignment="Center"
+                                                                       Grid.Column="1" />
 
 
-                                                            <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=SubComponentImgGrid}"
-                                                                    Style="{StaticResource TransparentBtn}" HorizontalAlignment="Center" Grid.Column="2" >
+                                                            <Button Command="{Binding TakeSnapshotCommand}"
+                                                                    CommandParameter="{Binding ItemsSource, ElementName=SubComponentImgGrid, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=SubComponent}"
+                                                                    Style="{StaticResource TransparentBtn}"
+                                                                    
+                                                                    HorizontalAlignment="Center"
+                                                                    Grid.Column="2">
+
                                                                 <Image Source="ms-appx:///Assets/camera_icon.png"
                                                                        HorizontalAlignment="Center"
                                                                        VerticalAlignment="Center"
@@ -293,7 +308,8 @@
                                                             </Button>
 
 
-                                                            <TextBlock Grid.Column="3" Text="{Binding SubComponent}"
+                                                            <TextBlock Grid.Column="3"
+                                                                       Text="{Binding SubComponent}"
                                                                        TextWrapping="Wrap"
                                                                        VerticalAlignment="Center" />
 
@@ -307,11 +323,13 @@
                                                                        Grid.Column="5"
                                                                        VerticalAlignment="Center" />
 
-                                                            <GridView  Grid.Column="6" Name="MajorComponentImgGrid"
+                                                            <GridView  Grid.Column="6"
+                                                                       Name="MajorComponentImgGrid"
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path=MajorComponentImgList}"
-                                                                       Margin="5 0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                                       Margin="5 0"
+                                                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                                        Height="40"
                                                                        Width="140"
                                                                        Padding="0 0 0 0"
@@ -335,11 +353,13 @@
                                                                 </GridView.ItemTemplate>
                                                             </GridView>
 
-                                                            <GridView  Grid.Column="7" Name="SubComponentImgGrid"
+                                                            <GridView  Grid.Column="7"
+                                                                       Name="SubComponentImgGrid"
                                                                        common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                                                                        IsItemClickEnabled="True"
                                                                        ItemsSource="{Binding Path=SubComponentImgList}"
-                                                                       Margin="20 0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                                       Margin="20 0"
+                                                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                                        Height="40"
                                                                        Width="140"
                                                                        Padding="0 0 0 0"

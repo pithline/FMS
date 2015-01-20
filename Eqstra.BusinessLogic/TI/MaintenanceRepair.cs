@@ -4,11 +4,13 @@ using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
 using System;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Windows.Media.Capture;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using System.Reflection;
 
 namespace Eqstra.BusinessLogic.TI
 {
@@ -21,9 +23,9 @@ namespace Eqstra.BusinessLogic.TI
             this.MajorComponentImgList = new ObservableCollection<ImageCapture>();
             this.SubComponentImgList = new ObservableCollection<ImageCapture>();
 
-            TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
+            TakeSnapshotCommand = DelegateCommand<Tuple<object,object>>.FromAsyncHandler(async (param) =>
             {
-                await TakeSnapshotAsync(param);
+                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>);
             });
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
@@ -32,10 +34,12 @@ namespace Eqstra.BusinessLogic.TI
             });
         }
 
-        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
+        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list, [CallerMemberName] string memberName = "") where T : ObservableCollection<ImageCapture>
         {
             try
             {
+                var m = memberName;
+                var props = list.GetType().GetRuntimeProperties();
                 CameraCaptureUI ccui = new CameraCaptureUI();
                 var file = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
                 if (file != null)
