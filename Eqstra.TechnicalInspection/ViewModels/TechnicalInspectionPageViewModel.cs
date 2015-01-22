@@ -20,6 +20,7 @@ using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Eqstra.TechnicalInspection.Common;
 
 namespace Eqstra.TechnicalInspection.ViewModels
 {
@@ -137,7 +138,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                 }
 
                 TIData viBaseObject = (TIData)this.Model;
-                //viBaseObject.LoadSnapshotsFromDb();
+                viBaseObject.LoadSnapshotsFromDb();
                 //  PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
                 viBaseObject.ShouldSave = false;
             }

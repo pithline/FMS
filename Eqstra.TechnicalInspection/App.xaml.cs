@@ -87,10 +87,11 @@ namespace Eqstra.TechnicalInspection
             }
             else
             {
+                await SqliteHelper.Storage.DropnCreateTableAsync<MaintenanceRepair>();
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-            CreateTableAsync();
+          
 
         }
 
@@ -100,7 +101,6 @@ namespace Eqstra.TechnicalInspection
             {
                 base.OnInitialize(args);
                 EventAggregator = new EventAggregator();
-
                 _container.RegisterInstance(SessionStateService);
                 _container.RegisterInstance(NavigationService);
                 _container.RegisterInstance(EventAggregator);

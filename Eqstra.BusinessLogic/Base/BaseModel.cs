@@ -111,7 +111,7 @@ namespace Eqstra.BusinessLogic.Base
             return _errors.Count == 0;
         }
 
-        public bool VehicleDetailsImagesValidate()
+        async public Task<bool> VehicleDetailsImagesValidate()
         {
             if (this is PVehicleDetails || this is CVehicleDetails || this is TVehicleDetails)
             {
@@ -122,7 +122,7 @@ namespace Eqstra.BusinessLogic.Base
                     {
                         var messageDialog = new MessageDialog("Please take missing images");
                         messageDialog.Commands.Add(new UICommand("Ok"));
-                        messageDialog.ShowAsync();
+                      await  messageDialog.ShowAsync();
                         return false;
 
                     }

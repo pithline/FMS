@@ -103,7 +103,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                     var currentViewModel = (BaseViewModel)this.NextViewStack.Peek().DataContext;
                     var currentModel = currentViewModel.Model as BaseModel;
 
-                    if (currentModel.ValidateModel() && currentModel.VehicleDetailsImagesValidate())
+                    if (currentModel.ValidateModel() && await currentModel.VehicleDetailsImagesValidate())
                     {
 
                         this.PrevViewStack.Push(this.NextViewStack.Pop());

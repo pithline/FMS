@@ -113,6 +113,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\TIExtension.cs" />
     <Compile Include="Common\GridViewItemClickCommand.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Converters\CommandParameterConverter.cs" />
@@ -245,6 +246,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Eqstra.TechnicalInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -603,11 +605,11 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.7.4">
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.8.1">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
-    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.2.0.36">
-      <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
+    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24">
+      <Name>Syncfusion 8.1 Controls for WinRT XAML %28Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24%29</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>

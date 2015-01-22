@@ -11,6 +11,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Reflection;
+using System.Linq;
 
 namespace Eqstra.BusinessLogic.TI
 {
@@ -145,6 +146,15 @@ namespace Eqstra.BusinessLogic.TI
             set { SetProperty(ref majorComponentImgList, value); }
         }
 
+        private string majorComponentImgPathList;
+
+        public string MajorComponentImgPathList
+        {
+            get { return string.Join("~", MajorComponentImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref majorComponentImgPathList, value); }
+        }
+
+
         private ObservableCollection<ImageCapture> subComponentImgList;
         [Ignore]
         public ObservableCollection<ImageCapture> SubComponentImgList
@@ -152,6 +162,15 @@ namespace Eqstra.BusinessLogic.TI
             get { return subComponentImgList; }
             set { SetProperty(ref subComponentImgList, value); }
         }
+
+        private string subComponentImgPathList;
+
+        public string SubComponentImgPathList
+        {
+            get { return string.Join("~", SubComponentImgList.Select(x => x.ImagePath)); }
+            set { SetProperty(ref subComponentImgPathList, value); }
+        }
+
         public async System.Threading.Tasks.Task<ValidatableBindableBase> GetDataAsync(long vehicleInsRecID)
         {
             return await SqliteHelper.Storage.GetSingleRecordAsync<MaintenanceRepair>(x => x.Repairid == vehicleInsRecID);

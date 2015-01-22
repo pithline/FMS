@@ -11,8 +11,13 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.TI
 {
-    public class TIData : ValidatableBindableBase
+    public class TIData : BaseModel
     {
+        async public override Task<BaseModel> GetDataAsync(long caseServiceRecId)
+        {
+            return await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == caseServiceRecId);
+        }
+
         public TIData()
         {
             this.CompletionDate = DateTime.Now;
@@ -73,10 +78,6 @@ namespace Eqstra.BusinessLogic.TI
         }
 
 
-        public async  Task<ValidatableBindableBase> GetDataAsync(long caseServiceRecId)
-        {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == caseServiceRecId);
-        }
 
     }
 }
