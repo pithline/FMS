@@ -246,7 +246,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Eqstra.TechnicalInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
