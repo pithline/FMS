@@ -46,7 +46,7 @@ namespace Eqstra.TechnicalInspection
 
             base.OnRegisterKnownTypesForSerialization();
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.UserInfo));
-            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Task));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.TITask));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Customer));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.LoggedInUser));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.ImageCapture));
@@ -56,7 +56,7 @@ namespace Eqstra.TechnicalInspection
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Enums.VehicleTypeEnum));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
-            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.Task>));
+            SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.TITask>));
             SessionStateService.RegisterKnownType(typeof(LogonResult));
             SessionStateService.RegisterKnownType(typeof(TIData));
             SessionStateService.RegisterKnownType(typeof(MaintenanceRepair));
@@ -87,7 +87,6 @@ namespace Eqstra.TechnicalInspection
             }
             else
             {
-                await SqliteHelper.Storage.DropnCreateTableAsync<MaintenanceRepair>();
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
