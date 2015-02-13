@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="519308bc-11ed-4623-96b0-2399552feab9" Publisher="CN=Syed.Noor" Version="1.0.0.16" />
+  <Identity Name="519308bc-11ed-4623-96b0-2399552feab9" Publisher="CN=Syed.Noor" Version="1.0.0.17" />
   <Properties>
     <DisplayName>Eqstra.ServiceScheduling</DisplayName>
     <PublisherDisplayName>Syed.Noor</PublisherDisplayName>

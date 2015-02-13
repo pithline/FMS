@@ -220,7 +220,7 @@
                             <grid:SfDataGrid Grid.Row="1"
                                              x:Name="mainGrid"  ScrollViewer.VerticalScrollBarVisibility="Visible"
                                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                                             SelectedIndex="0"
+                                             
                                              NavigationMode="Row"
                                              ShowBusyIndicator="True"
                                              ItemsSource="{Binding PoolofTasks}"

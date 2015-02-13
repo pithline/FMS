@@ -19,7 +19,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>CA29B5167FE15EA64082F6A5DBBEA0A9FE4A4DD7</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B93D7086D4EB107348697E600CBDA5621E38134A</PackageCertificateThumbprint>
     <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
