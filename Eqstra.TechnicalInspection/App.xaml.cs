@@ -76,6 +76,7 @@ namespace Eqstra.TechnicalInspection
                 await packDb.CopyAsync(destinationFolder);
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
+           
             var accountService = _container.Resolve<IAccountService>();
             var cred = accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
@@ -168,24 +169,7 @@ namespace Eqstra.TechnicalInspection
         }
 
 
-        private async System.Threading.Tasks.Task CreateTableAsync()
-        {
-
-            ////Drop Existing tables
-
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TITask>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TIData>();
-
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TITask>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
-
-        }
+        
 
     }
 }

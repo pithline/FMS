@@ -1,4 +1,5 @@
-﻿using Eqstra.TechnicalInspection.UILogic.Services;
+﻿using Eqstra.BusinessLogic.Helpers;
+using Eqstra.TechnicalInspection.UILogic.Services;
 using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -57,6 +58,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            await CreateTableAsync();
            
         }
 
@@ -119,6 +121,25 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         {
             get { return isLoggingIn; }
             set { SetProperty(ref isLoggingIn, value); }
+        }
+
+        private async System.Threading.Tasks.Task CreateTableAsync()
+        {
+
+            ////Drop Existing tables
+
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TITask>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TIData>();
+
+            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TITask>();
+            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
+
         }
 
     }
