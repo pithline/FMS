@@ -55,9 +55,9 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
                         var model = ((TIData)this.Model);
                         model.ShouldSave = true;
-                        model.CaseServiceRecID = _task.CaseServiceRecID;
+                        model.VehicleInsRecID = _task.CaseServiceRecID;
                         var tiDataTable = await SqliteHelper.Storage.LoadTableAsync<TIData>();
-                        if (tiDataTable.Any(x => x.CaseServiceRecID == model.CaseServiceRecID))
+                        if (tiDataTable.Any(x => x.VehicleInsRecID == model.VehicleInsRecID))
                         {
                             await SqliteHelper.Storage.UpdateSingleRecordAsync<TIData>(model);
                         }
@@ -151,7 +151,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
         public async override System.Threading.Tasks.Task LoadModelFromDbAsync(long CaseServiceRecId)
         {
 
-            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == CaseServiceRecId);
+            this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.VehicleInsRecID == CaseServiceRecId);
             if (this.Model == null)
             {
                 this.Model = new TIData();

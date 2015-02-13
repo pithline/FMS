@@ -15,7 +15,7 @@ namespace Eqstra.BusinessLogic.TI
     {
         async public override Task<BaseModel> GetDataAsync(long caseServiceRecId)
         {
-            return await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.CaseServiceRecID == caseServiceRecId);
+            return await SqliteHelper.Storage.GetSingleRecordAsync<TIData>(x => x.VehicleInsRecID == caseServiceRecId);
         }
 
         public TIData()
@@ -53,13 +53,13 @@ namespace Eqstra.BusinessLogic.TI
             get { return completionDate; }
             set { SetProperty(ref completionDate, value); }
         }
-        private long caseServiceRecID;
-        [PrimaryKey]
-        public long CaseServiceRecID
-        {
-            get { return caseServiceRecID; }
-            set { SetProperty(ref caseServiceRecID, value); }
-        }
+        //private long caseServiceRecID;
+        //[PrimaryKey]
+        //public long CaseServiceRecID
+        //{
+        //    get { return caseServiceRecID; }
+        //    set { SetProperty(ref caseServiceRecID, value); }
+        //}
 
         private ObservableCollection<object> caseCategoryAuthList;
         [Ignore]
