@@ -303,7 +303,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                 parmRecommendation = x.Recommendation,
                                 parmCompletionDate = x.CompletionDate,
                                 // parmCaseCategoryAuthList = x.CaseCategoryAuthList,
-                                parmCaseServiceRecID = x.CaseServiceRecID
+                                parmCaseServiceRecID = x.VehicleInsRecID
 
                             });
                     }
@@ -323,7 +323,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                             CompletionDate = x.parmCompletionDate,
                             ShouldSave = false,
                             // parmCaseCategoryAuthList = x.CaseCategoryAuthList,
-                            CaseServiceRecID = x.parmCaseServiceRecID
+                            VehicleInsRecID = x.parmCaseServiceRecID
 
                         });
                     }
