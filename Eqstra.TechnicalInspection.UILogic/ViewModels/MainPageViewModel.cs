@@ -35,7 +35,15 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             this.PoolofTasks = new ObservableCollection<BusinessLogic.TITask>();
             this.Appointments = new ScheduleAppointmentCollection();
             _navigationService = navigationService;
-
+            this._eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Subscribe(async p =>
+            {
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    await GetTasksFromDbAsync();
+                    GetAllCount();
+                    GetAppointments();
+                });
+            });
             DrivingDirectionCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 ApplicationData.Current.LocalSettings.Values["CaseNumber"] = this.InspectionTask.CaseNumber;
@@ -80,7 +88,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             await TIServiceHelper.Instance.GetTasksAsync();
                             _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
 
-                            TIServiceHelper.Instance.Synchronize();
+                           TIServiceHelper.Instance.Synchronize();
                            
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
@@ -112,7 +120,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-                //SyncData();
+       
 
                 await GetTasksFromDbAsync();
                 GetAllCount();
@@ -130,7 +138,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                         await TIServiceHelper.Instance.GetTasksAsync();
-                        _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
+                      
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             await GetTasksFromDbAsync();
@@ -144,15 +152,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                     });
                 }
 
-                this._eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Subscribe(async p =>
-                {
-                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                    {
-                        await GetTasksFromDbAsync();
-                        GetAllCount();
-                        GetAppointments();
-                    });
-                });
+            
 
             }
             catch (Exception ex)

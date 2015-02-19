@@ -134,11 +134,11 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.TI.TIData>();
 
-            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TITask>();
-            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
-            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
-            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Customer>();
-            await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
+            //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TITask>();
+            //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.DrivingDuration>();
+            //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
+            //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Customer>();
+            //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
 
         }
 
