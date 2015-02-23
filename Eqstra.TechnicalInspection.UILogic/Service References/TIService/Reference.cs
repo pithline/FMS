@@ -107,6 +107,365 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class AifFault : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string CustomDetailXmlField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessageList> FaultMessageListArrayField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.InfologMessage> InfologMessageListField;
+        
+        private string StackTraceField;
+        
+        private int XppExceptionTypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomDetailXml {
+            get {
+                return this.CustomDetailXmlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomDetailXmlField, value) != true)) {
+                    this.CustomDetailXmlField = value;
+                    this.RaisePropertyChanged("CustomDetailXml");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessageList> FaultMessageListArray {
+            get {
+                return this.FaultMessageListArrayField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FaultMessageListArrayField, value) != true)) {
+                    this.FaultMessageListArrayField = value;
+                    this.RaisePropertyChanged("FaultMessageListArray");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.InfologMessage> InfologMessageList {
+            get {
+                return this.InfologMessageListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InfologMessageListField, value) != true)) {
+                    this.InfologMessageListField = value;
+                    this.RaisePropertyChanged("InfologMessageList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StackTrace {
+            get {
+                return this.StackTraceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StackTraceField, value) != true)) {
+                    this.StackTraceField = value;
+                    this.RaisePropertyChanged("StackTrace");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int XppExceptionType {
+            get {
+                return this.XppExceptionTypeField;
+            }
+            set {
+                if ((this.XppExceptionTypeField.Equals(value) != true)) {
+                    this.XppExceptionTypeField = value;
+                    this.RaisePropertyChanged("XppExceptionType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessageList", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class FaultMessageList : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string DocumentField;
+        
+        private string DocumentOperationField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessage> FaultMessageArrayField;
+        
+        private string FieldField;
+        
+        private string ServiceField;
+        
+        private string ServiceOperationField;
+        
+        private string ServiceOperationParameterField;
+        
+        private string XPathField;
+        
+        private string XmlLineField;
+        
+        private string XmlPositionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Document {
+            get {
+                return this.DocumentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
+                    this.DocumentField = value;
+                    this.RaisePropertyChanged("Document");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentOperation {
+            get {
+                return this.DocumentOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentOperationField, value) != true)) {
+                    this.DocumentOperationField = value;
+                    this.RaisePropertyChanged("DocumentOperation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessage> FaultMessageArray {
+            get {
+                return this.FaultMessageArrayField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FaultMessageArrayField, value) != true)) {
+                    this.FaultMessageArrayField = value;
+                    this.RaisePropertyChanged("FaultMessageArray");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Field {
+            get {
+                return this.FieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FieldField, value) != true)) {
+                    this.FieldField = value;
+                    this.RaisePropertyChanged("Field");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Service {
+            get {
+                return this.ServiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceField, value) != true)) {
+                    this.ServiceField = value;
+                    this.RaisePropertyChanged("Service");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ServiceOperation {
+            get {
+                return this.ServiceOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceOperationField, value) != true)) {
+                    this.ServiceOperationField = value;
+                    this.RaisePropertyChanged("ServiceOperation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ServiceOperationParameter {
+            get {
+                return this.ServiceOperationParameterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceOperationParameterField, value) != true)) {
+                    this.ServiceOperationParameterField = value;
+                    this.RaisePropertyChanged("ServiceOperationParameter");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XPath {
+            get {
+                return this.XPathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XPathField, value) != true)) {
+                    this.XPathField = value;
+                    this.RaisePropertyChanged("XPath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XmlLine {
+            get {
+                return this.XmlLineField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XmlLineField, value) != true)) {
+                    this.XmlLineField = value;
+                    this.RaisePropertyChanged("XmlLine");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XmlPosition {
+            get {
+                return this.XmlPositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XmlPositionField, value) != true)) {
+                    this.XmlPositionField = value;
+                    this.RaisePropertyChanged("XmlPosition");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessage", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
+    public partial class InfologMessage : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Eqstra.TechnicalInspection.UILogic.TIService.InfologMessageType InfologMessageTypeField;
+        
+        private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.TechnicalInspection.UILogic.TIService.InfologMessageType InfologMessageType {
+            get {
+                return this.InfologMessageTypeField;
+            }
+            set {
+                if ((this.InfologMessageTypeField.Equals(value) != true)) {
+                    this.InfologMessageTypeField = value;
+                    this.RaisePropertyChanged("InfologMessageType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessage", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+    public partial class FaultMessage : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string CodeField;
+        
+        private string MessageField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessageType", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
+    public enum InfologMessageType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Info = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Warning = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Error = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MzkTechnicalTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class MzkTechnicalTasksContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
         
@@ -421,9 +780,41 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.Runtime.Serialization.DataContractAttribute(Name="Mzk_ImageContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
     public partial class Mzk_ImageContract : Eqstra.TechnicalInspection.UILogic.TIService.XppObjectBase {
         
+        private string parmCaseNumberField;
+        
+        private string parmFileNameField;
+        
         private string parmImageField;
         
+        private string parmImageDataField;
+        
         private string parmImageNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCaseNumber {
+            get {
+                return this.parmCaseNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseNumberField, value) != true)) {
+                    this.parmCaseNumberField = value;
+                    this.RaisePropertyChanged("parmCaseNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmFileName {
+            get {
+                return this.parmFileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmFileNameField, value) != true)) {
+                    this.parmFileNameField = value;
+                    this.RaisePropertyChanged("parmFileName");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string parmImage {
@@ -434,6 +825,19 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
                 if ((object.ReferenceEquals(this.parmImageField, value) != true)) {
                     this.parmImageField = value;
                     this.RaisePropertyChanged("parmImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImageData {
+            get {
+                return this.parmImageDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageDataField, value) != true)) {
+                    this.parmImageDataField = value;
+                    this.RaisePropertyChanged("parmImageData");
                 }
             }
         }
@@ -945,365 +1349,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         None = 0,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class AifFault : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string CustomDetailXmlField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessageList> FaultMessageListArrayField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.InfologMessage> InfologMessageListField;
-        
-        private string StackTraceField;
-        
-        private int XppExceptionTypeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CustomDetailXml {
-            get {
-                return this.CustomDetailXmlField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomDetailXmlField, value) != true)) {
-                    this.CustomDetailXmlField = value;
-                    this.RaisePropertyChanged("CustomDetailXml");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessageList> FaultMessageListArray {
-            get {
-                return this.FaultMessageListArrayField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FaultMessageListArrayField, value) != true)) {
-                    this.FaultMessageListArrayField = value;
-                    this.RaisePropertyChanged("FaultMessageListArray");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.InfologMessage> InfologMessageList {
-            get {
-                return this.InfologMessageListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.InfologMessageListField, value) != true)) {
-                    this.InfologMessageListField = value;
-                    this.RaisePropertyChanged("InfologMessageList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StackTrace {
-            get {
-                return this.StackTraceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StackTraceField, value) != true)) {
-                    this.StackTraceField = value;
-                    this.RaisePropertyChanged("StackTrace");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int XppExceptionType {
-            get {
-                return this.XppExceptionTypeField;
-            }
-            set {
-                if ((this.XppExceptionTypeField.Equals(value) != true)) {
-                    this.XppExceptionTypeField = value;
-                    this.RaisePropertyChanged("XppExceptionType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessageList", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class FaultMessageList : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string DocumentField;
-        
-        private string DocumentOperationField;
-        
-        private System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessage> FaultMessageArrayField;
-        
-        private string FieldField;
-        
-        private string ServiceField;
-        
-        private string ServiceOperationField;
-        
-        private string ServiceOperationParameterField;
-        
-        private string XPathField;
-        
-        private string XmlLineField;
-        
-        private string XmlPositionField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Document {
-            get {
-                return this.DocumentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
-                    this.DocumentField = value;
-                    this.RaisePropertyChanged("Document");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DocumentOperation {
-            get {
-                return this.DocumentOperationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentOperationField, value) != true)) {
-                    this.DocumentOperationField = value;
-                    this.RaisePropertyChanged("DocumentOperation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.FaultMessage> FaultMessageArray {
-            get {
-                return this.FaultMessageArrayField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FaultMessageArrayField, value) != true)) {
-                    this.FaultMessageArrayField = value;
-                    this.RaisePropertyChanged("FaultMessageArray");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Field {
-            get {
-                return this.FieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FieldField, value) != true)) {
-                    this.FieldField = value;
-                    this.RaisePropertyChanged("Field");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Service {
-            get {
-                return this.ServiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceField, value) != true)) {
-                    this.ServiceField = value;
-                    this.RaisePropertyChanged("Service");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ServiceOperation {
-            get {
-                return this.ServiceOperationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceOperationField, value) != true)) {
-                    this.ServiceOperationField = value;
-                    this.RaisePropertyChanged("ServiceOperation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ServiceOperationParameter {
-            get {
-                return this.ServiceOperationParameterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ServiceOperationParameterField, value) != true)) {
-                    this.ServiceOperationParameterField = value;
-                    this.RaisePropertyChanged("ServiceOperationParameter");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XPath {
-            get {
-                return this.XPathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XPathField, value) != true)) {
-                    this.XPathField = value;
-                    this.RaisePropertyChanged("XPath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XmlLine {
-            get {
-                return this.XmlLineField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XmlLineField, value) != true)) {
-                    this.XmlLineField = value;
-                    this.RaisePropertyChanged("XmlLine");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XmlPosition {
-            get {
-                return this.XmlPositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XmlPositionField, value) != true)) {
-                    this.XmlPositionField = value;
-                    this.RaisePropertyChanged("XmlPosition");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessage", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
-    public partial class InfologMessage : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private Eqstra.TechnicalInspection.UILogic.TIService.InfologMessageType InfologMessageTypeField;
-        
-        private string MessageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.TechnicalInspection.UILogic.TIService.InfologMessageType InfologMessageType {
-            get {
-                return this.InfologMessageTypeField;
-            }
-            set {
-                if ((this.InfologMessageTypeField.Equals(value) != true)) {
-                    this.InfologMessageTypeField = value;
-                    this.RaisePropertyChanged("InfologMessageType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FaultMessage", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-    public partial class FaultMessage : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string CodeField;
-        
-        private string MessageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InfologMessageType", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services")]
-    public enum InfologMessageType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Info = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Warning = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Error = 2,
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.microsoft.com/netfx/2009/05/routing", ConfigurationName="TIService.IRequestReplyRouter")]
     public interface IRequestReplyRouter {
@@ -1400,17 +1445,13 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIService.MzkTechnicalInspection")]
     public interface MzkTechnicalInspection {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/saveImageAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
@@ -1420,13 +1461,55 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getUserDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/saveImageAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserRequest {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.TechnicalInspection.UILogic.TIService.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _password;
+        
+        public MzkTechnicalInspectionValidateUserRequest() {
+        }
+        
+        public MzkTechnicalInspectionValidateUserRequest(string _userID, string _password) {
+            this._userID = _userID;
+            this._password = _password;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public bool response;
+        
+        public MzkTechnicalInspectionValidateUserResponse() {
+        }
+        
+        public MzkTechnicalInspectionValidateUserResponse(bool response) {
+            this.response = response;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1464,71 +1547,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         
         public MzkTechnicalInspectionUpdateStatusListResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalTasksContract> response) {
             this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionInsertTechnicalInspectionRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkTechnicalInspectionInsertTechnicalInspectionRequest() {
-        }
-        
-        public MzkTechnicalInspectionInsertTechnicalInspectionRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
-            this._caseServiceAuthorization = _caseServiceAuthorization;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionInsertTechnicalInspectionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response;
-        
-        public MzkTechnicalInspectionInsertTechnicalInspectionResponse() {
-        }
-        
-        public MzkTechnicalInspectionInsertTechnicalInspectionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionSaveImageRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo;
-        
-        public MzkTechnicalInspectionSaveImageRequest() {
-        }
-        
-        public MzkTechnicalInspectionSaveImageRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
-            this._imageInfo = _imageInfo;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionSaveImageResponse {
-        
-        public MzkTechnicalInspectionSaveImageResponse() {
         }
     }
     
@@ -1607,6 +1625,71 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo;
+        
+        public MzkTechnicalInspectionSaveImageRequest() {
+        }
+        
+        public MzkTechnicalInspectionSaveImageRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
+            this._imageInfo = _imageInfo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionSaveImageResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionSaveImageResponse {
+        
+        public MzkTechnicalInspectionSaveImageResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest() {
+        }
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionRequest(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
+            this._caseServiceAuthorization = _caseServiceAuthorization;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionInsertTechnicalInspectionResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionInsertTechnicalInspectionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response;
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse() {
+        }
+        
+        public MzkTechnicalInspectionInsertTechnicalInspectionResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
     public partial class MzkTechnicalInspectionGetSubComponentsRequest {
         
@@ -1638,44 +1721,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         public MzkTechnicalInspectionGetSubComponentsResponse(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseCategoryAuthorizationContract> response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
-        
-        public MzkTechnicalInspectionValidateUserRequest() {
-        }
-        
-        public MzkTechnicalInspectionValidateUserRequest(string _userID, string _password) {
-            this._userID = _userID;
-            this._password = _password;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public bool response;
-        
-        public MzkTechnicalInspectionValidateUserResponse() {
-        }
-        
-        public MzkTechnicalInspectionValidateUserResponse(bool response) {
             this.response = response;
         }
     }
@@ -1724,6 +1769,18 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(string _userID, string _password) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest();
+            inValue._userID = _userID;
+            inValue._password = _password;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.updateStatusListAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListRequest request) {
             return base.Channel.updateStatusListAsync(request);
         }
@@ -1733,29 +1790,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
             inValue._lstTasks = _lstTasks;
             inValue._company = _company;
             return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
-            return base.Channel.insertTechnicalInspectionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
-            inValue._caseServiceAuthorization = _caseServiceAuthorization;
-            inValue._company = _company;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).insertTechnicalInspectionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request) {
-            return base.Channel.saveImageAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest();
-            inValue._imageInfo = _imageInfo;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).saveImageAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1782,6 +1816,29 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.saveImageAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest request) {
+            return base.Channel.saveImageAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse> saveImageAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.Mzk_ImageContract> _imageInfo) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageRequest();
+            inValue._imageInfo = _imageInfo;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).saveImageAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.insertTechnicalInspectionAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest request) {
+            return base.Channel.insertTechnicalInspectionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(System.Collections.ObjectModel.ObservableCollection<Eqstra.TechnicalInspection.UILogic.TIService.MzkCaseServiceAuthorizationContract> _caseServiceAuthorization, string _company) {
+            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionRequest();
+            inValue._caseServiceAuthorization = _caseServiceAuthorization;
+            inValue._company = _company;
+            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).insertTechnicalInspectionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.getSubComponentsAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsRequest request) {
             return base.Channel.getSubComponentsAsync(request);
         }
@@ -1791,18 +1848,6 @@ namespace Eqstra.TechnicalInspection.UILogic.TIService {
             inValue._lstCaseService = _lstCaseService;
             inValue._company = _company;
             return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).getSubComponentsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection.validateUserAsync(Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(string _userID, string _password) {
-            Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest inValue = new Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserRequest();
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

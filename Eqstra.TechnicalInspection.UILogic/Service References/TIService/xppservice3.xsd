@@ -6,7 +6,10 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" base="q1:XppObjectBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="parmCaseNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmFileName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmImage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmImageData" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmImageName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
@@ -493,16 +496,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkTechnicalTasksContract" nillable="true" type="tns:ArrayOfMzkTechnicalTasksContract" />
-  <xs:complexType name="ArrayOfMzkCaseServiceAuthorizationContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCaseServiceAuthorizationContract" nillable="true" type="tns:MzkCaseServiceAuthorizationContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzkCaseServiceAuthorizationContract" nillable="true" type="tns:ArrayOfMzkCaseServiceAuthorizationContract" />
   <xs:complexType name="ArrayOfMzk_ImageContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Mzk_ImageContract" nillable="true" type="tns:Mzk_ImageContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzk_ImageContract" nillable="true" type="tns:ArrayOfMzk_ImageContract" />
+  <xs:complexType name="ArrayOfMzkCaseServiceAuthorizationContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCaseServiceAuthorizationContract" nillable="true" type="tns:MzkCaseServiceAuthorizationContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzkCaseServiceAuthorizationContract" nillable="true" type="tns:ArrayOfMzkCaseServiceAuthorizationContract" />
 </xs:schema>

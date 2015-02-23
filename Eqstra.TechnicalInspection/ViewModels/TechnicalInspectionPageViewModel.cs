@@ -69,7 +69,7 @@ namespace Eqstra.TechnicalInspection.ViewModels
                         // this.SaveCurrentUIDataAsync(currentModel);
                         _navigationService.Navigate("Main", null);
 
-                         await TIServiceHelper.Instance.UpdateTaskStatusAsync();
+                         //await TIServiceHelper.Instance.UpdateTaskStatusAsync();
                         this.IsBusy = false;
                         _eventAggregator.GetEvent<TITaskFetchedEvent>().Publish(this._task);
                     }

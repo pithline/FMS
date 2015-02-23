@@ -54,8 +54,14 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                     OpenTimeout = new TimeSpan(2, 0, 0),
                     ReceiveTimeout = new TimeSpan(2, 0, 0),
                     SendTimeout = new TimeSpan(2, 0, 0),
-                    AllowCookies = true
+                    AllowCookies = true,
+                    
                 };
+                basicHttpBinding.ReaderQuotas.MaxDepth = int.MaxValue;
+                basicHttpBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+                basicHttpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
+                basicHttpBinding.ReaderQuotas.MaxBytesPerRead = int.MaxValue;
+                basicHttpBinding.ReaderQuotas.MaxNameTableCharCount = int.MaxValue;
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
@@ -124,6 +130,41 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 });
             }
         }
+
+        async public System.Threading.Tasks.Task SyncImagesAsync(long caseServiceRecId)
+        {
+            try
+            {
+                var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
+                var task = await SqliteHelper.Storage.GetSingleRecordAsync<TITask>(x => x.CaseServiceRecID == caseServiceRecId);
+                var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == caseServiceRecId))
+                {
+                    mzk_ImageContractList.Add(new Mzk_ImageContract
+                        {
+                            parmCaseNumber = task.CaseNumber,
+                            parmFileName = item.FileName,
+                            parmImageData = item.ImageBinary,
+                        });
+
+                }
+
+                await client.saveImageAsync(mzk_ImageContractList);
+
+
+                foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == caseServiceRecId))
+                {
+                    await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         async public System.Threading.Tasks.Task<MzkTechnicalInspectionValidateUserResponse> ValidateUser(string userId, string password)
         {
             try
@@ -207,7 +248,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 var allTasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>();
 
                 var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
-                 if (result != null)
+                if (result != null)
                 {
                     foreach (var task in result.response)
                     {
@@ -327,7 +368,13 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
 
                         });
                     }
+
                     await SqliteHelper.Storage.UpdateAllAsync<TIData>(technicalInspList);
+
+                    foreach (var item in res.response.Where(x => x != null))
+                    {
+                        await SyncImagesAsync(item.parmCaseServiceRecID);
+                    }
                 }
             }
             catch (Exception ex)

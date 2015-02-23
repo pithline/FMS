@@ -120,16 +120,6 @@
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter .cs" />
     <Compile Include="Converters\InvertOpacityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\TIService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\VIService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\TechnicalInspectionPageViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -282,161 +272,9 @@
     <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.TIService.MzkTechnicalInspectionValidateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TIService\RoutingService.wsdl" />
-    <None Include="Service References\TIService\xppservice.wsdl" />
-    <None Include="Service References\TIService\xppservice.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice1.wsdl" />
-    <None Include="Service References\TIService\xppservice1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TIService\xppservice7.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceCreateVehicleInspectionTableResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditCommercialAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditCommercialChassisBodyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditCommercialMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditCommercialTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditCommercialTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditGlassResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditPassengerAccessoriesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditPassengerBodyworkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditPassengerMechConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditPassengerTrimInteriorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditPassengerTyreConditionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceEditVehicleInspectionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceGetCustDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceGetInspectionHistoryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceGetTasksResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceReadVehicleDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceUpdateConfirmationDateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceUpdateStatusListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\Eqstra.TechnicalInspection.VIService.MzkVehicleInspectionServiceValidateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VIService\xppservice.disco" />
-    <None Include="Service References\VIService\configuration91.svcinfo" />
-    <None Include="Service References\VIService\configuration.svcinfo" />
-    <None Include="Service References\VIService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\TIService\xppservice.disco" />
-    <None Include="Service References\TIService\configuration91.svcinfo" />
-    <None Include="Service References\TIService\configuration.svcinfo" />
-    <None Include="Service References\TIService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\VIService\RoutingService.wsdl" />
-    <None Include="Service References\VIService\xppservice.wsdl" />
-    <None Include="Service References\VIService\xppservice.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice1.wsdl" />
-    <None Include="Service References\VIService\xppservice1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\VIService\xppservice7.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Eqstra_logo.png" />
@@ -613,10 +451,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\TIService\" />
-    <WCFMetadataStorage Include="Service References\VIService\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">

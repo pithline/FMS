@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Helpers;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.TechnicalInspection.UILogic.Services;
 using Eqstra.WinRT.Components.Controls;
 using Microsoft.Practices.Prism.StoreApps;
@@ -139,7 +140,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
-
+            //await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
         }
 
     }

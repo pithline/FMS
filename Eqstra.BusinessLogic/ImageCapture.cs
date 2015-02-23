@@ -48,7 +48,9 @@ namespace Eqstra.BusinessLogic
         }
 
         private long primeId;
-
+        /// <summary>
+        /// RepaireId
+        /// </summary>
         public long PrimeId
         {
             get { return primeId; }

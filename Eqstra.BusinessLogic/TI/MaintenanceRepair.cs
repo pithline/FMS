@@ -56,7 +56,7 @@ namespace Eqstra.BusinessLogic.TI
                     }
                     if (file != null)
                     {
-                        var ic = new ImageCapture { PrimeId = this.Repairid, ImagePath = file.Path, ImageBinary = Convert.ToBase64String(bytes), FileName = string.Format("{0}_{1}_{2})", this.Repairid, suffix + +list.Count + 1) };
+                        var ic = new ImageCapture { CaseServiceRecId = this.CaseServiceRecId, PrimeId = this.Repairid, ImagePath = file.Path, ImageBinary = Convert.ToBase64String(bytes), FileName = string.Format("{0}_{1}_{2}{3}", this.Repairid, suffix, list.Count + 1,".png") };
                         list.Add(ic);
                         await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic); 
                     }

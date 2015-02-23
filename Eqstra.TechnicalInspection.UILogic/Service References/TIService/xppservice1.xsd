@@ -2,6 +2,21 @@
 <xs:schema xmlns:tns="http://tempuri.org" elementFormDefault="qualified" targetNamespace="http://tempuri.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" />
   <xs:import schemaLocation="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="MzkTechnicalInspectionValidateUserRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkTechnicalInspectionValidateUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="response" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="MzkTechnicalInspectionUpdateStatusListRequest">
     <xs:complexType>
       <xs:sequence>
@@ -17,18 +32,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkTechnicalInspectionInsertTechnicalInspectionRequest">
+  <xs:element name="MzkTechnicalInspectionGetTasksRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_caseServiceAuthorization" nillable="true" type="q3:ArrayOfMzkCaseServiceAuthorizationContract" />
+        <xs:element minOccurs="0" name="_userId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkTechnicalInspectionInsertTechnicalInspectionResponse">
+  <xs:element name="MzkTechnicalInspectionGetTasksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q4:ArrayOfMzkCaseServiceAuthorizationContract" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q3:ArrayOfMzkTechnicalTasksContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkTechnicalInspectionGetUserDetailsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MzkTechnicalInspectionGetUserDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q4:MzkValidateUserContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -44,32 +73,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkTechnicalInspectionGetTasksRequest">
+  <xs:element name="MzkTechnicalInspectionInsertTechnicalInspectionRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="_userId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="_caseServiceAuthorization" nillable="true" type="q6:ArrayOfMzkCaseServiceAuthorizationContract" />
         <xs:element minOccurs="0" name="_company" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MzkTechnicalInspectionGetTasksResponse">
+  <xs:element name="MzkTechnicalInspectionInsertTechnicalInspectionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q6:ArrayOfMzkTechnicalTasksContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkTechnicalInspectionGetUserDetailsRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkTechnicalInspectionGetUserDetailsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q7:MzkValidateUserContract" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q7:ArrayOfMzkCaseServiceAuthorizationContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,21 +100,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" minOccurs="0" name="response" nillable="true" type="q9:ArrayOfMzkCaseCategoryAuthorizationContract" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkTechnicalInspectionValidateUserRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="_userID" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="_password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MzkTechnicalInspectionValidateUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="response" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
