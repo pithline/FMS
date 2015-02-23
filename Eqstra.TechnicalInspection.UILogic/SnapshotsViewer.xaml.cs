@@ -1,5 +1,6 @@
 ﻿
 using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,12 +42,17 @@ namespace Eqstra.TechnicalInspection.UILogic.Popups
             popup.IsOpen = false;
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        async private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 var snaps = fvSnaps.ItemsSource as ObservableCollection<ImageCapture>;
-                snaps.Remove(fvSnaps.SelectedItem as ImageCapture);
+                var ic = fvSnaps.SelectedItem as ImageCapture;
+                
+                
+                    snaps.Remove(ic);
+                    await SqliteHelper.Storage.DeleteSingleRecordAsync<ImageCapture>(ic);  
+                
             }
             catch (Exception ex)
             {

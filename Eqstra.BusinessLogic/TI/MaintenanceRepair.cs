@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Reflection;
 using System.Linq;
+using Windows.Storage.Streams;
 
 namespace Eqstra.BusinessLogic.TI
 {
@@ -24,9 +25,9 @@ namespace Eqstra.BusinessLogic.TI
             this.MajorComponentImgList = new ObservableCollection<ImageCapture>();
             this.SubComponentImgList = new ObservableCollection<ImageCapture>();
 
-            TakeSnapshotCommand = DelegateCommand<Tuple<object,object>>.FromAsyncHandler(async (param) =>
+            TakeSnapshotCommand = DelegateCommand<Tuple<object, object>>.FromAsyncHandler(async (param) =>
             {
-                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>);
+                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>, param.Item2.ToString());
             });
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
@@ -35,18 +36,32 @@ namespace Eqstra.BusinessLogic.TI
             });
         }
 
-        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list, [CallerMemberName] string memberName = "") where T : ObservableCollection<ImageCapture>
+        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list, string suffix) where T : ObservableCollection<ImageCapture>
         {
             try
             {
-                var m = memberName;
+
                 var props = list.GetType().GetRuntimeProperties();
-                CameraCaptureUI ccui = new CameraCaptureUI();
+                CameraCaptureUI ccui = new CameraCaptureUI() { };
+                ccui.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Png;
                 var file = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
+                using (var stream = await file.OpenReadAsync())
                 {
-                    list.Add(new ImageCapture { ImagePath = file.Path });
+                    var bytes = new byte[stream.Size];
+                    using (var reader = new DataReader(stream))
+                    {
+                        await reader.LoadAsync((uint)stream.Size);
+                        reader.ReadBytes(bytes);
+
+                    }
+                    if (file != null)
+                    {
+                        var ic = new ImageCapture { PrimeId = this.Repairid, ImagePath = file.Path, ImageBinary = Convert.ToBase64String(bytes), FileName = string.Format("{0}_{1}_{2})", this.Repairid, suffix + +list.Count + 1) };
+                        list.Add(ic);
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic); 
+                    }
                 }
+
             }
             catch (Exception)
             {
@@ -72,7 +87,7 @@ namespace Eqstra.BusinessLogic.TI
                 this._snapShotsPopup = new SnapshotsViewer();
             }
             _snapShotsPopup.DataContext = dc;
-            
+
             popup.Child = _snapShotsPopup;
             this._snapShotsPopup.Tag = popup;
 
