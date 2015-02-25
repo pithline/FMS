@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Windows.Input;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -29,9 +30,9 @@ namespace Eqstra.VehicleInspection.UILogic
 
         public BaseViewModel(IEventAggregator eventAggregator)
         {
-            TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
+            TakeSnapshotCommand = DelegateCommand<Tuple<object, object>>.FromAsyncHandler(async (param) =>
             {
-                await TakeSnapshotAsync(param);
+                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>,param.Item2.ToString());
             });
 
             TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
@@ -104,12 +105,12 @@ namespace Eqstra.VehicleInspection.UILogic
 
         public DelegateCommand GoHomeCommand { get; set; }
 
-        public DelegateCommand<ObservableCollection<ImageCapture>> TakeSnapshotCommand { get; set; }
+        public ICommand TakeSnapshotCommand { get; set; }
 
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
 
         public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
-        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
+        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list, string fieldName) where T : ObservableCollection<ImageCapture>
         {
             try
             {
@@ -130,7 +131,15 @@ namespace Eqstra.VehicleInspection.UILogic
                         await strm.WriteAsync(bytes, 0, bytes.Length);
                         strm.Flush();
                     }
-                    list.Add(new ImageCapture { ImagePath = file.Path });
+                    var ic = new ImageCapture
+                    {
+                        ImagePath = file.Path,
+                        ImageBinary = Convert.ToBase64String(bytes),
+                        CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID,
+                        FileName = string.Format("{0}_{1}{2}", fieldName, list.Count + 1,".png")
+                    };
+                    list.Add(ic);
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
                 }
             }
             catch (Exception)

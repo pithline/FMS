@@ -51,7 +51,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             if (this.Model == null)
             {
                 AppSettings.Instance.IsSyncingVehDetails = 1;
-                this.Model = new TVehicleDetails();
+                this.Model = new TVehicleDetails() { VehicleInsRecID = vehicleInsRecID};
                 PropertyHistory.Instance.SetPropertyHistory((TVehicleDetails)this.Model);
             }
             else

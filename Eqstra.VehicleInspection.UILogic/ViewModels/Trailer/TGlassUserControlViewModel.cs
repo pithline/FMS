@@ -29,6 +29,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Model = new TGlass();
             }
             BaseModel viBaseObject = (TGlass)this.Model;
+            viBaseObject.VehicleInsRecID = vehicleInsRecID;
             viBaseObject.LoadSnapshotsFromDb();
             PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
             viBaseObject.ShouldSave = false;

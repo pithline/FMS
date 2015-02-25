@@ -27,6 +27,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Model = new PBodywork();
             }
             BaseModel viBaseObject = (PBodywork)this.Model;
+            viBaseObject.VehicleInsRecID = vehicleInsRecID;
             viBaseObject.LoadSnapshotsFromDb();
             viBaseObject.ShouldSave = false;
             PropertyHistory.Instance.SetPropertyHistory(viBaseObject);

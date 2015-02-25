@@ -126,8 +126,46 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 {
 
                     AppSettings.Instance.IsSynchronizing = 0;
-                    AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
+                    AppSettings.Instance.ErrorMessage = ex.Message +Environment.NewLine+ ex.InnerException+Environment.NewLine+ex.StackTrace;
                 });
+            }
+        }
+
+        async public System.Threading.Tasks.Task SyncImagesAsync()
+        {
+            try
+            {
+                var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
+                var taskList = await SqliteHelper.Storage.LoadTableAsync<TITask>();
+
+                foreach (var task in taskList)
+                {
+                    //var task = await SqliteHelper.Storage.GetSingleRecordAsync<TITask>(x => x.CaseServiceRecID == caseServiceRecId);
+                    var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.CaseServiceRecID))
+                    {
+                        mzk_ImageContractList.Add(new Mzk_ImageContract
+                        {
+                            parmCaseNumber = task.CaseNumber,
+                            parmFileName = item.FileName,
+                            parmImageData = item.ImageBinary,
+                        });
+
+                    }
+
+                    await client.saveImageAsync(mzk_ImageContractList);
+
+
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.CaseServiceRecID))
+                    {
+                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                    } 
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -356,6 +394,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 {
                     foreach (var x in res.response.Where(x => x != null))
                     {
+                        
                         technicalInspList.Add(new TIData
                         {
                             CauseOfDamage = x.parmDamageCause,
@@ -369,7 +408,10 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                         });
                     }
 
-                    await SqliteHelper.Storage.UpdateAllAsync<TIData>(technicalInspList);
+
+                   
+
+                    await SqliteHelper.Storage.DeleteBulkAsync<TIData>(technicalInspList);
 
                     foreach (var item in res.response.Where(x => x != null))
                     {

@@ -26,6 +26,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                this.Model = new PMechanicalCond();
            }
            BaseModel viBaseObject = (PMechanicalCond)this.Model;
+           viBaseObject.VehicleInsRecID = vehicleInsRecID;
            viBaseObject.LoadSnapshotsFromDb();
 
            viBaseObject.ShouldSave = false;

@@ -33,7 +33,7 @@ namespace Eqstra.TechnicalInspection.UILogic.Popups
         public SnapshotsViewer()
         {
             this.InitializeComponent();
-           
+
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -48,11 +48,11 @@ namespace Eqstra.TechnicalInspection.UILogic.Popups
             {
                 var snaps = fvSnaps.ItemsSource as ObservableCollection<ImageCapture>;
                 var ic = fvSnaps.SelectedItem as ImageCapture;
-                
-                
-                    snaps.Remove(ic);
-                    await SqliteHelper.Storage.DeleteSingleRecordAsync<ImageCapture>(ic);  
-                
+
+
+                snaps.Remove(ic);
+                await SqliteHelper.Storage.DeleteSingleRecordAsync<ImageCapture>(ic);
+
             }
             catch (Exception ex)
             {

@@ -104,6 +104,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                     }
                 }
                 BaseModel viBaseObject = (TTyreCond)this.Model;
+                viBaseObject.VehicleInsRecID = vehicleInsRecID;
                 viBaseObject.LoadSnapshotsFromDb();
                 PropertyHistory.Instance.SetPropertyHistory(this.PoolOfTyreCondions);
                 viBaseObject.ShouldSave = false;

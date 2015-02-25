@@ -86,10 +86,11 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             });
 
                             await TIServiceHelper.Instance.GetTasksAsync();
+
                             _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
 
-                           TIServiceHelper.Instance.Synchronize();
-                           
+                            TIServiceHelper.Instance.Synchronize();
+
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
                                 await GetTasksFromDbAsync();
@@ -99,6 +100,12 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                                 AppSettings.Instance.Synced = true;
                             });
 
+                        });
+
+
+                        TIServiceHelper.Instance.Synchronize(async () =>
+                        {
+                            await TIServiceHelper.Instance.SyncImagesAsync();
                         });
                     }
                 }
@@ -120,12 +127,12 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-       
+
 
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
-          
+
 
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
                 {
@@ -138,7 +145,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                         await TIServiceHelper.Instance.GetTasksAsync();
-                      
+
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
                             await GetTasksFromDbAsync();
@@ -152,7 +159,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                     });
                 }
 
-            
+
 
             }
             catch (Exception ex)
@@ -163,7 +170,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
         private void GetAllCount()
         {
-            this.TotalCount = this.PoolofTasks.Where(x=> x.ConfirmedDate.Date == DateTime.Today.Date).Count();
+            this.TotalCount = this.PoolofTasks.Where(x => x.ConfirmedDate.Date == DateTime.Today.Date).Count();
         }
 
 
@@ -194,7 +201,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
-             this.PoolofTasks.Clear();
+            this.PoolofTasks.Clear();
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation && w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.Completed);
             foreach (Eqstra.BusinessLogic.TITask item in list)
             {

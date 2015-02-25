@@ -42,7 +42,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             this.Model = await SqliteHelper.Storage.GetSingleRecordAsync<CVehicleDetails>(x => x.VehicleInsRecID == vehicleInsRecID);
             if (this.Model == null)
             {
-                this.Model = new CVehicleDetails();
+                this.Model = new CVehicleDetails() { VehicleInsRecID = vehicleInsRecID};
+                
                 PropertyHistory.Instance.SetPropertyHistory((CVehicleDetails)this.Model);
                 AppSettings.Instance.IsSyncingVehDetails = 1;
             }

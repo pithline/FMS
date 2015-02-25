@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Common\GridViewItemClickCommand.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Converters\CommandParameterConverter.cs" />
     <Compile Include="Converters\InvertOpacityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleInspectionPageViewModel.cs" />

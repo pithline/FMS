@@ -937,6 +937,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
+                    await SyncImagesAsync(pBodyworkList.FirstOrDefault().VehicleInsRecID);
                 }
             }
             catch (Exception ex)
@@ -1026,6 +1027,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
+                    await SyncImagesAsync(pTrimInteriorList.FirstOrDefault().VehicleInsRecID);
                 }
             }
             catch (Exception ex)
@@ -1702,6 +1704,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
+                    await SyncImagesAsync(cCabTrimInterList.FirstOrDefault().VehicleInsRecID);
                 }
             }
             catch (Exception ex)
@@ -1810,6 +1813,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
+                    await SyncImagesAsync(cChassisBodyList.FirstOrDefault().VehicleInsRecID);
                 }
             }
             catch (Exception ex)
@@ -2681,6 +2685,79 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 });
             }
 
+        }
+
+        public async System.Threading.Tasks.Task SyncImagesAsync()
+        {
+            try
+            {
+                var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
+                var taskList = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
+
+                foreach (var task in taskList)
+                {
+                    var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId))
+                    {
+                        mzk_ImageContractList.Add(new Mzk_ImageContract
+                        {
+                            parmCaseNumber = task.CaseNumber,
+                            parmFileName = item.FileName,
+                            parmImageData = item.ImageBinary,
+                        });
+
+                    }
+
+                    await client.saveImageAsync(mzk_ImageContractList);
+
+
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId))
+                    {
+                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async System.Threading.Tasks.Task SyncImagesAsync(long vehicleInspectionRecId)
+        {
+            try
+            {
+                var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
+                
+
+                    var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                    var caseNumber = (await SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.Task>(x => x.VehicleInsRecId == vehicleInspectionRecId)).CaseNumber;
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+                    {
+                        mzk_ImageContractList.Add(new Mzk_ImageContract
+                        {
+                            parmCaseNumber = caseNumber,
+                            parmFileName = item.FileName,
+                            parmImageData = item.ImageBinary,
+                        });
+
+                    }
+
+                    await client.saveImageAsync(mzk_ImageContractList);
+
+
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+                    {
+                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                    }
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Synchronize(Action syncExecute)

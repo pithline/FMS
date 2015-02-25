@@ -381,7 +381,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<TPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
 
-
+            //await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
 
         }
 

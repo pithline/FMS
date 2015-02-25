@@ -32,6 +32,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
               this.Model = new TMechanicalCond();
           }
           BaseModel viBaseObject = (TMechanicalCond)this.Model;
+          viBaseObject.VehicleInsRecID = vehicleInsRecID;
           viBaseObject.LoadSnapshotsFromDb();
           PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
           viBaseObject.ShouldSave = false;

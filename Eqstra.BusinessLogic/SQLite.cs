@@ -1237,6 +1237,21 @@ namespace SQLite
 			return Execute (q, primaryKey);
 		}
 
+
+        public int DeleteBulk(System.Collections.IEnumerable objects)
+        {
+            var c = 0;
+            RunInTransaction(() =>
+            {
+                foreach (var r in objects)
+                {
+                    c += Delete(r);
+                }
+            });
+            return c;
+        }
+        
+
 		/// <summary>
 		/// Deletes all the objects from the specified table.
 		/// WARNING WARNING: Let me repeat. It deletes ALL the objects from the

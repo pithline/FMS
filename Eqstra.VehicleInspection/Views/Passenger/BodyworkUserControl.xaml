@@ -9,9 +9,11 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:common="using:Eqstra.VehicleInspection.Common"
      xmlns:Converters="using:Syncfusion.UI.Xaml.Converters"
+    xmlns:c="using:Eqstra.VehicleInspection.Converters"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <c:CommandParameterConverter x:Key="CPConverter" />
     </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch" MinWidth="2000" >
         <Grid Grid.Column="0" Margin="0 0 0 0">
@@ -77,7 +79,8 @@
 
                     <TextBlock Text="Hail Damage" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch IsOn="{Binding Path=Model.IsHailDmg,Mode=TwoWay}" x:Name="HailDamageToggle" Grid.Row="1" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
-                    <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource,ElementName=GVHailDamage}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HailDamageToggle}" Margin="5 0" Grid.Column="2" Grid.Row="1" Style="{StaticResource TransparentBtn}">
+                    <Button Command="{Binding TakeSnapshotCommand}"
+                            CommandParameter="{Binding ItemsSource,ElementName=GVHailDamage, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=BodyWork_HailDamage}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=HailDamageToggle}" Margin="5 0" Grid.Column="2" Grid.Row="1" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
                     <TextBox Text="{Binding Path=Model.GVHailDamageComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="3" Grid.Row="1"/>
@@ -98,7 +101,8 @@
 
                     <TextBlock Text="RF Door" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormTextStyle}" VerticalAlignment="Center"/>
                     <ToggleSwitch  IsOn="{Binding Path=Model.IsRFDoorDmg,Mode=TwoWay}" x:Name="RFDoorToggle" Grid.Row="2" Style="{StaticResource DamagedToggleSwitch}" Grid.Column="1"/>
-                    <Button Command="{Binding TakeSnapshotCommand}" CommandParameter="{Binding ItemsSource, ElementName=GVRFDoor}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="2" Style="{StaticResource TransparentBtn}">
+                    <Button Command="{Binding TakeSnapshotCommand}"
+                            CommandParameter="{Binding ItemsSource, ElementName=GVRFDoor, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=BodyWork_RFDoorTrim}" Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=RFDoorToggle}" Margin="5 0" Grid.Column="2" Grid.Row="2" Style="{StaticResource TransparentBtn}">
                         <Image Source="ms-appx:///Assets/camera_icon.png" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="28" Height="28"/>
                     </Button>
                     <TextBox Text="{Binding Path=Model.GVRFDoorComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" Margin="5 0" Grid.Column="3" Grid.Row="2"/>

@@ -28,8 +28,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Model = new PGlass();
             }
             BaseModel viBaseObject = (PGlass)this.Model;
+            viBaseObject.VehicleInsRecID = vehicleInsRecID;
             viBaseObject.LoadSnapshotsFromDb(); 
-
             viBaseObject.ShouldSave = false;
             PropertyHistory.Instance.SetPropertyHistory(viBaseObject);
         }

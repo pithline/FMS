@@ -110,6 +110,19 @@ namespace Eqstra.BusinessLogic.Helpers
             }
         }
 
+        public async Task<int> DeleteBulkAsync<T>(IEnumerable<T> obj)
+        {
+            try
+            {
+                return await this.Connection.DeleteBulkAsync(obj);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         async public Task<int> UpdateSingleRecordAsync<T>(T obj)
         {
             try

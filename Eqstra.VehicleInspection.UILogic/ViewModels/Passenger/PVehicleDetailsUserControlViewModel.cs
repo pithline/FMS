@@ -47,7 +47,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             if (this.Model == null)
             {
                 AppSettings.Instance.IsSyncingVehDetails = 1;
-                this.Model = new PVehicleDetails();
+                this.Model = new PVehicleDetails() { VehicleInsRecID = vehicleInsRecID};
+                
                 PropertyHistory.Instance.SetPropertyHistory((PVehicleDetails)this.Model);
             }
             else

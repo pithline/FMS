@@ -31,6 +31,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Model = new PInspectionProof();
             }
             BaseModel viBaseObject = (PInspectionProof)this.Model;
+            viBaseObject.VehicleInsRecID = vehicleInsRecID;
             viBaseObject.LoadSnapshotsFromDb();
 
             viBaseObject.ShouldSave = false;
