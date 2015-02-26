@@ -92,10 +92,28 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                     GetAppointments();
                                     AppSettings.Instance.IsSynchronizing = 0;
                                     AppSettings.Instance.Synced = true;
-                                }
-                                      );
+                                });
 
                             });
+                    VIServiceHelper.Instance.Synchronize(async () =>
+                    {
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+
+                            AppSettings.Instance.IsSynchronizing = 1;
+                        });
+
+
+
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+
+                            AppSettings.Instance.IsSynchronizing = 0;
+                            AppSettings.Instance.Synced = true;
+                        });
+
+                    });
+
                 }
             });
 

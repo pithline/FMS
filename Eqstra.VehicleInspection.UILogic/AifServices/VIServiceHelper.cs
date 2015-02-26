@@ -362,7 +362,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             GetCVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        else 
+                        else
                         {
                             GetTVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
@@ -395,6 +395,54 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
         }
 
+        async public System.Threading.Tasks.Task SyncAllAsync()
+        {
+            await this.EditPassengerTrimInteriorToSvcAsync();
+
+            await this.EditPassengerAccessoriesToSvcAsync();
+
+            await this.EditPassengerBodyworkToSvcAsync();
+
+            await this.EditPassengerVehicleDetailsToSvcAsync();
+
+            await this.EditPassengerTyreConditionToSvcAsync();
+
+            await this.EditPassengerGlassToSvcAsync();
+
+            await this.EditPassengerMechanicalConditionAsync();
+
+            await this.EditCommercialAccessoriesToSvcAsync();
+
+            await this.EditCommercialVehicleDetailsToSvcAsync();
+
+            await this.EditCommercialTrimInteriorToSvcAsync();
+
+            await this.EditCommercialChassisBodyToSvcAsync();
+
+            await this.EditCommercialTyreConditionToSvcAsync();
+
+            await this.EditCommercialGlassToSvcAsync();
+
+            await this.EditCommercialMechConditionToSvcAsync();
+
+            await this.EditCommercialInspectionProofToSvcAsync();
+
+            await this.EditPassengerInspectionProofToSvcAsync();
+
+            await this.EditTrailerAccessoriesToSvcAsync();
+
+            await this.EditTrailerChassisBodyToSvcAsync();
+
+            await this.EditTrailerGlassToSvcAsync();
+
+            await this.EditTrailerMechConditionToSvcAsync();
+
+            await this.EditTrailerTyreConditionToSvcAsync();
+
+            await this.EditTrailerInspectionProofToSvcAsync();
+
+        }
+
         async private System.Threading.Tasks.Task GetCVehicleDetailsAsync(string caseNumber, long vRecId)
         {
             try
@@ -423,7 +471,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             Color = v.parmColor,
                             Year = v.parmyear.ToString("MM/dd/yyyy"),
                             ODOReading = v.parmODOReading.ToString(),
-                            Make = v.parmMake+ Environment.NewLine+v.parmModel,
+                            Make = v.parmMake + Environment.NewLine + v.parmModel,
                             EngineNumber = v.parmEngineNumber,
                             VehicleInsRecID = vRecId,
                             RecID = v.parmRecID,
@@ -624,6 +672,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
         }
 
+
+
         async private System.Threading.Tasks.Task EditPassengerVehicleDetailsToSvcAsync()
         {
             try
@@ -643,7 +693,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             parmLisenceDiscCurrent = pVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
                             parmRecID = pVehicleDetails.RecID,
-
                             parmTableId = pVehicleDetails.TableId,
                             parmVehicleInsRecID = pVehicleDetails.VehicleInsRecID
 
@@ -661,13 +710,17 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false,
                             TableId = x.parmTableId,
                             VehicleInsRecID = x.parmVehicleInsRecID
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
+                    foreach (var item in pVehicleDetailsList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PVehicleDetails"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -806,10 +859,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
+                    foreach (var item in pAccessoriesList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PAccessories"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -933,11 +990,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
-                    await SyncImagesAsync(pBodyworkList.FirstOrDefault().VehicleInsRecID);
+                    foreach (var item in pBodyworkList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PBodywork"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1023,11 +1084,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
-                    await SyncImagesAsync(pTrimInteriorList.FirstOrDefault().VehicleInsRecID);
+                    foreach (var item in pTrimInteriorList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PTrimInterior"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1128,10 +1193,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             IsSpareFChecked = MZKConditionEnum.Fair == x.parmSpareCondition ? true : false,
                             IsSpareGChecked = MZKConditionEnum.Good == x.parmSpareCondition ? true : false,
                             IsSparePChecked = MZKConditionEnum.Poor == x.parmSpareCondition ? true : false,
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PTyreCondition>(pTyreConditionList);
+                    foreach (var item in pTyreConditionList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PTyreCondition"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1213,10 +1283,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             RecID = x.parmRecID,
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PGlass>(glassList);
+                    foreach (var item in glassList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "PGlass"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1257,12 +1332,25 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 foreach (var result in res.response.Where(x => x.parmRecID == 0))
                 {
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<PMechanicalCond>(new PMechanicalCond { Remarks = result.parmRemarks, RecID = result.parmRecID, VehicleInsRecID = result.parmVehicleInsRecID });
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                    {
+                        Remarks = result.parmRemarks,
+                        RecID = result.parmRecID,
+                        VehicleInsRecID = result.parmVehicleInsRecID,
+                        ShouldSave = false
+                    });
                 }
                 foreach (var result in res.response.Where(x => x.parmRecID != 0))
                 {
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<PMechanicalCond>(new PMechanicalCond { RecID = result.parmRecID, Remarks = result.parmRemarks, VehicleInsRecID = result.parmVehicleInsRecID });
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                    {
+                        RecID = result.parmRecID,
+                        Remarks = result.parmRemarks,
+                        VehicleInsRecID = result.parmVehicleInsRecID,
+                        ShouldSave = false
+                    });
                 }
+
             }
         }
         async private System.Threading.Tasks.Task EditPassengerInspectionProofToSvcAsync()
@@ -1301,11 +1389,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             EQRDate = x.parmCompanyRepSignDateTime,
                             CRDate = x.parmCustomerRepSignDateTime,
                             CRSignComment = x.parmComments,
-                            VehicleInsRecID = x.parmRecID
+                            VehicleInsRecID = x.parmRecID,
+                            ShouldSave = false
                         });
                     }
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<PInspectionProof>(inspectionProofList);
+
             }
             catch (Exception ex)
             {
@@ -1359,12 +1449,17 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
                             IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
                             TableId = x.parmTableId,
-                            VehicleInsRecID = x.parmVehicleInsRecID
+                            VehicleInsRecID = x.parmVehicleInsRecID,
+                            ShouldSave = false
 
                         });
                     }
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
+                foreach (var item in cVehicleDetailsList.GroupBy(x=>x.VehicleInsRecID))
+                {
+                    await SyncImagesAsync(item.Key, "CVehicleDetails"); 
+                }
             }
             catch (Exception ex)
             {
@@ -1442,10 +1537,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             RecID = x.parmRecID,
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CGlass>(glassList);
+                    foreach (var item in glassList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CGlass"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1545,10 +1645,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CAccessories>(cAccessoriesList);
+                    foreach (var item in cAccessoriesList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CAccessories"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1599,15 +1703,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             parmWipersComments = cCabTrimInter.WipersComment,
                             parmDashboardComments = cCabTrimInter.DashboardComment,
                             parmEmblemComments = cCabTrimInter.EmblemsComment,
-                            parmSteeringWheelComments =cCabTrimInter.SteeringWheelsComment,
+                            parmSteeringWheelComments = cCabTrimInter.SteeringWheelsComment,
                             parmInstrumentClusterComments = cCabTrimInter.InstrumentClusterComment,
                             parmControlLeverComments = cCabTrimInter.ControlLeversComment,
-                            parmBackupWarningComments =cCabTrimInter.BackUpWarningComment,
-                            parmOverheadGuardComments=cCabTrimInter.OverheadGuardComment,
+                            parmBackupWarningComments = cCabTrimInter.BackUpWarningComment,
+                            parmOverheadGuardComments = cCabTrimInter.OverheadGuardComment,
                             parmMastComments = cCabTrimInter.MastComment,
                             parmMastHydraulicsComments = cCabTrimInter.MastHydraulicsComment,
-                            parmForksComments =cCabTrimInter.ForksComment,
-                            parmRainGuardComments=cCabTrimInter.RainGuardComment,
+                            parmForksComments = cCabTrimInter.ForksComment,
+                            parmRainGuardComments = cCabTrimInter.RainGuardComment,
 
                             parmIsDamagedBumper = cCabTrimInter.IsBumperDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedDoorHandleLeft = cCabTrimInter.IsDoorHandleLeftDmg ? NoYes.Yes : NoYes.No,
@@ -1629,11 +1733,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             parmIsDamagedRRQuarterPanel = cCabTrimInter.IsRRQuatPanelDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedWheelArchesLeft = cCabTrimInter.IsWheelArchLeftDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedWheelArchesRight = cCabTrimInter.IsWheelArchRightDmg ? NoYes.Yes : NoYes.No,
-                           parmIsDamagedDashboard =cCabTrimInter.IsDashboardDmg ? NoYes.Yes :NoYes.No,
-                           parmIsDamagedEmblems =cCabTrimInter.IsEmblemsDmg ? NoYes.Yes:NoYes.No,
-                           parmIsDamagedSteeringWheels =cCabTrimInter.IsSteeringWheelsDmg ? NoYes.Yes : NoYes.No,
-                           parmIsDamagedInstrumentCluster =cCabTrimInter.IsInstrumentClusterDmg ? NoYes.Yes:NoYes.No,
-                           parmIsDamagedControlLevers =cCabTrimInter.IsControlLeversDmg ?NoYes.Yes : NoYes.No,
+                            parmIsDamagedDashboard = cCabTrimInter.IsDashboardDmg ? NoYes.Yes : NoYes.No,
+                            parmIsDamagedEmblems = cCabTrimInter.IsEmblemsDmg ? NoYes.Yes : NoYes.No,
+                            parmIsDamagedSteeringWheels = cCabTrimInter.IsSteeringWheelsDmg ? NoYes.Yes : NoYes.No,
+                            parmIsDamagedInstrumentCluster = cCabTrimInter.IsInstrumentClusterDmg ? NoYes.Yes : NoYes.No,
+                            parmIsDamagedControlLevers = cCabTrimInter.IsControlLeversDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedBackupWarnings = cCabTrimInter.IsBackUpWarningDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedOverheadGuard = cCabTrimInter.IsOverheadGuardDmg ? NoYes.Yes : NoYes.No,
                             parmIsDamagedMast = cCabTrimInter.IsMastDmg ? NoYes.Yes : NoYes.No,
@@ -1643,6 +1747,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             parmVehicleInsRecID = cCabTrimInter.VehicleInsRecID,
                             parmTableId = cCabTrimInter.TableId,
                             parmRecID = cCabTrimInter.RecID,
+
 
                         });
                     }
@@ -1700,11 +1805,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
-                    await SyncImagesAsync(cCabTrimInterList.FirstOrDefault().VehicleInsRecID);
+                    foreach (var item in cCabTrimInterList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CTrimInterior"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1809,11 +1917,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
-                    await SyncImagesAsync(cChassisBodyList.FirstOrDefault().VehicleInsRecID);
+                    foreach (var item in cChassisBodyList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "ChassisBody"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -1920,10 +2031,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CMechanicalCond>(cMechanicalCondList);
+                    foreach (var item in cMechanicalCondList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CMechanicalCondition"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -2044,11 +2159,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             HasFLROuter = MZKConditionEnum.Fair == x.parmLROuterCondition ? true : false,
                             HasGLROuter = MZKConditionEnum.Good == x.parmLROuterCondition ? true : false,
                             HasPLROuter = MZKConditionEnum.Poor == x.parmLROuterCondition ? true : false,
-
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CTyres>(cTyresList);
+                    foreach (var item in cTyresList.GroupBy(x=>x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CTyres"); 
+                    }
                 }
             }
             catch (Exception ex)
@@ -2104,13 +2223,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             IsNotFeasChecked = x.parmRecommendation == MZKRecommendationEnum.NotFeasible ? true : false,
                             IsRetainChecked = x.parmRecommendation == MZKRecommendationEnum.Retain ? true : false,
                             IsSellChecked = x.parmRecommendation == MZKRecommendationEnum.Sell ? true : false,
-                            VehicleInsRecID = x.parmRecID
-
+                            VehicleInsRecID = x.parmRecID,
+                            ShouldSave = false
                         });
                     }
                 }
 
                 await SqliteHelper.Storage.UpdateAllAsync<CPOI>(cpoiList);
+
             }
             catch (Exception ex)
             {
@@ -2124,6 +2244,71 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
         }
 
+        async private System.Threading.Tasks.Task EditTrailerVehicleDetailsToSvcAsync()
+        {
+            try
+            {
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                //ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
+                var cVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TVehicleDetails>()).Where(x => x.ShouldSave);
+                //if (cVehicleDetailsData != null)
+                //{
+                //    foreach (var cVehicleDetails in cVehicleDetailsData)
+                //    {
+                //        mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
+                //        {
+                //            parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
+                //            parmlisenceDiscExpiryDate = DateTime.Parse(cVehicleDetails.LicenseDiscExpireDate),
+                //            parmRecID = cVehicleDetails.RecID,
+                //            parmSparseKeyShown = cVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
+                //            parmSparseKeyTested = cVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
+                //            parmTableId = cVehicleDetails.TableId,
+                //            parmVehicleInsRecID = cVehicleDetails.VehicleInsRecID
+                //        });
+                //    }
+                //}
+                //var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
+
+                //var cVehicleDetailsList = new ObservableCollection<CVehicleDetails>();
+                //if (resp.response != null)
+                //{
+                //    foreach (var x in resp.response.Where(x => x != null))
+                //    {
+                //        cVehicleDetailsList.Add(new CVehicleDetails
+                //        {
+                //            IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                //            LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate.ToString(),
+                //            RecID = x.parmRecID,
+                //            IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
+                //            IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
+                //            TableId = x.parmTableId,
+                //            VehicleInsRecID = x.parmVehicleInsRecID,
+                //            ShouldSave = false
+
+                //        });
+                //    }
+                //}
+                //await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
+                ;
+                foreach (var item in cVehicleDetailsData.GroupBy(x => x.VehicleInsRecID))
+                {
+                    await SyncImagesAsync(item.Key, "TVehicleDetails");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                });
+            }
+        }
 
         async private System.Threading.Tasks.Task EditTrailerAccessoriesToSvcAsync()
         {
@@ -2172,10 +2357,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<TAccessories>(tAccessoriesList);
+                    foreach (var item in tAccessoriesList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "TAccessories");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2294,10 +2483,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<TChassisBody>(tChassisBodyList);
+                    foreach (var item in tChassisBodyList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "TChassisBody");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2364,10 +2557,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             RecID = x.parmRecID,
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
-
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<TGlass>(tglassList);
+                    foreach (var item in tglassList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "TGlass");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2434,11 +2631,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
                             RecID = x.parmRecID,
-
+                            ShouldSave = false
 
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<TMechanicalCond>(tMechanicalCondList);
+                    foreach (var item in tMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "TMechanicalCondition");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2499,11 +2700,15 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             Position = x.parmPosition,
                             VehicleInsRecID = x.parmVehicleInsRecID,
                             TableId = x.parmTableId,
-                            RecID = x.parmRecID
-
+                            RecID = x.parmRecID,
+                            ShouldSave = false
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<TTyreCond>(tTyresList);
+                    foreach (var item in tTyresList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "TTyreCondition");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2552,11 +2757,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             EQRDate = x.parmCompanyRepSignDateTime,
                             CRDate = x.parmCustomerRepSignDateTime,
                             CRSignComment = x.parmComments,
-                            VehicleInsRecID = x.parmRecID
+                            VehicleInsRecID = x.parmRecID,
+                            ShouldSave = false
                         });
                     }
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<TPOI>(inspectionProofList);
+
             }
             catch (Exception ex)
             {
@@ -2619,7 +2826,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmContactPersonName = task.ContactName,
                                 parmRegistrationNum = task.RegistrationNumber,
 
-                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month,task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month, task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
                                              task.ConfirmedTime.Second),
 
                                 parmStatus = task.Status,
@@ -2724,34 +2931,34 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
         }
 
-        public async System.Threading.Tasks.Task SyncImagesAsync(long vehicleInspectionRecId)
+        public async System.Threading.Tasks.Task SyncImagesAsync(long vehicleInspectionRecId, string pageName)
         {
             try
             {
                 var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
-                
 
-                    var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
-                    var caseNumber = (await SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.Task>(x => x.VehicleInsRecId == vehicleInspectionRecId)).CaseNumber;
-                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+
+                var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                var caseNumber = (await SqliteHelper.Storage.GetSingleRecordAsync<Eqstra.BusinessLogic.Task>(x => x.VehicleInsRecId == vehicleInspectionRecId)).CaseNumber;
+                foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId && (x.FileName.StartsWith(pageName, StringComparison.OrdinalIgnoreCase))))
+                {
+                    mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
-                        mzk_ImageContractList.Add(new Mzk_ImageContract
-                        {
-                            parmCaseNumber = caseNumber,
-                            parmFileName = item.FileName,
-                            parmImageData = item.ImageBinary,
-                        });
+                        parmCaseNumber = caseNumber,
+                        parmFileName = item.FileName,
+                        parmImageData = item.ImageBinary,
+                    });
 
-                    }
+                }
 
-                    await client.saveImageAsync(mzk_ImageContractList);
+                await client.saveImageAsync(mzk_ImageContractList);
 
 
-                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
-                    {
-                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
-                    }
-                
+                foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+                {
+                    await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                }
+
             }
             catch (Exception)
             {

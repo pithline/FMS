@@ -32,12 +32,12 @@ namespace Eqstra.VehicleInspection.UILogic
         {
             TakeSnapshotCommand = DelegateCommand<Tuple<object, object>>.FromAsyncHandler(async (param) =>
             {
-                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>,param.Item2.ToString());
+                await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>, param.Item2.ToString());
             });
 
-            TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
+            TakePictureCommand = DelegateCommand<Tuple<object,object>>.FromAsyncHandler(async (param) =>
                 {
-                    await TakePictureAsync(param);
+                    await TakePictureAsync(param.Item1 as ImageCapture,param.Item2.ToString());
                 });
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
@@ -107,7 +107,7 @@ namespace Eqstra.VehicleInspection.UILogic
 
         public ICommand TakeSnapshotCommand { get; set; }
 
-        public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
+        public ICommand TakePictureCommand { get; set; }
 
         public DelegateCommand<object> OpenSnapshotViewerCommand { get; set; }
         protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list, string fieldName) where T : ObservableCollection<ImageCapture>
@@ -136,7 +136,7 @@ namespace Eqstra.VehicleInspection.UILogic
                         ImagePath = file.Path,
                         ImageBinary = Convert.ToBase64String(bytes),
                         CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID,
-                        FileName = string.Format("{0}_{1}{2}", fieldName, list.Count + 1,".png")
+                        FileName = string.Format("{0}_{1}{2}", fieldName, list.Count + 1, ".png")
                     };
                     list.Add(ic);
                     await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
@@ -148,7 +148,7 @@ namespace Eqstra.VehicleInspection.UILogic
             }
         }
 
-        async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param, string fieldName)
         {
             try
             {
@@ -173,6 +173,13 @@ namespace Eqstra.VehicleInspection.UILogic
 
                     param.ImagePath = file.Path;
 
+
+                    param.ImageBinary = Convert.ToBase64String(bytes);
+                    param.CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID;
+                    param.FileName = string.Format("{0}{2}", fieldName, ".png");
+
+
+                    await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(param);
 
                 }
 

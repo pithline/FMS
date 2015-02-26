@@ -8,10 +8,12 @@
              xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
              xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
              xmlns:SynchronizingSetting="using:Eqstra.VehicleInspection.UILogic"
+             xmlns:c="using:Eqstra.VehicleInspection.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <SynchronizingSetting:AppSettings x:Key="VM" />
+        <c:CommandParameterConverter x:Key="CPConverter" />
     </UserControl.Resources>
 
     <Grid HorizontalAlignment="Left">
@@ -85,7 +87,7 @@
 
                             <Button Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding TakePictureCommand}"
-                                    CommandParameter="{Binding Path=Model.LicenseDiscSnapshot}"
+                                    CommandParameter="{Binding Path=Model.LicenseDiscSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_LicenseDisc}"
                                     Width="175"
                                     Height="150">
                                 <Image Source="{Binding Path=Model.LicenseDiscSnapshot.ImagePath}"
@@ -110,7 +112,7 @@
                                     Width="175"
                                     Height="150"
                                     Command="{Binding TakePictureCommand}"
-                                    CommandParameter="{Binding Path= Model.LeftSnapshot}">
+                                    CommandParameter="{Binding Path= Model.LeftSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_Left}">
                                 <Image Margin="-10"
                                        Source="{Binding Path= Model.LeftSnapshot.ImagePath}"
                                        Grid.Row="0"
@@ -135,7 +137,7 @@
 
                             <Button Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding Path=TakePictureCommand}"
-                                    CommandParameter="{Binding Path= Model.BackSnapshot}"
+                                    CommandParameter="{Binding Path= Model.BackSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_Back}"
                                     Width="175"
                                     Height="150">
                                 <Image Source="{Binding Path= Model.BackSnapshot.ImagePath}"
@@ -160,7 +162,7 @@
                                     Height="150"
                                     Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding TakePictureCommand}"
-                                    CommandParameter="{Binding Path=Model.RightSnapshot}">
+                                    CommandParameter="{Binding Path=Model.RightSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_Right}">
                                 <Image Source="{Binding Path=Model.RightSnapshot.ImagePath}"
                                        Grid.Row="0"
                                        Stretch="UniformToFill"
@@ -181,7 +183,7 @@
 
                             <Button Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding Path=TakePictureCommand}"
-                                    CommandParameter="{Binding Path=Model.FrontSnapshot}"
+                                    CommandParameter="{Binding Path=Model.FrontSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_Front}"
                                     Width="175"
                                     Height="150">
                                 <Image Source="{Binding Path=Model.FrontSnapshot.ImagePath}"
@@ -228,7 +230,7 @@
 
                             <Button Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding Path=TakePictureCommand}"
-                                    CommandParameter="{Binding Path=Model.TopSnapshot}"
+                                    CommandParameter="{Binding Path=Model.TopSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_Top}"
                                     Width="175"
                                     Height="150">
                                 <Image Source="{Binding Path=Model.TopSnapshot.ImagePath}"
@@ -252,7 +254,7 @@
 
                             <Button Style="{StaticResource SnapshotButtonStyle}"
                                     Command="{Binding Path=TakePictureCommand}"
-                                    CommandParameter="{Binding Path=Model.ODOReadingSnapshot}"
+                                    CommandParameter="{Binding Path=Model.ODOReadingSnapshot, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PVehicleDetails_ODO}"
                                     Width="175"
                                     Height="150">
                                 <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}"

@@ -82,9 +82,9 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             StampPersistData.Instance.DataStamp = dataStamp;
         }
 
-        async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
+        async public override System.Threading.Tasks.Task TakePictureAsync(ImageCapture param,string fieldName)
         {
-            await base.TakePictureAsync(param);
+            await base.TakePictureAsync(param,fieldName);
             long vehicleInsRecID = long.Parse(ApplicationData.Current.LocalSettings.Values["VehicleInsRecID"].ToString());
             if (vehicleInsRecID != default(long))
             {
