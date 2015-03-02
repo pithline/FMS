@@ -48,6 +48,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             });
         }
 
+      
+
+        public override void OnNavigatedTo(object navigationParameter, NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        {
+            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+        }
+
 
         public async System.Threading.Tasks.Task SaveTrailerTyreConditions(long vehicleInsRecId)
         {

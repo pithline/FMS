@@ -12,8 +12,6 @@
              xmlns:c="using:Eqstra.VehicleInspection.Converters"
              prism:ViewModelLocator.AutoWireViewModel="true">
     <UserControl.Resources>
-        <c:CommandParameterConverter x:Key="CPConverter" />
-        <c:PositionCmdParamConverter x:Key="PCPConverter" />
         <Style x:Key="ListViewItemStyle1"
                TargetType="ListViewItem">
             <Setter Property="FontFamily"
@@ -77,10 +75,10 @@
 
                     <ListView x:Name="tyreListView"
                               Grid.Row="1"
-                              SelectionMode="None"
+                              SelectionMode="Single"
                               ItemsSource="{Binding PoolOfTyreCondions,Mode=TwoWay}"
                               IsZoomedInView="False"
-                              SelectedIndex="-1"
+                             
                               ItemContainerStyle="{StaticResource ListViewItemStyle1}">
 
                         <ListView.HeaderTemplate>
@@ -163,7 +161,7 @@
                                             HorizontalAlignment="Center"
                                             IsEnabled="{Binding ElementName=poorRadio,Path=IsChecked}"
                                             Command="{Binding TakeSnapshotCommand}"
-                                            CommandParameter="{Binding ItemsSource,ElementName=RFImg, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter={Binding Position, Converter={StaticResource ResourceKey=PCPConverter}}}"
+                                           
                                             Margin="5 0"
                                             Style="{StaticResource TransparentBtn}">
                                         <Image Source="ms-appx:///Assets/camera_icon.png"

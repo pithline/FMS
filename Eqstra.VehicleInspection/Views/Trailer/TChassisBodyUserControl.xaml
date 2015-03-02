@@ -661,7 +661,7 @@
                                   VerticalAlignment="Center"
                                   Margin="5 0" />
                     <Button Command="{Binding TakeSnapshotCommand}"
-                            CommandParameter="{Binding ElementName=GVChevron,Path=ItemsSource, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=TChassisBody_LandingLegs}"
+                            CommandParameter="{Binding ElementName=GVChevron,Path=ItemsSource, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=TChassisBody_Chevron}"
                             Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ChevronToggle}"
                             Margin="5 0"
                             Grid.Row="2"
@@ -721,7 +721,7 @@
                                   VerticalAlignment="Center"
                                   Margin="5 0" />
                     <Button Command="{Binding TakeSnapshotCommand}"
-                            CommandParameter="{Binding ElementName=GVLandingLegs,Path=ItemsSource}"
+                            CommandParameter="{Binding ElementName=GVLandingLegs,Path=ItemsSource, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=TChassisBody_LandingLegs}"
                             Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=LandingLegsToggle}"
                             Margin="5 0"
                             Grid.Row="3"

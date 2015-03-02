@@ -27,9 +27,12 @@ namespace Eqstra.BusinessLogic
             this.SnapshotImgList = new ObservableCollection<ImageCapture>();
 
 
-            TakeSnapshotCommand = DelegateCommand<ObservableCollection<ImageCapture>>.FromAsyncHandler(async (param) =>
+            TakeSnapshotCommand = new DelegateCommand(async ()  =>
             {
-                await TakeSnapshotAsync(param);
+                
+                
+                await this.TakeSnapshotAsync(this.SnapshotImgList, this.Position);
+               
             });
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
@@ -37,7 +40,7 @@ namespace Eqstra.BusinessLogic
                 OpenPopup(param);
             });
         }
-        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list) where T : ObservableCollection<ImageCapture>
+        protected async System.Threading.Tasks.Task TakeSnapshotAsync<T>(T list,string fieldName) where T : ObservableCollection<ImageCapture>
         {
             try
             {
@@ -58,7 +61,27 @@ namespace Eqstra.BusinessLogic
                         await strm.WriteAsync(bytes, 0, bytes.Length);
                         strm.Flush();
                     }
-                    list.Add(new ImageCapture { ImagePath = file.Path });
+                    var ic = new ImageCapture
+                    {
+                        ImagePath = file.Path,
+                        ImageBinary = Convert.ToBase64String(bytes),
+                        CaseServiceRecId = this.VehicleInsRecID,
+                        FileName = string.Format("{0}_{1}_{2}","TTyreCondition", fieldName, list.Count + 1)
+                    };
+                    list.Add(ic);
+
+                    var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                    var dbIC = imageTable.SingleOrDefault(x => x.CaseServiceRecId == ic.CaseServiceRecId && x.FileName == string.Format("{0}_{1}", fieldName, list.Count + 1));
+                    if (dbIC == null)
+                    {
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
+                    }
+                    else
+                    {
+                        dbIC.ImagePath = ic.ImagePath;
+                        dbIC.ImageBinary = ic.ImageBinary;
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(dbIC);
+                    }
                 }
               
             }
