@@ -128,7 +128,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
         private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
         {
-            var list = EnumerateTasks(navigationParameter, await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
+            var _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            var list = EnumerateTasks(navigationParameter, (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x=>x.UserId == _userInfo.UserId));
             this.InspectionList.Clear();
             foreach (var item in list)
             {
@@ -159,14 +160,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
                     this.AllowEditing = false;
-                    list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)));
+                    list = (tasks).Where(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture, StringComparison.OrdinalIgnoreCase)));
                     list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
                 if (navigationParameter.Equals("MyTasks"))
                 {
                     NavigationMode = Syncfusion.UI.Xaml.Grid.NavigationMode.Row;
                     this.AllowEditing = false;
-                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture));
+                    list = (tasks).Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture, StringComparison.OrdinalIgnoreCase));
                     list.AsParallel().ForAll(x => x.AllowEditing = false);
                 }
                 this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();

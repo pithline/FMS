@@ -8,9 +8,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.Storage;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-
+using System.IO;
+using Eqstra.BusinessLogic.Helpers;
 namespace Eqstra.VehicleInspection.UILogic.ViewModels
 {
     public class ImageMarkupPageViewModel : ViewModel
@@ -18,6 +21,48 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         public ImageMarkupPageViewModel()
         {
             this.Snapshots = new ObservableCollection<ImageCapture>();
+
+            DoneCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+                try
+                {
+                    var caseNumber = ApplicationData.Current.LocalSettings.Values["CaseNumber"].ToString();
+                    foreach (var item in this.Snapshots)
+                    {
+                        var image = await StorageFile.GetFileFromPathAsync(item.ImagePath);
+                        var curMarkupImageFile = await ApplicationData.Current.RoamingFolder.TryGetItemAsync("markupimage_" + caseNumber + this.Snapshots.IndexOf(item)) as StorageFile;
+                        if (image != null && curMarkupImageFile != null)
+                        {
+                            var ms = await RenderDataStampOnSnap.InterpolateImageMarkup(image, curMarkupImageFile);
+                            var msrandom = new MemoryRandomAccessStream(ms);
+                            Byte[] bytes = new Byte[ms.Length];
+                            await ms.ReadAsync(bytes, 0, (int)ms.Length);
+                            // StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Image.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+
+                            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + curMarkupImageFile.Name, CreationCollisionOption.ReplaceExisting);
+                            using (var strm = await file.OpenStreamForWriteAsync())
+                            {
+                                await strm.WriteAsync(bytes, 0, bytes.Length);
+                                strm.Flush();
+                            }
+
+                          await  UpdateImageAsync(new ImageCapture
+                            {
+                                CaseServiceRecId = Convert.ToInt64(ApplicationData.Current.LocalSettings.Values["VehicleInsRecId"] ),
+                                ImageBinary = Convert.ToBase64String(bytes),
+                                 ImagePath = file.Path,
+                                  FileName = item.FileName+"Marked"
+                            });
+
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            });
         }
         public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -45,7 +90,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.Snapshots.Add(model.LeftSnapshot);
                 PanelBackground = new ImageBrush()
             {
-               // ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
+                // ImageSource = new BitmapImage(new Uri(((CVehicleDetails)navigationParameter).BackSnapshot.ImagePath)),
                 Stretch = Stretch.Fill
             };
             }
@@ -82,6 +127,25 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             get { return panelBackground; }
             set { SetProperty(ref panelBackground, value); }
         }
+
+        private async System.Threading.Tasks.Task UpdateImageAsync(ImageCapture param)
+        {
+            var imageTable = await Eqstra.BusinessLogic.Helpers.SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+            var dbIC = imageTable.SingleOrDefault(x => x.CaseServiceRecId == param.CaseServiceRecId && x.FileName == param.FileName);
+
+            if (dbIC == null)
+            {
+                await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(param);
+            }
+            else
+            {
+                dbIC.ImagePath = param.ImagePath;
+                dbIC.ImageBinary = param.ImageBinary;
+                await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(dbIC);
+            }
+        }
+
+        public ICommand DoneCommand { get; set; }
 
     }
 }

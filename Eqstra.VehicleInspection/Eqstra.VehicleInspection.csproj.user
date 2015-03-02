@@ -4,7 +4,7 @@
     <UseSimulator>false</UseSimulator>
     <RemoteDebugMachine>HYDL-1028A</RemoteDebugMachine>
     <UseAuthentication>false</UseAuthentication>
-    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>

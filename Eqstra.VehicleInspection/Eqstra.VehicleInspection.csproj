@@ -266,8 +266,10 @@
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
     <Content Include="default.rd.xml" />
-    <Content Include="Images\images.png" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <Content Include="ImageMeta\VI_Passenger_ImageMetadata.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

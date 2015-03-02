@@ -34,11 +34,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         IEventAggregator _eventAggregator;
+        UserInfo _userInfo;
 
         public MainPageViewModel(IEventAggregator eventAggregator)
             : base(eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -84,6 +86,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
                                 await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
                                 _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
+                               
                                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                 {
                                     this.PoolofTasks.Clear();
@@ -103,14 +106,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
+                         await VIServiceHelper.Instance.SyncAllAsync();
+                         await VIServiceHelper.Instance.SyncImagesAsync();
+                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                         {
 
-
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-
-                            AppSettings.Instance.IsSynchronizing = 0;
-                            AppSettings.Instance.Synced = true;
-                        });
+                             AppSettings.Instance.IsSynchronizing = 0;
+                             AppSettings.Instance.Synced = true;
+                         });
 
                     });
 
@@ -124,7 +127,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             try
             {
-                var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                 _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 await CreateTableAsync();
@@ -148,6 +151,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            });
 
                            await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
+                           VIServiceHelper.Instance.SyncImagesAsync();
                            _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                  {
@@ -174,12 +178,13 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         {
 
             this.AwaitingConfirmationCount = this.PoolofTasks.Count(x => Regex.Replace(x.Status, @"\s", "").ToLower() == BusinessLogic.Helpers.TaskStatus.AwaitingInspectionConfirmation.ToLower() || x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation);
-            this.MyTasksCount = this.PoolofTasks.Count(x => x.Status == BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture);
-            this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture)));
+            this.MyTasksCount = this.PoolofTasks.Count(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture, StringComparison.OrdinalIgnoreCase));
+            this.TotalCount = this.PoolofTasks.Count(x => DateTime.Equals(x.ConfirmedDate, DateTime.Today) && (x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture, StringComparison.OrdinalIgnoreCase)));
         }
 
         private void GetAppointments()
         {
+            this.Appointments.Clear();
             foreach (var item in this.PoolofTasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
             {
 
@@ -206,7 +211,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
-            foreach (Eqstra.BusinessLogic.Task item in list)
+            foreach (Eqstra.BusinessLogic.Task item in list.Where(x=>x.UserId == _userInfo.UserId))
             {
                 //var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
                 //if (cust != null)
@@ -399,7 +404,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<TPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
 
-            //await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
+           // await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
 
         }
 

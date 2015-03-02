@@ -314,7 +314,7 @@
                                   Grid.Column="1" />
                     <Button IsEnabled="{Binding ElementName=HasAirconChkbox,Path=IsChecked}"
                             Command="{Binding TakeSnapshotCommand}"
-                            CommandParameter="{Binding ElementName=GVAircon,Path=ItemsSource, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PAccessories_Aricon}"
+                            CommandParameter="{Binding ElementName=GVAircon,Path=ItemsSource, Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=PAccessories_Aircon}"
                             Visibility="{Binding IsOn, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=AirconToggle}"
                             Margin="5 0"
                             Grid.Column="2"

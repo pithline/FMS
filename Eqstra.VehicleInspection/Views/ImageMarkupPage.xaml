@@ -1,7 +1,6 @@
 ﻿<prism:VisualStateAwarePage
     x:Name="pageRoot"
-    x:Class="Eqstra.VehicleInspection.Views.ImageMarkupPage"
-   
+    x:Class="Eqstra.VehicleInspection.Views.ImageMarkupPage"   
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Eqstra.VehicleInspection.Views"
@@ -25,6 +24,8 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
+            <AppBarButton Icon="Accept"
+                          Label="Done" Command="{Binding DoneCommand}"/>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
 

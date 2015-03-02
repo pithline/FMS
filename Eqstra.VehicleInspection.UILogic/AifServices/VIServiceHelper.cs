@@ -17,8 +17,10 @@ using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -397,51 +399,53 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
         async public System.Threading.Tasks.Task SyncAllAsync()
         {
-            await this.EditPassengerTrimInteriorToSvcAsync();
+            this.EditPassengerTrimInteriorToSvcAsync();
 
-            await this.EditPassengerAccessoriesToSvcAsync();
+            this.EditPassengerAccessoriesToSvcAsync();
 
-            await this.EditPassengerBodyworkToSvcAsync();
+            this.EditPassengerBodyworkToSvcAsync();
 
-            await this.EditPassengerVehicleDetailsToSvcAsync();
+            this.EditPassengerVehicleDetailsToSvcAsync();
 
-            await this.EditPassengerTyreConditionToSvcAsync();
+            this.EditPassengerTyreConditionToSvcAsync();
 
-            await this.EditPassengerGlassToSvcAsync();
+            this.EditPassengerGlassToSvcAsync();
 
-            await this.EditPassengerMechanicalConditionAsync();
+            this.EditPassengerMechanicalConditionAsync();
 
-            await this.EditCommercialAccessoriesToSvcAsync();
+            this.EditCommercialAccessoriesToSvcAsync();
 
-            await this.EditCommercialVehicleDetailsToSvcAsync();
+            this.EditCommercialVehicleDetailsToSvcAsync();
 
-            await this.EditCommercialTrimInteriorToSvcAsync();
+            this.EditCommercialTrimInteriorToSvcAsync();
 
-            await this.EditCommercialChassisBodyToSvcAsync();
+            this.EditCommercialChassisBodyToSvcAsync();
 
-            await this.EditCommercialTyreConditionToSvcAsync();
+            this.EditCommercialTyreConditionToSvcAsync();
 
-            await this.EditCommercialGlassToSvcAsync();
+            this.EditCommercialGlassToSvcAsync();
 
-            await this.EditCommercialMechConditionToSvcAsync();
+            this.EditCommercialMechConditionToSvcAsync();
 
-            await this.EditCommercialInspectionProofToSvcAsync();
+            this.EditCommercialInspectionProofToSvcAsync();
 
-            await this.EditPassengerInspectionProofToSvcAsync();
+            this.EditPassengerInspectionProofToSvcAsync();
 
-            await this.EditTrailerAccessoriesToSvcAsync();
+            this.EditTrailerAccessoriesToSvcAsync();
 
-            await this.EditTrailerChassisBodyToSvcAsync();
+            this.EditTrailerChassisBodyToSvcAsync();
 
-            await this.EditTrailerGlassToSvcAsync();
+            this.EditTrailerGlassToSvcAsync();
 
-            await this.EditTrailerMechConditionToSvcAsync();
+            this.EditTrailerMechConditionToSvcAsync();
 
-            await this.EditTrailerTyreConditionToSvcAsync();
+            this.EditTrailerTyreConditionToSvcAsync();
 
-            await this.EditTrailerInspectionProofToSvcAsync();
+            this.EditTrailerInspectionProofToSvcAsync();
 
         }
+
+
 
         async private System.Threading.Tasks.Task GetCVehicleDetailsAsync(string caseNumber, long vRecId)
         {
@@ -717,9 +721,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
-                    foreach (var item in pVehicleDetailsList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in pVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PVehicleDetails"); 
+                        await SyncImagesAsync(item.Key, "PVehicleDetails");
                     }
                 }
             }
@@ -863,9 +867,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
-                    foreach (var item in pAccessoriesList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in pAccessoriesList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PAccessories"); 
+                        await SyncImagesAsync(item.Key, "PAccessories");
                     }
                 }
             }
@@ -995,9 +999,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
-                    foreach (var item in pBodyworkList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in pBodyworkList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PBodywork"); 
+                        await SyncImagesAsync(item.Key, "PBodywork");
                     }
                 }
             }
@@ -1089,9 +1093,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
-                    foreach (var item in pTrimInteriorList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in pTrimInteriorList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PTrimInterior"); 
+                        await SyncImagesAsync(item.Key, "PTrimInterior");
                     }
                 }
             }
@@ -1198,9 +1202,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PTyreCondition>(pTyreConditionList);
-                    foreach (var item in pTyreConditionList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in pTyreConditionList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PTyreCondition"); 
+                        await SyncImagesAsync(item.Key, "PTyreCondition");
                     }
                 }
             }
@@ -1288,9 +1292,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<PGlass>(glassList);
-                    foreach (var item in glassList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "PGlass"); 
+                        await SyncImagesAsync(item.Key, "PGlass");
                     }
                 }
             }
@@ -1456,9 +1460,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     }
                 }
                 await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
-                foreach (var item in cVehicleDetailsList.GroupBy(x=>x.VehicleInsRecID))
+                foreach (var item in cVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
                 {
-                    await SyncImagesAsync(item.Key, "CVehicleDetails"); 
+                    await SyncImagesAsync(item.Key, "CVehicleDetails");
                 }
             }
             catch (Exception ex)
@@ -1542,9 +1546,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CGlass>(glassList);
-                    foreach (var item in glassList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "CGlass"); 
+                        await SyncImagesAsync(item.Key, "CGlass");
                     }
                 }
             }
@@ -1649,9 +1653,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CAccessories>(cAccessoriesList);
-                    foreach (var item in cAccessoriesList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in cAccessoriesList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "CAccessories"); 
+                        await SyncImagesAsync(item.Key, "CAccessories");
                     }
                 }
             }
@@ -1809,9 +1813,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
-                    foreach (var item in cCabTrimInterList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in cCabTrimInterList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "CTrimInterior"); 
+                        await SyncImagesAsync(item.Key, "CTrimInterior");
                     }
                 }
             }
@@ -1921,9 +1925,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
-                    foreach (var item in cChassisBodyList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in cChassisBodyList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "ChassisBody"); 
+                        await SyncImagesAsync(item.Key, "ChassisBody");
                     }
                 }
             }
@@ -2035,9 +2039,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CMechanicalCond>(cMechanicalCondList);
-                    foreach (var item in cMechanicalCondList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in cMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "CMechanicalCondition"); 
+                        await SyncImagesAsync(item.Key, "CMechanicalCondition");
                     }
                 }
             }
@@ -2164,9 +2168,9 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         });
                     }
                     await SqliteHelper.Storage.UpdateAllAsync<CTyres>(cTyresList);
-                    foreach (var item in cTyresList.GroupBy(x=>x.VehicleInsRecID))
+                    foreach (var item in cTyresList.GroupBy(x => x.VehicleInsRecID))
                     {
-                        await SyncImagesAsync(item.Key, "CTyres"); 
+                        await SyncImagesAsync(item.Key, "CTyres");
                     }
                 }
             }
@@ -2826,7 +2830,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmContactPersonName = task.ContactName,
                                 parmRegistrationNum = task.RegistrationNumber,
 
-                                parmConfirmedDueDate = new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month, task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
+                                parmConfirmedDueDate =
+                                new DateTime(task.ConfirmedDate.Year, task.ConfirmedDate.Month, task.ConfirmedDate.Day, task.ConfirmedTime.Hour, task.ConfirmedTime.Minute,
                                              task.ConfirmedTime.Second),
 
                                 parmStatus = task.Status,
@@ -2900,27 +2905,60 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
                 var taskList = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
+                StorageFile metaDataFile = null ;
 
-                foreach (var task in taskList)
+                foreach (var task in taskList.Where(x => x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, StringComparison.OrdinalIgnoreCase)))
                 {
                     var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
-                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId))
+                    var caseImages = imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId);
+
+                    if (caseImages.All(x => x.IsSynced))
                     {
+
+                        var dbImageMetaData = caseImages.Select(x => x.FileName);
+                        switch (task.VehicleType)
+                        {
+                            case VehicleTypeEnum.Commercial:
+                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                break;
+                            case VehicleTypeEnum.Passenger:
+                                 metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                break;
+                            case VehicleTypeEnum.Trailer:
+                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                break;
+                            default:
+                                break;
+                        }
+                       
+                        var stream = await metaDataFile.OpenReadAsync();
+                        var metaDataBase = await FileIO.ReadTextAsync(metaDataFile);
+                        var metaList = metaDataBase.Split('|').ToList();
+                        var query = from a in metaList
+                                    join b in dbImageMetaData on a equals b into grp
+                                    from g in grp.DefaultIfEmpty("")
+                                    select
+                                    g;
+
+
+                        byte[] contentBytes = null;
+                        var txtFileContent = string.Format("{0}|{1}", task.CaseNumber, string.Join("|", query));
+                        var fileName = string.Format("{0}{1}", task.CaseNumber, ".txt");
+                        contentBytes = await ReadBytesAsync(contentBytes, txtFileContent, fileName);
+
+
                         mzk_ImageContractList.Add(new Mzk_ImageContract
                         {
                             parmCaseNumber = task.CaseNumber,
-                            parmFileName = item.FileName,
-                            parmImageData = item.ImageBinary,
+                            parmFileName = fileName,
+                            parmImageData = Convert.ToBase64String(contentBytes),
                         });
 
-                    }
 
-                    await client.saveImageAsync(mzk_ImageContractList);
+                        await client.saveImageAsync(mzk_ImageContractList);
 
+                        await SqliteHelper.Storage.DeleteBulkAsync(caseImages);
 
-                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId))
-                    {
-                        await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
                     }
                 }
             }
@@ -2929,6 +2967,23 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 throw;
             }
+        }
+
+        private static async Task<byte[]> ReadBytesAsync(byte[] contentBytes, string txtFileContent, string fileName)
+        {
+            var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+
+            await FileIO.WriteTextAsync(file, txtFileContent);
+
+            var buffer = await FileIO.ReadBufferAsync(file);
+            contentBytes = new byte[buffer.Length];
+            using (var dataReader = DataReader.FromBuffer(buffer))
+            {
+
+                await dataReader.LoadAsync(buffer.Length);
+                dataReader.ReadBytes(contentBytes);
+            }
+            return contentBytes;
         }
 
         public async System.Threading.Tasks.Task SyncImagesAsync(long vehicleInspectionRecId, string pageName)
@@ -2945,7 +3000,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
                         parmCaseNumber = caseNumber,
-                        parmFileName = item.FileName,
+                        parmFileName = string.Format("{0}{1}", item.FileName,".png"),
                         parmImageData = item.ImageBinary,
                     });
 
@@ -2956,7 +3011,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
                 {
-                    await SqliteHelper.Storage.DeleteSingleRecordAsync(item);
+                    item.IsSynced = true;
+                    await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
                 }
 
             }

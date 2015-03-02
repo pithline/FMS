@@ -57,6 +57,14 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref primeId, value); }
         }
 
+        private bool isSynced;
+
+        public bool IsSynced
+        {
+            get { return isSynced; }
+            set { SetProperty(ref isSynced, value); }
+        }
+
 
     }
 }

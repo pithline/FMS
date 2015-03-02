@@ -18,6 +18,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
+using System.Linq;
 
 namespace Eqstra.VehicleInspection.UILogic
 {
@@ -35,9 +36,9 @@ namespace Eqstra.VehicleInspection.UILogic
                 await TakeSnapshotAsync(param.Item1 as ObservableCollection<ImageCapture>, param.Item2.ToString());
             });
 
-            TakePictureCommand = DelegateCommand<Tuple<object,object>>.FromAsyncHandler(async (param) =>
+            TakePictureCommand = DelegateCommand<Tuple<object, object>>.FromAsyncHandler(async (param) =>
                 {
-                    await TakePictureAsync(param.Item1 as ImageCapture,param.Item2.ToString());
+                    await TakePictureAsync(param.Item1 as ImageCapture, param.Item2.ToString());
                 });
 
             this.OpenSnapshotViewerCommand = new DelegateCommand<dynamic>((param) =>
@@ -131,15 +132,28 @@ namespace Eqstra.VehicleInspection.UILogic
                         await strm.WriteAsync(bytes, 0, bytes.Length);
                         strm.Flush();
                     }
+
                     var ic = new ImageCapture
                     {
                         ImagePath = file.Path,
                         ImageBinary = Convert.ToBase64String(bytes),
                         CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID,
-                        FileName = string.Format("{0}_{1}{2}", fieldName, list.Count + 1, ".png")
+                        FileName = string.Format("{0}_{1}", fieldName, list.Count + 1)
                     };
-                    list.Add(ic);
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
+                    list.Add(ic);                   
+
+                    var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+                    var dbIC =  imageTable.SingleOrDefault(x => x.CaseServiceRecId == ic.CaseServiceRecId && x.FileName == string.Format("{0}_{1}", fieldName, list.Count + 1));
+                    if (dbIC == null)
+                    {
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
+                    }
+                    else
+                    {
+                        dbIC.ImagePath = ic.ImagePath;
+                        dbIC.ImageBinary = ic.ImageBinary;
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(dbIC);
+                    }
                 }
             }
             catch (Exception)
@@ -172,21 +186,34 @@ namespace Eqstra.VehicleInspection.UILogic
                     }
 
                     param.ImagePath = file.Path;
-
-
                     param.ImageBinary = Convert.ToBase64String(bytes);
                     param.CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID;
-                    param.FileName = string.Format("{0}{2}", fieldName, ".png");
+                    param.FileName = fieldName;
 
-
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(param);
-
+                    await UpdateImageAsync(param);
                 }
 
             }
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private  async System.Threading.Tasks.Task UpdateImageAsync(ImageCapture param)
+        {
+            var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
+            var dbIC = imageTable.SingleOrDefault(x => x.CaseServiceRecId == param.CaseServiceRecId && x.FileName == param.FileName);
+
+            if (dbIC == null)
+            {
+                await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(param);
+            }
+            else
+            {
+                dbIC.ImagePath = param.ImagePath;
+                dbIC.ImageBinary = param.ImageBinary;
+                await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(dbIC);
             }
         }
         public void OpenPopup(dynamic dc)
