@@ -31,30 +31,22 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             _eventAggregator = eventAggregator;
 
 
-            this.SyncCommand = new DelegateCommand(() =>
+            this.SyncCommand = new DelegateCommand(async () =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
 
-                    SSProxyHelper.Instance.Synchronize(async () =>
-                    {
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            AppSettings.Instance.IsSynchronizing = 1;
-                        });
+                    AppSettings.Instance.IsSynchronizing = 1;
 
-                        await SSProxyHelper.Instance.GetTasksFromSvcAsync();
-                        _eventAggregator.GetEvent<DriverTaskFetchedEvent>().Publish(this.task);
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                        {
 
-                            await GetTasksFromDbAsync();
-                            AppSettings.Instance.IsSynchronizing = 0;
-                            AppSettings.Instance.Synced = true;
-                        }
-                         );
+                    //await SSProxyHelper.Instance.GetTasksFromSvcAsync();
+                    // _eventAggregator.GetEvent<DriverTaskFetchedEvent>().Publish(this.task);
 
-                    });
+
+                    await GetTasksFromDbAsync();
+                    AppSettings.Instance.IsSynchronizing = 0;
+                    AppSettings.Instance.Synced = true;
+
                 }
             });
 

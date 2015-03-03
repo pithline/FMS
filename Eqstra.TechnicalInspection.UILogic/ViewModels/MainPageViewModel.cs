@@ -27,6 +27,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
     {
         INavigationService _navigationService;
         IEventAggregator _eventAggregator;
+        UserInfo _userInfo;
 
         public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
             : base(eventAggregator)
@@ -123,7 +124,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
             try
             {
-                var userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
@@ -223,7 +224,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         {
             this.PoolofTasks.Clear();
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation && w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.Completed);
-            foreach (Eqstra.BusinessLogic.TITask item in list)
+            foreach (Eqstra.BusinessLogic.TITask item in list.Where(x=>x.UserId == _userInfo.UserId))
             {
                 this.PoolofTasks.Add(item);
             }
