@@ -28,14 +28,12 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion4" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion5" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion6" });
-
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion7" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion8" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion9" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion10" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion11" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion12" });
-
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion13" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion14" });
             PoolOfTyreCondions.Add(new TTyreCond { Position = "Postion15" });

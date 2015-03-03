@@ -266,8 +266,13 @@
     <Content Include="Assets\user_profile.png" />
     <Content Include="default.rd.xml" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <Content Include="ImageMeta\VI_Commercial_ImageMetadata.txt" />
+    <Content Include="ImageMeta\VI_Commercial_ImageMetadata.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ImageMeta\VI_Passenger_ImageMetadata.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImageMeta\VI_Trailer_ImageMetadata.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SqliteDB\eqstramobility.sqlite">
