@@ -2919,13 +2919,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         switch (task.VehicleType)
                         {
                             case VehicleTypeEnum.Commercial:
-                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Commercial_ImageMetadata.txt");
                                 break;
                             case VehicleTypeEnum.Passenger:
                                 metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
                                 break;
                             case VehicleTypeEnum.Trailer:
-                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Trailer_ImageMetadata.txt");
                                 break;
                             default:
                                 break;
@@ -2959,6 +2959,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                         await SqliteHelper.Storage.DeleteBulkAsync(caseImages);
 
+                        await SqliteHelper.Storage.DeleteSingleRecordAsync(task);
                     }
                 }
             }

@@ -40,7 +40,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             : base(eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            
+
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Task>();
             this.Appointments = new ScheduleAppointmentCollection();
             //this.Appointments = new ScheduleAppointmentCollection
@@ -86,7 +86,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
                                 await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
                                 _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
-                               
+
                                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                 {
                                     this.PoolofTasks.Clear();
@@ -106,14 +106,14 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                         await VIServiceHelper.Instance.SyncAllAsync();
-                         await VIServiceHelper.Instance.SyncImagesAsync();
-                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                         {
+                        await VIServiceHelper.Instance.SyncAllAsync();
+                        await VIServiceHelper.Instance.SyncImagesAsync();
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
 
-                             AppSettings.Instance.IsSynchronizing = 0;
-                             AppSettings.Instance.Synced = true;
-                         });
+                            AppSettings.Instance.IsSynchronizing = 0;
+                            AppSettings.Instance.Synced = true;
+                        });
 
                     });
 
@@ -127,7 +127,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             try
             {
-                 _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
 
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 await CreateTableAsync();
@@ -151,19 +151,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                            });
 
                            await VIServiceHelper.Instance.SyncTasksFromSvcAsync();
-                           VIServiceHelper.Instance.SyncImagesAsync();
+
                            _eventAggregator.GetEvent<TasksFetchedEvent>().Publish(this.PoolofTasks);
                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                                  {
                                      this.PoolofTasks.Clear();
                                      await GetTasksFromDbAsync();
+
                                      GetAllCount();
                                      GetAppointments();
+                                 });
 
-                                     AppSettings.Instance.IsSynchronizing = 0;
-                                     AppSettings.Instance.Synced = true;
-                                 }
-                                 );
+                           await VIServiceHelper.Instance.SyncImagesAsync();
+
+                           await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
+                                    AppSettings.Instance.IsSynchronizing = 0;
+                                    AppSettings.Instance.Synced = true;
+                                });
 
                        });
                 }
@@ -211,7 +216,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task GetTasksFromDbAsync()
         {
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation);
-            foreach (Eqstra.BusinessLogic.Task item in list.Where(x=>x.UserId == _userInfo.UserId))
+            foreach (Eqstra.BusinessLogic.Task item in list.Where(x => x.UserId == _userInfo.UserId))
             {
                 //var cust = await SqliteHelper.Storage.GetSingleRecordAsync<Customer>(x => x.Id.Equals(item.CustomerId));
                 //if (cust != null)
@@ -404,7 +409,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.CreateTableAsync<TPOI>();
             //await SqliteHelper.Storage.CreateTableAsync<TTyreCond>();
 
-           // await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
+            // await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
 
         }
 

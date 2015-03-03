@@ -39,7 +39,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             ProgressDialogPopup.Close();
                             ErrorMessage = result.Item2;
                         }
-                        
+
                     }
                     catch (Exception)
                     {
@@ -60,7 +60,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             await CreateTableAsync();
-           
+
         }
 
         public DelegateCommand LoginCommand { get; private set; }
@@ -140,7 +140,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.MaintenanceRepair>();
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.TI.TIData>();
-            //await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
+            //  await SqliteHelper.Storage.DropnCreateTableAsync<ImageCapture>();
         }
 
     }

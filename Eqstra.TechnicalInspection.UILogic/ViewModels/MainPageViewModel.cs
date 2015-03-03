@@ -157,6 +157,26 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         });
 
                     });
+
+
+                    TIServiceHelper.Instance.Synchronize(async () =>
+                   {
+                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                       {
+
+                           AppSettings.Instance.IsSynchronizing = 1;
+                       });
+
+                       await TIServiceHelper.Instance.Synchronize();
+
+                        await TIServiceHelper.Instance.SyncImagesAsync();
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,  () =>
+                        {
+                            AppSettings.Instance.IsSynchronizing = 0;
+                            AppSettings.Instance.Synced = true;
+                        });
+
+                   });
                 }
 
 

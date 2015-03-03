@@ -45,27 +45,30 @@ namespace Eqstra.BusinessLogic.TI
                 CameraCaptureUI ccui = new CameraCaptureUI() { };
                 ccui.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Png;
                 var file = await ccui.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                using (var stream = await file.OpenReadAsync())
+                if (file != null)
                 {
-                    var bytes = new byte[stream.Size];
-                    using (var reader = new DataReader(stream))
+                    using (var stream = await file.OpenReadAsync())
                     {
-                        await reader.LoadAsync((uint)stream.Size);
-                        reader.ReadBytes(bytes);
-
-                    }
-                    if (file != null)
-                    {
-                        var ic = new ImageCapture
+                        var bytes = new byte[stream.Size];
+                        using (var reader = new DataReader(stream))
                         {
-                            CaseServiceRecId = this.CaseServiceRecId,
-                            PrimeId = this.Repairid,
-                            ImagePath = file.Path,
-                            ImageBinary = Convert.ToBase64String(bytes),
-                            FileName = string.Format("{0}_{1}_{2}{3}", this.Repairid, suffix, list.Count + 1, ".png")
-                        };
-                        list.Add(ic);
-                        await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
+                            await reader.LoadAsync((uint)stream.Size);
+                            reader.ReadBytes(bytes);
+
+                        }
+                        if (file != null)
+                        {
+                            var ic = new ImageCapture
+                            {
+                                CaseServiceRecId = this.CaseServiceRecId,
+                                PrimeId = this.Repairid,
+                                ImagePath = file.Path,
+                                ImageBinary = Convert.ToBase64String(bytes),
+                                FileName = string.Format("{0}_{1}_{2}", this.Repairid, suffix, list.Count + 1)
+                            };
+                            list.Add(ic);
+                            await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
+                        }
                     }
                 }
 
