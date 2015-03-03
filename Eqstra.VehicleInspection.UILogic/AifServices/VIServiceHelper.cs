@@ -2905,7 +2905,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             {
                 var mzk_ImageContractList = new ObservableCollection<Mzk_ImageContract>();
                 var taskList = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
-                StorageFile metaDataFile = null ;
+                StorageFile metaDataFile = null;
 
                 foreach (var task in taskList.Where(x => x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, StringComparison.OrdinalIgnoreCase)))
                 {
@@ -2922,7 +2922,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
                                 break;
                             case VehicleTypeEnum.Passenger:
-                                 metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
+                                metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
                                 break;
                             case VehicleTypeEnum.Trailer:
                                 metaDataFile = await Package.Current.InstalledLocation.GetFileAsync("ImageMeta\\VI_Passenger_ImageMetadata.txt");
@@ -2930,8 +2930,8 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                             default:
                                 break;
                         }
-                       
-                        var stream = await metaDataFile.OpenReadAsync();
+
+
                         var metaDataBase = await FileIO.ReadTextAsync(metaDataFile);
                         var metaList = metaDataBase.Split('|').ToList();
                         var query = from a in metaList
@@ -2972,15 +2972,13 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
         private static async Task<byte[]> ReadBytesAsync(byte[] contentBytes, string txtFileContent, string fileName)
         {
             var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-
             await FileIO.WriteTextAsync(file, txtFileContent);
+            var fileStream = await file.OpenAsync(FileAccessMode.Read);
 
-            var buffer = await FileIO.ReadBufferAsync(file);
-            contentBytes = new byte[buffer.Length];
-            using (var dataReader = DataReader.FromBuffer(buffer))
+            contentBytes = new byte[fileStream.Size];
+            using (var dataReader = new DataReader(fileStream.GetInputStreamAt(0)))
             {
-
-                await dataReader.LoadAsync(buffer.Length);
+                await dataReader.LoadAsync((uint)fileStream.Size);
                 dataReader.ReadBytes(contentBytes);
             }
             return contentBytes;
@@ -3000,7 +2998,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
                         parmCaseNumber = caseNumber,
-                        parmFileName = string.Format("{0}{1}", item.FileName,".png"),
+                        parmFileName = string.Format("{0}{1}", item.FileName, ".png"),
                         parmImageData = item.ImageBinary,
                     });
 
