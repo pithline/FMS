@@ -641,8 +641,12 @@ namespace Eqstra.DataProvider.AX.Providers
                 var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
                       , mzkAddressContract, userInfo.CompanyId);
 
-                
-
+                _client.saveImage(new CallContext { }, new Mzk_ImageContract[]{new Mzk_ImageContract
+                {
+                     parmCaseNumber = serviceSchedulingDetail.CaseNumber,
+                      parmFileName = "ServiceScheduling_ODOReading",
+                       parmImageData = serviceSchedulingDetail.ODOReadingSnapshot
+                }});
                 return result;
 
             }

@@ -14,6 +14,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Linq;
+using System.IO;
 namespace Eqstra.DataProvider.AX.Providers
 {
     [DataProvider(Name = "TechnicalInspection")]
@@ -309,6 +310,19 @@ namespace Eqstra.DataProvider.AX.Providers
                 }
                 if (mzk_ImageContractList.Count>0)
                 {
+                    var txtFilenName = string.Format("{0}{1}", imageCaptureList.First().CaseNumber, ".txt");
+                    var txtFileContent = string.Format("{0}|{1}", imageCaptureList.First().CaseNumber, String.Join("|", mzk_ImageContractList.Select(x => x.parmFileName)));
+                    var tmpTxtFilePath = Path.GetTempFileName();
+                        File.WriteAllText(tmpTxtFilePath, txtFileContent);
+                        var contentBytes = File.ReadAllBytes(tmpTxtFilePath);
+                    
+                    mzk_ImageContractList.Add(new Mzk_ImageContract
+                    {
+                        parmFileName = txtFilenName,
+                        parmCaseNumber = imageCaptureList.First().CaseNumber,
+                        parmImageData = Convert.ToBase64String(contentBytes)
+
+                    });
                     client.saveImage(new CallContext(), mzk_ImageContractList.ToArray()); 
                 }
                 client.Close();

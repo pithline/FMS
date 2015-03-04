@@ -217,6 +217,9 @@
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceSaveImageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -235,31 +238,31 @@
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkZipCodeContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\RoutingService.wsdl" />
-    <None Include="Service References\SSProxy\xppservice.wsdl" />
-    <None Include="Service References\SSProxy\xppservice.xsd">
+    <None Include="Service References\SSProxy\RoutingService1.wsdl" />
+    <None Include="Service References\SSProxy\xppservice2.wsdl" />
+    <None Include="Service References\SSProxy\xppservice21.wsdl" />
+    <None Include="Service References\SSProxy\xppservice8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice1.wsdl" />
-    <None Include="Service References\SSProxy\xppservice1.xsd">
+    <None Include="Service References\SSProxy\xppservice81.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice2.xsd">
+    <None Include="Service References\SSProxy\xppservice82.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice3.xsd">
+    <None Include="Service References\SSProxy\xppservice83.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice4.xsd">
+    <None Include="Service References\SSProxy\xppservice84.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice5.xsd">
+    <None Include="Service References\SSProxy\xppservice85.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice6.xsd">
+    <None Include="Service References\SSProxy\xppservice86.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice7.xsd">
+    <None Include="Service References\SSProxy\xppservice87.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract.datasource">
