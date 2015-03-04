@@ -124,905 +124,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract))]
-    public partial class XppObjectBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Mzk_ImageContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class Mzk_ImageContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmImageNameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmImage {
-            get {
-                return this.parmImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmImageField, value) != true)) {
-                    this.parmImageField = value;
-                    this.RaisePropertyChanged("parmImage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmImageName {
-            get {
-                return this.parmImageNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmImageNameField, value) != true)) {
-                    this.parmImageNameField = value;
-                    this.RaisePropertyChanged("parmImageName");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseCategoryAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkCaseCategoryAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmActionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCaseServiceRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCauseField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmMajorComponentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmSubComponentField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAction {
-            get {
-                return this.parmActionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmActionField, value) != true)) {
-                    this.parmActionField = value;
-                    this.RaisePropertyChanged("parmAction");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecID {
-            get {
-                return this.parmCaseServiceRecIDField;
-            }
-            set {
-                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCause {
-            get {
-                return this.parmCauseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCauseField, value) != true)) {
-                    this.parmCauseField = value;
-                    this.RaisePropertyChanged("parmCause");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmMajorComponent {
-            get {
-                return this.parmMajorComponentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmMajorComponentField, value) != true)) {
-                    this.parmMajorComponentField = value;
-                    this.RaisePropertyChanged("parmMajorComponent");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmSubComponent {
-            get {
-                return this.parmSubComponentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmSubComponentField, value) != true)) {
-                    this.parmSubComponentField = value;
-                    this.RaisePropertyChanged("parmSubComponent");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseServiceAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkCaseServiceAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthListField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCaseServiceRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmCompletionDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmDamageCauseField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRecommendationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmRemedyField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthList {
-            get {
-                return this.parmCaseCategoryAuthListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCaseCategoryAuthListField, value) != true)) {
-                    this.parmCaseCategoryAuthListField = value;
-                    this.RaisePropertyChanged("parmCaseCategoryAuthList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecID {
-            get {
-                return this.parmCaseServiceRecIDField;
-            }
-            set {
-                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmCompletionDate {
-            get {
-                return this.parmCompletionDateField;
-            }
-            set {
-                if ((this.parmCompletionDateField.Equals(value) != true)) {
-                    this.parmCompletionDateField = value;
-                    this.RaisePropertyChanged("parmCompletionDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmDamageCause {
-            get {
-                return this.parmDamageCauseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmDamageCauseField, value) != true)) {
-                    this.parmDamageCauseField = value;
-                    this.RaisePropertyChanged("parmDamageCause");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmRecID {
-            get {
-                return this.parmRecIDField;
-            }
-            set {
-                if ((this.parmRecIDField.Equals(value) != true)) {
-                    this.parmRecIDField = value;
-                    this.RaisePropertyChanged("parmRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRecommendation {
-            get {
-                return this.parmRecommendationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRecommendationField, value) != true)) {
-                    this.parmRecommendationField = value;
-                    this.RaisePropertyChanged("parmRecommendation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmRemedy {
-            get {
-                return this.parmRemedyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmRemedyField, value) != true)) {
-                    this.parmRemedyField = value;
-                    this.RaisePropertyChanged("parmRemedy");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkTechnicalTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkTechnicalTasksContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCaseCategoryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCaseIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCaseRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmCaseServiceRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmContactPersonAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmContactPersonNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmContactPersonPhoneField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustAccountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCustPhoneField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.EEPActionStep parmEEPActionStepField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmEmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmInspectionDueDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmServiceIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long parmServiceRecIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmStatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime parmStatusDueDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCaseCategory {
-            get {
-                return this.parmCaseCategoryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCaseCategoryField, value) != true)) {
-                    this.parmCaseCategoryField = value;
-                    this.RaisePropertyChanged("parmCaseCategory");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCaseId {
-            get {
-                return this.parmCaseIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCaseIdField, value) != true)) {
-                    this.parmCaseIdField = value;
-                    this.RaisePropertyChanged("parmCaseId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseRecID {
-            get {
-                return this.parmCaseRecIDField;
-            }
-            set {
-                if ((this.parmCaseRecIDField.Equals(value) != true)) {
-                    this.parmCaseRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmCaseServiceRecID {
-            get {
-                return this.parmCaseServiceRecIDField;
-            }
-            set {
-                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
-                    this.parmCaseServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmCaseServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmContactPersonAddress {
-            get {
-                return this.parmContactPersonAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmContactPersonAddressField, value) != true)) {
-                    this.parmContactPersonAddressField = value;
-                    this.RaisePropertyChanged("parmContactPersonAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmContactPersonName {
-            get {
-                return this.parmContactPersonNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmContactPersonNameField, value) != true)) {
-                    this.parmContactPersonNameField = value;
-                    this.RaisePropertyChanged("parmContactPersonName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmContactPersonPhone {
-            get {
-                return this.parmContactPersonPhoneField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmContactPersonPhoneField, value) != true)) {
-                    this.parmContactPersonPhoneField = value;
-                    this.RaisePropertyChanged("parmContactPersonPhone");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustAccount {
-            get {
-                return this.parmCustAccountField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustAccountField, value) != true)) {
-                    this.parmCustAccountField = value;
-                    this.RaisePropertyChanged("parmCustAccount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustAddress {
-            get {
-                return this.parmCustAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustAddressField, value) != true)) {
-                    this.parmCustAddressField = value;
-                    this.RaisePropertyChanged("parmCustAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustName {
-            get {
-                return this.parmCustNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustNameField, value) != true)) {
-                    this.parmCustNameField = value;
-                    this.RaisePropertyChanged("parmCustName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCustPhone {
-            get {
-                return this.parmCustPhoneField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCustPhoneField, value) != true)) {
-                    this.parmCustPhoneField = value;
-                    this.RaisePropertyChanged("parmCustPhone");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.EEPActionStep parmEEPActionStep {
-            get {
-                return this.parmEEPActionStepField;
-            }
-            set {
-                if ((this.parmEEPActionStepField.Equals(value) != true)) {
-                    this.parmEEPActionStepField = value;
-                    this.RaisePropertyChanged("parmEEPActionStep");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmEmail {
-            get {
-                return this.parmEmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmEmailField, value) != true)) {
-                    this.parmEmailField = value;
-                    this.RaisePropertyChanged("parmEmail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmInspectionDueDate {
-            get {
-                return this.parmInspectionDueDateField;
-            }
-            set {
-                if ((this.parmInspectionDueDateField.Equals(value) != true)) {
-                    this.parmInspectionDueDateField = value;
-                    this.RaisePropertyChanged("parmInspectionDueDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmServiceId {
-            get {
-                return this.parmServiceIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmServiceIdField, value) != true)) {
-                    this.parmServiceIdField = value;
-                    this.RaisePropertyChanged("parmServiceId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long parmServiceRecID {
-            get {
-                return this.parmServiceRecIDField;
-            }
-            set {
-                if ((this.parmServiceRecIDField.Equals(value) != true)) {
-                    this.parmServiceRecIDField = value;
-                    this.RaisePropertyChanged("parmServiceRecID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmStatus {
-            get {
-                return this.parmStatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmStatusField, value) != true)) {
-                    this.parmStatusField = value;
-                    this.RaisePropertyChanged("parmStatus");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime parmStatusDueDate {
-            get {
-                return this.parmStatusDueDateField;
-            }
-            set {
-                if ((this.parmStatusDueDateField.Equals(value) != true)) {
-                    this.parmStatusDueDateField = value;
-                    this.RaisePropertyChanged("parmStatusDueDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserID {
-            get {
-                return this.parmUserIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
-                    this.parmUserIDField = value;
-                    this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkValidateUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    [System.SerializableAttribute()]
-    public partial class MzkValidateUserContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCompanyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmCompanyNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parmUserNameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmAddress {
-            get {
-                return this.parmAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmAddressField, value) != true)) {
-                    this.parmAddressField = value;
-                    this.RaisePropertyChanged("parmAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCompany {
-            get {
-                return this.parmCompanyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCompanyField, value) != true)) {
-                    this.parmCompanyField = value;
-                    this.RaisePropertyChanged("parmCompany");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmCompanyName {
-            get {
-                return this.parmCompanyNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmCompanyNameField, value) != true)) {
-                    this.parmCompanyNameField = value;
-                    this.RaisePropertyChanged("parmCompanyName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginType {
-            get {
-                return this.parmLoginTypeField;
-            }
-            set {
-                if ((this.parmLoginTypeField.Equals(value) != true)) {
-                    this.parmLoginTypeField = value;
-                    this.RaisePropertyChanged("parmLoginType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserID {
-            get {
-                return this.parmUserIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
-                    this.parmUserIDField = value;
-                    this.RaisePropertyChanged("parmUserID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parmUserName {
-            get {
-                return this.parmUserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parmUserNameField, value) != true)) {
-                    this.parmUserNameField = value;
-                    this.RaisePropertyChanged("parmUserName");
-                }
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MzkLoginType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum MzkLoginType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Driver = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Courier = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Customer = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EEPActionStep", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
-    public enum EEPActionStep : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessNone = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessCBL = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessLicenseReg = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        GenQuery = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ServiceSchedulling = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessEPStep1 = 97,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessEPStep2 = 98,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProcessEPStep3 = 99,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        JobCardDetails = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WorkComplete = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MaintenceServiceSheduling = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SelectSupplier = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ConfirmDriver = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CTermQuoteStep1 = 100,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CTermQuoteStep2 = 101,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CTermQuoteStep3 = 102,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Procurment = 105,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Procurment_AccRej = 106,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitInspectionDetail = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitInspectionConfirmation = 107,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitInspectionDataCapture = 108,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitInspectionAcceptance = 109,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDamageConfirmation = 110,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitServiceBookingDetail = 111,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitSupplierSelection = 112,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitServiceBookingConfirmation = 113,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Completed = 114,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionDetail = 115,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitVendorSelection = 116,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionConfirmation = 117,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCollectionDataCapture = 118,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProvideCollectionDetails = 119,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SelectThirdPartyCollection = 120,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ConfirmVehicleCollection = 121,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CaptureInspectionData = 122,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CustomerApprovals = 123,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UploadDrives = 124,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CreateDrivers = 125,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Live = 126,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UploadDevices = 127,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CreateDevices = 128,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManageContract_Customer = 129,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManageContract_Contract = 130,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManageContract_AccRej = 131,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CaptureFuelCardDetails = 132,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ConfirmDeliveryAddress = 133,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ReceiveFuelCard = 134,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDriverCollection = 135,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDeliveryConfirmation = 136,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitCourierCollection = 137,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitInvoice = 138,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CaptureETagReplacementReason = 139,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ReceiveETag = 140,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitDeliverytoHyper = 141,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProvideVehicleInspectionDetails = 142,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AwaitTechnicalInspection = 143,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
     [System.SerializableAttribute()]
     public partial class AifFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1455,6 +556,953 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         Error = 2,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkTechnicalTasksContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkTechnicalTasksContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCaseCategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCaseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmCaseRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmCaseServiceRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmContactPersonAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmContactPersonNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmContactPersonPhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCustAccountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCustAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCustNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCustPhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.EEPActionStep parmEEPActionStepField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmEmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime parmInspectionDueDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmServiceIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmServiceRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime parmStatusDueDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmUserIDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCaseCategory {
+            get {
+                return this.parmCaseCategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseCategoryField, value) != true)) {
+                    this.parmCaseCategoryField = value;
+                    this.RaisePropertyChanged("parmCaseCategory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCaseId {
+            get {
+                return this.parmCaseIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseIdField, value) != true)) {
+                    this.parmCaseIdField = value;
+                    this.RaisePropertyChanged("parmCaseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseRecID {
+            get {
+                return this.parmCaseRecIDField;
+            }
+            set {
+                if ((this.parmCaseRecIDField.Equals(value) != true)) {
+                    this.parmCaseRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseServiceRecID {
+            get {
+                return this.parmCaseServiceRecIDField;
+            }
+            set {
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmContactPersonAddress {
+            get {
+                return this.parmContactPersonAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmContactPersonAddressField, value) != true)) {
+                    this.parmContactPersonAddressField = value;
+                    this.RaisePropertyChanged("parmContactPersonAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmContactPersonName {
+            get {
+                return this.parmContactPersonNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmContactPersonNameField, value) != true)) {
+                    this.parmContactPersonNameField = value;
+                    this.RaisePropertyChanged("parmContactPersonName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmContactPersonPhone {
+            get {
+                return this.parmContactPersonPhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmContactPersonPhoneField, value) != true)) {
+                    this.parmContactPersonPhoneField = value;
+                    this.RaisePropertyChanged("parmContactPersonPhone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCustAccount {
+            get {
+                return this.parmCustAccountField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCustAccountField, value) != true)) {
+                    this.parmCustAccountField = value;
+                    this.RaisePropertyChanged("parmCustAccount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCustAddress {
+            get {
+                return this.parmCustAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCustAddressField, value) != true)) {
+                    this.parmCustAddressField = value;
+                    this.RaisePropertyChanged("parmCustAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCustName {
+            get {
+                return this.parmCustNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCustNameField, value) != true)) {
+                    this.parmCustNameField = value;
+                    this.RaisePropertyChanged("parmCustName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCustPhone {
+            get {
+                return this.parmCustPhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCustPhoneField, value) != true)) {
+                    this.parmCustPhoneField = value;
+                    this.RaisePropertyChanged("parmCustPhone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.EEPActionStep parmEEPActionStep {
+            get {
+                return this.parmEEPActionStepField;
+            }
+            set {
+                if ((this.parmEEPActionStepField.Equals(value) != true)) {
+                    this.parmEEPActionStepField = value;
+                    this.RaisePropertyChanged("parmEEPActionStep");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmEmail {
+            get {
+                return this.parmEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmEmailField, value) != true)) {
+                    this.parmEmailField = value;
+                    this.RaisePropertyChanged("parmEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime parmInspectionDueDate {
+            get {
+                return this.parmInspectionDueDateField;
+            }
+            set {
+                if ((this.parmInspectionDueDateField.Equals(value) != true)) {
+                    this.parmInspectionDueDateField = value;
+                    this.RaisePropertyChanged("parmInspectionDueDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmServiceId {
+            get {
+                return this.parmServiceIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmServiceIdField, value) != true)) {
+                    this.parmServiceIdField = value;
+                    this.RaisePropertyChanged("parmServiceId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmServiceRecID {
+            get {
+                return this.parmServiceRecIDField;
+            }
+            set {
+                if ((this.parmServiceRecIDField.Equals(value) != true)) {
+                    this.parmServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmStatus {
+            get {
+                return this.parmStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmStatusField, value) != true)) {
+                    this.parmStatusField = value;
+                    this.RaisePropertyChanged("parmStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime parmStatusDueDate {
+            get {
+                return this.parmStatusDueDateField;
+            }
+            set {
+                if ((this.parmStatusDueDateField.Equals(value) != true)) {
+                    this.parmStatusDueDateField = value;
+                    this.RaisePropertyChanged("parmStatusDueDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmUserID {
+            get {
+                return this.parmUserIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
+                    this.parmUserIDField = value;
+                    this.RaisePropertyChanged("parmUserID");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="XppObjectBase", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.Mzk_ImageContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract))]
+    public partial class XppObjectBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Mzk_ImageContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class Mzk_ImageContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCaseNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmFileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmImageDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmImageNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCaseNumber {
+            get {
+                return this.parmCaseNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseNumberField, value) != true)) {
+                    this.parmCaseNumberField = value;
+                    this.RaisePropertyChanged("parmCaseNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmFileName {
+            get {
+                return this.parmFileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmFileNameField, value) != true)) {
+                    this.parmFileNameField = value;
+                    this.RaisePropertyChanged("parmFileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImage {
+            get {
+                return this.parmImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageField, value) != true)) {
+                    this.parmImageField = value;
+                    this.RaisePropertyChanged("parmImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImageData {
+            get {
+                return this.parmImageDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageDataField, value) != true)) {
+                    this.parmImageDataField = value;
+                    this.RaisePropertyChanged("parmImageData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmImageName {
+            get {
+                return this.parmImageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmImageNameField, value) != true)) {
+                    this.parmImageNameField = value;
+                    this.RaisePropertyChanged("parmImageName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseCategoryAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkCaseCategoryAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmActionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmCaseServiceRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmMajorComponentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmSubComponentField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAction {
+            get {
+                return this.parmActionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmActionField, value) != true)) {
+                    this.parmActionField = value;
+                    this.RaisePropertyChanged("parmAction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseServiceRecID {
+            get {
+                return this.parmCaseServiceRecIDField;
+            }
+            set {
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCause {
+            get {
+                return this.parmCauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCauseField, value) != true)) {
+                    this.parmCauseField = value;
+                    this.RaisePropertyChanged("parmCause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmMajorComponent {
+            get {
+                return this.parmMajorComponentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmMajorComponentField, value) != true)) {
+                    this.parmMajorComponentField = value;
+                    this.RaisePropertyChanged("parmMajorComponent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmRecID {
+            get {
+                return this.parmRecIDField;
+            }
+            set {
+                if ((this.parmRecIDField.Equals(value) != true)) {
+                    this.parmRecIDField = value;
+                    this.RaisePropertyChanged("parmRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmSubComponent {
+            get {
+                return this.parmSubComponentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmSubComponentField, value) != true)) {
+                    this.parmSubComponentField = value;
+                    this.RaisePropertyChanged("parmSubComponent");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkCaseServiceAuthorizationContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkCaseServiceAuthorizationContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmCaseServiceRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime parmCompletionDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmDamageCauseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long parmRecIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmRecommendationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmRemedyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] parmCaseCategoryAuthList {
+            get {
+                return this.parmCaseCategoryAuthListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCaseCategoryAuthListField, value) != true)) {
+                    this.parmCaseCategoryAuthListField = value;
+                    this.RaisePropertyChanged("parmCaseCategoryAuthList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmCaseServiceRecID {
+            get {
+                return this.parmCaseServiceRecIDField;
+            }
+            set {
+                if ((this.parmCaseServiceRecIDField.Equals(value) != true)) {
+                    this.parmCaseServiceRecIDField = value;
+                    this.RaisePropertyChanged("parmCaseServiceRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime parmCompletionDate {
+            get {
+                return this.parmCompletionDateField;
+            }
+            set {
+                if ((this.parmCompletionDateField.Equals(value) != true)) {
+                    this.parmCompletionDateField = value;
+                    this.RaisePropertyChanged("parmCompletionDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmDamageCause {
+            get {
+                return this.parmDamageCauseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmDamageCauseField, value) != true)) {
+                    this.parmDamageCauseField = value;
+                    this.RaisePropertyChanged("parmDamageCause");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long parmRecID {
+            get {
+                return this.parmRecIDField;
+            }
+            set {
+                if ((this.parmRecIDField.Equals(value) != true)) {
+                    this.parmRecIDField = value;
+                    this.RaisePropertyChanged("parmRecID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmRecommendation {
+            get {
+                return this.parmRecommendationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmRecommendationField, value) != true)) {
+                    this.parmRecommendationField = value;
+                    this.RaisePropertyChanged("parmRecommendation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmRemedy {
+            get {
+                return this.parmRemedyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmRemedyField, value) != true)) {
+                    this.parmRemedyField = value;
+                    this.RaisePropertyChanged("parmRemedy");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkValidateUserContract", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    [System.SerializableAttribute()]
+    public partial class MzkValidateUserContract : Eqstra.DataProvider.AX.TIProxy.XppObjectBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCompanyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmCompanyNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmUserIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmUserNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmAddress {
+            get {
+                return this.parmAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmAddressField, value) != true)) {
+                    this.parmAddressField = value;
+                    this.RaisePropertyChanged("parmAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCompany {
+            get {
+                return this.parmCompanyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCompanyField, value) != true)) {
+                    this.parmCompanyField = value;
+                    this.RaisePropertyChanged("parmCompany");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmCompanyName {
+            get {
+                return this.parmCompanyNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmCompanyNameField, value) != true)) {
+                    this.parmCompanyNameField = value;
+                    this.RaisePropertyChanged("parmCompanyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Eqstra.DataProvider.AX.TIProxy.MzkLoginType parmLoginType {
+            get {
+                return this.parmLoginTypeField;
+            }
+            set {
+                if ((this.parmLoginTypeField.Equals(value) != true)) {
+                    this.parmLoginTypeField = value;
+                    this.RaisePropertyChanged("parmLoginType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmUserID {
+            get {
+                return this.parmUserIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmUserIDField, value) != true)) {
+                    this.parmUserIDField = value;
+                    this.RaisePropertyChanged("parmUserID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmUserName {
+            get {
+                return this.parmUserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmUserNameField, value) != true)) {
+                    this.parmUserNameField = value;
+                    this.RaisePropertyChanged("parmUserName");
+                }
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EEPActionStep", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public enum EEPActionStep : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessNone = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessCBL = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessLicenseReg = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GenQuery = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ServiceSchedulling = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessEPStep1 = 97,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessEPStep2 = 98,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProcessEPStep3 = 99,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JobCardDetails = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WorkComplete = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MaintenceServiceSheduling = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SelectSupplier = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ConfirmDriver = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CTermQuoteStep1 = 100,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CTermQuoteStep2 = 101,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CTermQuoteStep3 = 102,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Procurment = 105,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Procurment_AccRej = 106,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitInspectionDetail = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitInspectionConfirmation = 107,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitInspectionDataCapture = 108,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitInspectionAcceptance = 109,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDamageConfirmation = 110,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitServiceBookingDetail = 111,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitSupplierSelection = 112,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitServiceBookingConfirmation = 113,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Completed = 114,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitCollectionDetail = 115,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitVendorSelection = 116,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitCollectionConfirmation = 117,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitCollectionDataCapture = 118,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProvideCollectionDetails = 119,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SelectThirdPartyCollection = 120,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ConfirmVehicleCollection = 121,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CaptureInspectionData = 122,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CustomerApprovals = 123,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UploadDrives = 124,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CreateDrivers = 125,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Live = 126,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UploadDevices = 127,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CreateDevices = 128,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ManageContract_Customer = 129,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ManageContract_Contract = 130,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ManageContract_AccRej = 131,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CaptureFuelCardDetails = 132,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ConfirmDeliveryAddress = 133,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ReceiveFuelCard = 134,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDriverCollection = 135,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDeliveryConfirmation = 136,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitCourierCollection = 137,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitInvoice = 138,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CaptureETagReplacementReason = 139,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ReceiveETag = 140,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitDeliverytoHyper = 141,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProvideVehicleInspectionDetails = 142,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AwaitTechnicalInspection = 143,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MzkLoginType", Namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application")]
+    public enum MzkLoginType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Driver = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Courier = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Customer = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.microsoft.com/netfx/2009/05/routing", ConfigurationName="TIProxy.IRequestReplyRouter")]
     public interface IRequestReplyRouter {
@@ -1492,14 +1540,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://tempuri.org", ConfigurationName="TIProxy.MzkTechnicalInspection")]
     public interface MzkTechnicalInspection {
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetUserDetailsRequest) of message MzkTechnicalInspectionGetUserDetailsRequest does not match the default value (getUserDetails)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getUserDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
-        
         // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionValidateUserRequest) of message MzkTechnicalInspectionValidateUserRequest does not match the default value (validateUser)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
@@ -1508,13 +1548,29 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetSubComponentsRequest) of message MzkTechnicalInspectionGetSubComponentsRequest does not match the default value (getSubComponents)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionUpdateStatusListRequest) of message MzkTechnicalInspectionUpdateStatusListRequest does not match the default value (updateStatusList)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetTasksRequest) of message MzkTechnicalInspectionGetTasksRequest does not match the default value (getTasks)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetUserDetailsRequest) of message MzkTechnicalInspectionGetUserDetailsRequest does not match the default value (getUserDetails)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getUserDetailsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionSaveImageRequest) of message MzkTechnicalInspectionSaveImageRequest does not match the default value (saveImage)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
@@ -1532,59 +1588,13 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
         System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetTasksRequest) of message MzkTechnicalInspectionGetTasksRequest does not match the default value (getTasks)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getTasksAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetSubComponentsRequest) of message MzkTechnicalInspectionGetSubComponentsRequest does not match the default value (getSubComponents)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionUpdateStatusListRequest) of message MzkTechnicalInspectionUpdateStatusListRequest does not match the default value (updateStatusList)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetUserDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        public MzkTechnicalInspectionGetUserDetailsRequest() {
-        }
-        
-        public MzkTechnicalInspectionGetUserDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            this.CallContext = CallContext;
-            this._userID = _userID;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetUserDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
-        
-        public MzkTechnicalInspectionGetUserDetailsResponse() {
-        }
-        
-        public MzkTechnicalInspectionGetUserDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
-            this.response = response;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1632,24 +1642,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetSubComponentsRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public long[] _lstCaseService;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkTechnicalInspectionGetSubComponentsRequest() {
+        public MzkTechnicalInspectionUpdateStatusListRequest() {
         }
         
-        public MzkTechnicalInspectionGetSubComponentsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
+        public MzkTechnicalInspectionUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
             this.CallContext = CallContext;
-            this._lstCaseService = _lstCaseService;
+            this._lstTasks = _lstTasks;
             this._company = _company;
         }
     }
@@ -1657,16 +1667,96 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetSubComponentsResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
         
-        public MzkTechnicalInspectionGetSubComponentsResponse() {
+        public MzkTechnicalInspectionUpdateStatusListResponse() {
         }
         
-        public MzkTechnicalInspectionGetSubComponentsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response) {
+        public MzkTechnicalInspectionUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
+        public string _company;
+        
+        public MzkTechnicalInspectionGetTasksRequest() {
+        }
+        
+        public MzkTechnicalInspectionGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+            this.CallContext = CallContext;
+            this._userId = _userId;
+            this._company = _company;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetTasksResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
+        
+        public MzkTechnicalInspectionGetTasksResponse() {
+        }
+        
+        public MzkTechnicalInspectionGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
+        
+        public MzkTechnicalInspectionGetUserDetailsRequest() {
+        }
+        
+        public MzkTechnicalInspectionGetUserDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            this.CallContext = CallContext;
+            this._userID = _userID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
+        
+        public MzkTechnicalInspectionGetUserDetailsResponse() {
+        }
+        
+        public MzkTechnicalInspectionGetUserDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -1747,24 +1837,24 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetTasksRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetSubComponentsRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userId;
+        public long[] _lstCaseService;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
         public string _company;
         
-        public MzkTechnicalInspectionGetTasksRequest() {
+        public MzkTechnicalInspectionGetSubComponentsRequest() {
         }
         
-        public MzkTechnicalInspectionGetTasksRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+        public MzkTechnicalInspectionGetSubComponentsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
             this.CallContext = CallContext;
-            this._userId = _userId;
+            this._lstCaseService = _lstCaseService;
             this._company = _company;
         }
     }
@@ -1772,58 +1862,16 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetTasksResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetTasksResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetSubComponentsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response;
         
-        public MzkTechnicalInspectionGetTasksResponse() {
+        public MzkTechnicalInspectionGetSubComponentsResponse() {
         }
         
-        public MzkTechnicalInspectionGetTasksResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionUpdateStatusListRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
-        
-        public MzkTechnicalInspectionUpdateStatusListRequest() {
-        }
-        
-        public MzkTechnicalInspectionUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
-            this.CallContext = CallContext;
-            this._lstTasks = _lstTasks;
-            this._company = _company;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionUpdateStatusListResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
-        
-        public MzkTechnicalInspectionUpdateStatusListResponse() {
-        }
-        
-        public MzkTechnicalInspectionUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
+        public MzkTechnicalInspectionGetSubComponentsResponse(Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] response) {
             this.response = response;
         }
     }
@@ -1856,31 +1904,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
-            return base.Channel.getUserDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract getUserDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
-            return base.Channel.getUserDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUser(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
             return base.Channel.validateUser(request);
         }
@@ -1908,30 +1931,82 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
-            return base.Channel.getSubComponents(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusList(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] getSubComponents(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCaseService = _lstCaseService;
+            inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponents(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusList(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
-            return base.Channel.getSubComponentsAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._lstCaseService = _lstCaseService;
+            inValue._lstTasks = _lstTasks;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponentsAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
+            return base.Channel.getTasks(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
+            inValue.CallContext = CallContext;
+            inValue._userId = _userId;
+            inValue._company = _company;
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasks(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
+            return base.Channel.getTasksAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
+            inValue.CallContext = CallContext;
+            inValue._userId = _userId;
+            inValue._company = _company;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasksAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetails(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetails(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract getUserDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._userID = _userID;
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetails(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._userID = _userID;
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetailsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1986,57 +2061,30 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasks(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
-            return base.Channel.getTasks(request);
+        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponents(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
+            return base.Channel.getSubComponents(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] getTasks(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract[] getSubComponents(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
             inValue.CallContext = CallContext;
-            inValue._userId = _userId;
+            inValue._lstCaseService = _lstCaseService;
             inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasks(inValue);
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponents(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getTasksAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request) {
-            return base.Channel.getTasksAsync(request);
+        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
+            return base.Channel.getSubComponentsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userId, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest();
+        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, long[] _lstCaseService, string _company) {
+            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest();
             inValue.CallContext = CallContext;
-            inValue._userId = _userId;
+            inValue._lstCaseService = _lstCaseService;
             inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getTasksAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusList(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
-            return base.Channel.updateStatusList(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse retVal = ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusList(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
-            return base.Channel.updateStatusListAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
-            Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
-            inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
+            return ((Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getSubComponentsAsync(inValue);
         }
     }
 }

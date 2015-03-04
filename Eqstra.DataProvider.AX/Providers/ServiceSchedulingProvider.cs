@@ -641,6 +641,8 @@ namespace Eqstra.DataProvider.AX.Providers
                 var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
                       , mzkAddressContract, userInfo.CompanyId);
 
+                
+
                 return result;
 
             }

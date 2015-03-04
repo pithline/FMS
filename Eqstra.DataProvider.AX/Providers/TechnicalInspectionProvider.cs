@@ -188,7 +188,8 @@ namespace Eqstra.DataProvider.AX.Providers
                     {
                         var tiData = JsonConvert.DeserializeObject<List<TIData>>(criterias[1].ToString());
                         var tasks = JsonConvert.DeserializeObject<List<Eqstra.DataProvider.AX.TIModels.Task>>(criterias[2].ToString());
-                        return InsertInspectionData(tiData, tasks, criterias[3].ToString());
+                        var imgs = JsonConvert.DeserializeObject<List<ImageCapture>>(criterias[3].ToString());
+                        return InsertInspectionData(tiData, tasks,imgs, criterias[4].ToString());
 
 
                     }
@@ -243,7 +244,7 @@ namespace Eqstra.DataProvider.AX.Providers
         }
 
 
-        private bool InsertInspectionData(List<TIData> tiData, List<Eqstra.DataProvider.AX.TIModels.Task> tasks ,string companyId)
+        private bool InsertInspectionData(List<TIData> tiData, List<Eqstra.DataProvider.AX.TIModels.Task> tasks ,List<ImageCapture> imageCaptureList,string companyId)
         {
             try
             {
@@ -294,6 +295,22 @@ namespace Eqstra.DataProvider.AX.Providers
                     } 
                 }
                 var res = client.updateStatusList(new CallContext(),taskList.ToArray(), companyId);
+                var mzk_ImageContractList = new List<Mzk_ImageContract>();
+
+                foreach (var img in imageCaptureList)
+                {
+                    mzk_ImageContractList.Add(new Mzk_ImageContract
+                    {
+                          parmFileName = string.Format("{0}_{1}{2}",img.RepairId,img.Component,".png"),
+                          parmCaseNumber = img.CaseNumber,
+                           parmImageData =  img.ImageData
+                     
+                    });
+                }
+                if (mzk_ImageContractList.Count>0)
+                {
+                    client.saveImage(new CallContext(), mzk_ImageContractList.ToArray()); 
+                }
                 client.Close();
                 return res != null && res.Length > 0;
             }

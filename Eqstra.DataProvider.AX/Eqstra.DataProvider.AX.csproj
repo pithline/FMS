@@ -93,6 +93,7 @@
     <Compile Include="TIModels\CVehicle\CPOI.cs" />
     <Compile Include="TIModels\CVehicle\CTyres.cs" />
     <Compile Include="TIModels\CVehicle\CVehicleDetails.cs" />
+    <Compile Include="TIModels\ImageCapture.cs" />
     <Compile Include="TIModels\MaintenanceRepair.cs" />
     <Compile Include="TIModels\PVehicle\PAccessories.cs" />
     <Compile Include="TIModels\PVehicle\PassengerVehicle.cs" />
