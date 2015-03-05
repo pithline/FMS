@@ -364,10 +364,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateFirstOption,
-                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateSecondOption,
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? DateTime.Today : mzk.parmPreferredDateFirstOption,
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ? DateTime.Today : mzk.parmPreferredDateSecondOption,
                             ODOReading = mzk.parmODOReading.ToString(),
-                            ODOReadingDate = mzk.parmODOReadingDate < DateTime.Today ? DateTime.Today : mzk.parmODOReadingDate,
+                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? DateTime.Today : mzk.parmODOReadingDate,
                             ServiceType = GetServiceTypesAsync(caseNumber, _userInfo.CompanyId),
                             LocationTypes = GetLocationTypeAsync(serviceRecId, _userInfo.CompanyId),
                             SupplierName = mzk.parmSupplierName,
