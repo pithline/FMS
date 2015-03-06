@@ -22,8 +22,16 @@
 			<CommandBar.SecondaryCommands>
 				<AppBarButton Icon="Sync"
 							  Label="Sync"
-							  Command="{Binding SyncCommand}" />
-			</CommandBar.SecondaryCommands>
+							   >
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Passenger" Command="{Binding SyncCommand }" CommandParameter="Passenger"/>
+                            <MenuFlyoutItem Text="Commercial" Command="{Binding SyncCommand}" CommandParameter="Commercial"/>
+                            <MenuFlyoutItem Text="Trailer" Command="{Binding SyncCommand}" CommandParameter="Trailer"/>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
 		</CommandBar>
 	</prism:VisualStateAwarePage.BottomAppBar>
 

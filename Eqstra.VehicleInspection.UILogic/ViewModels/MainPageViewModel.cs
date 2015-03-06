@@ -21,6 +21,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.UI;
@@ -72,7 +73,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             });
 
-            this.SyncCommand = new DelegateCommand(() =>
+            this.SyncCommand = new DelegateCommand<string>((vehicleType) =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
@@ -93,7 +94,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                                     await GetTasksFromDbAsync();
                                     GetAllCount();
                                     GetAppointments();
-                                    AppSettings.Instance.IsSynchronizing = 0;
+                                    //AppSettings.Instance.IsSynchronizing = 0;
                                     AppSettings.Instance.Synced = true;
                                 });
 
@@ -106,7 +107,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                        await VIServiceHelper.Instance.SyncAllAsync();
+                        switch (vehicleType)
+                        {
+                            case "Passenger":
+                                await VIServiceHelper.Instance.SyncPassengerAsync();
+                                break;
+                            case "Commercial": await VIServiceHelper.Instance.SyncCommercialAsync(); break;
+                            case "Trailer": await VIServiceHelper.Instance.SyncTrailerAsync(); break;
+                            default:
+                                break;
+                        }
+
+
                         await VIServiceHelper.Instance.SyncImagesAsync();
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
@@ -331,7 +343,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         }
         public DelegateCommand BingWeatherCommand { get; set; }
 
-        public DelegateCommand SyncCommand { get; set; }
+        public ICommand SyncCommand { get; set; }
 
 
         /// <summary>

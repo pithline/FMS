@@ -397,52 +397,58 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
             }
         }
 
-        async public System.Threading.Tasks.Task SyncAllAsync()
+        async public System.Threading.Tasks.Task SyncPassengerAsync()
         {
-            this.EditPassengerTrimInteriorToSvcAsync();
+            await this.EditPassengerTrimInteriorToSvcAsync();
 
-            this.EditPassengerAccessoriesToSvcAsync();
+            await this.EditPassengerAccessoriesToSvcAsync();
 
-            this.EditPassengerBodyworkToSvcAsync();
+            await this.EditPassengerBodyworkToSvcAsync();
 
-            this.EditPassengerVehicleDetailsToSvcAsync();
+            await this.EditPassengerVehicleDetailsToSvcAsync();
 
-            this.EditPassengerTyreConditionToSvcAsync();
+            await this.EditPassengerTyreConditionToSvcAsync();
 
-            this.EditPassengerGlassToSvcAsync();
+            await this.EditPassengerGlassToSvcAsync();
 
-            this.EditPassengerMechanicalConditionAsync();
+            await this.EditPassengerMechanicalConditionAsync();
 
-            this.EditCommercialAccessoriesToSvcAsync();
+            await this.EditPassengerInspectionProofToSvcAsync();
 
-            this.EditCommercialVehicleDetailsToSvcAsync();
+        }
 
-            this.EditCommercialTrimInteriorToSvcAsync();
+        public async System.Threading.Tasks.Task SyncTrailerAsync()
+        {
+            await this.EditTrailerAccessoriesToSvcAsync();
 
-            this.EditCommercialChassisBodyToSvcAsync();
+            await this.EditTrailerChassisBodyToSvcAsync();
 
-            this.EditCommercialTyreConditionToSvcAsync();
+            await this.EditTrailerGlassToSvcAsync();
 
-            this.EditCommercialGlassToSvcAsync();
+            await this.EditTrailerMechConditionToSvcAsync();
 
-            this.EditCommercialMechConditionToSvcAsync();
+            await this.EditTrailerTyreConditionToSvcAsync();
 
-            this.EditCommercialInspectionProofToSvcAsync();
+            await this.EditTrailerInspectionProofToSvcAsync();
+        }
 
-            this.EditPassengerInspectionProofToSvcAsync();
+        public async System.Threading.Tasks.Task SyncCommercialAsync()
+        {
+            await this.EditCommercialAccessoriesToSvcAsync();
 
-            this.EditTrailerAccessoriesToSvcAsync();
+            await this.EditCommercialVehicleDetailsToSvcAsync();
 
-            this.EditTrailerChassisBodyToSvcAsync();
+            await this.EditCommercialTrimInteriorToSvcAsync();
 
-            this.EditTrailerGlassToSvcAsync();
+            await this.EditCommercialChassisBodyToSvcAsync();
 
-            this.EditTrailerMechConditionToSvcAsync();
+            await this.EditCommercialTyreConditionToSvcAsync();
 
-            this.EditTrailerTyreConditionToSvcAsync();
+            await this.EditCommercialGlassToSvcAsync();
 
-            this.EditTrailerInspectionProofToSvcAsync();
+            await this.EditCommercialMechConditionToSvcAsync();
 
+            await this.EditCommercialInspectionProofToSvcAsync();
         }
 
 
