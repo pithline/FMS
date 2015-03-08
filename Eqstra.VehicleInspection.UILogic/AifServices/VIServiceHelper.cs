@@ -434,21 +434,29 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
         public async System.Threading.Tasks.Task SyncCommercialAsync()
         {
-            await this.EditCommercialAccessoriesToSvcAsync();
+            try
+            {
+                await this.EditCommercialAccessoriesToSvcAsync();
 
-            await this.EditCommercialVehicleDetailsToSvcAsync();
+                await this.EditCommercialVehicleDetailsToSvcAsync();
 
-            await this.EditCommercialTrimInteriorToSvcAsync();
+                await this.EditCommercialTrimInteriorToSvcAsync();
 
-            await this.EditCommercialChassisBodyToSvcAsync();
+                await this.EditCommercialChassisBodyToSvcAsync();
 
-            await this.EditCommercialTyreConditionToSvcAsync();
+                await this.EditCommercialTyreConditionToSvcAsync();
 
-            await this.EditCommercialGlassToSvcAsync();
+                await this.EditCommercialGlassToSvcAsync();
 
-            await this.EditCommercialMechConditionToSvcAsync();
+                await this.EditCommercialMechConditionToSvcAsync();
 
-            await this.EditCommercialInspectionProofToSvcAsync();
+                await this.EditCommercialInspectionProofToSvcAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -695,8 +703,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
                 var pVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PVehicleDetails>()).Where(x => x.ShouldSave);
 
-                if (pVehicleDetailsData != null)
-                {
+                
                     foreach (var pVehicleDetails in pVehicleDetailsData)
                     {
                         mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
@@ -708,30 +715,33 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                         });
                     }
-                }
 
-                var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
-                var pVehicleDetailsList = new ObservableCollection<PVehicleDetails>();
-                if (resp.response != null)
-                {
-                    foreach (var x in resp.response.Where(x => x != null))
+                    if (mzkVehicleDetailsContractColl.Count>0)
                     {
-                        pVehicleDetailsList.Add(new PVehicleDetails
+
+                        var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
+                        var pVehicleDetailsList = new ObservableCollection<PVehicleDetails>();
+                        if (resp.response != null)
                         {
-                            IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                            RecID = x.parmRecID,
-                            ShouldSave = false,
-                            TableId = x.parmTableId,
-                            VehicleInsRecID = x.parmVehicleInsRecID
+                            foreach (var x in resp.response.Where(x => x != null))
+                            {
+                                pVehicleDetailsList.Add(new PVehicleDetails
+                                {
+                                    IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                                    RecID = x.parmRecID,
+                                    ShouldSave = false,
+                                    TableId = x.parmTableId,
+                                    VehicleInsRecID = x.parmVehicleInsRecID
 
-                        });
+                                });
+                            }
+                            await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
+                            foreach (var item in pVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
+                            {
+                                await SyncImagesAsync(item.Key, "PVehicleDetails");
+                            }
+                        } 
                     }
-                    await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
-                    foreach (var item in pVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "PVehicleDetails");
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -753,8 +763,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var pAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerAccessoriesContract> mzkMobiPassengerAccessoriesContractColl = new ObservableCollection<MzkMobiPassengerAccessoriesContract>();
-                if (pAccessoriesData != null)
-                {
+               
                     foreach (var pAccessories in pAccessoriesData)
                     {
                         mzkMobiPassengerAccessoriesContractColl.Add(new MzkMobiPassengerAccessoriesContract()
@@ -813,71 +822,74 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                     }
 
-                }
-                var res = await client.editPassengerAccessoriesAsync(mzkMobiPassengerAccessoriesContractColl, _userInfo.CompanyId);
-                var pAccessoriesList = new ObservableCollection<PAccessories>();
-                if (res.response != null)
-                {
-                    foreach (var x in res.response.Where(x => x != null))
+                    if (mzkMobiPassengerAccessoriesContractColl.Count>0)
                     {
-                        pAccessoriesList.Add(new PAccessories
+
+                        var res = await client.editPassengerAccessoriesAsync(mzkMobiPassengerAccessoriesContractColl, _userInfo.CompanyId);
+                        var pAccessoriesList = new ObservableCollection<PAccessories>();
+                        if (res.response != null)
                         {
-                            HasAircon = x.parmHasAircon == NoYes.Yes ? true : false,
-                            HasAlarm = x.parmHasAlarm == NoYes.Yes ? true : false,
-                            HasCanopy = x.parmHasCanopy == NoYes.Yes ? true : false,
-                            HasCDShuffle = x.parmHasCDShuttle == NoYes.Yes ? true : false,
-                            HasJack = x.parmHasJack == NoYes.Yes ? true : false,
-                            HasKey = x.parmHasKey == NoYes.Yes ? true : false,
-                            HasMags = x.parmHasMaps == NoYes.Yes ? true : false,
-                            HasNavigation = x.parmHasNavigation == NoYes.Yes ? true : false,
-                            HasRadio = x.parmHasRadio == NoYes.Yes ? true : false,
-                            HasServicesBook = x.parmHasServicesBook == NoYes.Yes ? true : false,
-                            HasSpareKeys = x.parmHasSparekey == NoYes.Yes ? true : false,
-                            HasSpareTyre = x.parmHasSpareType == NoYes.Yes ? true : false,
-                            HasTools = x.parmHasTools == NoYes.Yes ? true : false,
-                            HasTrackingUnit = x.parmHasTrackingUnit == NoYes.Yes ? true : false,
-                            IsOthers = x.parmHasOthers == NoYes.Yes ? true : false,
-                            IsAirconDmg = x.parmIsDamagedAircon == NoYes.Yes ? true : false,
-                            IsAlarmDmg = x.parmIsDamagedAlarm == NoYes.Yes ? true : false,
-                            IsCanopyDmg = x.parmIsDamagedCanopy == NoYes.Yes ? true : false,
-                            IsCDShuffleDmg = x.parmIsDamagedCDShuttle == NoYes.Yes ? true : false,
-                            IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
-                            IsKeyDmg = x.parmIsDamagedKey == NoYes.Yes ? true : false,
-                            IsMagsDmg = x.parmIsDamagedMaps == NoYes.Yes ? true : false,
-                            IsNavigationDmg = x.parmIsDamagedNavigation == NoYes.Yes ? true : false,
-                            IsRadioDmg = x.parmIsDamagedRadio == NoYes.Yes ? true : false,
-                            IsServicesBookDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
-                            IsSpareKeysDmg = x.parmIsDamagedSparekey == NoYes.Yes ? true : false,
-                            IsSpareTyreDmg = x.parmIsDamagedSpareType == NoYes.Yes ? true : false,
-                            IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
-                            IsTrackingUnitDmg = x.parmIsDamagedTrackingUnit == NoYes.Yes ? true : false,
-                            AirconComment = x.parmAirconComments,
-                            AlarmComment = x.parmAlarmComments,
-                            CanopyComment = x.parmCanopyComments,
-                            CDShuffleComment = x.parmCDShuttleComments,
-                            JackComment = x.parmJackComments,
-                            KeyComment = x.parmKeyComments,
-                            MagsComment = x.parmMapsComments,
-                            NavigationComment = x.parmNavigationComments,
-                            RadioComment = x.parmRadioComments,
-                            ServicesBookComment = x.parmServiceBooksComments,
-                            SpareKeysComment = x.parmSpareKeysComments,
-                            SpareTyreComment = x.parmSpareTypeComments,
-                            ToolsComment = x.parmToolComments,
-                            TrackingUnitComment = x.parmTrackLineComments,
-                            OthersComment = x.parmOtherComments,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
+                            foreach (var x in res.response.Where(x => x != null))
+                            {
+                                pAccessoriesList.Add(new PAccessories
+                                {
+                                    HasAircon = x.parmHasAircon == NoYes.Yes ? true : false,
+                                    HasAlarm = x.parmHasAlarm == NoYes.Yes ? true : false,
+                                    HasCanopy = x.parmHasCanopy == NoYes.Yes ? true : false,
+                                    HasCDShuffle = x.parmHasCDShuttle == NoYes.Yes ? true : false,
+                                    HasJack = x.parmHasJack == NoYes.Yes ? true : false,
+                                    HasKey = x.parmHasKey == NoYes.Yes ? true : false,
+                                    HasMags = x.parmHasMaps == NoYes.Yes ? true : false,
+                                    HasNavigation = x.parmHasNavigation == NoYes.Yes ? true : false,
+                                    HasRadio = x.parmHasRadio == NoYes.Yes ? true : false,
+                                    HasServicesBook = x.parmHasServicesBook == NoYes.Yes ? true : false,
+                                    HasSpareKeys = x.parmHasSparekey == NoYes.Yes ? true : false,
+                                    HasSpareTyre = x.parmHasSpareType == NoYes.Yes ? true : false,
+                                    HasTools = x.parmHasTools == NoYes.Yes ? true : false,
+                                    HasTrackingUnit = x.parmHasTrackingUnit == NoYes.Yes ? true : false,
+                                    IsOthers = x.parmHasOthers == NoYes.Yes ? true : false,
+                                    IsAirconDmg = x.parmIsDamagedAircon == NoYes.Yes ? true : false,
+                                    IsAlarmDmg = x.parmIsDamagedAlarm == NoYes.Yes ? true : false,
+                                    IsCanopyDmg = x.parmIsDamagedCanopy == NoYes.Yes ? true : false,
+                                    IsCDShuffleDmg = x.parmIsDamagedCDShuttle == NoYes.Yes ? true : false,
+                                    IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
+                                    IsKeyDmg = x.parmIsDamagedKey == NoYes.Yes ? true : false,
+                                    IsMagsDmg = x.parmIsDamagedMaps == NoYes.Yes ? true : false,
+                                    IsNavigationDmg = x.parmIsDamagedNavigation == NoYes.Yes ? true : false,
+                                    IsRadioDmg = x.parmIsDamagedRadio == NoYes.Yes ? true : false,
+                                    IsServicesBookDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
+                                    IsSpareKeysDmg = x.parmIsDamagedSparekey == NoYes.Yes ? true : false,
+                                    IsSpareTyreDmg = x.parmIsDamagedSpareType == NoYes.Yes ? true : false,
+                                    IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
+                                    IsTrackingUnitDmg = x.parmIsDamagedTrackingUnit == NoYes.Yes ? true : false,
+                                    AirconComment = x.parmAirconComments,
+                                    AlarmComment = x.parmAlarmComments,
+                                    CanopyComment = x.parmCanopyComments,
+                                    CDShuffleComment = x.parmCDShuttleComments,
+                                    JackComment = x.parmJackComments,
+                                    KeyComment = x.parmKeyComments,
+                                    MagsComment = x.parmMapsComments,
+                                    NavigationComment = x.parmNavigationComments,
+                                    RadioComment = x.parmRadioComments,
+                                    ServicesBookComment = x.parmServiceBooksComments,
+                                    SpareKeysComment = x.parmSpareKeysComments,
+                                    SpareTyreComment = x.parmSpareTypeComments,
+                                    ToolsComment = x.parmToolComments,
+                                    TrackingUnitComment = x.parmTrackLineComments,
+                                    OthersComment = x.parmOtherComments,
+                                    VehicleInsRecID = x.parmVehicleInsRecID,
+                                    TableId = x.parmTableId,
+                                    RecID = x.parmRecID,
+                                    ShouldSave = false
+                                });
+                            }
+                            await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
+                            foreach (var item in pAccessoriesList.GroupBy(x => x.VehicleInsRecID))
+                            {
+                                await SyncImagesAsync(item.Key, "PAccessories");
+                            }
+                        } 
                     }
-                    await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
-                    foreach (var item in pAccessoriesList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "PAccessories");
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -899,115 +911,117 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var pBodyworkData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PBodywork>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerBodyworkContract> mzkMobiPassengerBodyworkContractColl = new ObservableCollection<MzkMobiPassengerBodyworkContract>();
-                if (pBodyworkData != null)
+
+                foreach (var pBodywork in pBodyworkData)
                 {
-                    foreach (var pBodywork in pBodyworkData)
+
+                    mzkMobiPassengerBodyworkContractColl.Add(new MzkMobiPassengerBodyworkContract()
                     {
+                        parmIsDamagedBonnet = pBodywork.IsBonnetDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDoorHandles = pBodywork.IsDoorHandleDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHailDamage = pBodywork.IsHailDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHubcaps = pBodywork.IsHubcapsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLFBumper = pBodywork.IsLFBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLFDoor = pBodywork.IsLFDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLFWheelArch = pBodywork.IsLFWheelArchDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLRBumper = pBodywork.IsLRBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLRDoor = pBodywork.IsLRDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLRWheelArch = pBodywork.IsLRWheelArchDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLeftSide = pBodywork.IsLeftSideDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRFBumper = pBodywork.IsRFBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRFDoor = pBodywork.IsRFDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRFWheelArch = pBodywork.IsRFWheelArchDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRRBumper = pBodywork.IsRRBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRRDoor = pBodywork.IsRRDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRRWheelArch = pBodywork.IsRRWheelArchDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRightSide = pBodywork.IsRightSideDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRoof = pBodywork.IsRoofDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWipers = pBodywork.IsWipersDmg ? NoYes.Yes : NoYes.No,
 
-                        mzkMobiPassengerBodyworkContractColl.Add(new MzkMobiPassengerBodyworkContract()
-                        {
-                            parmIsDamagedBonnet = pBodywork.IsBonnetDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDoorHandles = pBodywork.IsDoorHandleDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHailDamage = pBodywork.IsHailDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHubcaps = pBodywork.IsHubcapsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLFBumper = pBodywork.IsLFBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLFDoor = pBodywork.IsLFDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLFWheelArch = pBodywork.IsLFWheelArchDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLRBumper = pBodywork.IsLRBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLRDoor = pBodywork.IsLRDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLRWheelArch = pBodywork.IsLRWheelArchDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLeftSide = pBodywork.IsLeftSideDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRFBumper = pBodywork.IsRFBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRFDoor = pBodywork.IsRFDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRFWheelArch = pBodywork.IsRFWheelArchDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRRBumper = pBodywork.IsRRBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRRDoor = pBodywork.IsRRDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRRWheelArch = pBodywork.IsRRWheelArchDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRightSide = pBodywork.IsRightSideDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRoof = pBodywork.IsRoofDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWipers = pBodywork.IsWipersDmg ? NoYes.Yes : NoYes.No,
+                        parmHailDamageComments = pBodywork.GVHailDamageComment,
+                        parmHubcapsComments = pBodywork.GVHubcapsComment,
+                        parmLFDoorComments = pBodywork.GVLFDoorComment,
+                        parmLRBumperComments = pBodywork.GVLRBumperComment,
+                        parmLRDoorComments = pBodywork.GVLRDoorComment,
+                        parmLRWheelArchComments = pBodywork.GVLRWheelArchComment,
+                        parmRFBumperComments = pBodywork.GVRFBumperComment,
+                        parmRFDoorComments = pBodywork.GVRFDoorComment,
+                        parmRFWheelArchComments = pBodywork.GVRFWheelArchComment,
+                        parmRRBumperComments = pBodywork.GVRRBumperComment,
+                        parmRRDoorComments = pBodywork.GVRRDoorComment,
+                        parmRRWheelArchComments = pBodywork.GVRRWheelArchComment,
+                        parmRightSideComments = pBodywork.GVRightSideComment,
+                        parmRoofComments = pBodywork.GVRoofComment,
+                        parmWipersComments = pBodywork.GVWipersComment,
 
-                            parmHailDamageComments = pBodywork.GVHailDamageComment,
-                            parmHubcapsComments = pBodywork.GVHubcapsComment,
-                            parmLFDoorComments = pBodywork.GVLFDoorComment,
-                            parmLRBumperComments = pBodywork.GVLRBumperComment,
-                            parmLRDoorComments = pBodywork.GVLRDoorComment,
-                            parmLRWheelArchComments = pBodywork.GVLRWheelArchComment,
-                            parmRFBumperComments = pBodywork.GVRFBumperComment,
-                            parmRFDoorComments = pBodywork.GVRFDoorComment,
-                            parmRFWheelArchComments = pBodywork.GVRFWheelArchComment,
-                            parmRRBumperComments = pBodywork.GVRRBumperComment,
-                            parmRRDoorComments = pBodywork.GVRRDoorComment,
-                            parmRRWheelArchComments = pBodywork.GVRRWheelArchComment,
-                            parmRightSideComments = pBodywork.GVRightSideComment,
-                            parmRoofComments = pBodywork.GVRoofComment,
-                            parmWipersComments = pBodywork.GVWipersComment,
+                        parmVehicleInsRecID = pBodywork.VehicleInsRecID,
+                        parmTableId = pBodywork.TableId,
+                        parmRecID = pBodywork.RecID,
 
-                            parmVehicleInsRecID = pBodywork.VehicleInsRecID,
-                            parmTableId = pBodywork.TableId,
-                            parmRecID = pBodywork.RecID,
-
-                        });
-                    }
+                    });
                 }
-                var res = await client.editPassengerBodyworkAsync(mzkMobiPassengerBodyworkContractColl, _userInfo.CompanyId);
-
-                var pBodyworkList = new ObservableCollection<PBodywork>();
-
-                if (res.response != null)
+                if (mzkMobiPassengerBodyworkContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+
+                    var res = await client.editPassengerBodyworkAsync(mzkMobiPassengerBodyworkContractColl, _userInfo.CompanyId);
+
+                    var pBodyworkList = new ObservableCollection<PBodywork>();
+
+                    if (res.response != null)
                     {
-
-
-                        pBodyworkList.Add(new PBodywork
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            IsBonnetDmg = x.parmIsDamagedBonnet == NoYes.Yes ? true : false,
-                            IsDoorHandleDmg = x.parmIsDamagedDoorHandles == NoYes.Yes ? true : false,
-                            IsHailDmg = x.parmIsDamagedHailDamage == NoYes.Yes ? true : false,
-                            IsHubcapsDmg = x.parmIsDamagedHubcaps == NoYes.Yes ? true : false,
-                            IsLFBumperDmg = x.parmIsDamagedLFBumper == NoYes.Yes ? true : false,
-                            IsLFDoorDmg = x.parmIsDamagedLFDoor == NoYes.Yes ? true : false,
-                            IsLFWheelArchDmg = x.parmIsDamagedLFWheelArch == NoYes.Yes ? true : false,
-                            IsLRBumperDmg = x.parmIsDamagedLRBumper == NoYes.Yes ? true : false,
-                            IsLRDoorDmg = x.parmIsDamagedLRDoor == NoYes.Yes ? true : false,
-                            IsLRWheelArchDmg = x.parmIsDamagedLRWheelArch == NoYes.Yes ? true : false,
-                            IsLeftSideDmg = x.parmIsDamagedLeftSide == NoYes.Yes ? true : false,
-                            IsRFBumperDmg = x.parmIsDamagedRFBumper == NoYes.Yes ? true : false,
-                            IsRFDoorDmg = x.parmIsDamagedRFDoor == NoYes.Yes ? true : false,
-                            IsRFWheelArchDmg = x.parmIsDamagedRFWheelArch == NoYes.Yes ? true : false,
-                            IsRRBumperDmg = x.parmIsDamagedRRBumper == NoYes.Yes ? true : false,
-                            IsRRDoorDmg = x.parmIsDamagedRRDoor == NoYes.Yes ? true : false,
-                            IsRRWheelArchDmg = x.parmIsDamagedRRWheelArch == NoYes.Yes ? true : false,
-                            IsRightSideDmg = x.parmIsDamagedRightSide == NoYes.Yes ? true : false,
-                            IsRoofDmg = x.parmIsDamagedRoof == NoYes.Yes ? true : false,
-                            IsWipersDmg = x.parmIsDamagedWipers == NoYes.Yes ? true : false,
-                            GVHailDamageComment = x.parmHailDamageComments,
-                            GVHubcapsComment = x.parmHubcapsComments,
-                            GVLFDoorComment = x.parmLFDoorComments,
-                            GVLRBumperComment = x.parmLRBumperComments,
-                            GVLRDoorComment = x.parmLRDoorComments,
-                            GVLRWheelArchComment = x.parmLRWheelArchComments,
-                            GVRFBumperComment = x.parmRFBumperComments,
-                            GVRFDoorComment = x.parmRFDoorComments,
-                            GVRFWheelArchComment = x.parmRFWheelArchComments,
-                            GVRRBumperComment = x.parmRRBumperComments,
-                            GVRRDoorComment = x.parmRRDoorComments,
-                            GVRRWheelArchComment = x.parmRRWheelArchComments,
-                            GVRightSideComment = x.parmRightSideComments,
-                            GVRoofComment = x.parmRoofComments,
-                            GVWipersComment = x.parmWipersComments,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
-                    foreach (var item in pBodyworkList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "PBodywork");
+
+                            pBodyworkList.Add(new PBodywork
+                            {
+                                IsBonnetDmg = x.parmIsDamagedBonnet == NoYes.Yes ? true : false,
+                                IsDoorHandleDmg = x.parmIsDamagedDoorHandles == NoYes.Yes ? true : false,
+                                IsHailDmg = x.parmIsDamagedHailDamage == NoYes.Yes ? true : false,
+                                IsHubcapsDmg = x.parmIsDamagedHubcaps == NoYes.Yes ? true : false,
+                                IsLFBumperDmg = x.parmIsDamagedLFBumper == NoYes.Yes ? true : false,
+                                IsLFDoorDmg = x.parmIsDamagedLFDoor == NoYes.Yes ? true : false,
+                                IsLFWheelArchDmg = x.parmIsDamagedLFWheelArch == NoYes.Yes ? true : false,
+                                IsLRBumperDmg = x.parmIsDamagedLRBumper == NoYes.Yes ? true : false,
+                                IsLRDoorDmg = x.parmIsDamagedLRDoor == NoYes.Yes ? true : false,
+                                IsLRWheelArchDmg = x.parmIsDamagedLRWheelArch == NoYes.Yes ? true : false,
+                                IsLeftSideDmg = x.parmIsDamagedLeftSide == NoYes.Yes ? true : false,
+                                IsRFBumperDmg = x.parmIsDamagedRFBumper == NoYes.Yes ? true : false,
+                                IsRFDoorDmg = x.parmIsDamagedRFDoor == NoYes.Yes ? true : false,
+                                IsRFWheelArchDmg = x.parmIsDamagedRFWheelArch == NoYes.Yes ? true : false,
+                                IsRRBumperDmg = x.parmIsDamagedRRBumper == NoYes.Yes ? true : false,
+                                IsRRDoorDmg = x.parmIsDamagedRRDoor == NoYes.Yes ? true : false,
+                                IsRRWheelArchDmg = x.parmIsDamagedRRWheelArch == NoYes.Yes ? true : false,
+                                IsRightSideDmg = x.parmIsDamagedRightSide == NoYes.Yes ? true : false,
+                                IsRoofDmg = x.parmIsDamagedRoof == NoYes.Yes ? true : false,
+                                IsWipersDmg = x.parmIsDamagedWipers == NoYes.Yes ? true : false,
+                                GVHailDamageComment = x.parmHailDamageComments,
+                                GVHubcapsComment = x.parmHubcapsComments,
+                                GVLFDoorComment = x.parmLFDoorComments,
+                                GVLRBumperComment = x.parmLRBumperComments,
+                                GVLRDoorComment = x.parmLRDoorComments,
+                                GVLRWheelArchComment = x.parmLRWheelArchComments,
+                                GVRFBumperComment = x.parmRFBumperComments,
+                                GVRFDoorComment = x.parmRFDoorComments,
+                                GVRFWheelArchComment = x.parmRFWheelArchComments,
+                                GVRRBumperComment = x.parmRRBumperComments,
+                                GVRRDoorComment = x.parmRRDoorComments,
+                                GVRRWheelArchComment = x.parmRRWheelArchComments,
+                                GVRightSideComment = x.parmRightSideComments,
+                                GVRoofComment = x.parmRoofComments,
+                                GVWipersComment = x.parmWipersComments,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PBodywork>(pBodyworkList);
+                        foreach (var item in pBodyworkList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PBodywork");
+                        }
                     }
                 }
             }
@@ -1031,77 +1045,79 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var pTrimInteriorData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PTrimInterior>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerTrimInteriorContract> mzkMobiPassengerTrimInteriorContractColl = new ObservableCollection<MzkMobiPassengerTrimInteriorContract>();
-                if (pTrimInteriorData != null)
+
+                foreach (var pTrimInterior in pTrimInteriorData)
                 {
-                    foreach (var pTrimInterior in pTrimInteriorData)
+                    mzkMobiPassengerTrimInteriorContractColl.Add(new MzkMobiPassengerTrimInteriorContract()
                     {
-                        mzkMobiPassengerTrimInteriorContractColl.Add(new MzkMobiPassengerTrimInteriorContract()
-                        {
-                            parmCarpetsComments = pTrimInterior.CarpetComment,
-                            parmDashComments = pTrimInterior.DashComment,
-                            parmInternalTrimComments = pTrimInterior.InternalTrimComment,
-                            parmLFDoorTrimComments = pTrimInterior.LFDoorTrimComment,
-                            parmLRDoorTrimComments = pTrimInterior.LRDoorTrimComment,
-                            parmPassengerSeatComments = pTrimInterior.PassengerSeatComment,
-                            parmRFDoorTrimComments = pTrimInterior.RFDoorTrimComment,
-                            parmRRDoorTrimComments = pTrimInterior.RRDoorTrimComment,
-                            parmRearSeatComments = pTrimInterior.RearSeatComment,
+                        parmCarpetsComments = pTrimInterior.CarpetComment,
+                        parmDashComments = pTrimInterior.DashComment,
+                        parmInternalTrimComments = pTrimInterior.InternalTrimComment,
+                        parmLFDoorTrimComments = pTrimInterior.LFDoorTrimComment,
+                        parmLRDoorTrimComments = pTrimInterior.LRDoorTrimComment,
+                        parmPassengerSeatComments = pTrimInterior.PassengerSeatComment,
+                        parmRFDoorTrimComments = pTrimInterior.RFDoorTrimComment,
+                        parmRRDoorTrimComments = pTrimInterior.RRDoorTrimComment,
+                        parmRearSeatComments = pTrimInterior.RearSeatComment,
 
-                            parmIsDamagedCarpets = pTrimInterior.IsCarpetDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDash = pTrimInterior.IsDashDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedInternalTrim = pTrimInterior.IsInternalTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLFDoorTrim = pTrimInterior.IsLFDoorTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLRDoorTrim = pTrimInterior.IsLRDoorTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPassengerSeat = pTrimInterior.IsPassengerSeatDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRFDoorTrim = pTrimInterior.IsRFDoorTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRRDoorTrim = pTrimInterior.IsRRDoorTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRearSeat = pTrimInterior.IsRearSeatDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedCarpets = pTrimInterior.IsCarpetDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDash = pTrimInterior.IsDashDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedInternalTrim = pTrimInterior.IsInternalTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLFDoorTrim = pTrimInterior.IsLFDoorTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLRDoorTrim = pTrimInterior.IsLRDoorTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPassengerSeat = pTrimInterior.IsPassengerSeatDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRFDoorTrim = pTrimInterior.IsRFDoorTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRRDoorTrim = pTrimInterior.IsRRDoorTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRearSeat = pTrimInterior.IsRearSeatDmg ? NoYes.Yes : NoYes.No,
 
-                            parmVehicleInsRecID = pTrimInterior.VehicleInsRecID,
-                            parmTableId = pTrimInterior.TableId,
-                            parmRecID = pTrimInterior.RecID,
-                        });
-                    }
-
+                        parmVehicleInsRecID = pTrimInterior.VehicleInsRecID,
+                        parmTableId = pTrimInterior.TableId,
+                        parmRecID = pTrimInterior.RecID,
+                    });
                 }
-                var res = await client.editPassengerTrimInteriorAsync(mzkMobiPassengerTrimInteriorContractColl, _userInfo.CompanyId);
 
-                if (res.response != null)
+                if (mzkMobiPassengerTrimInteriorContractColl.Count > 0)
                 {
-                    var pTrimInteriorList = new ObservableCollection<PTrimInterior>();
-                    foreach (var x in res.response.Where(x => x != null))
-                    {
-                        pTrimInteriorList.Add(new PTrimInterior
-                        {
-                            CarpetComment = x.parmCarpetsComments,
-                            DashComment = x.parmDashComments,
-                            InternalTrimComment = x.parmInternalTrimComments,
-                            LFDoorTrimComment = x.parmLFDoorTrimComments,
-                            LRDoorTrimComment = x.parmLRDoorTrimComments,
-                            PassengerSeatComment = x.parmPassengerSeatComments,
-                            RFDoorTrimComment = x.parmRFDoorTrimComments,
-                            RRDoorTrimComment = x.parmRRDoorTrimComments,
-                            RearSeatComment = x.parmRearSeatComments,
-                            IsCarpetDmg = x.parmIsDamagedCarpets == NoYes.Yes ? true : false,
-                            IsDashDmg = x.parmIsDamagedDash == NoYes.Yes ? true : false,
-                            IsInternalTrimDmg = x.parmIsDamagedInternalTrim == NoYes.Yes ? true : false,
-                            IsLFDoorTrimDmg = x.parmIsDamagedLFDoorTrim == NoYes.Yes ? true : false,
-                            IsLRDoorTrimDmg = x.parmIsDamagedLRDoorTrim == NoYes.Yes ? true : false,
-                            IsPassengerSeatDmg = x.parmIsDamagedPassengerSeat == NoYes.Yes ? true : false,
-                            IsRFDoorTrimDmg = x.parmIsDamagedRFDoorTrim == NoYes.Yes ? true : false,
-                            IsRRDoorTrimDmg = x.parmIsDamagedRRDoorTrim == NoYes.Yes ? true : false,
-                            IsRearSeatDmg = x.parmIsDamagedRearSeat == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
-                    foreach (var item in pTrimInteriorList.GroupBy(x => x.VehicleInsRecID))
+                    var res = await client.editPassengerTrimInteriorAsync(mzkMobiPassengerTrimInteriorContractColl, _userInfo.CompanyId);
+
+                    if (res.response != null)
                     {
-                        await SyncImagesAsync(item.Key, "PTrimInterior");
+                        var pTrimInteriorList = new ObservableCollection<PTrimInterior>();
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            pTrimInteriorList.Add(new PTrimInterior
+                            {
+                                CarpetComment = x.parmCarpetsComments,
+                                DashComment = x.parmDashComments,
+                                InternalTrimComment = x.parmInternalTrimComments,
+                                LFDoorTrimComment = x.parmLFDoorTrimComments,
+                                LRDoorTrimComment = x.parmLRDoorTrimComments,
+                                PassengerSeatComment = x.parmPassengerSeatComments,
+                                RFDoorTrimComment = x.parmRFDoorTrimComments,
+                                RRDoorTrimComment = x.parmRRDoorTrimComments,
+                                RearSeatComment = x.parmRearSeatComments,
+                                IsCarpetDmg = x.parmIsDamagedCarpets == NoYes.Yes ? true : false,
+                                IsDashDmg = x.parmIsDamagedDash == NoYes.Yes ? true : false,
+                                IsInternalTrimDmg = x.parmIsDamagedInternalTrim == NoYes.Yes ? true : false,
+                                IsLFDoorTrimDmg = x.parmIsDamagedLFDoorTrim == NoYes.Yes ? true : false,
+                                IsLRDoorTrimDmg = x.parmIsDamagedLRDoorTrim == NoYes.Yes ? true : false,
+                                IsPassengerSeatDmg = x.parmIsDamagedPassengerSeat == NoYes.Yes ? true : false,
+                                IsRFDoorTrimDmg = x.parmIsDamagedRFDoorTrim == NoYes.Yes ? true : false,
+                                IsRRDoorTrimDmg = x.parmIsDamagedRRDoorTrim == NoYes.Yes ? true : false,
+                                IsRearSeatDmg = x.parmIsDamagedRearSeat == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PTrimInterior>(pTrimInteriorList);
+                        foreach (var item in pTrimInteriorList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PTrimInterior");
+                        }
                     }
                 }
             }
@@ -1127,90 +1143,92 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var pTyreConditionData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PTyreCondition>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKMobiPassengerTyreConditionContract> mZKMobiPassengerTyreConditionContractColl = new ObservableCollection<MZKMobiPassengerTyreConditionContract>();
-                if (pTyreConditionData != null)
+
+                foreach (var pTyreCondition in pTyreConditionData)
                 {
-                    foreach (var pTyreCondition in pTyreConditionData)
+                    mZKMobiPassengerTyreConditionContractColl.Add(new MZKMobiPassengerTyreConditionContract()
                     {
-                        mZKMobiPassengerTyreConditionContractColl.Add(new MZKMobiPassengerTyreConditionContract()
-                        {
-                            parmLFComments = pTyreCondition.LFComment,
-                            parmLFMake = pTyreCondition.LFMake,
-                            parmLRComments = pTyreCondition.LRComment,
-                            parmLRMake = pTyreCondition.LRMake,
-                            parmRFComments = pTyreCondition.RFComment,
-                            parmRFMake = pTyreCondition.RFMake,
-                            parmRRComments = pTyreCondition.RRComment,
-                            parmRRMake = pTyreCondition.RRMake,
-                            parmSpareComments = pTyreCondition.SpareComment,
-                            parmSpareMake = pTyreCondition.SpareMake,
-                            parmLFDepth = pTyreCondition.LFTreadDepth,
-                            parmLRDepth = pTyreCondition.LRTreadDepth,
-                            parmRFDepth = pTyreCondition.RFTreadDepth,
-                            parmRRDepth = pTyreCondition.RRTreadDepth,
-                            parmSpareDepth = pTyreCondition.SpareTreadDepth,
+                        parmLFComments = pTyreCondition.LFComment,
+                        parmLFMake = pTyreCondition.LFMake,
+                        parmLRComments = pTyreCondition.LRComment,
+                        parmLRMake = pTyreCondition.LRMake,
+                        parmRFComments = pTyreCondition.RFComment,
+                        parmRFMake = pTyreCondition.RFMake,
+                        parmRRComments = pTyreCondition.RRComment,
+                        parmRRMake = pTyreCondition.RRMake,
+                        parmSpareComments = pTyreCondition.SpareComment,
+                        parmSpareMake = pTyreCondition.SpareMake,
+                        parmLFDepth = pTyreCondition.LFTreadDepth,
+                        parmLRDepth = pTyreCondition.LRTreadDepth,
+                        parmRFDepth = pTyreCondition.RFTreadDepth,
+                        parmRRDepth = pTyreCondition.RRTreadDepth,
+                        parmSpareDepth = pTyreCondition.SpareTreadDepth,
 
-                            parmLFCondition = pTyreCondition.IsLFFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsLFGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsLFPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmLRCondition = pTyreCondition.IsLRFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsLRGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsLRPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRFCondition = pTyreCondition.IsRFFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsRFGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsRFPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRRCondition = pTyreCondition.IsRRFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsRRGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsRRPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmSpareCondition = pTyreCondition.IsSpareFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsSpareGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsSparePChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLFCondition = pTyreCondition.IsLFFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsLFGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsLFPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLRCondition = pTyreCondition.IsLRFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsLRGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsLRPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRFCondition = pTyreCondition.IsRFFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsRFGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsRFPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRRCondition = pTyreCondition.IsRRFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsRRGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsRRPChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmSpareCondition = pTyreCondition.IsSpareFChecked ? MZKConditionEnum.Fair : (pTyreCondition.IsSpareGChecked ? MZKConditionEnum.Good : (pTyreCondition.IsSparePChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
 
-                            parmVehicleInsRecID = pTyreCondition.VehicleInsRecID,
-                            parmTableId = pTyreCondition.TableId,
-                            parmRecID = pTyreCondition.RecID,
-                        });
-                    }
+                        parmVehicleInsRecID = pTyreCondition.VehicleInsRecID,
+                        parmTableId = pTyreCondition.TableId,
+                        parmRecID = pTyreCondition.RecID,
+                    });
                 }
-                var res = await client.editPassengerTyreConditionAsync(mZKMobiPassengerTyreConditionContractColl, _userInfo.CompanyId);
 
-                var pTyreConditionList = new ObservableCollection<PTyreCondition>();
-                if (res.response != null)
+                if (mZKMobiPassengerTyreConditionContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
-                    {
-                        pTyreConditionList.Add(new PTyreCondition
-                        {
-                            LFComment = x.parmLFComments,
-                            LFMake = x.parmLFMake,
-                            LRComment = x.parmLRComments,
-                            LRMake = x.parmLRMake,
-                            RFComment = x.parmRFComments,
-                            RFMake = x.parmRFMake,
-                            RRComment = x.parmRRComments,
-                            RRMake = x.parmRRMake,
-                            SpareComment = x.parmSpareComments,
-                            SpareMake = x.parmSpareMake,
-                            LFTreadDepth = x.parmLFDepth,
-                            LRTreadDepth = x.parmLRDepth,
-                            RFTreadDepth = x.parmRFDepth,
-                            RRTreadDepth = x.parmRRDepth,
-                            SpareTreadDepth = x.parmSpareDepth,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            RecID = x.parmRecID,
-                            TableId = x.parmTableId,
-                            IsLFFChecked = MZKConditionEnum.Fair == x.parmLFCondition ? true : false,
-                            IsLFGChecked = MZKConditionEnum.Good == x.parmLFCondition ? true : false,
-                            IsLFPChecked = MZKConditionEnum.Poor == x.parmLFCondition ? true : false,
-                            IsLRFChecked = MZKConditionEnum.Fair == x.parmLRCondition ? true : false,
-                            IsLRGChecked = MZKConditionEnum.Good == x.parmLRCondition ? true : false,
-                            IsLRPChecked = MZKConditionEnum.Poor == x.parmLRCondition ? true : false,
-                            IsRFFChecked = MZKConditionEnum.Fair == x.parmRFCondition ? true : false,
-                            IsRFGChecked = MZKConditionEnum.Good == x.parmRFCondition ? true : false,
-                            IsRFPChecked = MZKConditionEnum.Poor == x.parmRFCondition ? true : false,
-                            IsRRFChecked = MZKConditionEnum.Fair == x.parmRRCondition ? true : false,
-                            IsRRGChecked = MZKConditionEnum.Good == x.parmRRCondition ? true : false,
-                            IsRRPChecked = MZKConditionEnum.Poor == x.parmRRCondition ? true : false,
-                            IsSpareFChecked = MZKConditionEnum.Fair == x.parmSpareCondition ? true : false,
-                            IsSpareGChecked = MZKConditionEnum.Good == x.parmSpareCondition ? true : false,
-                            IsSparePChecked = MZKConditionEnum.Poor == x.parmSpareCondition ? true : false,
-                            ShouldSave = false
+                    var res = await client.editPassengerTyreConditionAsync(mZKMobiPassengerTyreConditionContractColl, _userInfo.CompanyId);
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<PTyreCondition>(pTyreConditionList);
-                    foreach (var item in pTyreConditionList.GroupBy(x => x.VehicleInsRecID))
+                    var pTyreConditionList = new ObservableCollection<PTyreCondition>();
+                    if (res.response != null)
                     {
-                        await SyncImagesAsync(item.Key, "PTyreCondition");
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            pTyreConditionList.Add(new PTyreCondition
+                            {
+                                LFComment = x.parmLFComments,
+                                LFMake = x.parmLFMake,
+                                LRComment = x.parmLRComments,
+                                LRMake = x.parmLRMake,
+                                RFComment = x.parmRFComments,
+                                RFMake = x.parmRFMake,
+                                RRComment = x.parmRRComments,
+                                RRMake = x.parmRRMake,
+                                SpareComment = x.parmSpareComments,
+                                SpareMake = x.parmSpareMake,
+                                LFTreadDepth = x.parmLFDepth,
+                                LRTreadDepth = x.parmLRDepth,
+                                RFTreadDepth = x.parmRFDepth,
+                                RRTreadDepth = x.parmRRDepth,
+                                SpareTreadDepth = x.parmSpareDepth,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                RecID = x.parmRecID,
+                                TableId = x.parmTableId,
+                                IsLFFChecked = MZKConditionEnum.Fair == x.parmLFCondition ? true : false,
+                                IsLFGChecked = MZKConditionEnum.Good == x.parmLFCondition ? true : false,
+                                IsLFPChecked = MZKConditionEnum.Poor == x.parmLFCondition ? true : false,
+                                IsLRFChecked = MZKConditionEnum.Fair == x.parmLRCondition ? true : false,
+                                IsLRGChecked = MZKConditionEnum.Good == x.parmLRCondition ? true : false,
+                                IsLRPChecked = MZKConditionEnum.Poor == x.parmLRCondition ? true : false,
+                                IsRFFChecked = MZKConditionEnum.Fair == x.parmRFCondition ? true : false,
+                                IsRFGChecked = MZKConditionEnum.Good == x.parmRFCondition ? true : false,
+                                IsRFPChecked = MZKConditionEnum.Poor == x.parmRFCondition ? true : false,
+                                IsRRFChecked = MZKConditionEnum.Fair == x.parmRRCondition ? true : false,
+                                IsRRGChecked = MZKConditionEnum.Good == x.parmRRCondition ? true : false,
+                                IsRRPChecked = MZKConditionEnum.Poor == x.parmRRCondition ? true : false,
+                                IsSpareFChecked = MZKConditionEnum.Fair == x.parmSpareCondition ? true : false,
+                                IsSpareGChecked = MZKConditionEnum.Good == x.parmSpareCondition ? true : false,
+                                IsSparePChecked = MZKConditionEnum.Poor == x.parmSpareCondition ? true : false,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PTyreCondition>(pTyreConditionList);
+                        foreach (var item in pTyreConditionList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PTyreCondition");
+                        }
                     }
                 }
             }
@@ -1237,70 +1255,72 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 var pGlassData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PGlass>()).Where(x => x.ShouldSave);
 
                 ObservableCollection<MzkMobiPassengerGlassContract> mzkMobiPassengerGlassContractColl = new ObservableCollection<MzkMobiPassengerGlassContract>();
-                if (pGlassData != null)
+
+                foreach (var pglass in pGlassData)
                 {
-                    foreach (var pglass in pGlassData)
+                    mzkMobiPassengerGlassContractColl.Add(new MzkMobiPassengerGlassContract()
                     {
-                        mzkMobiPassengerGlassContractColl.Add(new MzkMobiPassengerGlassContract()
-                        {
-                            parmExitRearViewMirrorComments = pglass.GVExtRearViewMirrorComment,
-                            parmHeadLightsComments = pglass.GVHeadLightsComment,
-                            parmIndicatorLensesComments = pglass.GVInductorLensesComment,
-                            parmRearGlassComments = pglass.GVRearGlassComment,
-                            parmSideGlassComments = pglass.GVSideGlassComment,
-                            parmTailLightsComments = pglass.GVTailLightsComment,
-                            parmWindScreenComments = pglass.GVWindscreenComment,
+                        parmExitRearViewMirrorComments = pglass.GVExtRearViewMirrorComment,
+                        parmHeadLightsComments = pglass.GVHeadLightsComment,
+                        parmIndicatorLensesComments = pglass.GVInductorLensesComment,
+                        parmRearGlassComments = pglass.GVRearGlassComment,
+                        parmSideGlassComments = pglass.GVSideGlassComment,
+                        parmTailLightsComments = pglass.GVTailLightsComment,
+                        parmWindScreenComments = pglass.GVWindscreenComment,
 
-                            parmIsDamagedExitRearViewMirror = pglass.IsExtRearViewMirror ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHeadLights = pglass.IsHeadLights ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedIndicatorLenses = pglass.IsInductorLenses ? NoYes.Yes : NoYes.No,
-                            parmVehicleType = MzkVehicleType.Passenger,
-                            parmIsDamagedRearGlass = pglass.IsRearGlass ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSideGlass = pglass.IsSideGlass ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTailLights = pglass.IsTailLights ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWindScreen = pglass.IsWindscreen ? NoYes.Yes : NoYes.No,
-                            parmRecID = pglass.RecID,
-                            parmVehicleInsRecID = pglass.VehicleInsRecID,
-                            parmTableId = pglass.TableId,
-                        });
-
-                    }
+                        parmIsDamagedExitRearViewMirror = pglass.IsExtRearViewMirror ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHeadLights = pglass.IsHeadLights ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedIndicatorLenses = pglass.IsInductorLenses ? NoYes.Yes : NoYes.No,
+                        parmVehicleType = MzkVehicleType.Passenger,
+                        parmIsDamagedRearGlass = pglass.IsRearGlass ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSideGlass = pglass.IsSideGlass ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTailLights = pglass.IsTailLights ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWindScreen = pglass.IsWindscreen ? NoYes.Yes : NoYes.No,
+                        parmRecID = pglass.RecID,
+                        parmVehicleInsRecID = pglass.VehicleInsRecID,
+                        parmTableId = pglass.TableId,
+                    });
 
                 }
-                var res = await client.editGlassAsync(mzkMobiPassengerGlassContractColl, _userInfo.CompanyId);
 
-                var glassList = new ObservableCollection<PGlass>();
-                if (res.response != null)
+
+                if (mzkMobiPassengerGlassContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
-                    {
-                        glassList.Add(new PGlass
-                        {
-                            GVExtRearViewMirrorComment = x.parmExitRearViewMirrorComments,
-                            GVHeadLightsComment = x.parmHeadLightsComments,
-                            GVInductorLensesComment = x.parmIndicatorLensesComments,
-                            GVRearGlassComment = x.parmRearGlassComments,
-                            GVSideGlassComment = x.parmSideGlassComments,
-                            GVTailLightsComment = x.parmTailLightsComments,
-                            GVWindscreenComment = x.parmWindScreenComments,
-                            IsExtRearViewMirror = x.parmIsDamagedExitRearViewMirror == NoYes.Yes ? true : false,
-                            IsHeadLights = x.parmIsDamagedHeadLights == NoYes.Yes ? true : false,
-                            IsInductorLenses = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
-                            IsRearGlass = x.parmIsDamagedRearGlass == NoYes.Yes ? true : false,
-                            IsSideGlass = x.parmIsDamagedSideGlass == NoYes.Yes ? true : false,
-                            IsTailLights = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
-                            IsWindscreen = x.parmIsDamagedWindScreen == NoYes.Yes ? true : false,
-                            RecID = x.parmRecID,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            ShouldSave = false
+                    var res = await client.editGlassAsync(mzkMobiPassengerGlassContractColl, _userInfo.CompanyId);
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<PGlass>(glassList);
-                    foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
+                    var glassList = new ObservableCollection<PGlass>();
+                    if (res.response != null)
                     {
-                        await SyncImagesAsync(item.Key, "PGlass");
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            glassList.Add(new PGlass
+                            {
+                                GVExtRearViewMirrorComment = x.parmExitRearViewMirrorComments,
+                                GVHeadLightsComment = x.parmHeadLightsComments,
+                                GVInductorLensesComment = x.parmIndicatorLensesComments,
+                                GVRearGlassComment = x.parmRearGlassComments,
+                                GVSideGlassComment = x.parmSideGlassComments,
+                                GVTailLightsComment = x.parmTailLightsComments,
+                                GVWindscreenComment = x.parmWindScreenComments,
+                                IsExtRearViewMirror = x.parmIsDamagedExitRearViewMirror == NoYes.Yes ? true : false,
+                                IsHeadLights = x.parmIsDamagedHeadLights == NoYes.Yes ? true : false,
+                                IsInductorLenses = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
+                                IsRearGlass = x.parmIsDamagedRearGlass == NoYes.Yes ? true : false,
+                                IsSideGlass = x.parmIsDamagedSideGlass == NoYes.Yes ? true : false,
+                                IsTailLights = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
+                                IsWindscreen = x.parmIsDamagedWindScreen == NoYes.Yes ? true : false,
+                                RecID = x.parmRecID,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PGlass>(glassList);
+                        foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PGlass");
+                        }
                     }
                 }
             }
@@ -1336,31 +1356,34 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                    }
                );
             }
-            var res = await client.editPassengerMechConditionAsync(mechConditionContract, _userInfo.CompanyId);
-            var pMechConditionColl = new ObservableCollection<PMechanicalCond>();
-            if (res.response != null)
+            if (mechConditionContract.Count > 0)
             {
-                foreach (var result in res.response.Where(x => x.parmRecID == 0))
+                var res = await client.editPassengerMechConditionAsync(mechConditionContract, _userInfo.CompanyId);
+                var pMechConditionColl = new ObservableCollection<PMechanicalCond>();
+                if (res.response != null)
                 {
-                    await SqliteHelper.Storage.InsertSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                    foreach (var result in res.response.Where(x => x.parmRecID == 0))
                     {
-                        Remarks = result.parmRemarks,
-                        RecID = result.parmRecID,
-                        VehicleInsRecID = result.parmVehicleInsRecID,
-                        ShouldSave = false
-                    });
-                }
-                foreach (var result in res.response.Where(x => x.parmRecID != 0))
-                {
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                        await SqliteHelper.Storage.InsertSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                        {
+                            Remarks = result.parmRemarks,
+                            RecID = result.parmRecID,
+                            VehicleInsRecID = result.parmVehicleInsRecID,
+                            ShouldSave = false
+                        });
+                    }
+                    foreach (var result in res.response.Where(x => x.parmRecID != 0))
                     {
-                        RecID = result.parmRecID,
-                        Remarks = result.parmRemarks,
-                        VehicleInsRecID = result.parmVehicleInsRecID,
-                        ShouldSave = false
-                    });
-                }
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync<PMechanicalCond>(new PMechanicalCond
+                        {
+                            RecID = result.parmRecID,
+                            Remarks = result.parmRemarks,
+                            VehicleInsRecID = result.parmVehicleInsRecID,
+                            ShouldSave = false
+                        });
+                    }
 
+                }
             }
         }
         async private System.Threading.Tasks.Task EditPassengerInspectionProofToSvcAsync()
@@ -1373,39 +1396,41 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var inspectionProofData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PInspectionProof>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKVehicleInspectionTableContract> MZKVehicleInspectionTableContractColl = new ObservableCollection<MZKVehicleInspectionTableContract>();
-                if (inspectionProofData != null)
-                {
-                    foreach (var insProof in inspectionProofData)
-                    {
-                        MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
-                        {
-                            parmCustomerComments = insProof.CRSignComment,
-                            parmComments = insProof.EQRSignComment,
-                            parmCompanyRepSignDateTime = insProof.EQRDate,
-                            parmCustomerRepSignDateTime = insProof.CRDate,
-                            parmRecID = insProof.VehicleInsRecID
-                        });
-                    }
-                }
-                var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
 
-                var inspectionProofList = new ObservableCollection<PInspectionProof>();
-                if (res.response != null)
+                foreach (var insProof in inspectionProofData)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
                     {
-                        inspectionProofList.Add(new PInspectionProof
-                        {
-                            EQRDate = x.parmCompanyRepSignDateTime,
-                            CRDate = x.parmCustomerRepSignDateTime,
-                            CRSignComment = x.parmComments,
-                            VehicleInsRecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
+                        parmCustomerComments = insProof.CRSignComment,
+                        parmComments = insProof.EQRSignComment,
+                        parmCompanyRepSignDateTime = insProof.EQRDate,
+                        parmCustomerRepSignDateTime = insProof.CRDate,
+                        parmRecID = insProof.VehicleInsRecID
+                    });
                 }
-                await SqliteHelper.Storage.UpdateAllAsync<PInspectionProof>(inspectionProofList);
+                if (MZKVehicleInspectionTableContractColl.Count > 0)
+                {
 
+                    var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
+
+                    var inspectionProofList = new ObservableCollection<PInspectionProof>();
+                    if (res.response != null)
+                    {
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            inspectionProofList.Add(new PInspectionProof
+                            {
+                                EQRDate = x.parmCompanyRepSignDateTime,
+                                CRDate = x.parmCustomerRepSignDateTime,
+                                CRSignComment = x.parmComments,
+                                VehicleInsRecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                    }
+                    await SqliteHelper.Storage.UpdateAllAsync<PInspectionProof>(inspectionProofList);
+
+                }
             }
             catch (Exception ex)
             {
@@ -1428,47 +1453,49 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
                 var cVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CVehicleDetails>()).Where(x => x.ShouldSave);
-                if (cVehicleDetailsData != null)
-                {
-                    foreach (var cVehicleDetails in cVehicleDetailsData)
-                    {
-                        mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
-                        {
-                            parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
-                            parmlisenceDiscExpiryDate = DateTime.Parse(cVehicleDetails.LicenseDiscExpireDate),
-                            parmRecID = cVehicleDetails.RecID,
-                            parmSparseKeyShown = cVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
-                            parmSparseKeyTested = cVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
-                            parmTableId = cVehicleDetails.TableId,
-                            parmVehicleInsRecID = cVehicleDetails.VehicleInsRecID
-                        });
-                    }
-                }
-                var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
 
-                var cVehicleDetailsList = new ObservableCollection<CVehicleDetails>();
-                if (resp.response != null)
+                foreach (var cVehicleDetails in cVehicleDetailsData)
                 {
-                    foreach (var x in resp.response.Where(x => x != null))
+                    mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                     {
-                        cVehicleDetailsList.Add(new CVehicleDetails
-                        {
-                            IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                            LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate.ToString(),
-                            RecID = x.parmRecID,
-                            IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
-                            IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
-                            TableId = x.parmTableId,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            ShouldSave = false
-
-                        });
-                    }
+                        parmLisenceDiscCurrent = cVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
+                        parmlisenceDiscExpiryDate = DateTime.Parse(cVehicleDetails.LicenseDiscExpireDate),
+                        parmRecID = cVehicleDetails.RecID,
+                        parmSparseKeyShown = cVehicleDetails.IsSpareKeysShown ? NoYes.Yes : NoYes.No,
+                        parmSparseKeyTested = cVehicleDetails.IsSpareKeysTested ? NoYes.Yes : NoYes.No,
+                        parmTableId = cVehicleDetails.TableId,
+                        parmVehicleInsRecID = cVehicleDetails.VehicleInsRecID
+                    });
                 }
-                await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
-                foreach (var item in cVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
+                if (mzkVehicleDetailsContractColl.Count > 0)
                 {
-                    await SyncImagesAsync(item.Key, "CVehicleDetails");
+
+                    var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
+
+                    var cVehicleDetailsList = new ObservableCollection<CVehicleDetails>();
+                    if (resp.response != null)
+                    {
+                        foreach (var x in resp.response.Where(x => x != null))
+                        {
+                            cVehicleDetailsList.Add(new CVehicleDetails
+                            {
+                                IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                                LicenseDiscExpireDate = x.parmlisenceDiscExpiryDate.ToString(),
+                                RecID = x.parmRecID,
+                                IsSpareKeysShown = x.parmSparseKeyShown == NoYes.Yes ? true : false,
+                                IsSpareKeysTested = x.parmSparseKeyTested == NoYes.Yes ? true : false,
+                                TableId = x.parmTableId,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                ShouldSave = false
+
+                            });
+                        }
+                    }
+                    await SqliteHelper.Storage.UpdateAllAsync<CVehicleDetails>(cVehicleDetailsList);
+                    foreach (var item in cVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
+                    {
+                        await SyncImagesAsync(item.Key, "CVehicleDetails");
+                    }
                 }
             }
             catch (Exception ex)
@@ -1492,69 +1519,71 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var cGlassData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CGlass>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerGlassContract> mzkMobiCommercialGlassContractColl = new ObservableCollection<MzkMobiPassengerGlassContract>();
-                if (cGlassData != null)
+
+                foreach (var cglass in cGlassData)
                 {
-                    foreach (var cglass in cGlassData)
+                    mzkMobiCommercialGlassContractColl.Add(new MzkMobiPassengerGlassContract()
                     {
-                        mzkMobiCommercialGlassContractColl.Add(new MzkMobiPassengerGlassContract()
-                        {
-                            parmExitRearViewMirrorComments = cglass.ExtRearViewMirrorComment,
-                            parmHeadLightsComments = cglass.HeadLightsComment,
-                            parmIndicatorLensesComments = cglass.InductorLensesComment,
-                            parmRearGlassComments = cglass.RearGlassComment,
-                            parmSideGlassComments = cglass.SideGlassComment,
-                            parmTailLightsComments = cglass.TailLightsComment,
-                            parmWindScreenComments = cglass.WindscreenComment,
+                        parmExitRearViewMirrorComments = cglass.ExtRearViewMirrorComment,
+                        parmHeadLightsComments = cglass.HeadLightsComment,
+                        parmIndicatorLensesComments = cglass.InductorLensesComment,
+                        parmRearGlassComments = cglass.RearGlassComment,
+                        parmSideGlassComments = cglass.SideGlassComment,
+                        parmTailLightsComments = cglass.TailLightsComment,
+                        parmWindScreenComments = cglass.WindscreenComment,
 
-                            parmIsDamagedExitRearViewMirror = cglass.IsRearGlassDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHeadLights = cglass.IsHeadLightsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedIndicatorLenses = cglass.IsInductorLensesDmg ? NoYes.Yes : NoYes.No,
-                            parmVehicleType = MzkVehicleType.Commercial,
-                            parmIsDamagedRearGlass = cglass.IsRearGlassDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSideGlass = cglass.IsSideGlassDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTailLights = cglass.IsTailLightsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWindScreen = cglass.IsWindscreenDmg ? NoYes.Yes : NoYes.No,
-                            parmRecID = cglass.RecID,
-                            parmVehicleInsRecID = cglass.VehicleInsRecID,
-                            parmTableId = cglass.TableId,
-                        });
+                        parmIsDamagedExitRearViewMirror = cglass.IsRearGlassDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHeadLights = cglass.IsHeadLightsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedIndicatorLenses = cglass.IsInductorLensesDmg ? NoYes.Yes : NoYes.No,
+                        parmVehicleType = MzkVehicleType.Commercial,
+                        parmIsDamagedRearGlass = cglass.IsRearGlassDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSideGlass = cglass.IsSideGlassDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTailLights = cglass.IsTailLightsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWindScreen = cglass.IsWindscreenDmg ? NoYes.Yes : NoYes.No,
+                        parmRecID = cglass.RecID,
+                        parmVehicleInsRecID = cglass.VehicleInsRecID,
+                        parmTableId = cglass.TableId,
+                    });
 
-                    }
                 }
-                var res = await client.editGlassAsync(mzkMobiCommercialGlassContractColl, _userInfo.CompanyId);
-
-                var glassList = new ObservableCollection<CGlass>();
-                if (res.response != null)
+                if (mzkMobiCommercialGlassContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
-                    {
-                        glassList.Add(new CGlass
-                        {
-                            ExtRearViewMirrorComment = x.parmExitRearViewMirrorComments,
-                            HeadLightsComment = x.parmHeadLightsComments,
-                            InductorLensesComment = x.parmIndicatorLensesComments,
-                            RearGlassComment = x.parmRearGlassComments,
-                            SideGlassComment = x.parmSideGlassComments,
-                            TailLightsComment = x.parmTailLightsComments,
-                            WindscreenComment = x.parmWindScreenComments,
-                            IsExtRearViewMirrorDmg = x.parmIsDamagedExitRearViewMirror == NoYes.Yes ? true : false,
-                            IsHeadLightsDmg = x.parmIsDamagedHeadLights == NoYes.Yes ? true : false,
-                            IsInductorLensesDmg = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
-                            IsRearGlassDmg = x.parmIsDamagedRearGlass == NoYes.Yes ? true : false,
-                            IsSideGlassDmg = x.parmIsDamagedSideGlass == NoYes.Yes ? true : false,
-                            IsTailLightsDmg = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
-                            IsWindscreenDmg = x.parmIsDamagedWindScreen == NoYes.Yes ? true : false,
-                            RecID = x.parmRecID,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            ShouldSave = false
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CGlass>(glassList);
-                    foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
+                    var res = await client.editGlassAsync(mzkMobiCommercialGlassContractColl, _userInfo.CompanyId);
+
+                    var glassList = new ObservableCollection<CGlass>();
+                    if (res.response != null)
                     {
-                        await SyncImagesAsync(item.Key, "CGlass");
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            glassList.Add(new CGlass
+                            {
+                                ExtRearViewMirrorComment = x.parmExitRearViewMirrorComments,
+                                HeadLightsComment = x.parmHeadLightsComments,
+                                InductorLensesComment = x.parmIndicatorLensesComments,
+                                RearGlassComment = x.parmRearGlassComments,
+                                SideGlassComment = x.parmSideGlassComments,
+                                TailLightsComment = x.parmTailLightsComments,
+                                WindscreenComment = x.parmWindScreenComments,
+                                IsExtRearViewMirrorDmg = x.parmIsDamagedExitRearViewMirror == NoYes.Yes ? true : false,
+                                IsHeadLightsDmg = x.parmIsDamagedHeadLights == NoYes.Yes ? true : false,
+                                IsInductorLensesDmg = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
+                                IsRearGlassDmg = x.parmIsDamagedRearGlass == NoYes.Yes ? true : false,
+                                IsSideGlassDmg = x.parmIsDamagedSideGlass == NoYes.Yes ? true : false,
+                                IsTailLightsDmg = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
+                                IsWindscreenDmg = x.parmIsDamagedWindScreen == NoYes.Yes ? true : false,
+                                RecID = x.parmRecID,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CGlass>(glassList);
+                        foreach (var item in glassList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "CGlass");
+                        }
                     }
                 }
             }
@@ -1579,89 +1608,91 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var cAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialAccessoriesContract> mzkMobiCommercialAccessoriesContractColl = new ObservableCollection<MzkMobiCommercialAccessoriesContract>();
-                if (cAccessoriesData != null)
+
+                foreach (var cAccessories in cAccessoriesData)
                 {
-                    foreach (var cAccessories in cAccessoriesData)
+                    mzkMobiCommercialAccessoriesContractColl.Add(new MzkMobiCommercialAccessoriesContract()
                     {
-                        mzkMobiCommercialAccessoriesContractColl.Add(new MzkMobiCommercialAccessoriesContract()
-                        {
-                            parmBullbarComments = cAccessories.BullBarComment,
-                            parmEngineProtectionUnitComments = cAccessories.EngineProtectionUnitComment,
-                            parmJackComments = cAccessories.JackComment,
-                            parmReflectiveTapeComments = cAccessories.ReflectiveTapeComment,
-                            parmTrackingDeviceComments = cAccessories.TrackingDeviceComment,
-                            parmToolComments = cAccessories.ToolsComment,
-                            parmSignWritingComments = cAccessories.DecalSignWritingComment,
-                            parmServiceBooksComments = cAccessories.ServiceBlockComment,
+                        parmBullbarComments = cAccessories.BullBarComment,
+                        parmEngineProtectionUnitComments = cAccessories.EngineProtectionUnitComment,
+                        parmJackComments = cAccessories.JackComment,
+                        parmReflectiveTapeComments = cAccessories.ReflectiveTapeComment,
+                        parmTrackingDeviceComments = cAccessories.TrackingDeviceComment,
+                        parmToolComments = cAccessories.ToolsComment,
+                        parmSignWritingComments = cAccessories.DecalSignWritingComment,
+                        parmServiceBooksComments = cAccessories.ServiceBlockComment,
 
-                            parmHasEngineProtectionUnit = cAccessories.HasEngineProtectionUnitDmg ? NoYes.Yes : NoYes.No,
-                            parmHasJack = cAccessories.HasJackDmg ? NoYes.Yes : NoYes.No,
-                            parmHasReflectiveTape = cAccessories.HasReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
-                            parmHasTools = cAccessories.HasToolsDmg ? NoYes.Yes : NoYes.No,
-                            parmHasTrackingDevice = cAccessories.HasTrackingDeviceDmg ? NoYes.Yes : NoYes.No,
-                            parmHasBullbar = cAccessories.HasBullBarDmg ? NoYes.Yes : NoYes.No,
-                            parmHasDecals = cAccessories.HasDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
-                            parmHasServiceBook = cAccessories.HasServiceBlockDmg ? NoYes.Yes : NoYes.No,
+                        parmHasEngineProtectionUnit = cAccessories.HasEngineProtectionUnitDmg ? NoYes.Yes : NoYes.No,
+                        parmHasJack = cAccessories.HasJackDmg ? NoYes.Yes : NoYes.No,
+                        parmHasReflectiveTape = cAccessories.HasReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
+                        parmHasTools = cAccessories.HasToolsDmg ? NoYes.Yes : NoYes.No,
+                        parmHasTrackingDevice = cAccessories.HasTrackingDeviceDmg ? NoYes.Yes : NoYes.No,
+                        parmHasBullbar = cAccessories.HasBullBarDmg ? NoYes.Yes : NoYes.No,
+                        parmHasDecals = cAccessories.HasDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
+                        parmHasServiceBook = cAccessories.HasServiceBlockDmg ? NoYes.Yes : NoYes.No,
 
-                            parmIsDamagedBullbar = cAccessories.IsBullBarDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedEngineProtectionUnit = cAccessories.IsEngineProtectionUnitDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedJack = cAccessories.IsJackDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedReflectiveTape = cAccessories.IsReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSignWriting = cAccessories.IsDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTools = cAccessories.IsToolsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTrackingDevice = cAccessories.IsTrackingDeviceDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedServicesBook = cAccessories.IsServiceBlockDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedBullbar = cAccessories.IsBullBarDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedEngineProtectionUnit = cAccessories.IsEngineProtectionUnitDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedJack = cAccessories.IsJackDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedReflectiveTape = cAccessories.IsReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSignWriting = cAccessories.IsDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTools = cAccessories.IsToolsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTrackingDevice = cAccessories.IsTrackingDeviceDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedServicesBook = cAccessories.IsServiceBlockDmg ? NoYes.Yes : NoYes.No,
 
-                            parmVehicleInsRecID = cAccessories.VehicleInsRecID,
-                            parmTableId = cAccessories.TableId,
-                            parmRecID = cAccessories.RecID,
+                        parmVehicleInsRecID = cAccessories.VehicleInsRecID,
+                        parmTableId = cAccessories.TableId,
+                        parmRecID = cAccessories.RecID,
 
-                        });
-                    }
+                    });
+
                 }
-                var res = await client.editCommercialAccessoriesAsync(mzkMobiCommercialAccessoriesContractColl, _userInfo.CompanyId);
-
-                var cAccessoriesList = new ObservableCollection<CAccessories>();
-                if (res.response != null)
+                if (mzkMobiCommercialAccessoriesContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editCommercialAccessoriesAsync(mzkMobiCommercialAccessoriesContractColl, _userInfo.CompanyId);
+
+                    var cAccessoriesList = new ObservableCollection<CAccessories>();
+                    if (res.response != null)
                     {
-                        cAccessoriesList.Add(new CAccessories
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            BullBarComment = x.parmBullbarComments,
-                            EngineProtectionUnitComment = x.parmEngineProtectionUnitComments,
-                            JackComment = x.parmJackComments,
-                            ReflectiveTapeComment = x.parmReflectiveTapeComments,
-                            TrackingDeviceComment = x.parmTrackingDeviceComments,
-                            ToolsComment = x.parmToolComments,
-                            DecalSignWritingComment = x.parmSignWritingComments,
-                            ServiceBlockComment = x.parmServiceBooksComments,
-                            HasEngineProtectionUnitDmg = x.parmHasEngineProtectionUnit == NoYes.Yes ? true : false,
-                            HasJackDmg = x.parmHasJack == NoYes.Yes ? true : false,
-                            HasReflectiveTapeDmg = x.parmHasReflectiveTape == NoYes.Yes ? true : false,
-                            HasToolsDmg = x.parmHasTools == NoYes.Yes ? true : false,
-                            HasTrackingDeviceDmg = x.parmHasTrackingDevice == NoYes.Yes ? true : false,
-                            HasBullBarDmg = x.parmHasBullbar == NoYes.Yes ? true : false,
-                            HasDecalSignWritingDmg = x.parmHasDecals == NoYes.Yes ? true : false,
-                            HasServiceBlockDmg = x.parmHasServiceBook == NoYes.Yes ? true : false,
-                            IsBullBarDmg = x.parmIsDamagedBullbar == NoYes.Yes ? true : false,
-                            IsEngineProtectionUnitDmg = x.parmIsDamagedEngineProtectionUnit == NoYes.Yes ? true : false,
-                            IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
-                            IsReflectiveTapeDmg = x.parmIsDamagedReflectiveTape == NoYes.Yes ? true : false,
-                            IsDecalSignWritingDmg = x.parmIsDamagedSignWriting == NoYes.Yes ? true : false,
-                            IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
-                            IsTrackingDeviceDmg = x.parmIsDamagedTrackingDevice == NoYes.Yes ? true : false,
-                            IsServiceBlockDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CAccessories>(cAccessoriesList);
-                    foreach (var item in cAccessoriesList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "CAccessories");
+                            cAccessoriesList.Add(new CAccessories
+                            {
+                                BullBarComment = x.parmBullbarComments,
+                                EngineProtectionUnitComment = x.parmEngineProtectionUnitComments,
+                                JackComment = x.parmJackComments,
+                                ReflectiveTapeComment = x.parmReflectiveTapeComments,
+                                TrackingDeviceComment = x.parmTrackingDeviceComments,
+                                ToolsComment = x.parmToolComments,
+                                DecalSignWritingComment = x.parmSignWritingComments,
+                                ServiceBlockComment = x.parmServiceBooksComments,
+                                HasEngineProtectionUnitDmg = x.parmHasEngineProtectionUnit == NoYes.Yes ? true : false,
+                                HasJackDmg = x.parmHasJack == NoYes.Yes ? true : false,
+                                HasReflectiveTapeDmg = x.parmHasReflectiveTape == NoYes.Yes ? true : false,
+                                HasToolsDmg = x.parmHasTools == NoYes.Yes ? true : false,
+                                HasTrackingDeviceDmg = x.parmHasTrackingDevice == NoYes.Yes ? true : false,
+                                HasBullBarDmg = x.parmHasBullbar == NoYes.Yes ? true : false,
+                                HasDecalSignWritingDmg = x.parmHasDecals == NoYes.Yes ? true : false,
+                                HasServiceBlockDmg = x.parmHasServiceBook == NoYes.Yes ? true : false,
+                                IsBullBarDmg = x.parmIsDamagedBullbar == NoYes.Yes ? true : false,
+                                IsEngineProtectionUnitDmg = x.parmIsDamagedEngineProtectionUnit == NoYes.Yes ? true : false,
+                                IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
+                                IsReflectiveTapeDmg = x.parmIsDamagedReflectiveTape == NoYes.Yes ? true : false,
+                                IsDecalSignWritingDmg = x.parmIsDamagedSignWriting == NoYes.Yes ? true : false,
+                                IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
+                                IsTrackingDeviceDmg = x.parmIsDamagedTrackingDevice == NoYes.Yes ? true : false,
+                                IsServiceBlockDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CAccessories>(cAccessoriesList);
+                        foreach (var item in cAccessoriesList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "CAccessories");
+                        }
                     }
                 }
             }
@@ -1684,144 +1715,146 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var cCabTrimInterData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CCabTrimInter>()).Where(x => x.ShouldSave);
-                ObservableCollection<MZKMobiCommercialTrimInteriorContract> mZKMobiCommercialTrimInteriorContractColl = new ObservableCollection<MZKMobiCommercialTrimInteriorContract>();
-                if (cCabTrimInterData != null)
+                ObservableCollection<MZKMobiCommercialTrimInteriorContract> mzkMobiCommercialTrimInteriorContractColl = new ObservableCollection<MZKMobiCommercialTrimInteriorContract>();
+
+                foreach (var cCabTrimInter in cCabTrimInterData)
                 {
-                    foreach (var cCabTrimInter in cCabTrimInterData)
+                    mzkMobiCommercialTrimInteriorContractColl.Add(new MZKMobiCommercialTrimInteriorContract()
                     {
-                        mZKMobiCommercialTrimInteriorContractColl.Add(new MZKMobiCommercialTrimInteriorContract()
-                        {
-                            parmBumperComments = cCabTrimInter.BumperComment,
-                            parmDoorHandleLeftComments = cCabTrimInter.DoorHandleLeftComment,
-                            parmDoorHandleRightComments = cCabTrimInter.DoorHandleRightComment,
-                            parmDriverSeatComments = cCabTrimInter.DriverSeatComment,
-                            parmFrontViewComments = cCabTrimInter.FrontViewComment,
-                            parmGrillComments = cCabTrimInter.GrillComment,
-                            parmInternalTriesComments = cCabTrimInter.InternalTrimComment,
-                            parmLeftDoorComments = cCabTrimInter.LeftDoorComment,
-                            parmLFQuarterPanelComments = cCabTrimInter.LFQuatPanelComment,
-                            parmLRQuarterPanelComments = cCabTrimInter.LRQuatPanelComment,
-                            parmMatsComments = cCabTrimInter.MatsComment,
-                            parmPassengerSeatComments = cCabTrimInter.PassengerSeatComment,
-                            parmRearViewMirrorComments = cCabTrimInter.RearMirrorComment,
-                            parmRFQuarterPanelComments = cCabTrimInter.RFQuatPanelComment,
-                            parmRightDoorComments = cCabTrimInter.RightDoorComment,
-                            parmRoofComments = cCabTrimInter.RoofComment,
-                            parmRRQuarterPanelComments = cCabTrimInter.RRQuatPanelComment,
-                            parmWheelArchesLeftComments = cCabTrimInter.WheelArchLeftComment,
-                            parmWheelArchesRightComments = cCabTrimInter.WheelArchRightComment,
-                            parmWipersComments = cCabTrimInter.WipersComment,
-                            parmDashboardComments = cCabTrimInter.DashboardComment,
-                            parmEmblemComments = cCabTrimInter.EmblemsComment,
-                            parmSteeringWheelComments = cCabTrimInter.SteeringWheelsComment,
-                            parmInstrumentClusterComments = cCabTrimInter.InstrumentClusterComment,
-                            parmControlLeverComments = cCabTrimInter.ControlLeversComment,
-                            parmBackupWarningComments = cCabTrimInter.BackUpWarningComment,
-                            parmOverheadGuardComments = cCabTrimInter.OverheadGuardComment,
-                            parmMastComments = cCabTrimInter.MastComment,
-                            parmMastHydraulicsComments = cCabTrimInter.MastHydraulicsComment,
-                            parmForksComments = cCabTrimInter.ForksComment,
-                            parmRainGuardComments = cCabTrimInter.RainGuardComment,
+                        parmBumperComments = cCabTrimInter.BumperComment,
+                        parmDoorHandleLeftComments = cCabTrimInter.DoorHandleLeftComment,
+                        parmDoorHandleRightComments = cCabTrimInter.DoorHandleRightComment,
+                        parmDriverSeatComments = cCabTrimInter.DriverSeatComment,
+                        parmFrontViewComments = cCabTrimInter.FrontViewComment,
+                        parmGrillComments = cCabTrimInter.GrillComment,
+                        parmInternalTriesComments = cCabTrimInter.InternalTrimComment,
+                        parmLeftDoorComments = cCabTrimInter.LeftDoorComment,
+                        parmLFQuarterPanelComments = cCabTrimInter.LFQuatPanelComment,
+                        parmLRQuarterPanelComments = cCabTrimInter.LRQuatPanelComment,
+                        parmMatsComments = cCabTrimInter.MatsComment,
+                        parmPassengerSeatComments = cCabTrimInter.PassengerSeatComment,
+                        parmRearViewMirrorComments = cCabTrimInter.RearMirrorComment,
+                        parmRFQuarterPanelComments = cCabTrimInter.RFQuatPanelComment,
+                        parmRightDoorComments = cCabTrimInter.RightDoorComment,
+                        parmRoofComments = cCabTrimInter.RoofComment,
+                        parmRRQuarterPanelComments = cCabTrimInter.RRQuatPanelComment,
+                        parmWheelArchesLeftComments = cCabTrimInter.WheelArchLeftComment,
+                        parmWheelArchesRightComments = cCabTrimInter.WheelArchRightComment,
+                        parmWipersComments = cCabTrimInter.WipersComment,
+                        parmDashboardComments = cCabTrimInter.DashboardComment,
+                        parmEmblemComments = cCabTrimInter.EmblemsComment,
+                        parmSteeringWheelComments = cCabTrimInter.SteeringWheelsComment,
+                        parmInstrumentClusterComments = cCabTrimInter.InstrumentClusterComment,
+                        parmControlLeverComments = cCabTrimInter.ControlLeversComment,
+                        parmBackupWarningComments = cCabTrimInter.BackUpWarningComment,
+                        parmOverheadGuardComments = cCabTrimInter.OverheadGuardComment,
+                        parmMastComments = cCabTrimInter.MastComment,
+                        parmMastHydraulicsComments = cCabTrimInter.MastHydraulicsComment,
+                        parmForksComments = cCabTrimInter.ForksComment,
+                        parmRainGuardComments = cCabTrimInter.RainGuardComment,
 
-                            parmIsDamagedBumper = cCabTrimInter.IsBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDoorHandleLeft = cCabTrimInter.IsDoorHandleLeftDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDoorHandleRight = cCabTrimInter.IsDoorHandleRightDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedGrill = cCabTrimInter.IsGrillDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLeftDoor = cCabTrimInter.IsLeftDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedMats = cCabTrimInter.IsMatsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPassengerSeat = cCabTrimInter.IsPassengerSeatDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRightDoor = cCabTrimInter.IsRightDoorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRoof = cCabTrimInter.IsRoofDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWipers = cCabTrimInter.IsWipersDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDriversSeat = cCabTrimInter.IsDriverSeatDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFrontview = cCabTrimInter.IsFrontViewDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedInternalTries = cCabTrimInter.IsInternalTrimDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLFQuarterPanel = cCabTrimInter.IsLFQuatPanelDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLRQuarterPanel = cCabTrimInter.IsLRQuatPanelDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRearViewMirror = cCabTrimInter.IsRearMirrorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRFQuarterPanel = cCabTrimInter.IsRFQuatPanelDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRRQuarterPanel = cCabTrimInter.IsRRQuatPanelDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWheelArchesLeft = cCabTrimInter.IsWheelArchLeftDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedWheelArchesRight = cCabTrimInter.IsWheelArchRightDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDashboard = cCabTrimInter.IsDashboardDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedEmblems = cCabTrimInter.IsEmblemsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSteeringWheels = cCabTrimInter.IsSteeringWheelsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedInstrumentCluster = cCabTrimInter.IsInstrumentClusterDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedControlLevers = cCabTrimInter.IsControlLeversDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedBackupWarnings = cCabTrimInter.IsBackUpWarningDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedOverheadGuard = cCabTrimInter.IsOverheadGuardDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedMast = cCabTrimInter.IsMastDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedMaskHydraulics = cCabTrimInter.IsMastHydraulicsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedForks = cCabTrimInter.IsForksDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRainGuard = cCabTrimInter.IsRainGuardDmg ? NoYes.Yes : NoYes.No,
-                            parmVehicleInsRecID = cCabTrimInter.VehicleInsRecID,
-                            parmTableId = cCabTrimInter.TableId,
-                            parmRecID = cCabTrimInter.RecID,
+                        parmIsDamagedBumper = cCabTrimInter.IsBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDoorHandleLeft = cCabTrimInter.IsDoorHandleLeftDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDoorHandleRight = cCabTrimInter.IsDoorHandleRightDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedGrill = cCabTrimInter.IsGrillDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLeftDoor = cCabTrimInter.IsLeftDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedMats = cCabTrimInter.IsMatsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPassengerSeat = cCabTrimInter.IsPassengerSeatDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRightDoor = cCabTrimInter.IsRightDoorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRoof = cCabTrimInter.IsRoofDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWipers = cCabTrimInter.IsWipersDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDriversSeat = cCabTrimInter.IsDriverSeatDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFrontview = cCabTrimInter.IsFrontViewDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedInternalTries = cCabTrimInter.IsInternalTrimDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLFQuarterPanel = cCabTrimInter.IsLFQuatPanelDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLRQuarterPanel = cCabTrimInter.IsLRQuatPanelDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRearViewMirror = cCabTrimInter.IsRearMirrorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRFQuarterPanel = cCabTrimInter.IsRFQuatPanelDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRRQuarterPanel = cCabTrimInter.IsRRQuatPanelDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWheelArchesLeft = cCabTrimInter.IsWheelArchLeftDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedWheelArchesRight = cCabTrimInter.IsWheelArchRightDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDashboard = cCabTrimInter.IsDashboardDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedEmblems = cCabTrimInter.IsEmblemsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSteeringWheels = cCabTrimInter.IsSteeringWheelsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedInstrumentCluster = cCabTrimInter.IsInstrumentClusterDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedControlLevers = cCabTrimInter.IsControlLeversDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedBackupWarnings = cCabTrimInter.IsBackUpWarningDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedOverheadGuard = cCabTrimInter.IsOverheadGuardDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedMast = cCabTrimInter.IsMastDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedMaskHydraulics = cCabTrimInter.IsMastHydraulicsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedForks = cCabTrimInter.IsForksDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRainGuard = cCabTrimInter.IsRainGuardDmg ? NoYes.Yes : NoYes.No,
+                        parmVehicleInsRecID = cCabTrimInter.VehicleInsRecID,
+                        parmTableId = cCabTrimInter.TableId,
+                        parmRecID = cCabTrimInter.RecID,
 
 
-                        });
-                    }
+                    });
                 }
 
-                var res = await client.editCommercialTrimInteriorAsync(mZKMobiCommercialTrimInteriorContractColl, _userInfo.CompanyId);
-
-                var cCabTrimInterList = new ObservableCollection<CCabTrimInter>();
-                if (res.response != null)
+                if (mzkMobiCommercialTrimInteriorContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+
+                    var res = await client.editCommercialTrimInteriorAsync(mzkMobiCommercialTrimInteriorContractColl, _userInfo.CompanyId);
+
+                    var cCabTrimInterList = new ObservableCollection<CCabTrimInter>();
+                    if (res.response != null)
                     {
-                        cCabTrimInterList.Add(new CCabTrimInter
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            BumperComment = x.parmBumperComments,
-                            DoorHandleLeftComment = x.parmDoorHandleLeftComments,
-                            DoorHandleRightComment = x.parmDoorHandleRightComments,
-                            DriverSeatComment = x.parmDriverSeatComments,
-                            FrontViewComment = x.parmFrontViewComments,
-                            GrillComment = x.parmGrillComments,
-                            InternalTrimComment = x.parmInternalTriesComments,
-                            LeftDoorComment = x.parmLeftDoorComments,
-                            LFQuatPanelComment = x.parmLFQuarterPanelComments,
-                            LRQuatPanelComment = x.parmLRQuarterPanelComments,
-                            MatsComment = x.parmMatsComments,
-                            PassengerSeatComment = x.parmPassengerSeatComments,
-                            RearMirrorComment = x.parmRearViewMirrorComments,
-                            RFQuatPanelComment = x.parmRFQuarterPanelComments,
-                            RightDoorComment = x.parmRightDoorComments,
-                            RoofComment = x.parmRoofComments,
-                            RRQuatPanelComment = x.parmRRQuarterPanelComments,
-                            WheelArchLeftComment = x.parmWheelArchesLeftComments,
-                            WheelArchRightComment = x.parmWheelArchesRightComments,
-                            WipersComment = x.parmWipersComments,
-                            IsBumperDmg = x.parmIsDamagedBumper == NoYes.Yes ? true : false,
-                            IsDoorHandleLeftDmg = x.parmIsDamagedDoorHandleLeft == NoYes.Yes ? true : false,
-                            IsDoorHandleRightDmg = x.parmIsDamagedDoorHandleRight == NoYes.Yes ? true : false,
-                            IsGrillDmg = x.parmIsDamagedGrill == NoYes.Yes ? true : false,
-                            IsLeftDoorDmg = x.parmIsDamagedLeftDoor == NoYes.Yes ? true : false,
-                            IsMatsDmg = x.parmIsDamagedMats == NoYes.Yes ? true : false,
-                            IsPassengerSeatDmg = x.parmIsDamagedPassengerSeat == NoYes.Yes ? true : false,
-                            IsRightDoorDmg = x.parmIsDamagedRightDoor == NoYes.Yes ? true : false,
-                            IsRoofDmg = x.parmIsDamagedRoof == NoYes.Yes ? true : false,
-                            IsWipersDmg = x.parmIsDamagedWipers == NoYes.Yes ? true : false,
-                            IsDriverSeatDmg = x.parmIsDamagedDriversSeat == NoYes.Yes ? true : false,
-                            IsFrontViewDmg = x.parmIsDamagedFrontview == NoYes.Yes ? true : false,
-                            IsInternalTrimDmg = x.parmIsDamagedInternalTries == NoYes.Yes ? true : false,
-                            IsLFQuatPanelDmg = x.parmIsDamagedLFQuarterPanel == NoYes.Yes ? true : false,
-                            IsLRQuatPanelDmg = x.parmIsDamagedLRQuarterPanel == NoYes.Yes ? true : false,
-                            IsRearMirrorDmg = x.parmIsDamagedRearViewMirror == NoYes.Yes ? true : false,
-                            IsRFQuatPanelDmg = x.parmIsDamagedRFQuarterPanel == NoYes.Yes ? true : false,
-                            IsRRQuatPanelDmg = x.parmIsDamagedRRQuarterPanel == NoYes.Yes ? true : false,
-                            IsWheelArchLeftDmg = x.parmIsDamagedWheelArchesLeft == NoYes.Yes ? true : false,
-                            IsWheelArchRightDmg = x.parmIsDamagedWheelArchesRight == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
-                    foreach (var item in cCabTrimInterList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "CTrimInterior");
+                            cCabTrimInterList.Add(new CCabTrimInter
+                            {
+                                BumperComment = x.parmBumperComments,
+                                DoorHandleLeftComment = x.parmDoorHandleLeftComments,
+                                DoorHandleRightComment = x.parmDoorHandleRightComments,
+                                DriverSeatComment = x.parmDriverSeatComments,
+                                FrontViewComment = x.parmFrontViewComments,
+                                GrillComment = x.parmGrillComments,
+                                InternalTrimComment = x.parmInternalTriesComments,
+                                LeftDoorComment = x.parmLeftDoorComments,
+                                LFQuatPanelComment = x.parmLFQuarterPanelComments,
+                                LRQuatPanelComment = x.parmLRQuarterPanelComments,
+                                MatsComment = x.parmMatsComments,
+                                PassengerSeatComment = x.parmPassengerSeatComments,
+                                RearMirrorComment = x.parmRearViewMirrorComments,
+                                RFQuatPanelComment = x.parmRFQuarterPanelComments,
+                                RightDoorComment = x.parmRightDoorComments,
+                                RoofComment = x.parmRoofComments,
+                                RRQuatPanelComment = x.parmRRQuarterPanelComments,
+                                WheelArchLeftComment = x.parmWheelArchesLeftComments,
+                                WheelArchRightComment = x.parmWheelArchesRightComments,
+                                WipersComment = x.parmWipersComments,
+                                IsBumperDmg = x.parmIsDamagedBumper == NoYes.Yes ? true : false,
+                                IsDoorHandleLeftDmg = x.parmIsDamagedDoorHandleLeft == NoYes.Yes ? true : false,
+                                IsDoorHandleRightDmg = x.parmIsDamagedDoorHandleRight == NoYes.Yes ? true : false,
+                                IsGrillDmg = x.parmIsDamagedGrill == NoYes.Yes ? true : false,
+                                IsLeftDoorDmg = x.parmIsDamagedLeftDoor == NoYes.Yes ? true : false,
+                                IsMatsDmg = x.parmIsDamagedMats == NoYes.Yes ? true : false,
+                                IsPassengerSeatDmg = x.parmIsDamagedPassengerSeat == NoYes.Yes ? true : false,
+                                IsRightDoorDmg = x.parmIsDamagedRightDoor == NoYes.Yes ? true : false,
+                                IsRoofDmg = x.parmIsDamagedRoof == NoYes.Yes ? true : false,
+                                IsWipersDmg = x.parmIsDamagedWipers == NoYes.Yes ? true : false,
+                                IsDriverSeatDmg = x.parmIsDamagedDriversSeat == NoYes.Yes ? true : false,
+                                IsFrontViewDmg = x.parmIsDamagedFrontview == NoYes.Yes ? true : false,
+                                IsInternalTrimDmg = x.parmIsDamagedInternalTries == NoYes.Yes ? true : false,
+                                IsLFQuatPanelDmg = x.parmIsDamagedLFQuarterPanel == NoYes.Yes ? true : false,
+                                IsLRQuatPanelDmg = x.parmIsDamagedLRQuarterPanel == NoYes.Yes ? true : false,
+                                IsRearMirrorDmg = x.parmIsDamagedRearViewMirror == NoYes.Yes ? true : false,
+                                IsRFQuatPanelDmg = x.parmIsDamagedRFQuarterPanel == NoYes.Yes ? true : false,
+                                IsRRQuatPanelDmg = x.parmIsDamagedRRQuarterPanel == NoYes.Yes ? true : false,
+                                IsWheelArchLeftDmg = x.parmIsDamagedWheelArchesLeft == NoYes.Yes ? true : false,
+                                IsWheelArchRightDmg = x.parmIsDamagedWheelArchesRight == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CCabTrimInter>(cCabTrimInterList);
+                        foreach (var item in cCabTrimInterList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "CTrimInterior");
+                        }
                     }
                 }
             }
@@ -1845,95 +1878,97 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var cChassisBodyData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CChassisBody>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialChassisBodyContract> mzkMobiCommercialChassisBodyContractColl = new ObservableCollection<MzkMobiCommercialChassisBodyContract>();
-                if (cChassisBodyData != null)
+
+                foreach (var cChassisBody in cChassisBodyData)
                 {
-                    foreach (var cChassisBody in cChassisBodyData)
+                    mzkMobiCommercialChassisBodyContractColl.Add(new MzkMobiCommercialChassisBodyContract()
                     {
-                        mzkMobiCommercialChassisBodyContractColl.Add(new MzkMobiCommercialChassisBodyContract()
-                        {
-                            parmChassisComments = cChassisBody.ChassisComment,
-                            parmChevronComments = cChassisBody.ChevronComment,
-                            parmDoorsComments = cChassisBody.DoorsComment,
-                            parmFloorComments = cChassisBody.FloorComment,
-                            parmLandingLegsComments = cChassisBody.LandingLegsComment,
-                            parmSpareWheelCarrierComments = cChassisBody.SpareWheelCarrierComment,
-                            parmUnderRunBumperComments = cChassisBody.UnderRunBumperComment,
-                            parmFuelTanksComments = cChassisBody.FuelTankComment,
-                            parmHeadBoardComments = cChassisBody.HeadboardComment,
-                            parmPanelFrontComments = cChassisBody.DropSideFrontComment,
-                            parmPanelLeftComments = cChassisBody.DropSideLeftComment,
-                            parmPanelRearComments = cChassisBody.DropSideRearComment,
-                            parmPanelRightComments = cChassisBody.DropSideRightComment,
+                        parmChassisComments = cChassisBody.ChassisComment,
+                        parmChevronComments = cChassisBody.ChevronComment,
+                        parmDoorsComments = cChassisBody.DoorsComment,
+                        parmFloorComments = cChassisBody.FloorComment,
+                        parmLandingLegsComments = cChassisBody.LandingLegsComment,
+                        parmSpareWheelCarrierComments = cChassisBody.SpareWheelCarrierComment,
+                        parmUnderRunBumperComments = cChassisBody.UnderRunBumperComment,
+                        parmFuelTanksComments = cChassisBody.FuelTankComment,
+                        parmHeadBoardComments = cChassisBody.HeadboardComment,
+                        parmPanelFrontComments = cChassisBody.DropSideFrontComment,
+                        parmPanelLeftComments = cChassisBody.DropSideLeftComment,
+                        parmPanelRearComments = cChassisBody.DropSideRearComment,
+                        parmPanelRightComments = cChassisBody.DropSideRightComment,
 
-                            parmIsDamagedChassis = cChassisBody.IsChassisDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedChevron = cChassisBody.IsChevronDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDoors = cChassisBody.IsDoorsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFloor = cChassisBody.IsFloorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFuelTanks = cChassisBody.IsFuelTankDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHeadBoard = cChassisBody.IsHeadboardDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLandingLegs = cChassisBody.IsLandingLegsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSpareWheelCarrier = cChassisBody.IsSpareWheelCarrierDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedUnderRunBumper = cChassisBody.IsUnderRunBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelFront = cChassisBody.IsDropSideFrontDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelLeft = cChassisBody.IsDropSideLeftDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelRear = cChassisBody.IsDropSideRearDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelRight = cChassisBody.IsDropSideRightDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedChassis = cChassisBody.IsChassisDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedChevron = cChassisBody.IsChevronDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDoors = cChassisBody.IsDoorsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFloor = cChassisBody.IsFloorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFuelTanks = cChassisBody.IsFuelTankDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHeadBoard = cChassisBody.IsHeadboardDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLandingLegs = cChassisBody.IsLandingLegsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSpareWheelCarrier = cChassisBody.IsSpareWheelCarrierDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedUnderRunBumper = cChassisBody.IsUnderRunBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelFront = cChassisBody.IsDropSideFrontDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelLeft = cChassisBody.IsDropSideLeftDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelRear = cChassisBody.IsDropSideRearDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelRight = cChassisBody.IsDropSideRightDmg ? NoYes.Yes : NoYes.No,
 
-                            parmVehicleInsRecID = cChassisBody.VehicleInsRecID,
-                            parmTableId = cChassisBody.TableId,
-                            parmRecID = cChassisBody.RecID,
-
-                        }
-                        );
+                        parmVehicleInsRecID = cChassisBody.VehicleInsRecID,
+                        parmTableId = cChassisBody.TableId,
+                        parmRecID = cChassisBody.RecID,
 
                     }
+                    );
+
+
                 }
 
-                var res = await client.editCommercialChassisBodyAsync(mzkMobiCommercialChassisBodyContractColl, _userInfo.CompanyId);
-
-                var cChassisBodyList = new ObservableCollection<CChassisBody>();
-                if (res.response != null)
+                if (mzkMobiCommercialChassisBodyContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editCommercialChassisBodyAsync(mzkMobiCommercialChassisBodyContractColl, _userInfo.CompanyId);
+
+                    var cChassisBodyList = new ObservableCollection<CChassisBody>();
+                    if (res.response != null)
                     {
-                        cChassisBodyList.Add(new CChassisBody
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            ChassisComment = x.parmChassisComments,
-                            ChevronComment = x.parmChevronComments,
-                            DoorsComment = x.parmDoorsComments,
-                            FloorComment = x.parmFloorComments,
-                            LandingLegsComment = x.parmLandingLegsComments,
-                            SpareWheelCarrierComment = x.parmSpareWheelCarrierComments,
-                            UnderRunBumperComment = x.parmUnderRunBumperComments,
-                            FuelTankComment = x.parmFuelTanksComments,
-                            HeadboardComment = x.parmHeadBoardComments,
-                            DropSideFrontComment = x.parmPanelFrontComments,
-                            DropSideLeftComment = x.parmPanelLeftComments,
-                            DropSideRearComment = x.parmPanelRearComments,
-                            DropSideRightComment = x.parmPanelRightComments,
-                            IsChassisDmg = x.parmIsDamagedChassis == NoYes.Yes ? true : false,
-                            IsChevronDmg = x.parmIsDamagedChevron == NoYes.Yes ? true : false,
-                            IsDoorsDmg = x.parmIsDamagedDoors == NoYes.Yes ? true : false,
-                            IsFloorDmg = x.parmIsDamagedFloor == NoYes.Yes ? true : false,
-                            IsFuelTankDmg = x.parmIsDamagedFuelTanks == NoYes.Yes ? true : false,
-                            IsHeadboardDmg = x.parmIsDamagedHeadBoard == NoYes.Yes ? true : false,
-                            IsLandingLegsDmg = x.parmIsDamagedLandingLegs == NoYes.Yes ? true : false,
-                            IsSpareWheelCarrierDmg = x.parmIsDamagedSpareWheelCarrier == NoYes.Yes ? true : false,
-                            IsUnderRunBumperDmg = x.parmIsDamagedUnderRunBumper == NoYes.Yes ? true : false,
-                            IsDropSideFrontDmg = x.parmIsDamagedPanelFront == NoYes.Yes ? true : false,
-                            IsDropSideLeftDmg = x.parmIsDamagedPanelLeft == NoYes.Yes ? true : false,
-                            IsDropSideRearDmg = x.parmIsDamagedPanelRear == NoYes.Yes ? true : false,
-                            IsDropSideRightDmg = x.parmIsDamagedPanelRight == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
-                    foreach (var item in cChassisBodyList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "ChassisBody");
+                            cChassisBodyList.Add(new CChassisBody
+                            {
+                                ChassisComment = x.parmChassisComments,
+                                ChevronComment = x.parmChevronComments,
+                                DoorsComment = x.parmDoorsComments,
+                                FloorComment = x.parmFloorComments,
+                                LandingLegsComment = x.parmLandingLegsComments,
+                                SpareWheelCarrierComment = x.parmSpareWheelCarrierComments,
+                                UnderRunBumperComment = x.parmUnderRunBumperComments,
+                                FuelTankComment = x.parmFuelTanksComments,
+                                HeadboardComment = x.parmHeadBoardComments,
+                                DropSideFrontComment = x.parmPanelFrontComments,
+                                DropSideLeftComment = x.parmPanelLeftComments,
+                                DropSideRearComment = x.parmPanelRearComments,
+                                DropSideRightComment = x.parmPanelRightComments,
+                                IsChassisDmg = x.parmIsDamagedChassis == NoYes.Yes ? true : false,
+                                IsChevronDmg = x.parmIsDamagedChevron == NoYes.Yes ? true : false,
+                                IsDoorsDmg = x.parmIsDamagedDoors == NoYes.Yes ? true : false,
+                                IsFloorDmg = x.parmIsDamagedFloor == NoYes.Yes ? true : false,
+                                IsFuelTankDmg = x.parmIsDamagedFuelTanks == NoYes.Yes ? true : false,
+                                IsHeadboardDmg = x.parmIsDamagedHeadBoard == NoYes.Yes ? true : false,
+                                IsLandingLegsDmg = x.parmIsDamagedLandingLegs == NoYes.Yes ? true : false,
+                                IsSpareWheelCarrierDmg = x.parmIsDamagedSpareWheelCarrier == NoYes.Yes ? true : false,
+                                IsUnderRunBumperDmg = x.parmIsDamagedUnderRunBumper == NoYes.Yes ? true : false,
+                                IsDropSideFrontDmg = x.parmIsDamagedPanelFront == NoYes.Yes ? true : false,
+                                IsDropSideLeftDmg = x.parmIsDamagedPanelLeft == NoYes.Yes ? true : false,
+                                IsDropSideRearDmg = x.parmIsDamagedPanelRear == NoYes.Yes ? true : false,
+                                IsDropSideRightDmg = x.parmIsDamagedPanelRight == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CChassisBody>(cChassisBodyList);
+                        foreach (var item in cChassisBodyList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "ChassisBody");
+                        }
                     }
                 }
             }
@@ -1957,97 +1992,98 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var cMechanicalCondData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CMechanicalCond>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialMechConditionContract> mzkMobiCommercialMechConditionContractColl = new ObservableCollection<MzkMobiCommercialMechConditionContract>();
-                if (cMechanicalCondData != null)
+                foreach (var cMechanicalCond in cMechanicalCondData)
                 {
-                    foreach (var cMechanicalCond in cMechanicalCondData)
+
+                    mzkMobiCommercialMechConditionContractColl.Add(new MzkMobiCommercialMechConditionContract()
                     {
-
-                        mzkMobiCommercialMechConditionContractColl.Add(new MzkMobiCommercialMechConditionContract()
-                        {
-                            parmAutoTransmissionComments = cMechanicalCond.AutoTransmissionComment,
-                            parmDifferentialComments = cMechanicalCond.DifferentialComment,
-                            parmEngineComments = cMechanicalCond.EngineComment,
-                            parmExhaustComments = cMechanicalCond.ExhaustComment,
-                            parmFootBrakeComments = cMechanicalCond.FootBrakeComment,
-                            parmFrontSuppressionComments = cMechanicalCond.FrontSuspComment,
-                            parmGearBoxComments = cMechanicalCond.GearboxComment,
-                            parmHandBrakeComments = cMechanicalCond.HandBrakeComment,
-                            parmHydraulicPowerSteeringComments = cMechanicalCond.HPSComment,
-                            parmRearSuppressionComments = cMechanicalCond.RearSuspComment,
-                            parmOilLeaksComments = cMechanicalCond.OilLeaksComment,
-                            parmBatteryComments = cMechanicalCond.BatteryComment,
-                            parmSteeringComments = cMechanicalCond.SteeringComment,
+                        parmAutoTransmissionComments = cMechanicalCond.AutoTransmissionComment,
+                        parmDifferentialComments = cMechanicalCond.DifferentialComment,
+                        parmEngineComments = cMechanicalCond.EngineComment,
+                        parmExhaustComments = cMechanicalCond.ExhaustComment,
+                        parmFootBrakeComments = cMechanicalCond.FootBrakeComment,
+                        parmFrontSuppressionComments = cMechanicalCond.FrontSuspComment,
+                        parmGearBoxComments = cMechanicalCond.GearboxComment,
+                        parmHandBrakeComments = cMechanicalCond.HandBrakeComment,
+                        parmHydraulicPowerSteeringComments = cMechanicalCond.HPSComment,
+                        parmRearSuppressionComments = cMechanicalCond.RearSuspComment,
+                        parmOilLeaksComments = cMechanicalCond.OilLeaksComment,
+                        parmBatteryComments = cMechanicalCond.BatteryComment,
+                        parmSteeringComments = cMechanicalCond.SteeringComment,
 
 
-                            parmIsDamagedBatteryComments = cMechanicalCond.IsBatteryDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedAutoTransmission = cMechanicalCond.IsAutoTransmissionDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedDifferential = cMechanicalCond.IsDifferentialDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedEngine = cMechanicalCond.IsEngineDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedExhaust = cMechanicalCond.IsExhaustDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFootBrake = cMechanicalCond.IsFootBrakeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFrontSuppression = cMechanicalCond.IsFrontSuspDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedGearBox = cMechanicalCond.IsGearboxDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHandBrake = cMechanicalCond.IsHandBrakeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHydraulicPowerSteering = cMechanicalCond.IsHPSDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedOilLeeks = cMechanicalCond.IsOilLeaksDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRearSuppression = cMechanicalCond.IsRearSuspDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSteering = cMechanicalCond.IsSteeringDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedBatteryComments = cMechanicalCond.IsBatteryDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedAutoTransmission = cMechanicalCond.IsAutoTransmissionDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedDifferential = cMechanicalCond.IsDifferentialDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedEngine = cMechanicalCond.IsEngineDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedExhaust = cMechanicalCond.IsExhaustDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFootBrake = cMechanicalCond.IsFootBrakeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFrontSuppression = cMechanicalCond.IsFrontSuspDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedGearBox = cMechanicalCond.IsGearboxDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHandBrake = cMechanicalCond.IsHandBrakeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHydraulicPowerSteering = cMechanicalCond.IsHPSDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedOilLeeks = cMechanicalCond.IsOilLeaksDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRearSuppression = cMechanicalCond.IsRearSuspDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSteering = cMechanicalCond.IsSteeringDmg ? NoYes.Yes : NoYes.No,
 
 
-                            parmVehicleInsRecID = cMechanicalCond.VehicleInsRecID,
-                            parmTableId = cMechanicalCond.TableId,
-                            parmRecID = cMechanicalCond.RecID,
+                        parmVehicleInsRecID = cMechanicalCond.VehicleInsRecID,
+                        parmTableId = cMechanicalCond.TableId,
+                        parmRecID = cMechanicalCond.RecID,
 
-                        });
+                    });
 
 
-                    }
                 }
-                var res = await client.editCommercialMechConditionAsync(mzkMobiCommercialMechConditionContractColl, _userInfo.CompanyId);
-
-                var cMechanicalCondList = new ObservableCollection<CMechanicalCond>();
-                if (res.response != null)
+                if (mzkMobiCommercialMechConditionContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+
+                    var res = await client.editCommercialMechConditionAsync(mzkMobiCommercialMechConditionContractColl, _userInfo.CompanyId);
+
+                    var cMechanicalCondList = new ObservableCollection<CMechanicalCond>();
+                    if (res.response != null)
                     {
-                        cMechanicalCondList.Add(new CMechanicalCond
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            AutoTransmissionComment = x.parmAutoTransmissionComments,
-                            DifferentialComment = x.parmDifferentialComments,
-                            EngineComment = x.parmEngineComments,
-                            ExhaustComment = x.parmExhaustComments,
-                            FootBrakeComment = x.parmFootBrakeComments,
-                            FrontSuspComment = x.parmFrontSuppressionComments,
-                            GearboxComment = x.parmGearBoxComments,
-                            HandBrakeComment = x.parmHandBrakeComments,
-                            HPSComment = x.parmHydraulicPowerSteeringComments,
-                            RearSuspComment = x.parmRearSuppressionComments,
-                            OilLeaksComment = x.parmOilLeaksComments,
-                            BatteryComment = x.parmBatteryComments,
-                            SteeringComment = x.parmSteeringComments,
-                            IsBatteryDmg = x.parmIsDamagedBatteryComments == NoYes.Yes ? true : false,
-                            IsAutoTransmissionDmg = x.parmIsDamagedAutoTransmission == NoYes.Yes ? true : false,
-                            IsDifferentialDmg = x.parmIsDamagedDifferential == NoYes.Yes ? true : false,
-                            IsEngineDmg = x.parmIsDamagedEngine == NoYes.Yes ? true : false,
-                            IsExhaustDmg = x.parmIsDamagedExhaust == NoYes.Yes ? true : false,
-                            IsFootBrakeDmg = x.parmIsDamagedFootBrake == NoYes.Yes ? true : false,
-                            IsFrontSuspDmg = x.parmIsDamagedFrontSuppression == NoYes.Yes ? true : false,
-                            IsGearboxDmg = x.parmIsDamagedGearBox == NoYes.Yes ? true : false,
-                            IsHandBrakeDmg = x.parmIsDamagedHandBrake == NoYes.Yes ? true : false,
-                            IsHPSDmg = x.parmIsDamagedHydraulicPowerSteering == NoYes.Yes ? true : false,
-                            IsOilLeaksDmg = x.parmIsDamagedOilLeeks == NoYes.Yes ? true : false,
-                            IsRearSuspDmg = x.parmIsDamagedRearSuppression == NoYes.Yes ? true : false,
-                            IsSteeringDmg = x.parmIsDamagedSteering == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CMechanicalCond>(cMechanicalCondList);
-                    foreach (var item in cMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "CMechanicalCondition");
+                            cMechanicalCondList.Add(new CMechanicalCond
+                            {
+                                AutoTransmissionComment = x.parmAutoTransmissionComments,
+                                DifferentialComment = x.parmDifferentialComments,
+                                EngineComment = x.parmEngineComments,
+                                ExhaustComment = x.parmExhaustComments,
+                                FootBrakeComment = x.parmFootBrakeComments,
+                                FrontSuspComment = x.parmFrontSuppressionComments,
+                                GearboxComment = x.parmGearBoxComments,
+                                HandBrakeComment = x.parmHandBrakeComments,
+                                HPSComment = x.parmHydraulicPowerSteeringComments,
+                                RearSuspComment = x.parmRearSuppressionComments,
+                                OilLeaksComment = x.parmOilLeaksComments,
+                                BatteryComment = x.parmBatteryComments,
+                                SteeringComment = x.parmSteeringComments,
+                                IsBatteryDmg = x.parmIsDamagedBatteryComments == NoYes.Yes ? true : false,
+                                IsAutoTransmissionDmg = x.parmIsDamagedAutoTransmission == NoYes.Yes ? true : false,
+                                IsDifferentialDmg = x.parmIsDamagedDifferential == NoYes.Yes ? true : false,
+                                IsEngineDmg = x.parmIsDamagedEngine == NoYes.Yes ? true : false,
+                                IsExhaustDmg = x.parmIsDamagedExhaust == NoYes.Yes ? true : false,
+                                IsFootBrakeDmg = x.parmIsDamagedFootBrake == NoYes.Yes ? true : false,
+                                IsFrontSuspDmg = x.parmIsDamagedFrontSuppression == NoYes.Yes ? true : false,
+                                IsGearboxDmg = x.parmIsDamagedGearBox == NoYes.Yes ? true : false,
+                                IsHandBrakeDmg = x.parmIsDamagedHandBrake == NoYes.Yes ? true : false,
+                                IsHPSDmg = x.parmIsDamagedHydraulicPowerSteering == NoYes.Yes ? true : false,
+                                IsOilLeaksDmg = x.parmIsDamagedOilLeeks == NoYes.Yes ? true : false,
+                                IsRearSuspDmg = x.parmIsDamagedRearSuppression == NoYes.Yes ? true : false,
+                                IsSteeringDmg = x.parmIsDamagedSteering == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CMechanicalCond>(cMechanicalCondList);
+                        foreach (var item in cMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "CMechanicalCondition");
+                        }
                     }
                 }
             }
@@ -2071,112 +2107,112 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var cTyresData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CTyres>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiCommercialTyresContract> mzkMobiCommercialTyresContractColl = new ObservableCollection<MzkMobiCommercialTyresContract>();
-                if (cTyresData != null)
+
+                foreach (var cTyres in cTyresData)
                 {
-                    foreach (var cTyres in cTyresData)
+                    mzkMobiCommercialTyresContractColl.Add(new MzkMobiCommercialTyresContract()
                     {
-                        mzkMobiCommercialTyresContractColl.Add(new MzkMobiCommercialTyresContract()
-                        {
-                            parmLFComments = cTyres.LFComment,
-                            parmLInnerAxleInComments = cTyres.LInnerAxleInComment,
-                            parmLInnerAxleOutComments = cTyres.LInnerAxleOutComment,
-                            parmLRInnerComments = cTyres.LRInnerComment,
-                            parmLROuterComments = cTyres.LROuterComment,
-                            parmRFComments = cTyres.RFComment,
-                            parmRInnerAxleInComments = cTyres.RInnerAxleInComment,
-                            parmRInnerAxleOutComments = cTyres.RInnerAxleOutComment,
-                            parmRRInnerComments = cTyres.RRInnerComment,
-                            parmRROuterComments = cTyres.RROuterComment,
-                            parmSpareComments = cTyres.SpareComment,
+                        parmLFComments = cTyres.LFComment,
+                        parmLInnerAxleInComments = cTyres.LInnerAxleInComment,
+                        parmLInnerAxleOutComments = cTyres.LInnerAxleOutComment,
+                        parmLRInnerComments = cTyres.LRInnerComment,
+                        parmLROuterComments = cTyres.LROuterComment,
+                        parmRFComments = cTyres.RFComment,
+                        parmRInnerAxleInComments = cTyres.RInnerAxleInComment,
+                        parmRInnerAxleOutComments = cTyres.RInnerAxleOutComment,
+                        parmRRInnerComments = cTyres.RRInnerComment,
+                        parmRROuterComments = cTyres.RROuterComment,
+                        parmSpareComments = cTyres.SpareComment,
 
-                            parmLFCondition = cTyres.HasFLF ? MZKConditionEnum.Fair : (cTyres.HasGLF ? MZKConditionEnum.Good : (cTyres.HasPLF ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmLInnerAxleInCondition = cTyres.HasFLInnerAxleIn ? MZKConditionEnum.Fair : (cTyres.HasGLInnerAxleIn ? MZKConditionEnum.Good : (cTyres.HasPLInnerAxleIn ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmLInnerAxleOutCondition = cTyres.HasFLInnerAxleOut ? MZKConditionEnum.Fair : (cTyres.HasGLInnerAxleOut ? MZKConditionEnum.Good : (cTyres.HasPLInnerAxleOut ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmLRInnerCondition = cTyres.HasFLRInner ? MZKConditionEnum.Fair : (cTyres.HasGLRInner ? MZKConditionEnum.Good : (cTyres.HasPLRInner ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRInnerAxleOutCondition = cTyres.HasFRInnerAxleOut ? MZKConditionEnum.Fair : (cTyres.HasGRInnerAxleOut ? MZKConditionEnum.Good : (cTyres.HasPRInnerAxleOut ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRRInnerCondition = cTyres.HasFRRInner ? MZKConditionEnum.Fair : (cTyres.HasGRRInner ? MZKConditionEnum.Good : (cTyres.HasPRRInner ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRROuterCondition = cTyres.HasFRROuter ? MZKConditionEnum.Fair : (cTyres.HasGRROuter ? MZKConditionEnum.Good : (cTyres.HasPRROuter ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmSpareCondition = cTyres.HasFSpare ? MZKConditionEnum.Fair : (cTyres.HasGSpare ? MZKConditionEnum.Good : (cTyres.HasPSpare ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRInnerAxleInCondition = cTyres.HasFRInnerAxleIn ? MZKConditionEnum.Fair : (cTyres.HasGRInnerAxleIn ? MZKConditionEnum.Good : (cTyres.HasPRInnerAxleIn ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmRFCondition = cTyres.HasFRF ? MZKConditionEnum.Fair : (cTyres.HasGRF ? MZKConditionEnum.Good : (cTyres.HasPRF ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmLROuterCondition = cTyres.HasFLROuter ? MZKConditionEnum.Fair : (cTyres.HasGLROuter ? MZKConditionEnum.Good : (cTyres.HasPLROuter ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLFCondition = cTyres.HasFLF ? MZKConditionEnum.Fair : (cTyres.HasGLF ? MZKConditionEnum.Good : (cTyres.HasPLF ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLInnerAxleInCondition = cTyres.HasFLInnerAxleIn ? MZKConditionEnum.Fair : (cTyres.HasGLInnerAxleIn ? MZKConditionEnum.Good : (cTyres.HasPLInnerAxleIn ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLInnerAxleOutCondition = cTyres.HasFLInnerAxleOut ? MZKConditionEnum.Fair : (cTyres.HasGLInnerAxleOut ? MZKConditionEnum.Good : (cTyres.HasPLInnerAxleOut ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLRInnerCondition = cTyres.HasFLRInner ? MZKConditionEnum.Fair : (cTyres.HasGLRInner ? MZKConditionEnum.Good : (cTyres.HasPLRInner ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRInnerAxleOutCondition = cTyres.HasFRInnerAxleOut ? MZKConditionEnum.Fair : (cTyres.HasGRInnerAxleOut ? MZKConditionEnum.Good : (cTyres.HasPRInnerAxleOut ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRRInnerCondition = cTyres.HasFRRInner ? MZKConditionEnum.Fair : (cTyres.HasGRRInner ? MZKConditionEnum.Good : (cTyres.HasPRRInner ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRROuterCondition = cTyres.HasFRROuter ? MZKConditionEnum.Fair : (cTyres.HasGRROuter ? MZKConditionEnum.Good : (cTyres.HasPRROuter ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmSpareCondition = cTyres.HasFSpare ? MZKConditionEnum.Fair : (cTyres.HasGSpare ? MZKConditionEnum.Good : (cTyres.HasPSpare ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRInnerAxleInCondition = cTyres.HasFRInnerAxleIn ? MZKConditionEnum.Fair : (cTyres.HasGRInnerAxleIn ? MZKConditionEnum.Good : (cTyres.HasPRInnerAxleIn ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmRFCondition = cTyres.HasFRF ? MZKConditionEnum.Fair : (cTyres.HasGRF ? MZKConditionEnum.Good : (cTyres.HasPRF ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmLROuterCondition = cTyres.HasFLROuter ? MZKConditionEnum.Fair : (cTyres.HasGLROuter ? MZKConditionEnum.Good : (cTyres.HasPLROuter ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
 
-                            parmVehicleInsRecID = cTyres.VehicleInsRecID,
-                            parmTableId = cTyres.TableId,
-                            parmRecID = cTyres.RecID,
+                        parmVehicleInsRecID = cTyres.VehicleInsRecID,
+                        parmTableId = cTyres.TableId,
+                        parmRecID = cTyres.RecID,
 
 
 
-                        });
+                    });
 
-                    }
                 }
 
-                var res = await client.editCommercialTyreConditionAsync(mzkMobiCommercialTyresContractColl, _userInfo.CompanyId);
-
-                var cTyresList = new ObservableCollection<CTyres>();
-                if (res.response != null)
+                if (mzkMobiCommercialTyresContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editCommercialTyreConditionAsync(mzkMobiCommercialTyresContractColl, _userInfo.CompanyId);
+
+                    var cTyresList = new ObservableCollection<CTyres>();
+                    if (res.response != null)
                     {
-                        cTyresList.Add(new CTyres
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            LFComment = x.parmLFComments,
-                            LInnerAxleInComment = x.parmLInnerAxleInComments,
-                            LInnerAxleOutComment = x.parmLInnerAxleOutComments,
-                            LRInnerComment = x.parmLRInnerComments,
-                            LROuterComment = x.parmLROuterComments,
-                            RFComment = x.parmRFComments,
-                            RInnerAxleInComment = x.parmRInnerAxleInComments,
-                            RInnerAxleOutComment = x.parmRInnerAxleOutComments,
-                            RRInnerComment = x.parmRRInnerComments,
-                            RROuterComment = x.parmRROuterComments,
-                            SpareComment = x.parmSpareComments,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
+                            cTyresList.Add(new CTyres
+                            {
+                                LFComment = x.parmLFComments,
+                                LInnerAxleInComment = x.parmLInnerAxleInComments,
+                                LInnerAxleOutComment = x.parmLInnerAxleOutComments,
+                                LRInnerComment = x.parmLRInnerComments,
+                                LROuterComment = x.parmLROuterComments,
+                                RFComment = x.parmRFComments,
+                                RInnerAxleInComment = x.parmRInnerAxleInComments,
+                                RInnerAxleOutComment = x.parmRInnerAxleOutComments,
+                                RRInnerComment = x.parmRRInnerComments,
+                                RROuterComment = x.parmRROuterComments,
+                                SpareComment = x.parmSpareComments,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                HasFLF = MZKConditionEnum.Fair == x.parmLFCondition ? true : false,
+                                HasGLF = MZKConditionEnum.Good == x.parmLFCondition ? true : false,
+                                HasPLF = MZKConditionEnum.Poor == x.parmLFCondition ? true : false,
+                                HasFLInnerAxleIn = MZKConditionEnum.Fair == x.parmLInnerAxleInCondition ? true : false,
+                                HasGLInnerAxleIn = MZKConditionEnum.Good == x.parmLInnerAxleInCondition ? true : false,
+                                HasPLInnerAxleIn = MZKConditionEnum.Poor == x.parmLInnerAxleInCondition ? true : false,
+                                HasFLInnerAxleOut = MZKConditionEnum.Fair == x.parmLInnerAxleOutCondition ? true : false,
+                                HasGLInnerAxleOut = MZKConditionEnum.Good == x.parmLInnerAxleOutCondition ? true : false,
+                                HasPLInnerAxleOut = MZKConditionEnum.Poor == x.parmLInnerAxleOutCondition ? true : false,
+                                HasFLRInner = MZKConditionEnum.Fair == x.parmLRInnerCondition ? true : false,
+                                HasGLRInner = MZKConditionEnum.Good == x.parmLRInnerCondition ? true : false,
+                                HasPLRInner = MZKConditionEnum.Poor == x.parmLRInnerCondition ? true : false,
+                                HasFRInnerAxleOut = MZKConditionEnum.Fair == x.parmRInnerAxleOutCondition ? true : false,
+                                HasGRInnerAxleOut = MZKConditionEnum.Good == x.parmRInnerAxleOutCondition ? true : false,
+                                HasPRInnerAxleOut = MZKConditionEnum.Poor == x.parmRInnerAxleOutCondition ? true : false,
+                                HasFRRInner = MZKConditionEnum.Fair == x.parmRRInnerCondition ? true : false,
+                                HasGRRInner = MZKConditionEnum.Good == x.parmRRInnerCondition ? true : false,
+                                HasPRRInner = MZKConditionEnum.Poor == x.parmRRInnerCondition ? true : false,
+                                HasFRROuter = MZKConditionEnum.Fair == x.parmRROuterCondition ? true : false,
+                                HasGRROuter = MZKConditionEnum.Good == x.parmRROuterCondition ? true : false,
+                                HasPRROuter = MZKConditionEnum.Poor == x.parmRROuterCondition ? true : false,
+                                HasFSpare = MZKConditionEnum.Fair == x.parmSpareCondition ? true : false,
+                                HasGSpare = MZKConditionEnum.Good == x.parmSpareCondition ? true : false,
+                                HasPSpare = MZKConditionEnum.Poor == x.parmSpareCondition ? true : false,
+                                HasFRInnerAxleIn = MZKConditionEnum.Fair == x.parmRInnerAxleInCondition ? true : false,
+                                HasGRInnerAxleIn = MZKConditionEnum.Good == x.parmRInnerAxleInCondition ? true : false,
+                                HasPRInnerAxleIn = MZKConditionEnum.Poor == x.parmRInnerAxleInCondition ? true : false,
+                                HasFRF = MZKConditionEnum.Fair == x.parmRFCondition ? true : false,
+                                HasGRF = MZKConditionEnum.Good == x.parmRFCondition ? true : false,
+                                HasPRF = MZKConditionEnum.Poor == x.parmRFCondition ? true : false,
+                                HasFLROuter = MZKConditionEnum.Fair == x.parmLROuterCondition ? true : false,
+                                HasGLROuter = MZKConditionEnum.Good == x.parmLROuterCondition ? true : false,
+                                HasPLROuter = MZKConditionEnum.Poor == x.parmLROuterCondition ? true : false,
+                                ShouldSave = false
 
-                            HasFLF = MZKConditionEnum.Fair == x.parmLFCondition ? true : false,
-                            HasGLF = MZKConditionEnum.Good == x.parmLFCondition ? true : false,
-                            HasPLF = MZKConditionEnum.Poor == x.parmLFCondition ? true : false,
-                            HasFLInnerAxleIn = MZKConditionEnum.Fair == x.parmLInnerAxleInCondition ? true : false,
-                            HasGLInnerAxleIn = MZKConditionEnum.Good == x.parmLInnerAxleInCondition ? true : false,
-                            HasPLInnerAxleIn = MZKConditionEnum.Poor == x.parmLInnerAxleInCondition ? true : false,
-                            HasFLInnerAxleOut = MZKConditionEnum.Fair == x.parmLInnerAxleOutCondition ? true : false,
-                            HasGLInnerAxleOut = MZKConditionEnum.Good == x.parmLInnerAxleOutCondition ? true : false,
-                            HasPLInnerAxleOut = MZKConditionEnum.Poor == x.parmLInnerAxleOutCondition ? true : false,
-                            HasFLRInner = MZKConditionEnum.Fair == x.parmLRInnerCondition ? true : false,
-                            HasGLRInner = MZKConditionEnum.Good == x.parmLRInnerCondition ? true : false,
-                            HasPLRInner = MZKConditionEnum.Poor == x.parmLRInnerCondition ? true : false,
-                            HasFRInnerAxleOut = MZKConditionEnum.Fair == x.parmRInnerAxleOutCondition ? true : false,
-                            HasGRInnerAxleOut = MZKConditionEnum.Good == x.parmRInnerAxleOutCondition ? true : false,
-                            HasPRInnerAxleOut = MZKConditionEnum.Poor == x.parmRInnerAxleOutCondition ? true : false,
-                            HasFRRInner = MZKConditionEnum.Fair == x.parmRRInnerCondition ? true : false,
-                            HasGRRInner = MZKConditionEnum.Good == x.parmRRInnerCondition ? true : false,
-                            HasPRRInner = MZKConditionEnum.Poor == x.parmRRInnerCondition ? true : false,
-                            HasFRROuter = MZKConditionEnum.Fair == x.parmRROuterCondition ? true : false,
-                            HasGRROuter = MZKConditionEnum.Good == x.parmRROuterCondition ? true : false,
-                            HasPRROuter = MZKConditionEnum.Poor == x.parmRROuterCondition ? true : false,
-                            HasFSpare = MZKConditionEnum.Fair == x.parmSpareCondition ? true : false,
-                            HasGSpare = MZKConditionEnum.Good == x.parmSpareCondition ? true : false,
-                            HasPSpare = MZKConditionEnum.Poor == x.parmSpareCondition ? true : false,
-                            HasFRInnerAxleIn = MZKConditionEnum.Fair == x.parmRInnerAxleInCondition ? true : false,
-                            HasGRInnerAxleIn = MZKConditionEnum.Good == x.parmRInnerAxleInCondition ? true : false,
-                            HasPRInnerAxleIn = MZKConditionEnum.Poor == x.parmRInnerAxleInCondition ? true : false,
-                            HasFRF = MZKConditionEnum.Fair == x.parmRFCondition ? true : false,
-                            HasGRF = MZKConditionEnum.Good == x.parmRFCondition ? true : false,
-                            HasPRF = MZKConditionEnum.Poor == x.parmRFCondition ? true : false,
-                            HasFLROuter = MZKConditionEnum.Fair == x.parmLROuterCondition ? true : false,
-                            HasGLROuter = MZKConditionEnum.Good == x.parmLROuterCondition ? true : false,
-                            HasPLROuter = MZKConditionEnum.Poor == x.parmLROuterCondition ? true : false,
-                            ShouldSave = false
-
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<CTyres>(cTyresList);
-                    foreach (var item in cTyresList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "CTyres");
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<CTyres>(cTyresList);
+                        foreach (var item in cTyresList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "CTyres");
+                        }
                     }
                 }
             }
@@ -2200,45 +2236,47 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var inspectionProofData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Commercial.CPOI>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKVehicleInspectionTableContract> MZKVehicleInspectionTableContractColl = new ObservableCollection<MZKVehicleInspectionTableContract>();
-                if (inspectionProofData != null)
-                {
-                    foreach (var insProof in inspectionProofData)
-                    {
-                        MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
-                        {
-                            parmCompanyRepSignDateTime = insProof.EQRDate,
-                            parmCustomerRepSignDateTime = insProof.CRDate,
-                            parmRecommendation = insProof.IsRetainChecked ? MZKRecommendationEnum.Retain : (insProof.IsSellChecked ? MZKRecommendationEnum.Sell : (insProof.IsNotFeasChecked ? MZKRecommendationEnum.NotFeasible : MZKRecommendationEnum.None)),
-                            parmVehicleType = MzkVehicleType.Commercial,
-                            parmRecID = insProof.VehicleInsRecID,
-                            parmGeneralCondition = insProof.IsFairChecked ? MZKConditionEnum.Fair : (insProof.IsGoodChecked ? MZKConditionEnum.Good : (insProof.IsPoorChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None))
-
-                        });
-                    }
-                }
-                var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
-
                 var cpoiList = new ObservableCollection<CPOI>();
-                if (res.response != null)
+
+                foreach (var insProof in inspectionProofData)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
                     {
-                        cpoiList.Add(new CPOI
-                        {
-                            EQRDate = x.parmCompanyRepSignDateTime,
-                            CRDate = x.parmCustomerRepSignDateTime,
-                            IsFairChecked = x.parmGeneralCondition == MZKConditionEnum.Fair ? true : false,
-                            IsGoodChecked = x.parmGeneralCondition == MZKConditionEnum.Good ? true : false,
-                            IsPoorChecked = x.parmGeneralCondition == MZKConditionEnum.Poor ? true : false,
-                            IsNotFeasChecked = x.parmRecommendation == MZKRecommendationEnum.NotFeasible ? true : false,
-                            IsRetainChecked = x.parmRecommendation == MZKRecommendationEnum.Retain ? true : false,
-                            IsSellChecked = x.parmRecommendation == MZKRecommendationEnum.Sell ? true : false,
-                            VehicleInsRecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
+                        parmCompanyRepSignDateTime = insProof.EQRDate,
+                        parmCustomerRepSignDateTime = insProof.CRDate,
+                        parmRecommendation = insProof.IsRetainChecked ? MZKRecommendationEnum.Retain : (insProof.IsSellChecked ? MZKRecommendationEnum.Sell : (insProof.IsNotFeasChecked ? MZKRecommendationEnum.NotFeasible : MZKRecommendationEnum.None)),
+                        parmVehicleType = MzkVehicleType.Commercial,
+                        parmRecID = insProof.VehicleInsRecID,
+                        parmGeneralCondition = insProof.IsFairChecked ? MZKConditionEnum.Fair : (insProof.IsGoodChecked ? MZKConditionEnum.Good : (insProof.IsPoorChecked ? MZKConditionEnum.Poor : MZKConditionEnum.None))
+
+                    });
                 }
 
+                if (MZKVehicleInspectionTableContractColl.Count > 0)
+                {
+                    var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
+                    if (res.response != null)
+                    {
+
+
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            cpoiList.Add(new CPOI
+                            {
+                                EQRDate = x.parmCompanyRepSignDateTime,
+                                CRDate = x.parmCustomerRepSignDateTime,
+                                IsFairChecked = x.parmGeneralCondition == MZKConditionEnum.Fair ? true : false,
+                                IsGoodChecked = x.parmGeneralCondition == MZKConditionEnum.Good ? true : false,
+                                IsPoorChecked = x.parmGeneralCondition == MZKConditionEnum.Poor ? true : false,
+                                IsNotFeasChecked = x.parmRecommendation == MZKRecommendationEnum.NotFeasible ? true : false,
+                                IsRetainChecked = x.parmRecommendation == MZKRecommendationEnum.Retain ? true : false,
+                                IsSellChecked = x.parmRecommendation == MZKRecommendationEnum.Sell ? true : false,
+                                VehicleInsRecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                    }
+                }
                 await SqliteHelper.Storage.UpdateAllAsync<CPOI>(cpoiList);
 
             }
@@ -2330,50 +2368,52 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var tAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiTrailorAccessoriesContract> mzkMobiTrailerAccessoriesContractColl = new ObservableCollection<MzkMobiTrailorAccessoriesContract>();
-                if (tAccessoriesData != null)
-                {
-                    foreach (var x in tAccessoriesData)
-                    {
-                        mzkMobiTrailerAccessoriesContractColl.Add(new MzkMobiTrailorAccessoriesContract()
-                        {
-                            parmReflectiveTapeComments = x.ReflectiveTapeComment,
-                            parmSignWritingComments = x.DecalSignWritingComment,
-                            parmHasReflectiveTape = x.HasReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
-                            parmHasDecals = x.HasDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedReflectiveTape = x.IsReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSignWriting = x.IsDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
-                            parmVehicleInsRecID = x.VehicleInsRecID,
-                            parmTableId = x.TableId,
-                            parmRecID = x.RecID,
 
-                        });
-                    }
+                foreach (var x in tAccessoriesData)
+                {
+                    mzkMobiTrailerAccessoriesContractColl.Add(new MzkMobiTrailorAccessoriesContract()
+                    {
+                        parmReflectiveTapeComments = x.ReflectiveTapeComment,
+                        parmSignWritingComments = x.DecalSignWritingComment,
+                        parmHasReflectiveTape = x.HasReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
+                        parmHasDecals = x.HasDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedReflectiveTape = x.IsReflectiveTapeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSignWriting = x.IsDecalSignWritingDmg ? NoYes.Yes : NoYes.No,
+                        parmVehicleInsRecID = x.VehicleInsRecID,
+                        parmTableId = x.TableId,
+                        parmRecID = x.RecID,
+
+                    });
                 }
-                var res = await client.editTrailorAccessoriesAsync(mzkMobiTrailerAccessoriesContractColl, _userInfo.CompanyId);
 
-                var tAccessoriesList = new ObservableCollection<TAccessories>();
-                if (res.response != null)
+                if (mzkMobiTrailerAccessoriesContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editTrailorAccessoriesAsync(mzkMobiTrailerAccessoriesContractColl, _userInfo.CompanyId);
+
+                    var tAccessoriesList = new ObservableCollection<TAccessories>();
+                    if (res.response != null)
                     {
-                        tAccessoriesList.Add(new TAccessories
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            ReflectiveTapeComment = x.parmReflectiveTapeComments,
-                            DecalSignWritingComment = x.parmSignWritingComments,
-                            HasReflectiveTapeDmg = x.parmHasReflectiveTape == NoYes.Yes ? true : false,
-                            HasDecalSignWritingDmg = x.parmHasDecals == NoYes.Yes ? true : false,
-                            IsReflectiveTapeDmg = x.parmIsDamagedReflectiveTape == NoYes.Yes ? true : false,
-                            IsDecalSignWritingDmg = x.parmIsDamagedSignWriting == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<TAccessories>(tAccessoriesList);
-                    foreach (var item in tAccessoriesList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "TAccessories");
+                            tAccessoriesList.Add(new TAccessories
+                            {
+                                ReflectiveTapeComment = x.parmReflectiveTapeComments,
+                                DecalSignWritingComment = x.parmSignWritingComments,
+                                HasReflectiveTapeDmg = x.parmHasReflectiveTape == NoYes.Yes ? true : false,
+                                HasDecalSignWritingDmg = x.parmHasDecals == NoYes.Yes ? true : false,
+                                IsReflectiveTapeDmg = x.parmIsDamagedReflectiveTape == NoYes.Yes ? true : false,
+                                IsDecalSignWritingDmg = x.parmIsDamagedSignWriting == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<TAccessories>(tAccessoriesList);
+                        foreach (var item in tAccessoriesList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "TAccessories");
+                        }
                     }
                 }
             }
@@ -2397,109 +2437,111 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var tChassisBodyData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TChassisBody>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiTrailorChassisBodyContract> mzkMobiTrailerChassisBodyContractColl = new ObservableCollection<MzkMobiTrailorChassisBodyContract>();
-                if (tChassisBodyData != null)
+
+                foreach (var x in tChassisBodyData)
                 {
-                    foreach (var x in tChassisBodyData)
+                    mzkMobiTrailerChassisBodyContractColl.Add(new MzkMobiTrailorChassisBodyContract()
                     {
-                        mzkMobiTrailerChassisBodyContractColl.Add(new MzkMobiTrailorChassisBodyContract()
-                        {
-                            parmChassisComments = x.ChassisComment,
-                            parmChevronComments = x.ChevronComment,
-                            parmFloorComments = x.FloorComment,
-                            parmLandingLegsComments = x.LandingLegsComment,
-                            parmSpareWheelCarrierComments = x.SpareWheelCarrierComment,
-                            parmUnderRunBumperComments = x.UnderRunBumperComment,
-                            parmHeadBoardComments = x.HeadboardComment,
-                            parmPanelFrontComments = x.DropSideFrontComment,
-                            parmPanelLeftComments = x.DropSideLeftComment,
-                            parmPanelRearComments = x.DropSideRearComment,
-                            parmPanelRightComments = x.DropSideRightComment,
+                        parmChassisComments = x.ChassisComment,
+                        parmChevronComments = x.ChevronComment,
+                        parmFloorComments = x.FloorComment,
+                        parmLandingLegsComments = x.LandingLegsComment,
+                        parmSpareWheelCarrierComments = x.SpareWheelCarrierComment,
+                        parmUnderRunBumperComments = x.UnderRunBumperComment,
+                        parmHeadBoardComments = x.HeadboardComment,
+                        parmPanelFrontComments = x.DropSideFrontComment,
+                        parmPanelLeftComments = x.DropSideLeftComment,
+                        parmPanelRearComments = x.DropSideRearComment,
+                        parmPanelRightComments = x.DropSideRightComment,
 
-                            parmSuzieFitments = x.SuzieFitmentsComment,
-                            parmKingpin = x.KingpinComment,
-                            parmFictionPlates = x.FictionPlatesComment,
-                            parmABSActivator = x.ABSActivatorComment,
+                        parmSuzieFitments = x.SuzieFitmentsComment,
+                        parmKingpin = x.KingpinComment,
+                        parmFictionPlates = x.FictionPlatesComment,
+                        parmABSActivator = x.ABSActivatorComment,
 
-                            parmIsDamagedChassis = x.IsChassisDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedChevron = x.IsChevronDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFloor = x.IsFloorDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHeadBoard = x.IsHeadboardDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedLandingLegs = x.IsLandingLegsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSpareWheelCarrier = x.IsSpareWheelCarrierDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedUnderRunBumper = x.IsUnderRunBumperDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelFront = x.IsDropSideFrontDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelLeft = x.IsDropSideLeftDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelRear = x.IsDropSideRearDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedPanelRight = x.IsDropSideRightDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedChassis = x.IsChassisDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedChevron = x.IsChevronDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFloor = x.IsFloorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHeadBoard = x.IsHeadboardDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedLandingLegs = x.IsLandingLegsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSpareWheelCarrier = x.IsSpareWheelCarrierDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedUnderRunBumper = x.IsUnderRunBumperDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelFront = x.IsDropSideFrontDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelLeft = x.IsDropSideLeftDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelRear = x.IsDropSideRearDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedPanelRight = x.IsDropSideRightDmg ? NoYes.Yes : NoYes.No,
 
-                            parmIsDamagedSuzieFitments = x.IsSuzieFitmentsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFictionPlates = x.IsFictionPlatesDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedKingpin = x.IsKingpinDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedABSActivator = x.IsABSActivatorDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSuzieFitments = x.IsSuzieFitmentsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFictionPlates = x.IsFictionPlatesDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedKingpin = x.IsKingpinDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedABSActivator = x.IsABSActivatorDmg ? NoYes.Yes : NoYes.No,
 
 
-                            parmVehicleInsRecID = x.VehicleInsRecID,
-                            parmTableId = x.TableId,
-                            parmRecID = x.RecID,
-                        }
-                        );
-
+                        parmVehicleInsRecID = x.VehicleInsRecID,
+                        parmTableId = x.TableId,
+                        parmRecID = x.RecID,
                     }
+                    );
+
                 }
 
-                var res = await client.editTrailorChassisBodyAsync(mzkMobiTrailerChassisBodyContractColl, _userInfo.CompanyId);
 
-                var tChassisBodyList = new ObservableCollection<TChassisBody>();
-                if (res.response != null)
+                if (mzkMobiTrailerChassisBodyContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editTrailorChassisBodyAsync(mzkMobiTrailerChassisBodyContractColl, _userInfo.CompanyId);
+
+                    var tChassisBodyList = new ObservableCollection<TChassisBody>();
+                    if (res.response != null)
                     {
-                        tChassisBodyList.Add(new TChassisBody
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            ChassisComment = x.parmChassisComments,
-                            ChevronComment = x.parmChevronComments,
-                            FloorComment = x.parmFloorComments,
-                            LandingLegsComment = x.parmLandingLegsComments,
-                            SpareWheelCarrierComment = x.parmSpareWheelCarrierComments,
-                            UnderRunBumperComment = x.parmUnderRunBumperComments,
-                            HeadboardComment = x.parmHeadBoardComments,
-                            DropSideFrontComment = x.parmPanelFrontComments,
-                            DropSideLeftComment = x.parmPanelLeftComments,
-                            DropSideRearComment = x.parmPanelRearComments,
-                            DropSideRightComment = x.parmPanelRightComments,
+                            tChassisBodyList.Add(new TChassisBody
+                            {
+                                ChassisComment = x.parmChassisComments,
+                                ChevronComment = x.parmChevronComments,
+                                FloorComment = x.parmFloorComments,
+                                LandingLegsComment = x.parmLandingLegsComments,
+                                SpareWheelCarrierComment = x.parmSpareWheelCarrierComments,
+                                UnderRunBumperComment = x.parmUnderRunBumperComments,
+                                HeadboardComment = x.parmHeadBoardComments,
+                                DropSideFrontComment = x.parmPanelFrontComments,
+                                DropSideLeftComment = x.parmPanelLeftComments,
+                                DropSideRearComment = x.parmPanelRearComments,
+                                DropSideRightComment = x.parmPanelRightComments,
 
-                            SuzieFitmentsComment = x.parmSuzieFitments,
-                            KingpinComment = x.parmKingpin,
-                            FictionPlatesComment = x.parmFictionPlates,
-                            ABSActivatorComment = x.parmABSActivator,
+                                SuzieFitmentsComment = x.parmSuzieFitments,
+                                KingpinComment = x.parmKingpin,
+                                FictionPlatesComment = x.parmFictionPlates,
+                                ABSActivatorComment = x.parmABSActivator,
 
-                            IsChassisDmg = x.parmIsDamagedChassis == NoYes.Yes ? true : false,
-                            IsChevronDmg = x.parmIsDamagedChevron == NoYes.Yes ? true : false,
-                            IsFloorDmg = x.parmIsDamagedFloor == NoYes.Yes ? true : false,
-                            IsHeadboardDmg = x.parmIsDamagedHeadBoard == NoYes.Yes ? true : false,
-                            IsLandingLegsDmg = x.parmIsDamagedLandingLegs == NoYes.Yes ? true : false,
-                            IsSpareWheelCarrierDmg = x.parmIsDamagedSpareWheelCarrier == NoYes.Yes ? true : false,
-                            IsUnderRunBumperDmg = x.parmIsDamagedUnderRunBumper == NoYes.Yes ? true : false,
-                            IsDropSideFrontDmg = x.parmIsDamagedPanelFront == NoYes.Yes ? true : false,
-                            IsDropSideLeftDmg = x.parmIsDamagedPanelLeft == NoYes.Yes ? true : false,
-                            IsDropSideRearDmg = x.parmIsDamagedPanelRear == NoYes.Yes ? true : false,
-                            IsDropSideRightDmg = x.parmIsDamagedPanelRight == NoYes.Yes ? true : false,
+                                IsChassisDmg = x.parmIsDamagedChassis == NoYes.Yes ? true : false,
+                                IsChevronDmg = x.parmIsDamagedChevron == NoYes.Yes ? true : false,
+                                IsFloorDmg = x.parmIsDamagedFloor == NoYes.Yes ? true : false,
+                                IsHeadboardDmg = x.parmIsDamagedHeadBoard == NoYes.Yes ? true : false,
+                                IsLandingLegsDmg = x.parmIsDamagedLandingLegs == NoYes.Yes ? true : false,
+                                IsSpareWheelCarrierDmg = x.parmIsDamagedSpareWheelCarrier == NoYes.Yes ? true : false,
+                                IsUnderRunBumperDmg = x.parmIsDamagedUnderRunBumper == NoYes.Yes ? true : false,
+                                IsDropSideFrontDmg = x.parmIsDamagedPanelFront == NoYes.Yes ? true : false,
+                                IsDropSideLeftDmg = x.parmIsDamagedPanelLeft == NoYes.Yes ? true : false,
+                                IsDropSideRearDmg = x.parmIsDamagedPanelRear == NoYes.Yes ? true : false,
+                                IsDropSideRightDmg = x.parmIsDamagedPanelRight == NoYes.Yes ? true : false,
 
-                            IsSuzieFitmentsDmg = x.parmIsDamagedSuzieFitments == NoYes.Yes ? true : false,
-                            IsKingpinDmg = x.parmIsDamagedKingpin == NoYes.Yes ? true : false,
-                            IsABSActivatorDmg = x.parmIsDamagedABSActivator == NoYes.Yes ? true : false,
-                            IsFictionPlatesDmg = x.parmIsDamagedFictionPlates == NoYes.Yes ? true : false,
+                                IsSuzieFitmentsDmg = x.parmIsDamagedSuzieFitments == NoYes.Yes ? true : false,
+                                IsKingpinDmg = x.parmIsDamagedKingpin == NoYes.Yes ? true : false,
+                                IsABSActivatorDmg = x.parmIsDamagedABSActivator == NoYes.Yes ? true : false,
+                                IsFictionPlatesDmg = x.parmIsDamagedFictionPlates == NoYes.Yes ? true : false,
 
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<TChassisBody>(tChassisBodyList);
-                    foreach (var item in tChassisBodyList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "TChassisBody");
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<TChassisBody>(tChassisBodyList);
+                        foreach (var item in tChassisBodyList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "TChassisBody");
+                        }
                     }
                 }
             }
@@ -2525,55 +2567,57 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 var tGlassData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TGlass>()).Where(x => x.ShouldSave);
 
                 ObservableCollection<MzkMobiTrailorGlassContract> mzkMobiTrailorGlassContractColl = new ObservableCollection<MzkMobiTrailorGlassContract>();
-                if (tGlassData != null)
+
+                foreach (var x in tGlassData)
                 {
-                    foreach (var x in tGlassData)
+                    mzkMobiTrailorGlassContractColl.Add(new MzkMobiTrailorGlassContract()
                     {
-                        mzkMobiTrailorGlassContractColl.Add(new MzkMobiTrailorGlassContract()
-                        {
-                            parmTailLightsComments = x.GVTailLightsComment,
-                            parmReflectorsComments = x.ReflectorsComment,
-                            parmIndicatorLensesComments = x.GVInductorLensesComment,
+                        parmTailLightsComments = x.GVTailLightsComment,
+                        parmReflectorsComments = x.ReflectorsComment,
+                        parmIndicatorLensesComments = x.GVInductorLensesComment,
 
-                            parmIsDamagedIndicatorLenses = x.IsInductorLenses ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTailLights = x.IsTailLights ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedReflectors = x.IsReflectors ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedIndicatorLenses = x.IsInductorLenses ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTailLights = x.IsTailLights ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedReflectors = x.IsReflectors ? NoYes.Yes : NoYes.No,
 
-                            parmRecID = x.RecID,
-                            parmVehicleInsRecID = x.VehicleInsRecID,
-                            parmTableId = x.TableId,
-                        });
-
-                    }
+                        parmRecID = x.RecID,
+                        parmVehicleInsRecID = x.VehicleInsRecID,
+                        parmTableId = x.TableId,
+                    });
 
                 }
-                var res = await client.editTrailorGlassAsync(mzkMobiTrailorGlassContractColl, _userInfo.CompanyId);
 
-                var tglassList = new ObservableCollection<TGlass>();
-                if (res.response != null)
+
+                if (mzkMobiTrailorGlassContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editTrailorGlassAsync(mzkMobiTrailorGlassContractColl, _userInfo.CompanyId);
+
+                    var tglassList = new ObservableCollection<TGlass>();
+                    if (res.response != null)
                     {
-                        tglassList.Add(new TGlass
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            GVInductorLensesComment = x.parmIndicatorLensesComments,
-                            GVTailLightsComment = x.parmTailLightsComments,
-                            ReflectorsComment = x.parmReflectorsComments,
+                            tglassList.Add(new TGlass
+                            {
+                                GVInductorLensesComment = x.parmIndicatorLensesComments,
+                                GVTailLightsComment = x.parmTailLightsComments,
+                                ReflectorsComment = x.parmReflectorsComments,
 
-                            IsInductorLenses = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
-                            IsTailLights = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
-                            IsReflectors = x.parmIsDamagedReflectors == NoYes.Yes ? true : false,
+                                IsInductorLenses = x.parmIsDamagedIndicatorLenses == NoYes.Yes ? true : false,
+                                IsTailLights = x.parmIsDamagedTailLights == NoYes.Yes ? true : false,
+                                IsReflectors = x.parmIsDamagedReflectors == NoYes.Yes ? true : false,
 
-                            RecID = x.parmRecID,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<TGlass>(tglassList);
-                    foreach (var item in tglassList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "TGlass");
+                                RecID = x.parmRecID,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<TGlass>(tglassList);
+                        foreach (var item in tglassList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "TGlass");
+                        }
                     }
                 }
             }
@@ -2598,57 +2642,59 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var tMechanicalCondData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TMechanicalCond>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiTrailorMechConditionContract> mzkMobiTrailerMechConditionContractColl = new ObservableCollection<MzkMobiTrailorMechConditionContract>();
-                if (tMechanicalCondData != null)
+
+                foreach (var x in tMechanicalCondData)
                 {
-                    foreach (var x in tMechanicalCondData)
+                    mzkMobiTrailerMechConditionContractColl.Add(new MzkMobiTrailorMechConditionContract()
                     {
-                        mzkMobiTrailerMechConditionContractColl.Add(new MzkMobiTrailorMechConditionContract()
-                        {
-                            parmFootBrakeComments = x.FootBrakeComment,
-                            parmFrontSuppressionComments = x.FrontSuspComment,
-                            parmHandBrakeComments = x.HandBrakeComment,
-                            parmRearSuppressionComments = x.RearSuspComment,
-                            parmIsDamagedFootBrake = x.IsFootBrakeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedFrontSuppression = x.IsFrontSuspDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedHandBrake = x.IsHandBrakeDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRearSuppression = x.IsRearSuspDmg ? NoYes.Yes : NoYes.No,
-                            parmVehicleInsRecID = x.VehicleInsRecID,
-                            parmTableId = x.TableId,
-                            parmRecID = x.RecID,
+                        parmFootBrakeComments = x.FootBrakeComment,
+                        parmFrontSuppressionComments = x.FrontSuspComment,
+                        parmHandBrakeComments = x.HandBrakeComment,
+                        parmRearSuppressionComments = x.RearSuspComment,
+                        parmIsDamagedFootBrake = x.IsFootBrakeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedFrontSuppression = x.IsFrontSuspDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedHandBrake = x.IsHandBrakeDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRearSuppression = x.IsRearSuspDmg ? NoYes.Yes : NoYes.No,
+                        parmVehicleInsRecID = x.VehicleInsRecID,
+                        parmTableId = x.TableId,
+                        parmRecID = x.RecID,
 
-                        });
+                    });
 
 
-                    }
                 }
-                var res = await client.editTrailorMechConditionAsync(mzkMobiTrailerMechConditionContractColl, _userInfo.CompanyId);
 
-                var tMechanicalCondList = new ObservableCollection<TMechanicalCond>();
-                if (res.response != null)
+                if (mzkMobiTrailerMechConditionContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
-                    {
-                        tMechanicalCondList.Add(new TMechanicalCond
-                        {
-                            FootBrakeComment = x.parmFootBrakeComments,
-                            FrontSuspComment = x.parmFrontSuppressionComments,
-                            HandBrakeComment = x.parmHandBrakeComments,
-                            RearSuspComment = x.parmRearSuppressionComments,
-                            IsFootBrakeDmg = x.parmIsDamagedFootBrake == NoYes.Yes ? true : false,
-                            IsFrontSuspDmg = x.parmIsDamagedFrontSuppression == NoYes.Yes ? true : false,
-                            IsHandBrakeDmg = x.parmIsDamagedHandBrake == NoYes.Yes ? true : false,
-                            IsRearSuspDmg = x.parmIsDamagedRearSuppression == NoYes.Yes ? true : false,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
+                    var res = await client.editTrailorMechConditionAsync(mzkMobiTrailerMechConditionContractColl, _userInfo.CompanyId);
 
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<TMechanicalCond>(tMechanicalCondList);
-                    foreach (var item in tMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
+                    var tMechanicalCondList = new ObservableCollection<TMechanicalCond>();
+                    if (res.response != null)
                     {
-                        await SyncImagesAsync(item.Key, "TMechanicalCondition");
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            tMechanicalCondList.Add(new TMechanicalCond
+                            {
+                                FootBrakeComment = x.parmFootBrakeComments,
+                                FrontSuspComment = x.parmFrontSuppressionComments,
+                                HandBrakeComment = x.parmHandBrakeComments,
+                                RearSuspComment = x.parmRearSuppressionComments,
+                                IsFootBrakeDmg = x.parmIsDamagedFootBrake == NoYes.Yes ? true : false,
+                                IsFrontSuspDmg = x.parmIsDamagedFrontSuppression == NoYes.Yes ? true : false,
+                                IsHandBrakeDmg = x.parmIsDamagedHandBrake == NoYes.Yes ? true : false,
+                                IsRearSuspDmg = x.parmIsDamagedRearSuppression == NoYes.Yes ? true : false,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<TMechanicalCond>(tMechanicalCondList);
+                        foreach (var item in tMechanicalCondList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "TMechanicalCondition");
+                        }
                     }
                 }
             }
@@ -2672,52 +2718,54 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var tTyresData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TTyreCond>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKMobiTrailorTyreConditionContract> mzkMobiTrailerTyresContractColl = new ObservableCollection<MZKMobiTrailorTyreConditionContract>();
-                if (tTyresData != null)
+
+                foreach (var x in tTyresData)
                 {
-                    foreach (var x in tTyresData)
+                    mzkMobiTrailerTyresContractColl.Add(new MZKMobiTrailorTyreConditionContract()
                     {
-                        mzkMobiTrailerTyresContractColl.Add(new MZKMobiTrailorTyreConditionContract()
-                        {
-                            parmComment = x.Comment,
-                            parmCondition = x.IsFair ? MZKConditionEnum.Fair : (x.IsGood ? MZKConditionEnum.Good : (x.IsPoor ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
-                            parmDepth = x.ThreadDepth,
-                            parmMake = x.Make,
-                            parmPosition = x.Position,
-                            parmVehicleInsRecID = x.VehicleInsRecID,
-                            parmTableId = x.TableId,
-                            parmRecID = x.RecID
+                        parmComment = x.Comment,
+                        parmCondition = x.IsFair ? MZKConditionEnum.Fair : (x.IsGood ? MZKConditionEnum.Good : (x.IsPoor ? MZKConditionEnum.Poor : MZKConditionEnum.None)),
+                        parmDepth = x.ThreadDepth,
+                        parmMake = x.Make,
+                        parmPosition = x.Position,
+                        parmVehicleInsRecID = x.VehicleInsRecID,
+                        parmTableId = x.TableId,
+                        parmRecID = x.RecID
 
-                        });
+                    });
 
-                    }
                 }
 
-                var res = await client.editTrailorTyreConditionAsync(mzkMobiTrailerTyresContractColl, _userInfo.CompanyId);
 
-                var tTyresList = new ObservableCollection<TTyreCond>();
-                if (res.response != null)
+                if (mzkMobiTrailerTyresContractColl.Count > 0)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    var res = await client.editTrailorTyreConditionAsync(mzkMobiTrailerTyresContractColl, _userInfo.CompanyId);
+
+                    var tTyresList = new ObservableCollection<TTyreCond>();
+                    if (res.response != null)
                     {
-                        tTyresList.Add(new TTyreCond
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            Comment = x.parmComment,
-                            IsFair = x.parmCondition == MZKConditionEnum.Fair,
-                            IsGood = x.parmCondition == MZKConditionEnum.Good,
-                            IsPoor = x.parmCondition == MZKConditionEnum.Poor,
-                            ThreadDepth = x.parmDepth,
-                            Make = x.parmMake,
-                            Position = x.parmPosition,
-                            VehicleInsRecID = x.parmVehicleInsRecID,
-                            TableId = x.parmTableId,
-                            RecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
-                    await SqliteHelper.Storage.UpdateAllAsync<TTyreCond>(tTyresList);
-                    foreach (var item in tTyresList.GroupBy(x => x.VehicleInsRecID))
-                    {
-                        await SyncImagesAsync(item.Key, "TTyreCondition");
+                            tTyresList.Add(new TTyreCond
+                            {
+                                Comment = x.parmComment,
+                                IsFair = x.parmCondition == MZKConditionEnum.Fair,
+                                IsGood = x.parmCondition == MZKConditionEnum.Good,
+                                IsPoor = x.parmCondition == MZKConditionEnum.Poor,
+                                ThreadDepth = x.parmDepth,
+                                Make = x.parmMake,
+                                Position = x.parmPosition,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<TTyreCond>(tTyresList);
+                        foreach (var item in tTyresList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "TTyreCondition");
+                        }
                     }
                 }
             }
@@ -2741,38 +2789,40 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var inspectionProofData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TPOI>()).Where(x => x.ShouldSave);
                 ObservableCollection<MZKVehicleInspectionTableContract> MZKVehicleInspectionTableContractColl = new ObservableCollection<MZKVehicleInspectionTableContract>();
-                if (inspectionProofData != null)
-                {
-                    foreach (var insProof in inspectionProofData)
-                    {
-                        MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
-                        {
-                            parmCustomerComments = insProof.CRSignComment,
-                            parmComments = insProof.EQRSignComment,
-                            parmCompanyRepSignDateTime = insProof.EQRDate,
-                            parmCustomerRepSignDateTime = insProof.CRDate,
-                            parmRecID = insProof.VehicleInsRecID
-                        });
-                    }
-                }
-                var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
 
-                var inspectionProofList = new ObservableCollection<TPOI>();
-                if (res.response != null)
+                foreach (var insProof in inspectionProofData)
                 {
-                    foreach (var x in res.response.Where(x => x != null))
+                    MZKVehicleInspectionTableContractColl.Add(new MZKVehicleInspectionTableContract()
                     {
-                        inspectionProofList.Add(new TPOI
-                        {
-                            EQRDate = x.parmCompanyRepSignDateTime,
-                            CRDate = x.parmCustomerRepSignDateTime,
-                            CRSignComment = x.parmComments,
-                            VehicleInsRecID = x.parmRecID,
-                            ShouldSave = false
-                        });
-                    }
+                        parmCustomerComments = insProof.CRSignComment,
+                        parmComments = insProof.EQRSignComment,
+                        parmCompanyRepSignDateTime = insProof.EQRDate,
+                        parmCustomerRepSignDateTime = insProof.CRDate,
+                        parmRecID = insProof.VehicleInsRecID
+                    });
                 }
-                await SqliteHelper.Storage.UpdateAllAsync<TPOI>(inspectionProofList);
+                if (MZKVehicleInspectionTableContractColl.Count > 0)
+                {
+
+                    var res = await client.editVehicleInspectionAsync(MZKVehicleInspectionTableContractColl);
+
+                    var inspectionProofList = new ObservableCollection<TPOI>();
+                    if (res.response != null)
+                    {
+                        foreach (var x in res.response.Where(x => x != null))
+                        {
+                            inspectionProofList.Add(new TPOI
+                            {
+                                EQRDate = x.parmCompanyRepSignDateTime,
+                                CRDate = x.parmCustomerRepSignDateTime,
+                                CRSignComment = x.parmComments,
+                                VehicleInsRecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                    }
+                    await SqliteHelper.Storage.UpdateAllAsync<TPOI>(inspectionProofList);
+                }
 
             }
             catch (Exception ex)
@@ -2849,44 +2899,48 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                 parmEEPActionStep = actionStepMapping[task.Status]
                             });
                     }
-                    var res = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
 
-                    var taskList = new ObservableCollection<Eqstra.BusinessLogic.Task>();
-                    if (res.response != null)
+
+                    if (mzkTasks.Count > 0)
                     {
-                        foreach (var x in res.response.Where(x => x != null))
+                        var taskList = new ObservableCollection<Eqstra.BusinessLogic.Task>();
+                        var res = await client.updateStatusListAsync(mzkTasks, _userInfo.CompanyId);
+                        if (res.response != null)
                         {
-                            taskList.Add(new Eqstra.BusinessLogic.Task
+                            foreach (var x in res.response.Where(x => x != null))
                             {
-                                CaseNumber = x.parmCaseID,
-                                CaseServiceRecID = x.parmCaseServiceRecId,
-                                ProcessStepRecID = x.parmProcessStepRecID,
-                                ServiceRecID = x.parmServiceRecId,
-                                CaseCategory = x.parmCaseCategory,
-                                CollectionRecID = x.parmCollectionRecId,
-                                ConfirmedDate = x.parmConfirmedDueDate,
-                                ConfirmedTime = new DateTime(x.parmConfirmedDueDate.TimeOfDay.Ticks),
-                                Address = x.parmContactPersonAddress,
-                                AllocatedTo = _userInfo.Name,
-                                CustomerId = x.parmCustId,
-                                CustomerName = x.parmCustName,
-                                CustPhone = x.parmCustPhone,
-                                ContactName = x.parmContactPersonName,
-                                ContactNumber = x.parmContactPersonPhone,
-                                RegistrationNumber = x.parmRegistrationNum,
-                                Status = x.parmStatus,
-                                StatusDueDate = x.parmStatusDueDate,
-                                UserId = x.parmUserID,
-                                ProcessStep = x.parmProcessStep,
-                                CategoryType = x.parmCaseCategory,
-                                VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), x.parmVehicleType.ToString()),
-                                VehicleInsRecId = x.parmRecID,
+                                taskList.Add(new Eqstra.BusinessLogic.Task
+                                {
+                                    CaseNumber = x.parmCaseID,
+                                    CaseServiceRecID = x.parmCaseServiceRecId,
+                                    ProcessStepRecID = x.parmProcessStepRecID,
+                                    ServiceRecID = x.parmServiceRecId,
+                                    CaseCategory = x.parmCaseCategory,
+                                    CollectionRecID = x.parmCollectionRecId,
+                                    ConfirmedDate = x.parmConfirmedDueDate,
+                                    ConfirmedTime = new DateTime(x.parmConfirmedDueDate.TimeOfDay.Ticks),
+                                    Address = x.parmContactPersonAddress,
+                                    AllocatedTo = _userInfo.Name,
+                                    CustomerId = x.parmCustId,
+                                    CustomerName = x.parmCustName,
+                                    CustPhone = x.parmCustPhone,
+                                    ContactName = x.parmContactPersonName,
+                                    ContactNumber = x.parmContactPersonPhone,
+                                    RegistrationNumber = x.parmRegistrationNum,
+                                    Status = x.parmStatus,
+                                    StatusDueDate = x.parmStatusDueDate,
+                                    UserId = x.parmUserID,
+                                    ProcessStep = x.parmProcessStep,
+                                    CategoryType = x.parmCaseCategory,
+                                    VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), x.parmVehicleType.ToString()),
+                                    VehicleInsRecId = x.parmRecID,
 
-                            });
+                                });
+                            }
                         }
-                    }
 
-                    await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
+                        await SqliteHelper.Storage.UpdateAllAsync<Eqstra.BusinessLogic.Task>(taskList);
+                    }
                 }
             }
             catch (SQLite.SQLiteException)
@@ -2918,7 +2972,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                     var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
                     var caseImages = imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId);
 
-                    if (caseImages.All(x => x.IsSynced))
+                    if (caseImages.Count() > 0 && caseImages.All(x => x.IsSynced))
                     {
 
                         var dbImageMetaData = caseImages.Select(x => x.FileName);
@@ -3011,13 +3065,16 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                 }
 
-                await client.saveImageAsync(mzk_ImageContractList);
-
-
-                foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+                if (mzk_ImageContractList.Count > 0)
                 {
-                    item.IsSynced = true;
-                    await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
+                    await client.saveImageAsync(mzk_ImageContractList);
+
+
+                    foreach (var item in imageCaptureList.Where(x => x.CaseServiceRecId == vehicleInspectionRecId))
+                    {
+                        item.IsSynced = true;
+                        await SqliteHelper.Storage.UpdateSingleRecordAsync(item);
+                    }
                 }
 
             }
