@@ -17,6 +17,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             this.Provinces = new List<Province>();
             this.Cities = new List<City>();
             this.Suburbs = new List<Suburb>();
+            this.Regions = new List<Region>();
         }
 
         private long entityRecId;
@@ -70,9 +71,9 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             set { SetProperty(ref suburbs, value); }
         }
 
-        private List<string> region;
+        private List<Region> region;
 
-        public List<string> Region
+        public List<Region> Regions
         {
             get { return region; }
             set { SetProperty(ref region, value); }
@@ -89,7 +90,7 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 
         private Province selectedprovince;
 
-        public Province Selectedprovince
+        public Province SelectedProvince
         {
             get { return selectedprovince; }
             set { SetProperty(ref selectedprovince, value); }
@@ -115,7 +116,16 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return selectedZip; }
             set { SetProperty(ref selectedZip, value); }
         }
-        
+
+        private Region selectedRegion;
+
+        public Region SelectedRegion
+        {
+            get { return selectedRegion; }
+            set { SetProperty(ref selectedRegion, value); }
+        }
+
+
     }
     public class AddressEvent : PubSubEvent<Address>
     {

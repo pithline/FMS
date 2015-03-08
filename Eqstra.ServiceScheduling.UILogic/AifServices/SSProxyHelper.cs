@@ -256,7 +256,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     foreach (var mzk in result.response.Where(x => x != null))
                     {
-                        cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmStateId });
+                        cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmCountyId });
                     }
                 }
                 return cityList;
@@ -275,7 +275,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return null;
 
-                var result = await client.getSuburbListAsync(countryId, stateId, _userInfo.CompanyId);
+                var result = await client.getSuburbListAsync(countryId,stateId, _userInfo.CompanyId);
                 List<Suburb> suburbList = new List<Suburb>();
                 if (result.response != null)
                 {
@@ -627,7 +627,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     parmCity = address.SelectedCity != null ? address.SelectedCity.Id : string.Empty,
                     parmCountryRegionId = address.SelectedCountry != null ? address.SelectedCountry.Id : string.Empty,
-                    parmProvince = address.Selectedprovince != null ? address.Selectedprovince.Id : string.Empty,
+                    parmProvince = address.SelectedProvince != null ? address.SelectedProvince.Id : string.Empty,
                     parmStreet = address.Street,
                     parmSubUrb = address.SelectedSuburb != null ? address.SelectedSuburb.Id : string.Empty,
                     parmZipCode = address.SelectedZip

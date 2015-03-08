@@ -82,7 +82,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                         {
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
-
+                                AppSettings.Instance.ErrorMessage = string.Empty;
                                 AppSettings.Instance.IsSynchronizing = 1;
                             });
 

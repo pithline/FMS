@@ -35,6 +35,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
+                    AppSettings.Instance.ErrorMessage = string.Empty;
 
                     AppSettings.Instance.IsSynchronizing = 1;
 

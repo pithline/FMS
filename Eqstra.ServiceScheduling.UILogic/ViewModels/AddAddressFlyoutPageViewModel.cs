@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
@@ -49,63 +50,124 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             });
             this.CountryChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if (param != null && (param is Country))
+                try
                 {
-                    Country country = param as Country;
-                    if (!String.IsNullOrEmpty(country.Id) && !this.Model.Provinces.Any())
+                    if (param != null && (param is Country))
                     {
-                        this.ProgressbarMessage = "Loading Provinces ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
-                        this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(country.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
-                        this.Model.SelectedCountry = country;
+                        Country country = param as Country;
+                        if (this.Model.SelectedCountry != null)
+                        {
+                            this.ProgressbarMessage = "Loading Provinces ....  ";
+                            this.ProgressbarVisiblity = Visibility.Visible;
+                            this.Model.Provinces = await SSProxyHelper.Instance.GetProvinceListFromSvcAsync(country.Id);
+                            this.ProgressbarVisiblity = Visibility.Collapsed;
+
+                        }
                     }
+                }
+                catch ( Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    this.ProgressbarMessage = "";
+                    this.ProgressbarVisiblity = Visibility.Collapsed;
                 }
             });
 
             this.ProvinceChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if (param != null && (param is Province))
+                try
                 {
-                    Province province = param as Province;
-                    if (!String.IsNullOrEmpty(province.Id) && !this.Model.Cities.Any())
+                    if (param != null && (param is Province))
                     {
-                        this.ProgressbarMessage = "Loading Cities ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
-                        this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
-                        this.Model.Postcodes = await SSProxyHelper.Instance.GetZipcodeListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
-                        this.Model.Selectedprovince = province;
+                        Province province = param as Province;
+                        if (this.Model.SelectedProvince != null)
+                        {
+                            this.ProgressbarMessage = "Loading Cities ....  ";
+                            this.ProgressbarVisiblity = Visibility.Visible;
+                            this.Model.Cities = await SSProxyHelper.Instance.GetCityListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
+                            this.Model.Postcodes = await SSProxyHelper.Instance.GetZipcodeListFromSvcAsync(this.Model.SelectedCountry.Id, province.Id);
+                            this.ProgressbarVisiblity = Visibility.Collapsed;
+
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    this.ProgressbarMessage = "";
+                    this.ProgressbarVisiblity = Visibility.Collapsed;
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             });
 
             this.CityChangedCommand = new DelegateCommand<object>(async (param) =>
             {
-                if (param != null && (param is City))
+                try
                 {
-                    City city = param as City;
-                    if (!String.IsNullOrEmpty(city.Id) && !this.Model.Suburbs.Any())
+                    if (param != null && (param is City))
                     {
-                        this.ProgressbarMessage = "Loading Suburbs ....  ";
-                        this.ProgressbarVisiblity = Visibility.Visible;
-                        this.Model.Suburbs = await SSProxyHelper.Instance.GetSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, city.Id);
-                        this.ProgressbarVisiblity = Visibility.Collapsed;
-                        this.Model.SelectedCity = city;
+                        City city = param as City;
+                        if (this.Model.SelectedCity != null && this.Model.SelectedProvince !=null)
+                        {
+                            this.ProgressbarMessage = "Loading Regions ....  ";
+                            this.ProgressbarVisiblity = Visibility.Visible;
+                            this.Model.Regions = await SSProxyHelper.Instance.GetRegionListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.SelectedProvince.Id);
+                            this.ProgressbarVisiblity = Visibility.Collapsed;
+                            this.Model.SelectedCity = city;
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    this.ProgressbarMessage = "";
+                    this.ProgressbarVisiblity = Visibility.Collapsed;
                 }
 
             });
 
+            this.RegionChangedCommand = new DelegateCommand<object>(async (param) =>
+            {
+                try
+                {
+                    if (param != null && param is Region)
+                    {
+                        var region = param as Region;
+                        if (this.Model.SelectedRegion != null && this.Model.SelectedProvince !=null)
+                        {
+                            this.ProgressbarMessage = "Loading Suburbs ....  ";
+                            this.ProgressbarVisiblity = Visibility.Visible;
+                            this.Model.Suburbs = await SSProxyHelper.Instance.GetSuburbListFromSvcAsync(this.Model.SelectedCountry.Id, this.Model.SelectedProvince.Id);
+                            this.ProgressbarVisiblity = Visibility.Collapsed;
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                    this.ProgressbarMessage = "";
+                    this.ProgressbarVisiblity = Visibility.Collapsed;
+                }
+            });
+
             this.SuburbChangedCommand = new DelegateCommand<object>((param) =>
             {
-                if (param != null && (param is Suburb))
+                try
                 {
-                    Suburb suburb = param as Suburb;
-                    if (!String.IsNullOrEmpty(suburb.Id))
+                    if (param != null && (param is Suburb))
                     {
-                        this.Model.SelectedSuburb = suburb;
+                        Suburb suburb = param as Suburb;
+                        if (!String.IsNullOrEmpty(suburb.Id))
+                        {
+
+                            this.Model.SelectedSuburb = suburb;
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+
+                    AppSettings.Instance.ErrorMessage = ex.Message;
                 }
             });
 
@@ -133,6 +195,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         public DelegateCommand<object> CountryChangedCommand { get; set; }
         public DelegateCommand<object> ProvinceChangedCommand { get; set; }
         public DelegateCommand<object> CityChangedCommand { get; set; }
+
+        public ICommand RegionChangedCommand { get; set; }
         public DelegateCommand<object> SuburbChangedCommand { get; set; }
         public DelegateCommand<object> ZipChangedCommand { get; set; }
 

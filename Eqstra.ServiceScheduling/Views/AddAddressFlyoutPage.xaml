@@ -69,12 +69,13 @@
                                  Width="250"
                                  Height="35"
                                  SuggestionMode="Contains"
+                                 SelectedItem="{Binding Model.SelectedCountry,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  AutoCompleteSource="{Binding Model.Countries}"
                                  WatermarkTemplate="{StaticResource WatermarkTemplate}">
             <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                <Core:EventTriggerBehavior EventName="LostFocus">
                     <Core:InvokeCommandAction Command="{Binding CountryChangedCommand}"
-                                              CommandParameter="{Binding ElementName=AutoCountry,Path=SelectedItem}" />
+                                              CommandParameter="{Binding ElementName=AutoCountry,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
 
@@ -102,18 +103,19 @@
                                  x:Name="AutoProvince"
                                  Watermark="Enter province..."
                                  ShowSuggestionsOnFocus="True"
-                                 AutoCompleteMode="Suggest"
+                                 AutoCompleteMode="SuggestAppend"
                                  SearchItemPath="Name"
                                  AutoCompleteSource="{Binding Model.Provinces}"
                                  Width="250"
+                                 SelectedItem="{Binding Model.SelectedProvince,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  Height="35"
-                                 SuggestionMode="Contains"
+                                 SuggestionMode="ContainsOrdinal"
                                  WatermarkTemplate="{StaticResource WatermarkTemplate}">
 
             <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="TextChanged">
+                <Core:EventTriggerBehavior EventName="LostFocus">
                     <Core:InvokeCommandAction Command="{Binding ProvinceChangedCommand}"
-                                              CommandParameter="{Binding ElementName=AutoProvince,Path=SelectedItem}" />
+                                              CommandParameter="{Binding ElementName=AutoProvince,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
 
@@ -145,14 +147,15 @@
                                  SearchItemPath="Name"
                                  Width="250"
                                  Height="35"
+                                 SelectedItem="{Binding Model.SelectedCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  AutoCompleteSource="{Binding Model.Cities}"
                                  SuggestionMode="Contains"
                                  WatermarkTemplate="{StaticResource WatermarkTemplate}">
 
             <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                <Core:EventTriggerBehavior EventName="LostFocus">
                     <Core:InvokeCommandAction Command="{Binding CityChangedCommand}"
-                                              CommandParameter="{Binding ElementName=AutoCity,Path=SelectedItem}" />
+                                              CommandParameter="{Binding ElementName=AutoCity,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
 
@@ -168,8 +171,7 @@
             </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
         </syncfusion:SfTextBoxExt>
 
-
-        <TextBlock Text="Suburb"
+        <TextBlock Text="Region"
                    Grid.Row="7"
                    Style="{StaticResource FormTextStyle}"
                    VerticalAlignment="Center" />
@@ -177,6 +179,46 @@
         <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
                                  Header="Suburb"
                                  Grid.Row="8"
+                                 x:Name="AutoRegion"
+                                 Watermark="Enter Region..."
+                                 ShowSuggestionsOnFocus="True"
+                                 AutoCompleteMode="Suggest"
+                                 SearchItemPath="Name"
+                                 Width="250"
+                                 Height="35"
+                                 SelectedItem="{Binding Model.SelectedRegion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                 AutoCompleteSource="{Binding Model.Regions}"
+                                 SuggestionMode="Contains"
+                                 WatermarkTemplate="{StaticResource WatermarkTemplate}">
+
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="LostFocus">
+                    <Core:InvokeCommandAction Command="{Binding RegionChangedCommand}"
+                                              CommandParameter="{Binding ElementName=AutoRegion,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+
+            <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="Region"
+                                   TextWrapping="Wrap"
+                                   Width="250"
+                                   Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
+        </syncfusion:SfTextBoxExt>
+
+
+        <TextBlock Text="Suburb"
+                   Grid.Row="9"
+                   Style="{StaticResource FormTextStyle}"
+                   VerticalAlignment="Center" />
+
+        <syncfusion:SfTextBoxExt MinimumPrefixCharacters="1"
+                                 Header="Suburb"
+                                 Grid.Row="10"
                                  x:Name="AutoSuburb"
                                  Watermark="Enter suburb..."
                                  ShowSuggestionsOnFocus="True"
@@ -184,17 +226,18 @@
                                  SearchItemPath="Name"
                                  Width="250"
                                  Height="35"
+                                 SelectedItem="{Binding Model.SelectedSuburb}"
                                  AutoCompleteSource="{Binding Model.Suburbs}"
                                  SuggestionMode="Contains"
                                  WatermarkTemplate="{StaticResource WatermarkTemplate}">
-            
-            <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="SelectionChanged">
+
+            <!--<Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="LostFocus">
                     <Core:InvokeCommandAction Command="{Binding SuburbChangedCommand}"
-                                              CommandParameter="{Binding ElementName=AutoSuburb,Path=SelectedItem}" />
+                                              CommandParameter="{Binding ElementName=AutoSuburb,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
                 </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
-            
+            </Interactivity:Interaction.Behaviors>-->
+
             <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -236,15 +279,16 @@
                                  AutoCompleteMode="Suggest"
                                  Width="250"
                                  Height="35"
+                                 SelectedItem="{Binding Model.SelectedZip}"
                                  AutoCompleteSource="{Binding Model.Postcodes}"
                                  SuggestionMode="Contains"
                                  WatermarkTemplate="{StaticResource WatermarkTemplate}">
-            <Interactivity:Interaction.Behaviors>
+            <!--<Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="SelectionChanged">
                     <Core:InvokeCommandAction Command="{Binding ZipChangedCommand}"
                                               CommandParameter="{Binding ElementName=AutoPostcode,Path=SelectedItem}" />
                 </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
+            </Interactivity:Interaction.Behaviors>-->
             <syncfusion:SfTextBoxExt.AutoCompleteItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

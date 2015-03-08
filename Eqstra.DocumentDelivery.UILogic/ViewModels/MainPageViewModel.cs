@@ -37,11 +37,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
                 {
-
+                    
                     DDServiceProxyHelper.Instance.Synchronize(async () =>
                     {
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
+                            AppSettings.Instance.ErrorMessage = string.Empty;
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 

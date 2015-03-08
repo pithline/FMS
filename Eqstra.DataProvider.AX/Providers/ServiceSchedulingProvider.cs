@@ -340,7 +340,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 {
                     foreach (var mzk in result)
                     {
-                        cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmStateId });
+                        cityList.Add(new City { Name = mzk.parmCountyId, Id = mzk.parmCountyId });
                     }
                 }
                 return cityList;
@@ -362,7 +362,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 {
                     foreach (var mzk in result)
                     {
-                        suburbList.Add(new Suburb { Name = mzk.parmCity, Id = mzk.parmStateId });
+                        suburbList.Add(new Suburb { Name = mzk.parmCity, Id = mzk.parmCity });
                     }
                 }
                 return suburbList;

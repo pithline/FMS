@@ -74,31 +74,35 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.Address = address;
                     StringBuilder sb = new StringBuilder();
-                    if (!String.IsNullOrEmpty(address.Street))
-                    {
+                   
+                   
                         sb.Append(address.Street).Append(",").Append(Environment.NewLine);
-                    }
+                   
                     if ((address.SelectedSuburb != null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
                     {
                         sb.Append(address.SelectedSuburb.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if (address.SelectedRegion !=null)
+                    {
+                        sb.Append(address.SelectedRegion.Name).Append(",").Append(Environment.NewLine);
                     }
                     if ((address.SelectedCity != null) && !String.IsNullOrEmpty(address.SelectedCity.Name))
                     {
                         sb.Append(address.SelectedCity.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if ((address.Selectedprovince != null) && !String.IsNullOrEmpty(address.Selectedprovince.Name))
+                    if ((address.SelectedProvince != null) && !String.IsNullOrEmpty(address.SelectedProvince.Name))
                     {
-                        sb.Append(address.Selectedprovince.Name).Append(",").Append(Environment.NewLine);
+                        sb.Append(address.SelectedProvince.Name).Append(",").Append(Environment.NewLine);
                     }
 
                     if ((address.SelectedCountry != null) && !String.IsNullOrEmpty(address.SelectedCountry.Name))
                     {
                         sb.Append(address.SelectedCountry.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if (!String.IsNullOrEmpty(address.SelectedZip))
-                    {
+                    
                         sb.Append(address.SelectedZip);
-                    }
+                    
+                    
                     this.Model.Address = sb.ToString();
                 }
                 settingsFlyout.Hide();
