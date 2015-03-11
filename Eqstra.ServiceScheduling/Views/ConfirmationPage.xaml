@@ -35,7 +35,7 @@
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Submit"
                           Icon="Accept"
-                          Command="{Binding SubmitCommand}" />
+                          Command="{Binding SubmitCommand}" Opacity="{Binding ShouldSubmit}"/>
         </CommandBar>
 
     </prism:VisualStateAwarePage.BottomAppBar>

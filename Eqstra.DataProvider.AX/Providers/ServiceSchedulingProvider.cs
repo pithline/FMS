@@ -433,10 +433,10 @@ namespace Eqstra.DataProvider.AX.Providers
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = (mzk.parmPreferredDateFirstOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateFirstOption).ToShortDateString(),
-                            ServiceDateOption2 = (mzk.parmPreferredDateSecondOption < DateTime.Today ? DateTime.Today : mzk.parmPreferredDateSecondOption).ToShortDateString(),
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? string.Empty: mzk.parmPreferredDateFirstOption.ToShortDateString(),
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ?string.Empty: mzk.parmPreferredDateSecondOption.ToShortDateString(),
                             ODOReading = Int64.Parse(mzk.parmODOReading.ToString()),
-                            ODOReadingDate = mzk.parmODOReadingDate == DateTime.MinValue ? string.Empty : mzk.parmODOReadingDate.ToShortDateString(),
+                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? string.Empty : mzk.parmODOReadingDate.ToShortDateString(),
                             ServiceType = GetServiceTypes(caseNumber, userInfo.CompanyId),
                             LocationTypes = GetLocationType(serviceRecId, userInfo.CompanyId),
                             SupplierName = mzk.parmSupplierName,
@@ -447,7 +447,9 @@ namespace Eqstra.DataProvider.AX.Providers
                             CaseNumber = caseNumber,
                             SelectedLocationType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
-                            IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false
+                            IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
+                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToShortDateString()
+                            
                         });
                     }
 

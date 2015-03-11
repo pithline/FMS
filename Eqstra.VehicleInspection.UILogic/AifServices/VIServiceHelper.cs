@@ -703,45 +703,45 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 ObservableCollection<MzkVehicleDetailsContract> mzkVehicleDetailsContractColl = new ObservableCollection<MzkVehicleDetailsContract>();
                 var pVehicleDetailsData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PVehicleDetails>()).Where(x => x.ShouldSave);
 
-                
-                    foreach (var pVehicleDetails in pVehicleDetailsData)
+
+                foreach (var pVehicleDetails in pVehicleDetailsData)
+                {
+                    mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
                     {
-                        mzkVehicleDetailsContractColl.Add(new MzkVehicleDetailsContract()
-                        {
-                            parmLisenceDiscCurrent = pVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
-                            parmRecID = pVehicleDetails.RecID,
-                            parmTableId = pVehicleDetails.TableId,
-                            parmVehicleInsRecID = pVehicleDetails.VehicleInsRecID
+                        parmLisenceDiscCurrent = pVehicleDetails.IsLicenseDiscCurrent ? NoYes.Yes : NoYes.No,
+                        parmRecID = pVehicleDetails.RecID,
+                        parmTableId = pVehicleDetails.TableId,
+                        parmVehicleInsRecID = pVehicleDetails.VehicleInsRecID
 
-                        });
-                    }
+                    });
+                }
 
-                    if (mzkVehicleDetailsContractColl.Count>0)
+                if (mzkVehicleDetailsContractColl.Count > 0)
+                {
+
+                    var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
+                    var pVehicleDetailsList = new ObservableCollection<PVehicleDetails>();
+                    if (resp.response != null)
                     {
-
-                        var resp = await client.editVehicleDetailsAsync(mzkVehicleDetailsContractColl, _userInfo.CompanyId);
-                        var pVehicleDetailsList = new ObservableCollection<PVehicleDetails>();
-                        if (resp.response != null)
+                        foreach (var x in resp.response.Where(x => x != null))
                         {
-                            foreach (var x in resp.response.Where(x => x != null))
+                            pVehicleDetailsList.Add(new PVehicleDetails
                             {
-                                pVehicleDetailsList.Add(new PVehicleDetails
-                                {
-                                    IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
-                                    RecID = x.parmRecID,
-                                    ShouldSave = false,
-                                    TableId = x.parmTableId,
-                                    VehicleInsRecID = x.parmVehicleInsRecID
+                                IsLicenseDiscCurrent = x.parmLisenceDiscCurrent == NoYes.Yes ? true : false,
+                                RecID = x.parmRecID,
+                                ShouldSave = false,
+                                TableId = x.parmTableId,
+                                VehicleInsRecID = x.parmVehicleInsRecID
 
-                                });
-                            }
-                            await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
-                            foreach (var item in pVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
-                            {
-                                await SyncImagesAsync(item.Key, "PVehicleDetails");
-                            }
-                        } 
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PVehicleDetails>(pVehicleDetailsList);
+                        foreach (var item in pVehicleDetailsList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PVehicleDetails");
+                        }
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -763,133 +763,133 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 }
                 var pAccessoriesData = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Passenger.PAccessories>()).Where(x => x.ShouldSave);
                 ObservableCollection<MzkMobiPassengerAccessoriesContract> mzkMobiPassengerAccessoriesContractColl = new ObservableCollection<MzkMobiPassengerAccessoriesContract>();
-               
-                    foreach (var pAccessories in pAccessoriesData)
+
+                foreach (var pAccessories in pAccessoriesData)
+                {
+                    mzkMobiPassengerAccessoriesContractColl.Add(new MzkMobiPassengerAccessoriesContract()
                     {
-                        mzkMobiPassengerAccessoriesContractColl.Add(new MzkMobiPassengerAccessoriesContract()
-                        {
-                            parmHasAircon = pAccessories.HasAircon ? NoYes.Yes : NoYes.No,
-                            parmHasAlarm = pAccessories.HasAlarm ? NoYes.Yes : NoYes.No,
-                            parmHasCanopy = pAccessories.HasCanopy ? NoYes.Yes : NoYes.No,
-                            parmHasCDShuttle = pAccessories.HasCDShuffle ? NoYes.Yes : NoYes.No,
-                            parmHasJack = pAccessories.HasJack ? NoYes.Yes : NoYes.No,
-                            parmHasKey = pAccessories.HasKey ? NoYes.Yes : NoYes.No,
-                            parmHasMaps = pAccessories.HasMags ? NoYes.Yes : NoYes.No,
-                            parmHasNavigation = pAccessories.HasNavigation ? NoYes.Yes : NoYes.No,
-                            parmHasRadio = pAccessories.HasRadio ? NoYes.Yes : NoYes.No,
-                            parmHasServicesBook = pAccessories.HasServicesBook ? NoYes.Yes : NoYes.No,
-                            parmHasSparekey = pAccessories.HasSpareKeys ? NoYes.Yes : NoYes.No,
-                            parmHasSpareType = pAccessories.HasSpareTyre ? NoYes.Yes : NoYes.No,
-                            parmHasTools = pAccessories.HasTools ? NoYes.Yes : NoYes.No,
-                            parmHasTrackingUnit = pAccessories.HasTrackingUnit ? NoYes.Yes : NoYes.No,
-                            parmHasOthers = pAccessories.IsOthers ? NoYes.Yes : NoYes.No,
+                        parmHasAircon = pAccessories.HasAircon ? NoYes.Yes : NoYes.No,
+                        parmHasAlarm = pAccessories.HasAlarm ? NoYes.Yes : NoYes.No,
+                        parmHasCanopy = pAccessories.HasCanopy ? NoYes.Yes : NoYes.No,
+                        parmHasCDShuttle = pAccessories.HasCDShuffle ? NoYes.Yes : NoYes.No,
+                        parmHasJack = pAccessories.HasJack ? NoYes.Yes : NoYes.No,
+                        parmHasKey = pAccessories.HasKey ? NoYes.Yes : NoYes.No,
+                        parmHasMaps = pAccessories.HasMags ? NoYes.Yes : NoYes.No,
+                        parmHasNavigation = pAccessories.HasNavigation ? NoYes.Yes : NoYes.No,
+                        parmHasRadio = pAccessories.HasRadio ? NoYes.Yes : NoYes.No,
+                        parmHasServicesBook = pAccessories.HasServicesBook ? NoYes.Yes : NoYes.No,
+                        parmHasSparekey = pAccessories.HasSpareKeys ? NoYes.Yes : NoYes.No,
+                        parmHasSpareType = pAccessories.HasSpareTyre ? NoYes.Yes : NoYes.No,
+                        parmHasTools = pAccessories.HasTools ? NoYes.Yes : NoYes.No,
+                        parmHasTrackingUnit = pAccessories.HasTrackingUnit ? NoYes.Yes : NoYes.No,
+                        parmHasOthers = pAccessories.IsOthers ? NoYes.Yes : NoYes.No,
 
-                            parmIsDamagedAircon = pAccessories.IsAirconDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedAlarm = pAccessories.IsAlarmDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedCanopy = pAccessories.IsCanopyDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedCDShuttle = pAccessories.IsCDShuffleDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedJack = pAccessories.IsJackDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedKey = pAccessories.IsKeyDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedMaps = pAccessories.IsMagsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedNavigation = pAccessories.IsNavigationDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedRadio = pAccessories.IsRadioDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedServicesBook = pAccessories.IsServicesBookDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSparekey = pAccessories.IsSpareKeysDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedSpareType = pAccessories.IsSpareTyreDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTools = pAccessories.IsToolsDmg ? NoYes.Yes : NoYes.No,
-                            parmIsDamagedTrackingUnit = pAccessories.IsTrackingUnitDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedAircon = pAccessories.IsAirconDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedAlarm = pAccessories.IsAlarmDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedCanopy = pAccessories.IsCanopyDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedCDShuttle = pAccessories.IsCDShuffleDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedJack = pAccessories.IsJackDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedKey = pAccessories.IsKeyDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedMaps = pAccessories.IsMagsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedNavigation = pAccessories.IsNavigationDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedRadio = pAccessories.IsRadioDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedServicesBook = pAccessories.IsServicesBookDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSparekey = pAccessories.IsSpareKeysDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedSpareType = pAccessories.IsSpareTyreDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTools = pAccessories.IsToolsDmg ? NoYes.Yes : NoYes.No,
+                        parmIsDamagedTrackingUnit = pAccessories.IsTrackingUnitDmg ? NoYes.Yes : NoYes.No,
 
-                            parmAirconComments = pAccessories.AirconComment,
-                            parmAlarmComments = pAccessories.AlarmComment,
-                            parmCanopyComments = pAccessories.CanopyComment,
-                            parmCDShuttleComments = pAccessories.CDShuffleComment,
-                            parmJackComments = pAccessories.JackComment,
-                            parmKeyComments = pAccessories.KeyComment,
-                            parmMapsComments = pAccessories.MagsComment,
-                            parmNavigationComments = pAccessories.NavigationComment,
-                            parmRadioComments = pAccessories.RadioComment,
-                            parmServiceBooksComments = pAccessories.ServicesBookComment,
-                            parmSpareKeysComments = pAccessories.SpareKeysComment,
-                            parmSpareTypeComments = pAccessories.SpareTyreComment,
-                            parmToolComments = pAccessories.ToolsComment,
-                            parmTrackLineComments = pAccessories.TrackingUnitComment,
-                            parmOtherComments = pAccessories.OthersComment,
+                        parmAirconComments = pAccessories.AirconComment,
+                        parmAlarmComments = pAccessories.AlarmComment,
+                        parmCanopyComments = pAccessories.CanopyComment,
+                        parmCDShuttleComments = pAccessories.CDShuffleComment,
+                        parmJackComments = pAccessories.JackComment,
+                        parmKeyComments = pAccessories.KeyComment,
+                        parmMapsComments = pAccessories.MagsComment,
+                        parmNavigationComments = pAccessories.NavigationComment,
+                        parmRadioComments = pAccessories.RadioComment,
+                        parmServiceBooksComments = pAccessories.ServicesBookComment,
+                        parmSpareKeysComments = pAccessories.SpareKeysComment,
+                        parmSpareTypeComments = pAccessories.SpareTyreComment,
+                        parmToolComments = pAccessories.ToolsComment,
+                        parmTrackLineComments = pAccessories.TrackingUnitComment,
+                        parmOtherComments = pAccessories.OthersComment,
 
-                            parmVehicleInsRecID = pAccessories.VehicleInsRecID,
-                            parmTableId = pAccessories.TableId,
-                            parmRecID = pAccessories.RecID,
-                        });
+                        parmVehicleInsRecID = pAccessories.VehicleInsRecID,
+                        parmTableId = pAccessories.TableId,
+                        parmRecID = pAccessories.RecID,
+                    });
 
-                    }
+                }
 
-                    if (mzkMobiPassengerAccessoriesContractColl.Count>0)
+                if (mzkMobiPassengerAccessoriesContractColl.Count > 0)
+                {
+
+                    var res = await client.editPassengerAccessoriesAsync(mzkMobiPassengerAccessoriesContractColl, _userInfo.CompanyId);
+                    var pAccessoriesList = new ObservableCollection<PAccessories>();
+                    if (res.response != null)
                     {
-
-                        var res = await client.editPassengerAccessoriesAsync(mzkMobiPassengerAccessoriesContractColl, _userInfo.CompanyId);
-                        var pAccessoriesList = new ObservableCollection<PAccessories>();
-                        if (res.response != null)
+                        foreach (var x in res.response.Where(x => x != null))
                         {
-                            foreach (var x in res.response.Where(x => x != null))
+                            pAccessoriesList.Add(new PAccessories
                             {
-                                pAccessoriesList.Add(new PAccessories
-                                {
-                                    HasAircon = x.parmHasAircon == NoYes.Yes ? true : false,
-                                    HasAlarm = x.parmHasAlarm == NoYes.Yes ? true : false,
-                                    HasCanopy = x.parmHasCanopy == NoYes.Yes ? true : false,
-                                    HasCDShuffle = x.parmHasCDShuttle == NoYes.Yes ? true : false,
-                                    HasJack = x.parmHasJack == NoYes.Yes ? true : false,
-                                    HasKey = x.parmHasKey == NoYes.Yes ? true : false,
-                                    HasMags = x.parmHasMaps == NoYes.Yes ? true : false,
-                                    HasNavigation = x.parmHasNavigation == NoYes.Yes ? true : false,
-                                    HasRadio = x.parmHasRadio == NoYes.Yes ? true : false,
-                                    HasServicesBook = x.parmHasServicesBook == NoYes.Yes ? true : false,
-                                    HasSpareKeys = x.parmHasSparekey == NoYes.Yes ? true : false,
-                                    HasSpareTyre = x.parmHasSpareType == NoYes.Yes ? true : false,
-                                    HasTools = x.parmHasTools == NoYes.Yes ? true : false,
-                                    HasTrackingUnit = x.parmHasTrackingUnit == NoYes.Yes ? true : false,
-                                    IsOthers = x.parmHasOthers == NoYes.Yes ? true : false,
-                                    IsAirconDmg = x.parmIsDamagedAircon == NoYes.Yes ? true : false,
-                                    IsAlarmDmg = x.parmIsDamagedAlarm == NoYes.Yes ? true : false,
-                                    IsCanopyDmg = x.parmIsDamagedCanopy == NoYes.Yes ? true : false,
-                                    IsCDShuffleDmg = x.parmIsDamagedCDShuttle == NoYes.Yes ? true : false,
-                                    IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
-                                    IsKeyDmg = x.parmIsDamagedKey == NoYes.Yes ? true : false,
-                                    IsMagsDmg = x.parmIsDamagedMaps == NoYes.Yes ? true : false,
-                                    IsNavigationDmg = x.parmIsDamagedNavigation == NoYes.Yes ? true : false,
-                                    IsRadioDmg = x.parmIsDamagedRadio == NoYes.Yes ? true : false,
-                                    IsServicesBookDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
-                                    IsSpareKeysDmg = x.parmIsDamagedSparekey == NoYes.Yes ? true : false,
-                                    IsSpareTyreDmg = x.parmIsDamagedSpareType == NoYes.Yes ? true : false,
-                                    IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
-                                    IsTrackingUnitDmg = x.parmIsDamagedTrackingUnit == NoYes.Yes ? true : false,
-                                    AirconComment = x.parmAirconComments,
-                                    AlarmComment = x.parmAlarmComments,
-                                    CanopyComment = x.parmCanopyComments,
-                                    CDShuffleComment = x.parmCDShuttleComments,
-                                    JackComment = x.parmJackComments,
-                                    KeyComment = x.parmKeyComments,
-                                    MagsComment = x.parmMapsComments,
-                                    NavigationComment = x.parmNavigationComments,
-                                    RadioComment = x.parmRadioComments,
-                                    ServicesBookComment = x.parmServiceBooksComments,
-                                    SpareKeysComment = x.parmSpareKeysComments,
-                                    SpareTyreComment = x.parmSpareTypeComments,
-                                    ToolsComment = x.parmToolComments,
-                                    TrackingUnitComment = x.parmTrackLineComments,
-                                    OthersComment = x.parmOtherComments,
-                                    VehicleInsRecID = x.parmVehicleInsRecID,
-                                    TableId = x.parmTableId,
-                                    RecID = x.parmRecID,
-                                    ShouldSave = false
-                                });
-                            }
-                            await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
-                            foreach (var item in pAccessoriesList.GroupBy(x => x.VehicleInsRecID))
-                            {
-                                await SyncImagesAsync(item.Key, "PAccessories");
-                            }
-                        } 
+                                HasAircon = x.parmHasAircon == NoYes.Yes ? true : false,
+                                HasAlarm = x.parmHasAlarm == NoYes.Yes ? true : false,
+                                HasCanopy = x.parmHasCanopy == NoYes.Yes ? true : false,
+                                HasCDShuffle = x.parmHasCDShuttle == NoYes.Yes ? true : false,
+                                HasJack = x.parmHasJack == NoYes.Yes ? true : false,
+                                HasKey = x.parmHasKey == NoYes.Yes ? true : false,
+                                HasMags = x.parmHasMaps == NoYes.Yes ? true : false,
+                                HasNavigation = x.parmHasNavigation == NoYes.Yes ? true : false,
+                                HasRadio = x.parmHasRadio == NoYes.Yes ? true : false,
+                                HasServicesBook = x.parmHasServicesBook == NoYes.Yes ? true : false,
+                                HasSpareKeys = x.parmHasSparekey == NoYes.Yes ? true : false,
+                                HasSpareTyre = x.parmHasSpareType == NoYes.Yes ? true : false,
+                                HasTools = x.parmHasTools == NoYes.Yes ? true : false,
+                                HasTrackingUnit = x.parmHasTrackingUnit == NoYes.Yes ? true : false,
+                                IsOthers = x.parmHasOthers == NoYes.Yes ? true : false,
+                                IsAirconDmg = x.parmIsDamagedAircon == NoYes.Yes ? true : false,
+                                IsAlarmDmg = x.parmIsDamagedAlarm == NoYes.Yes ? true : false,
+                                IsCanopyDmg = x.parmIsDamagedCanopy == NoYes.Yes ? true : false,
+                                IsCDShuffleDmg = x.parmIsDamagedCDShuttle == NoYes.Yes ? true : false,
+                                IsJackDmg = x.parmIsDamagedJack == NoYes.Yes ? true : false,
+                                IsKeyDmg = x.parmIsDamagedKey == NoYes.Yes ? true : false,
+                                IsMagsDmg = x.parmIsDamagedMaps == NoYes.Yes ? true : false,
+                                IsNavigationDmg = x.parmIsDamagedNavigation == NoYes.Yes ? true : false,
+                                IsRadioDmg = x.parmIsDamagedRadio == NoYes.Yes ? true : false,
+                                IsServicesBookDmg = x.parmIsDamagedServicesBook == NoYes.Yes ? true : false,
+                                IsSpareKeysDmg = x.parmIsDamagedSparekey == NoYes.Yes ? true : false,
+                                IsSpareTyreDmg = x.parmIsDamagedSpareType == NoYes.Yes ? true : false,
+                                IsToolsDmg = x.parmIsDamagedTools == NoYes.Yes ? true : false,
+                                IsTrackingUnitDmg = x.parmIsDamagedTrackingUnit == NoYes.Yes ? true : false,
+                                AirconComment = x.parmAirconComments,
+                                AlarmComment = x.parmAlarmComments,
+                                CanopyComment = x.parmCanopyComments,
+                                CDShuffleComment = x.parmCDShuttleComments,
+                                JackComment = x.parmJackComments,
+                                KeyComment = x.parmKeyComments,
+                                MagsComment = x.parmMapsComments,
+                                NavigationComment = x.parmNavigationComments,
+                                RadioComment = x.parmRadioComments,
+                                ServicesBookComment = x.parmServiceBooksComments,
+                                SpareKeysComment = x.parmSpareKeysComments,
+                                SpareTyreComment = x.parmSpareTypeComments,
+                                ToolsComment = x.parmToolComments,
+                                TrackingUnitComment = x.parmTrackLineComments,
+                                OthersComment = x.parmOtherComments,
+                                VehicleInsRecID = x.parmVehicleInsRecID,
+                                TableId = x.parmTableId,
+                                RecID = x.parmRecID,
+                                ShouldSave = false
+                            });
+                        }
+                        await SqliteHelper.Storage.UpdateAllAsync<PAccessories>(pAccessoriesList);
+                        foreach (var item in pAccessoriesList.GroupBy(x => x.VehicleInsRecID))
+                        {
+                            await SyncImagesAsync(item.Key, "PAccessories");
+                        }
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -2847,13 +2847,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>());
+                var tasks = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.ShouldSync);
                 ObservableCollection<MzkTasksContract> mzkTasks = new ObservableCollection<MzkTasksContract>();
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
-                //actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionDataCapture);
+
+
 
                 if (tasks != null)
                 {
@@ -2863,11 +2862,25 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
 
                         //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDetail &&
                             //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVehicleCollection &&
-                            //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionConfirmation &&
+                            // x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture ||
+
                             //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitVendorSelection &&
                             //x.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance &&
                         x.Status == Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation))
                     {
+                        actionStepMapping.Clear();
+                        actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture, EEPActionStep.AwaitInspectionConfirmation);
+                        //actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, EEPActionStep.AwaitInspectionDataCapture);
+                        actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitCollectionDataCapture, EEPActionStep.AwaitCollectionConfirmation);
+                        if (task.CategoryType.Equals("Vehicle Inspection", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitInspectionDataCapture);
+                        }
+                        else
+                        {
+                            actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, EEPActionStep.AwaitCollectionDataCapture);
+                        }
+
                         mzkTasks.Add(
                             new MzkTasksContract
                             {
@@ -2935,6 +2948,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                                     VehicleType = (VehicleTypeEnum)Enum.Parse(typeof(VehicleTypeEnum), x.parmVehicleType.ToString()),
                                     VehicleInsRecId = x.parmRecID,
 
+
                                 });
                             }
                         }
@@ -2967,7 +2981,11 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 var taskList = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
                 StorageFile metaDataFile = null;
 
-                foreach (var task in taskList.Where(x => x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, StringComparison.OrdinalIgnoreCase) || x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, StringComparison.OrdinalIgnoreCase)))
+                foreach (var task in taskList.Where(x =>
+                    x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation, StringComparison.OrdinalIgnoreCase)
+                    || x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.Completed, StringComparison.OrdinalIgnoreCase)
+                    || x.Status.Equals(Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance, StringComparison.OrdinalIgnoreCase))
+                    )
                 {
                     var imageCaptureList = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
                     var caseImages = imageCaptureList.Where(x => x.CaseServiceRecId == task.VehicleInsRecId);

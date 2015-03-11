@@ -13,6 +13,7 @@ namespace Eqstra.BusinessLogic.Helpers
         public const string CaptureInspectionData = "Capture Inspection Data";
         public const string AcceptInspection = "Accept Inspection";
         public const string ProofOfInspection = "Proof of Inspection";
+        public const string ConfirmVehicleCollection = "Confirm Vehicle Collection";
 
     }
 }

@@ -155,7 +155,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ConfirmationDate = mzkTask.parmConfirmationDate == new DateTime(1900, 1, 1) ? string.Empty : mzkTask.parmConfirmationDate.ToString(),
                             CustomerId = mzkTask.parmCustAccount,
                             ContactName = mzkTask.parmContactPersonName,
-                           // ScheduledTime=DateTime.Now
+                            // ScheduledTime=DateTime.Now
                         });
 
                     }
@@ -275,7 +275,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return null;
 
-                var result = await client.getSuburbListAsync(countryId,stateId, _userInfo.CompanyId);
+                var result = await client.getSuburbListAsync(countryId, stateId, _userInfo.CompanyId);
                 List<Suburb> suburbList = new List<Suburb>();
                 if (result.response != null)
                 {
@@ -378,7 +378,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
                             SelectedLocType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
-                            IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false
+                            IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
+                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "": mzk.parmConfirmedDate.ToString("mm/dd/yyyy")
                         });
                     };
 
@@ -582,7 +583,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return suplierList;
             }
         }
-       
+
 
         async public System.Threading.Tasks.Task<bool> UpdateConfirmationDatesToSvcAsync(long caseServiceRecId, ServiceSchedulingDetail serviceSchedulingDetail)
         {
@@ -652,6 +653,13 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, _userInfo.CompanyId);
+
+                await client.saveImageAsync(new ObservableCollection<Mzk_ImageContract>{new Mzk_ImageContract
+                {
+                     parmCaseNumber = caseNumber,
+                      parmFileName = "ServiceScheduling_ODOReading",
+                       parmImageData = serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary
+                }});
 
                 return result.response;
             }

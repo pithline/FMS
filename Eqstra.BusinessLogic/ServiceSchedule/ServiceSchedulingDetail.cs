@@ -172,6 +172,15 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             }
         }
 
+        private string confirmedDate;
+
+        public string ConfirmedDate
+        {
+            get { return confirmedDate; }
+            set { SetProperty(ref confirmedDate , value); }
+        }
+
+
         private DateTime supplierDateTime;
         public DateTime SupplierDateTime
         {

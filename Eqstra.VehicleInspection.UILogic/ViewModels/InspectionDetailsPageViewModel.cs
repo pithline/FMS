@@ -68,8 +68,18 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 }
                 else
                 {
-                    this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
-                    this.InspectionTask.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture;
+                    this.InspectionTask.ShouldSync = true;
+                    if (this.InspectionTask.CategoryType.Equals("Vehicle Inspection", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        this.InspectionTask.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture;
+                        this.InspectionTask.ProcessStep = ProcessStep.ConfirmInspectionDetails;
+                    }
+                    else
+                    {
+                        this.InspectionTask.Status = TaskStatus.AwaitCollectionDataCapture;
+                        this.InspectionTask.ProcessStep = ProcessStep.ConfirmVehicleCollection;
+                    }
+
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this.InspectionTask);
                     var startTime = new DateTime(this.InspectionTask.ConfirmedDate.Year, this.InspectionTask.ConfirmedDate.Month, this.InspectionTask.ConfirmedDate.Day, this.InspectionTask.ConfirmedTime.Hour, this.InspectionTask.ConfirmedTime.Minute,
                             this.InspectionTask.ConfirmedTime.Second);
@@ -129,7 +139,7 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
         private async System.Threading.Tasks.Task ShowTasksAsync(object navigationParameter)
         {
             var _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
-            var list = EnumerateTasks(navigationParameter, (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x=>x.UserId == _userInfo.UserId));
+            var list = EnumerateTasks(navigationParameter, (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>()).Where(x => x.UserId == _userInfo.UserId));
             this.InspectionList.Clear();
             foreach (var item in list)
             {
@@ -173,24 +183,24 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
                 this.CustomerDetails.Appointments = new ScheduleAppointmentCollection();
                 foreach (var item in tasks.Where(x => x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionDataCapture) || x.Status.Equals(BusinessLogic.Helpers.TaskStatus.AwaitInspectionAcceptance)))
                 {
-                   
-                        var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
-                                             item.ConfirmedTime.Second);
-                        this.CustomerDetails.Appointments.Add(
 
-                                      new ScheduleAppointment()
-                                      {
-                                          Subject = item.CaseNumber,
-                                          Location = item.Address,
-                                          StartTime = startTime,
-                                          EndTime = startTime.AddHours(1),
-                                          ReadOnly = true,
-                                          AppointmentBackground = new SolidColorBrush(Colors.Crimson),
-                                          Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+                    var startTime = new DateTime(item.ConfirmedDate.Year, item.ConfirmedDate.Month, item.ConfirmedDate.Day, item.ConfirmedTime.Hour, item.ConfirmedTime.Minute,
+                                         item.ConfirmedTime.Second);
+                    this.CustomerDetails.Appointments.Add(
 
-                                      }
-                                 ); 
-                    
+                                  new ScheduleAppointment()
+                                  {
+                                      Subject = item.CaseNumber,
+                                      Location = item.Address,
+                                      StartTime = startTime,
+                                      EndTime = startTime.AddHours(1),
+                                      ReadOnly = true,
+                                      AppointmentBackground = new SolidColorBrush(Colors.Crimson),
+                                      Status = new ScheduleAppointmentStatus { Status = item.Status, Brush = new SolidColorBrush(Colors.Chocolate) }
+
+                                  }
+                             );
+
                 }
                 return list;
             }

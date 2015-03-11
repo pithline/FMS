@@ -47,6 +47,7 @@ namespace Eqstra.VehicleInspection.ViewModels
                 {
                     this.IsBusy = true;
                     this._task.ProcessStep = ProcessStep.AcceptInspection;
+                    this._task.ShouldSync = true;
                     this._task.Status = Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation;
                     await SqliteHelper.Storage.UpdateSingleRecordAsync(this._task);
                     var currentViewModel = ((BaseViewModel)this.NextViewStack.Peek().DataContext);

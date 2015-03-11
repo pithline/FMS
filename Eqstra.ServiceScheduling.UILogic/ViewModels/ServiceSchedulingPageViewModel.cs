@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Windows.Media.Capture;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -65,6 +66,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 if (file != null)
                 {
                     ODOReadingImagePath = file.Path;
+
                 }
             });
 
@@ -74,15 +76,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.Address = address;
                     StringBuilder sb = new StringBuilder();
-                   
-                   
-                        sb.Append(address.Street).Append(",").Append(Environment.NewLine);
-                   
+
+
+                    sb.Append(address.Street).Append(",").Append(Environment.NewLine);
+
                     if ((address.SelectedSuburb != null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
                     {
                         sb.Append(address.SelectedSuburb.Name).Append(",").Append(Environment.NewLine);
                     }
-                    if (address.SelectedRegion !=null)
+                    if (address.SelectedRegion != null)
                     {
                         sb.Append(address.SelectedRegion.Name).Append(",").Append(Environment.NewLine);
                     }
@@ -99,10 +101,10 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         sb.Append(address.SelectedCountry.Name).Append(",").Append(Environment.NewLine);
                     }
-                    
-                        sb.Append(address.SelectedZip);
-                    
-                    
+
+                    sb.Append(address.SelectedZip);
+
+
                     this.Model.Address = sb.ToString();
                 }
                 settingsFlyout.Hide();
@@ -268,10 +270,23 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 CameraCaptureUI cam = new CameraCaptureUI();
                 var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (file != null)
+                using (var stream = await file.OpenReadAsync())
                 {
-                    param.ImagePath = file.Path;
+                    byte[] bytes = new byte[stream.Size];
+                    using (var reader = new DataReader(stream))
+                    {
+                        await reader.LoadAsync((uint)stream.Size);
+                        reader.ReadBytes(bytes);
+                    }
+
+
+                    if (file != null)
+                    {
+                        param.ImagePath = file.Path;
+                        param.ImageBinary = Convert.ToBase64String(bytes);
+                    }
                 }
+
             }
             catch (Exception ex)
             {

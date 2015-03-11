@@ -21,20 +21,20 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="xppservice.wsdl" MetadataType="Wsdl" ID="4bebad45-308b-475a-8d6c-70d17e65aee0" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl=wsdl1" />
-    <MetadataFile FileName="xppservice.xsd" MetadataType="Schema" ID="0dbd5a1b-ca47-44a0-bb48-4623927f23a6" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd5" />
-    <MetadataFile FileName="xppservice1.xsd" MetadataType="Schema" ID="9a7320d7-d6b5-4149-9027-a1c3742ca769" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd4" />
-    <MetadataFile FileName="RoutingService.wsdl" MetadataType="Wsdl" ID="843f4f1c-65da-4c04-bf4a-716a14ee4c2b" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl" />
-    <MetadataFile FileName="xppservice2.xsd" MetadataType="Schema" ID="fd11093c-7677-4a3b-84cc-eea096859490" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd6" />
-    <MetadataFile FileName="xppservice3.xsd" MetadataType="Schema" ID="4e343dcb-d574-4643-a272-f343a806a596" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd1" />
-    <MetadataFile FileName="xppservice1.wsdl" MetadataType="Wsdl" ID="f70bd4bc-f189-4869-9032-245764b67ea1" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="xppservice4.xsd" MetadataType="Schema" ID="8a282107-f427-4880-a723-47b61722b223" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd3" />
-    <MetadataFile FileName="xppservice5.xsd" MetadataType="Schema" ID="64b94c6a-c806-42aa-9606-cf70316d0a59" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd2" />
-    <MetadataFile FileName="xppservice6.xsd" MetadataType="Schema" ID="c89821bd-3ee9-470f-8846-3441aef3342b" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd7" />
-    <MetadataFile FileName="xppservice7.xsd" MetadataType="Schema" ID="52f81f82-2b1a-41d4-841d-eaea1b0479be" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?xsd=xsd0" />
+    <MetadataFile FileName="xppservice8.xsd" MetadataType="Schema" ID="cb33c6ce-6fe9-45e5-94ca-13f661548948" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd7" />
+    <MetadataFile FileName="xppservice81.xsd" MetadataType="Schema" ID="b8759a5e-494c-4aa8-b6c6-abe2a3450afe" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd5" />
+    <MetadataFile FileName="xppservice82.xsd" MetadataType="Schema" ID="4002a00e-fd2a-4e48-a820-259b6415609c" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd0" />
+    <MetadataFile FileName="xppservice83.xsd" MetadataType="Schema" ID="51b1ca15-0bab-48d4-bac6-90a6fd6489e5" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd3" />
+    <MetadataFile FileName="xppservice84.xsd" MetadataType="Schema" ID="cd260169-29e9-4226-969c-f1c221627eb7" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd6" />
+    <MetadataFile FileName="xppservice85.xsd" MetadataType="Schema" ID="5917516e-c4c5-4f21-bf96-3e736ef8da20" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd1" />
+    <MetadataFile FileName="xppservice86.xsd" MetadataType="Schema" ID="c71335ad-8e3e-4a4c-8aef-6f9e2b4f81a4" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd4" />
+    <MetadataFile FileName="xppservice2.wsdl" MetadataType="Wsdl" ID="5f0d6873-8dab-4efd-b7f9-c36381ce43e1" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="xppservice21.wsdl" MetadataType="Wsdl" ID="ba9d2d64-2cdf-4952-a997-06c43ed07218" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl=wsdl1" />
+    <MetadataFile FileName="RoutingService1.wsdl" MetadataType="Wsdl" ID="0724f2f9-cebc-4fc1-bd5d-f39d823ad81f" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl" />
+    <MetadataFile FileName="xppservice87.xsd" MetadataType="Schema" ID="12d301f3-9216-4fd3-a41a-e22789d63c16" SourceId="1" SourceUrl="http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

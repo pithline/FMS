@@ -355,8 +355,8 @@ namespace Eqstra.VehicleInspection.UILogic.ViewModels
 
             ////Drop Existing tables
 
-            //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Task>();
-            //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Task>();
+          
+           // await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Task>();
 
             //await SqliteHelper.Storage.DropTableAsync<Eqstra.BusinessLogic.Customer>();
             //await SqliteHelper.Storage.CreateTableAsync<Eqstra.BusinessLogic.Customer>();

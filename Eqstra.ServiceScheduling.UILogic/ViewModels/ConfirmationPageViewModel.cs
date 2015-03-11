@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
@@ -76,6 +77,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.ServiceDateOption1 = this.ServiceSchedulingDetail.ServiceDateOption1;
                     this.ServiceDateOption2 = this.ServiceSchedulingDetail.ServiceDateOption2;
                 }
+                this.ShouldSubmit = this.CustomerDetails.Status == DriverTaskStatus.AwaitServiceBookingConfirmation ? 0 : 1;
                 this.IsBusy = false;
             }
             catch (Exception ex)
@@ -84,6 +86,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
+
+        private int shouldSubmit;
+
+        public int ShouldSubmit
+        {
+            get { return shouldSubmit; }
+            set {SetProperty(ref shouldSubmit , value); }
+        }
+
         private CustomerDetails customerDetails;
         public CustomerDetails CustomerDetails
         {

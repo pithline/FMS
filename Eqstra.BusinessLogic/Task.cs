@@ -223,6 +223,15 @@ namespace Eqstra.BusinessLogic
             set { SetProperty(ref email, value); }
         }
 
+        private bool shouldSync;
+
+        public bool ShouldSync
+        {
+            get { return shouldSync; }
+            set { shouldSync = value; }
+        }
+
+
     }
 
     public class TaskFetchedEvent : PubSubEvent<Task>

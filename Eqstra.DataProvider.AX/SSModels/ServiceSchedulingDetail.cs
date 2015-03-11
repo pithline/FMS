@@ -53,6 +53,7 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public String SelectedServiceType { get; set; }
 
+        public string ConfirmedDate { get; set; }
 
     }
 }

@@ -140,10 +140,10 @@ namespace Eqstra.VehicleInspection.UILogic
                         CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID,
                         FileName = string.Format("{0}_{1}", fieldName, list.Count + 1)
                     };
-                    list.Add(ic);                   
+                    list.Add(ic);
 
                     var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
-                    var dbIC =  imageTable.SingleOrDefault(x => x.CaseServiceRecId == ic.CaseServiceRecId && x.FileName == string.Format("{0}_{1}", fieldName, list.Count + 1));
+                    var dbIC = imageTable.SingleOrDefault(x => x.CaseServiceRecId == ic.CaseServiceRecId && x.FileName == string.Format("{0}_{1}", fieldName, list.Count + 1));
                     if (dbIC == null)
                     {
                         await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(ic);
@@ -172,25 +172,29 @@ namespace Eqstra.VehicleInspection.UILogic
                 if (storagefile != null)
                 {
 
-                    var ms = await RenderDataStampOnSnap.RenderStaticTextToBitmap(storagefile);
-                    var msrandom = new MemoryRandomAccessStream(ms);
-                    Byte[] bytes = new Byte[ms.Length];
-                    await ms.ReadAsync(bytes, 0, (int)ms.Length);
-                    // StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Image.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
-
-                    StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + storagefile.Name, CreationCollisionOption.ReplaceExisting);
-                    using (var strm = await file.OpenStreamForWriteAsync())
+                    using (MemoryStream ms = await RenderDataStampOnSnap.RenderStaticTextToBitmap(storagefile))
                     {
-                        await strm.WriteAsync(bytes, 0, bytes.Length);
-                        strm.Flush();
+                        using (var msrandom = new MemoryRandomAccessStream(ms))
+                        {
+                            Byte[] bytes = new Byte[ms.Length];
+                            await ms.ReadAsync(bytes, 0, (int)ms.Length);
+                            // StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Image.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+
+                            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(DateTime.Now.Ticks.ToString() + storagefile.Name, CreationCollisionOption.ReplaceExisting);
+                            using (var strm = await file.OpenStreamForWriteAsync())
+                            {
+                                await strm.WriteAsync(bytes, 0, bytes.Length);
+                                strm.Flush();
+                            }
+
+                            param.ImagePath = file.Path;
+                            param.ImageBinary = Convert.ToBase64String(bytes);
+                            param.CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID;
+                            param.FileName = fieldName;
+
+                            await UpdateImageAsync(param);
+                        }
                     }
-
-                    param.ImagePath = file.Path;
-                    param.ImageBinary = Convert.ToBase64String(bytes);
-                    param.CaseServiceRecId = ((BaseModel)this.Model).VehicleInsRecID;
-                    param.FileName = fieldName;
-
-                    await UpdateImageAsync(param);
                 }
 
             }
@@ -200,7 +204,7 @@ namespace Eqstra.VehicleInspection.UILogic
             }
         }
 
-        private  async System.Threading.Tasks.Task UpdateImageAsync(ImageCapture param)
+        private async System.Threading.Tasks.Task UpdateImageAsync(ImageCapture param)
         {
             var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
             var dbIC = imageTable.SingleOrDefault(x => x.CaseServiceRecId == param.CaseServiceRecId && x.FileName == param.FileName);
