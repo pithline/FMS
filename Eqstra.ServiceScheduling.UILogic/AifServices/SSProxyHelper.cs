@@ -376,12 +376,15 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ContactPersonPhone = mzk.parmContactPersonPhone,
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
-                            SelectedLocType = mzk.parmLocationType,
+                           
+                            
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
-                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "": mzk.parmConfirmedDate.ToString("mm/dd/yyyy")
+                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("mm/dd/yyyy")
                         });
-                    };
+                        detailServiceScheduling.SelectedLocationType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
+                    }
+
 
                 }
                 return detailServiceScheduling;
@@ -645,7 +648,10 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                        parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                        parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                       parmLocationType = serviceSchedulingDetail.SelectedLocationType.LocType,
+                       parmLocationType = new MzkLocationTypeContract 
+                       {
+                           parmLocationType = (EXDCaseServiceDestinationType)Enum.Parse(typeof(EXDCaseServiceDestinationType), serviceSchedulingDetail.SelectedLocationType.LocType)
+                       },
                        parmSupplierId = serviceSchedulingDetail.SelectedDestinationType != null ? serviceSchedulingDetail.SelectedDestinationType.Id : string.Empty,
                        parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
 

@@ -181,7 +181,7 @@
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Lift Required"/>
                                 <ToggleSwitch  OffContent="No" OnContent="Yes"  IsEnabled="False"
-                                              IsOn="{Binding ServiceSchedulingDetail.IsLiftRequired,Mode=OneTime}"
+                                              IsOn="{Binding ServiceSchedulingDetail.IsLiftRequired}"
                                             />
                             </StackPanel>
 
@@ -190,7 +190,7 @@
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Location Type" />
                                 <TextBlock Style="{StaticResource TextContentStyle}"
-                                           Text="{Binding ServiceSchedulingDetail.SelectedLocType,Mode=TwoWay}" />
+                                           Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationName,Mode=TwoWay}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="6"
@@ -228,23 +228,11 @@
                                            Text="{Binding ServiceSchedulingDetail.ContactPersonPhone,Mode=TwoWay}" />
                             </StackPanel>
 
+                         
+
+
+
                             <StackPanel Grid.Row="3"
-                                          Margin="0 20 20 0"
-                                           Grid.RowSpan="2"
-                                        Grid.Column="1">
-                                <TextBlock Style="{StaticResource TextHeaderStyle}"
-                                           Text="Supplier Date Time" />
-                                <input:SfDatePicker BorderThickness="0"
-                                                    IsHitTestVisible="False"
-                                                    Value="{Binding ServiceSchedulingDetail.SupplierDateTime,Mode=TwoWay}"
-                                                    IsEnabled="False">
-
-                                </input:SfDatePicker>
-                            </StackPanel>
-
-
-
-                            <StackPanel Grid.Row="4"
                                         Grid.RowSpan="2"
                                            Margin="0 20 20 0"
                                         Grid.Column="1">
@@ -259,7 +247,7 @@
                             </StackPanel>
 
 
-                            <StackPanel Grid.Row="5"
+                            <StackPanel Grid.Row="4"
                                         Grid.RowSpan="2"
                                            Margin="0 20 20 0"
                                         Grid.Column="1"
@@ -273,6 +261,19 @@
 
                                 </input:SfDatePicker>
                             </StackPanel>
+
+                            <StackPanel Grid.Row="5"
+                                          Margin="0 20 20 0"
+                                           Grid.RowSpan="2"
+                                        Grid.Column="1">
+                                <TextBlock Style="{StaticResource TextHeaderStyle}"
+                                           Text="Confirmed Date" />
+                                <TextBlock Style="{StaticResource TextContentStyle}" Text="{Binding ServiceSchedulingDetail.ConfirmedDate}"/>
+
+
+
+                            </StackPanel>
+
                         </Grid>
                     </Border>
                 </Grid>

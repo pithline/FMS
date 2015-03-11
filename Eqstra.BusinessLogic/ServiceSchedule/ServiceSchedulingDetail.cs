@@ -126,13 +126,13 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 
         }
 
-        private string selectedlocType;
+        //private LocationType selectedlocType;
 
-        public string SelectedLocType
-        {
-            get { return selectedlocType; }
-            set { SetProperty(ref selectedlocType, value); }
-        }
+        //public LocationType SelectedLocType
+        //{
+        //    get { return selectedlocType; }
+        //    set { SetProperty(ref selectedlocType, value); }
+        //}
 
 
         private string address;

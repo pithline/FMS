@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
 using Windows.Media.Capture;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
@@ -115,10 +116,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 await TakePictureAsync(param);
             });
 
-            this.LocTypeChangedCommand = new DelegateCommand<LocationType>(async (param) =>
+            this.LocTypeChangedCommand = new DelegateCommand<object>(async (param) =>
             {
                 try
                 {
+                    var locType = ((LocationType)param).LocType;
                     this.IsBusy = true;
                     this.Model.Address = string.Empty;
                     if (this.Model.DestinationTypes != null)
@@ -126,22 +128,22 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                         this.Model.DestinationTypes.Clear();
                         this.Model.SelectedDestinationType = null;
                     }
-                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Driver && this._task != null)
+                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Driver && this._task != null)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync(this._task.CustomerId));
                     }
-                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Customer && this._task != null)
+                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Customer && this._task != null)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync(this._task.CustomerId));
                     }
 
-                    if (this.Model.DestinationTypes != null && param.LocType == LocationTypeConstants.Vendor)
+                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Vendor)
                     {
                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
                     }
                     this.IsAddFlyoutOn = Visibility.Collapsed;
                     this.IsAlternative = Visibility.Visible;
-                    if (param.LocType == LocationTypeConstants.Other)
+                    if (locType == LocationTypeConstants.Other)
                     {
                         this.Model.DestinationTypes = new ObservableCollection<DestinationType>();
                         this.Model.SelectedDestinationType = new DestinationType();
@@ -254,7 +256,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
         public DelegateCommand ODOReadingPictureCommand { get; set; }
         public DelegateCommand<string> AddAddressCommand { get; set; }
-        public DelegateCommand<LocationType> LocTypeChangedCommand { get; set; }
+        public ICommand LocTypeChangedCommand { get; set; }
         public DelegateCommand<object> DestiTypeChangedCommand { get; set; }
 
         private string odoReadingImagePath;

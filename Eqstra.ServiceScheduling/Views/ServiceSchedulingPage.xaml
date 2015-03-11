@@ -335,7 +335,7 @@
                                             <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedLocationType]}" />
                                             <Core:EventTriggerBehavior EventName="SelectionChanged">
                                                 <Core:InvokeCommandAction Command="{Binding LocTypeChangedCommand}"
-                                                                          CommandParameter="{Binding Model.SelectedLocationType}" />
+                                                                          CommandParameter="{Binding ElementName=ddLocationType, Path=SelectedItem, Mode=TwoWay}" />
                                             </Core:EventTriggerBehavior>
                                         </Interactivity:Interaction.Behaviors>
 
@@ -369,7 +369,7 @@
                                             <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[SelectedDestinationType]}" />
                                             <Core:EventTriggerBehavior EventName="SelectionChanged">
                                                 <Core:InvokeCommandAction Command="{Binding DestiTypeChangedCommand}"
-                                                                          CommandParameter="{Binding Model.SelectedDestinationType}" />
+                                                                          CommandParameter="{Binding ElementName=ddDestinationTypes,Path=SelectedItem, Mode=TwoWay}" />
                                             </Core:EventTriggerBehavior>
                                         </Interactivity:Interaction.Behaviors>
                                     </ComboBox>
