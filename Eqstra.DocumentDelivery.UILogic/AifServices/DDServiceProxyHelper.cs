@@ -330,7 +330,6 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         {
                             await SqliteHelper.Storage.InsertSingleRecordAsync<CollectedFromData>(new CollectedFromData { UserID = mzk.parmUserID, UserName = mzk.parmUserName, Address = mzk.parmAddress });
                         }
-
                     }
                 }
             }

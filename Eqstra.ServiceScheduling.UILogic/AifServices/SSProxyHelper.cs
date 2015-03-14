@@ -377,7 +377,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
                            
-                            
+                           
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("mm/dd/yyyy")
@@ -648,24 +648,31 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                        parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                        parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                       parmLocationType = new MzkLocationTypeContract 
-                       {
-                           parmLocationType = (EXDCaseServiceDestinationType)Enum.Parse(typeof(EXDCaseServiceDestinationType), serviceSchedulingDetail.SelectedLocationType.LocType)
-                       },
+                       
                        parmSupplierId = serviceSchedulingDetail.SelectedDestinationType != null ? serviceSchedulingDetail.SelectedDestinationType.Id : string.Empty,
                        parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
 
                    };
+                if (serviceSchedulingDetail.SelectedDestinationType != null)
+                {
+                    mzkServiceDetailsContract.parmLocationType = new MzkLocationTypeContract
+                    {
+                        parmLocationType = (EXDCaseServiceDestinationType)Enum.Parse(typeof(EXDCaseServiceDestinationType), serviceSchedulingDetail.SelectedLocationType.LocType)
+                    };
+                }
 
                 var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, _userInfo.CompanyId);
 
-                await client.saveImageAsync(new ObservableCollection<Mzk_ImageContract>{new Mzk_ImageContract
+                if (serviceSchedulingDetail.ODOReadingSnapshot!=null && !string.IsNullOrEmpty( serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary))
+                {
+                    await client.saveImageAsync(new ObservableCollection<Mzk_ImageContract>{new Mzk_ImageContract
                 {
                      parmCaseNumber = caseNumber,
                       parmFileName = "ServiceScheduling_ODOReading",
                        parmImageData = serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary
-                }});
+                }}); 
+                }
 
                 return result.response;
             }

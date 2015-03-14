@@ -47,7 +47,7 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public LocationType SelectedLocType { get; set; }
 
-        public string SelectedLocationType { get; set; }
+        public LocationType SelectedLocationType { get; set; }
 
         public DestinationType SelectedDestinationType { get; set; }
 

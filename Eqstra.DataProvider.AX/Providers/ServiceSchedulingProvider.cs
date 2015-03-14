@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
@@ -89,7 +90,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         break;
 
                     case ActionSwitch.GetServiceDetails:
-                        response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()), JsonConvert.DeserializeObject<UserInfo>(criterias[3].ToString()));
+                        response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()),long.Parse(criterias[3].ToString()), JsonConvert.DeserializeObject<UserInfo>(criterias[4].ToString()));
                         break;
 
                     case ActionSwitch.GetUserInfo:
@@ -417,12 +418,12 @@ namespace Eqstra.DataProvider.AX.Providers
                 throw;
             }
         }
-        private ServiceSchedulingDetail GetServiceDetails(string caseNumber, long serviceRecId, UserInfo userInfo)
+        private ServiceSchedulingDetail GetServiceDetails(string caseNumber, long caseServiceRecId, long serviceRecId, UserInfo userInfo)
         {
             try
             {
 
-                var result = _client.getServiceDetails(new SSProxy.CallContext() { }, caseNumber, serviceRecId, userInfo.CompanyId);
+                var result = _client.getServiceDetails(new SSProxy.CallContext() { }, caseNumber, caseServiceRecId, userInfo.CompanyId);
                 ServiceSchedulingDetail detailServiceScheduling = null;
                 if (result != null)
                 {
@@ -433,10 +434,10 @@ namespace Eqstra.DataProvider.AX.Providers
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? string.Empty: mzk.parmPreferredDateFirstOption.ToShortDateString(),
-                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ?string.Empty: mzk.parmPreferredDateSecondOption.ToShortDateString(),
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateFirstOption.ToString("MM/dd/yyyy"),
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateSecondOption.ToString("MM/dd/yyyy"),
                             ODOReading = Int64.Parse(mzk.parmODOReading.ToString()),
-                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? string.Empty : mzk.parmODOReadingDate.ToShortDateString(),
+                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? string.Empty : mzk.parmODOReadingDate.ToString("MM/dd/yyyy"),
                             ServiceType = GetServiceTypes(caseNumber, userInfo.CompanyId),
                             LocationTypes = GetLocationType(serviceRecId, userInfo.CompanyId),
                             SupplierName = mzk.parmSupplierName,
@@ -445,12 +446,14 @@ namespace Eqstra.DataProvider.AX.Providers
                             ContactPersonPhone = mzk.parmContactPersonPhone,
                             SupplierDateTime = DateTime.Now,// need to add in service
                             CaseNumber = caseNumber,
-                            SelectedLocationType = mzk.parmLocationType,
+                            CaseServiceRecID = caseServiceRecId,
+                            //  SelectedLocationType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
-                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToShortDateString()
-                            
+                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy")
+
                         });
+                        detailServiceScheduling.SelectedLocType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
                     }
 
                 }
@@ -629,26 +632,38 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
 
                     parmODOReading = serviceSchedulingDetail.ODOReading.ToString(),
-                    parmODOReadingDate = DateTime.Parse(serviceSchedulingDetail.ODOReadingDate),
-                    parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
-                    parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2),
+                    parmODOReadingDate = DateTime.Parse(serviceSchedulingDetail.ODOReadingDate, new CultureInfo("en-US").DateTimeFormat),
+                    parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1, new CultureInfo("en-US").DateTimeFormat),
+                    parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2, new CultureInfo("en-US").DateTimeFormat),
                     parmServiceType = serviceSchedulingDetail.SelectedServiceType,
                     parmLiftLocationRecId = serviceSchedulingDetail.SelectedLocType == null ? default(long) : serviceSchedulingDetail.SelectedLocType.RecID,
                     parmSupplierId = serviceSchedulingDetail.SelectedDestinationType == null ? string.Empty : serviceSchedulingDetail.SelectedDestinationType.Id,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocType == null ? string.Empty : serviceSchedulingDetail.SelectedLocType.LocationName,
+
+
                     parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
                 };
+
+                if (serviceSchedulingDetail.SelectedLocType != null)
+                {
+                    mzkServiceDetailsContract.parmLocationType = new MzkLocationTypeContract
+                               {
+                                   parmLocationType = (EXDCaseServiceDestinationType)Enum.Parse(typeof(EXDCaseServiceDestinationType), serviceSchedulingDetail.SelectedLocType.LocType)
+                               };
+                }
                 var recID = serviceSchedulingDetail.SelectedDestinationType == null ? default(long) : serviceSchedulingDetail.SelectedDestinationType.RecID;
 
                 var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
                       , mzkAddressContract, userInfo.CompanyId);
 
-                _client.saveImage(new CallContext { }, new Mzk_ImageContract[]{new Mzk_ImageContract
+                if (!string.IsNullOrEmpty(serviceSchedulingDetail.ODOReadingSnapshot))
+                {
+                    _client.saveImage(new CallContext { }, new Mzk_ImageContract[]{new Mzk_ImageContract
                 {
                      parmCaseNumber = serviceSchedulingDetail.CaseNumber,
                       parmFileName = "ServiceScheduling_ODOReading",
                        parmImageData = serviceSchedulingDetail.ODOReadingSnapshot
                 }});
+                }
                 return result;
 
             }
@@ -771,7 +786,11 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
                     parmEventDesc = serviceSchedulingDetail.EventDesc,
-                    parmLocationType = serviceSchedulingDetail.SelectedLocType.LocationName,
+                    parmLocationType = new MzkLocationTypeContract
+                    {
+                        parmLocationType = (EXDCaseServiceDestinationType)Enum.Parse(typeof(EXDCaseServiceDestinationType), serviceSchedulingDetail.SelectedLocationType.LocType)
+                    },
+
                     parmODOReading = serviceSchedulingDetail.ODOReading.ToString(),
                     parmODOReadingDate = DateTime.Parse(serviceSchedulingDetail.ODOReadingDate),
                     parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),

@@ -47,7 +47,7 @@ namespace Eqstra.CrossPlatform.API
                 Provider = new SimpleAuthorizationServerProvider()
 
             };
-
+           
             app.UseOAuthAuthorizationServer(oauthAuthorizationServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
