@@ -669,7 +669,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     await client.saveImageAsync(new ObservableCollection<Mzk_ImageContract>{new Mzk_ImageContract
                 {
                      parmCaseNumber = caseNumber,
-                      parmFileName = "ServiceScheduling_ODOReading",
+                      parmFileName = "ServiceScheduling_ODOReading.png",
                        parmImageData = serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary
                 }}); 
                 }
@@ -732,9 +732,9 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceBookingDetail, EEPActionStep.AwaitServiceBookingDetail);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitSupplierSelection);
-                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceBookingConfirmation, EEPActionStep.AwaitServiceBookingConfirmation);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceBookingDetail, EEPActionStep.MaintenceServiceSheduling);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.SelectSupplier);
+                actionStepMapping.Add(Eqstra.BusinessLogic.Helpers.DriverTaskStatus.AwaitServiceBookingConfirmation, EEPActionStep.ServiceSchedulling);
                 mzkTasks.Add(new MzkServiceSchdTasksContract
                 {
                     parmCaseID = task.CaseNumber,

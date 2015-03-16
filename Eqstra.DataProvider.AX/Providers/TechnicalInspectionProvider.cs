@@ -73,7 +73,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             VehicleInsRecId = task.parmCaseServiceRecID,
                             ConfirmedDate = task.parmInspectionDueDate,
                             CustEmailId = task.parmEmail,
-
+                            
                         };
 
 
@@ -188,9 +188,9 @@ namespace Eqstra.DataProvider.AX.Providers
                 case "InsertInspectionData":
                     {
                         var tiData = JsonConvert.DeserializeObject<List<TIData>>(criterias[1].ToString());
-                        var tasks = JsonConvert.DeserializeObject<List<Eqstra.DataProvider.AX.TIModels.Task>>(criterias[2].ToString());
+                        var task = JsonConvert.DeserializeObject<Eqstra.DataProvider.AX.TIModels.Task>(criterias[2].ToString());
                         var imgs = JsonConvert.DeserializeObject<List<ImageCapture>>(criterias[3].ToString());
-                        return InsertInspectionData(tiData, tasks,imgs, criterias[4].ToString());
+                        return InsertInspectionData(tiData, task,imgs, criterias[4].ToString());
 
 
                     }
@@ -245,7 +245,7 @@ namespace Eqstra.DataProvider.AX.Providers
         }
 
 
-        private bool InsertInspectionData(List<TIData> tiData, List<Eqstra.DataProvider.AX.TIModels.Task> tasks ,List<ImageCapture> imageCaptureList,string companyId)
+        private bool InsertInspectionData(List<TIData> tiData, Eqstra.DataProvider.AX.TIModels.Task task ,List<ImageCapture> imageCaptureList,string companyId)
         {
             try
             {
@@ -270,10 +270,9 @@ namespace Eqstra.DataProvider.AX.Providers
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
                 actionStepMapping.Add("Completed", EEPActionStep.AwaitTechnicalInspection);
 
-                if (tasks != null)
+                if (task != null)
                 {
-                    foreach (var task in tasks.Where(x=>x.Status == "Completed"))
-                    {
+                   
                         taskList.Add(
                             new MzkTechnicalTasksContract
 
@@ -293,7 +292,7 @@ namespace Eqstra.DataProvider.AX.Providers
                                 parmEEPActionStep = actionStepMapping[task.Status]
 
                             });
-                    } 
+                     
                 }
                 var res = client.updateStatusList(new CallContext(),taskList.ToArray(), companyId);
                 var mzk_ImageContractList = new List<Mzk_ImageContract>();
@@ -303,15 +302,15 @@ namespace Eqstra.DataProvider.AX.Providers
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
                           parmFileName = string.Format("{0}_{1}{2}",img.RepairId,img.Component,".png"),
-                          parmCaseNumber = img.CaseNumber,
+                          parmCaseNumber = task.CaseNumber,
                            parmImageData =  img.ImageData
                      
                     });
                 }
                 if (mzk_ImageContractList.Count>0)
                 {
-                    var txtFilenName = string.Format("{0}{1}", imageCaptureList.First().CaseNumber, ".txt");
-                    var txtFileContent = string.Format("{0}|{1}", imageCaptureList.First().CaseNumber, String.Join("|", mzk_ImageContractList.Select(x => x.parmFileName)));
+                    var txtFilenName = string.Format("{0}{1}", task.CaseNumber, ".txt");
+                    var txtFileContent = string.Format("{0}|{1}", task.CaseNumber, String.Join("|", mzk_ImageContractList.Select(x => x.parmFileName)));
                     var tmpTxtFilePath = Path.GetTempFileName();
                         File.WriteAllText(tmpTxtFilePath, txtFileContent);
                         var contentBytes = File.ReadAllBytes(tmpTxtFilePath);

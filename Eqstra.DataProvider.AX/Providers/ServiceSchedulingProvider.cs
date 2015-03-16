@@ -660,7 +660,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     _client.saveImage(new CallContext { }, new Mzk_ImageContract[]{new Mzk_ImageContract
                 {
                      parmCaseNumber = serviceSchedulingDetail.CaseNumber,
-                      parmFileName = "ServiceScheduling_ODOReading",
+                      parmFileName = "ServiceScheduling_ODOReading.png",
                        parmImageData = serviceSchedulingDetail.ODOReadingSnapshot
                 }});
                 }
@@ -821,9 +821,9 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 Dictionary<string, EEPActionStep> actionStepMapping = new Dictionary<string, EEPActionStep>();
 
-                actionStepMapping.Add(DriverTaskStatus.AwaitServiceBookingDetail, EEPActionStep.AwaitServiceBookingDetail);
-                actionStepMapping.Add(DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.AwaitSupplierSelection);
-                actionStepMapping.Add(DriverTaskStatus.AwaitServiceBookingConfirmation, EEPActionStep.AwaitServiceBookingConfirmation);
+                actionStepMapping.Add(DriverTaskStatus.AwaitServiceBookingDetail, EEPActionStep.MaintenceServiceSheduling);
+                actionStepMapping.Add(DriverTaskStatus.AwaitSupplierSelection, EEPActionStep.SelectSupplier);
+                actionStepMapping.Add(DriverTaskStatus.AwaitServiceBookingConfirmation, EEPActionStep.ServiceSchedulling);
 
                 mzkTasks.Add(new MzkServiceSchdTasksContract
                 {
