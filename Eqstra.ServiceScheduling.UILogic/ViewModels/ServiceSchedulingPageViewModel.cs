@@ -122,7 +122,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     var locType = ((LocationType)param).LocType;
                     this.IsBusy = true;
-                    this.Model.Address = string.Empty;
                     if (this.Model.DestinationTypes != null)
                     {
                         this.Model.DestinationTypes.Clear();
@@ -210,12 +209,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
 
             bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
-            if (isInserted)
-            {
+            //if (isInserted)
+            //{
 
                 PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
                 PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-            }
+           // }
             _navigationService.Navigate("SupplierSelection", string.Empty);
 
 
