@@ -62,12 +62,12 @@
                         <TextBlock Text="{Binding Address}" Style="{StaticResource TextContentStyle}" TextWrapping="Wrap"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="4" Margin="0 15 0 0">
+                    <!--<StackPanel Grid.Row="4" Margin="0 15 0 0">
                         <TextBlock Text="Registration Number" Style="{StaticResource TextHeaderStyle}"/>
                         <TextBlock Text="{Binding RegistrationNumber}" Style="{StaticResource TextContentStyle}"/>
                     </StackPanel>
 
-                    <!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>-->
+                    --><!--<DatePicker Header="Status Due Date" Grid.Row="4" IsHitTestVisible="False" Margin="0 10 0 0"/>--><!--
 
                     <StackPanel Grid.Row="5" Margin="0 15 0 0">
                         <TextBlock Text="Make&amp;Model" Style="{StaticResource TextHeaderStyle}"/>
@@ -81,7 +81,7 @@
                     <StackPanel Grid.Row="7" Margin="0 15 0 0">
                         <TextBlock Text="Delivery Time" Style="{StaticResource TextHeaderStyle}"/>
                         <TextBlock Text="{Binding DeliveryDate,Converter={StaticResource DateTimeConverter}}" Style="{StaticResource TextContentStyle}"/>
-                    </StackPanel>
+                    </StackPanel>-->
 
                     <StackPanel Orientation="Horizontal" MinHeight="40" Height="70" VerticalAlignment="Bottom" Grid.Row="8" Margin="0 10 0 0">
                         <Button Command="{Binding MakeSkypeCallCommand, Source={StaticResource CustDetailsViewModel}}" CommandParameter="{Binding ContactNumber}" Style="{StaticResource TransparentBtn}" Margin="0 0 0 0">

@@ -58,6 +58,13 @@ namespace Eqstra.ServiceScheduling
             SessionStateService.RegisterKnownType(typeof(Syncfusion.UI.Xaml.Schedule.ScheduleAppointmentCollection));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.CustomerDetails));
             SessionStateService.RegisterKnownType(typeof(ObservableCollection<Eqstra.BusinessLogic.ServiceSchedule.DriverTask>));
+            SessionStateService.RegisterKnownType(typeof(City));
+            SessionStateService.RegisterKnownType(typeof(Country));
+            SessionStateService.RegisterKnownType(typeof(Region));
+            SessionStateService.RegisterKnownType(typeof(Suburb));
+            SessionStateService.RegisterKnownType(typeof(Province));
+            SessionStateService.RegisterKnownType(typeof(Supplier));
+
             SessionStateService.RegisterKnownType(typeof(LogonResult));
             SessionStateService.RegisterKnownType(typeof(List<string>));
 

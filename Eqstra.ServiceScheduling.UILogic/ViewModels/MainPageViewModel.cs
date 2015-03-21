@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media;
+using System.Linq;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -89,7 +90,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (list != null)
                 {
-                    foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list)
+                    foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list.Where(x=>x.Status != TaskStatus.Completed))
                     {
                         if (item != null)
                         {
@@ -110,6 +111,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         {
             this.IsBusy = true;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            _navigationService.ClearHistory();
+            
             await GetTasksFromDbAsync();
             this.IsBusy = false;
 

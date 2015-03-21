@@ -38,7 +38,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 try
                 {
-                    if (ODOImageValidate() && this.Model.ValidateProperties())
+                    if (await ODOImageValidate() && this.Model.ValidateProperties())
                     {
                         var messageDialog = new MessageDialog("Details once saved cannot be edited. Do you want to continue ?");
                         messageDialog.Commands.Add(new UICommand("Yes", OnYesButtonClicked));
@@ -48,7 +48,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 }
                 catch (Exception ex)
                 {
-
                     this.IsBusy = false;
                     AppSettings.Instance.ErrorMessage = ex.Message;
                 }
@@ -184,13 +183,13 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             });
         }
 
-        private Boolean ODOImageValidate()
+        async private System.Threading.Tasks.Task<Boolean> ODOImageValidate()
         {
             if (this.Model.ODOReadingSnapshot.ImagePath.Equals("ms-appx:///Assets/ODO_meter.png"))
             {
                 var messageDialog = new MessageDialog("Please take missing images");
                 messageDialog.Commands.Add(new UICommand("Ok"));
-                messageDialog.ShowAsync();
+                await messageDialog.ShowAsync();
                 return false;
             }
             return true;
@@ -209,12 +208,24 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             }
 
             bool isInserted = await SSProxyHelper.Instance.InsertServiceDetailsToSvcAsync(this.Model, this.Address, this._task.CaseNumber, this._task.CaseServiceRecID, this.Address.EntityRecId);
+
             //if (isInserted)
             //{
 
-                PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
-                PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-           // }
+            PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
+            PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
+            // }
+            var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
+            if (doesExist == null)
+            {
+                await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(this.Model.ODOReadingSnapshot);
+            }
+            else
+            {
+                doesExist.ImageBinary = this.Model.ODOReadingSnapshot.ImageBinary;
+                doesExist.ImagePath = this.Model.ODOReadingSnapshot.ImagePath;
+                await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(doesExist);
+            }
             _navigationService.Navigate("SupplierSelection", string.Empty);
 
 
@@ -228,9 +239,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this._task = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
+                var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
+
                 this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID, this._task.ServiceRecID);
                 this.Model.IsValidationEnabled = true;
-                this.ODOReadingImagePath = "ms-appx:///Assets/odo_meter.png";
+                if (doesExist != null)
+                {
+                    this.Model.ODOReadingSnapshot.ImageBinary = doesExist.ImageBinary;
+                    this.Model.ODOReadingSnapshot.ImagePath = doesExist.ImagePath; 
+                }
                 this.IsBusy = false;
             }
             catch (Exception ex)
@@ -285,6 +302,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     {
                         param.ImagePath = file.Path;
                         param.ImageBinary = Convert.ToBase64String(bytes);
+                        param.CaseServiceRecId = _task.CaseServiceRecID;
                     }
                 }
 

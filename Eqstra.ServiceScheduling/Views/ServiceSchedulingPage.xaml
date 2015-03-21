@@ -281,8 +281,8 @@
                                     Width="200"
                                                     Grid.Column="1"
                                                     HorizontalAlignment="Left" />
-                                <TextBlock Text="Confirm Date" Grid.Row="11" Margin="5" Style="{StaticResource FormTextStyle}"/>
-                                <TextBlock Text="{Binding ConfirmedDate}" Grid.Row="11" Grid.Column="1" Style="{StaticResource TextContentStyle}" Margin="5"/>
+                                <TextBlock Text="Confirm/Proposed Date" Grid.Row="11" Margin="5" Style="{StaticResource FormTextStyle}"/>
+                                <TextBlock Text="{Binding Model.ConfirmedDate}" Grid.Row="11" Grid.Column="1" Style="{StaticResource TextContentStyle}" Margin="5"/>
                                 <TextBlock Text="Please Provide Delivery Requirements"
                                            Style="{StaticResource TextContentStyle}"
                                            Grid.ColumnSpan="3"
@@ -381,6 +381,7 @@
                                 <TextBlock Text="Address"
                                            Grid.Row="5"
                                            Grid.Column="4"
+
                                            Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter},Mode=TwoWay}"
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center">
@@ -393,8 +394,8 @@
                                              Grid.RowSpan="4">
                                     <StackPanel Orientation="Horizontal"
                                                 Opacity="{Binding ElementName=liftRequired,Path=IsOn,Converter={StaticResource BooleanToOpacityConverter}}">
-                                        <TextBox Width="200"
-                                                 Height="80" 
+                                        <TextBox Width="250"
+                                                 Height="120" 
                                                  TextWrapping="Wrap"
                                                  IsReadOnly="{Binding ElementName=editableAddress,Path=IsChecked,Converter={StaticResource InvertBooleanConverter}}"
                                                  VerticalAlignment="Top"
@@ -420,6 +421,7 @@
 
 
                                         <AppBarToggleButton  x:Name="editableAddress"
+                                                               Visibility="{Binding IsAddFlyoutOn}"
                                                              VerticalAlignment="Top"
                                                              Icon="Edit"
                                                              RequestedTheme="Light"
@@ -446,7 +448,7 @@
                                            Style="{StaticResource FormTextStyle}"
                                            VerticalAlignment="Center" />
                                 <TextBox Width="200"
-                                         Height="80"
+                                         Height="120"
                                          VerticalAlignment="Bottom"
                                          Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
                                          Margin="5 10"

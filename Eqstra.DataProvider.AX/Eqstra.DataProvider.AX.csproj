@@ -71,6 +71,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SSModels\Address.cs" />
+    <Compile Include="SSModels\CaseStatus.cs" />
     <Compile Include="SSModels\City.cs" />
     <Compile Include="SSModels\ConfirmationServiceScheduling.cs" />
     <Compile Include="SSModels\Country.cs" />

@@ -33,7 +33,7 @@
                 </AppBarButton.Icon>
             </AppBarButton>
 
-            <AppBarButton Label="Complete" Visibility="{Binding CompleteVisibility}" Command="{Binding CompleteCommand}">
+            <AppBarButton Label="Deliver" Visibility="{Binding CompleteVisibility}" Command="{Binding CompleteCommand}">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Accept"/>
                 </AppBarButton.Icon>
@@ -73,7 +73,7 @@
                 <local:ProfileUserControl Grid.Column="2"/>
             </Grid>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Grid.Row="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" ZoomMode="Disabled" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled"  HorizontalScrollMode="Enabled" HorizontalAlignment="Left" Grid.Row="1">
                 <Grid Margin="30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

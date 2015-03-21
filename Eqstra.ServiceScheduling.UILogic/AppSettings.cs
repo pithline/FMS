@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 
 namespace Eqstra.ServiceScheduling.UILogic
@@ -13,9 +14,14 @@ namespace Eqstra.ServiceScheduling.UILogic
         private static readonly AppSettings _instance = new AppSettings();
         public AppSettings()
         {
-
+            this.ClearErrorMessageCommand = new DelegateCommand(() =>
+                {
+                    ErrorMessage = string.Empty;
+                });
         }
         public static AppSettings Instance { get { return _instance; } }
+
+        public ICommand ClearErrorMessageCommand { get; set; }
 
         private int isSyncingCustDetails;
 

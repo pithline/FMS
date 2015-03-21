@@ -46,9 +46,19 @@
                     HorizontalAlignment="Stretch">
                 <Button.Flyout>
                     <Flyout>
-                        <TextBlock Foreground="Crimson"
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
+                                <TextBlock Foreground="Crimson"
                                    Text="{Binding Source={StaticResource VM}, Path=Instance.ErrorMessage}"
                                    TextWrapping="Wrap"></TextBlock>
+                            </ScrollViewer>
+                            <Button Grid.Row="1" HorizontalAlignment="Right" Command="{Binding ClearErrorMessageCommand}">Clear</Button>
+                        </Grid>
                     </Flyout>
                 </Button.Flyout>
                 <TextBlock Foreground="Crimson"

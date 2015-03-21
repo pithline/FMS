@@ -812,7 +812,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 throw;
             }
         }
-        private string UpdateStatusList(Eqstra.DataProvider.AX.SSModels.Task task, UserInfo userInfo)
+        private CaseStatus UpdateStatusList(Eqstra.DataProvider.AX.SSModels.Task task, UserInfo userInfo)
         {
             try
             {
@@ -837,7 +837,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 });
                 var result = _client.updateStatusList(new SSProxy.CallContext() { }, mzkTasks.ToArray(), userInfo.CompanyId);
 
-                return result.FirstOrDefault().parmStatus;
+                return new CaseStatus { Status = result.FirstOrDefault().parmStatus };
 
             }
 

@@ -29,9 +29,7 @@
                               Label="Confirm"
                               Command="{Binding ConfirmationDatesCommand}" Visibility="Collapsed"/>
 
-                <AppBarButton Icon="Previous"
-                              Label="Previous Step"
-                              Command="{Binding GoBackCommand, ElementName=pageRoot}" />
+             
             </CommandBar.SecondaryCommands>
             <AppBarButton Label="Submit"
                           Icon="Accept"

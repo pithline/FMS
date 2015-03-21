@@ -105,8 +105,8 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <grid:SfDataGrid x:Name="sfDataGrid" NavigationMode="Row"  
-                                         SelectionChanged="sfDataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            <grid:SfDataGrid x:Name="sfDataGrid" SelectionChanged="sfDataGrid_SelectionChanged" NavigationMode="Row"  
+                                          ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"
                                          AllowSorting="False" ShowBusyIndicator="True" 
                                          ItemsSource="{Binding CDTaskList}" 
                                          ColumnSizer="Auto" 
@@ -170,8 +170,7 @@
 
                                     <grid:GridTextColumn MappingName="CustomerNumber" HeaderText="CONTACT NUMBER" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
 
-                                    <grid:GridTextColumn MappingName="ContactPersonAddress" TextWrapping="Wrap" HeaderText="CUSTOMER ADDRESS" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
-
+                                   
                                     <grid:GridTextColumn MappingName="DocumentCount" HeaderText="NO OF DOCUMENTS" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}" HorizontalHeaderContentAlignment="Left"/>
 
                                     <grid:GridTextColumn MappingName="AllocatedTo" HeaderText="ALLOCATED TO" AllowEditing="False" HeaderStyle="{StaticResource SyncGridHeaderStyle}"  HorizontalHeaderContentAlignment="Left"/>

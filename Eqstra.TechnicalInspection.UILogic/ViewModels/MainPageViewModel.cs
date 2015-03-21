@@ -88,12 +88,12 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                             await TIServiceHelper.Instance.GetTasksAsync();
 
-                            _eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
 
                             TIServiceHelper.Instance.Synchronize();
 
                             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                             {
+                                //_eventAggregator.GetEvent<Eqstra.BusinessLogic.TITaskFetchedEvent>().Publish(this.task);
                                 await GetTasksFromDbAsync();
                                 GetAllCount();
                                 GetAppointments();
@@ -170,12 +170,12 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
 
                        await TIServiceHelper.Instance.Synchronize();
 
-                        await TIServiceHelper.Instance.SyncImagesAsync();
-                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,  () =>
-                        {
-                            AppSettings.Instance.IsSynchronizing = 0;
-                            AppSettings.Instance.Synced = true;
-                        });
+                       await TIServiceHelper.Instance.SyncImagesAsync();
+                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                       {
+                           AppSettings.Instance.IsSynchronizing = 0;
+                           AppSettings.Instance.Synced = true;
+                       });
 
                    });
                 }
@@ -224,7 +224,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
         {
             this.PoolofTasks.Clear();
             var list = (await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>()).Where(w => w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.AwaitDamageConfirmation && w.Status != Eqstra.BusinessLogic.Helpers.TaskStatus.Completed);
-            foreach (Eqstra.BusinessLogic.TITask item in list.Where(x=>x.UserId == _userInfo.UserId))
+            foreach (Eqstra.BusinessLogic.TITask item in list.Where(x => x.UserId == _userInfo.UserId))
             {
                 this.PoolofTasks.Add(item);
             }
