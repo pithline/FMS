@@ -187,7 +187,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 if (result.response != null)
                 {
 
-                    foreach (var mzk in result.response.OrderBy(o => o.parmCountryRegionName))
+                    foreach (var mzk in result.response.OrderBy(o => o.parmCountryRegionName).Where(x=> x!=null))
                     {
 
                         countryList.Add(
