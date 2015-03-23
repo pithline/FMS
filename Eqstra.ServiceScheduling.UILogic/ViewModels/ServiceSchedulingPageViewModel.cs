@@ -215,17 +215,17 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this._task);
             PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
             // }
-            var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
-            if (doesExist == null)
-            {
-                await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(this.Model.ODOReadingSnapshot);
-            }
-            else
-            {
-                doesExist.ImageBinary = this.Model.ODOReadingSnapshot.ImageBinary;
-                doesExist.ImagePath = this.Model.ODOReadingSnapshot.ImagePath;
-                await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(doesExist);
-            }
+            //var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
+            //if (doesExist == null)
+            //{
+            //    await SqliteHelper.Storage.InsertSingleRecordAsync<ImageCapture>(this.Model.ODOReadingSnapshot);
+            //}
+            //else
+            //{
+            //    doesExist.ImageBinary = this.Model.ODOReadingSnapshot.ImageBinary;
+            //    doesExist.ImagePath = this.Model.ODOReadingSnapshot.ImagePath;
+            //    await SqliteHelper.Storage.UpdateSingleRecordAsync<ImageCapture>(doesExist);
+            //}
             _navigationService.Navigate("SupplierSelection", string.Empty);
 
 
@@ -239,15 +239,15 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this._task = PersistentData.Instance.DriverTask;
                 this.CustomerDetails = PersistentData.Instance.CustomerDetails;
-                var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
+                //var doesExist = await SqliteHelper.Storage.GetSingleRecordAsync<ImageCapture>(x => x.CaseServiceRecId == this._task.CaseServiceRecID);
 
                 this.Model = await SSProxyHelper.Instance.GetServiceDetailsFromSvcAsync(this._task.CaseNumber, this._task.CaseServiceRecID, this._task.ServiceRecID);
                 this.Model.IsValidationEnabled = true;
-                if (doesExist != null)
-                {
-                    this.Model.ODOReadingSnapshot.ImageBinary = doesExist.ImageBinary;
-                    this.Model.ODOReadingSnapshot.ImagePath = doesExist.ImagePath; 
-                }
+                //if (doesExist != null)
+                //{
+                //    this.Model.ODOReadingSnapshot.ImageBinary = doesExist.ImageBinary;
+                //    this.Model.ODOReadingSnapshot.ImagePath = doesExist.ImagePath; 
+                //}
                 this.IsBusy = false;
             }
             catch (Exception ex)

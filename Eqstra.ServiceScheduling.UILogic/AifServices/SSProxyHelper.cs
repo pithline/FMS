@@ -13,6 +13,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
+using Windows.UI.Xaml.Shapes;
 namespace Eqstra.ServiceScheduling.UILogic.AifServices
 {
     public class SSProxyHelper
@@ -377,7 +378,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ContactPersonPhone = mzk.parmContactPersonPhone,
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
-                           
+                           ODOReadingSnapshot = await GetOdoReadingImageAsync(mzk.parmODOReadingImage),
                            
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
@@ -395,6 +396,15 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 AppSettings.Instance.ErrorMessage = ex.Message;
                 return null;
             }
+        }
+
+        async private Task<ImageCapture> GetOdoReadingImageAsync(string odoReadingImageBinary)
+        {
+            var sf  = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("Odo_" + new Random().Next().ToString()+".png",CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteBytesAsync(sf,Convert.FromBase64String(odoReadingImageBinary));
+
+            return new ImageCapture { ImagePath = sf.Path, ImageBinary = odoReadingImageBinary };
+
         }
         private List<string> GetServiceTypesAsync(string caseNumber, string companyId)
         {

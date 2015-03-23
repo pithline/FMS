@@ -447,6 +447,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             SupplierDateTime = DateTime.Now,// need to add in service
                             CaseNumber = caseNumber,
                             CaseServiceRecID = caseServiceRecId,
+                            ODOReadingSnapshot = mzk.parmODOReadingImage,
                             //  SelectedLocationType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
