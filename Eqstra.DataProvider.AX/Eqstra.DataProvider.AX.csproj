@@ -203,6 +203,9 @@
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorsByClassResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

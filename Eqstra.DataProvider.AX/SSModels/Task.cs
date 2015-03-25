@@ -62,6 +62,10 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public DateTime AppointmentStart { get; set; }
         public DateTime AppointmentEnd { get; set; }
+
+        public string VehicleClassId { get; set; }
+
+        public string VehicleSubClassId { get; set; }
        
     }
 }

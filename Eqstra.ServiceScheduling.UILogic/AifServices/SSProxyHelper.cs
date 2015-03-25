@@ -157,6 +157,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ConfirmationDate = mzkTask.parmConfirmationDate == new DateTime(1900, 1, 1) ? string.Empty : mzkTask.parmConfirmationDate.ToString(),
                             CustomerId = mzkTask.parmCustAccount,
                             ContactName = mzkTask.parmContactPersonName,
+                            VehicleClassId = mzkTask.parmVehicleClassId,
+                            VehicleSubClassId = mzkTask.parmVehicleSubClassId
                             // ScheduledTime=DateTime.Now
                         });
 
@@ -570,6 +572,48 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
                 var result = await client.getVendorBySelectionAsync(_userInfo.CompanyId, countryId, provinceId, suburbId, cityId, regionId); ;
+
+                if (result.response != null)
+                {
+                    foreach (var mzk in result.response.Where(x => x != null))
+                    {
+                        suplierList.Add(new Eqstra.BusinessLogic.ServiceSchedule.Supplier
+                        {
+                            SupplierContactName = mzk.parmContactPersonName,
+                            SupplierContactNumber = mzk.parmContactPersonPhone,
+                            SupplierName = mzk.parmName,
+                            AccountNum = mzk.parmAccountNum,
+                            City = mzk.parmCityName,
+                            Country = mzk.parmCountryName,
+                            Province = mzk.parmStateName,
+                            Suburb = mzk.parmSuburbanName
+                        });
+                    }
+                }
+                suplierList = suplierList.OrderBy(o => o.SupplierContactName).ToList<Supplier>();
+                return suplierList;
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+                return suplierList;
+            }
+        }
+
+        public async System.Threading.Tasks.Task<List<Supplier>> GetSuppliersByClass(string classId)
+        {
+            List<Supplier> suplierList = new List<Supplier>();
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return null;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                var result = await client.getVendorsByClassAsync(_userInfo.CompanyId,classId); ;
 
                 if (result.response != null)
                 {

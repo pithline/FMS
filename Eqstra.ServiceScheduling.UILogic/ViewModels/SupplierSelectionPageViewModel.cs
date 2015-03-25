@@ -291,7 +291,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 //    this.Model.Suppliers = await SSProxyHelper.Instance.FilterSuppliersByCriteria(position.CivicAddress.Country, position.CivicAddress.State, position.CivicAddress.City, string.Empty, string.Empty);
                 //}
 
-                await DefaultSuplierOnCustomerLocation();
+                // await DefaultSuplierOnCustomerLocation();
+                this.Model.Suppliers = await SSProxyHelper.Instance.GetSuppliersByClass(DriverTask.VehicleClassId);
                 _navigationService.ClearHistory();
 
                 this.IsBusy = false;

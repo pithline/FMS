@@ -66,6 +66,9 @@ namespace Eqstra.DataProvider.AX.Providers
                         response = FilterSuppliersByGeoLocation(criterias[1].ToString(), criterias[2].ToString(), JsonConvert.DeserializeObject<UserInfo>(criterias[3].ToString()));
                         break;
 
+                    case ActionSwitch.GetSupplierByClass :
+                        response = GetSuppliersByClass(criterias[1].ToString(),JsonConvert.DeserializeObject<UserInfo>(criterias[2].ToString()));
+                        break;
                 }
                 _client.Close();
                 return response;
@@ -260,8 +263,9 @@ namespace Eqstra.DataProvider.AX.Providers
                             ConfirmedDate = mzkTask.parmConfirmationDate.ToShortDateString(),
                             ContactName = mzkTask.parmContactPersonName,
                             AppointmentStart = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime : DateTime.MinValue,
-                            AppointmentEnd = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime.AddHours(24) : DateTime.MinValue
-
+                            AppointmentEnd = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime.AddHours(24) : DateTime.MinValue,
+                            VehicleClassId = mzkTask.parmVehicleClassId,
+                            VehicleSubClassId = mzkTask.parmVehicleSubClassId
                         });
 
 
@@ -452,7 +456,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy")
-
+                           
                         });
                         detailServiceScheduling.SelectedLocType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
                     }
@@ -752,6 +756,41 @@ namespace Eqstra.DataProvider.AX.Providers
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public List<Supplier> GetSuppliersByClass(string classId,UserInfo userInfo)
+        {
+            List<Supplier> suplierList = new List<Supplier>();
+            try
+            {
+                
+                var result =  _client.getVendorsByClass(new CallContext{ Company = userInfo.CompanyId}, userInfo.CompanyId, classId); ;
+
+                if (result != null)
+                {
+                    foreach (var mzk in result.Where(x => x != null))
+                    {
+                        suplierList.Add(new Supplier
+                        {
+                            SupplierContactName = mzk.parmContactPersonName,
+                            SupplierContactNumber = mzk.parmContactPersonPhone,
+                            SupplierName = mzk.parmName,
+                            AccountNum = mzk.parmAccountNum,
+                            City = mzk.parmCityName,
+                            Country = mzk.parmCountryName,
+                            Province = mzk.parmStateName,
+                            Suburb = mzk.parmSuburbanName
+                        });
+                    }
+                }
+                suplierList = suplierList.OrderBy(o => o.SupplierContactName).ToList<Supplier>();
+                return suplierList;
+            }
+            catch (Exception ex)
+            {
+                
+                return suplierList;
             }
         }
 

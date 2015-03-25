@@ -242,6 +242,23 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
             get { return model; }
             set { SetProperty(ref model, value); }
         }
+
+        private string vehicleClassId;
+
+        public string VehicleClassId
+        {
+            get { return vehicleClassId; }
+            set { SetProperty(ref vehicleClassId , value); }
+        }
+
+        private string vehicleSubClassId;
+
+        public string VehicleSubClassId
+        {
+            get { return vehicleSubClassId; }
+            set { SetProperty(ref vehicleSubClassId , value); }
+        }
+
         
     }
     public class DriverTaskFetchedEvent : PubSubEvent<DriverTask>
