@@ -138,7 +138,7 @@
                                              SelectionMode="Single"
                                              BorderBrush="Transparent"
                                              BorderThickness="0"
-                                             CellStyle="{StaticResource SyncGridCellStyle}">
+                                             CellStyle="{StaticResource SyncGridCellStyle}" Padding="0 0 0 20">
                                 <grid:SfDataGrid.Columns>
                                     <grid:GridTextColumn MappingName="CaseNumber"
                                                          HeaderText="CASE NUMBER"

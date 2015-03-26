@@ -127,15 +127,15 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Margin="0 20 20 0">
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
@@ -145,7 +145,6 @@
                             </StackPanel>
 
                             <StackPanel Grid.Row="1"
-                                           Grid.RowSpan="2"
                                         Margin="0 20 20 0">
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="ODO Reading Date" />
@@ -174,7 +173,7 @@
                             </StackPanel>
 
 
-                            <StackPanel Grid.Row="4"   Grid.RowSpan="2" Margin="0 20 20 0">
+                            <StackPanel Grid.Row="4" Margin="0 20 20 0">
 
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Lift Required"/>
@@ -188,7 +187,7 @@
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Location Type" />
                                 <TextBlock Style="{StaticResource TextContentStyle}"
-                                           Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationName,Mode=TwoWay}" />
+                                           Text="{Binding ServiceSchedulingDetail.SelectedLocationType.LocationName,Mode=TwoWay}" TextWrapping="WrapWholeWords" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="6"
@@ -196,7 +195,7 @@
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Additional Work" />
                                 <TextBlock Style="{StaticResource TextContentStyle}"
-                                           Text="{Binding ServiceSchedulingDetail.AdditionalWork,Mode=TwoWay}" />
+                                           Text="{Binding ServiceSchedulingDetail.AdditionalWork,Mode=TwoWay}" TextWrapping="WrapWholeWords" />
                             </StackPanel>
 
 
@@ -231,7 +230,6 @@
 
 
                             <StackPanel Grid.Row="3"
-                                        Grid.RowSpan="2"
                                            Margin="0 20 20 0"
                                         Grid.Column="1">
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
@@ -246,7 +244,6 @@
 
 
                             <StackPanel Grid.Row="4"
-                                        Grid.RowSpan="2"
                                            Margin="0 20 20 0"
                                         Grid.Column="1"
                                         VerticalAlignment="Top">
@@ -262,7 +259,6 @@
 
                             <StackPanel Grid.Row="5"
                                           Margin="0 20 20 0"
-                                           Grid.RowSpan="2"
                                         Grid.Column="1">
                                 <TextBlock Style="{StaticResource TextHeaderStyle}"
                                            Text="Confirmed Date" />
