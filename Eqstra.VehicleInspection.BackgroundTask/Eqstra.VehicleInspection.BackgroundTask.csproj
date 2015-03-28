@@ -246,6 +246,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Eqstra.BusinessLogic.Portable\Eqstra.BusinessLogic.Portable.csproj">
+      <Project>{a9300e19-216b-413f-aecb-7e02d8fb22ad}</Project>
+      <Name>Eqstra.BusinessLogic.Portable</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eqstra.BusinessLogic\Eqstra.BusinessLogic.csproj">
       <Project>{790ad967-f93d-402a-8857-e4c0b64d00e7}</Project>
       <Name>Eqstra.BusinessLogic</Name>

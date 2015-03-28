@@ -15,6 +15,7 @@ using Windows.Data.Xml.Dom;
 using System.ServiceModel;
 using Eqstra.VehicleInspection.BackgroundTask.VIProxy;
 using Windows.Security.Credentials;
+using Windows.Storage;
 
 
 namespace Eqstra.VehicleInspection.BackgroundTask
@@ -27,6 +28,7 @@ namespace Eqstra.VehicleInspection.BackgroundTask
         async public void Run(IBackgroundTaskInstance taskInstance)
         {
           string PasswordVaultResourceName = "VehicleInspection";
+          
             ConnectAsync("axbcsvc", "AXrocks100");
             var cred = this.GetSavedCredentials(PasswordVaultResourceName);
             if (cred != null)
