@@ -164,30 +164,5 @@ namespace Eqstra.ServiceScheduling
         }
 
 
-        /// <summary>
-        ///  temporary code
-        /// </summary>
-
-        private async void GenerateModalForHybApp()
-        {
-
-            Type t = typeof(City);
-
-            var properties = t.GetRuntimeProperties();
-            StringBuilder sb = new StringBuilder();
-
-            foreach (var property in properties)
-            {
-                sb.Append("public ");
-                sb.Append(property.PropertyType.Name).Append(" ");
-                sb.Append(property.Name).Append(" ");
-                sb.Append(" { get ; set ; }");
-                sb.Append(Environment.NewLine);
-                sb.Append(Environment.NewLine);
-
-            }
-
-            string file = sb.ToString();
-        }
     }
 }
