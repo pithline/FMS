@@ -193,7 +193,7 @@
                     <TextBlock Text="Tasks"
                                Style="{StaticResource GroupHeaderStyle}"
                                Margin="10 0 0 0" />
-                    <SearchBox ChooseSuggestionOnEnter="True"
+                    <SearchBox 
                                Width="250"
                                PlaceholderText="Type to filter..."
                                Margin="0 0 10 0"

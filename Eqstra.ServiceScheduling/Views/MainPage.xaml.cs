@@ -17,6 +17,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Eqstra.BusinessLogic.ServiceSchedule;
+using Eqstra.ServiceScheduling.UILogic.ViewModels;
+using Eqstra.ServiceScheduling.UILogic;
+using System.Collections.ObjectModel;
+using Windows.UI.Core;
+using Eqstra.ServiceScheduling.UILogic.Helpers;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Eqstra.ServiceScheduling.Views
@@ -26,78 +31,102 @@ namespace Eqstra.ServiceScheduling.Views
     /// </summary>
     public sealed partial class MainPage : VisualStateAwarePage
     {
-        bool isCached;
-        HashSet<string> _searchSuggestionList = new HashSet<string>();
+        private List<string> suggestLookup = new List<string>();
+
         public MainPage()
         {
             this.InitializeComponent();
+            suggestLookup.Add("CaseNumber");
+            suggestLookup.Add("StatusDueDate");
+            suggestLookup.Add("Status");
+            suggestLookup.Add("RegistrationNumber");
+            suggestLookup.Add("Make");
+            suggestLookup.Add("Model");
+            suggestLookup.Add("CustomerName");
+            suggestLookup.Add("ContactName");
+            suggestLookup.Add("CustPhone");
         }
         private void WeatherInfo_Tapped(object sender, TappedRoutedEventArgs e)
         {
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadFromDiskAsync<DriverTask>("MainItemsSourceFile.json");
-            if (result != null)
+            try
             {
-                this.mainGrid.ItemsSource = result.Where(x =>
-                         x.CaseNumber.Contains(args.QueryText) ||
+                if (PersistentData.Instance.PoolOfTask != null)
+                {
+                    var filterResult = PersistentData.Instance.PoolOfTask.Where(x => Convert.ToString(x.CaseNumber).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.StatusDueDate).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.Status).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.Make).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.Model).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CustomerName).Contains(args.QueryText) ||
+                                                                Convert.ToString(x.CustPhone).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.RegistrationNumber).Contains(args.QueryText));
 
-                         x.CustomerName.Contains(args.QueryText) ||
-                         x.RegistrationNumber.Contains(args.QueryText) ||
-                         x.Model.Contains(args.QueryText) ||
-                         x.Make.Contains(args.QueryText) ||
-                         x.Description.Contains(args.QueryText) ||
-                         x.Address.Contains(args.QueryText) ||
-                         x.Status.Contains(args.QueryText));
+                    if (filterResult != null)
+                    {
+                        ((MainPageViewModel)this.DataContext).PoolofTasks.Clear();
+                        foreach (var item in filterResult)
+                        {
+                            ((MainPageViewModel)this.DataContext).PoolofTasks.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        ((MainPageViewModel)this.DataContext).PoolofTasks.Clear();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
         }
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
             try
             {
-                if (this.mainGrid.ItemsSource != null & ((IEnumerable<DriverTask>)this.mainGrid.ItemsSource).Any())
+                if (this.mainGrid.ItemsSource != null)
                 {
+                    var checkLookup = new List<string>();
                     var deferral = args.Request.GetDeferral();
-                    var query = args.QueryText != null ? args.QueryText.Trim() : null;
-                    if (string.IsNullOrEmpty(query))
-                    {
-                        return;
-                    }
+                    var query = args.QueryText != null ? args.QueryText.Trim() : String.Empty;
                     if (!string.IsNullOrEmpty(args.QueryText))
                     {
-                        if (!isCached)
-                        {
-                            await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "MainItemsSourceFile.json");
-                            isCached = true;
-                        }
-                        _searchSuggestionList.Clear();
-                        foreach (var task in await Util.ReadFromDiskAsync<DriverTask>("MainItemsSourceFile.json"))
+                        foreach (var task in PersistentData.Instance.PoolOfTask)
                         {
                             foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {
-                                if (propInfo.Name.Equals("CaseCategory") || propInfo.Name.Equals("CaseType") || propInfo.Name.Equals("ModelYear") || propInfo.Name.Equals("ConfirmedTime") || propInfo.Name.Equals("ConfirmedDate") || propInfo.Name.Equals("VehicleInsRecId") || propInfo.Name.Equals("CustomerId")
-                                    || propInfo.Name.Equals("CaseServiceRecID") || propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address") || propInfo.Name.Equals("CollectionRecID") || propInfo.Name.Equals("DriverPhone") || propInfo.Name.Equals("DriverLastName") || propInfo.Name.Equals("DriverFirstName"))
-                                    continue;
-
-                                var propVal = Convert.ToString(propInfo.GetValue(task));
-                                if (propVal.ToLowerInvariant().Contains(query.ToLowerInvariant()))
+                                if (this.suggestLookup.Contains(propInfo.Name))
                                 {
+                                    var propVal = Convert.ToString(propInfo.GetValue(task));
+                                    if (propVal.ToLowerInvariant().Contains(query.ToLowerInvariant()))
+                                    {
+                                        if (!checkLookup.Contains(propVal))
+                                        {
+                                            checkLookup.Add(propVal);
+                                        }
 
-                                    args.Request.SearchSuggestionCollection.AppendQuerySuggestion(propVal);
-
+                                    }
                                 }
                             }
                         }
+                        args.Request.SearchSuggestionCollection.AppendQuerySuggestions(checkLookup);
 
+                    }
+                    else
+                    {
+                        ((MainPageViewModel)this.DataContext).PoolofTasks.Clear();
+                        ((MainPageViewModel)this.DataContext).PoolofTasks.AddRange(PersistentData.Instance.PoolOfTask);
                     }
                     deferral.Complete();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
 
         }

@@ -31,7 +31,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
 
-
             this.SyncCommand = new DelegateCommand(async () =>
             {
                 if (AppSettings.Instance.IsSynchronizing == 0)
@@ -39,11 +38,6 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     AppSettings.Instance.ErrorMessage = string.Empty;
 
                     AppSettings.Instance.IsSynchronizing = 1;
-
-
-                    //await SSProxyHelper.Instance.GetTasksFromSvcAsync();
-                    // _eventAggregator.GetEvent<DriverTaskFetchedEvent>().Publish(this.task);
-
 
                     await GetTasksFromDbAsync();
                     AppSettings.Instance.IsSynchronizing = 0;
@@ -90,7 +84,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 if (list != null)
                 {
-                    foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list.Where(x=>x.Status != TaskStatus.Completed))
+                    foreach (Eqstra.BusinessLogic.ServiceSchedule.DriverTask item in list.Where(x => x.Status != TaskStatus.Completed))
                     {
                         if (item != null)
                         {
@@ -112,18 +106,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             this.IsBusy = true;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
             _navigationService.ClearHistory();
-            
+
             await GetTasksFromDbAsync();
             this.IsBusy = false;
+            PersistentData.Instance.PoolOfTask = new ObservableCollection<DriverTask>();
+            PersistentData.Instance.PoolOfTask.AddRange(this.PoolofTasks);
 
-            this._eventAggregator.GetEvent<DriverTaskFetchedEvent>().Subscribe(async p =>
-            {
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                {
-                    await GetTasksFromDbAsync();
-
-                });
-            });
         }
         private void GetAppointments(DriverTask task)
         {

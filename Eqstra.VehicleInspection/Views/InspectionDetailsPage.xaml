@@ -128,7 +128,6 @@
                                Style="{StaticResource GroupHeaderStyle}"
                                Margin="0 0 0 10" />
                     <SearchBox Grid.Row="0"
-                               ChooseSuggestionOnEnter="True"
                                Margin="0 0 0 10"
                                HorizontalAlignment="Right"
                                PlaceholderText="Type to filter..."

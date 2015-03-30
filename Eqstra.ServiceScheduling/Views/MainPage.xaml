@@ -105,14 +105,13 @@
                                Style="{StaticResource GroupHeaderStyle}"
                                HorizontalAlignment="Left"
                                Margin="0 0 0 10" />
-                    <SearchBox ChooseSuggestionOnEnter="True" VerticalAlignment="Center" 
+                    <SearchBox  VerticalAlignment="Center" SearchHistoryEnabled="False"
                                Width="250" Height="35"
                                PlaceholderText="Type to filter..."
                                Margin="0 0 0 8"
                                x:Name="filterBox"
                                HorizontalAlignment="Right"
                                FocusOnKeyboardInput="True"
-                               SearchHistoryEnabled="False"
                                QuerySubmitted="filterBox_QuerySubmitted"
                                SuggestionsRequested="filterBox_SuggestionsRequested">
                     </SearchBox>
@@ -206,7 +205,6 @@
                                         <grid:GridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Image />
                                                     <TextBlock Text="{Binding CustPhone}" />
                                                 </StackPanel>
                                             </DataTemplate>
@@ -226,40 +224,6 @@
                     </Border>
                 </Grid>
 
-                <!--<Border BorderBrush="#FFE0E0E0"
-                     Grid.Column="2"
-                     Margin="20 60 20 30"
-                     VerticalAlignment="Stretch"
-                     BorderThickness="1"
-                     Background="White"
-                     Tapped="WeatherInfo_Tapped">
-                     <Interactivity:Interaction.Behaviors>
-                     <Core:EventTriggerBehavior EventName="PointerPressed">
-                     <Core:CallMethodAction MethodName="BingWeatherCommand" />
-                     </Core:EventTriggerBehavior>
-                     </Interactivity:Interaction.Behaviors>
-                     <Grid Width="200"
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Left">
-                     <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="5" />
-                     <ColumnDefinition Width="*" />
-                     </Grid.ColumnDefinitions>
-                     <Grid.RowDefinitions>
-                     <RowDefinition Height="*" />
-                     <RowDefinition Height="Auto" />
-                     </Grid.RowDefinitions>
-                     <Rectangle Fill="#FF35a3dc"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     Grid.RowSpan="2" />
-                     <TextBlock Text="Today's Weather"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     HorizontalAlignment="Left"
-                     Style="{StaticResource InfoBoxTitleStyle}" />
-                     </Grid>
-                     </Border>-->
             </Grid>
         </Grid>
     </busy:SfBusyIndicator>

@@ -33,7 +33,7 @@ namespace Eqstra.DocumentDelivery.Views
     public sealed partial class InspectionDetailsPage : VisualStateAwarePage
     {
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private bool isCached;
+        private List<string> suggestLookup = new List<string>();
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -42,23 +42,32 @@ namespace Eqstra.DocumentDelivery.Views
         public InspectionDetailsPage()
         {
             this.InitializeComponent();
+            suggestLookup.Add("TaskType");
+            suggestLookup.Add("CustomerName");
+            suggestLookup.Add("ContactName");
+            suggestLookup.Add("CustomerNumber");
+
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             try
             {
-                var result = await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json");
+                var result = ((InspectionDetailsPageViewModel)this.DataContext).CDTaskList;
                 if (result != null)
                 {
-                    this.sfDataGrid.ItemsSource = result.Where(x => x.CustomerName.Equals(args.QueryText) ||
-                                      Convert.ToString(x.DocumentCount).Equals(args.QueryText) || x.AllocatedTo.Equals(args.QueryText) ||
-                                     Convert.ToString(x.TaskType).Equals(args.QueryText) || Convert.ToString(x.ConfirmedDate).Equals(args.QueryText) ||
-                                     Convert.ToString(x.StatusDueDate).Equals(args.QueryText) || x.Status.Equals(args.QueryText) ||
-                                     Convert.ToString(x.DeliveryDate).Equals(args.QueryText) || Convert.ToString(x.Address).Equals(args.QueryText) |
-                                      Convert.ToString(x.CaseNumber).Equals(args.QueryText) || Convert.ToString(x.CDTaskStatus).Equals(args.QueryText)
-                                      || Convert.ToString(x.CustomerId).Equals(args.QueryText) || Convert.ToString(x.ContactName).Equals(args.QueryText)
-                                      || Convert.ToString(x.CustPartyId).Equals(args.QueryText) || Convert.ToString(x.EmailId).Equals(args.QueryText)
-                                     );
+                    var filterResult = result.Where(x => Convert.ToString(x.TaskType).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CustomerName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CustomerNumber).Contains(args.QueryText));
+
+                    if (filterResult != null)
+                    {
+                        this.sfDataGrid.ItemsSource = filterResult;
+                    }
+                    else
+                    {
+                        this.sfDataGrid.ItemsSource = new ObservableCollection<CollectDeliveryTask>();
+                    }
                 }
             }
             catch (Exception ex)
@@ -70,35 +79,43 @@ namespace Eqstra.DocumentDelivery.Views
 
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
-            var deferral = args.Request.GetDeferral();
-            if (!string.IsNullOrEmpty(args.QueryText))
+            try
             {
-                if (!isCached)
+                if (((InspectionDetailsPageViewModel)this.DataContext).CDTaskList != null)
                 {
-                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.sfDataGrid.ItemsSource), "CDTaskDetailsFile.json");
-                    isCached = true;
-                }
-
-                var searchSuggestionList = new List<string>();
-                foreach (var task in await Util.ReadFromDiskAsync<CollectDeliveryTask>("CDTaskDetailsFile.json"))
-                {
-                    foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                    var deferral = args.Request.GetDeferral();
+                    if (!string.IsNullOrEmpty(args.QueryText))
                     {
-                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) ||
-                            propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name))
-                            continue;
-                        var propVal = Convert.ToString(propInfo.GetValue(task));
-                        if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                        var searchSuggestionList = new List<string>();
+                        foreach (var task in ((InspectionDetailsPageViewModel)this.DataContext).CDTaskList)
                         {
-                            if (!searchSuggestionList.Contains(propVal))
-                                searchSuggestionList.Add(propVal);
+                            foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                            {
+                                if (this.suggestLookup.Contains(propInfo.Name))
+                                {
+                                    var propVal = Convert.ToString(propInfo.GetValue(task));
+                                    if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                                    {
+                                        if (!searchSuggestionList.Contains(propVal))
+                                            searchSuggestionList.Add(propVal);
+                                    }
+                                }
+                            }
                         }
+                        args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
                     }
-                }
-                args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
-            }
-            deferral.Complete();
+                    else
+                    {
+                        this.sfDataGrid.ItemsSource = ((InspectionDetailsPageViewModel)this.DataContext).CDTaskList;
+                    }
+                    deferral.Complete();
 
+                }
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
         }
 
         private async void sfDataGrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
