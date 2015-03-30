@@ -71,6 +71,9 @@
           <xs:element minOccurs="0" name="parmEEPActionStep" type="tns:EEPActionStep" />
           <xs:element minOccurs="0" name="parmEmail" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmInspectionDueDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="parmMake" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmModel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="parmRegistrationNumber" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmServiceId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="parmServiceRecID" type="xs:long" />
           <xs:element minOccurs="0" name="parmStatus" nillable="true" type="xs:string" />
@@ -559,16 +562,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkTechnicalTasksContract" nillable="true" type="tns:ArrayOfMzkTechnicalTasksContract" />
-  <xs:complexType name="ArrayOfMzk_ImageContract">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Mzk_ImageContract" nillable="true" type="tns:Mzk_ImageContract" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMzk_ImageContract" nillable="true" type="tns:ArrayOfMzk_ImageContract" />
   <xs:complexType name="ArrayOfMzkCaseServiceAuthorizationContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MzkCaseServiceAuthorizationContract" nillable="true" type="tns:MzkCaseServiceAuthorizationContract" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMzkCaseServiceAuthorizationContract" nillable="true" type="tns:ArrayOfMzkCaseServiceAuthorizationContract" />
+  <xs:complexType name="ArrayOfMzk_ImageContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Mzk_ImageContract" nillable="true" type="tns:Mzk_ImageContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMzk_ImageContract" nillable="true" type="tns:ArrayOfMzk_ImageContract" />
 </xs:schema>

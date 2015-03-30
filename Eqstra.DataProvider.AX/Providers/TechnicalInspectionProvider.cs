@@ -47,7 +47,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
                 var taskList = new List<TITask>();
-                
+
 
                 var client = GetServiceClient();
                 var result = client.getTasks(new CallContext(), userId, companyId);
@@ -73,7 +73,9 @@ namespace Eqstra.DataProvider.AX.Providers
                             VehicleInsRecId = task.parmCaseServiceRecID,
                             ConfirmedDate = task.parmInspectionDueDate,
                             CustEmailId = task.parmEmail,
-                            
+                            RegistrationNumber = task.parmRegistrationNumber,
+                            Make = task.parmMake,
+                            Model = task.parmModel
                         };
 
 
@@ -99,7 +101,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             }
                             tiTask.ComponentList = subComponentList;
                         }
-                        
+
                         taskList.Add(tiTask);
                     }
                 }
@@ -190,7 +192,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         var tiData = JsonConvert.DeserializeObject<List<TIData>>(criterias[1].ToString());
                         var task = JsonConvert.DeserializeObject<Eqstra.DataProvider.AX.TIModels.Task>(criterias[2].ToString());
                         var imgs = JsonConvert.DeserializeObject<List<ImageCapture>>(criterias[3].ToString());
-                        return InsertInspectionData(tiData, task,imgs, criterias[4].ToString());
+                        return InsertInspectionData(tiData, task, imgs, criterias[4].ToString());
 
 
                     }
@@ -245,7 +247,7 @@ namespace Eqstra.DataProvider.AX.Providers
         }
 
 
-        private bool InsertInspectionData(List<TIData> tiData, Eqstra.DataProvider.AX.TIModels.Task task ,List<ImageCapture> imageCaptureList,string companyId)
+        private bool InsertInspectionData(List<TIData> tiData, Eqstra.DataProvider.AX.TIModels.Task task, List<ImageCapture> imageCaptureList, string companyId)
         {
             try
             {
@@ -272,49 +274,49 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 if (task != null)
                 {
-                   
-                        taskList.Add(
-                            new MzkTechnicalTasksContract
 
-                            {
-                                parmCaseServiceRecID = task.CaseServiceRecID,
-                                parmServiceRecID = task.ServiceRecID,
-                                parmCaseId = task.CaseNumber,
+                    taskList.Add(
+                        new MzkTechnicalTasksContract
 
-                                parmCustAddress = task.Address,
-                                parmCustName = task.CustomerName,
-                                parmCustPhone = task.CustPhone,
-                                parmContactPersonPhone = task.ContactNumber,
-                                parmContactPersonName = task.ContactName,
-                                parmStatus = task.Status,
-                                
-                                parmUserID = task.UserId,
-                                parmEEPActionStep = actionStepMapping[task.Status]
+                        {
+                            parmCaseServiceRecID = task.CaseServiceRecID,
+                            parmServiceRecID = task.ServiceRecID,
+                            parmCaseId = task.CaseNumber,
 
-                            });
-                     
+                            parmCustAddress = task.Address,
+                            parmCustName = task.CustomerName,
+                            parmCustPhone = task.CustPhone,
+                            parmContactPersonPhone = task.ContactNumber,
+                            parmContactPersonName = task.ContactName,
+                            parmStatus = task.Status,
+
+                            parmUserID = task.UserId,
+                            parmEEPActionStep = actionStepMapping[task.Status]
+
+                        });
+
                 }
-                var res = client.updateStatusList(new CallContext(),taskList.ToArray(), companyId);
+                var res = client.updateStatusList(new CallContext(), taskList.ToArray(), companyId);
                 var mzk_ImageContractList = new List<Mzk_ImageContract>();
 
                 foreach (var img in imageCaptureList)
                 {
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
-                          parmFileName = string.Format("{0}_{1}{2}",img.RepairId,img.Component,".png"),
-                          parmCaseNumber = task.CaseNumber,
-                           parmImageData =  img.ImageData
-                     
+                        parmFileName = string.Format("{0}_{1}{2}", img.RepairId, img.Component, ".png"),
+                        parmCaseNumber = task.CaseNumber,
+                        parmImageData = img.ImageData
+
                     });
                 }
-                if (mzk_ImageContractList.Count>0)
+                if (mzk_ImageContractList.Count > 0)
                 {
                     var txtFilenName = string.Format("{0}{1}", task.CaseNumber, ".txt");
                     var txtFileContent = string.Format("{0}|{1}", task.CaseNumber, String.Join("|", mzk_ImageContractList.Select(x => x.parmFileName)));
                     var tmpTxtFilePath = Path.GetTempFileName();
-                        File.WriteAllText(tmpTxtFilePath, txtFileContent);
-                        var contentBytes = File.ReadAllBytes(tmpTxtFilePath);
-                    
+                    File.WriteAllText(tmpTxtFilePath, txtFileContent);
+                    var contentBytes = File.ReadAllBytes(tmpTxtFilePath);
+
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
                         parmFileName = txtFilenName,
@@ -322,7 +324,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         parmImageData = Convert.ToBase64String(contentBytes)
 
                     });
-                    client.saveImage(new CallContext(), mzk_ImageContractList.ToArray()); 
+                    client.saveImage(new CallContext(), mzk_ImageContractList.ToArray());
                 }
                 client.Close();
                 return res != null && res.Length > 0;
@@ -336,6 +338,6 @@ namespace Eqstra.DataProvider.AX.Providers
         }
 
 
-      
+
     }
 }

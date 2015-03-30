@@ -273,7 +273,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 }
 
-                return driverTaskList;
+                return driverTaskList.OrderByDescending(x=>x.CaseNumber).ToList();
 
             }
             catch (Exception)
@@ -455,6 +455,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             //  SelectedLocationType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
+                          AccountNumber = mzk.parmSupplierId,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy")
                            
                         });
@@ -772,7 +773,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     foreach (var mzk in result.Where(x => x != null))
                     {
                         suplierList.Add(new Supplier
-                        {
+                        {  
                             SupplierContactName = mzk.parmContactPersonName,
                             SupplierContactNumber = mzk.parmContactPersonPhone,
                             SupplierName = mzk.parmName,
@@ -784,7 +785,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         });
                     }
                 }
-                suplierList = suplierList.OrderBy(o => o.SupplierContactName).ToList<Supplier>();
+                suplierList = suplierList.OrderBy(o => o.SupplierName).ToList<Supplier>();
                 return suplierList;
             }
             catch (Exception ex)
