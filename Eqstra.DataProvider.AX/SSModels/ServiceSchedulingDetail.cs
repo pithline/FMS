@@ -55,5 +55,7 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public string ConfirmedDate { get; set; }
 
+        public string AccountNumber { get; set; }
+
     }
 }

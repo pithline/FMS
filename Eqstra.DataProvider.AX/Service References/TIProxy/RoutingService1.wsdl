@@ -24,13 +24,13 @@
   <wsdl:binding name="BasicHttpBinding_MzkTechnicalInspection" type="i1:MzkTechnicalInspection">
     <wsp:PolicyReference URI="#BasicHttpBinding_MzkTechnicalInspection_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="validateUser">
-      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/validateUser" style="document" />
-      <wsdl:input name="MzkTechnicalInspectionValidateUserRequest">
-        <soap:header message="i1:MzkTechnicalInspectionValidateUserRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getTasks">
+      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/getTasks" style="document" />
+      <wsdl:input name="MzkTechnicalInspectionGetTasksRequest">
+        <soap:header message="i1:MzkTechnicalInspectionGetTasksRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkTechnicalInspectionValidateUserResponse">
+      <wsdl:output name="MzkTechnicalInspectionGetTasksResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -50,13 +50,13 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getTasks">
-      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/getTasks" style="document" />
-      <wsdl:input name="MzkTechnicalInspectionGetTasksRequest">
-        <soap:header message="i1:MzkTechnicalInspectionGetTasksRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="insertTechnicalInspection">
+      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection" style="document" />
+      <wsdl:input name="MzkTechnicalInspectionInsertTechnicalInspectionRequest">
+        <soap:header message="i1:MzkTechnicalInspectionInsertTechnicalInspectionRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkTechnicalInspectionGetTasksResponse">
+      <wsdl:output name="MzkTechnicalInspectionInsertTechnicalInspectionResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -76,32 +76,6 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="saveImage">
-      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/saveImage" style="document" />
-      <wsdl:input name="MzkTechnicalInspectionSaveImageRequest">
-        <soap:header message="i1:MzkTechnicalInspectionSaveImageRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkTechnicalInspectionSaveImageResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="insertTechnicalInspection">
-      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection" style="document" />
-      <wsdl:input name="MzkTechnicalInspectionInsertTechnicalInspectionRequest">
-        <soap:header message="i1:MzkTechnicalInspectionInsertTechnicalInspectionRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkTechnicalInspectionInsertTechnicalInspectionResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="getSubComponents">
       <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/getSubComponents" style="document" />
       <wsdl:input name="MzkTechnicalInspectionGetSubComponentsRequest">
@@ -109,6 +83,32 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="MzkTechnicalInspectionGetSubComponentsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateUser">
+      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/validateUser" style="document" />
+      <wsdl:input name="MzkTechnicalInspectionValidateUserRequest">
+        <soap:header message="i1:MzkTechnicalInspectionValidateUserRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkTechnicalInspectionValidateUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="saveImage">
+      <soap:operation soapAction="http://tempuri.org/MzkTechnicalInspection/saveImage" style="document" />
+      <wsdl:input name="MzkTechnicalInspectionSaveImageRequest">
+        <soap:header message="i1:MzkTechnicalInspectionSaveImageRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkTechnicalInspectionSaveImageResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
