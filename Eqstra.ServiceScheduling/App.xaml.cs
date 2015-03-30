@@ -42,7 +42,13 @@ namespace Eqstra.ServiceScheduling
         public App()
         {
             this.InitializeComponent();
+            this.UnhandledException += App_UnhandledException;
 
+        }
+
+        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
         }
 
         protected override void OnRegisterKnownTypesForSerialization()

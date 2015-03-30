@@ -24,6 +24,7 @@ using System.Reflection;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic;
 using Syncfusion.UI.Xaml.Grid;
+using Eqstra.VehicleInspection.UILogic;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.VehicleInspection.Views
@@ -37,6 +38,7 @@ namespace Eqstra.VehicleInspection.Views
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private Windows.Storage.StorageFolder temporaryFolder = ApplicationData.Current.TemporaryFolder;
         private bool isCached;
+        private List<string> suggestLookup = new List<string>();
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -45,6 +47,13 @@ namespace Eqstra.VehicleInspection.Views
         {
             this.InitializeComponent();
             this.SizeChanged += InspectionDetailsPage_SizeChanged;
+            suggestLookup.Add("CaseNumber");
+            suggestLookup.Add("CategoryType");
+            suggestLookup.Add("Status");
+            suggestLookup.Add("StatusDueDate");
+            suggestLookup.Add("CustomerName");
+            suggestLookup.Add("ContactName");
+            suggestLookup.Add("ContactNumber");
         }
         void InspectionDetailsPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -77,43 +86,68 @@ namespace Eqstra.VehicleInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            this.detailsGrid.ItemsSource = (await Util.ReadFromDiskAsync<Eqstra.BusinessLogic.Task>("DetailsItemsSourceFile.txt")).Where(x => x.CaseCategory.Contains(args.QueryText) ||
-                 x.CaseNumber.Contains(args.QueryText) ||
-                 x.CaseType.ToString().Contains(args.QueryText) ||
-                 x.CustomerName.Contains(args.QueryText) ||
-                 x.RegistrationNumber.Contains(args.QueryText) ||
-                 x.Status.ToString().Contains(args.QueryText));
+            var result = ((InspectionDetailsPageViewModel)this.DataContext).PoolofTasks;
+            if (result != null)
+            {
+                try
+                {
+                    this.detailsGrid.ItemsSource = result.Where(x => Convert.ToString(x.CaseNumber).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CategoryType).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.Status).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.StatusDueDate).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CustomerName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactNumber).Contains(args.QueryText));
+
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
+            }
         }
 
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
-            var deferral = args.Request.GetDeferral();
-            if (!string.IsNullOrEmpty(args.QueryText))
+            try
             {
-                if (!isCached)
+                if (this.detailsGrid.ItemsSource != null)
                 {
-                    await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.detailsGrid.ItemsSource), "DetailsItemsSourceFile.txt");
-                    isCached = true;
-                }
-
-                var searchSuggestionList = new List<string>();
-                foreach (var task in await Util.ReadFromDiskAsync<Eqstra.BusinessLogic.Task>("DetailsItemsSourceFile.txt"))
-                {
-                    foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                    var deferral = args.Request.GetDeferral();
+                    if (!string.IsNullOrEmpty(args.QueryText))
                     {
-                        if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
-                            continue;
-                        var propVal = Convert.ToString( propInfo.GetValue(task));
-                        if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                        var searchSuggestionList = new List<string>();
+                        foreach (var task in ((InspectionDetailsPageViewModel)this.DataContext).InspectionList)
                         {
-                            searchSuggestionList.Add(propVal);
-                        }
-                    }
-                }
-                args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
-            }
-            deferral.Complete();
+                            foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                            {
+                                if (this.suggestLookup.Contains(propInfo.Name))
+                                {
+                                    var propVal = Convert.ToString(propInfo.GetValue(task));
+                                    if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                                    {
+                                        if (!searchSuggestionList.Contains(propVal))
+                                        {
+                                            searchSuggestionList.Add(propVal);
+                                        }
 
+                                    }
+                                }
+                            }
+                        }
+                        args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+                    }
+                    else
+                    {
+                        this.detailsGrid.ItemsSource = ((InspectionDetailsPageViewModel)this.DataContext).InspectionList;
+                    }
+                    deferral.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
+            }
         }
 
         async private void snapedListView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)

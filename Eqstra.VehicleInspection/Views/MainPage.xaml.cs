@@ -25,6 +25,7 @@ using System.Reflection;
 using Windows.UI.ViewManagement;
 using System.Collections;
 using Eqstra.BusinessLogic.Helpers;
+using Eqstra.VehicleInspection.UILogic;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -36,8 +37,7 @@ namespace Eqstra.VehicleInspection.Views
     public sealed partial class MainPage : VisualStateAwarePage
     {
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
-        private bool isCached;
+        private List<string> suggestLookup = new List<string>();
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -46,6 +46,13 @@ namespace Eqstra.VehicleInspection.Views
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += (s, e) => UpdateVisualState();
+            suggestLookup.Add("CaseNumber");
+            suggestLookup.Add("CategoryType");
+            suggestLookup.Add("Status");
+            suggestLookup.Add("StatusDueDate");
+            suggestLookup.Add("CustomerName");
+            suggestLookup.Add("ContactName");
+            suggestLookup.Add("ContactNumber");
         }
         private void UpdateVisualState()
         {
@@ -76,48 +83,65 @@ namespace Eqstra.VehicleInspection.Views
         }
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            var result = await Util.ReadFromDiskAsync<Task>("VITasksFile.txt");
+            var result = ((MainPageViewModel)this.DataContext).PoolofTasks;
             if (result != null)
             {
-                this.mainGrid.ItemsSource = result.Where(x => x.CaseCategory.Contains(args.QueryText) ||
-                         x.CaseNumber.Contains(args.QueryText) ||
-                        Convert.ToString(x.CaseType).Contains(args.QueryText) ||
-                         x.CustomerName.Contains(args.QueryText) ||
-                         x.RegistrationNumber.Contains(args.QueryText) ||
-                         x.Status.Contains(args.QueryText));
+                try
+                {
+                    this.mainGrid.ItemsSource = result.Where(x => Convert.ToString(x.CaseNumber).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CategoryType).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.Status).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.StatusDueDate).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.CustomerName).Contains(args.QueryText) ||
+                                                               Convert.ToString(x.ContactNumber).Contains(args.QueryText));
+                }
+                catch (Exception ex)
+                {
+                    AppSettings.Instance.ErrorMessage = ex.Message;
+                }
             }
         }
 
         async private void filterBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
-            if (this.mainGrid.ItemsSource != null & ((IEnumerable<Task>)this.mainGrid.ItemsSource).Any())
+            try
             {
-                var deferral = args.Request.GetDeferral();
-                if (!string.IsNullOrEmpty(args.QueryText))
+                if (this.mainGrid.ItemsSource != null)
                 {
-                    if (!isCached)
+                    var deferral = args.Request.GetDeferral();
+                    if (!string.IsNullOrEmpty(args.QueryText))
                     {
-                        await Util.WriteToDiskAsync(JsonConvert.SerializeObject(this.mainGrid.ItemsSource), "VITasksFile.txt");
-                        isCached = true;
-                    }
-
-                    var searchSuggestionList = new List<string>();
-                    foreach (var task in await Util.ReadFromDiskAsync<Task>("VITasksFile.txt"))
-                    {
-                        foreach (var propInfo in task.GetType().GetRuntimeProperties())
+                        var searchSuggestionList = new List<string>();
+                        foreach (var task in ((MainPageViewModel)this.DataContext).PoolofTasks)
                         {
-                            if (propInfo.PropertyType.Name.Equals(typeof(System.Boolean).Name) || propInfo.PropertyType.Name.Equals(typeof(BindableValidator).Name) || propInfo.Name.Equals("Address"))
-                                continue;
-                            var propVal = Convert.ToString(propInfo.GetValue(task));
-                            if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                            foreach (var propInfo in task.GetType().GetRuntimeProperties())
                             {
-                                searchSuggestionList.Add(propVal);
+                                if (this.suggestLookup.Contains(propInfo.Name))
+                                {
+                                    var propVal = Convert.ToString(propInfo.GetValue(task));
+                                    if (propVal.ToLowerInvariant().Contains(args.QueryText))
+                                    {
+                                        if (!searchSuggestionList.Contains(propVal))
+                                        {
+                                            searchSuggestionList.Add(propVal);
+                                        }
+                                    }
+                                }
                             }
                         }
+                        args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
                     }
-                    args.Request.SearchSuggestionCollection.AppendQuerySuggestions(searchSuggestionList);
+                    else
+                    {
+                        this.mainGrid.ItemsSource = ((MainPageViewModel)this.DataContext).PoolofTasks;
+                    }
+                    deferral.Complete();
                 }
-                deferral.Complete();
+            }
+            catch (Exception ex)
+            {
+                AppSettings.Instance.ErrorMessage = ex.Message;
             }
 
         }

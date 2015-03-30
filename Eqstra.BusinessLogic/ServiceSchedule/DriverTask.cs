@@ -12,6 +12,10 @@ namespace Eqstra.BusinessLogic.ServiceSchedule
 {
     public class DriverTask : ValidatableBindableBase
     {
+        public DriverTask()
+        {
+            this.CaseType = new CaseTypeEnum();
+        }
         private DateTime modelYear;
         public DateTime ModelYear
         {

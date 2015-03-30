@@ -19,6 +19,7 @@ using Windows.UI.ApplicationSettings;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Eqstra.BusinessLogic.TI;
+using Eqstra.TechnicalInspection.UILogic;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -39,6 +40,7 @@ namespace Eqstra.TechnicalInspection
         public App()
         {
             this.InitializeComponent();
+            this.UnhandledException += App_UnhandledException;
         }
 
         protected override void OnRegisterKnownTypesForSerialization()
@@ -76,7 +78,7 @@ namespace Eqstra.TechnicalInspection
                 await packDb.CopyAsync(destinationFolder);
             }
             SqliteHelper.Storage.ConnectionDatabaseAsync();
-           
+
             var accountService = _container.Resolve<IAccountService>();
             var cred = accountService.VerifyUserCredentialsAsync();
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
@@ -91,7 +93,7 @@ namespace Eqstra.TechnicalInspection
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-          
+
 
         }
 
@@ -168,8 +170,11 @@ namespace Eqstra.TechnicalInspection
             this._container.Dispose();
         }
 
-
-        
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            AppSettings.Instance.ErrorMessage = e.Message;
+        }
 
     }
 }
