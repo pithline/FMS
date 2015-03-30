@@ -55,15 +55,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.ServiceScheduling", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eqstra.ServiceScheduling", "Eqstra.ServiceScheduling", "{1B864322-C8D7-4523-B488-268354F61C09}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Eqstra.ServiceScheduling.Shared", "Eqstra.ServiceScheduling.Shared\Eqstra.ServiceScheduling.Shared.shproj", "{381889AA-711C-4A6E-9854-0E3A638B60F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.ServiceScheduling.WindowsPhone", "Eqstra.ServiceScheduling.WindowsPhone\Eqstra.ServiceScheduling.WindowsPhone.csproj", "{9F629F44-C762-4A11-BC3D-9D3B7DE926B6}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Eqstra.ServiceScheduling.Shared\Eqstra.ServiceScheduling.Shared.projitems*{9f629f44-c762-4a11-bc3d-9d3b7de926b6}*SharedItemsImports = 4
-		Eqstra.ServiceScheduling.Shared\Eqstra.ServiceScheduling.Shared.projitems*{381889aa-711c-4a6e-9854-0e3a638b60f8}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -439,7 +433,6 @@ Global
 		{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2} = {1B864322-C8D7-4523-B488-268354F61C09}
 		{8BCC54E1-4586-4A35-9AC9-43E81540B05C} = {1B864322-C8D7-4523-B488-268354F61C09}
 		{1DCF6F96-5004-45F0-B422-302184AD60B9} = {1B864322-C8D7-4523-B488-268354F61C09}
-		{381889AA-711C-4A6E-9854-0E3A638B60F8} = {1B864322-C8D7-4523-B488-268354F61C09}
 		{9F629F44-C762-4A11-BC3D-9D3B7DE926B6} = {1B864322-C8D7-4523-B488-268354F61C09}
 	EndGlobalSection
 EndGlobal

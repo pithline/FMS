@@ -5,9 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.ServiceScheduling.UILogic.Portable.ViewModels
+namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
    public class LoginPageViewModel : ViewModel
     {
+       public LoginPageViewModel()
+       {
+
+       }
     }
 }

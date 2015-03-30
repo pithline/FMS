@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -57,10 +58,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
-
+          
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.ViewModels.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable,Version 1.0.0.0, Culture=neutral", viewType.Name);
+                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", viewType.Name);
+
                 return Type.GetType(viewModelTypeName);
             });
             return base.OnInitializeAsync(args);
