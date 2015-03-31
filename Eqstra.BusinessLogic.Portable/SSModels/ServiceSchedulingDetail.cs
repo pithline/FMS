@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eqstra.BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace Eqstra.DataProvider.AX.SSModels
 {
     public class ServiceSchedulingDetail
     {
-
+        public ServiceSchedulingDetail()
+        {
+            this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
+        }
         public String CaseNumber { get; set; }
 
         public Int64 CaseServiceRecID { get; set; }
 
-        public string ODOReadingSnapshot { get; set; }
+        public ImageCapture ODOReadingSnapshot { get; set; }
 
         public Int64 ODOReading { get; set; }
 

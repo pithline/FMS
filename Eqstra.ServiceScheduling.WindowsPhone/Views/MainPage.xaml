@@ -1,16 +1,97 @@
 ﻿<prism:VisualStateAwarePage
-    x:Class="Eqstra.ServiceScheduling.Views.MainPage"
+    x:Class="Eqstra.ServiceScheduling.WindowsPhone.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.ServiceScheduling.Views"
+    xmlns:local="using:Eqstra.ServiceScheduling.WindowsPhone.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
     xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
 
-    </Grid>
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Visibility="{Binding AppBarVisibility}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Phone" Icon="Phone" />
+                <AppBarButton Label="Message" Icon="Message"/>
+                <AppBarButton Label="Mail" Icon="Mail"/>
+                <AppBarButton Label="Map" Icon="Map"/>
+              
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Next" Icon="Next" Command="{Binding NextPageCommand}"/>
+                <AppBarButton Label="Refresh" Icon="Refresh"/>
+                <AppBarButton Label="Filter" Icon="Filter">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBox FontSize="25"/>
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+
+                <AppBarButton Label="Calendar" Icon="Calendar"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+
+    <prism:VisualStateAwarePage.Resources>
+
+        <DataTemplate x:Key="TasksTemplate">
+            <StackPanel Orientation="Vertical"
+                        >
+                <TextBlock
+                    FontSize="18" HorizontalAlignment="Left"
+                    Foreground="White"
+                    TextAlignment="Center" 
+                    Text="{Binding CaseNumber}"/>
+
+                <TextBlock 
+                    FontSize="18" HorizontalAlignment="Left"
+                    Foreground="White"
+                    TextAlignment="Center" 
+                    Text="{Binding Status}"/>
+
+                <TextBlock HorizontalAlignment="Left"
+                           FontSize="18" 
+                           Foreground="White"
+                           TextAlignment="Center" 
+                 
+                           Text="{Binding RegistrationNumber}"/>
+            </StackPanel>
+
+        </DataTemplate>
+
+
+    </prism:VisualStateAwarePage.Resources>
+
+    <Pivot Title="Tasks" Grid.Row="1">
+        <Pivot.HeaderTemplate>
+            <DataTemplate>
+                <TextBlock FontSize="40" Text="{Binding }"/>
+            </DataTemplate>
+        </Pivot.HeaderTemplate>
+        <PivotItem Header="Booking Detail">
+            <Grid>
+                <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
+                          VerticalAlignment="Center" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" 
+                          ItemsSource="{Binding PoolofTasks}">
+                </GridView>
+            </Grid>
+        </PivotItem>
+
+        <PivotItem Header="Supplier Selection">
+            <Grid>
+                <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
+                          VerticalAlignment="Center"  SelectionMode="Single"  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
+                          ItemsSource="{Binding PoolofTasks}">
+
+                </GridView>
+            </Grid>
+        </PivotItem>
+    </Pivot>
 </prism:VisualStateAwarePage>
