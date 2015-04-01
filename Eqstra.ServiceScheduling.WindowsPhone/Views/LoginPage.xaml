@@ -18,9 +18,16 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Stretch="None"/>
-            <TextBox PlaceholderText="username"/>
-            <PasswordBox PlaceholderText="passwor"/>
-            <Button HorizontalAlignment="Center">Login</Button>
+            <TextBox PlaceholderText="username" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox PlaceholderText="passwor"  Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}" Command="{Binding LoginCommand}" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="ms-appx:///Assets/loginIcon.png" Width="26" Height="26"/>
+                        <TextBlock Text="Login" Margin="10 5"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </StackPanel>
     </Grid>
 </prism:VisualStateAwarePage>

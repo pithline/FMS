@@ -1,5 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Eqstra.ServiceScheduling.UILogic.Portable;
+using Eqstra.ServiceScheduling.WindowsPhone.Views;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
@@ -44,6 +46,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
         public App()
         {
             this.InitializeComponent();
+            this.UnhandledException += App_UnhandledException;
+        }
+
+        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
         }
 
         protected override void OnRegisterKnownTypesForSerialization()
@@ -59,7 +67,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
-
+          
 
             //Register Services
 
@@ -69,7 +77,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
           
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", viewType.Name);
+                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral", viewType.Name);
 
                 return Type.GetType(viewModelTypeName);
             });
@@ -85,7 +93,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
 
         protected override System.Threading.Tasks.Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-           if(ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
             { 
                 NavigationService.Navigate("Main", string.Empty);
             }
