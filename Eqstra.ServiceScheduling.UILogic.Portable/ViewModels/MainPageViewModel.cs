@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 using Windows.UI.Xaml;
 using Eqstra.BusinessLogic.Portable.SSModels;
 
@@ -30,8 +31,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              {
                  try
                  {
-                     navigationService.Navigate("ServiceScheduling", string.Empty);
-
+                     //navigationService.Navigate("ServiceScheduling", string.Empty);
+                     navigationService.Navigate("PreferredSupplier", string.Empty);
                  }
                  catch (Exception ex)
                  {
@@ -43,6 +44,39 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              },
 
               () => { return this.InspectionTask != null; });
+
+
+
+
+           // this.Location = new Bing.Maps.Location();
+            this.MakeIMCommand = DelegateCommand<string>.FromAsyncHandler(async (emailId) =>
+            {
+                await Launcher.LaunchUriAsync(new Uri("skype:shoaibrafi?chat"));
+            }, (emailId) => { return !string.IsNullOrEmpty(emailId); });
+
+            this.MakeCallCommand = DelegateCommand<string>.FromAsyncHandler(async (number) =>
+            {
+                await Launcher.LaunchUriAsync(new Uri("audiocall-skype-com:" + number));
+            }, (number) => { return !string.IsNullOrEmpty(number); });
+
+            this.MailToCommand = DelegateCommand<string>.FromAsyncHandler(async (email) =>
+            {
+                await Launcher.LaunchUriAsync(new Uri("mailto:" + email));
+            }, (email) => { return !string.IsNullOrEmpty(email); });
+
+            //this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
+            //{
+            //    //await this.GeocodeAddressAsync(Regex.Replace(address, "\n", ","));
+            //    //var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
+            //    //stringBuilder.Append(Location.Latitude);
+            //    //stringBuilder.Append("_");
+            //    //stringBuilder.Append(Location.Longitude);
+            //    var stringBuilder = new StringBuilder("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
+            //    await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
+            //}, (address) =>
+            //{
+            //    return !string.IsNullOrEmpty(address);
+            //});
         }
 
 
@@ -90,6 +124,22 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
         }
+
+
+        public DelegateCommand<string> MailToCommand { get; set; }
+
+        public DelegateCommand<string> MakeIMCommand { get; set; }
+
+        public DelegateCommand<string> LocateCommand { get; set; }
+
+        public DelegateCommand<string> MakeCallCommand { get; set; }
+
+        //private Bing.Maps.Location location;
+        //public Bing.Maps.Location Location
+        //{
+        //    get { return location; }
+        //    set { SetProperty(ref location, value); }
+        //}
 
     }
 }

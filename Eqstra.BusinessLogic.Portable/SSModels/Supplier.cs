@@ -32,7 +32,6 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 
         public string Address { get; set; }
 
-
         public String CountryName { get; set; }
 
         public String ProvinceName { get; set; }
