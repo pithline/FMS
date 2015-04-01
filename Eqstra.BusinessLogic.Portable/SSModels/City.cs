@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eqstra.DataProvider.AX.SSModels
+namespace Eqstra.BusinessLogic.Portable.SSModels
 {
     public class City
     {

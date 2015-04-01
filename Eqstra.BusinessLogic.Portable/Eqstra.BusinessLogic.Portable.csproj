@@ -52,6 +52,7 @@
     <Compile Include="SSModels\Supplier.cs" />
     <Compile Include="SSModels\SupplierSelection.cs" />
     <Compile Include="SSModels\Task.cs" />
+    <Compile Include="SSModels\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">

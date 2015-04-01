@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
@@ -58,6 +59,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
+
+
+            //Register Services
+
+            _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ISupplierService,SupplierService>(new ContainerControlledLifetimeManager());
+
           
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
@@ -86,7 +94,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-            return Task.FromResult<object>(null);
+            return System.Threading.Tasks.Task.FromResult<object>(null);
         }
     }
 }

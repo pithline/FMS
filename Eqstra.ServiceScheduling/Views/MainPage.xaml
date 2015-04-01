@@ -193,7 +193,7 @@
                                                        
                                                          HorizontalHeaderContentAlignment="Left" />
                                     <grid:GridTextColumn MappingName="ConfirmationDate"
-                                                         HeaderText="CONFIRMED DATE"
+                                                         HeaderText="CONFIRMED/PROPOSED DATE"
                                                          HeaderStyle="{StaticResource SyncGridHeaderStyle}"
                                                            
                                                          HorizontalHeaderContentAlignment="Left" />

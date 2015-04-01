@@ -194,7 +194,8 @@
                                         <ValidationBehaviour:HighlightFormFieldOnErrors PropertyErrors="{Binding Model.Errors[ODOReadingDate]}" />
                                     </Interactivity:Interaction.Behaviors>
                                 </input:SfDatePicker>
-
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left"
+            >
                                 <Grid Grid.Row="1"
                                       Grid.Column="2"
                                       Grid.RowSpan="2"
@@ -206,20 +207,29 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-
-                                    <Button Style="{StaticResource SnapshotButtonStyle}" HorizontalAlignment="Left"
-                                            Command="{Binding TakePictureCommand}"
+                                   
+                                        <Button Style="{StaticResource SnapshotButtonStyle}" HorizontalAlignment="Left"
+                                            Command="{Binding OpenImageViewerCommand}"
                                             CommandParameter="{Binding Path=Model.ODOReadingSnapshot}"
                                             Width="100"
                                             Height="80">
-                                        <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}"
+                                            <Image Source="{Binding Path=Model.ODOReadingSnapshot.ImagePath}"
                                                Grid.Row="0"
                                                Stretch="UniformToFill"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center" />
-                                    </Button>
+                                        </Button>
+                                   
                                 </Grid>
-
+                                        <AppBarButton  VerticalAlignment="Top"
+                                                       Icon="Camera"
+                                                      
+                                                     
+                                                       RequestedTheme="Light"
+                                                       Command="{Binding TakePictureCommand}"
+                                            CommandParameter="{Binding Path=Model.ODOReadingSnapshot}"
+                                                       IsCompact="True" />
+ </StackPanel>
                                 <TextBlock Text="According to the above data, this vehicle is due for the following services"
                                            Style="{StaticResource TextContentStyle}" 
                                            Grid.ColumnSpan="2"
