@@ -15,11 +15,11 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Phone" Icon="Phone" />
-                <AppBarButton Label="Message" Icon="Message"/>
-                <AppBarButton Label="Mail" Icon="Mail"/>
+                <AppBarButton Label="Phone" Icon="Phone" Command="{Binding MakeCallCommand }" />
+                <AppBarButton Label="Message" Icon="Message" Command="{Binding MakeIMCommand}"/>
+                <AppBarButton Label="Mail" Icon="Mail" Command="{Binding MailToCommand}"/>
                 <AppBarButton Label="Map" Icon="Map"/>
-              
+
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Next" Icon="Next" Command="{Binding NextPageCommand}"/>
@@ -33,8 +33,8 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-
                 <AppBarButton Label="Calendar" Icon="Calendar"/>
+                <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
@@ -94,4 +94,8 @@
             </Grid>
         </PivotItem>
     </Pivot>
+
+
+
+
 </prism:VisualStateAwarePage>

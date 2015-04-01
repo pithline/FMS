@@ -19,30 +19,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : VisualStateAwarePage
+    public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
-        public MainPage()
+        public PreferredSupplierPage()
         {
             this.InitializeComponent();
-           // this.DataContext = new MainPageViewModel();
-        }
-
-        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-        }
-        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
         }
 
         private void More_Click(object sender, RoutedEventArgs e)
         {
             MoreInfo m = new MoreInfo();
             m.Open(this);
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            SearchSupplier ss = new SearchSupplier();
+            ss.Open(this);
         }
 
     }
