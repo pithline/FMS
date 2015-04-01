@@ -73,7 +73,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
 
             _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ISupplierService,SupplierService>(new ContainerControlledLifetimeManager());
-
+            _container.RegisterType<IServiceDetailService, ServiceDetailService>(new ContainerControlledLifetimeManager());
           
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {

@@ -10,6 +10,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 {
     public interface ISupplierService
     {
-        async public Task<ObservableCollection<Supplier>> GetSuppliersByClassAsync(string classId, UserInfo userInfo);
+         Task<ObservableCollection<Supplier>> GetSuppliersByClassAsync(string classId, UserInfo userInfo);
+
+         Task<bool> InsertSelectedSupplierAsync(SupplierSelection supplierSelection, UserInfo userInfo);
+
+         Task<ObservableCollection<Supplier>> SearchSupplierByLocationAsync(string countryId, string provinceId, string cityId, string suburbId, string regionId, UserInfo userInfo);
     }
 }

@@ -12,8 +12,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 {
     public interface ITaskService
     {
-       async Task<ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task>> GetTasksAsync(UserInfo userInfo);
+         Task<ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task>> GetTasksAsync(UserInfo userInfo);
 
-      async Task<  CaseStatus> UpdateStatusList(Eqstra.BusinessLogic.Portable.SSModels.Task task, UserInfo userInfo);
+         Task<CaseStatus> UpdateStatusListAsync(Eqstra.BusinessLogic.Portable.SSModels.Task task, UserInfo userInfo);
     }
 }

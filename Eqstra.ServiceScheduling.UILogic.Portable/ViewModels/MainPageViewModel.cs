@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Eqstra.BusinessLogic.Portable.SSModels;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -20,29 +21,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.AppBarVisibility = Visibility.Collapsed;
 
-            this.PoolofTasks = new ObservableCollection<DataProvider.AX.SSModels.Task>();
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-
-
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-
-
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
-            this.PoolofTasks.Add(new DataProvider.AX.SSModels.Task { CaseNumber = "556131", Status = "aaaaaaaaaaaa", RegistrationNumber = "5646133" });
+          
 
 
 
@@ -78,8 +57,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-        private Eqstra.DataProvider.AX.SSModels.Task task;
-        public Eqstra.DataProvider.AX.SSModels.Task InspectionTask
+        private Eqstra.BusinessLogic.Portable.SSModels.Task task;
+        public Eqstra.BusinessLogic.Portable.SSModels.Task InspectionTask
         {
             get { return task; }
             set
@@ -97,8 +76,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-        private ObservableCollection<Eqstra.DataProvider.AX.SSModels.Task> poolofTasks;
-        public ObservableCollection<Eqstra.DataProvider.AX.SSModels.Task> PoolofTasks
+        private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> poolofTasks;
+        public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> PoolofTasks
         {
             get { return poolofTasks; }
             set

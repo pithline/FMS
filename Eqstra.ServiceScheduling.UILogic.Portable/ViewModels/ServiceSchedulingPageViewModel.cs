@@ -1,4 +1,5 @@
-﻿using Eqstra.DataProvider.AX.SSModels;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
