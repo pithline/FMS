@@ -13,7 +13,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
     
     public class TaskService : ITaskService
     {
-
+        private static TaskService _instance = new TaskService();
+        public static TaskService Instance { get { return _instance; } }
        
         async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.Task>> GetTasksAsync(UserInfo userInfo)
         {

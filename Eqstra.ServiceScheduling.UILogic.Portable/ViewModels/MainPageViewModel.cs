@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Xaml;
 using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -22,7 +23,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.AppBarVisibility = Visibility.Collapsed;
 
-          
+
 
 
 
@@ -39,7 +40,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                  }
                  finally
                  {
-                     
+
                  }
              },
 
@@ -48,7 +49,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
 
 
-           // this.Location = new Bing.Maps.Location();
+            // this.Location = new Bing.Maps.Location();
             this.MakeIMCommand = DelegateCommand<string>.FromAsyncHandler(async (emailId) =>
             {
                 await Launcher.LaunchUriAsync(new Uri("skype:shoaibrafi?chat"));
@@ -120,9 +121,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
         public DelegateCommand NextPageCommand { get; private set; }
-        public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+            this.PoolofTasks = await TaskService.Instance.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
         }
 
 

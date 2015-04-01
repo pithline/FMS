@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Views\ServiceSchedulingPage.xaml.cs">
       <DependentUpon>ServiceSchedulingPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\SubmittedDetailPage.xaml.cs">
       <DependentUpon>SubmittedDetailPage.xaml</DependentUpon>
