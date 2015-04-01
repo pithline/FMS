@@ -3,6 +3,7 @@ using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
 using Eqstra.ServiceScheduling.UILogic.AifServices;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
+using Eqstra.ServiceScheduling.UILogic.Popups;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
@@ -13,9 +14,11 @@ using System.Text;
 using System.Windows.Input;
 using Windows.Media.Capture;
 using Windows.Storage.Streams;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 {
@@ -25,6 +28,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
         private INavigationService _navigationService;
         private IEventAggregator _eventAggregator;
         private SettingsFlyout _settingsFlyout;
+        private ImageViewerPopup _imageViewer;
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, SettingsFlyout settingsFlyout)
             : base(navigationService)
         {
@@ -68,6 +72,38 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     ODOReadingImagePath = file.Path;
 
                 }
+            });
+
+            this.OpenImageViewerCommand = new DelegateCommand<ImageCapture>(param =>
+            {
+
+                CoreWindow currentWindow = Window.Current.CoreWindow;
+                Popup popup = new Popup();
+                popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+                popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+
+                if (_imageViewer == null)
+                {
+                    _imageViewer = new ImageViewerPopup();
+
+                }
+                else
+                {
+                    _imageViewer = null;
+                    this._imageViewer = new ImageViewerPopup();
+                }
+                _imageViewer.DataContext = param;
+
+
+                popup.Child = _imageViewer;
+                this._imageViewer.Tag = popup;
+
+                this._imageViewer.Height = currentWindow.Bounds.Height;
+                this._imageViewer.Width = currentWindow.Bounds.Width;
+
+                popup.IsOpen = true;
+
+
             });
 
             this._eventAggregator.GetEvent<AddressEvent>().Subscribe((address) =>
@@ -115,49 +151,51 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 await TakePictureAsync(param);
             });
 
+            #region Location Type Changed
             this.LocTypeChangedCommand = new DelegateCommand<object>(async (param) =>
-            {
-                try
-                {
-                    var locType = ((LocationType)param).LocType;
-                    this.IsBusy = true;
-                    if (this.Model.DestinationTypes != null)
-                    {
-                        this.Model.DestinationTypes.Clear();
-                        this.Model.SelectedDestinationType = null;
-                    }
-                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Driver && this._task != null)
-                    {
-                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync(this._task.CustomerId));
-                    }
-                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Customer && this._task != null)
-                    {
-                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync(this._task.CustomerId));
-                    }
+             {
+                 try
+                 {
+                     var locType = ((LocationType)param).LocType;
+                     this.IsBusy = true;
+                     if (this.Model.DestinationTypes != null)
+                     {
+                         this.Model.DestinationTypes.Clear();
+                         this.Model.SelectedDestinationType = null;
+                     }
+                     if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Driver && this._task != null)
+                     {
+                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetDriversFromSvcAsync(this._task.CustomerId));
+                     }
+                     if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Customer && this._task != null)
+                     {
+                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetCustomersFromSvcAsync(this._task.CustomerId));
+                     }
 
-                    if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Vendor)
-                    {
-                        this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
-                    }
-                    this.IsAddFlyoutOn = Visibility.Collapsed;
-                    this.IsAlternative = Visibility.Visible;
-                    if (locType == LocationTypeConstants.Other)
-                    {
-                        this.Model.DestinationTypes = new ObservableCollection<DestinationType>();
-                        this.Model.SelectedDestinationType = new DestinationType();
-                        this.IsAddFlyoutOn = Visibility.Visible;
-                        this.IsAlternative = Visibility.Collapsed;
-                    }
+                     if (this.Model.DestinationTypes != null && locType == LocationTypeConstants.Vendor)
+                     {
+                         this.Model.DestinationTypes.AddRange(await SSProxyHelper.Instance.GetVendorsFromSvcAsync());
+                     }
+                     this.IsAddFlyoutOn = Visibility.Collapsed;
+                     this.IsAlternative = Visibility.Visible;
+                     if (locType == LocationTypeConstants.Other)
+                     {
+                         this.Model.DestinationTypes = new ObservableCollection<DestinationType>();
+                         this.Model.SelectedDestinationType = new DestinationType();
+                         this.IsAddFlyoutOn = Visibility.Visible;
+                         this.IsAlternative = Visibility.Collapsed;
+                     }
 
-                    this.IsBusy = false;
-                }
-                catch (Exception ex)
-                {
-                    this.IsBusy = false;
-                    AppSettings.Instance.ErrorMessage = ex.Message;
-                }
+                     this.IsBusy = false;
+                 }
+                 catch (Exception ex)
+                 {
+                     this.IsBusy = false;
+                     AppSettings.Instance.ErrorMessage = ex.Message;
+                 }
 
-            });
+             }); 
+            #endregion
 
             this.DestiTypeChangedCommand = new DelegateCommand<object>(async (param) =>
             {
@@ -185,7 +223,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
 
         async private System.Threading.Tasks.Task<Boolean> ODOImageValidate()
         {
-            if (this.Model.ODOReadingSnapshot.ImagePath.Equals("ms-appx:///Assets/ODO_meter.png"))
+            if (this.Model.ODOReadingSnapshot.ImagePath.Equals("ms-appx:///Assets/ODO_meter.png") || string.IsNullOrEmpty(this.Model.ODOReadingSnapshot.ImageBinary))
             {
                 var messageDialog = new MessageDialog("Please take missing images");
                 messageDialog.Commands.Add(new UICommand("Ok"));
@@ -282,6 +320,9 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref odoReadingImagePath, value); }
         }
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
+
+        public DelegateCommand<ImageCapture> OpenImageViewerCommand { get; set; }
+
         async public virtual System.Threading.Tasks.Task TakePictureAsync(ImageCapture param)
         {
             try

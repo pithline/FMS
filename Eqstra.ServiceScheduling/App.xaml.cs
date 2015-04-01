@@ -71,6 +71,12 @@ namespace Eqstra.ServiceScheduling
             SessionStateService.RegisterKnownType(typeof(Province));
             SessionStateService.RegisterKnownType(typeof(Supplier));
 
+            SessionStateService.RegisterKnownType(typeof(List<City>));
+            SessionStateService.RegisterKnownType(typeof(List<Country>));
+            SessionStateService.RegisterKnownType(typeof(List<Region>));
+            SessionStateService.RegisterKnownType(typeof(List<Suburb>));
+            SessionStateService.RegisterKnownType(typeof(List<Province>));
+            SessionStateService.RegisterKnownType(typeof(List<Supplier>));
             SessionStateService.RegisterKnownType(typeof(LogonResult));
             SessionStateService.RegisterKnownType(typeof(List<string>));
 

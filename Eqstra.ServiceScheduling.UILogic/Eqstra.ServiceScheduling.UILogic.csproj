@@ -110,6 +110,9 @@
     <Compile Include="Helpers\ObservableDictionary.cs" />
     <Compile Include="Helpers\PersistentData.cs" />
     <Compile Include="Helpers\SSExtension.cs" />
+    <Compile Include="Popups\ImageViewerPopup.xaml.cs">
+      <DependentUpon>ImageViewerPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\SSProxy\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -299,6 +302,12 @@
       <Name>Eqstra.WinRT.Components.Controls</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Popups\ImageViewerPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

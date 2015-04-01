@@ -138,7 +138,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             CaseNumber = mzkTask.parmCaseID,
                             Address = mzkTask.parmContactPersonAddress,
                             CustomerName = mzkTask.parmCustName,
-                            CustPhone = mzkTask.parmCustPhone,
+                            CustPhone = string.IsNullOrEmpty(mzkTask.parmCustPhone) ? "" : "+" + mzkTask.parmCustPhone,
                             Status = mzkTask.parmStatus,
                             StatusDueDate = mzkTask.parmStatusDueDate,
                             RegistrationNumber = mzkTask.parmRegistrationNum,
@@ -164,7 +164,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                     }
                 }
-                return driverTaskList;
+                return driverTaskList.OrderByDescending(x=>x.CaseNumber).ToList();
             }
             catch (Exception ex)
             {
@@ -190,7 +190,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 if (result.response != null)
                 {
 
-                    foreach (var mzk in result.response.OrderBy(o => o.parmCountryRegionName).Where(x=> x!=null))
+                    foreach (var mzk in result.response.OrderBy(o => o.parmCountryRegionName).Where(x => x != null))
                     {
 
                         countryList.Add(
@@ -380,8 +380,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             ContactPersonPhone = mzk.parmContactPersonPhone,
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
-                           ODOReadingSnapshot = await GetOdoReadingImageAsync(mzk.parmODOReadingImage),
-                           
+                            ODOReadingSnapshot = await GetOdoReadingImageAsync(mzk.parmODOReadingImage),
+
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString(CultureInfo.CurrentCulture)
@@ -402,8 +402,12 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
         async private Task<ImageCapture> GetOdoReadingImageAsync(string odoReadingImageBinary)
         {
-            var sf  = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("Odo_" + new Random().Next().ToString()+".png",CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteBytesAsync(sf,Convert.FromBase64String(odoReadingImageBinary));
+            if (string.IsNullOrEmpty(odoReadingImageBinary))
+            {
+                return new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
+            }
+            var sf = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("Odo_" + new Random().Next().ToString() + ".png", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteBytesAsync(sf, Convert.FromBase64String(odoReadingImageBinary));
 
             return new ImageCapture { ImagePath = sf.Path, ImageBinary = odoReadingImageBinary };
 
@@ -613,7 +617,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var result = await client.getVendorsByClassAsync(_userInfo.CompanyId,classId); ;
+                var result = await client.getVendorsByClassAsync(_userInfo.CompanyId, classId); ;
 
                 if (result.response != null)
                 {
@@ -703,7 +707,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmPreferredDateFirstOption = serviceSchedulingDetail.ServiceDateOption1,
                        parmPreferredDateSecondOption = serviceSchedulingDetail.ServiceDateOption2,
                        parmServiceType = serviceSchedulingDetail.SelectedServiceType,
-                       
+
                        parmSupplierId = serviceSchedulingDetail.SelectedDestinationType != null ? serviceSchedulingDetail.SelectedDestinationType.Id : string.Empty,
                        parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
 
@@ -719,14 +723,14 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 var result = await client.insertServiceDetailsAsync(caseNumber, caseServiceRecId, _entityRecId, mzkServiceDetailsContract
                       , mzkAddressContract, _userInfo.CompanyId);
 
-                if (serviceSchedulingDetail.ODOReadingSnapshot!=null && !string.IsNullOrEmpty( serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary))
+                if (serviceSchedulingDetail.ODOReadingSnapshot != null && !string.IsNullOrEmpty(serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary))
                 {
                     await client.saveImageAsync(new ObservableCollection<Mzk_ImageContract>{new Mzk_ImageContract
                 {
                      parmCaseNumber = caseNumber,
                       parmFileName = "ServiceScheduling_ODOReading.png",
                        parmImageData = serviceSchedulingDetail.ODOReadingSnapshot.ImageBinary
-                }}); 
+                }});
                 }
 
                 return result.response;

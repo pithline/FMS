@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Eqstra.ServiceScheduling.UILogic.Portable;
 using Eqstra.ServiceScheduling.WindowsPhone.Views;
 using Microsoft.Practices.Prism.Mvvm;
@@ -66,7 +67,14 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
+          
 
+            //Register Services
+
+            _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ISupplierService,SupplierService>(new ContainerControlledLifetimeManager());
+
+          
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral", viewType.Name);
@@ -81,12 +89,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
         {
             return _container.Resolve(type);
         }
-
+        
 
         protected override System.Threading.Tasks.Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
-            {
+            { 
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
@@ -94,7 +102,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
                 NavigationService.Navigate("Login", args.Arguments);
             }
             Window.Current.Activate();
-            return Task.FromResult<object>(null);
+            return System.Threading.Tasks.Task.FromResult<object>(null);
         }
     }
 }

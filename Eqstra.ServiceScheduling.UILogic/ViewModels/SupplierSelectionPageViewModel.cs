@@ -19,7 +19,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
     {
         INavigationService _navigationService;
         IEventAggregator _eventAggregator;
-        bool isCached;
+        
         public SupplierSelectionPageViewModel(INavigationService navigationSerive, IEventAggregator eventAggregator)
             : base(navigationSerive)
         {
