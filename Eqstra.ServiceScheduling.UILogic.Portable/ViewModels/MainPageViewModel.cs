@@ -11,29 +11,36 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Appointments;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class MainPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
-        public MainPageViewModel(INavigationService navigationService)
+        private ITaskService _taskService;
+        public MainPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
             this._navigationService = navigationService;
-
+            this._taskService = taskService;
             this.AppBarVisibility = Visibility.Collapsed;
-
-
-
-
+            this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
+            this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
 
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
              async () =>
              {
                  try
                  {
-                     //navigationService.Navigate("ServiceScheduling", string.Empty);
-                     navigationService.Navigate("PreferredSupplier", string.Empty);
+                     if (this.InspectionTask != null && this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                     {
+                         navigationService.Navigate("ServiceScheduling", string.Empty);
+                     }
+                     else
+                     {
+                         navigationService.Navigate("PreferredSupplier", string.Empty);
+                     }
                  }
                  catch (Exception ex)
                  {
@@ -50,36 +57,38 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
 
             // this.Location = new Bing.Maps.Location();
-            this.MakeIMCommand = DelegateCommand<string>.FromAsyncHandler(async (emailId) =>
+            this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("skype:shoaibrafi?chat"));
-            }, (emailId) => { return !string.IsNullOrEmpty(emailId); });
+                await Launcher.LaunchUriAsync(new Uri("whatsapp:" + 9290650135));
+            }, () => { return !string.IsNullOrEmpty(this.InspectionTask.CustPhone); });
 
-            this.MakeCallCommand = DelegateCommand<string>.FromAsyncHandler(async (number) =>
+            this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("audiocall-skype-com:" + number));
-            }, (number) => { return !string.IsNullOrEmpty(number); });
+                await Launcher.LaunchUriAsync(new Uri("callto:" + 9290650135));
+            }, () => { return !string.IsNullOrEmpty(this.InspectionTask.CustPhone); });
 
-            this.MailToCommand = DelegateCommand<string>.FromAsyncHandler(async (email) =>
+            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("mailto:" + email));
-            }, (email) => { return !string.IsNullOrEmpty(email); });
+                await Launcher.LaunchUriAsync(new Uri("mailto:" + "kasif@mzkgbl.com"));
+            }, () => { return !string.IsNullOrEmpty("testing"); });
 
-            //this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
-            //{
-            //    //await this.GeocodeAddressAsync(Regex.Replace(address, "\n", ","));
-            //    //var stringBuilder = new StringBuilder("bingmaps:?rtp=pos.");
-            //    //stringBuilder.Append(Location.Latitude);
-            //    //stringBuilder.Append("_");
-            //    //stringBuilder.Append(Location.Longitude);
-            //    var stringBuilder = new StringBuilder("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
-            //    await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
-            //}, (address) =>
-            //{
-            //    return !string.IsNullOrEmpty(address);
-            //});
+            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+
+            }, () => { return !string.IsNullOrEmpty("testing"); });
+
+
+
+            this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?cp=40.726966~-74.006076"));
+                //var stringBuilder = new StringBuilder("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
+                //await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
+            }, () =>
+            {
+                return !string.IsNullOrEmpty(this.InspectionTask.Address);
+            });
         }
-
 
 
         private Visibility appBarVisibility;
@@ -89,6 +98,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref appBarVisibility, value);
+            }
+        }
+
+        private Visibility taskProgressBar;
+        public Visibility TaskProgressBar
+        {
+            get { return taskProgressBar; }
+            set
+            {
+                SetProperty(ref taskProgressBar, value);
             }
         }
 
@@ -120,21 +139,53 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 SetProperty(ref poolofTasks, value);
             }
         }
+
+        private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks;
+        public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> Tasks
+        {
+            get { return tasks; }
+            set
+            {
+                SetProperty(ref tasks, value);
+            }
+        }
+
         public DelegateCommand NextPageCommand { get; private set; }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            this.PoolofTasks = await TaskService.Instance.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            try
+            {
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                foreach (var task in tasksResult)
+                {
+                    task.Address = Regex.Replace(task.Address, ",", "\n");
+                    if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    {
+                        this.PoolofTasks.Add(task);
+                    }
+                    else
+                    {
+                        this.Tasks.Add(task);
+                    }
+                }
+                this.TaskProgressBar = Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                this.TaskProgressBar = Visibility.Collapsed;
+            }
+
         }
 
 
-        public DelegateCommand<string> MailToCommand { get; set; }
+        public DelegateCommand MailToCommand { get; set; }
 
-        public DelegateCommand<string> MakeIMCommand { get; set; }
+        public DelegateCommand MakeIMCommand { get; set; }
 
-        public DelegateCommand<string> LocateCommand { get; set; }
+        public DelegateCommand LocateCommand { get; set; }
 
-        public DelegateCommand<string> MakeCallCommand { get; set; }
+        public DelegateCommand MakeCallCommand { get; set; }
 
         //private Bing.Maps.Location location;
         //public Bing.Maps.Location Location

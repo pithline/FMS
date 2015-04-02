@@ -12,19 +12,19 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     >
     <prism:VisualStateAwarePage.Background>
-        <ImageBrush ImageSource="ms-appx:///Assets/login_bg.jpg" Stretch="None"/>
+        <ImageBrush ImageSource="ms-appx:///Assets/login_bg.jpg" Stretch="UniformToFill"/>
     </prism:VisualStateAwarePage.Background>
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
             <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Stretch="None"/>
-            <TextBox PlaceholderText="username" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <PasswordBox PlaceholderText="passwor"  Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox PlaceholderText="User Name" Background="{ThemeResource PhoneAccentBrush}" Height="45" Width="350" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox PlaceholderText="Password" Background="{ThemeResource PhoneAccentBrush}"  Height="45" Width="350" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Button HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}" Command="{Binding LoginCommand}" >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="ms-appx:///Assets/loginIcon.png" Width="26" Height="26"/>
-                        <TextBlock Text="Login" Margin="10 5"/>
+                        <Image Source="ms-appx:///Assets/loginIcon.png" Width="50" Height="50"/>
+                        <TextBlock Text="Login" Margin="20 15"/>
                     </StackPanel>
                 </Button.Content>
             </Button>

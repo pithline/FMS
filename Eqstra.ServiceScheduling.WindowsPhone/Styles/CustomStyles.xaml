@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:grid="using:Syncfusion.UI.Xaml.Grid">
+                   >
 
     <Style x:Key="HighlightTextBoxtStyle"
            TargetType="TextBox">
@@ -14,6 +14,25 @@
                 Value="Red"></Setter>
     </Style>
 
+    <Style x:Key="TextContentStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#FF666666"/>
+    </Style>
+    <Style x:Key="ComboContentStyle" TargetType="ComboBox">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#FF666666"/>
+    </Style>
+    
+    <Style x:Key="TextBoxContentStyle" TargetType="TextBox">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#FF666666"/>
+    </Style>
 
     <Style x:Key="GridViewItemStyle1" TargetType="GridViewItem">
         <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}"/>

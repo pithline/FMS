@@ -13,8 +13,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
     
     public class TaskService : ITaskService
     {
-        private static TaskService _instance = new TaskService();
-        public static TaskService Instance { get { return _instance; } }
        
         async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.Task>> GetTasksAsync(UserInfo userInfo)
         {
@@ -23,9 +21,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
                 userInfo = new UserInfo { UserId = "axbcsvc", CompanyId = "1095" };                
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("Content-Type: application/x-www-form-urlencoded"));
                 httpClient.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Bearer", Constants.TOKEN);
                 var postData = new { target = "ServiceScheduling", parameters = new[] { "GetTasks", Newtonsoft.Json.JsonConvert.SerializeObject(userInfo) } };
-                var response = await httpClient.PostAsync(new Uri(Constants.APIURL), new HttpStringContent(JsonConvert.SerializeObject(postData)));
+                var response = await httpClient.PostAsync(new Uri(Constants.APIURL), new HttpStringContent(JsonConvert.SerializeObject(postData),Windows.Storage.Streams.UnicodeEncoding.Utf8,"application/json"));
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
