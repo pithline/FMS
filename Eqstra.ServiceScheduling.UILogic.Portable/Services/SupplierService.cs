@@ -21,7 +21,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
                 httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Bearer", Constants.TOKEN);
                 var postData = new { target = "ServiceScheduling", parameters = new[] { "GetSuppliersByClass",classId, Newtonsoft.Json.JsonConvert.SerializeObject(userInfo) } };
-                var response = await httpClient.PostAsync(new Uri(Constants.APIURL), new HttpStringContent(JsonConvert.SerializeObject(postData)));
+                var response = await httpClient.PostAsync(new Uri(Constants.APIURL), new HttpStringContent(JsonConvert.SerializeObject(postData),Windows.Storage.Streams.UnicodeEncoding.Utf8,"application/json"));
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {

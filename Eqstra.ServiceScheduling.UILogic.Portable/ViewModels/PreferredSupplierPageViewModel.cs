@@ -24,7 +24,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync("",new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+            this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
         }
         private ObservableCollection<Supplier> poolofSupplier;
         public ObservableCollection<Supplier> PoolofSupplier

@@ -39,7 +39,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                      }
                      else
                      {
-                         navigationService.Navigate("PreferredSupplier", string.Empty);
+                         navigationService.Navigate("PreferredSupplier", this.InspectionTask);
                      }
                  }
                  catch (Exception ex)
