@@ -26,6 +26,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Eqstra.ServiceScheduling.UILogic.Portable.Factories;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -74,6 +75,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ISupplierService,SupplierService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IServiceDetailService, ServiceDetailService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IHttpFactory, HttpFactory>(new ContainerControlledLifetimeManager());
           
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
