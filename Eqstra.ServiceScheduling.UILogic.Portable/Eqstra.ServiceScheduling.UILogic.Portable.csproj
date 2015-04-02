@@ -40,6 +40,8 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\HttpFactory.cs" />
+    <Compile Include="Factories\IHttpFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServiceDetailService.cs" />
     <Compile Include="Services\ISupplierService.cs" />

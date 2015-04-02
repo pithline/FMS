@@ -106,7 +106,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     }
                 }
                 client.Close();
-                return taskList;
+                return taskList.OrderByDescending(x=>x.CaseNumber).ToList();
             }
             catch (Exception)
             {

@@ -377,7 +377,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
-                            ContactPersonPhone = mzk.parmContactPersonPhone,
+                            ContactPersonPhone = string.IsNullOrEmpty(mzk.parmContactPersonPhone) ? "" : "+" + mzk.parmContactPersonPhone,
+                            
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
                             ODOReadingSnapshot = await GetOdoReadingImageAsync(mzk.parmODOReadingImage),
