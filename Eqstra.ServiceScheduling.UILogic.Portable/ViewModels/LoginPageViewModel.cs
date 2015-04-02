@@ -17,16 +17,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public LoginPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
                     try
                     {
+
+                        ProgressDialogPopup.Open(this);
                         navigationService.Navigate("Main", string.Empty);
+                        ProgressDialogPopup.Close();
 
                     }
                     catch (Exception ex)
                     {
+                        ProgressDialogPopup.Close();
                     }
                     finally
                     {
@@ -34,7 +39,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
                 },
 
-                 () => { return true|| !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return true || !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
         public DelegateCommand LoginCommand { get; private set; }
@@ -85,6 +90,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return isLoggingIn; }
             set { SetProperty(ref isLoggingIn, value); }
         }
+        private ProgressDialog progressDialogPopup;
+
+        public ProgressDialog ProgressDialogPopup
+        {
+            get { return progressDialogPopup; }
+            set { SetProperty(ref progressDialogPopup, value); }
+        }
+
 
     }
 }

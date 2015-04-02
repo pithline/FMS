@@ -26,6 +26,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
             this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            PersistentData.Instance.PoolofSupplier = this.PoolofSupplier;
         }
         private ObservableCollection<Supplier> poolofSupplier;
         public ObservableCollection<Supplier> PoolofSupplier

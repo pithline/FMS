@@ -12,13 +12,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar>
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Home" Label="Home" Command="{Binding HomeCommand}"/>
                 <AppBarButton Label="Submit" Icon="Accept" Command="{Binding NextCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Calendar" Icon="Calendar" Name="Calendar" Click="Calendar_Click"/>
+                <AppBarButton Label="Appointments" Icon="Calendar" Name="Calendar" Click="Calendar_Click"/>
                 <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

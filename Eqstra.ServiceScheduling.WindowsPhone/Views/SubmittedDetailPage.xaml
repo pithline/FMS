@@ -10,7 +10,16 @@
     xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Home" Label="Home" Command="{Binding HomeCommand}"/>
+                <AppBarButton Label="Submit" Icon="Accept" Command="{Binding NextCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+    
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
