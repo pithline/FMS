@@ -29,7 +29,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
-
+           
         }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {

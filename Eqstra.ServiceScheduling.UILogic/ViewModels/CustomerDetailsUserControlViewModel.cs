@@ -28,7 +28,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     await Launcher.LaunchUriAsync(new Uri("mailto:" + email));
                 }, (email) => { return !string.IsNullOrEmpty(email); });
-
+            
             this.LocateCommand = DelegateCommand<string>.FromAsyncHandler(async (address) =>
                 {
                     //await this.GeocodeAddressAsync(Regex.Replace(address, "\n", ","));

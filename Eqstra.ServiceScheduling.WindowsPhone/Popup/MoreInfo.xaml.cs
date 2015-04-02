@@ -36,7 +36,7 @@ namespace Eqstra.ServiceScheduling
             _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
 
-            //this.DataContext = dataContext;
+            this.DataContext = dataContext;
             this.Tag = _popup;
             this.Height = currentWindow.Bounds.Height;
             this.Width = currentWindow.Bounds.Width;

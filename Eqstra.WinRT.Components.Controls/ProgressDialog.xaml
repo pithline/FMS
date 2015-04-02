@@ -473,7 +473,6 @@
             </Grid.RowDefinitions>
             <ProgressBar IsIndeterminate="True"
                          Foreground="White"
-                         
                          VerticalAlignment="Top"
                          Style="{StaticResource ProgressBarStyle1}" />
             <TextBlock Grid.Row="1"

@@ -8,117 +8,119 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}">
+        <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="LeaveChat" Icon="LeaveChat" />
+                <AppBarButton >
+                    <AppBarButton.Content>
+                        <Image Source="/Assets/logout_icon.png" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="20" Width="20" />
+                    </AppBarButton.Content>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid>
         <Pivot Title="Tasks" Grid.Row="1">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="40" Text="{Binding }"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
             <PivotItem Header="Task Detail">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer>
+                    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical" Margin="2">
-                        <TextBlock Text="Regi. Number" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="2">
+                            <TextBlock Text="Regi. Number" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding RegistrationNumber}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Made By" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
-
-
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Margin="2">
-                        <TextBlock Text="Model" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="1"  Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Description" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Made By" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Make}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
 
-                    <StackPanel Orientation="Vertical" Grid.Row="2"  Margin="2">
-                        <TextBlock Text="Model Year" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="2">
+                            <TextBlock Text="Model" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Model}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="2"  Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Driver Name" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
-
-
-                    <StackPanel Orientation="Vertical" Grid.Row="3"  Margin="2">
-                        <TextBlock Text="Status Due Date" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="3"  Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Confirmed Date" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1"  Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Description" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Description}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
 
-                    <StackPanel Orientation="Vertical" Grid.Row="4"  Margin="2">
-                        <TextBlock Text="Customer Name" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2"  Margin="2">
+                            <TextBlock Text="Model Year" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock  Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="4"  Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Contact Name" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2"  Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Driver Name" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding DriverFirstName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
 
-                    <StackPanel Orientation="Vertical" Grid.Row="5"  Margin="2">
-                        <TextBlock Text="Address" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3"  Margin="2">
+                            <TextBlock Text="Status Due Date" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding StatusDueDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="5"  Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Status" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3"  Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Confirmed Date" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding ConfirmedDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="6"  Margin="2">
-                        <TextBlock Text="Email" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="1"  Margin="2">
-                        <TextBlock Text="Case Number" Style="{StaticResource TextContentStyle}"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                    </StackPanel>
-                </Grid>
+                        <StackPanel Orientation="Vertical" Grid.Row="4"  Margin="2">
+                            <TextBlock Text="Customer Name" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding CustomerName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="4"  Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Contact Name" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding CustomerName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Vertical" Grid.Row="5"  Margin="2">
+                            <TextBlock Text="Address" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Address}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="5"  Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Status" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Status}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="6"  Margin="2">
+                            <TextBlock Text="Email" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding CusEmailId}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Case Number" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
             </PivotItem>
 
             <PivotItem Header="Customer Detail">
-                <Grid>
-                    <Grid>
+                <ScrollViewer>
+
+                    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -136,72 +138,61 @@
 
                         <StackPanel Orientation="Vertical" Margin="2">
                             <TextBlock Text="Case Number" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding CaseNumber}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Column="1"  Margin="2">
                             <TextBlock Text="Customer Name" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding CustomerName}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
 
                         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="2">
                             <TextBlock Text="Case Type" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding CaseType}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Row="1"  Grid.Column="1"  Margin="2">
                             <TextBlock Text="Contact Name" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding ContactName}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
-
-                        <StackPanel Orientation="Vertical" Grid.Row="2"  Margin="2">
-                            <TextBlock Text="Contact Number" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Grid.Row="2"  Grid.Column="1"  Margin="2">
+                        <StackPanel Orientation="Vertical" Grid.Row="2"   Margin="2">
                             <TextBlock Text="Address" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding Address}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
-
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1"  Margin="2">
+                            <TextBlock Text="Contact Number" Style="{StaticResource TextContentStyle}"/>
+                            <TextBlock Text="{Binding Contact Number}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                        </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Row="3"  Margin="2">
                             <TextBlock Text="Status Due Date" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding StatusDueDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Row="3"  Grid.Column="1"  Margin="2">
                             <TextBlock Text="Confirmed Date" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding ConfirmedDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
 
                         <StackPanel Orientation="Vertical" Grid.Row="4"  Margin="2">
                             <TextBlock Text="Status" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding Status}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Grid.Row="4"  Grid.Column="1"  Margin="2">
                             <TextBlock Text="Contact Name" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding ContactName}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
-
-                        <StackPanel Orientation="Vertical" Grid.Row="5"  Margin="2">
-                            <TextBlock Text="Address" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Grid.Row="5"  Grid.Column="1"  Margin="2">
-                            <TextBlock Text="Allocated to" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
-                        </StackPanel>
 
 
                     </Grid>
-                </Grid>
+
+                </ScrollViewer>
+
             </PivotItem>
 
             <PivotItem Header="You">

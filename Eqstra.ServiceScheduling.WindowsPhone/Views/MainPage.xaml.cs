@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Appointments;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,7 +28,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
-           // this.DataContext = new MainPageViewModel();
+            // this.DataContext = new MainPageViewModel();
         }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
@@ -42,7 +43,24 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         private void More_Click(object sender, RoutedEventArgs e)
         {
             MoreInfo m = new MoreInfo();
-            m.Open(this);
+            m.Open(((MainPageViewModel)this.DataContext).InspectionTask);
+        }
+
+
+        async private void Message_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.ApplicationModel.Chat.ChatMessage msg
+         = new Windows.ApplicationModel.Chat.ChatMessage();
+            msg.Body = "";
+            msg.Recipients.Add(((MainPageViewModel)this.DataContext).InspectionTask.CustPhone);
+            await Windows.ApplicationModel.Chat.ChatMessageManager
+                     .ShowComposeSmsMessageAsync(msg);
+
+        }
+
+        private async void Calendar_Click(object sender, RoutedEventArgs e)
+        {
+            await AppointmentManager.ShowTimeFrameAsync(DateTime.Today,TimeSpan.FromDays(7));
         }
 
     }
