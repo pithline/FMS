@@ -39,7 +39,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                      }
                      else
                      {
-                         navigationService.Navigate("PreferredSupplier", string.Empty);
+                         navigationService.Navigate("PreferredSupplier", this.InspectionTask);
                      }
                  }
                  catch (Exception ex)
@@ -170,6 +170,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
                 }
                 this.TaskProgressBar = Visibility.Collapsed;
+                PersistentData.Instance.PoolofTasks = this.PoolofTasks;
+                PersistentData.Instance.Tasks = this.Tasks;
             }
             catch (Exception)
             {
@@ -177,7 +179,33 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
 
         }
+        private void GetAppointments(Eqstra.BusinessLogic.Portable.SSModels.Task task)
+        {
+            try
+            {
 
+                var appointment = new Windows.ApplicationModel.Appointments.Appointment();
+
+                // StartTime
+                var date = task.AppointmentStart.Date;
+                var time = task.AppointmentEnd.TimeOfDay - task.AppointmentStart.TimeOfDay;
+                var timeZoneOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.Now);
+                var startTime = new DateTimeOffset(date.Year, date.Month, date.Day, time.Hours,
+                    time.Minutes, 0, timeZoneOffset);
+                appointment.StartTime = startTime;
+                appointment.Subject = task.CaseNumber;
+                appointment.Location = task.Address;
+                appointment.Details = task.Description;
+                appointment.Duration = TimeSpan.FromHours(1);
+                appointment.Reminder = TimeSpan.FromMinutes(15);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public DelegateCommand MailToCommand { get; set; }
 

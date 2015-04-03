@@ -11,35 +11,12 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-
-    <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Phone" Icon="Phone" Command="{Binding MakeCallCommand }"/>
-                <AppBarButton Label="Message" Icon="Message" Command="{Binding MakeIMCommand}" />
-                <AppBarButton Label="Mail" Icon="Mail" Command="{Binding MailToCommand}"  />
-                <AppBarButton Label="Map" Icon="Map" Command="{Binding LocateCommand}"/>
-
-            </CommandBar.PrimaryCommands>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Next" Icon="Next" Command="{Binding NextPageCommand}"  />
-                <AppBarButton Label="Filter" Icon="Filter" >
-                    <AppBarButton.Flyout>
-                        <Flyout>
-                            <StackPanel>
-                                <TextBox FontSize="25"/>
-                            </StackPanel>
-                        </Flyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-                <AppBarButton Label="Calendar" Icon="Calendar" Name="Calendar" Click="Calendar_Click"  />
-                <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click" />
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
-    </prism:VisualStateAwarePage.BottomAppBar>
-
     <prism:VisualStateAwarePage.Resources>
-
+        <Flyout x:Key="FilterFlyout" Closed="Flyout_Closed">
+            <StackPanel>
+                <TextBox FontSize="25" Margin="10,0"  TextChanged="Filter_TextChanged"/>
+            </StackPanel>
+        </Flyout> 
         <DataTemplate x:Key="TasksTemplate">
             <StackPanel Orientation="Vertical"
                         >
@@ -73,44 +50,61 @@
             </StackPanel>
 
         </DataTemplate>
-
-
     </prism:VisualStateAwarePage.Resources>
 
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Phone" Icon="Phone" Command="{Binding MakeCallCommand }"/>
+                <AppBarButton Label="Message" Icon="Message" Command="{Binding MakeIMCommand}" />
+                <AppBarButton Label="Mail" Icon="Mail" Command="{Binding MailToCommand}"  />
+                <AppBarButton Label="Map" Icon="Map" Command="{Binding LocateCommand}"/>
+
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Next" Icon="Next" Command="{Binding NextPageCommand}"  />
+                <AppBarButton Label="Filter" Icon="Filter" Click="filter_Click" Name="filter" FlyoutBase.AttachedFlyout="{StaticResource ResourceKey=FilterFlyout}">
+                 
+                </AppBarButton>
+                <AppBarButton Label="Appointments " Icon="Calendar" Name="Calendar" Click="Calendar_Click"  />
+                <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+
+    
+
     <Grid>
-
-
-
         <ProgressBar IsIndeterminate="True" Visibility="{Binding TaskProgressBar}"
                          Foreground="White"
                          VerticalAlignment="Top"
                           />
 
-        <Pivot Title="Tasks" Grid.Row="1">
-        <Pivot.HeaderTemplate>
-            <DataTemplate>
-                <TextBlock FontSize="40" Text="{Binding }"/>
-            </DataTemplate>
-        </Pivot.HeaderTemplate>
-        <PivotItem Header="Booking Detail">
-            <Grid>
-                <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
+        <Pivot Title="Tasks" Grid.Row="1" Name="TasksPivot">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="40" Text="{Binding }"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem Header="Booking Detail">
+                <Grid>
+                    <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
                           VerticalAlignment="Center" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" 
                           ItemsSource="{Binding PoolofTasks}">
-                </GridView>
-            </Grid>
-        </PivotItem>
+                    </GridView>
+                </Grid>
+            </PivotItem>
 
-        <PivotItem Header="Supplier Selection">
-            <Grid>
-                <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
+            <PivotItem Header="Supplier Selection">
+                <Grid>
+                    <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
                           VerticalAlignment="Center"  SelectionMode="Single"  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
                           ItemsSource="{Binding Tasks}">
 
-                </GridView>
-            </Grid>
-        </PivotItem>
-    </Pivot>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+        </Pivot>
     </Grid>
 
 </prism:VisualStateAwarePage>

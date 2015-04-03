@@ -1,7 +1,9 @@
-﻿using Eqstra.ServiceScheduling.UILogic.Portable;
+﻿using Eqstra.ServiceScheduling.UILogic;
+using Eqstra.ServiceScheduling.UILogic.Portable;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -38,5 +40,28 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ss.Open(this);
         }
 
+        private void filter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = ((TextBox)sender).Text;
+            if (!String.IsNullOrEmpty(text))
+            {
+                ObservableCollection<BusinessLogic.Portable.SSModels.Supplier> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Supplier>();
+                foreach (var task in PersistentData.Instance.PoolofSupplier)
+                {
+                    if (task.SupplierName.Contains(text))
+                    {
+                        filterResult.Add(task);
+                    }
+                }
+                ((PreferredSupplierPageViewModel)this.DataContext).PoolofSupplier = filterResult;
+            }
+            else
+            {
+                ((PreferredSupplierPageViewModel)this.DataContext).PoolofSupplier = PersistentData.Instance.PoolofSupplier;
+
+            }
+            FlyoutBase.ShowAttachedFlyout(filter);
+        }
     }
+
 }

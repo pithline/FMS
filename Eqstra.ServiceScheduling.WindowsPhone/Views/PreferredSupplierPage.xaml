@@ -17,13 +17,13 @@
 
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}">
+        <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Filter" Icon="Filter">
+                <AppBarButton Label="Filter" Name="filter" Icon="Filter">
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <TextBox FontSize="25"/>
+                                <TextBox FontSize="25" Margin="10,0"  TextChanged="filter_TextChanged"/>
                             </StackPanel>
                         </Flyout>
                     </AppBarButton.Flyout>
@@ -32,7 +32,7 @@
                 <AppBarButton Label="Submit" Icon="Accept"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Calendar" Icon="Calendar"/>
+                <AppBarButton Label="Appointments" Icon="Calendar"/>
                 <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

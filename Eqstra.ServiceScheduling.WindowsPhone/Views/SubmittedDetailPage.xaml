@@ -10,7 +10,16 @@
     xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Home" Label="Home" Command="{Binding HomeCommand}"/>
+                <AppBarButton Label="Submit" Icon="Accept" Command="{Binding NextCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+    
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,5 +37,72 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical"  Margin="2">
+            <TextBlock Text="ODO Reading" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ODOReading}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1"  Margin="2">
+            <TextBlock Text="ODO Reading Date" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ODOReadingDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+
+        <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="2">
+            <TextBlock Text="ServiceType" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ServiceType}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1"  Margin="2">
+            <TextBlock Text="Additional Work" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding AdditionalWork}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="2" Margin="2">
+            <TextBlock Text="Delivery Option"  Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding Option}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="3" Margin="2">
+            <TextBlock Text="Service Date(opt1)"  Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ServiceDateOption1}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="2">
+            <TextBlock Text="Service Date(opt2)"  Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ServiceDateOption2}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="4" Margin="2">
+            <TextBlock Text="Lift Required" Style="{StaticResource TextContentStyle}"/>
+            <ToggleSwitch OnContent="Yes" HorizontalAlignment="Left" OffContent="No" IsOn="{Binding LiftRequired}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="4"  Grid.Column="1" Margin="2">
+            <TextBlock Text="Location Type"  Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding LocationType}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="0,40" VerticalAlignment="Center" Height="40" Background="{ThemeResource PhoneAccentBrush}">
+            <TextBlock Text="Supplier Details"  Style="{StaticResource TextContentStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" FontSize="18" Foreground="White"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="6" >
+            <TextBlock Text="Supplier Namee" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding SupplierName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="1" >
+            <TextBlock Text="Contact Supplier Name" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ContactSupplierName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="7" >
+            <TextBlock Text="Supplier Conact Number" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding SupplierConactNumber}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" >
+            <TextBlock Text="Confirmation Date" Style="{StaticResource TextContentStyle}"/>
+            <TextBlock Text="{Binding ConfirmationDate}" Style="{StaticResource InfoBoxTitleStyle}"/>
+        </StackPanel>
+
+
     </Grid>
 </prism:VisualStateAwarePage>

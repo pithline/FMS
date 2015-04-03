@@ -24,16 +24,20 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
+        
+        Windows.Media.Capture.MediaCapture captureManager;
         public ServiceSchedulingPageViewModel(INavigationService navigationService)
         {
             this._navigationService = navigationService;
             this.Model = new ServiceSchedulingDetail();
+            captureManager = new MediaCapture();
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
               TakePictureAsync();
           });
-            this.OpenImageViewerCommand = new DelegateCommand<ImageCapture>(param =>
+            this.OpenImageViewerCommand = new DelegateCommand(
+                ()=>
             {
 
                 CoreWindow currentWindow = Window.Current.CoreWindow;
@@ -51,8 +55,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     _imageViewer = null;
                     this._imageViewer = new ImageViewerPopup();
                 }
-                _imageViewer.DataContext = param;
-
 
                 popup.Child = _imageViewer;
                 this._imageViewer.Tag = popup;
@@ -69,21 +71,19 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         async private void TakePictureAsync()
         {
-            Windows.Media.Capture.MediaCapture captureManager;
-            captureManager = new MediaCapture();
-            await captureManager.InitializeAsync();
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
-
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                 "TestPhoto.jpg",
                 CreationCollisionOption.GenerateUniqueName);
-
             await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
             this.Model.ODOReadingSnapshot.ImagePath = file.Path;
             BitmapImage bmpImage = new BitmapImage(new Uri(file.Path));
 
         }
-
+        public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        {
+            await captureManager.InitializeAsync();
+        }
 
         private ServiceSchedulingDetail model;
         public ServiceSchedulingDetail Model
@@ -93,7 +93,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
 
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
-        public DelegateCommand<ImageCapture> OpenImageViewerCommand { get; set; }
+        public DelegateCommand OpenImageViewerCommand { get; set; }
 
 
     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Appointments;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -38,6 +39,15 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+        }
+        private void More_Click(object sender, RoutedEventArgs e)
+        {
+            MoreInfo m = new MoreInfo();
+            m.Open(this);
+        }
+        private async void Calendar_Click(object sender, RoutedEventArgs e)
+        {
+            await AppointmentManager.ShowTimeFrameAsync(DateTime.Today, TimeSpan.FromDays(7));
         }
 
     }

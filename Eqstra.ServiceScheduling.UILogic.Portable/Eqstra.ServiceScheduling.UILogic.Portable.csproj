@@ -40,10 +40,14 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />
     <Compile Include="ImageViewer\ImageViewerPopup.xaml.cs">
       <DependentUpon>ImageViewerPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageViewer\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServiceDetailService.cs" />
@@ -83,6 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ImageViewer\ImageViewerPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageViewer\ProgressDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

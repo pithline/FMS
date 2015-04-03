@@ -1,7 +1,9 @@
-﻿using Eqstra.ServiceScheduling.UILogic.Portable;
+﻿using Eqstra.ServiceScheduling.UILogic;
+using Eqstra.ServiceScheduling.UILogic.Portable;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -60,7 +62,62 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private async void Calendar_Click(object sender, RoutedEventArgs e)
         {
-            await AppointmentManager.ShowTimeFrameAsync(DateTime.Today,TimeSpan.FromDays(7));
+            await AppointmentManager.ShowTimeFrameAsync(DateTime.Today, TimeSpan.FromDays(7));
+        }
+
+        private void Filter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var index = TasksPivot.SelectedIndex;
+            var text = ((TextBox)sender).Text;
+            if (!String.IsNullOrEmpty(text))
+            {
+                ObservableCollection<BusinessLogic.Portable.SSModels.Task> currentTasks;
+                if (index == 0)
+                {
+                    currentTasks = PersistentData.Instance.PoolofTasks;
+                }
+                else
+                {
+                    currentTasks = PersistentData.Instance.Tasks;
+                }
+
+                ObservableCollection<BusinessLogic.Portable.SSModels.Task> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
+                foreach (var task in currentTasks)
+                {
+                    if (task.ContactName.Contains(text) || task.CustomerName.Contains(text) || task.RegistrationNumber.Contains(text) || task.CaseNumber.Contains(text))
+                    {
+                        filterResult.Add(task);
+                    }
+                }
+
+                if (index == 0)
+                {
+                    ((MainPageViewModel)this.DataContext).PoolofTasks = filterResult;
+
+                }
+                else
+                {
+                    ((MainPageViewModel)this.DataContext).Tasks = filterResult;
+
+                }
+            }
+            else
+            {
+                ((MainPageViewModel)this.DataContext).PoolofTasks = PersistentData.Instance.PoolofTasks;
+
+                ((MainPageViewModel)this.DataContext).Tasks = PersistentData.Instance.Tasks;
+
+            }
+        }
+
+        private void Flyout_Closed(object sender, object e)
+        {
+            FlyoutBase.ShowAttachedFlyout(filter);
+        }
+
+        private void filter_Click(object sender, RoutedEventArgs e)
+        {
+           FlyoutBase.ShowAttachedFlyout(filter);
         }
 
     }
