@@ -66,8 +66,8 @@ namespace Eqstra.DataProvider.AX.Providers
                         response = FilterSuppliersByGeoLocation(criterias[1].ToString(), criterias[2].ToString(), JsonConvert.DeserializeObject<UserInfo>(criterias[3].ToString()));
                         break;
 
-                    case ActionSwitch.GetSupplierByClass :
-                        response = GetSuppliersByClass(criterias[1].ToString(),JsonConvert.DeserializeObject<UserInfo>(criterias[2].ToString()));
+                    case ActionSwitch.GetSupplierByClass:
+                        response = GetSuppliersByClass(criterias[1].ToString(), JsonConvert.DeserializeObject<UserInfo>(criterias[2].ToString()));
                         break;
                 }
                 _client.Close();
@@ -93,7 +93,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         break;
 
                     case ActionSwitch.GetServiceDetails:
-                        response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()),long.Parse(criterias[3].ToString()), JsonConvert.DeserializeObject<UserInfo>(criterias[4].ToString()));
+                        response = GetServiceDetails(criterias[1].ToString(), long.Parse(criterias[2].ToString()), long.Parse(criterias[3].ToString()), JsonConvert.DeserializeObject<UserInfo>(criterias[4].ToString()));
                         break;
 
                     case ActionSwitch.GetUserInfo:
@@ -243,7 +243,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             CaseNumber = mzkTask.parmCaseID,
                             Address = Regex.Replace(mzkTask.parmContactPersonAddress, "\n", ","),
                             CustomerName = mzkTask.parmCustName,
-                            CustPhone = mzkTask.parmCustPhone,
+                            CustPhone = string.IsNullOrEmpty(mzkTask.parmContactPersonPhone) ? "" : "+" + mzkTask.parmContactPersonPhone,
                             Status = mzkTask.parmStatus,
                             StatusDueDate = mzkTask.parmStatusDueDate.ToShortDateString(),
                             RegistrationNumber = mzkTask.parmRegistrationNum,
@@ -267,13 +267,10 @@ namespace Eqstra.DataProvider.AX.Providers
                             VehicleClassId = mzkTask.parmVehicleClassId,
                             VehicleSubClassId = mzkTask.parmVehicleSubClassId
                         });
-
-
                     }
-
                 }
 
-                return driverTaskList.OrderByDescending(x=>x.CaseNumber).ToList();
+                return driverTaskList.OrderByDescending(x => x.CaseNumber).ToList();
 
             }
             catch (Exception)
@@ -455,9 +452,9 @@ namespace Eqstra.DataProvider.AX.Providers
                             //  SelectedLocationType = mzk.parmLocationType,
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
-                          AccountNumber = mzk.parmSupplierId,
+                            AccountNumber = mzk.parmSupplierId,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy")
-                           
+
                         });
                         detailServiceScheduling.SelectedLocType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
                     }
@@ -760,20 +757,20 @@ namespace Eqstra.DataProvider.AX.Providers
             }
         }
 
-        public List<Supplier> GetSuppliersByClass(string classId,UserInfo userInfo)
+        public List<Supplier> GetSuppliersByClass(string classId, UserInfo userInfo)
         {
             List<Supplier> suplierList = new List<Supplier>();
             try
             {
-                
-                var result =  _client.getVendorsByClass(new CallContext{ Company = userInfo.CompanyId}, userInfo.CompanyId, classId); ;
+
+                var result = _client.getVendorsByClass(new CallContext { Company = userInfo.CompanyId }, userInfo.CompanyId, classId); ;
 
                 if (result != null)
                 {
                     foreach (var mzk in result.Where(x => x != null))
                     {
                         suplierList.Add(new Supplier
-                        {  
+                        {
                             SupplierContactName = mzk.parmContactPersonName,
                             SupplierContactNumber = mzk.parmContactPersonPhone,
                             SupplierName = mzk.parmName,
@@ -790,7 +787,7 @@ namespace Eqstra.DataProvider.AX.Providers
             }
             catch (Exception ex)
             {
-                
+
                 return suplierList;
             }
         }

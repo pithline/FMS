@@ -168,6 +168,9 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         private string parmEmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string parmEngineNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime parmInspectionDueDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -359,6 +362,19 @@ namespace Eqstra.DataProvider.AX.TIProxy {
                 if ((object.ReferenceEquals(this.parmEmailField, value) != true)) {
                     this.parmEmailField = value;
                     this.RaisePropertyChanged("parmEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string parmEngineNumber {
+            get {
+                return this.parmEngineNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.parmEngineNumberField, value) != true)) {
+                    this.parmEngineNumberField = value;
+                    this.RaisePropertyChanged("parmEngineNumber");
                 }
             }
         }
@@ -1623,21 +1639,13 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getTasks", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getTasksResponse")]
         System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse> getTasksAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionUpdateStatusListRequest) of message MzkTechnicalInspectionUpdateStatusListRequest does not match the default value (updateStatusList)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse updateStatusList(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionValidateUserRequest) of message MzkTechnicalInspectionValidateUserRequest does not match the default value (validateUser)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse validateUser(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionInsertTechnicalInspectionRequest) of message MzkTechnicalInspectionInsertTechnicalInspectionRequest does not match the default value (insertTechnicalInspection)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse insertTechnicalInspection(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetUserDetailsRequest) of message MzkTechnicalInspectionGetUserDetailsRequest does not match the default value (getUserDetails)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
@@ -1647,6 +1655,14 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getUserDetails", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getUserDetailsResponse")]
         System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request);
         
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionInsertTechnicalInspectionRequest) of message MzkTechnicalInspectionInsertTechnicalInspectionRequest does not match the default value (insertTechnicalInspection)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse insertTechnicalInspection(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspection", ReplyAction="http://tempuri.org/MzkTechnicalInspection/insertTechnicalInspectionResponse")]
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse> insertTechnicalInspectionAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionRequest request);
+        
         // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionGetSubComponentsRequest) of message MzkTechnicalInspectionGetSubComponentsRequest does not match the default value (getSubComponents)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/getSubComponentsAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
@@ -1655,13 +1671,13 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/getSubComponents", ReplyAction="http://tempuri.org/MzkTechnicalInspection/getSubComponentsResponse")]
         System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse> getSubComponentsAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionValidateUserRequest) of message MzkTechnicalInspectionValidateUserRequest does not match the default value (validateUser)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/validateUserAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse validateUser(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
+        // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionUpdateStatusListRequest) of message MzkTechnicalInspectionUpdateStatusListRequest does not match the default value (updateStatusList)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Eqstra.DataProvider.AX.TIProxy.AifFault), Action="http://tempuri.org/MzkTechnicalInspection/updateStatusListAifFaultFault", Name="AifFault", Namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault")]
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse updateStatusList(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/validateUser", ReplyAction="http://tempuri.org/MzkTechnicalInspection/validateUserResponse")]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/updateStatusList", ReplyAction="http://tempuri.org/MzkTechnicalInspection/updateStatusListResponse")]
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request);
         
         // CODEGEN: Generating message contract since the wrapper name (MzkTechnicalInspectionSaveImageRequest) of message MzkTechnicalInspectionSaveImageRequest does not match the default value (saveImage)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MzkTechnicalInspection/saveImage", ReplyAction="http://tempuri.org/MzkTechnicalInspection/saveImageResponse")]
@@ -1717,41 +1733,79 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionUpdateStatusListRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks;
+        public string _userID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _company;
+        public string _password;
         
-        public MzkTechnicalInspectionUpdateStatusListRequest() {
+        public MzkTechnicalInspectionValidateUserRequest() {
         }
         
-        public MzkTechnicalInspectionUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+        public MzkTechnicalInspectionValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
             this.CallContext = CallContext;
-            this._lstTasks = _lstTasks;
-            this._company = _company;
+            this._userID = _userID;
+            this._password = _password;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionUpdateStatusListResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionValidateUserResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
+        public bool response;
         
-        public MzkTechnicalInspectionUpdateStatusListResponse() {
+        public MzkTechnicalInspectionValidateUserResponse() {
         }
         
-        public MzkTechnicalInspectionUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
+        public MzkTechnicalInspectionValidateUserResponse(bool response) {
+            this.response = response;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
+        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public string _userID;
+        
+        public MzkTechnicalInspectionGetUserDetailsRequest() {
+        }
+        
+        public MzkTechnicalInspectionGetUserDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            this.CallContext = CallContext;
+            this._userID = _userID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionGetUserDetailsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
+        
+        public MzkTechnicalInspectionGetUserDetailsResponse() {
+        }
+        
+        public MzkTechnicalInspectionGetUserDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
             this.response = response;
         }
     }
@@ -1801,44 +1855,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetUserDetailsRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
-        public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
-        
-        public MzkTechnicalInspectionGetUserDetailsRequest() {
-        }
-        
-        public MzkTechnicalInspectionGetUserDetailsRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            this.CallContext = CallContext;
-            this._userID = _userID;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetUserDetailsResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionGetUserDetailsResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response;
-        
-        public MzkTechnicalInspectionGetUserDetailsResponse() {
-        }
-        
-        public MzkTechnicalInspectionGetUserDetailsResponse(Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract response) {
-            this.response = response;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionGetSubComponentsRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
     public partial class MzkTechnicalInspectionGetSubComponentsRequest {
         
@@ -1881,41 +1897,41 @@ namespace Eqstra.DataProvider.AX.TIProxy {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListRequest", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts")]
         public Eqstra.DataProvider.AX.TIProxy.CallContext CallContext;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public string _userID;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=1)]
-        public string _password;
+        public string _company;
         
-        public MzkTechnicalInspectionValidateUserRequest() {
+        public MzkTechnicalInspectionUpdateStatusListRequest() {
         }
         
-        public MzkTechnicalInspectionValidateUserRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+        public MzkTechnicalInspectionUpdateStatusListRequest(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
             this.CallContext = CallContext;
-            this._userID = _userID;
-            this._password = _password;
+            this._lstTasks = _lstTasks;
+            this._company = _company;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionValidateUserResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
-    public partial class MzkTechnicalInspectionValidateUserResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="MzkTechnicalInspectionUpdateStatusListResponse", WrapperNamespace="http://tempuri.org", IsWrapped=true)]
+    public partial class MzkTechnicalInspectionUpdateStatusListResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org", Order=0)]
-        public bool response;
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response;
         
-        public MzkTechnicalInspectionValidateUserResponse() {
+        public MzkTechnicalInspectionUpdateStatusListResponse() {
         }
         
-        public MzkTechnicalInspectionValidateUserResponse(bool response) {
+        public MzkTechnicalInspectionUpdateStatusListResponse(Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] response) {
             this.response = response;
         }
     }
@@ -2006,30 +2022,55 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusList(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
-            return base.Channel.updateStatusList(request);
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUser(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
+            return base.Channel.validateUser(request);
         }
         
-        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
+        public bool validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
             inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusList(inValue);
+            inValue._userID = _userID;
+            inValue._password = _password;
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUser(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusListAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
-            return base.Channel.updateStatusListAsync(request);
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUserAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
+            return base.Channel.validateUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
+        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
             inValue.CallContext = CallContext;
-            inValue._lstTasks = _lstTasks;
-            inValue._company = _company;
-            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
+            inValue._userID = _userID;
+            inValue._password = _password;
+            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetails(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetails(request);
+        }
+        
+        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract getUserDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._userID = _userID;
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetails(inValue);
+            return retVal.response;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetailsAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
+            return base.Channel.getUserDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
+            inValue.CallContext = CallContext;
+            inValue._userID = _userID;
+            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetailsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2060,31 +2101,6 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetails(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
-            return base.Channel.getUserDetails(request);
-        }
-        
-        public Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract getUserDetails(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetails(inValue);
-            return retVal.response;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getUserDetailsAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest request) {
-            return base.Channel.getUserDetailsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse> getUserDetailsAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsRequest();
-            inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).getUserDetailsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.getSubComponents(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsRequest request) {
             return base.Channel.getSubComponents(request);
         }
@@ -2112,30 +2128,30 @@ namespace Eqstra.DataProvider.AX.TIProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUser(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
-            return base.Channel.validateUser(request);
+        global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusList(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusList(request);
         }
         
-        public bool validateUser(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
+        public Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] updateStatusList(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            inValue._password = _password;
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUser(inValue);
+            inValue._lstTasks = _lstTasks;
+            inValue._company = _company;
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse retVal = ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusList(inValue);
             return retVal.response;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.validateUserAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest request) {
-            return base.Channel.validateUserAsync(request);
+        System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection.updateStatusListAsync(global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest request) {
+            return base.Channel.updateStatusListAsync(request);
         }
         
-        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse> validateUserAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, string _userID, string _password) {
-            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserRequest();
+        public System.Threading.Tasks.Task<global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse> updateStatusListAsync(Eqstra.DataProvider.AX.TIProxy.CallContext CallContext, Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract[] _lstTasks, string _company) {
+            global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest inValue = new global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListRequest();
             inValue.CallContext = CallContext;
-            inValue._userID = _userID;
-            inValue._password = _password;
-            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).validateUserAsync(inValue);
+            inValue._lstTasks = _lstTasks;
+            inValue._company = _company;
+            return ((global::Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspection)(this)).updateStatusListAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -1,5 +1,5 @@
 ﻿
-namespace Eqstra.BusinessLogic.Portable.SSModels
+namespace Eqstra.DataProvider.AX
 {
     public class UserInfo
     {

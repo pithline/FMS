@@ -62,20 +62,21 @@ namespace Eqstra.DataProvider.AX.Providers
                             CaseNumber = task.parmCaseId,
                             CaseCategory = task.parmCaseCategory,
                             ContactName = task.parmContactPersonName,
-                            ContactNumber = task.parmContactPersonPhone,
+                            ContactNumber = string.IsNullOrEmpty(task.parmContactPersonPhone) ? "" : "+" + task.parmContactPersonPhone,
                             CustPhone = task.parmCustPhone,
                             CustomerName = task.parmCustName,
                             Status = task.parmStatus,
                             StatusDueDate = task.parmStatusDueDate.ToShortDateString(),
                             UserId = task.parmUserID,
-                            Address = task.parmCustAddress,
+                            Address = task.parmContactPersonAddress,
                             CustomerId = task.parmCustAccount,
                             VehicleInsRecId = task.parmCaseServiceRecID,
                             ConfirmedDate = task.parmInspectionDueDate,
                             CustEmailId = task.parmEmail,
                             RegistrationNumber = task.parmRegistrationNumber,
                             Make = task.parmMake,
-                            Model = task.parmModel
+                            Model = task.parmModel,
+                            EngineNumber = task.parmEngineNumber
                         };
 
 
@@ -106,7 +107,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     }
                 }
                 client.Close();
-                return taskList.OrderByDescending(x=>x.CaseNumber).ToList();
+                return taskList.OrderByDescending(x => x.CaseNumber).ToList();
             }
             catch (Exception)
             {
