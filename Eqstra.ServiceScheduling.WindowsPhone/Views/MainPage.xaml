@@ -107,7 +107,7 @@
                      Foreground="White"
                      VerticalAlignment="Top" />
 
-        <Pivot Title="Tasks"
+        <Pivot Title="Tasks" SelectionChanged="TasksPivot_SelectionChanged"
                Grid.Row="1"
                Name="TasksPivot">
             <Pivot.HeaderTemplate>

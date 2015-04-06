@@ -1,18 +1,14 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Windows.System;
 using Windows.UI.Xaml;
-using Eqstra.BusinessLogic.Portable.SSModels;
-using Eqstra.ServiceScheduling.UILogic.Portable.Services;
-using System.Text.RegularExpressions;
-using Windows.ApplicationModel.Appointments;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -24,7 +20,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this._navigationService = navigationService;
             this._taskService = taskService;
-            
+
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
             this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
 
@@ -59,17 +55,24 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("whatsapp:" + 9290650135));
-            }, () => { return(this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
+            }, () =>
+            {
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
+            }
+            );
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("callto:" + 9290650135));
-            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
+            }, () =>
+            {
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
+            });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("mailto:" + "kasif@mzkgbl.com"));
-            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
+            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
@@ -85,12 +88,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 //await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             }, () =>
             {
-                return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.Address));
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
             });
         }
-
-
-       
 
         private Visibility taskProgressBar;
         public Visibility TaskProgressBar
@@ -109,7 +109,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref task, value);
-               
+                this.LocateCommand.RaiseCanExecuteChanged();
+                this.MailToCommand.RaiseCanExecuteChanged();
+                this.MakeCallCommand.RaiseCanExecuteChanged();
+                this.MakeIMCommand.RaiseCanExecuteChanged();
+                this.NextPageCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -139,6 +143,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                var userInfo = ((Eqstra.BusinessLogic.Portable.SSModels.UserInfo)navigationParameter);
+                PersistentData.Instance.UserInfo = new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" };
                 var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                 foreach (var task in tasksResult)
                 {
@@ -189,6 +195,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 throw;
             }
         }
+
+
+
+
+
+
+
+
+
+
 
         public DelegateCommand MailToCommand { get; set; }
 

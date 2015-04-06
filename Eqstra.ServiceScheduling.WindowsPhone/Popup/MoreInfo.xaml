@@ -193,7 +193,7 @@
             </PivotItem>
 
             <PivotItem Header="You">
-                <Grid>
+                <Grid x:Name="profileGrid">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -203,12 +203,12 @@
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2">
                             <TextBlock Text="User Name" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding UserId}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1"  Margin="2">
                             <TextBlock Text="Company Name" Style="{StaticResource TextContentStyle}"/>
-                            <TextBlock Text="{Binding}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                            <TextBlock Text="{Binding CompanyName}" Style="{StaticResource InfoBoxTitleStyle}"/>
                         </StackPanel>
 
                     </Grid>

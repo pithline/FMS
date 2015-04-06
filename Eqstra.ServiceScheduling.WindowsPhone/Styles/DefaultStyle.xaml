@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Eqstra.ServiceScheduling.WindowsPhone.Views"
-   >
+    >
     <Style TargetType="AppBar">
         <Setter Property="RequestedTheme" Value="Default"/>
     </Style>
@@ -221,27 +221,27 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleSwitch">
                     <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchCurtainPointerOverBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                   Storyboard.TargetProperty="Background">
+                                                                       Storyboard.TargetProperty="Background">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchTrackPointerOverBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbPointerOverBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Stroke">
+                                                                       Storyboard.TargetProperty="Stroke">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbPointerOverBorderThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -249,19 +249,19 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchCurtainPressedBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                   Storyboard.TargetProperty="Background">
+                                                                       Storyboard.TargetProperty="Background">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchTrackPressedBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbPressedBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Stroke">
+                                                                       Storyboard.TargetProperty="Stroke">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbPressedForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -269,35 +269,35 @@
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
-                                                                   Storyboard.TargetProperty="Foreground">
+                                                                       Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchHeaderDisabledForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OffContentPresenter"
-                                                                   Storyboard.TargetProperty="Foreground">
+                                                                       Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchDisabledForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OnContentPresenter"
-                                                                   Storyboard.TargetProperty="Foreground">
+                                                                       Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchDisabledForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
-                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                                       Storyboard.TargetProperty="BorderBrush">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchOuterBorderDisabledBorderThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InnerBorder"
-                                                                   Storyboard.TargetProperty="Background">
+                                                                       Storyboard.TargetProperty="Background">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchTrackDisabledBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbDisabledBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnob"
-                                                                   Storyboard.TargetProperty="Stroke">
+                                                                       Storyboard.TargetProperty="Stroke">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchThumbDisabledBorderThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchCurtain"
-                                                                   Storyboard.TargetProperty="Fill">
+                                                                       Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchCurtainDisabledBackgroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -306,36 +306,36 @@
                             <VisualStateGroup x:Name="ToggleStates">
                                 <VisualStateGroup.Transitions>
                                     <VisualTransition x:Name="DraggingToOnTransition"
-                                                  From="Dragging"
-                                                  To="On"
-                                                  GeneratedDuration="0">
+                                                      From="Dragging"
+                                                      To="On"
+                                                      GeneratedDuration="0">
                                         <Storyboard>
                                             <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOnOffset}" />
                                             <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOnOffset}" />
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition x:Name="DraggingToOffTransition"
-                                                  From="Dragging"
-                                                  To="Off"
-                                                  GeneratedDuration="0">
+                                                      From="Dragging"
+                                                      To="Off"
+                                                      GeneratedDuration="0">
                                         <Storyboard>
                                             <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOffOffset}" />
                                             <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainCurrentToOffOffset}" />
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition x:Name="OnToOffTransition"
-                                                  From="On"
-                                                  To="Off"
-                                                  GeneratedDuration="0">
+                                                      From="On"
+                                                      To="Off"
+                                                      GeneratedDuration="0">
                                         <Storyboard>
                                             <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOnToOffOffset}" />
                                             <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOnToOffOffset}" />
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition x:Name="OffToOnTransition"
-                                                  From="Off"
-                                                  To="On"
-                                                  GeneratedDuration="0">
+                                                      From="Off"
+                                                      To="On"
+                                                      GeneratedDuration="0">
                                         <Storyboard>
                                             <RepositionThemeAnimation TargetName="SwitchKnob" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOffToOnOffset}" />
                                             <RepositionThemeAnimation TargetName="SwitchCurtain" FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CurtainOffToOnOffset}" />
@@ -346,21 +346,21 @@
                                 <VisualState x:Name="Off">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="CurtainTranslateTransform"
-                                                     Storyboard.TargetProperty="X"
-                                                     To="-44"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="X"
+                                                         To="-44"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="On">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="CurtainTranslateTransform"
-                                                     Storyboard.TargetProperty="X"
-                                                     To="0"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="X"
+                                                         To="0"
+                                                         Duration="0" />
                                         <DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
-                                                     Storyboard.TargetProperty="X"
-                                                     To="38"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="X"
+                                                         To="38"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -368,9 +368,9 @@
                                 <VisualState x:Name="OffContent">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="OffContentPresenter"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     To="1"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="OffContentPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
@@ -383,9 +383,9 @@
                                 <VisualState x:Name="OnContent">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="OnContentPresenter"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     To="1"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="OnContentPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
@@ -400,13 +400,13 @@
                                 <VisualState x:Name="Focused">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     To="1"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
                                         <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     To="1"
-                                                     Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Unfocused" />
@@ -419,14 +419,14 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <ContentPresenter x:Name="HeaderContentPresenter"
-                                          Foreground="#FF666666"
-                                          FontSize="16"
-                                          Margin="6"
-                                          Content="{TemplateBinding Header}"
-                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                          FontWeight="Light"
-                                          VerticalAlignment="Center"
-                                          AutomationProperties.AccessibilityView="Raw" />
+                                              Foreground="#FF666666"
+                                              FontSize="16"
+                                              Margin="6"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              FontWeight="Light"
+                                              VerticalAlignment="Center"
+                                              AutomationProperties.AccessibilityView="Raw" />
                             <Grid Grid.Column="1" Margin="6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -434,39 +434,39 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter x:Name="OffContentPresenter"
-                                              MinWidth="65"
-                                              Margin="0"
-                                              Opacity="0"
-                                              IsHitTestVisible="False"
-                                              Content="No"
-                                              ContentTemplate="{TemplateBinding OffContentTemplate}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              AutomationProperties.AccessibilityView="Raw" />
+                                                  MinWidth="65"
+                                                  Margin="0"
+                                                  Opacity="0"
+                                                  IsHitTestVisible="False"
+                                                  Content="No"
+                                                  ContentTemplate="{TemplateBinding OffContentTemplate}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  AutomationProperties.AccessibilityView="Raw" />
                                 <ContentPresenter x:Name="OnContentPresenter"
-                                              MinWidth="65"
-                                              Margin="0"
-                                              Opacity="0"
-                                              IsHitTestVisible="False"
-                                              Content="Yes"
-                                              ContentTemplate="{TemplateBinding OnContentTemplate}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              AutomationProperties.AccessibilityView="Raw" />
+                                                  MinWidth="65"
+                                                  Margin="0"
+                                                  Opacity="0"
+                                                  IsHitTestVisible="False"
+                                                  Content="Yes"
+                                                  ContentTemplate="{TemplateBinding OnContentTemplate}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  AutomationProperties.AccessibilityView="Raw" />
                                 <Grid Grid.Column="2" Background="Transparent" ManipulationMode="None">
                                     <Grid x:Name="SwitchKnobBounds" Height="19" Margin="13,0,13,0">
                                         <Border x:Name="OuterBorder"
-                                            BorderBrush="{ThemeResource ToggleSwitchOuterBorderBorderThemeBrush}"
-                                            BorderThickness="2">
+                                                BorderBrush="{ThemeResource ToggleSwitchOuterBorderBorderThemeBrush}"
+                                                BorderThickness="2">
                                             <Border x:Name="InnerBorder"
-                                                Background="{ThemeResource ToggleSwitchTrackBackgroundThemeBrush}"
-                                                BorderBrush="{ThemeResource ToggleSwitchTrackBorderThemeBrush}"
-                                                BorderThickness="1">
+                                                    Background="{ThemeResource ToggleSwitchTrackBackgroundThemeBrush}"
+                                                    BorderBrush="{ThemeResource ToggleSwitchTrackBorderThemeBrush}"
+                                                    BorderThickness="1">
                                                 <ContentPresenter x:Name="SwitchCurtainBounds">
                                                     <ContentPresenter x:Name="SwitchCurtainClip">
                                                         <Rectangle x:Name="SwitchCurtain"
-                                                               Fill="{ThemeResource ToggleSwitchCurtainBackgroundThemeBrush}"
-                                                               Width="44">
+                                                                   Fill="{ThemeResource ToggleSwitchCurtainBackgroundThemeBrush}"
+                                                                   Width="44">
                                                             <Rectangle.RenderTransform>
                                                                 <TranslateTransform x:Name="CurtainTranslateTransform" X="-44" />
                                                             </Rectangle.RenderTransform>
@@ -476,29 +476,29 @@
                                             </Border>
                                         </Border>
                                         <Rectangle x:Name="SwitchKnob"
-                                               Fill="{ThemeResource ToggleSwitchThumbBackgroundThemeBrush}"
-                                               Stroke="{ThemeResource ToggleSwitchThumbBorderThemeBrush}"
-                                               StrokeThickness="1"
-                                               HorizontalAlignment="Left"
-                                               Width="12">
+                                                   Fill="{ThemeResource ToggleSwitchThumbBackgroundThemeBrush}"
+                                                   Stroke="{ThemeResource ToggleSwitchThumbBorderThemeBrush}"
+                                                   StrokeThickness="1"
+                                                   HorizontalAlignment="Left"
+                                                   Width="12">
                                             <Rectangle.RenderTransform>
                                                 <TranslateTransform x:Name="KnobTranslateTransform" />
                                             </Rectangle.RenderTransform>
                                         </Rectangle>
                                         <Rectangle x:Name="FocusVisualWhite"
-                                               Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
-                                               StrokeEndLineCap="Square"
-                                               StrokeDashArray="1,1"
-                                               Opacity="0"
-                                               Margin="-3"
-                                               StrokeDashOffset="1.5" />
+                                                   Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                                                   StrokeEndLineCap="Square"
+                                                   StrokeDashArray="1,1"
+                                                   Opacity="0"
+                                                   Margin="-3"
+                                                   StrokeDashOffset="1.5" />
                                         <Rectangle x:Name="FocusVisualBlack"
-                                               Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
-                                               StrokeEndLineCap="Square"
-                                               StrokeDashArray="1,1"
-                                               Opacity="0"
-                                               Margin="-3"
-                                               StrokeDashOffset="0.5" />
+                                                   Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                                                   StrokeEndLineCap="Square"
+                                                   StrokeDashArray="1,1"
+                                                   Opacity="0"
+                                                   Margin="-3"
+                                                   StrokeDashOffset="0.5" />
                                     </Grid>
                                     <Thumb x:Name="SwitchThumb" AutomationProperties.AccessibilityView="Raw">
                                         <Thumb.Template>
@@ -535,24 +535,24 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ColorAnimation Duration="0"
-                                                            Storyboard.TargetName="rectangle"
-                                                            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                            To="White"
-                                                           />
+                                                        Storyboard.TargetName="rectangle"
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        To="White"
+                                                        />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <DoubleAnimation Duration="0"
-                                                             Storyboard.TargetName="rectangle"
-                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                             To="0.995"
-                                                             />
+                                                         Storyboard.TargetName="rectangle"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.995"
+                                                         />
                                         <DoubleAnimation Duration="0"
-                                                             Storyboard.TargetName="grid"
-                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                             To="0.5"
-                                                            />
+                                                         Storyboard.TargetName="grid"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5"
+                                                         />
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(ContentPresenter.Content)">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Save" />
                                         </ObjectAnimationUsingKeyFrames>
@@ -561,10 +561,10 @@
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
                                         <ColorAnimation Duration="0"
-                                                            Storyboard.TargetName="rectangle"
-                                                            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                            To="#FF777777"
-                                                           />
+                                                        Storyboard.TargetName="rectangle"
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        To="#FF777777"
+                                                        />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -574,13 +574,13 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="rectangle"
-                                       Fill="White"
-                                       Stroke="Black"
-                                       StrokeThickness="1" RadiusX="25" RadiusY="25" />
+                                   Fill="White"
+                                   Stroke="Black"
+                                   StrokeThickness="1" RadiusX="25" RadiusY="25" />
                         <ContentPresenter x:Name="contentPresenter"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Foreground="Black" />
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Foreground="Black" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -597,24 +597,24 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ColorAnimation Duration="0"
-                                                            Storyboard.TargetName="rectangle"
-                                                            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                            To="#FF000000"
-                                                            />
+                                                        Storyboard.TargetName="rectangle"
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        To="#FF000000"
+                                                        />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <DoubleAnimation Duration="0"
-                                                             Storyboard.TargetName="rectangle"
-                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                             To="0.995"
-                                                            />
+                                                         Storyboard.TargetName="rectangle"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.995"
+                                                         />
                                         <DoubleAnimation Duration="0"
-                                                             Storyboard.TargetName="grid"
-                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                             To="0.5"
-                                                             />
+                                                         Storyboard.TargetName="grid"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5"
+                                                         />
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(ContentPresenter.Content)">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Save" />
                                         </ObjectAnimationUsingKeyFrames>
@@ -623,10 +623,10 @@
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
                                         <ColorAnimation Duration="0"
-                                                            Storyboard.TargetName="rectangle"
-                                                            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                            To="#FF777777"
-                                                          />
+                                                        Storyboard.TargetName="rectangle"
+                                                        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        To="#FF777777"
+                                                        />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -636,13 +636,13 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="rectangle"
-                                       Fill="#FF444444"
-                                       Stroke="White"
-                                       StrokeThickness="3" RadiusX="25" RadiusY="25" />
+                                   Fill="#FF444444"
+                                   Stroke="White"
+                                   StrokeThickness="3" RadiusX="25" RadiusY="25" />
                         <ContentPresenter x:Name="contentPresenter"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Foreground="White" />
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Foreground="White" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

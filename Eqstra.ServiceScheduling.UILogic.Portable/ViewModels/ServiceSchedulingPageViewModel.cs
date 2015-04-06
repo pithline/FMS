@@ -42,8 +42,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
            {
                try
                {
-                   //  await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                   bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                   if (response)
+                   {
                    navigationService.Navigate("PreferredSupplier", string.Empty);
+               }
                }
                catch (Exception ex)
                {
@@ -62,7 +65,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-                ()=>
+                () =>
                 {
 
                     CoreWindow currentWindow = Window.Current.CoreWindow;
@@ -105,7 +108,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                 if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
                 {
-
+            
                     this.Model = new ServiceSchedulingDetail() { OdoReadingImageCapture = new ImageCapture { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) } }; 
                 }
                 else
@@ -114,8 +117,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                    await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
                     this.Model.OdoReadingImageCapture =new ImageCapture(){ImageBitmap = bitmap};
                 }
-                
-            }
+
+        }
             else
             {
                 this.Model = navigationParameter as ServiceSchedulingDetail;
@@ -126,7 +129,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             var randomAccessStream = new InMemoryRandomAccessStream();
             using (var writer = new DataWriter(randomAccessStream))
-            {
+        {
                 writer.WriteBytes(bytes);
                 await writer.StoreAsync();
                 await writer.FlushAsync();
@@ -172,6 +175,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
 
             }
+        }
+
+        private List<Supplier> suppliers;
+        public List<Supplier> Suppliers
+        {
+            get { return suppliers; }
+            set { SetProperty(ref suppliers, value); }
+            }
+
+        private Supplier selectedSupplier;
+
+        public Supplier SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set { SetProperty(ref selectedSupplier, value); }
         }
 
         private Visibility isReqVisibility;

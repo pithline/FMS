@@ -1,61 +1,78 @@
-﻿<prism:VisualStateAwarePage
-    x:Class="Eqstra.ServiceScheduling.WindowsPhone.Views.PreferredSupplierPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.ServiceScheduling.WindowsPhone.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-    xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
-    mvvm:ViewModelLocator.AutoWireViewModel="True"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<prism:VisualStateAwarePage x:Class="Eqstra.ServiceScheduling.WindowsPhone.Views.PreferredSupplierPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:local="using:Eqstra.ServiceScheduling.WindowsPhone.Views"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+                            mvvm:ViewModelLocator.AutoWireViewModel="True"
+                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.Resources>
 
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <CommandBar Visibility="{Binding AppBarVisibility}"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Find" Icon="Find" Name="Find" Click="Find_Click">
+                <AppBarButton Label="Find"
+                              Icon="Find"
+                              Name="Find"
+                              Click="Find_Click">
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <TextBox FontSize="25" TextAlignment="Center" Margin="10,0"  TextChanged="filter_TextChanged"/>
+                                <TextBox FontSize="25"
+                                         TextAlignment="Center"
+                                         Margin="10,0"
+                                         TextChanged="filter_TextChanged" />
                             </StackPanel>
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-                <AppBarButton Label="Submit" Icon="Accept"/>
+                <AppBarButton Label="Submit"
+                              Icon="Accept"
+                              Command="{Binding NextPageCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Appointments" Icon="Calendar"/>
-                <AppBarButton Label="Profile" Icon="NewWindow" Name="Profile" Click="More_Click"/>
+                <AppBarButton Label="Appointments"
+                              Icon="Calendar" />
+                <AppBarButton Label="Profile"
+                              Icon="NewWindow"
+                              Name="Profile"
+                              Click="More_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
-        <Hub x:Name="Hub" x:Uid="Hub" >
+        <Hub x:Name="Hub"
+             x:Uid="Hub">
 
-            <HubSection x:Uid="HubSection1" Header="preferred suppliers">
+            <HubSection x:Uid="HubSection1"
+                        Header="preferred suppliers">
                 <DataTemplate>
                     <Grid>
-                        <ProgressBar IsIndeterminate="True" Visibility="{Binding TaskProgressBar}"
+                        <ProgressBar IsIndeterminate="True"
+                                     Visibility="{Binding TaskProgressBar}"
                                      Foreground="White"
-                                     VerticalAlignment="Top"
-                                     />
-                        <ListView HorizontalAlignment="Center"  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                  VerticalAlignment="Center" 
-                                  ItemsSource="{Binding PoolofSupplier}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" >
+                                     VerticalAlignment="Top" />
+                        <ListView HorizontalAlignment="Center"
+                                  SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
+                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                  VerticalAlignment="Center" SelectionMode="Single"
+                                  ItemsSource="{Binding PoolofSupplier}"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle1}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        Foreground="White" 
-                                        TextAlignment="Center" 
-                                        Text="{Binding SupplierName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Foreground="White"
+                                               TextAlignment="Center"
+                                               Text="{Binding SupplierName}"
+                                               Style="{StaticResource InfoBoxTitleStyle}" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -63,52 +80,82 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Uid="HubSection2" Header="suppliers filter">
+            <HubSection x:Uid="HubSection2"
+                        Header="suppliers filter">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
 
                         </Grid.RowDefinitions>
 
-                        <ComboBox  Height="70" Width="310" 
+                        <ComboBox  Height="70"
+                                   Width="310"
                                    ItemsSource="{Binding }"
                                    SelectedItem="{Binding }"
                                    Margin="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        <ComboBox  Height="70" Grid.Row="1"  Width="310" 
+                        <ComboBox  Height="70"
+                                   Grid.Row="1"
+                                   Width="310"
                                    ItemsSource="{Binding }"
                                    SelectedItem="{Binding }"
                                    Margin="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        <ComboBox  Height="70" Grid.Row="2"  Width="310" 
+                        <ComboBox  Height="70"
+                                   Grid.Row="2"
+                                   Width="310"
                                    ItemsSource="{Binding }"
                                    SelectedItem="{Binding }"
                                    Margin="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        <ComboBox  Height="70" Grid.Row="3"  Width="310" 
+                        <ComboBox  Height="70"
+                                   Grid.Row="3"
+                                   Width="310"
                                    ItemsSource="{Binding }"
                                    SelectedItem="{Binding }"
                                    Margin="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        <ComboBox  Height="70" Grid.Row="4"  Width="310" 
+                        <ComboBox  Height="70"
+                                   Grid.Row="4"
+                                   Width="310"
                                    ItemsSource="{Binding }"
                                    SelectedItem="{Binding }"
                                    Margin="2"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
 
-                        <StackPanel Grid.Row="5" VerticalAlignment="Bottom" Orientation="Horizontal">
-                            <AppBarButton Icon="Accept" Name="Accept" Click="Accept_Click" Label="Accept" VerticalAlignment="Top"  HorizontalAlignment="Left" RequestedTheme="Dark"/>
-                            <AppBarButton Icon="Cancel" Name="Cancel" Click="Cancel_Click" Label="Cancel" VerticalAlignment="Top" Margin="130,0,0,0" HorizontalAlignment="Right" RequestedTheme="Dark"/>
+                        <StackPanel Grid.Row="5"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Horizontal">
+                            <AppBarButton Icon="Accept"
+                                          Name="Accept"
+                                          Click="Accept_Click"
+                                          Label="Accept"
+                                          VerticalAlignment="Top"
+                                          HorizontalAlignment="Left"
+                                          RequestedTheme="Dark" />
+                            <AppBarButton Icon="Cancel"
+                                          Name="Cancel"
+                                          Click="Cancel_Click"
+                                          Label="Cancel"
+                                          VerticalAlignment="Top"
+                                          Margin="130,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          RequestedTheme="Dark" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

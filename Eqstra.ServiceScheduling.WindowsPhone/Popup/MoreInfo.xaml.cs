@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eqstra.ServiceScheduling.UILogic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,13 @@ namespace Eqstra.ServiceScheduling
         public MoreInfo()
         {
             this.InitializeComponent();
+            this.Loaded += MoreInfo_Loaded;
 
+        }
+
+        void MoreInfo_Loaded(object sender, RoutedEventArgs e)
+        {
+            profileGrid.DataContext = PersistentData.Instance.UserInfo;
         }
         public void Open(object dataContext)
         {
