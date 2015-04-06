@@ -23,7 +23,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     public class CameraCapturePageViewModel : ViewModel
     {
         private INavigationService _navigationService;
-        private ServiceSchedulingDetail serviceDetail;
+        public ServiceSchedulingDetail _serviceDetail;
         private byte[] _bytes;
 
         public CameraCapturePageViewModel(INavigationService navigationService)
@@ -41,7 +41,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     await this.MediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
                     _bytes = new byte[stream.Size];
                     var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
-                    _bytes = buffer.ToArray();
+                    _bytes = buffer.ToArray(0,(int)stream.Size);
 
                     if (ImageSource == null)
                     {
@@ -57,15 +57,15 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 ImageVisibility = Visibility.Collapsed;
             });
 
-            AcceptCommand = new DelegateCommand(() =>
+            AcceptCommand = new DelegateCommand<byte[]>((bytes) =>
             {
-                if (serviceDetail.OdoReadingImageCapture.ImageBitmap == null)
-                    serviceDetail.OdoReadingImageCapture.ImageBitmap = this.ImageSource;
-                if (_bytes.Length > 0)
+                if (_serviceDetail.OdoReadingImageCapture.ImageBitmap == null)
+                    _serviceDetail.OdoReadingImageCapture.ImageBitmap = this.ImageSource;
+                if (bytes.Length > 0)
                 {
-                    serviceDetail.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
+                    _serviceDetail.ODOReadingSnapshot = Convert.ToBase64String(bytes);
                 }
-                _navigationService.Navigate("ServiceSchedulingPage", serviceDetail);
+                _navigationService.Navigate("ServiceScheduling", _serviceDetail);
                 _navigationService.ClearHistory();
             });
 
@@ -77,7 +77,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this.ImageVisibility = Visibility.Collapsed;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-
+            _serviceDetail = navigationParameter as ServiceSchedulingDetail;
             //await this.MediaCapture.InitializeAsync();
             //this.MediaCapture.VideoDeviceController.PrimaryUse = Windows.Media.Devices.CaptureUse.Photo;
 

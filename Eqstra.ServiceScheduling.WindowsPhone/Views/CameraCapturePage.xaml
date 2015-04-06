@@ -14,27 +14,32 @@
         <c:VisibilityInverter x:Key="vi" />
     </prism:VisualStateAwarePage.Resources>
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Background="#33000000">
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Accept" />
+                <AppBarButton Label="Accept" Click="Accept_Click" />
             </CommandBar.SecondaryCommands>
             <AppBarButton Icon="Camera"
                           Label="take"
-                          Visibility="{Binding ImageVisibility,Converter={StaticResource vi}}"
+                          x:Name="Take"
+                       
                          Click="AppBarButton_Click" />
             <AppBarButton Icon="Undo"
                           Label="retake"
-                          Visibility="{Binding ImageVisibility}" />
+                          x:Name="Retake"
+                          Visibility="Collapsed"
+                         Click="Retake_Click"
+                          />
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
 
-    <Grid>
+    <Grid VerticalAlignment="Top">
         <CaptureElement x:Name="PreviewElement"
                      Loaded="PreviewElement_Loaded"
-                        Visibility="{Binding ImageVisibility, Converter={StaticResource vi}}"
+                        Stretch="UniformToFill"
+                       Visibility="{Binding ElementName=Take, Path=Visibility}"
                          />
 
-        <Image Source="{Binding ImageSource}"
-               Visibility="{Binding ImageVisibility}" />
+        <Image x:Name="Img"
+               Visibility="{Binding ElementName=Retake, Path=Visibility}" />
     </Grid>
 </prism:VisualStateAwarePage>

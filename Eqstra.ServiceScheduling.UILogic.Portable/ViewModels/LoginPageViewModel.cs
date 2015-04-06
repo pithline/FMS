@@ -27,7 +27,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                         ProgressDialogPopup.Open(this);
                         navigationService.Navigate("Main", new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" });
-                        navigationService.ClearHistory();
+                     
                         ProgressDialogPopup.Close();
 
                     }
