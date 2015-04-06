@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,24 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Portable.SSModels
 {
-    public class ServiceSchedulingDetail
+    public class ServiceSchedulingDetail : BindableBase
     {
         public ServiceSchedulingDetail()
         {
-            this.ODOReadingSnapshot = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png" };
+            this.OdoReadingImageCapture = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) };
         }
         public String CaseNumber { get; set; }
 
         public Int64 CaseServiceRecID { get; set; }
 
-        public ImageCapture ODOReadingSnapshot { get; set; }
+        public string ODOReadingSnapshot { get; set; }
+
+        private ImageCapture odoReadingImageCapture;
+        public ImageCapture OdoReadingImageCapture
+        {
+            get { return odoReadingImageCapture; }
+            set { SetProperty(ref odoReadingImageCapture, value); }
+        }
 
         public Int64 ODOReading { get; set; }
 

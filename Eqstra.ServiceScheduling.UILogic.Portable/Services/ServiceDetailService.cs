@@ -32,7 +32,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         public async Task<BusinessLogic.Portable.SSModels.ServiceSchedulingDetail> GetServiceDetailAsync(string caseNumber, long caseServiceRecId, long serviceRecId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling", parameters = new[] { "GetServiceDetails", caseNumber, caseServiceRecId.ToString(), serviceRecId.ToString(), JsonConvert.SerializeObject(userInfo) } };
+            var postData = new { target = "ServiceScheduling", method= "single", parameters = new[] { "GetServiceDetails", caseNumber, caseServiceRecId.ToString(), serviceRecId.ToString(), JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)

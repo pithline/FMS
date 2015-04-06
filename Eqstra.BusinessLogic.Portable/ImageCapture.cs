@@ -1,15 +1,18 @@
-﻿using Microsoft.Practices.Prism.StoreApps;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
+
 
 namespace Eqstra.BusinessLogic
 {
 
-    public class ImageCapture
+    public class ImageCapture :  BindableBase
     {
         public int Id { get; set; }
 
@@ -27,5 +30,11 @@ namespace Eqstra.BusinessLogic
 
         public bool IsSynced { get; set; }
 
+        private BitmapImage imageBitmap;
+        public BitmapImage ImageBitmap
+        {
+            get { return imageBitmap; }
+            set { SetProperty(ref imageBitmap, value); }
+        }
     }
 }
