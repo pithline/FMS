@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Appointments;
+using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,10 +29,31 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     /// </summary>
     public sealed partial class MainPage : VisualStateAwarePage
     {
+        Accelerometer accelerometer;
         public MainPage()
         {
             this.InitializeComponent();
-            // this.DataContext = new MainPageViewModel();
+
+        }
+        void accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
+        {
+            if (accelerometer != null)
+            {
+                var accel = accelerometer.GetCurrentReading();
+                var ax = accel.AccelerationX;
+                var ay = accel.AccelerationY;
+                var az = accel.AccelerationZ;
+            }
+        }
+
+        async void accelerometer_Shaken(Accelerometer sender, AccelerometerShakenEventArgs args)
+        {
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+           {
+
+               int s = 564611;
+
+           });
         }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
@@ -39,7 +62,10 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         }
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
+            accelerometer = Accelerometer.GetDefault();
             base.OnNavigatedTo(e);
+            accelerometer.ReadingChanged += accelerometer_ReadingChanged;
+            accelerometer.Shaken += accelerometer_Shaken;
         }
 
         private void More_Click(object sender, RoutedEventArgs e)
