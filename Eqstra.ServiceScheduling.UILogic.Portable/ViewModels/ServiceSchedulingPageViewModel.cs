@@ -24,48 +24,48 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
-        
+
         Windows.Media.Capture.MediaCapture captureManager;
         public ServiceSchedulingPageViewModel(INavigationService navigationService)
         {
             this._navigationService = navigationService;
             this.Model = new ServiceSchedulingDetail();
             captureManager = new MediaCapture();
-
+            this.IsLiftRequired = false;
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
               TakePictureAsync();
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-                ()=>
-            {
-
-                CoreWindow currentWindow = Window.Current.CoreWindow;
-                Popup popup = new Popup();
-                popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-                popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-
-                if (_imageViewer == null)
+                () =>
                 {
-                    _imageViewer = new ImageViewerPopup();
 
-                }
-                else
-                {
-                    _imageViewer = null;
-                    this._imageViewer = new ImageViewerPopup();
-                }
+                    CoreWindow currentWindow = Window.Current.CoreWindow;
+                    Popup popup = new Popup();
+                    popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+                    popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
 
-                popup.Child = _imageViewer;
-                this._imageViewer.Tag = popup;
+                    if (_imageViewer == null)
+                    {
+                        _imageViewer = new ImageViewerPopup();
 
-                this._imageViewer.Height = currentWindow.Bounds.Height;
-                this._imageViewer.Width = currentWindow.Bounds.Width;
+                    }
+                    else
+                    {
+                        _imageViewer = null;
+                        this._imageViewer = new ImageViewerPopup();
+                    }
 
-                popup.IsOpen = true;
+                    popup.Child = _imageViewer;
+                    this._imageViewer.Tag = popup;
+
+                    this._imageViewer.Height = currentWindow.Bounds.Height;
+                    this._imageViewer.Width = currentWindow.Bounds.Width;
+
+                    popup.IsOpen = true;
 
 
-            });
+                });
 
         }
 
@@ -95,6 +95,31 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         public DelegateCommand OpenImageViewerCommand { get; set; }
 
+        private Boolean isLiftRequired;
+        public Boolean IsLiftRequired
+        {
+            get { return isLiftRequired; }
+            set
+            {
 
+                SetProperty(ref isLiftRequired, value);
+                if (value)
+                {
+                    this.IsReqVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.IsReqVisibility = Visibility.Collapsed;
+                }
+
+            }
+        }
+
+        private Visibility isReqVisibility;
+        public Visibility IsReqVisibility
+        {
+            get { return isReqVisibility; }
+            set { SetProperty(ref isReqVisibility, value); }
+        }
     }
 }

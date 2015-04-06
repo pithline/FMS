@@ -118,28 +118,12 @@
 
             <ToggleSwitch Grid.Row="9" OffContent="No" OnContent="Yes" Header="Lift Required" 
                           x:Name="liftRequired"  HorizontalAlignment="Center" VerticalAlignment="Center"
-                          IsOn="{Binding Model.IsLiftRequired,Mode=TwoWay}"
+                          IsOn="{Binding IsLiftRequired,Mode=TwoWay}"
                           Margin="2" 
                           Style="{StaticResource DamagedToggleSwitch}" />
 
-            <TextBox  Width="350" Grid.Row="10" Header="Additional Work"
-                      Grid.RowSpan="2" Height="120" 
-                      Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
-                      Margin="2"  Style="{StaticResource TextBoxContentStyle}"
-                      IsSpellCheckEnabled="True"
-                      IsTextPredictionEnabled="True"
-                      AcceptsReturn="True"
-                      HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-            <ComboBox  Width="350" Grid.Row="14" Header="Select Supplier" 
-                      
-                       ItemsSource="{Binding Model.Supplier,Mode=TwoWay}"
-                       SelectedItem="{Binding Model.SelectedSupplier,Mode=TwoWay}"
-                       Margin="2"  Style="{StaticResource ComboContentStyle}"
-                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-            <ComboBox ItemsSource="{Binding Model.LocationTypes}" Grid.Row="15"  Header="Location Types"
-                      DisplayMemberPath="LocationName"
+            <ComboBox ItemsSource="{Binding Model.LocationTypes}" Grid.Row="10"  Header="Location Types"
+                      DisplayMemberPath="LocationName" Visibility="{Binding IsReqVisibility}"
                       SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
                       x:Name="ddLocationType"
                       Margin="2" 
@@ -147,7 +131,7 @@
                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
-            <ComboBox Grid.Row="16"  Header="Destination Types"
+            <ComboBox Grid.Row="11"  Header="Destination Types" Visibility="{Binding IsReqVisibility}"
                       ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       DisplayMemberPath="ContactName"
                       SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
@@ -158,14 +142,31 @@
 
 
             <TextBox  Width="350" 
-                      Height="120" Grid.Row="17" Grid.RowSpan="19"
-                      TextWrapping="Wrap"
+                      Height="120" Grid.Row="12" 
+                      TextWrapping="Wrap" Visibility="{Binding IsReqVisibility}"
                       HorizontalAlignment="Center" VerticalAlignment="Center"
                       Text="{Binding Model.Address,Mode=TwoWay}"
                       Margin="2"  Style="{StaticResource TextBoxContentStyle}"
                       IsSpellCheckEnabled="True"
                       IsTextPredictionEnabled="True"
                       AcceptsReturn="True"/>
+
+            <TextBox  Width="350" Grid.Row="16" Header="Additional Work"
+                      Grid.RowSpan="2" Height="120" 
+                      Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
+                      Margin="2"  Style="{StaticResource TextBoxContentStyle}"
+                      IsSpellCheckEnabled="True"
+                      IsTextPredictionEnabled="True"
+                      AcceptsReturn="True"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <ComboBox  Width="350" Grid.Row="20" Header="Select Supplier" 
+                      
+                       ItemsSource="{Binding Model.Supplier,Mode=TwoWay}"
+                       SelectedItem="{Binding Model.SelectedSupplier,Mode=TwoWay}"
+                       Margin="2"  Style="{StaticResource ComboContentStyle}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         </Grid>
     </ScrollViewer>
 </prism:VisualStateAwarePage>
