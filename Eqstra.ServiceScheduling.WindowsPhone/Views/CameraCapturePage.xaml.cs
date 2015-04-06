@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage.Streams;
 using Eqstra.ServiceScheduling.UILogic.Portable;
+using Microsoft.Practices.Prism.Mvvm.Interfaces;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -34,6 +35,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     public sealed partial class CameraCapturePage : VisualStateAwarePage
     {
         MediaCapture _mediaCapture;
+        byte[] _bytes;
         public CameraCapturePage()
         {
             this.InitializeComponent();
@@ -52,7 +54,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             try
             {
-                 _mediaCapture = new MediaCapture();
+                _mediaCapture = new MediaCapture();
                 _mediaCapture.Failed += mediaCapture_Failed;
 
                 var _deviceInformation = await GetCameraDeviceInfoAsync(Windows.Devices.Enumeration.Panel.Back);
@@ -86,7 +88,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             }
             catch (Exception ex)
             {
-                new MessageDialog(ex.Message,"Error");
+                new MessageDialog(ex.Message, "Error");
             }
         }
 
@@ -108,21 +110,52 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             return device;
         }
 
-       async private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        async private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            var vm = this.DataContext as CameraCapturePageViewModel;
-var imageEncodingProps = ImageEncodingProperties.CreatePng();
+            try
+            {
+                var vm = this.DataContext as CameraCapturePageViewModel;
+                var imageEncodingProps = ImageEncodingProperties.CreatePng();
                 using (var stream = new InMemoryRandomAccessStream())
                 {
 
                     await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
-                    if (vm.ImageSource == null)
-                    {
-                       vm. ImageSource = new BitmapImage();
-                    }
-                    await vm.ImageSource.SetSourceAsync(stream);
-                    vm.ImageVisibility = Visibility.Visible;
+                    _bytes = new byte[stream.Size];
+                    var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
+                    _bytes = buffer.ToArray(0,(int)stream.Size);
+
+                   var bitmap = new BitmapImage();
+                    
+
+                    await bitmap .SetSourceAsync(stream);
+                    Img.Source = bitmap;
+                    vm.ImageSource = bitmap;
+                    Retake.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    Take.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    await _mediaCapture.StopPreviewAsync();
+
+
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+       async private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as CameraCapturePageViewModel;
+            await _mediaCapture.StopPreviewAsync();
+            _mediaCapture.Dispose();
+            vm.AcceptCommand.Execute(_bytes);
+        }
+
+       async private void Retake_Click(object sender, RoutedEventArgs e)
+        {
+            this.Retake.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            this.Take.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            await _mediaCapture.StartPreviewAsync();
         }
 
 
