@@ -124,12 +124,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
                     _bytes = buffer.ToArray(0,(int)stream.Size);
 
-                   var bitmap = new BitmapImage();
-                    
+                    if (vm.ImageSource == null)
+                    {
+                        vm.ImageSource = new BitmapImage();
+                    }
 
-                    await bitmap .SetSourceAsync(stream);
-                    Img.Source = bitmap;
-                    vm.ImageSource = bitmap;
+                    await vm.ImageSource.SetSourceAsync(stream as IRandomAccessStream);
                     Retake.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     Take.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                     await _mediaCapture.StopPreviewAsync();
