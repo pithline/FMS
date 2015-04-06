@@ -49,9 +49,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                  {
 
                  }
-             },
-
-              () => { return this.InspectionTask != null; });
+             }
+);
 
 
 
@@ -60,22 +59,22 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("whatsapp:" + 9290650135));
-            }, () => { return !string.IsNullOrEmpty(this.InspectionTask.CustPhone); });
+            }, () => { return(this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("callto:" + 9290650135));
-            }, () => { return !string.IsNullOrEmpty(this.InspectionTask.CustPhone); });
+            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("mailto:" + "kasif@mzkgbl.com"));
-            }, () => { return !string.IsNullOrEmpty("testing"); });
+            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
 
-            }, () => { return !string.IsNullOrEmpty("testing"); });
+            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
 
 
@@ -86,7 +85,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 //await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             }, () =>
             {
-                return !string.IsNullOrEmpty(this.InspectionTask.Address);
+                return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.Address));
             });
         }
 

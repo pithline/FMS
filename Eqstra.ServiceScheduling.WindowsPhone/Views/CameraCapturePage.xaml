@@ -29,8 +29,7 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
-        <CaptureElement Source="{Binding MediaCapture}"
-                        Visibility="{Binding ImageVisibility, Converter={StaticResource vi}}" />
+        <CaptureElement />
 
         <Image Source="{Binding ImageSource}"
                Visibility="{Binding ImageVisibility}" />
