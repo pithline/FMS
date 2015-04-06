@@ -80,13 +80,13 @@
                          VerticalAlignment="Top"
                           />
 
-        <Pivot Title="Tasks" Grid.Row="1" Name="TasksPivot">
+        <Pivot Title="tasks" Grid.Row="1" Name="TasksPivot">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock FontSize="40" Text="{Binding }"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
-            <PivotItem Header="Booking Detail">
+            <PivotItem Header="booking detail">
                 <Grid>
                     <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
                           VerticalAlignment="Center" SelectionMode="Single" SelectedItem="{Binding InspectionTask,Mode=TwoWay}" 
@@ -95,7 +95,7 @@
                 </Grid>
             </PivotItem>
 
-            <PivotItem Header="Supplier Selection">
+            <PivotItem Header="supplier selection">
                 <Grid>
                     <GridView HorizontalAlignment="Center" ItemTemplate="{StaticResource TasksTemplate}" ItemContainerStyle="{StaticResource GridViewItemStyle1}" 
                           VerticalAlignment="Center"  SelectionMode="Single"  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"

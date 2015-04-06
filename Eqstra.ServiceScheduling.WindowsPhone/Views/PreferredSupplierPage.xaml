@@ -15,11 +15,10 @@
 
     </prism:VisualStateAwarePage.Resources>
 
-
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Filter" Name="filter" Icon="Filter">
+                <AppBarButton Label="Find" Icon="Find" Name="Find" Click="Find_Click">
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
@@ -28,7 +27,6 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-                <AppBarButton Label="Find" Icon="Find" Name="Find" Click="Find_Click"/>
                 <AppBarButton Label="Submit" Icon="Accept"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
@@ -39,20 +37,84 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
+        <Hub x:Name="Hub" x:Uid="Hub" >
 
-        <ListView HorizontalAlignment="Center"  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                      VerticalAlignment="Center" 
-                      ItemsSource="{Binding PoolofSupplier}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" >
-            <ListView.ItemTemplate>
+            <HubSection x:Uid="HubSection1" Header="preferred suppliers">
                 <DataTemplate>
-                    <TextBlock
-                            HorizontalAlignment="Center"
-                            Foreground="White" 
-                            TextAlignment="Center" 
-                            Text="{Binding SupplierName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                    <Grid>
+                        <ProgressBar IsIndeterminate="True" Visibility="{Binding TaskProgressBar}"
+                                     Foreground="White"
+                                     VerticalAlignment="Top"
+                                     />
+                        <ListView HorizontalAlignment="Center"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                  VerticalAlignment="Center" 
+                                  ItemsSource="{Binding PoolofSupplier}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Foreground="White" 
+                                        TextAlignment="Center" 
+                                        Text="{Binding SupplierName}" Style="{StaticResource InfoBoxTitleStyle}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </HubSection>
+
+            <HubSection x:Uid="HubSection2" Header="suppliers filter">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <ComboBox  Height="70" Width="310" 
+                                   ItemsSource="{Binding }"
+                                   SelectedItem="{Binding }"
+                                   Margin="2"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <ComboBox  Height="70" Grid.Row="1"  Width="310" 
+                                   ItemsSource="{Binding }"
+                                   SelectedItem="{Binding }"
+                                   Margin="2"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <ComboBox  Height="70" Grid.Row="2"  Width="310" 
+                                   ItemsSource="{Binding }"
+                                   SelectedItem="{Binding }"
+                                   Margin="2"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <ComboBox  Height="70" Grid.Row="3"  Width="310" 
+                                   ItemsSource="{Binding }"
+                                   SelectedItem="{Binding }"
+                                   Margin="2"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <ComboBox  Height="70" Grid.Row="4"  Width="310" 
+                                   ItemsSource="{Binding }"
+                                   SelectedItem="{Binding }"
+                                   Margin="2"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <StackPanel Grid.Row="5" VerticalAlignment="Bottom" Orientation="Horizontal">
+                            <AppBarButton Icon="Accept" Name="Accept" Click="Accept_Click" Label="Accept" VerticalAlignment="Top"  HorizontalAlignment="Left" RequestedTheme="Dark"/>
+                            <AppBarButton Icon="Cancel" Name="Cancel" Click="Cancel_Click" Label="Cancel" VerticalAlignment="Top" Margin="130,0,0,0" HorizontalAlignment="Right" RequestedTheme="Dark"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
+
 
     </Grid>
 

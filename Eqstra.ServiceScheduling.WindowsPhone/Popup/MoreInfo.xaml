@@ -10,11 +10,8 @@
     <Page.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton >
-                    <AppBarButton.Content>
-                        <Image Source="/Assets/logout_icon.png" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="20" Width="20" />
-                    </AppBarButton.Content>
-                </AppBarButton>
+                <AppBarButton  Style="{StaticResource LogoutAppBarButtonStyle}">
+                    s</AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

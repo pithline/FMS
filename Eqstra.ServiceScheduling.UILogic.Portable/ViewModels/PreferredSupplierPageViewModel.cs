@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -24,9 +25,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-            this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-            PersistentData.Instance.PoolofSupplier = this.PoolofSupplier;
+            try
+            {
+                var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                PersistentData.Instance.PoolofSupplier = this.PoolofSupplier;
+                this.TaskProgressBar = Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                this.TaskProgressBar = Visibility.Collapsed;
+            }
         }
         private ObservableCollection<Supplier> poolofSupplier;
         public ObservableCollection<Supplier> PoolofSupplier
@@ -35,6 +44,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref poolofSupplier, value);
+            }
+        }
+
+        private Visibility taskProgressBar;
+        public Visibility TaskProgressBar
+        {
+            get { return taskProgressBar; }
+            set
+            {
+                SetProperty(ref taskProgressBar, value);
             }
         }
     }
