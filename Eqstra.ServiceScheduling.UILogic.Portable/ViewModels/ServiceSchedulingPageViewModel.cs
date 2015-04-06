@@ -42,8 +42,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
            {
                try
                {
-                   //  await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                   navigationService.Navigate("PreferredSupplier", string.Empty);
+                  // bool response =await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                  // if (response)
+                   //{
+                       navigationService.Navigate("PreferredSupplier", string.Empty); 
+                   //}
                }
                catch (Exception ex)
                {

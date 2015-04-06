@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
@@ -21,6 +22,24 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this._navigationService = navigationService;
             this.PoolofSupplier = new ObservableCollection<Supplier>();
             this._supplierService = supplierService;
+
+            this.NextPageCommand = DelegateCommand.FromAsyncHandler(
+         async () =>
+         {
+             try
+             {
+                 navigationService.Navigate("SubmittedDetail", string.Empty);
+             }
+             catch (Exception ex)
+             {
+             }
+             finally
+             {
+             }
+         },
+
+          () => { return this.SelectedSupplier != null; });
+
         }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -56,5 +75,18 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 SetProperty(ref taskProgressBar, value);
             }
         }
+
+        private Supplier selectedSupplier;
+        public Supplier SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set
+            {
+                SetProperty(ref selectedSupplier, value);
+                this.NextPageCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public DelegateCommand NextPageCommand { get; private set; }
     }
 }
