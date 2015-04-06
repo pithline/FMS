@@ -36,9 +36,18 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private void Find_Click(object sender, RoutedEventArgs e)
         {
-            SearchSupplier ss = new SearchSupplier();
-            ss.Open(this);
+            
         }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -60,8 +69,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 ((PreferredSupplierPageViewModel)this.DataContext).PoolofSupplier = PersistentData.Instance.PoolofSupplier;
 
             }
-            FlyoutBase.ShowAttachedFlyout(filter);
         }
+      
     }
 
 }
