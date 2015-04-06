@@ -24,7 +24,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this._navigationService = navigationService;
             this._taskService = taskService;
-            this.AppBarVisibility = Visibility.Collapsed;
+            
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
             this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
 
@@ -91,15 +91,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
 
 
-        private Visibility appBarVisibility;
-        public Visibility AppBarVisibility
-        {
-            get { return appBarVisibility; }
-            set
-            {
-                SetProperty(ref appBarVisibility, value);
-            }
-        }
+       
 
         private Visibility taskProgressBar;
         public Visibility TaskProgressBar
@@ -118,15 +110,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref task, value);
-                if (value != null)
-                {
-                    AppBarVisibility = Visibility.Visible;
-                }
-                else
-                {
-                    AppBarVisibility = Visibility.Collapsed;
-
-                }
+               
             }
         }
 
