@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -24,14 +25,36 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
-
+        private IServiceDetailService _serviceDetailService;
         Windows.Media.Capture.MediaCapture captureManager;
-        public ServiceSchedulingPageViewModel(INavigationService navigationService)
+        public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService)
         {
             this._navigationService = navigationService;
+            this._serviceDetailService = serviceDetailService;
             this.Model = new ServiceSchedulingDetail();
+            this.Address = new BusinessLogic.Portable.SSModels.Address();
             captureManager = new MediaCapture();
             this.IsLiftRequired = false;
+
+            this.NextPageCommand = DelegateCommand.FromAsyncHandler(
+           async () =>
+           {
+               try
+               {
+                   //  await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                   navigationService.Navigate("PreferredSupplier", string.Empty);
+               }
+               catch (Exception ex)
+               {
+               }
+               finally
+               {
+               }
+           },
+
+            () => { return this.Model != null; });
+
+
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
               TakePictureAsync();
@@ -83,6 +106,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             await captureManager.InitializeAsync();
+            var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+            this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
         }
 
         private ServiceSchedulingDetail model;
@@ -92,6 +117,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref model, value); }
         }
 
+        private Address address;
+        public Address Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
+        public DelegateCommand NextPageCommand { get; private set; }
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         public DelegateCommand OpenImageViewerCommand { get; set; }
 

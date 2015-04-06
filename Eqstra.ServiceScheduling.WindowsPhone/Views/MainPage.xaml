@@ -14,7 +14,7 @@
     <prism:VisualStateAwarePage.Resources>
         <Flyout x:Key="FilterFlyout" Closed="Flyout_Closed">
             <StackPanel>
-                <TextBox FontSize="25" Margin="10,0"  TextChanged="Filter_TextChanged"/>
+                <TextBox FontSize="25" Margin="10,0" TextAlignment="Center"  TextChanged="Filter_TextChanged"/>
             </StackPanel>
         </Flyout> 
         <DataTemplate x:Key="TasksTemplate">

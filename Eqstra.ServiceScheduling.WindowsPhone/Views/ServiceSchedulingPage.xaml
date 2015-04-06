@@ -15,7 +15,7 @@
         <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Home" Label="Home" Command="{Binding HomeCommand}"/>
-                <AppBarButton Label="Submit" Icon="Accept" Command="{Binding NextCommand}"/>
+                <AppBarButton Label="Submit" Icon="Accept" Command="{Binding NextPageCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Appointments" Icon="Calendar" Name="Calendar" Click="Calendar_Click"/>

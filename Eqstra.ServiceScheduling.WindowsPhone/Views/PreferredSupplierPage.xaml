@@ -22,7 +22,7 @@
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
-                                <TextBox FontSize="25" Margin="10,0"  TextChanged="filter_TextChanged"/>
+                                <TextBox FontSize="25" TextAlignment="Center" Margin="10,0"  TextChanged="filter_TextChanged"/>
                             </StackPanel>
                         </Flyout>
                     </AppBarButton.Flyout>

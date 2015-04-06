@@ -35,7 +35,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                  {
                      if (this.InspectionTask != null && this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                      {
-                         navigationService.Navigate("ServiceScheduling", string.Empty);
+                         navigationService.Navigate("ServiceScheduling", this.InspectionTask);
                      }
                      else
                      {
