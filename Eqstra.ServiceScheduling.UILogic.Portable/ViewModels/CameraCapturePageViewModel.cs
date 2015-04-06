@@ -1,17 +1,21 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Devices.Enumeration;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -19,19 +23,26 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     public class CameraCapturePageViewModel : ViewModel
     {
         private INavigationService _navigationService;
-
+        private ServiceSchedulingDetail serviceDetail;
+        private byte[] _bytes;
 
         public CameraCapturePageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            this.MediaCapture = new MediaCapture();
+
             TakePictureCommand = new DelegateCommand(async () =>
             {
                 var imageEncodingProps = ImageEncodingProperties.CreatePng();
+
                 using (var stream = new InMemoryRandomAccessStream())
                 {
 
+
                     await this.MediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
+                    _bytes = new byte[stream.Size];
+                    var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
+                    _bytes = buffer.ToArray();
+
                     if (ImageSource == null)
                     {
                         ImageSource = new BitmapImage();
@@ -41,17 +52,23 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
             });
 
-            RetakePictureCommand = new DelegateCommand( () =>
+            RetakePictureCommand = new DelegateCommand(() =>
             {
                 ImageVisibility = Visibility.Collapsed;
             });
 
             AcceptCommand = new DelegateCommand(() =>
             {
-                _navigationService.Navigate("ServiceSchedulingPage", null);
+                if (serviceDetail.OdoReadingImageCapture.ImageBitmap == null)
+                    serviceDetail.OdoReadingImageCapture.ImageBitmap = this.ImageSource;
+                if (_bytes.Length > 0)
+                {
+                    serviceDetail.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
+                }
+                _navigationService.Navigate("ServiceSchedulingPage", serviceDetail);
                 _navigationService.ClearHistory();
             });
-           
+
         }
 
 
@@ -61,12 +78,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.ImageVisibility = Visibility.Collapsed;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-            this.MediaCapture.VideoDeviceController.PrimaryUse = Windows.Media.Devices.CaptureUse.Photo;
-            await this.MediaCapture.InitializeAsync();
-            
-            await this.MediaCapture.StartPreviewAsync();
+            //await this.MediaCapture.InitializeAsync();
+            //this.MediaCapture.VideoDeviceController.PrimaryUse = Windows.Media.Devices.CaptureUse.Photo;
+
+            //await this.MediaCapture.StartPreviewAsync();
 
         }
+
+
+
+
 
         public ICommand TakePictureCommand { get; set; }
 

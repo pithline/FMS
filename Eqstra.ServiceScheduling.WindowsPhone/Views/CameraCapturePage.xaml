@@ -21,7 +21,7 @@
             <AppBarButton Icon="Camera"
                           Label="take"
                           Visibility="{Binding ImageVisibility,Converter={StaticResource vi}}"
-                          Command="{Binding TakePictureCommand}" />
+                         Click="AppBarButton_Click" />
             <AppBarButton Icon="Undo"
                           Label="retake"
                           Visibility="{Binding ImageVisibility}" />
@@ -29,7 +29,10 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
-        <CaptureElement />
+        <CaptureElement x:Name="PreviewElement"
+                     Loaded="PreviewElement_Loaded"
+                        Visibility="{Binding ImageVisibility, Converter={StaticResource vi}}"
+                         />
 
         <Image Source="{Binding ImageSource}"
                Visibility="{Binding ImageVisibility}" />
