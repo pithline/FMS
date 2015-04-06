@@ -60,5 +60,19 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             }
             return JsonConvert.DeserializeObject<ObservableCollection<Supplier>>(await response.Content.ReadAsStringAsync());
         }
+
+
+        async public Task<ObservableCollection<Supplier>> FilterSuppliersByCriteria(string countryId, string provinceId, string cityId, string suburbId, string regionId, UserInfo userInfo)
+        {
+            var postData = new { target = "ServiceScheduling", parameters = new[] { "FilterSuppliersByCriteria", countryId, provinceId,cityId,suburbId,regionId, JsonConvert.SerializeObject(userInfo) } };
+            var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var tasks = await response.Content.ReadAsStringAsync();
+            }
+
+            return JsonConvert.DeserializeObject<ObservableCollection<Supplier>>(await response.Content.ReadAsStringAsync());
+        }
     }
 }

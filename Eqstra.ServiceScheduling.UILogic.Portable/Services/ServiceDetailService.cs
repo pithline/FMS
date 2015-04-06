@@ -3,6 +3,7 @@ using Eqstra.ServiceScheduling.UILogic.Portable.Factories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         public async Task<BusinessLogic.Portable.SSModels.ServiceSchedulingDetail> GetServiceDetailAsync(string caseNumber, long caseServiceRecId, long serviceRecId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling", method= "single", parameters = new[] { "GetServiceDetails", caseNumber, caseServiceRecId.ToString(), serviceRecId.ToString(), JsonConvert.SerializeObject(userInfo) } };
+            var postData = new { target = "ServiceScheduling", method = "single", parameters = new[] { "GetServiceDetails", caseNumber, caseServiceRecId.ToString(), serviceRecId.ToString(), JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
@@ -44,17 +45,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
         }
 
 
-       async public Task<System.Collections.ObjectModel.ObservableCollection<string>> GetServiceTypes(string caseNumber, string companyId)
+        public Task<System.Collections.ObjectModel.ObservableCollection<string>> GetServiceTypes(string caseNumber, string companyId)
         {
-            var postData = new { target = "ServiceScheduling", parameters = new[] { "GetRegionList", countryId, stateId, JsonConvert.SerializeObject(userInfo) } };
-            var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
-            {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
-            return JsonConvert.DeserializeObject<string>>(await response.Content.ReadAsStringAsync());
+            throw new NotImplementedException();
         }
 
         public Task<System.Collections.ObjectModel.ObservableCollection<LocationType>> GetLocationType(long serviceRecId, string companyId)
@@ -62,9 +55,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             throw new NotImplementedException();
         }
 
-        public Task<System.Collections.ObjectModel.ObservableCollection<DestinationType>> GetDestinationTypeList(string callerKey, string cusId, UserInfo userInfo)
+        async public Task<System.Collections.ObjectModel.ObservableCollection<DestinationType>> GetDestinationTypeList(string callerKey, string cusId, UserInfo userInfo)
         {
-            throw new NotImplementedException();
+            var postData = new { target = "ServiceScheduling", parameters = new[] { "GetDestinationTypeList", callerKey, cusId, JsonConvert.SerializeObject(userInfo) } };
+            var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var tasks = await response.Content.ReadAsStringAsync();
+            }
+
+            return JsonConvert.DeserializeObject<ObservableCollection<DestinationType>>(await response.Content.ReadAsStringAsync());
         }
     }
 }
