@@ -196,16 +196,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-
-
-
-
-
-
-
-
-
-
         public DelegateCommand MailToCommand { get; set; }
 
         public DelegateCommand MakeIMCommand { get; set; }
