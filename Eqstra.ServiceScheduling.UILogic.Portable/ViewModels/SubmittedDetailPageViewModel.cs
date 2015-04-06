@@ -45,6 +45,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref model, value); }
         }
 
+     
+        
+
         public DelegateCommand HomePageCommand { get; private set; }
         public DelegateCommand NextPageCommand { get; private set; }
 

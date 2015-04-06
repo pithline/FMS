@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Newtonsoft.Json;
@@ -25,7 +26,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     {
 
                         ProgressDialogPopup.Open(this);
-                        navigationService.Navigate("Main", string.Empty);
+                        navigationService.Navigate("Main", new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" });
                         navigationService.ClearHistory();
                         ProgressDialogPopup.Close();
 

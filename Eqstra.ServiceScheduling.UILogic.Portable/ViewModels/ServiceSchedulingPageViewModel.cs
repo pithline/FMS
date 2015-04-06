@@ -42,11 +42,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
            {
                try
                {
-                  // bool response =await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                  // if (response)
-                   //{
-                       navigationService.Navigate("PreferredSupplier", string.Empty); 
-                   //}
+                   bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                   if (response)
+                   {
+                       navigationService.Navigate("PreferredSupplier", string.Empty);
+                   }
                }
                catch (Exception ex)
                {
@@ -61,11 +61,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
-              _navigationService.Navigate("CameraCapture",null);
+              _navigationService.Navigate("CameraCapture", null);
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-                ()=>
+                () =>
                 {
 
                     CoreWindow currentWindow = Window.Current.CoreWindow;
@@ -84,7 +84,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                         this._imageViewer = new ImageViewerPopup();
                     }
 
-                _imageViewer.DataContext = this.Model.ODOReadingSnapshot;
+                    _imageViewer.DataContext = this.Model.ODOReadingSnapshot;
                     popup.Child = _imageViewer;
                     this._imageViewer.Tag = popup;
 
@@ -101,7 +101,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         async private void TakePictureAsync()
         {
-            
+
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                 "TestPhoto.jpg",
@@ -116,6 +116,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             await captureManager.InitializeAsync();
             var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
             this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            if (this.Model == null)
+            {
+                this.Model = new ServiceSchedulingDetail();
+            }
         }
 
         private ServiceSchedulingDetail model;
@@ -155,6 +159,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
+        private List<Supplier> suppliers;
+        public List<Supplier> Suppliers
+        {
+            get { return suppliers; }
+            set { SetProperty(ref suppliers, value); }
+        }
+
+        private Supplier selectedSupplier;
+
+        public Supplier SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set { SetProperty(ref selectedSupplier, value); }
+        }
+        
         private Visibility isReqVisibility;
         public Visibility IsReqVisibility
         {

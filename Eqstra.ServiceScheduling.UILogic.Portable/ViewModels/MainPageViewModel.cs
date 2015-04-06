@@ -1,18 +1,14 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Windows.System;
 using Windows.UI.Xaml;
-using Eqstra.BusinessLogic.Portable.SSModels;
-using Eqstra.ServiceScheduling.UILogic.Portable.Services;
-using System.Text.RegularExpressions;
-using Windows.ApplicationModel.Appointments;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -147,6 +143,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+                var userInfo = ((Eqstra.BusinessLogic.Portable.SSModels.UserInfo)navigationParameter);
+                PersistentData.Instance.UserInfo = new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" };
                 var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                 foreach (var task in tasksResult)
                 {
@@ -197,6 +195,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 throw;
             }
         }
+
+
+
+
+
+
+
+
+
+
 
         public DelegateCommand MailToCommand { get; set; }
 
