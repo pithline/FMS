@@ -117,7 +117,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private void filter_Click(object sender, RoutedEventArgs e)
         {
-           FlyoutBase.ShowAttachedFlyout(filter);
+            FlyoutBase.ShowAttachedFlyout(filter);
+        }
+
+        private void TasksPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((MainPageViewModel)this.DataContext).InspectionTask = null;
         }
 
     }

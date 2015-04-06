@@ -24,7 +24,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this._navigationService = navigationService;
             this._taskService = taskService;
-            
+
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
             this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
 
@@ -59,17 +59,24 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("whatsapp:" + 9290650135));
-            }, () => { return(this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
+            }, () =>
+            {
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
+            }
+            );
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("callto:" + 9290650135));
-            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone)); });
+            }, () =>
+            {
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
+            });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 await Launcher.LaunchUriAsync(new Uri("mailto:" + "kasif@mzkgbl.com"));
-            }, () => { return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
+            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
@@ -85,12 +92,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 //await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
             }, () =>
             {
-                return (this.InspectionTask !=null && !string.IsNullOrEmpty(this.InspectionTask.Address));
+                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
             });
         }
-
-
-       
 
         private Visibility taskProgressBar;
         public Visibility TaskProgressBar
