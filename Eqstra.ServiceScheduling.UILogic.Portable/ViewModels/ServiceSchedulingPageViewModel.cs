@@ -28,14 +28,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
-
+        
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService)
         {
             this._navigationService = navigationService;
             this._serviceDetailService = serviceDetailService;
             this.Model = new ServiceSchedulingDetail();
             this.Address = new BusinessLogic.Portable.SSModels.Address();
-
+          
             this.IsLiftRequired = false;
 
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
@@ -48,8 +48,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                    bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                    if (response)
                    {
-                       navigationService.Navigate("PreferredSupplier", string.Empty);
-                   }
+                   navigationService.Navigate("PreferredSupplier", string.Empty);
+               }
                }
                catch (Exception ex)
                {
@@ -87,7 +87,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                         this._imageViewer = new ImageViewerPopup();
                     }
 
-                    _imageViewer.DataContext = this.Model.ODOReadingSnapshot;
+                _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
                     popup.Child = _imageViewer;
                     this._imageViewer.Tag = popup;
 
@@ -102,7 +102,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         }
 
-
+       
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
@@ -111,17 +111,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                 if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
                 {
-
-                    this.Model = new ServiceSchedulingDetail() { OdoReadingImageCapture = new ImageCapture { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) } };
+            
+                    this.Model = new ServiceSchedulingDetail() { OdoReadingImageCapture = new ImageCapture { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) } }; 
                 }
                 else
                 {
                     var bitmap = new BitmapImage();
-                    await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
+                   await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
                     this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
                 }
 
-            }
+        }
             else
             {
                 this.Model = navigationParameter as ServiceSchedulingDetail;
@@ -134,7 +134,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             var randomAccessStream = new InMemoryRandomAccessStream();
             using (var writer = new DataWriter(randomAccessStream))
-            {
+        {
                 writer.WriteBytes(bytes);
                 await writer.StoreAsync();
                 await writer.FlushAsync();
@@ -187,7 +187,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             get { return suppliers; }
             set { SetProperty(ref suppliers, value); }
-        }
+            }
 
         private Supplier selectedSupplier;
 
