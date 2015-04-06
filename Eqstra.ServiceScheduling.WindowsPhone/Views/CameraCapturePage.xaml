@@ -40,6 +40,8 @@
                          />
 
         <Image x:Name="Img"
-               Visibility="{Binding ElementName=Retake, Path=Visibility}" />
+               Source="{Binding ImageSource,Mode=TwoWay}"
+               Visibility="{Binding ElementName=Retake, Path=Visibility}"
+               Stretch="UniformToFill"/>
     </Grid>
 </prism:VisualStateAwarePage>

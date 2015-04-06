@@ -140,8 +140,9 @@
             <DatePicker  Width="350"
                          Header="Service Date (Option 1)"
                          Grid.Row="5"
-                         Date="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
+                          Date ="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
                          Margin="2"
+                         
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center" />
 

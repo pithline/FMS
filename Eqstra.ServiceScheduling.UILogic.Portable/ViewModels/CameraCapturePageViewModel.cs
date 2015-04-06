@@ -41,7 +41,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     await this.MediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
                     _bytes = new byte[stream.Size];
                     var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
-                    _bytes = buffer.ToArray(0,(int)stream.Size);
+                    _bytes = buffer.ToArray(0, (int)stream.Size);
 
                     if (ImageSource == null)
                     {
@@ -59,14 +59,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             AcceptCommand = new DelegateCommand<byte[]>((bytes) =>
             {
-                if (_serviceDetail.OdoReadingImageCapture.ImageBitmap == null)
-                    _serviceDetail.OdoReadingImageCapture.ImageBitmap = this.ImageSource;
+                _serviceDetail.OdoReadingImageCapture.ImageBitmap = this.ImageSource;
                 if (bytes.Length > 0)
                 {
                     _serviceDetail.ODOReadingSnapshot = Convert.ToBase64String(bytes);
                 }
                 _navigationService.Navigate("ServiceScheduling", _serviceDetail);
-                _navigationService.ClearHistory();
+                //_navigationService.ClearHistory();
             });
 
         }

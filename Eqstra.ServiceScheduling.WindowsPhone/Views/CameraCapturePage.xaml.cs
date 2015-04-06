@@ -77,8 +77,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 _mediaCapture.VideoDeviceController.FocusControl.Configure(focusSettings);
                 await _mediaCapture.VideoDeviceController.ExposureControl.SetAutoAsync(true);
 
-                _mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
-                _mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
+                //_mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
+                //_mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
 
 
                 PreviewElement.Source = _mediaCapture;
@@ -128,13 +128,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     {
                         vm.ImageSource = new BitmapImage();
                     }
-
-                    await vm.ImageSource.SetSourceAsync(stream as IRandomAccessStream);
+                    stream.Seek(0);
+                    await vm.ImageSource.SetSourceAsync(stream);
                     Retake.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     Take.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                     await _mediaCapture.StopPreviewAsync();
 
-
+                   
                 }
             }
             catch (Exception)
@@ -146,7 +146,10 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
        async private void Accept_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as CameraCapturePageViewModel;
-            await _mediaCapture.StopPreviewAsync();
+            if (Take.Visibility == Windows.UI.Xaml.Visibility.Visible)
+            {
+                await _mediaCapture.StopPreviewAsync(); 
+            }
             _mediaCapture.Dispose();
             vm.AcceptCommand.Execute(_bytes);
         }

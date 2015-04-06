@@ -68,8 +68,21 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 
         public string ConfirmedDate { get; set; }
 
-        public DateTime ServiceDateOpt1 { get; set; }
+        private DateTime serviceDateOpt1;
+        public DateTime ServiceDateOpt1
+        {
+            get { return serviceDateOpt1; }
+            set { SetProperty(ref serviceDateOpt1, value); }
+        }
 
-        public DateTime ServiceDateOpt2 { get; set; }
+
+        private DateTime serviceDateOpt2;
+        public DateTime ServiceDateOpt2
+        {
+            get { return serviceDateOpt2; }
+            set { SetProperty(ref serviceDateOpt2, value); }
+        }
+
+      
     }
 }

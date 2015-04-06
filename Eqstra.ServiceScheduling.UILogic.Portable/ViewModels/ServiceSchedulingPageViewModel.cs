@@ -130,11 +130,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
             if (!String.IsNullOrEmpty(this.Model.ServiceDateOption1))
             {
-                this.Model.ServiceDateOpt1 = DateTime.ParseExact(this.Model.ServiceDateOption1, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                this.Model.ServiceDateOpt1 = DateTime.Parse(this.Model.ServiceDateOption1);
             }
             if (!String.IsNullOrEmpty(this.Model.ServiceDateOption2))
             {
-                this.Model.ServiceDateOpt2 = DateTime.ParseExact(this.Model.ServiceDateOption2, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
             }
         }
 
