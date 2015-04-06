@@ -35,7 +35,7 @@
                 </AppBarButton>
                 <AppBarButton Label="Submit"
                               Icon="Accept"
-                              Command="{Binding NextPageCommand}"/>
+                              Command="{Binding NextPageCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Appointments"
@@ -52,8 +52,7 @@
         <Hub x:Name="Hub"
              x:Uid="Hub">
 
-            <HubSection x:Uid="HubSection1"
-                        Header="preferred suppliers">
+            <HubSection Header="preferred suppliers">
                 <DataTemplate>
                     <Grid>
                         <ProgressBar IsIndeterminate="True"
@@ -63,7 +62,8 @@
                         <ListView HorizontalAlignment="Center"
                                   SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
                                   ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                  VerticalAlignment="Center" SelectionMode="Single"
+                                  VerticalAlignment="Center"
+                                  SelectionMode="Single"
                                   ItemsSource="{Binding PoolofSupplier}"
                                   ItemContainerStyle="{StaticResource ListViewItemStyle1}">
                             <ListView.ItemTemplate>
@@ -80,8 +80,7 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Uid="HubSection2"
-                        Header="suppliers filter">
+            <HubSection Header="suppliers filter">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -96,8 +95,8 @@
 
                         <ComboBox  Height="70"
                                    Width="310"
-                                   ItemsSource="{Binding }"
-                                   SelectedItem="{Binding }"
+                                   ItemsSource="{Binding Address.Countries }"
+                                   SelectedItem="{Binding Address.SelectedCountry}"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
@@ -105,8 +104,8 @@
                         <ComboBox  Height="70"
                                    Grid.Row="1"
                                    Width="310"
-                                   ItemsSource="{Binding }"
-                                   SelectedItem="{Binding }"
+                                   ItemsSource="{Binding Address.Provinces}"
+                                   SelectedItem="{Binding Address.Selectedprovince}"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
@@ -114,8 +113,8 @@
                         <ComboBox  Height="70"
                                    Grid.Row="2"
                                    Width="310"
-                                   ItemsSource="{Binding }"
-                                   SelectedItem="{Binding }"
+                                   ItemsSource="{Binding Address.Cities}"
+                                   SelectedItem="{Binding Address.SelectedCity}"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
@@ -123,8 +122,8 @@
                         <ComboBox  Height="70"
                                    Grid.Row="3"
                                    Width="310"
-                                   ItemsSource="{Binding }"
-                                   SelectedItem="{Binding }"
+                                   ItemsSource="{Binding Address.Suburbs}"
+                                   SelectedItem="{Binding Address.SelectedSuburb}"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
@@ -132,8 +131,8 @@
                         <ComboBox  Height="70"
                                    Grid.Row="4"
                                    Width="310"
-                                   ItemsSource="{Binding }"
-                                   SelectedItem="{Binding }"
+                                   ItemsSource="{Binding Address.Region}"
+                                   SelectedItem="{Binding Address.SelectedRegion}"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />

@@ -16,9 +16,6 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             get { return street; }
             set { SetProperty(ref street, value); }
         }
-       
-        
-
         public List<string> Postcodes { get; set; }
 
         public List<Country> Countries { get; set; }
@@ -40,6 +37,7 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         public string SelectedSuburb { get; set; }
 
         public string SelectedZip { get; set; }
+        public string SelectedRegion { get; set; }
 
     }
 }

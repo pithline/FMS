@@ -22,6 +22,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this._navigationService = navigationService;
             this.PoolofSupplier = new ObservableCollection<Supplier>();
             this._supplierService = supplierService;
+            this.Address = new Address();
 
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
          async () =>
@@ -87,6 +88,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
+        private Address address;
+        public Address Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
         public DelegateCommand NextPageCommand { get; private set; }
     }
 }
