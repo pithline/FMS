@@ -140,14 +140,14 @@
             <DatePicker  Width="350"
                          Header="Service Date (Option 1)"
                          Grid.Row="5"
-                         Date="{Binding Model.ODOReadingDate,Mode=TwoWay}"
+                         Date="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
                          Margin="2"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center" />
 
             <DatePicker  Width="350"
                          Header="Service Date (Option 2)"
-                         Date="{Binding Model.ODOReadingDate,Mode=TwoWay}"
+                         Date="{Binding Model.ServiceDateOpt2,Mode=TwoWay}"
                          Grid.Row="6"
                          Margin="2"
                          HorizontalAlignment="Center"

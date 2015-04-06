@@ -14,6 +14,7 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         {
             this.OdoReadingImageCapture = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) };
         }
+        
         public String CaseNumber { get; set; }
 
         public Int64 CaseServiceRecID { get; set; }
@@ -67,5 +68,8 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 
         public string ConfirmedDate { get; set; }
 
+        public DateTime ServiceDateOpt1 { get; set; }
+
+        public DateTime ServiceDateOpt2 { get; set; }
     }
 }
