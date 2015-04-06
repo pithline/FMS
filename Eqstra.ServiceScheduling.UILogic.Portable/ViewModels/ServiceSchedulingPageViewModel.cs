@@ -19,6 +19,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
 
+
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class ServiceSchedulingPageViewModel : ViewModel
@@ -57,10 +58,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
-              TakePictureAsync();
+              _navigationService.Navigate("CameraCapture",null);
+
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-                () =>
+                ()=>
                 {
 
                     CoreWindow currentWindow = Window.Current.CoreWindow;
@@ -79,8 +81,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                         this._imageViewer = new ImageViewerPopup();
                     }
 
+                _imageViewer.DataContext = this.Model.ODOReadingSnapshot;
                     popup.Child = _imageViewer;
                     this._imageViewer.Tag = popup;
+
 
                     this._imageViewer.Height = currentWindow.Bounds.Height;
                     this._imageViewer.Width = currentWindow.Bounds.Width;
@@ -94,6 +98,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         async private void TakePictureAsync()
         {
+            
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                 "TestPhoto.jpg",

@@ -7,24 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#77666666">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button x:Name="backButton" VerticalAlignment="Top" Click="Close_Click" HorizontalAlignment="Left"
-                         Background="LightGoldenrodYellow"
-                        Margin="10 0 0 20"/>
+       
+          
             <Image Grid.Row="1" x:Name="Viewer" Source="{Binding ImagePath}" Stretch="None" Margin="10">
-                
-            </Image>        </Grid>
 
+            </Image>
+
+       
+            <Button Click="Close_Click" Margin="5 0"
+                      Content="close" Grid.Row="2" HorizontalAlignment="Center"
+                        />
+          
+        
     </Grid>
+
+    
 </Page>

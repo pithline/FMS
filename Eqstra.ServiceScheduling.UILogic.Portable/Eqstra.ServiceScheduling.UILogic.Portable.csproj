@@ -56,6 +56,7 @@
     <Compile Include="Services\ServiceDetailService.cs" />
     <Compile Include="Services\SupplierService.cs" />
     <Compile Include="Services\TaskService.cs" />
+    <Compile Include="ViewModels\CameraCapturePageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PreferredSupplierPageViewModel.cs" />
