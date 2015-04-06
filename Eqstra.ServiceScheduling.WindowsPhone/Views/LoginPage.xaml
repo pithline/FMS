@@ -18,16 +18,14 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
             <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png" Stretch="None"/>
-            <TextBox PlaceholderText="User Name" Background="{ThemeResource PhoneAccentBrush}" Height="45" Width="350" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <PasswordBox PlaceholderText="Password" Background="{ThemeResource PhoneAccentBrush}"  Height="45" Width="350" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Button HorizontalAlignment="Center" Style="{StaticResource LoginButtonStyle}" Command="{Binding LoginCommand}" >
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="ms-appx:///Assets/loginIcon.png" Width="50" Height="50"/>
-                        <TextBlock Text="Login" Margin="20 15"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+            <TextBox PlaceholderText="user name" Height="45" Width="350" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox PlaceholderText="password"  Height="45" Width="350" Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox HorizontalAlignment="Left"
+                     
+                      >Remember</CheckBox>
+
+
+            <Button HorizontalAlignment="Center" Content="login" Command="{Binding LoginCommand}" />
         </StackPanel>
     </Grid>
 </prism:VisualStateAwarePage>

@@ -26,6 +26,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                         ProgressDialogPopup.Open(this);
                         navigationService.Navigate("Main", string.Empty);
+                        navigationService.ClearHistory();
                         ProgressDialogPopup.Close();
 
                     }

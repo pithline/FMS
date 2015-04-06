@@ -1,0 +1,38 @@
+﻿<prism:VisualStateAwarePage x:Class="Eqstra.ServiceScheduling.WindowsPhone.Views.CameraCapturePage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:local="using:Eqstra.ServiceScheduling.WindowsPhone.Views"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+                            xmlns:c="using:Eqstra.ServiceScheduling.Converters"
+                            xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            mvvm:ViewModelLocator.AutoWireViewModel="True"
+                            mc:Ignorable="d"
+                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <prism:VisualStateAwarePage.Resources>
+        <c:VisibilityInverter x:Key="vi" />
+    </prism:VisualStateAwarePage.Resources>
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Background="#33000000">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Accept" />
+            </CommandBar.SecondaryCommands>
+            <AppBarButton Icon="Camera"
+                          Label="take"
+                          Visibility="{Binding ImageVisibility,Converter={StaticResource vi}}"
+                          Command="{Binding TakePictureCommand}" />
+            <AppBarButton Icon="Undo"
+                          Label="retake"
+                          Visibility="{Binding ImageVisibility}" />
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+
+    <Grid>
+        <CaptureElement Source="{Binding MediaCapture}"
+                        Visibility="{Binding ImageVisibility, Converter={StaticResource vi}}" />
+
+        <Image Source="{Binding ImageSource}"
+               Visibility="{Binding ImageVisibility}" />
+    </Grid>
+</prism:VisualStateAwarePage>
