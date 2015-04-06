@@ -84,7 +84,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                         this._imageViewer = new ImageViewerPopup();
                     }
 
-                _imageViewer.DataContext = this.Model.ODOReadingSnapshot;
+                _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
                     popup.Child = _imageViewer;
                     this._imageViewer.Tag = popup;
 
