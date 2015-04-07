@@ -48,6 +48,7 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             {
                 return (this.SelectedSupplier != null);
             });
+
             this.CountryChangedCommand = new DelegateCommand<object>(async (param) =>
             {
                 try

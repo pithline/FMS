@@ -50,9 +50,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
            {
-
                int s = 564611;
-
            });
         }
 
@@ -77,12 +75,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         async private void Message_Click(object sender, RoutedEventArgs e)
         {
-            Windows.ApplicationModel.Chat.ChatMessage msg
-         = new Windows.ApplicationModel.Chat.ChatMessage();
+
+            Windows.ApplicationModel.Chat.ChatMessage msg = new Windows.ApplicationModel.Chat.ChatMessage();
             msg.Body = "";
             msg.Recipients.Add(((MainPageViewModel)this.DataContext).InspectionTask.CustPhone);
-            await Windows.ApplicationModel.Chat.ChatMessageManager
-                     .ShowComposeSmsMessageAsync(msg);
+            await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(msg);
 
         }
 

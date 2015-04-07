@@ -27,20 +27,21 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             this.InitializeComponent();
         }
-
+        public PreferredSupplierPageViewModel vm { get; set; }
         private void More_Click(object sender, RoutedEventArgs e)
         {
             MoreInfo m = new MoreInfo();
+            this.vm = this.DataContext as PreferredSupplierPageViewModel;
             m.Open(this);
         }
 
         private void Find_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-           
+
 
         }
 
@@ -70,7 +71,33 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
             }
         }
-      
+
+        private void country_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.vm = this.DataContext as PreferredSupplierPageViewModel;
+            vm.CountryChanged();
+        }
+
+        private void Provinces_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.ProvinceChanged();
+        }
+
+        private void City_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.CityChanged();
+        }
+
+        private void suburb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void region_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 
 }

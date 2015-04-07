@@ -22,7 +22,7 @@
                               Icon="Calendar"
                               x:Name="Calendar"
                               Click="Calendar_Click" />
-                <AppBarButton Label="Profile"
+                <AppBarButton Label="Details"
                               Icon="NewWindow"
                               x:Name="Profile"
                               Click="More_Click" />
@@ -203,7 +203,7 @@
             <ComboBox Grid.Row="11"
                       Header="Destination Types"
                       Visibility="{Binding IsReqVisibility}"
-                      ItemsSource="{Binding Model.DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       DisplayMemberPath="ContactName"
                       SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                       x:Name="ddDestinationTypes"
