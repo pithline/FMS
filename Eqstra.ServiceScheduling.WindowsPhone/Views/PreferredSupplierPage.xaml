@@ -162,6 +162,7 @@
                                     VerticalAlignment="Bottom"
                                     Orientation="Horizontal">
                             <AppBarButton Icon="Accept"
+                                          Command="{Binding SupplierFilterCommand}"
                                           Name="Accept"
                                           Click="Accept_Click"
                                           Label="Accept"
@@ -169,6 +170,7 @@
                                           HorizontalAlignment="Left"
                                           RequestedTheme="Dark" />
                             <AppBarButton Icon="Cancel"
+                                          Command="{Binding ConcelCommand}"
                                           Name="Cancel"
                                           Click="Cancel_Click"
                                           Label="Cancel"

@@ -31,7 +31,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
          {
              try
              {
-                 navigationService.Navigate("SubmittedDetail", string.Empty);
+                 if (this.SelectedSupplier != null)
+                 {
+                     var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
+                     var response = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                     if (response)
+                     {
+                         navigationService.Navigate("SubmittedDetail", string.Empty);
+                     }
+                 }
+
              }
              catch (Exception ex)
              {
@@ -61,7 +70,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 return (this.SelectedSupplier != null);
             });
+            this.ConcelCommand = new DelegateCommand(async () =>
+          {
+              this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(this.SelectedTask.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
 
+          });
             this.SupplierFilterCommand = new DelegateCommand(async () =>
             {
                 try
@@ -73,6 +86,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     string suburbId = this.SupplierFilter.SelectedSuburb != null ? this.SupplierFilter.SelectedSuburb.Id : string.Empty;
                     string regionId = this.SupplierFilter.SelectedRegion != null ? this.SupplierFilter.SelectedRegion.Id : string.Empty;
 
+                    this.PoolofSupplier = await this._supplierService.SearchSupplierByLocationAsync(countryId, provinceId, cityId, suburbId, regionId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
 
                     this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
                 }
@@ -89,8 +103,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
-                var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(this.SelectedTask.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
 
                 this.SupplierFilter.Countries = await _locationService.GetCountryList(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
 
@@ -143,6 +157,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
 
         public DelegateCommand GoToConfirmationCommand { get; set; }
+        public DelegateCommand ConcelCommand { get; set; }
 
         private ObservableCollection<Supplier> poolofSupplier;
         public ObservableCollection<Supplier> PoolofSupplier
@@ -191,5 +206,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
         public DelegateCommand SupplierFilterCommand { get; set; }
         public DelegateCommand NextPageCommand { get; private set; }
+
+        public Eqstra.BusinessLogic.Portable.SSModels.Task SelectedTask { get; set; }
     }
 }
