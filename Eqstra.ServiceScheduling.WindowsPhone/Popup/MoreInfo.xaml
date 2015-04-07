@@ -9,12 +9,12 @@
     <Page.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}"
                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <CommandBar.PrimaryCommands>
-                
-                <AppBarButton Icon="Home"
+             <AppBarButton  Icon="ClosePane"
                               Click="home_Click" />
-            </CommandBar.PrimaryCommands>
+            
         </CommandBar>
+        
+              
     </Page.BottomAppBar>
 
     <Grid>
