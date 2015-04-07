@@ -16,7 +16,7 @@
 
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}"
-                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                   >
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Find"
                               Icon="Find"

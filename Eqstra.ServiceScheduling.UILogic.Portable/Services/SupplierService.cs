@@ -37,7 +37,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         public async Task<bool> InsertSelectedSupplierAsync(SupplierSelection supplierSelection, UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling",method="save", parameters = new[] { "InsertSelectedSupplier", Newtonsoft.Json.JsonConvert.SerializeObject(supplierSelection) } };
+            var postData = new { target = "ServiceScheduling", method = "save", parameters = new[] { "InsertSelectedSupplier", Newtonsoft.Json.JsonConvert.SerializeObject(supplierSelection), Newtonsoft.Json.JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
@@ -62,17 +62,5 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
         }
 
 
-        async public Task<ObservableCollection<Supplier>> FilterSuppliersByCriteria(string countryId, string provinceId, string cityId, string suburbId, string regionId, UserInfo userInfo)
-        {
-            var postData = new { target = "ServiceScheduling", parameters = new[] { "FilterSuppliersByCriteria", countryId, provinceId,cityId,suburbId,regionId, JsonConvert.SerializeObject(userInfo) } };
-            var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
-            {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
-            return JsonConvert.DeserializeObject<ObservableCollection<Supplier>>(await response.Content.ReadAsStringAsync());
-        }
     }
 }
