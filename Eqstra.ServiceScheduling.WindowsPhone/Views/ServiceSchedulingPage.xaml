@@ -13,8 +13,7 @@
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Background="{ThemeResource 
-            ApplicationPageBackgroundThemeBrush}"
+        <CommandBar 
                     IsSticky="False"
                     ClosedDisplayMode="Compact">
             <CommandBar.SecondaryCommands>

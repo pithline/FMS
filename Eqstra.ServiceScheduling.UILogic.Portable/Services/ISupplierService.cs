@@ -15,7 +15,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
          Task<bool> InsertSelectedSupplierAsync(SupplierSelection supplierSelection, UserInfo userInfo);
 
          Task<ObservableCollection<Supplier>> SearchSupplierByLocationAsync(string countryId, string provinceId, string cityId, string suburbId, string regionId, UserInfo userInfo);
-         Task<ObservableCollection<Supplier>> FilterSuppliersByCriteria(string countryId, string provinceId, string cityId, string suburbId, string regionId, UserInfo userInfo);
-
+       
     }
 }

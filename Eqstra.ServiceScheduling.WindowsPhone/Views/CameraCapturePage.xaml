@@ -9,7 +9,7 @@
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             mvvm:ViewModelLocator.AutoWireViewModel="True"
                             mc:Ignorable="d"
-                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                           >
     <prism:VisualStateAwarePage.Resources>
         <c:VisibilityInverter x:Key="vi" />
     </prism:VisualStateAwarePage.Resources>

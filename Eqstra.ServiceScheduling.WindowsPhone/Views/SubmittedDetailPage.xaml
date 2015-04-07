@@ -8,10 +8,10 @@
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
                             mvvm:ViewModelLocator.AutoWireViewModel="True"
-                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            >
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Submit"
                               Icon="Accept"
