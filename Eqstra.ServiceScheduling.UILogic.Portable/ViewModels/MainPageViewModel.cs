@@ -48,9 +48,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              }
 );
 
-
-
-
             // this.Location = new Bing.Maps.Location();
             this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
             {

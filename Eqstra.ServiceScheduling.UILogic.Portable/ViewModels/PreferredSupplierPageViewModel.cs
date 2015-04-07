@@ -17,12 +17,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
         private INavigationService _navigationService;
         private ISupplierService _supplierService;
-        public PreferredSupplierPageViewModel(INavigationService navigationService, ISupplierService supplierService)
+        private ILocationService _locationService;
+        public PreferredSupplierPageViewModel(INavigationService navigationService, ISupplierService supplierService, ILocationService locationService)
         {
             this._navigationService = navigationService;
             this.PoolofSupplier = new ObservableCollection<Supplier>();
             this._supplierService = supplierService;
-            this.Address = new Address();
+            this._locationService = locationService;
+            this.SupplierFilter = new SupplierFilter();
 
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
          async () =>
@@ -41,6 +43,46 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
           () => { return this.SelectedSupplier != null; });
 
+            this.GoToConfirmationCommand = new DelegateCommand(async () =>
+            {
+                try
+                {
+                    this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+
+                    _navigationService.Navigate("Confirmation", string.Empty);
+
+                    this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+                }
+                catch (Exception)
+                {
+                    this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+                }
+            }, () =>
+            {
+                return (this.SelectedSupplier != null);
+            });
+
+            this.SupplierFilterCommand = new DelegateCommand(async () =>
+            {
+                try
+                {
+                    this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+                    string countryId = this.SupplierFilter.SelectedCountry != null ? this.SupplierFilter.SelectedCountry.Id : string.Empty;
+                    string provinceId = this.SupplierFilter.Selectedprovince != null ? this.SupplierFilter.Selectedprovince.Id : string.Empty;
+                    string cityId = this.SupplierFilter.SelectedCity != null ? this.SupplierFilter.SelectedCity.Id : string.Empty;
+                    string suburbId = this.SupplierFilter.SelectedSuburb != null ? this.SupplierFilter.SelectedSuburb.Id : string.Empty;
+                    string regionId = this.SupplierFilter.SelectedRegion != null ? this.SupplierFilter.SelectedRegion.Id : string.Empty;
+
+
+                    this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+                }
+                catch (Exception ex)
+                {
+                    this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+                }
+            }
+          );
+
         }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -49,6 +91,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
                 this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(task.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+
+                this.SupplierFilter.Countries = await _locationService.GetCountryList(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+
                 PersistentData.Instance.PoolofSupplier = this.PoolofSupplier;
                 this.TaskProgressBar = Visibility.Collapsed;
             }
@@ -57,6 +102,48 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.TaskProgressBar = Visibility.Collapsed;
             }
         }
+
+        public async void CountryChanged()
+        {
+            if (this.SupplierFilter.SelectedCountry != null)
+            {
+                this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+                this.SupplierFilter.Provinces = await _locationService.GetProvinceList(this.SupplierFilter.SelectedCountry.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+            }
+
+        }
+        public async void ProvinceChanged()
+        {
+            if (this.SupplierFilter.Selectedprovince != null)
+            {
+                this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+                this.SupplierFilter.Cities = await _locationService.GetCityList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+            }
+
+        }
+        public async void CityChanged()
+        {
+            if (this.SupplierFilter.Selectedprovince != null)
+            {
+                this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+                this.SupplierFilter.Suburbs = await _locationService.GetSuburbList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+            }
+        }
+        public async void SuburbChanged()
+        {
+            if (this.SupplierFilter.Selectedprovince != null)
+            {
+                this.LoadingCriteriaProgressVisibility = Visibility.Visible;
+                this.SupplierFilter.Region = await _locationService.GetRegionList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.LoadingCriteriaProgressVisibility = Visibility.Collapsed;
+            }
+        }
+
+        public DelegateCommand GoToConfirmationCommand { get; set; }
+
         private ObservableCollection<Supplier> poolofSupplier;
         public ObservableCollection<Supplier> PoolofSupplier
         {
@@ -88,12 +175,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-        private Address address;
-        public Address Address
+        private SupplierFilter supplierFilter;
+        public SupplierFilter SupplierFilter
         {
-            get { return address; }
-            set { SetProperty(ref address, value); }
+            get { return supplierFilter; }
+            set { SetProperty(ref supplierFilter, value); }
         }
+
+        private Visibility loadingCriteriaProgressVisibility;
+
+        public Visibility LoadingCriteriaProgressVisibility
+        {
+            get { return loadingCriteriaProgressVisibility; }
+            set { SetProperty(ref loadingCriteriaProgressVisibility, value); }
+        }
+        public DelegateCommand SupplierFilterCommand { get; set; }
         public DelegateCommand NextPageCommand { get; private set; }
     }
 }

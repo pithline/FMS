@@ -52,6 +52,7 @@
     <Compile Include="SSModels\ServiceSchedulingDetail.cs" />
     <Compile Include="SSModels\Suburb.cs" />
     <Compile Include="SSModels\Supplier.cs" />
+    <Compile Include="SSModels\SupplierFilter.cs" />
     <Compile Include="SSModels\SupplierSelection.cs" />
     <Compile Include="SSModels\Task.cs" />
     <Compile Include="SSModels\UserInfo.cs" />

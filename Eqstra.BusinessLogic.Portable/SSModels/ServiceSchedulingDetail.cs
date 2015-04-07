@@ -14,12 +14,29 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         {
             this.OdoReadingImageCapture = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) };
         }
-        
-        public String CaseNumber { get; set; }
 
-        public Int64 CaseServiceRecID { get; set; }
+        private string caseNumber;
 
-        public string ODOReadingSnapshot { get; set; }
+        public string CaseNumber
+        {
+            get { return caseNumber; }
+            set { SetProperty(ref caseNumber, value); }
+        }
+
+        private string caseServiceRecID;
+        public string CaseServiceRecID
+        {
+            get { return caseServiceRecID; }
+            set { SetProperty(ref caseServiceRecID, value); }
+        }
+
+        private string oDOReadingSnapshot;
+        public string ODOReadingSnapshot
+        {
+            get { return oDOReadingSnapshot; }
+            set { SetProperty(ref oDOReadingSnapshot, value); }
+        }
+
 
         private ImageCapture odoReadingImageCapture;
         public ImageCapture OdoReadingImageCapture
@@ -28,45 +45,162 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             set { SetProperty(ref odoReadingImageCapture, value); }
         }
 
-        public Int64 ODOReading { get; set; }
+        private string oDOReading;
+        public string ODOReading
+        {
+            get { return oDOReading; }
+            set { SetProperty(ref oDOReading, value); }
+        }
 
-        public string ODOReadingDate { get; set; }
+        private string oDOReadingDate;
+        public string ODOReadingDate
+        {
+            get { return oDOReadingDate; }
+            set { SetProperty(ref oDOReadingDate, value); }
+        }
 
-        public List<string> ServiceType { get; set; }
+        private List<string> serviceType;
 
-        public String ContactPersonName { get; set; }
+        public List<string> ServiceType
+        {
+            get { return serviceType; }
+            set { SetProperty(ref serviceType, value); }
+        }
 
-        public String ContactPersonPhone { get; set; }
+        private string contactPersonName;
 
-        public String SupplierName { get; set; }
+        public string ContactPersonName
+        {
+            get { return contactPersonName; }
+            set { SetProperty(ref contactPersonName, value); }
+        }
 
-        public String EventDesc { get; set; }
 
-        public List<DestinationType> DestinationTypes { get; set; }
+        private string contactPersonPhone;
+
+        public string ContactPersonPhone
+        {
+            get { return contactPersonPhone; }
+            set { SetProperty(ref contactPersonPhone, value); }
+        }
+
+        private string supplierName;
+
+        public string SupplierName
+        {
+            get { return supplierName; }
+            set { SetProperty(ref supplierName, value); }
+        }
+
+        private string eventDesc;
+
+        public string EventDesc
+        {
+            get { return eventDesc; }
+            set { SetProperty(ref eventDesc, value); }
+        }
+
+
+        private List<DestinationType> dstinationTypes;
+
+        public List<DestinationType> DestinationTypes
+        {
+            get { return dstinationTypes; }
+            set { SetProperty(ref dstinationTypes, value); }
+        }
+
 
         public List<LocationType> LocationTypes { get; set; }
 
-        public String Address { get; set; }
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
 
-        public String AdditionalWork { get; set; }
+        private string additionalWork;
 
-        public string ServiceDateOption1 { get; set; }
+        public string AdditionalWork
+        {
+            get { return additionalWork; }
+            set { SetProperty(ref additionalWork, value); }
+        }
 
-        public string ServiceDateOption2 { get; set; }
 
-        public DateTime SupplierDateTime { get; set; }
+        private string serviceDateOption1;
 
-        public Boolean IsLiftRequired { get; set; }
+        public string ServiceDateOption1
+        {
+            get { return serviceDateOption1; }
+            set { SetProperty(ref serviceDateOption1, value); }
+        }
 
-        public LocationType SelectedLocType { get; set; }
+        private string serviceDateOption2;
 
-        public LocationType SelectedLocationType { get; set; }
+        public string ServiceDateOption2
+        {
+            get { return serviceDateOption2; }
+            set { SetProperty(ref serviceDateOption2, value); }
+        }
 
-        public DestinationType SelectedDestinationType { get; set; }
 
-        public String SelectedServiceType { get; set; }
+        private string supplierDateTime;
+        public string SupplierDateTime
+        {
+            get { return supplierDateTime; }
+            set { SetProperty(ref supplierDateTime, value); }
+        }
 
-        public string ConfirmedDate { get; set; }
+        private Boolean isLiftRequired;
+
+        public Boolean IsLiftRequired
+        {
+            get { return isLiftRequired; }
+            set { SetProperty(ref isLiftRequired, value); }
+        }
+
+
+        private LocationType selectedLocType;
+
+        public LocationType SelectedLocType
+        {
+            get { return selectedLocType; }
+            set { SetProperty(ref selectedLocType, value); }
+        }
+
+        private LocationType selectedLocationType;
+        public LocationType SelectedLocationType
+        {
+            get { return selectedLocationType; }
+            set { SetProperty(ref selectedLocationType, value); }
+        }
+
+
+        private DestinationType slectedDestinationType;
+
+        public DestinationType SelectedDestinationType
+        {
+            get { return slectedDestinationType; }
+            set { SetProperty(ref slectedDestinationType, value); }
+        }
+
+
+        private string selectedServiceType;
+
+        public string SelectedServiceType
+        {
+            get { return selectedServiceType; }
+            set { SetProperty(ref selectedServiceType, value); }
+        }
+
+
+        private string confirmedDate;
+        public string ConfirmedDate
+        {
+            get { return confirmedDate; }
+            set { SetProperty(ref confirmedDate, value); }
+        }
 
         private DateTime serviceDateOpt1;
         public DateTime ServiceDateOpt1
@@ -83,6 +217,5 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             set { SetProperty(ref serviceDateOpt2, value); }
         }
 
-      
     }
 }

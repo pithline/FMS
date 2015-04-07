@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -44,8 +45,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                try
                {
 
-                   this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString();
-                   this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString();
+                   this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
+                   this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
 
                    bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                    if (response)
@@ -107,34 +108,44 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
+            try
             {
-                var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
+                if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
                 {
+                    var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+                    this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                    if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
+                    {
+                        this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) };
+                    }
+                    else
+                    {
+                        var bitmap = new BitmapImage();
+                        await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
+                        this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
+                    }
+                    if (task != null)
+                    {
+                        this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", task.CustomerId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                    }
 
-                    this.Model = new ServiceSchedulingDetail() { OdoReadingImageCapture = new ImageCapture { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) } };
                 }
                 else
                 {
-                    var bitmap = new BitmapImage();
-                    await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
-                    this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
+                    this.Model = navigationParameter as ServiceSchedulingDetail;
                 }
+                if (!String.IsNullOrEmpty(this.Model.ServiceDateOption1))
+                {
+                    this.Model.ServiceDateOpt1 = DateTime.Parse(this.Model.ServiceDateOption1);
+                }
+                if (!String.IsNullOrEmpty(this.Model.ServiceDateOption2))
+                {
+                    this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
+                }
+            }
+            catch (Exception)
+            {
 
-            }
-            else
-            {
-                this.Model = navigationParameter as ServiceSchedulingDetail;
-            }
-            if (!String.IsNullOrEmpty(this.Model.ServiceDateOption1))
-            {
-                this.Model.ServiceDateOpt1 = DateTime.Parse(this.Model.ServiceDateOption1);
-            }
-            if (!String.IsNullOrEmpty(this.Model.ServiceDateOption2))
-            {
-                this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
             }
         }
 
@@ -196,6 +207,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return suppliers; }
             set { SetProperty(ref suppliers, value); }
         }
+
+        private ObservableCollection<DestinationType> destinationTypes;
+        public ObservableCollection<DestinationType> DestinationTypes
+        {
+            get { return destinationTypes; }
+            set { SetProperty(ref destinationTypes, value); }
+        }
+
 
         private Supplier selectedSupplier;
 

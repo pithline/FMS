@@ -40,7 +40,7 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Appointments"
                               Icon="Calendar" />
-                <AppBarButton Label="Profile"
+                <AppBarButton Label="Details"
                               Icon="NewWindow"
                               Name="Profile"
                               Click="More_Click" />
@@ -90,54 +90,75 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
-                        <ComboBox  Height="70"
-                                   Width="310"
-                                   ItemsSource="{Binding Address.Countries }"
-                                   SelectedItem="{Binding Address.SelectedCountry}"
-                                   Margin="2"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
+                        <ProgressBar VerticalAlignment="Top"
+                                     IsIndeterminate="True"
+                                     Visibility="{Binding LoadingCriteriaProgressVisibility}"
+                                     HorizontalAlignment="Stretch" />
 
                         <ComboBox  Height="70"
                                    Grid.Row="1"
                                    Width="310"
-                                   ItemsSource="{Binding Address.Provinces}"
-                                   SelectedItem="{Binding Address.Selectedprovince}"
+                                   ItemsSource="{Binding SupplierFilter.Countries}"
+                                   SelectedItem="{Binding SupplierFilter.SelectedCountry,Mode=TwoWay}"
                                    Margin="2"
+                                   DisplayMemberPath="Name"
+                                   SelectionChanged="country_SelectionChanged"
+                                   x:Name="country"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
 
                         <ComboBox  Height="70"
                                    Grid.Row="2"
                                    Width="310"
-                                   ItemsSource="{Binding Address.Cities}"
-                                   SelectedItem="{Binding Address.SelectedCity}"
+                                   ItemsSource="{Binding SupplierFilter.Provinces}"
+                                   SelectedItem="{Binding SupplierFilter.Selectedprovince,Mode=TwoWay}"
+                                   DisplayMemberPath="Name"
                                    Margin="2"
+                                   Name="Provinces"
+                                   SelectionChanged="Provinces_SelectionChanged"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
 
                         <ComboBox  Height="70"
                                    Grid.Row="3"
                                    Width="310"
-                                   ItemsSource="{Binding Address.Suburbs}"
-                                   SelectedItem="{Binding Address.SelectedSuburb}"
+                                   ItemsSource="{Binding SupplierFilter.Cities}"
+                                   SelectedItem="{Binding SupplierFilter.SelectedCity,Mode=TwoWay}"
+                                   DisplayMemberPath="Name"
                                    Margin="2"
+                                   x:Name="City"
+                                   SelectionChanged="City_SelectionChanged"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
 
                         <ComboBox  Height="70"
                                    Grid.Row="4"
                                    Width="310"
-                                   ItemsSource="{Binding Address.Region}"
-                                   SelectedItem="{Binding Address.SelectedRegion}"
+                                   ItemsSource="{Binding SupplierFilter.Suburbs}"
+                                   SelectedItem="{Binding SupplierFilter.SelectedSuburb,Mode=TwoWay}"
+                                   DisplayMemberPath="Name"
+                                   x:Name="suburb"
+                                   SelectionChanged="suburb_SelectionChanged"
                                    Margin="2"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center" />
 
-                        <StackPanel Grid.Row="5"
+                        <ComboBox  Height="70"
+                                   Grid.Row="5"
+                                   Width="310"
+                                   ItemsSource="{Binding SupplierFilter.Region}"
+                                   SelectedItem="{Binding SupplierFilter.SelectedRegion,Mode=TwoWay}"
+                                   DisplayMemberPath="Name"
+                                   Name="region"
+                                   SelectionChanged="region_SelectionChanged"
+                                   Margin="2"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+
+                        <StackPanel Grid.Row="6"
                                     VerticalAlignment="Bottom"
                                     Orientation="Horizontal">
                             <AppBarButton Icon="Accept"

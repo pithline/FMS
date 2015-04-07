@@ -31,7 +31,7 @@ namespace Eqstra.ServiceScheduling
 
         void MoreInfo_Loaded(object sender, RoutedEventArgs e)
         {
-            profileGrid.DataContext = PersistentData.Instance.UserInfo;
+            //profileGrid.DataContext = PersistentData.Instance.UserInfo;
         }
         public void Open(object dataContext)
         {

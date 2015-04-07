@@ -91,7 +91,7 @@
                               Icon="Calendar"
                               Name="Calendar"
                               Click="Calendar_Click" />
-                <AppBarButton Label="Profile"
+                <AppBarButton Label="Details"
                               Icon="NewWindow"
                               Name="Profile"
                               Click="More_Click" />
