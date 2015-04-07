@@ -30,7 +30,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Accept"
                               Label="Submit"
-                              Command="{Binding SubmitCommand}" />
+                              Command="{Binding NextPageCommand}" />
             </CommandBar.PrimaryCommands>
 
         </CommandBar>
@@ -72,7 +72,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-
+            
             <TextBox  Width="350"
                       Header="ODO Reading"
                       Margin="2"
@@ -86,7 +86,7 @@
                          Header="ODO Reading Date"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center"
-                         Date="{Binding Model.ODOReadingDate,Mode=TwoWay}"
+                         Date="{Binding Model.ODOReadingDt,Mode=TwoWay}"
                          Grid.Row="1"
                          Margin="2" />
             <StackPanel Grid.Row="2"
@@ -117,7 +117,7 @@
             <ComboBox  Width="350"
                        Grid.Row="3"
                        Header="Service Type"
-                       ItemsSource="{Binding Model.ServiceType,Mode=TwoWay}"
+                       ItemsSource="{Binding Model.ServiceType}"
                        SelectedItem="{Binding Model.SelectedServiceType,Mode=TwoWay}"
                        Margin="2"
                        Style="{StaticResource ComboContentStyle}"
@@ -140,9 +140,8 @@
             <DatePicker  Width="350"
                          Header="Service Date (Option 1)"
                          Grid.Row="5"
-                          Date ="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
+                         Date="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
                          Margin="2"
-                         
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center" />
 
@@ -203,7 +202,7 @@
             <ComboBox Grid.Row="11"
                       Header="Destination Types"
                       Visibility="{Binding IsReqVisibility}"
-                      ItemsSource="{Binding DestinationTypes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DestinationTypes}"
                       DisplayMemberPath="ContactName"
                       SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                       x:Name="ddDestinationTypes"

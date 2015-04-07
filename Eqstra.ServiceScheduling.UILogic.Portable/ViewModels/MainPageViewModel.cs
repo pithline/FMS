@@ -7,9 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using Windows.System;
 using Windows.UI.Xaml;
-
+using System.Linq;
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class MainPageViewModel : ViewModel
@@ -24,18 +25,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
             this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
 
-            this.NextPageCommand = DelegateCommand.FromAsyncHandler(
-             async () =>
+            this.NextPageCommand = new DelegateCommand<Task>((task) =>
              {
                  try
                  {
-                     if (this.InspectionTask != null && this.InspectionTask.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                     if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                      {
-                         navigationService.Navigate("ServiceScheduling", this.InspectionTask);
+                         navigationService.Navigate("ServiceScheduling", task);
                      }
                      else
                      {
-                         navigationService.Navigate("PreferredSupplier", this.InspectionTask);
+                         navigationService.Navigate("PreferredSupplier", task);
                      }
                  }
                  catch (Exception ex)
@@ -110,7 +110,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.MailToCommand.RaiseCanExecuteChanged();
                 this.MakeCallCommand.RaiseCanExecuteChanged();
                 this.MakeIMCommand.RaiseCanExecuteChanged();
-                this.NextPageCommand.RaiseCanExecuteChanged();
+
             }
         }
 
@@ -134,7 +134,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-        public DelegateCommand NextPageCommand { get; private set; }
+        public ICommand NextPageCommand { get; set; }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -142,19 +142,29 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 var userInfo = ((Eqstra.BusinessLogic.Portable.SSModels.UserInfo)navigationParameter);
                 PersistentData.Instance.UserInfo = new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" };
+                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))
+                {
+                    this.PoolofTasks = PersistentData.Instance.PoolofTasks;
+                    this.Tasks = PersistentData.Instance.Tasks;
+                }
                 var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
+                ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
                 foreach (var task in tasksResult)
                 {
                     task.Address = Regex.Replace(task.Address, ",", "\n");
                     if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                     {
-                        this.PoolofTasks.Add(task);
+                        pooltask.Add(task);
                     }
                     else
                     {
-                        this.Tasks.Add(task);
+                        tasks.Add(task);
                     }
                 }
+                this.PoolofTasks = pooltask;
+                this.Tasks = tasks;
+
                 this.TaskProgressBar = Visibility.Collapsed;
                 PersistentData.Instance.PoolofTasks = this.PoolofTasks;
                 PersistentData.Instance.Tasks = this.Tasks;

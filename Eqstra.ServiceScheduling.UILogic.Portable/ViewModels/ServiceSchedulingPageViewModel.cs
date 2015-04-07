@@ -29,12 +29,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
-
+        private BusyIndicator _busyIndicator;
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService)
         {
             this._navigationService = navigationService;
             this._serviceDetailService = serviceDetailService;
             this.Model = new ServiceSchedulingDetail();
+            _busyIndicator = new BusyIndicator();
             this.Address = new BusinessLogic.Portable.SSModels.Address();
 
             this.IsLiftRequired = false;
@@ -47,7 +48,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                    this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
                    this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
-
+                   this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
                    bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                    if (response)
                    {
@@ -112,6 +113,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
                 {
+                    _busyIndicator.Open();
+
                     var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
                     this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                     if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
@@ -142,6 +145,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
                 }
+                if (!String.IsNullOrEmpty(this.Model.ODOReadingDate))
+                {
+                    this.Model.ODOReadingDt = DateTime.Parse(this.Model.ODOReadingDate);
+                }
+                _busyIndicator.Close();
             }
             catch (Exception)
             {

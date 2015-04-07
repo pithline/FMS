@@ -56,5 +56,11 @@ namespace Eqstra.ServiceScheduling
             ((Popup)this.Tag).IsOpen = false;
         }
 
+        private void home_Click(object sender, RoutedEventArgs e)
+        {
+
+            ((Popup)this.Tag).IsOpen = false;
+        }
+
     }
 }

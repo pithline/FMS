@@ -43,10 +43,13 @@
     <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />
-    <Compile Include="ImageViewer\ImageViewerPopup.xaml.cs">
+    <Compile Include="Popup\BusyIndicator.xaml.cs">
+      <DependentUpon>BusyIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popup\ImageViewerPopup.xaml.cs">
       <DependentUpon>ImageViewerPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageViewer\ProgressDialog.xaml.cs">
+    <Compile Include="Popup\ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,11 +92,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ImageViewer\ImageViewerPopup.xaml">
+    <Page Include="Popup\BusyIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ImageViewer\ProgressDialog.xaml">
+    <Page Include="Popup\ImageViewerPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popup\ProgressDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

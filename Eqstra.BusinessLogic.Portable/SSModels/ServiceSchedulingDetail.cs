@@ -13,6 +13,9 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         public ServiceSchedulingDetail()
         {
             this.OdoReadingImageCapture = new ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) };
+            this.ODOReadingDt = DateTimeOffset.Now;
+            this.ServiceDateOpt1 = DateTimeOffset.Now;
+            this.serviceDateOpt2 = DateTimeOffset.Now;
         }
 
         private string caseNumber;
@@ -57,6 +60,13 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         {
             get { return oDOReadingDate; }
             set { SetProperty(ref oDOReadingDate, value); }
+        }
+
+        private DateTimeOffset oDOReadingDt;
+        public DateTimeOffset ODOReadingDt
+        {
+            get { return oDOReadingDt; }
+            set { SetProperty(ref oDOReadingDt, value); }
         }
 
         private List<string> serviceType;
@@ -202,16 +212,16 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             set { SetProperty(ref confirmedDate, value); }
         }
 
-        private DateTime serviceDateOpt1;
-        public DateTime ServiceDateOpt1
+        private DateTimeOffset serviceDateOpt1;
+        public DateTimeOffset ServiceDateOpt1
         {
             get { return serviceDateOpt1; }
             set { SetProperty(ref serviceDateOpt1, value); }
         }
 
 
-        private DateTime serviceDateOpt2;
-        public DateTime ServiceDateOpt2
+        private DateTimeOffset serviceDateOpt2;
+        public DateTimeOffset ServiceDateOpt2
         {
             get { return serviceDateOpt2; }
             set { SetProperty(ref serviceDateOpt2, value); }
