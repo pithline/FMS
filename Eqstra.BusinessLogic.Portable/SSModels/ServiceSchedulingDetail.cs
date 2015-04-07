@@ -16,6 +16,7 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             this.ODOReadingDt = DateTimeOffset.Now;
             this.ServiceDateOpt1 = DateTimeOffset.Now;
             this.serviceDateOpt2 = DateTimeOffset.Now;
+            this.ConfirmedDateDt = DateTimeOffset.Now;
         }
 
         private string caseNumber;

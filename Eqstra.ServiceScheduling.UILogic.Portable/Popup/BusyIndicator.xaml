@@ -6,8 +6,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Grid Background="#44e8edf1"
-          VerticalAlignment="Top">
+    <Grid Background="#44e8edf1">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <PopupThemeTransition />
@@ -18,7 +17,10 @@
             <RowDefinition Height="0.5*" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+
+        <!-- Back button and page title -->
+        <Grid Grid.Row="1"
+              Background="#FF1e8ac2">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -28,6 +30,5 @@
                          VerticalAlignment="Top" />
 
         </Grid>
-
     </Grid>
 </Page>
