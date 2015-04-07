@@ -48,19 +48,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              }
 );
 
-            // this.Location = new Bing.Maps.Location();
-            this.MakeIMCommand = DelegateCommand.FromAsyncHandler(async () =>
-            {
-                await Launcher.LaunchUriAsync(new Uri("whatsapp:" + 9290650135));
-            }, () =>
-            {
-                return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
-            }
-            );
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("callto:" + 9290650135));
+                await Launcher.LaunchUriAsync(new Uri("callto:" + this.InspectionTask.CustPhone));
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
@@ -68,7 +59,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("mailto:" + "kasif@mzkgbl.com"));
+                await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
             }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -80,9 +71,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?cp=40.726966~-74.006076"));
-                //var stringBuilder = new StringBuilder("bingmaps:?where=" + Regex.Replace(address, "\n", ","));
-                //await Launcher.LaunchUriAsync(new Uri(stringBuilder.ToString()));
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(this.InspectionTask.Address, "\n", ",")));
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
