@@ -38,7 +38,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         async public Task<BusinessLogic.Portable.SSModels.CaseStatus> UpdateStatusListAsync(BusinessLogic.Portable.SSModels.Task task, UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling", parameters = new[] { "UpdateStatusList", JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(userInfo) } };
+            var postData = new { target = "ServiceScheduling",method="save" ,parameters = new[] { "UpdateStatusList", JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)

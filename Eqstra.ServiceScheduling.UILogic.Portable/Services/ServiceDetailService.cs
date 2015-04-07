@@ -21,7 +21,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         public async Task<bool> InsertServiceDetailsAsync(BusinessLogic.Portable.SSModels.ServiceSchedulingDetail serviceSchedulingDetail, BusinessLogic.Portable.SSModels.Address address, BusinessLogic.Portable.SSModels.UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling", parameters = new[] { "InsertServiceDetails", JsonConvert.SerializeObject(serviceSchedulingDetail), JsonConvert.SerializeObject(address), JsonConvert.SerializeObject(userInfo) } };
+            var postData = new { target = "ServiceScheduling",method="save", parameters = new[] { "InsertServiceDetails", JsonConvert.SerializeObject(serviceSchedulingDetail), JsonConvert.SerializeObject(address), JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
