@@ -19,8 +19,7 @@
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
-        <Grid Grid.Row="1"
-              Background="#FF1e8ac2">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
