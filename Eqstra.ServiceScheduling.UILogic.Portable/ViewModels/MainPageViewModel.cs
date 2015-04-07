@@ -95,10 +95,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref task, value);
-                this.LocateCommand.RaiseCanExecuteChanged();
-                this.MailToCommand.RaiseCanExecuteChanged();
-                this.MakeCallCommand.RaiseCanExecuteChanged();
-                this.MakeIMCommand.RaiseCanExecuteChanged();
+              
+              
 
             }
         }
