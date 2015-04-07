@@ -30,10 +30,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
         private BusyIndicator _busyIndicator;
-        public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService)
+        private ISupplierService _supplierService;
+        private ITaskService _taskService;
+        public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService, ISupplierService supplierService, ITaskService taskService)
         {
             this._navigationService = navigationService;
             this._serviceDetailService = serviceDetailService;
+            this._taskService = taskService;
+            this._supplierService = supplierService;
             this.Model = new ServiceSchedulingDetail();
             _busyIndicator = new BusyIndicator();
             this.Address = new BusinessLogic.Portable.SSModels.Address();
@@ -52,7 +56,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                    bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                    if (response)
                    {
-                       navigationService.Navigate("PreferredSupplier", string.Empty);
+                       var caseStatus = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                       var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
+                       var res = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                       if (res)
+                       {
+                           this.SelectedTask.Status = caseStatus.Status;
+                           await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                           navigationService.Navigate("Main", string.Empty);
+                       }
+
                    }
                }
                catch (Exception ex)
@@ -106,7 +119,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         }
 
-
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -115,8 +127,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     _busyIndicator.Open();
 
-                    var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                    this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                    SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+                    this.Model = await _serviceDetailService.GetServiceDetailAsync(SelectedTask.CaseNumber, SelectedTask.CaseServiceRecID, SelectedTask.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                    this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(SelectedTask.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                     if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
                     {
                         this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) };
@@ -127,9 +140,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                         await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
                         this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
                     }
-                    if (task != null)
+                    if (SelectedTask != null)
                     {
-                        this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", task.CustomerId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                        this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", SelectedTask.CustomerId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                     }
 
                 }
@@ -185,6 +198,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return address; }
             set { SetProperty(ref address, value); }
         }
+
+        public Eqstra.BusinessLogic.Portable.SSModels.Task SelectedTask { get; set; }
         public DelegateCommand NextPageCommand { get; private set; }
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         public DelegateCommand OpenImageViewerCommand { get; set; }
@@ -223,13 +238,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref destinationTypes, value); }
         }
 
-
-        private Supplier selectedSupplier;
-
-        public Supplier SelectedSupplier
+        private ObservableCollection<Supplier> poolofSupplier;
+        public ObservableCollection<Supplier> PoolofSupplier
         {
-            get { return selectedSupplier; }
-            set { SetProperty(ref selectedSupplier, value); }
+            get { return poolofSupplier; }
+            set
+            {
+                SetProperty(ref poolofSupplier, value);
+            }
         }
 
         private Visibility isReqVisibility;
@@ -238,5 +254,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return isReqVisibility; }
             set { SetProperty(ref isReqVisibility, value); }
         }
+
+        private Supplier selectedSupplier;
+        public Supplier SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set
+            {
+                SetProperty(ref selectedSupplier, value);
+                this.NextPageCommand.RaiseCanExecuteChanged();
+            }
+        }
+
     }
 }

@@ -13,8 +13,7 @@
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar 
-                    IsSticky="False"
+        <CommandBar IsSticky="False"
                     ClosedDisplayMode="Compact">
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Appointments"
@@ -71,7 +70,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            
+
             <TextBox  Width="350"
                       Header="ODO Reading"
                       Margin="2"
@@ -152,12 +151,13 @@
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center" />
 
-            <TextBlock Text="{Binding Model.ConfirmedDate}"
-                       Grid.Row="7"
-                       Style="{StaticResource TextContentStyle}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="2" />
+            <DatePicker  Width="350"
+                         Header="Confirmed/Prefered Date"
+                         Grid.Row="7"
+                         Date="{Binding Model.ConfirmedDateDt,Mode=TwoWay}"
+                         Margin="2"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
 
 
             <StackPanel Grid.Row="8"
@@ -243,9 +243,10 @@
             <ComboBox  Width="350"
                        Grid.Row="20"
                        Header="Select Supplier"
-                       ItemsSource="{Binding Suppliers,Mode=TwoWay}"
+                       ItemsSource="{Binding PoolofSupplier}"
                        SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
                        Margin="2"
+                       DisplayMemberPath="SupplierName"
                        Style="{StaticResource ComboContentStyle}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />

@@ -8,9 +8,26 @@
 
     <Grid Background="#44e8edf1"
           VerticalAlignment="Top">
-        <ProgressBar IsIndeterminate="True"
-                     VerticalAlignment="Top"
-                     Foreground="White" />
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <PopupThemeTransition />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ProgressBar IsIndeterminate="True"
+                         Foreground="White"
+                         VerticalAlignment="Top" />
+
+        </Grid>
 
     </Grid>
 </Page>

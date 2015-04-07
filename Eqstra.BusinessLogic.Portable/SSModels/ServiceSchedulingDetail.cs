@@ -211,7 +211,14 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             get { return confirmedDate; }
             set { SetProperty(ref confirmedDate, value); }
         }
+        private DateTimeOffset confirmedDateDt;
 
+        public DateTimeOffset ConfirmedDateDt
+        {
+            get { return confirmedDateDt; }
+            set { SetProperty(ref confirmedDateDt, value); }
+        }
+        
         private DateTimeOffset serviceDateOpt1;
         public DateTimeOffset ServiceDateOpt1
         {

@@ -157,7 +157,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     {
                         pooltask.Add(task);
                     }
-                    else
+                    else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
                     {
                         tasks.Add(task);
                     }
