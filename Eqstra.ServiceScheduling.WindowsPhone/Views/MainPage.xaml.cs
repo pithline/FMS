@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -77,11 +78,18 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         async private void Message_Click(object sender, RoutedEventArgs e)
         {
 
-            Windows.ApplicationModel.Chat.ChatMessage msg = new Windows.ApplicationModel.Chat.ChatMessage();
-            msg.Body = "";
-            msg.Recipients.Add(vm.InspectionTask.CustPhone);
-            await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(msg);
-
+            if (!string.IsNullOrEmpty(vm.InspectionTask.CustPhone))
+            {
+                Windows.ApplicationModel.Chat.ChatMessage msg = new Windows.ApplicationModel.Chat.ChatMessage();
+                msg.Body = "";
+                msg.Recipients.Add(vm.InspectionTask.CustPhone);
+                await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(msg); 
+            }
+            else
+            {
+              await  new MessageDialog("No phone number exist").ShowAsync() ;
+               
+            }
         }
 
         private async void Calendar_Click(object sender, RoutedEventArgs e)
