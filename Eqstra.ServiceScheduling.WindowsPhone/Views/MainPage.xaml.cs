@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Appointments;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -38,8 +39,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
-
+          
         }
+
+      
+      
         void accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
             if (accelerometer != null)

@@ -1,15 +1,38 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Eqstra.BusinessLogic.Portable.SSModels
 {
+    public class SupplierFilterEvent : PubSubEvent<ObservableCollection<Supplier>>
+    {
+
+    }
     public class SupplierFilter : BindableBase
     {
+
+        public SupplierFilter()
+        {
+            this.Countries = new ObservableCollection<Country>();
+            this.Provinces = new ObservableCollection<Province>();
+            this.Cities = new ObservableCollection<City>();
+            this.Region = new ObservableCollection<Region>();
+        }
+
+        private Visibility progressVisibility;
+
+        public Visibility ProgressVisibility
+        {
+            get { return progressVisibility; }
+            set { SetProperty(ref progressVisibility, value); }
+        }
+
         public ObservableCollection<string> Postcodes { get; set; }
 
 

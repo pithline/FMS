@@ -44,6 +44,10 @@
                               Icon="NewWindow"
                               Name="Profile"
                               Click="More_Click" />
+                <AppBarButton Icon="Filter"
+                              Label="Filter"
+                              IsCompact="True"
+                              Click="filter_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
@@ -79,111 +83,7 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-
-            <HubSection Header="suppliers filter">
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ProgressBar VerticalAlignment="Top"
-                                     IsIndeterminate="True"
-                                     Visibility="{Binding LoadingCriteriaProgressVisibility}"
-                                     HorizontalAlignment="Stretch" />
-
-                        <ComboBox  Height="70"
-                                   Grid.Row="1"
-                                   Width="310"
-                                   ItemsSource="{Binding SupplierFilter.Countries}"
-                                   SelectedItem="{Binding SupplierFilter.SelectedCountry,Mode=TwoWay}"
-                                   Margin="2"
-                                   DisplayMemberPath="Name"
-                                   SelectionChanged="country_SelectionChanged"
-                                   x:Name="country"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-
-                        <ComboBox  Height="70"
-                                   Grid.Row="2"
-                                   Width="310"
-                                   ItemsSource="{Binding SupplierFilter.Provinces}"
-                                   SelectedItem="{Binding SupplierFilter.Selectedprovince,Mode=TwoWay}"
-                                   DisplayMemberPath="Name"
-                                   Margin="2"
-                                   Name="Provinces"
-                                   SelectionChanged="Provinces_SelectionChanged"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-
-                        <ComboBox  Height="70"
-                                   Grid.Row="3"
-                                   Width="310"
-                                   ItemsSource="{Binding SupplierFilter.Cities}"
-                                   SelectedItem="{Binding SupplierFilter.SelectedCity,Mode=TwoWay}"
-                                   DisplayMemberPath="Name"
-                                   Margin="2"
-                                   x:Name="City"
-                                   SelectionChanged="City_SelectionChanged"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-
-                        <ComboBox  Height="70"
-                                   Grid.Row="4"
-                                   Width="310"
-                                   ItemsSource="{Binding SupplierFilter.Suburbs}"
-                                   SelectedItem="{Binding SupplierFilter.SelectedSuburb,Mode=TwoWay}"
-                                   DisplayMemberPath="Name"
-                                   x:Name="suburb"
-                                   SelectionChanged="suburb_SelectionChanged"
-                                   Margin="2"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-
-                        <ComboBox  Height="70"
-                                   Grid.Row="5"
-                                   Width="310"
-                                   ItemsSource="{Binding SupplierFilter.Region}"
-                                   SelectedItem="{Binding SupplierFilter.SelectedRegion,Mode=TwoWay}"
-                                   DisplayMemberPath="Name"
-                                   Name="region"
-                                   SelectionChanged="region_SelectionChanged"
-                                   Margin="2"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-
-                        <StackPanel Grid.Row="6"
-                                    VerticalAlignment="Bottom"
-                                    Orientation="Horizontal">
-                            <AppBarButton Icon="Accept"
-                                          Command="{Binding SupplierFilterCommand}"
-                                          Name="Accept"
-                                          Click="Accept_Click"
-                                          Label="Accept"
-                                          VerticalAlignment="Top"
-                                          HorizontalAlignment="Left"
-                                          RequestedTheme="Dark" />
-                            <AppBarButton Icon="Cancel"
-                                          Command="{Binding ConcelCommand}"
-                                          Name="Cancel"
-                                          Click="Cancel_Click"
-                                          Label="Cancel"
-                                          VerticalAlignment="Top"
-                                          Margin="130,0,0,0"
-                                          HorizontalAlignment="Right"
-                                          RequestedTheme="Dark" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </HubSection>
         </Hub>
-
 
     </Grid>
 

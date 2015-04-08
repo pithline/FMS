@@ -1,5 +1,7 @@
-﻿using Eqstra.ServiceScheduling.UILogic;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic;
 using Eqstra.ServiceScheduling.UILogic.Portable;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,16 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 {
     public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
+     
         public PreferredSupplierPage()
         {
             this.InitializeComponent();
+            this.Loaded += PreferredSupplierPage_Loaded;
+        }
+
+        void PreferredSupplierPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.vm = this.DataContext as PreferredSupplierPageViewModel;
         }
         public PreferredSupplierPageViewModel vm { get; set; }
         private void More_Click(object sender, RoutedEventArgs e)
@@ -72,32 +81,15 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             }
         }
 
-        private void country_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.vm = this.DataContext as PreferredSupplierPageViewModel;
-            vm.CountryChanged();
-        }
-
-        private void Provinces_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            vm.ProvinceChanged();
-        }
-
-        private void City_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            vm.CityChanged();
-        }
-
-        private void suburb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void filter_Click(object sender, RoutedEventArgs e)
         {
 
+            if (vm != null)
+            {
+                SearchSupplierPopup sp = new SearchSupplierPopup(vm._locationService,vm._eventAggregator, vm._supplierService);
+                sp.Open();
+            }
         }
-
-        private void region_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
     }
 
 }

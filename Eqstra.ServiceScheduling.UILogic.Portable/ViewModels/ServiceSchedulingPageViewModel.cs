@@ -4,6 +4,7 @@ using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,17 +27,23 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class ServiceSchedulingPageViewModel : ViewModel
     {
+        public IEventAggregator _eventAggregator;
+        public ILocationService _locationService;
+        public ISupplierService _supplierService;
+
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
-        private BusyIndicator _busyIndicator;
-        private ISupplierService _supplierService;
+        public BusyIndicator _busyIndicator;
+   
         private ITaskService _taskService;
-        public ServiceSchedulingPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService, ISupplierService supplierService, ITaskService taskService)
+        public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, ILocationService locationService, IServiceDetailService serviceDetailService, ISupplierService supplierService, ITaskService taskService)
         {
             this._navigationService = navigationService;
             this._serviceDetailService = serviceDetailService;
             this._taskService = taskService;
+            this._eventAggregator = eventAggregator;
+            this._locationService = locationService;
             this._supplierService = supplierService;
             this.Model = new ServiceSchedulingDetail();
             _busyIndicator = new BusyIndicator();
@@ -116,6 +123,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
 
                 });
+
+            _eventAggregator.GetEvent<SupplierFilterEvent>().Subscribe(poolofSupplier =>
+            {
+                this.PoolofSupplier = poolofSupplier;
+            });
 
         }
 
@@ -203,6 +215,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand NextPageCommand { get; private set; }
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         public DelegateCommand OpenImageViewerCommand { get; set; }
+        public DelegateCommand SupplierFilterCommand { get; set; }
 
         private Boolean isLiftRequired;
         public Boolean IsLiftRequired
