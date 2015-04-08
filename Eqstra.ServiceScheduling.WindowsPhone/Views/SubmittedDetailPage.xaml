@@ -7,13 +7,12 @@
                             mc:Ignorable="d"
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
-                            mvvm:ViewModelLocator.AutoWireViewModel="True"
-                            >
+                            mvvm:ViewModelLocator.AutoWireViewModel="True">
 
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Submit"
+                <AppBarButton Label="submit"
                               Icon="Accept"
                               Command="{Binding NextPageCommand}" />
             </CommandBar.PrimaryCommands>
@@ -119,7 +118,8 @@
                         Margin="2">
                 <TextBlock Text="Lift Required"
                            Style="{StaticResource TextContentStyle}" />
-                <ToggleSwitch OnContent="Yes" IsHitTestVisible="False"
+                <ToggleSwitch OnContent="Yes"
+                              IsHitTestVisible="False"
                               HorizontalAlignment="Left"
                               OffContent="No"
                               IsOn="{Binding Model.LiftRequired}" />

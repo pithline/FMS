@@ -41,10 +41,5 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             base.OnNavigatedFrom(e);
         }
 
-        private void More_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

@@ -41,25 +41,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             this.InitializeComponent();
           
         }
-
-      
-      
-        void accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
-        {
-            if (accelerometer != null)
-            {
-                var accel = accelerometer.GetCurrentReading();
-                var ax = accel.AccelerationX;
-                var ay = accel.AccelerationY;
-                var az = accel.AccelerationZ;
-            }
-        }
-
         async void accelerometer_Shaken(Accelerometer sender, AccelerometerShakenEventArgs args)
         {
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,async () =>
            {
-               int s = 564611;
+              await vm.FetchTasks();
            });
         }
 
@@ -72,9 +58,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             vm = ((MainPageViewModel)this.DataContext);
             accelerometer = Accelerometer.GetDefault();
             base.OnNavigatedTo(e);
-            accelerometer.ReadingChanged += accelerometer_ReadingChanged;
             accelerometer.Shaken += accelerometer_Shaken;
-
         }
 
 

@@ -16,18 +16,18 @@
         <CommandBar IsSticky="False"
                     ClosedDisplayMode="Compact">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Appointments"
+                <AppBarButton Label="appointments"
                               Icon="Calendar"
                               x:Name="Calendar"
                               Click="Calendar_Click" />
-                <AppBarButton Label="Details"
+                <AppBarButton Label="details"
                               Icon="NewWindow"
                               x:Name="Profile"
                               Click="More_Click" />
             </CommandBar.SecondaryCommands>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Accept"
-                              Label="Submit"
+                              Label="submit"
                               Command="{Binding NextPageCommand}" />
             </CommandBar.PrimaryCommands>
 
@@ -244,9 +244,10 @@
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
                         Grid.Row="20">
-                <ComboBox  Width="300" 
+                <ComboBox  Width="300"
                            Header="Select Supplier"
                            ItemsSource="{Binding PoolofSupplier}"
                            SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
@@ -260,8 +261,9 @@
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"
                               IsCompact="True"
-                              Name="filterSup" Click="filterSup_Click"/>
-               
+                              Name="filterSup"
+                              Click="filterSup_Click" />
+
             </StackPanel>
 
         </Grid>

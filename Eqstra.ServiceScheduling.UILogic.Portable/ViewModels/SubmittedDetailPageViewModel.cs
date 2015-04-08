@@ -27,8 +27,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
-                await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                var respone = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+
                 navigationService.Navigate("Main", string.Empty);
+
             }
             catch (Exception ex)
             {

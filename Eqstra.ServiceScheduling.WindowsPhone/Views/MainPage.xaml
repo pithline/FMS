@@ -602,7 +602,7 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Search"
+                <AppBarButton Label="search"
                               Icon="Find"
                               Click="filter_Click"
                               Name="filter"
@@ -610,12 +610,12 @@
 
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Appointments "
+                <AppBarButton Label="appointments "
                               Icon="Calendar"
                               Name="Calendar"
                               Click="Calendar_Click" />
                 <AppBarButton Name="Profile"
-                              Label="Profile"
+                              Label="profile"
                               Click="Profile_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>

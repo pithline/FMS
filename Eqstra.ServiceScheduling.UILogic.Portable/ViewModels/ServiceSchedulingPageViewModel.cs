@@ -63,6 +63,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
+                       this.Model.ConfirmedDate = this.Model.ConfirmedDateDt.ToString("MM/dd/yyyy");
                        bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                        if (response)
                        {
@@ -134,8 +135,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             });
 
         }
-
-
         private bool Validate()
         {
             Boolean resp = true;
@@ -168,7 +167,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 else
                 {
                     this.DtBorderBrush = null;
-
                 }
                 if (String.IsNullOrEmpty(this.Model.Address))
                 {
@@ -180,7 +178,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     this.AdBorderBrush = null;
                 }
             }
-
             return resp;
         }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)

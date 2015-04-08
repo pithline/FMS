@@ -15,13 +15,11 @@
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}"
-                   >
+        <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Find"
+                <AppBarButton Label="find"
                               Icon="Find"
-                              Name="Find"
-                              Click="Find_Click">
+                              Name="Find">
                     <AppBarButton.Flyout>
                         <Flyout>
                             <StackPanel>
@@ -33,21 +31,21 @@
                         </Flyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-                <AppBarButton Label="Submit"
+                <AppBarButton Label="submit"
                               Icon="Accept"
                               Command="{Binding NextPageCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Appointments"
+                <AppBarButton Label="appointments"
                               Icon="Calendar" />
-                <AppBarButton Label="Details"
+                <AppBarButton Label="details"
                               Icon="NewWindow"
                               Name="Profile"
                               Click="More_Click" />
                 <AppBarButton Icon="Filter"
-                              Label="Filter"
+                              Label="filter"
                               IsCompact="True"
-                              Click="filter_Click"/>
+                              Click="filter_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>

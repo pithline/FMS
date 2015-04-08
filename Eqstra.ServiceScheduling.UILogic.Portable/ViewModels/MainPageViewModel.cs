@@ -36,7 +36,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                      else
                      {
 
-                        navigationService.Navigate("PreferredSupplier", task);
+                         navigationService.Navigate("PreferredSupplier", task);
 
                      }
                  }
@@ -48,7 +48,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                  }
              }
-);
+                   );
 
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -97,8 +97,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref task, value);
-              
-              
+
+
 
             }
         }
@@ -123,7 +123,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
-        public ICommand NextPageCommand { get; set; }
+
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -136,33 +136,41 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     this.PoolofTasks = PersistentData.Instance.PoolofTasks;
                     this.Tasks = PersistentData.Instance.Tasks;
                 }
-                var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
-                ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
-                foreach (var task in tasksResult)
-                {
-                    task.Address = Regex.Replace(task.Address, ",", "\n");
-                    if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
-                    {
-                        pooltask.Add(task);
-                    }
-                    else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
-                    {
-                        tasks.Add(task);
-                    }
-                }
-                this.PoolofTasks = pooltask;
-                this.Tasks = tasks;
-
-                this.TaskProgressBar = Visibility.Collapsed;
-                PersistentData.Instance.PoolofTasks = this.PoolofTasks;
-                PersistentData.Instance.Tasks = this.Tasks;
+                await FetchTasks();
             }
             catch (Exception)
             {
                 this.TaskProgressBar = Visibility.Collapsed;
 
             }
+
+        }
+        public async System.Threading.Tasks.Task FetchTasks()
+        {
+            this.TaskProgressBar = Visibility.Collapsed;
+
+            var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
+            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
+            foreach (var task in tasksResult)
+            {
+                task.Address = Regex.Replace(task.Address, ",", "\n");
+                if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                {
+                    pooltask.Add(task);
+                }
+                else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
+                {
+                    tasks.Add(task);
+                }
+            }
+            this.PoolofTasks = pooltask;
+            this.Tasks = tasks;
+
+            this.TaskProgressBar = Visibility.Collapsed;
+
+            PersistentData.Instance.PoolofTasks = this.PoolofTasks;
+            PersistentData.Instance.Tasks = this.Tasks;
 
         }
         private void GetAppointments(Eqstra.BusinessLogic.Portable.SSModels.Task task)
@@ -172,7 +180,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                 var appointment = new Windows.ApplicationModel.Appointments.Appointment();
 
-                // StartTime
                 var date = task.AppointmentStart.Date;
                 var time = task.AppointmentEnd.TimeOfDay - task.AppointmentStart.TimeOfDay;
                 var timeZoneOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.Now);
@@ -198,15 +205,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand MakeIMCommand { get; set; }
 
         public DelegateCommand LocateCommand { get; set; }
-
+        public ICommand NextPageCommand { get; set; }
         public DelegateCommand MakeCallCommand { get; set; }
-
-        //private Bing.Maps.Location location;
-        //public Bing.Maps.Location Location
-        //{
-        //    get { return location; }
-        //    set { SetProperty(ref location, value); }
-        //}
 
     }
 }

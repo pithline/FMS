@@ -34,7 +34,6 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             this.InitializeComponent();
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-           
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

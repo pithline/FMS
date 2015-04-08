@@ -25,7 +25,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 {
     public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
-     
+
         public PreferredSupplierPage()
         {
             this.InitializeComponent();
@@ -43,21 +43,6 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
             m.Open(this);
         }
-
-        private void Find_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
-        private void Accept_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -86,7 +71,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
             if (vm != null)
             {
-                SearchSupplierPopup sp = new SearchSupplierPopup(vm._locationService,vm._eventAggregator, vm._supplierService);
+                SearchSupplierPopup sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
                 sp.Open();
             }
         }
