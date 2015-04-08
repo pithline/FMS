@@ -29,7 +29,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     /// </summary>
     public sealed partial class ServiceSchedulingPage : VisualStateAwarePage
     {
-
+        MoreInfo moreInfo;
+        SearchSupplierPopup sp;
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
@@ -39,6 +40,14 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             ((ServiceSchedulingPageViewModel)this.DataContext)._busyIndicator.Close();
+            if (sp!=null)
+            {
+                sp.Close(); 
+            }
+            if (moreInfo!=null)
+            {
+                moreInfo.Close(); 
+            }
         }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
@@ -50,8 +59,9 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         }
         private void More_Click(object sender, RoutedEventArgs e)
         {
-            MoreInfo m = new MoreInfo();
-            m.Open(this);
+            var vm = this.DataContext as ServiceSchedulingPageViewModel;
+            moreInfo = new MoreInfo();
+            moreInfo.Open(vm.SelectedTask);
         }
         private async void Calendar_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +73,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             if (vm != null)
             {
-                SearchSupplierPopup sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
+                sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
                 sp.Open();
             }
         }

@@ -104,7 +104,10 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 ObservableCollection<BusinessLogic.Portable.SSModels.Task> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
                 foreach (var task in currentTasks)
                 {
-                    if (task.ContactName.Contains(text) || task.CustomerName.Contains(text) || task.RegistrationNumber.Contains(text) || task.CaseNumber.Contains(text))
+                    if (task.ContactName.ToLower().Contains(text.ToLower()) ||
+                        task.CustomerName.ToLower().Contains(text.ToLower()) ||
+                        task.RegistrationNumber.ToLower().Contains(text.ToLower()) ||
+                        task.CaseNumber.ToLower().Contains(text.ToLower()))
                     {
                         filterResult.Add(task);
                     }

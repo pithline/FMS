@@ -47,7 +47,7 @@
                      Visibility="{Binding ProgressVisibility}"
                      HorizontalAlignment="Stretch" />
 
-        <ComboBox  Height="70"
+        <ComboBox  Height="70" Header="Country"
                    Grid.Row="1"
                    Width="310"
                    ItemsSource="{Binding Countries}"
@@ -59,7 +59,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
 
-        <ComboBox  Height="70"
+        <ComboBox  Height="70" Header="Province"
                    Grid.Row="2"
                    Width="310"
                    ItemsSource="{Binding Provinces}"
@@ -72,7 +72,7 @@
                    VerticalAlignment="Center" />
 
         <ComboBox  Height="70"
-                   Grid.Row="3"
+                   Grid.Row="3" Header="City"
                    Width="310"
                    ItemsSource="{Binding Cities}"
                    SelectedItem="{Binding SelectedCity,Mode=TwoWay}"
@@ -84,7 +84,7 @@
                    VerticalAlignment="Center" />
 
         <ComboBox  Height="70"
-                   Grid.Row="4"
+                   Grid.Row="4" Header="Suburb"
                    Width="310"
                    ItemsSource="{Binding Suburbs}"
                    SelectedItem="{Binding SelectedSuburb,Mode=TwoWay}"
@@ -95,7 +95,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
 
-        <ComboBox  Height="70"
+        <ComboBox  Height="70" Header="Region"
                    Grid.Row="5"
                    Width="310"
                    ItemsSource="{Binding Region}"

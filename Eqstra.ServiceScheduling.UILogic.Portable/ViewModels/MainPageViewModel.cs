@@ -147,7 +147,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
         public async System.Threading.Tasks.Task FetchTasks()
         {
-            this.TaskProgressBar = Visibility.Collapsed;
+            this.TaskProgressBar = Visibility.Visible;
 
             var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
             ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();

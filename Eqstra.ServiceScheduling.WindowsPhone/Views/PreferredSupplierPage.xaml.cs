@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,11 +26,25 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 {
     public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
-
+        SearchSupplierPopup sp;
+        MoreInfo moreInfo;
         public PreferredSupplierPage()
         {
             this.InitializeComponent();
             this.Loaded += PreferredSupplierPage_Loaded;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            if (sp != null)
+            {
+                sp.Close();
+            }
+            if (moreInfo != null)
+            {
+                moreInfo.Close();
+            }
         }
 
         void PreferredSupplierPage_Loaded(object sender, RoutedEventArgs e)
@@ -39,9 +54,9 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public PreferredSupplierPageViewModel vm { get; set; }
         private void More_Click(object sender, RoutedEventArgs e)
         {
-            MoreInfo m = new MoreInfo();
+            moreInfo = new MoreInfo();
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
-            m.Open(this);
+            moreInfo.Open(vm.SelectedTask);
         }
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
@@ -52,7 +67,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 ObservableCollection<BusinessLogic.Portable.SSModels.Supplier> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Supplier>();
                 foreach (var task in PersistentData.Instance.PoolofSupplier)
                 {
-                    if (task.SupplierName.Contains(text))
+                    if (task.SupplierName.ToLower().Contains(text.ToLower()))
                     {
                         filterResult.Add(task);
                     }
@@ -71,7 +86,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
             if (vm != null)
             {
-                SearchSupplierPopup sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
+                sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
                 sp.Open();
             }
         }
