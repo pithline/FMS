@@ -42,7 +42,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                      var response = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                      if (response)
                      {
-                         navigationService.Navigate("SubmittedDetail", string.Empty);
+                         navigationService.Navigate("SubmittedDetail", this.SelectedTask);
                      }
                  }
 

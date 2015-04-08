@@ -17,9 +17,11 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 
@@ -35,7 +37,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
         public BusyIndicator _busyIndicator;
-   
+
         private ITaskService _taskService;
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, ILocationService locationService, IServiceDetailService serviceDetailService, ISupplierService supplierService, ITaskService taskService)
         {
@@ -56,23 +58,25 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
            {
                try
                {
-
-                   this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
-                   this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
-                   this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
-                   bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                   if (response)
+                   if (this.Validate())
                    {
-                       var caseStatus = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                       var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
-                       var res = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                       if (res)
+                       this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
+                       this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
+                       this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
+                       bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                       if (response)
                        {
-                           this.SelectedTask.Status = caseStatus.Status;
-                           await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                           navigationService.Navigate("Main", string.Empty);
-                       }
+                           var caseStatus = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                           var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
+                           var res = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                           if (res)
+                           {
+                               this.SelectedTask.Status = caseStatus.Status;
+                               await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                               navigationService.Navigate("Main", string.Empty);
+                           }
 
+                       }
                    }
                }
                catch (Exception ex)
@@ -131,6 +135,54 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         }
 
+
+        private bool Validate()
+        {
+            Boolean resp = true;
+            if (String.IsNullOrEmpty(this.Model.SelectedServiceType))
+            {
+                this.StBorderBrush = new SolidColorBrush(Colors.Red);
+                resp = false;
+            }
+            else
+            {
+                this.StBorderBrush = null;
+            }
+
+            if (this.IsLiftRequired)
+            {
+                if (this.Model.SelectedLocationType == null)
+                {
+                    this.LtBorderBrush = new SolidColorBrush(Colors.Red);
+                    resp = false;
+                }
+                else
+                {
+                    this.LtBorderBrush = null;
+                }
+                if (this.Model.SelectedDestinationType == null)
+                {
+                    this.DtBorderBrush = new SolidColorBrush(Colors.Red);
+                    resp = false;
+                }
+                else
+                {
+                    this.DtBorderBrush = null;
+
+                }
+                if (String.IsNullOrEmpty(this.Model.Address))
+                {
+                    this.AdBorderBrush = new SolidColorBrush(Colors.Red);
+                    resp = false;
+                }
+                else
+                {
+                    this.AdBorderBrush = null;
+                }
+            }
+
+            return resp;
+        }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
@@ -174,11 +226,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.Model.ODOReadingDt = DateTime.Parse(this.Model.ODOReadingDate);
                 }
+
+                if (this.Model != null)
+                {
+                    this.IsLiftRequired = this.Model.IsLiftRequired;
+                }
                 _busyIndicator.Close();
             }
             catch (Exception)
             {
-
+                _busyIndicator.Close();
             }
         }
 
@@ -277,6 +334,34 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 SetProperty(ref selectedSupplier, value);
                 this.NextPageCommand.RaiseCanExecuteChanged();
             }
+        }
+
+        private Brush stBorderBrush;
+        public Brush StBorderBrush
+        {
+            get { return stBorderBrush; }
+            set { SetProperty(ref stBorderBrush, value); }
+        }
+
+        private Brush ltBorderBrush;
+        public Brush LtBorderBrush
+        {
+            get { return ltBorderBrush; }
+            set { SetProperty(ref ltBorderBrush, value); }
+        }
+
+
+        private Brush dtBorderBrush;
+        public Brush DtBorderBrush
+        {
+            get { return dtBorderBrush; }
+            set { SetProperty(ref dtBorderBrush, value); }
+        }
+        private Brush adBorderBrush;
+        public Brush AdBorderBrush
+        {
+            get { return adBorderBrush; }
+            set { SetProperty(ref adBorderBrush, value); }
         }
 
     }

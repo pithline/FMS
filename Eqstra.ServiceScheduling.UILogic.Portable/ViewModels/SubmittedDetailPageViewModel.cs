@@ -15,9 +15,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
-        public SubmittedDetailPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService)
+        private ITaskService _taskService;
+        public SubmittedDetailPageViewModel(INavigationService navigationService, IServiceDetailService serviceDetailService, ITaskService taskService)
         {
             this._navigationService = navigationService;
+            this._taskService = taskService;
             this._serviceDetailService = serviceDetailService;
             this.Model = new ServiceSchedulingDetail();
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
@@ -25,6 +27,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
+                await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
                 navigationService.Navigate("Main", string.Empty);
             }
             catch (Exception ex)
@@ -44,8 +47,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
             {
-                var task = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                this.Model = await _serviceDetailService.GetServiceDetailAsync(task.CaseNumber, task.CaseServiceRecID, task.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
+                this.Model = await _serviceDetailService.GetServiceDetailAsync(this.SelectedTask.CaseNumber, this.SelectedTask.CaseServiceRecID, this.SelectedTask.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
             }
 
         }
@@ -55,8 +58,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return model; }
             set { SetProperty(ref model, value); }
         }
+        public Eqstra.BusinessLogic.Portable.SSModels.Task SelectedTask { get; set; }
         public DelegateCommand HomePageCommand { get; private set; }
         public DelegateCommand NextPageCommand { get; private set; }
+
+
 
     }
 }

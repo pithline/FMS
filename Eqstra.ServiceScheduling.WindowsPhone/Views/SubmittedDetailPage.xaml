@@ -119,7 +119,7 @@
                         Margin="2">
                 <TextBlock Text="Lift Required"
                            Style="{StaticResource TextContentStyle}" />
-                <ToggleSwitch OnContent="Yes"
+                <ToggleSwitch OnContent="Yes" IsHitTestVisible="False"
                               HorizontalAlignment="Left"
                               OffContent="No"
                               IsOn="{Binding Model.LiftRequired}" />

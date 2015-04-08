@@ -161,6 +161,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             catch (Exception)
             {
                 this.TaskProgressBar = Visibility.Collapsed;
+
             }
 
         }

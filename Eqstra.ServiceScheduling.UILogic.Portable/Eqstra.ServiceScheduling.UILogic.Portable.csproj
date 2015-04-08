@@ -65,7 +65,6 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PreferredSupplierPageViewModel.cs" />
-    <Compile Include="ViewModels\SearchSupplierPopupViewModel.cs" />
     <Compile Include="ViewModels\ServiceSchedulingPageViewModel.cs" />
     <Compile Include="ViewModels\SubmittedDetailPageViewModel.cs" />
   </ItemGroup>
