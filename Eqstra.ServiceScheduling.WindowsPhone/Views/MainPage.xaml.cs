@@ -197,10 +197,5 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             await contentDialog.ShowAsync();
 
         }
-
-        void appBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

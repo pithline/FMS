@@ -40,8 +40,8 @@ namespace Eqstra.ServiceScheduling.Views
         {
             ApplicationData.Current.RoamingSettings.Values.Remove(Constants.ACCESSTOKEN);
             ApplicationData.Current.RoamingSettings.Values.Remove(Constants.USERINFO);
-            _navigationService.ClearHistory();
             this._navigationService.Navigate("Login", string.Empty);
+            _navigationService.ClearHistory();
             this.Hide();
         }
 

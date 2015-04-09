@@ -90,13 +90,7 @@
                         <StackPanel Grid.Row="2"
                                     Orientation="Horizontal">
 
-                            <AppBarButton HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
-                                          Icon="Camera"
-                                          Command="{Binding TakePictureCommand}"
-                                          CommandParameter="{Binding Model.OdoReadingImageCapture}">
-                                
-                            </AppBarButton>
+                           
                             <Image Source="{Binding Model.OdoReadingImageCapture.ImageBitmap}"
                                    Stretch="UniformToFill"
                                    Height="70"
@@ -110,6 +104,13 @@
                                     </Core:EventTriggerBehavior>
                                 </Interactivity:Interaction.Behaviors>
                             </Image>
+                            <AppBarButton HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          Icon="Camera"
+                                          Command="{Binding TakePictureCommand}"
+                                          CommandParameter="{Binding Model.OdoReadingImageCapture}">
+
+                            </AppBarButton>
                         </StackPanel>
 
                         <ComboBox  Width="330"

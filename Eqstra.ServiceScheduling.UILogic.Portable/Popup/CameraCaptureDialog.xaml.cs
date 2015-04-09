@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -25,7 +26,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace Eqstra.ServiceScheduling.Views
+namespace Eqstra.ServiceScheduling.UILogic
 {
     public sealed partial class CameraCaptureDialog : ContentDialog
     {
@@ -83,6 +84,13 @@ namespace Eqstra.ServiceScheduling.Views
                 var bitmap = new BitmapImage();
                 stream.Seek(0);
                 await bitmap.SetSourceAsync(stream);
+                var model = this.Tag as ServiceSchedulingDetail;
+                if (model.OdoReadingImageCapture==null)
+                {
+                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+                }
+                model.OdoReadingImageCapture.ImageBitmap = bitmap;
+                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
                 Img.Source = bitmap;
 
             }
