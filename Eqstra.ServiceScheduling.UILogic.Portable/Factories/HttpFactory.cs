@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.Web.Http;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
@@ -20,7 +21,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
                     httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("Content-Type: application/x-www-form-urlencoded"));
-                    httpClient.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Bearer", Constants.TOKEN);
+                    var token = ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN] as AccessToken;
+                    httpClient.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Bearer", token.Access_Token);
 
                     return await httpClient.PostAsync(new Uri(Constants.APIURL), data);
                 }

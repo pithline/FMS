@@ -34,11 +34,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                         if (token != null)
                         {
-                            ApplicationData.Current.RoamingSettings.Values["TokenInfo"] = JsonConvert.SerializeObject(token);
+                            ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN] = JsonConvert.SerializeObject(token);
                             var userInfo = await userService.GetUserInfoAsync(this.UserName);
                             if (userInfo != null)
                             {
-                                ApplicationData.Current.RoamingSettings.Values["UserInfo"] = JsonConvert.SerializeObject(token);
+                                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(token);
                                 navigationService.Navigate("Main", userInfo);
                             }
                         }
