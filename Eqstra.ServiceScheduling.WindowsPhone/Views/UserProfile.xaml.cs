@@ -1,4 +1,7 @@
-﻿using Eqstra.ServiceScheduling.UILogic;
+﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic;
+using Microsoft.Practices.Prism.Mvvm.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.Storage.Pickers.Provider;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,15 +25,24 @@ namespace Eqstra.ServiceScheduling.Views
 {
     public sealed partial class UserProfile : ContentDialog
     {
-        public UserProfile()
+        public INavigationService _navigationService;
+        public UserProfile(INavigationService navigationService)
         {
+            this._navigationService = navigationService;
             this.InitializeComponent();
-            this.DataContext = PersistentData.Instance.UserInfo;
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            {
+                this.DataContext = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            }
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-
+            ApplicationData.Current.RoamingSettings.Values.Remove(Constants.ACCESSTOKEN);
+            ApplicationData.Current.RoamingSettings.Values.Remove(Constants.UserInfo);
+            _navigationService.ClearHistory();
+            this._navigationService.Navigate("Login", string.Empty);
+            this.Hide();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

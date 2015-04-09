@@ -5,6 +5,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,28 +61,31 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                {
                    if (this.Validate())
                    {
+                       _busyIndicator.Open();
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
                        this.Model.ConfirmedDate = this.Model.ConfirmedDateDt.ToString("MM/dd/yyyy");
-                       bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                       bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, this.UserInfo);
                        if (response)
                        {
-                           var caseStatus = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                           var caseStatus = await this._taskService.UpdateStatusListAsync(this.SelectedTask, this.UserInfo);
                            var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
-                           var res = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                           var res = await this._supplierService.InsertSelectedSupplierAsync(supplier, this.UserInfo);
                            if (res)
                            {
                                this.SelectedTask.Status = caseStatus.Status;
-                               await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                               await this._taskService.UpdateStatusListAsync(this.SelectedTask, this.UserInfo);
                                navigationService.Navigate("Main", string.Empty);
                            }
 
                        }
+                       _busyIndicator.Close();
                    }
                }
                catch (Exception ex)
                {
+                   _busyIndicator.Close();
                }
                finally
                {
@@ -93,7 +97,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
-              _navigationService.Navigate("CameraCapture", this.Model);
+              ApplicationData.Current.RoamingSettings.Values[Constants.SSDCameraCapture] = JsonConvert.SerializeObject(this.Model);
+              _navigationService.Navigate("CameraCapture", string.Empty);
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
@@ -184,30 +189,36 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
-                if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
+                _busyIndicator.Open();
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
                 {
-                    _busyIndicator.Open();
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
 
-                    SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                    this.Model = await _serviceDetailService.GetServiceDetailAsync(SelectedTask.CaseNumber, SelectedTask.CaseServiceRecID, SelectedTask.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                    this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(SelectedTask.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                    if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
-                    {
-                        this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) };
-                    }
-                    else
-                    {
-                        var bitmap = new BitmapImage();
-                        await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
-                        this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
-                    }
-                    if (SelectedTask != null)
-                    {
-                        this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", SelectedTask.CustomerId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
-                    }
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SelectedTask))
+                {
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask].ToString());
+                }
 
+                this.Model = await _serviceDetailService.GetServiceDetailAsync(SelectedTask.CaseNumber, SelectedTask.CaseServiceRecID, SelectedTask.ServiceRecID,this.UserInfo);
+                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(SelectedTask.VehicleClassId, this.UserInfo);
+                if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
+                {
+                    this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = new BitmapImage(new Uri("ms-appx:///Assets/odo_meter.png")) };
                 }
                 else
+                {
+                    var bitmap = new BitmapImage();
+                    await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
+                    this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
+                }
+                if (SelectedTask != null)
+                {
+                    this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", SelectedTask.CustomerId, this.UserInfo);
+                }
+
+
+                if (this.Model == null)
                 {
                     this.Model = navigationParameter as ServiceSchedulingDetail;
                 }
@@ -250,7 +261,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             return randomAccessStream;
         }
-
+        public UserInfo UserInfo { get; set; }
         private ServiceSchedulingDetail model;
         public ServiceSchedulingDetail Model
         {

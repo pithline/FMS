@@ -1,24 +1,14 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
-using Eqstra.ServiceScheduling.UILogic;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.ServiceScheduling
 {
@@ -30,7 +20,6 @@ namespace Eqstra.ServiceScheduling
         private ILocationService _locationService;
         public ISupplierService _supplierService;
         public ObservableCollection<Supplier> PoolofSupplier;
-        private ObservableCollection<Country> _countries;
         public SearchSupplierPopup(ILocationService locationService, IEventAggregator eventAggregator, ISupplierService supplierService)
         {
             this._eventAggregator = eventAggregator;
@@ -45,7 +34,11 @@ namespace Eqstra.ServiceScheduling
             this.SupplierFilter = new SupplierFilter();
             this.DataContext = this.SupplierFilter;
             this.SupplierFilter.ProgressVisibility = Visibility.Visible;
-            this.SupplierFilter.Countries = await _locationService.GetCountryList(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            {
+                this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            }
+            this.SupplierFilter.Countries = await _locationService.GetCountryList(this.UserInfo);
             this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
         }
 
@@ -88,7 +81,7 @@ namespace Eqstra.ServiceScheduling
                 string cityId = this.SupplierFilter.SelectedCity != null ? this.SupplierFilter.SelectedCity.Id : string.Empty;
                 string suburbId = this.SupplierFilter.SelectedSuburb != null ? this.SupplierFilter.SelectedSuburb.Id : string.Empty;
                 string regionId = this.SupplierFilter.SelectedRegion != null ? this.SupplierFilter.SelectedRegion.Id : string.Empty;
-                this.PoolofSupplier = await this._supplierService.SearchSupplierByLocationAsync(countryId, provinceId, cityId, suburbId, regionId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.PoolofSupplier = await this._supplierService.SearchSupplierByLocationAsync(countryId, provinceId, cityId, suburbId, regionId, this.UserInfo);
 
                 _eventAggregator.GetEvent<SupplierFilterEvent>().Publish(this.PoolofSupplier);
 
@@ -110,7 +103,7 @@ namespace Eqstra.ServiceScheduling
             {
                 this.SupplierFilter.ProgressVisibility = Visibility.Visible;
 
-                this.SupplierFilter.Provinces = await _locationService.GetProvinceList(this.SupplierFilter.SelectedCountry.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SupplierFilter.Provinces = await _locationService.GetProvinceList(this.SupplierFilter.SelectedCountry.Id, this.UserInfo);
                 this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
             }
         }
@@ -120,7 +113,7 @@ namespace Eqstra.ServiceScheduling
             if (this.SupplierFilter.Selectedprovince != null)
             {
                 this.SupplierFilter.ProgressVisibility = Visibility.Visible;
-                this.SupplierFilter.Cities = await _locationService.GetCityList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SupplierFilter.Cities = await _locationService.GetCityList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, this.UserInfo);
                 this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
             }
         }
@@ -131,7 +124,7 @@ namespace Eqstra.ServiceScheduling
             {
                 this.SupplierFilter.ProgressVisibility = Visibility.Visible;
 
-                this.SupplierFilter.Suburbs = await _locationService.GetSuburbList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SupplierFilter.Suburbs = await _locationService.GetSuburbList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, this.UserInfo);
                 this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
             }
         }
@@ -141,7 +134,7 @@ namespace Eqstra.ServiceScheduling
             if (this.SupplierFilter.Selectedprovince != null)
             {
                 this.SupplierFilter.ProgressVisibility = Visibility.Visible;
-                this.SupplierFilter.Region = await _locationService.GetRegionList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SupplierFilter.Region = await _locationService.GetRegionList(this.SupplierFilter.SelectedCountry.Id, this.SupplierFilter.Selectedprovince.Id, this.UserInfo);
                 this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
             }
         }
@@ -152,7 +145,7 @@ namespace Eqstra.ServiceScheduling
         }
 
         public SupplierFilter SupplierFilter { get; set; }
-
+        public UserInfo UserInfo { get; set; }
     }
 
 

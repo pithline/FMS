@@ -24,14 +24,11 @@
                      Width="350"
                      Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <PasswordBox PlaceholderText="password"
-                        
-                         Height="45"
+                         Height="95"
+                         Visibility="Visible"
+                         IsPasswordRevealButtonEnabled="True"
                          Width="350"
-                        
-                         Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         />
-
-
+                         Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button HorizontalAlignment="Center"
                     Content="login"

@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -39,13 +40,20 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
-          
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            vm._navigationService.ClearHistory();
+        }
+
         async void accelerometer_Shaken(Accelerometer sender, AccelerometerShakenEventArgs args)
         {
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,async () =>
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
            {
-              await vm.FetchTasks();
+               await vm.FetchTasks();
            });
         }
 
@@ -71,12 +79,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 Windows.ApplicationModel.Chat.ChatMessage msg = new Windows.ApplicationModel.Chat.ChatMessage();
                 msg.Body = "";
                 msg.Recipients.Add(vm.InspectionTask.CustPhone);
-                await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(msg); 
+                await Windows.ApplicationModel.Chat.ChatMessageManager.ShowComposeSmsMessageAsync(msg);
             }
             else
             {
-              await  new MessageDialog("No phone number exist").ShowAsync() ;
-               
+                await new MessageDialog("No phone number exist").ShowAsync();
             }
         }
 
@@ -186,8 +193,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-
-            UserProfile contentDialog = new UserProfile();
+            UserProfile contentDialog = new UserProfile(vm._navigationService);
             await contentDialog.ShowAsync();
 
         }

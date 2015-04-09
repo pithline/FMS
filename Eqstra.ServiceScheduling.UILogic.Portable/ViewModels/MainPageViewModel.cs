@@ -11,11 +11,14 @@ using System.Windows.Input;
 using Windows.System;
 using Windows.UI.Xaml;
 using System.Linq;
+using Windows.Storage;
+using Newtonsoft.Json;
+using Windows.UI.Popups;
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class MainPageViewModel : ViewModel
     {
-        private INavigationService _navigationService;
+        public INavigationService _navigationService;
         private ITaskService _taskService;
         public MainPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
@@ -29,14 +32,15 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              {
                  try
                  {
+                     ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask] = JsonConvert.SerializeObject(task);
                      if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                      {
-                         navigationService.Navigate("ServiceScheduling", task);
+                         navigationService.Navigate("ServiceScheduling", String.Empty);
                      }
                      else
                      {
 
-                         navigationService.Navigate("PreferredSupplier", task);
+                         navigationService.Navigate("PreferredSupplier", String.Empty);
 
                      }
                  }
@@ -53,7 +57,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("callto:" + this.InspectionTask.CustPhone));
+                if (!String.IsNullOrEmpty(this.InspectionTask.CustPhone))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("callto:" + this.InspectionTask.CustPhone));
+                }
+                else
+                {
+                    await new MessageDialog("No phone number exist").ShowAsync();
+                }
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
@@ -61,19 +72,27 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
+                if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
+                }
+                else
+                {
+                    await new MessageDialog("No mail id exist").ShowAsync();
+                }
             }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
-
-            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
-            {
-
-            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
-
 
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(this.InspectionTask.Address, "\n", ",")));
+                if (!String.IsNullOrEmpty(this.InspectionTask.Address))
+                {
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(this.InspectionTask.Address, "\n", ",")));
+                }
+                else
+                {
+                    await new MessageDialog("No address exist").ShowAsync();
+                }
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
@@ -126,11 +145,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
+       
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                var userInfo = ((Eqstra.BusinessLogic.Portable.SSModels.UserInfo)navigationParameter);
-                PersistentData.Instance.UserInfo = new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" };
+
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+                {
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+
                 if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))
                 {
                     this.PoolofTasks = PersistentData.Instance.PoolofTasks;
@@ -149,7 +173,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this.TaskProgressBar = Visibility.Visible;
 
-            var tasksResult = await this._taskService.GetTasksAsync(new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo);
             ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
             ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
             foreach (var task in tasksResult)
@@ -199,6 +223,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 throw;
             }
         }
+        public UserInfo UserInfo { get; set; }
 
         public DelegateCommand MailToCommand { get; set; }
 

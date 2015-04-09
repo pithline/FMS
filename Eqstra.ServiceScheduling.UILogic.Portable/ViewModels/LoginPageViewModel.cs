@@ -20,6 +20,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public LoginPageViewModel(INavigationService navigationService, IUserService userService)
         {
             _navigationService = navigationService;
+        
             ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
@@ -38,8 +39,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                             var userInfo = await userService.GetUserInfoAsync(this.UserName);
                             if (userInfo != null)
                             {
-                                ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO] = JsonConvert.SerializeObject(userInfo);
-                                navigationService.Navigate("Main", userInfo);
+                                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(userInfo);
+                                navigationService.Navigate("Main", string.Empty);
                             }
                         }
 
@@ -115,6 +116,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref progressDialogPopup, value); }
         }
 
-
+           
     }
 }
