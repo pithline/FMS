@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.Web.Http;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
@@ -20,14 +21,19 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         async public Task<UserInfo> GetUserInfoAsync(string userId)
         {
-
-
-            var postData = new { target = "ServiceScheduling", method = "single", parameters = new[] { "GetUserInfo", userId } };
-            var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return JsonConvert.DeserializeObject<UserInfo>(await response.Content.ReadAsStringAsync());
+                var postData = new { target = "ServiceScheduling", method = "single", parameters = new[] { "GetUserInfo", userId } };
+                var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<UserInfo>(await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+                new MessageDialog(ex.Message).ShowAsync();
             }
 
             return null;
@@ -58,8 +64,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new MessageDialog(ex.Message).ShowAsync();
 
                 return null ;
             }
