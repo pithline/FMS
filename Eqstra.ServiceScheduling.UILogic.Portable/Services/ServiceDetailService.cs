@@ -21,14 +21,15 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
 
         public async Task<bool> InsertServiceDetailsAsync(BusinessLogic.Portable.SSModels.ServiceSchedulingDetail serviceSchedulingDetail, BusinessLogic.Portable.SSModels.Address address, BusinessLogic.Portable.SSModels.UserInfo userInfo)
         {
-            var postData = new { target = "ServiceScheduling",method="save", parameters = new[] { "InsertServiceDetails", JsonConvert.SerializeObject(serviceSchedulingDetail), JsonConvert.SerializeObject(address), JsonConvert.SerializeObject(userInfo) } };
+            var postData = new { target = "ServiceScheduling", method = "save", parameters = new[] { "InsertServiceDetails", JsonConvert.SerializeObject(serviceSchedulingDetail), JsonConvert.SerializeObject(address), JsonConvert.SerializeObject(userInfo) } };
             var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+              
+            }
+            return false;
         }
 
         public async Task<BusinessLogic.Portable.SSModels.ServiceSchedulingDetail> GetServiceDetailAsync(string caseNumber, long caseServiceRecId, long serviceRecId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -38,10 +39,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
 
-            return JsonConvert.DeserializeObject<ServiceSchedulingDetail>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<ServiceSchedulingDetail>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
 
@@ -62,10 +64,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ObservableCollection<DestinationType>>(await response.Content.ReadAsStringAsync());
+
             }
 
-            return JsonConvert.DeserializeObject<ObservableCollection<DestinationType>>(await response.Content.ReadAsStringAsync());
+            return null;
+
         }
     }
 }

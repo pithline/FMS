@@ -749,7 +749,7 @@ namespace Eqstra.DataProvider.AX.Providers
                         });
                     }
                 }
-                return suppliers;
+                return suppliers.OrderBy(o => o.SupplierName).ToList<Supplier>();
             }
             catch (Exception)
             {

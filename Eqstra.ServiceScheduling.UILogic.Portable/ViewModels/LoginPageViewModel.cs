@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -15,7 +17,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
 
         private INavigationService _navigationService;
-        public LoginPageViewModel(INavigationService navigationService)
+        public LoginPageViewModel(INavigationService navigationService,IUserService userService)
         {
             _navigationService = navigationService;
             ProgressDialogPopup = new ProgressDialog();
@@ -26,7 +28,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     {
 
                         ProgressDialogPopup.Open(this);
-                        navigationService.Navigate("Main", new UserInfo { UserId = "axbcsvc", CompanyId = "1095", CompanyName = "Eqstra" });
+
+
+                        var token = await userService.ValidateUserAsync(this.UserName, this.Password);
+
+                        if (token!=null)
+                        {
+                            ApplicationData.Current.RoamingSettings.Values["TokenInfo"] = JsonConvert.SerializeObject( token);
+                            var userInfo = await userService.GetUserInfoAsync(this.UserName);
+                            navigationService.Navigate("Main",userInfo); 
+                        }
                      
                         ProgressDialogPopup.Close();
 
