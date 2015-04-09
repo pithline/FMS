@@ -47,7 +47,10 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
+                        <ProgressBar IsIndeterminate="True"
+                                     Visibility="{Binding TaskProgressBar}"
+                                     Foreground="White"
+                                     VerticalAlignment="Top" />
                         <StackPanel Orientation="Vertical"
                                     HorizontalAlignment="Center"
                                     Margin="2">

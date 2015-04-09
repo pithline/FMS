@@ -20,6 +20,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public LoginPageViewModel(INavigationService navigationService, IUserService userService)
         {
             _navigationService = navigationService;
+        
             ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
@@ -115,6 +116,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref progressDialogPopup, value); }
         }
 
-
+           
     }
 }

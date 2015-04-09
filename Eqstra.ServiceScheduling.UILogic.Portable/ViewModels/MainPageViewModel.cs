@@ -13,6 +13,7 @@ using Windows.UI.Xaml;
 using System.Linq;
 using Windows.Storage;
 using Newtonsoft.Json;
+using Windows.UI.Popups;
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class MainPageViewModel : ViewModel
@@ -56,7 +57,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("callto:" + this.InspectionTask.CustPhone));
+                if (!String.IsNullOrEmpty(this.InspectionTask.CustPhone))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("callto:" + this.InspectionTask.CustPhone));
+                }
+                else
+                {
+                    await new MessageDialog("No phone number exist").ShowAsync();
+                }
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
@@ -64,19 +72,27 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
+                if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
+                }
+                else
+                {
+                    await new MessageDialog("No mail id exist").ShowAsync();
+                }
             }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
-
-            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
-            {
-
-            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
-
 
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(this.InspectionTask.Address, "\n", ",")));
+                if (!String.IsNullOrEmpty(this.InspectionTask.Address))
+                {
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri("bingmaps:?where=" + Regex.Replace(this.InspectionTask.Address, "\n", ",")));
+                }
+                else
+                {
+                    await new MessageDialog("No address exist").ShowAsync();
+                }
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
@@ -129,6 +145,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
+       
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
@@ -150,6 +167,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.TaskProgressBar = Visibility.Collapsed;
 
             }
+
         }
         public async System.Threading.Tasks.Task FetchTasks()
         {

@@ -39,6 +39,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              {
                  if (this.SelectedSupplier != null)
                  {
+                     this.TaskProgressBar = Visibility.Visible;
                      var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
                      var response = await this._supplierService.InsertSelectedSupplierAsync(supplier, this.UserInfo);
                      if (response)
@@ -50,6 +51,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              }
              catch (Exception ex)
              {
+                 this.TaskProgressBar = Visibility.Collapsed;
              }
              finally
              {

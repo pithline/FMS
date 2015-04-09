@@ -61,6 +61,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                {
                    if (this.Validate())
                    {
+                       _busyIndicator.Open();
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
@@ -79,10 +80,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                            }
 
                        }
+                       _busyIndicator.Close();
                    }
                }
                catch (Exception ex)
                {
+                   _busyIndicator.Close();
                }
                finally
                {

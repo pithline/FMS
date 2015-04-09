@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -40,13 +41,14 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             this.InitializeComponent();
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-          //  e.Handled = true;
+            e.Handled = true;
+            vm._navigationService.ClearHistory();
         }
+
         async void accelerometer_Shaken(Accelerometer sender, AccelerometerShakenEventArgs args)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -82,7 +84,6 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             else
             {
                 await new MessageDialog("No phone number exist").ShowAsync();
-
             }
         }
 
@@ -192,7 +193,6 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-
             UserProfile contentDialog = new UserProfile(vm._navigationService);
             await contentDialog.ShowAsync();
 

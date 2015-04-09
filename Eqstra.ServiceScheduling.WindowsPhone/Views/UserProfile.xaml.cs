@@ -42,6 +42,7 @@ namespace Eqstra.ServiceScheduling.Views
             ApplicationData.Current.RoamingSettings.Values.Remove(Constants.UserInfo);
             _navigationService.ClearHistory();
             this._navigationService.Navigate("Login", string.Empty);
+            this.Hide();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
