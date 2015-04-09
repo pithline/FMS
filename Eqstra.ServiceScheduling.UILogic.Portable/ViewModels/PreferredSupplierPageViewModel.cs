@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Windows.Storage;
+using Newtonsoft.Json;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -38,10 +40,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                  if (this.SelectedSupplier != null)
                  {
                      var supplier = new SupplierSelection() { CaseNumber = this.SelectedTask.CaseNumber, CaseServiceRecID = this.SelectedTask.CaseServiceRecID, SelectedSupplier = this.SelectedSupplier };
-                     var response = await this._supplierService.InsertSelectedSupplierAsync(supplier, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                     var response = await this._supplierService.InsertSelectedSupplierAsync(supplier, this.UserInfo);
                      if (response)
                      {
-                         navigationService.Navigate("SubmittedDetail", this.SelectedTask);
+                         navigationService.Navigate("SubmittedDetail", string.Empty);
                      }
                  }
 
@@ -69,12 +71,22 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             try
             {
                 this.TaskProgressBar = Visibility.Visible;
-                this.SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                if (PersistentData.Instance.PoolofSupplier != null)
+
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SelectedTask))
+                {
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask].ToString());
+                }
+
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+                {
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+
+                if (PersistentData.Instance.PoolofSupplier!= null)
                 {
                     this.PoolofSupplier = PersistentData.Instance.PoolofSupplier;
                 }
-                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(this.SelectedTask.VehicleClassId, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(this.SelectedTask.VehicleClassId, this.UserInfo);
                 PersistentData.Instance.PoolofSupplier = this.PoolofSupplier;
                 this.TaskProgressBar = Visibility.Collapsed;
             }
@@ -113,7 +125,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.NextPageCommand.RaiseCanExecuteChanged();
             }
         }
-
+        public UserInfo UserInfo { get; set; }
         public DelegateCommand NextPageCommand { get; private set; }
 
         public Eqstra.BusinessLogic.Portable.SSModels.Task SelectedTask { get; set; }

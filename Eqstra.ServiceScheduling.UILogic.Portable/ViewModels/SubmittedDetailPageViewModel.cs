@@ -3,11 +3,13 @@ using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -27,7 +29,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
-                var respone = await this._taskService.UpdateStatusListAsync(this.SelectedTask, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                var respone = await this._taskService.UpdateStatusListAsync(this.SelectedTask, this.UserInfo);
 
                 navigationService.Navigate("Main", string.Empty);
 
@@ -47,12 +49,15 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            if (navigationParameter is Eqstra.BusinessLogic.Portable.SSModels.Task)
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SelectedTask))
             {
-                SelectedTask = ((Eqstra.BusinessLogic.Portable.SSModels.Task)navigationParameter);
-                this.Model = await _serviceDetailService.GetServiceDetailAsync(this.SelectedTask.CaseNumber, this.SelectedTask.CaseServiceRecID, this.SelectedTask.ServiceRecID, new UserInfo { UserId = "axbcsvc", CompanyId = "1095" });
+                this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask].ToString());
             }
-
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            {
+                this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            }
+            this.Model = await _serviceDetailService.GetServiceDetailAsync(this.SelectedTask.CaseNumber, this.SelectedTask.CaseServiceRecID, this.SelectedTask.ServiceRecID, this.UserInfo);
         }
         private ServiceSchedulingDetail model;
         public ServiceSchedulingDetail Model
@@ -61,10 +66,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref model, value); }
         }
         public Eqstra.BusinessLogic.Portable.SSModels.Task SelectedTask { get; set; }
+        public UserInfo UserInfo { get; set; }
         public DelegateCommand HomePageCommand { get; private set; }
         public DelegateCommand NextPageCommand { get; private set; }
-
-
 
     }
 }

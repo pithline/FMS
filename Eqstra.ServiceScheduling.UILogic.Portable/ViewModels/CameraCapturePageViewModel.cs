@@ -16,6 +16,8 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Storage;
+using Newtonsoft.Json;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
@@ -36,8 +38,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                 using (var stream = new InMemoryRandomAccessStream())
                 {
-
-
                     await this.MediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
                     _bytes = new byte[stream.Size];
                     var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
@@ -64,6 +64,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     _serviceDetail.ODOReadingSnapshot = Convert.ToBase64String(bytes);
                 }
+
                 _navigationService.Navigate("ServiceScheduling", _serviceDetail);
                 //_navigationService.ClearHistory();
             });
@@ -76,7 +77,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this.ImageVisibility = Visibility.Collapsed;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-            _serviceDetail = navigationParameter as ServiceSchedulingDetail;
+
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SSDCameraCapture))
+            {
+                _serviceDetail = JsonConvert.DeserializeObject<ServiceSchedulingDetail>(ApplicationData.Current.RoamingSettings.Values[Constants.SSDCameraCapture].ToString());
+            }
+      
             //await this.MediaCapture.InitializeAsync();
             //this.MediaCapture.VideoDeviceController.PrimaryUse = Windows.Media.Devices.CaptureUse.Photo;
 

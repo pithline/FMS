@@ -39,7 +39,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                             if (userInfo != null)
                             {
                                 ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(userInfo);
-                                navigationService.Navigate("Main", userInfo);
+                                navigationService.Navigate("Main", string.Empty);
                             }
                         }
 
