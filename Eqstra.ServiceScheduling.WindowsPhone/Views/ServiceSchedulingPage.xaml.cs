@@ -1,5 +1,6 @@
 ﻿using Eqstra.ServiceScheduling.Common;
 using Eqstra.ServiceScheduling.UILogic.Portable;
+using Eqstra.ServiceScheduling.Views;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             {
                 sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
                 sp.Open();
+
+              
             }
         }
 
