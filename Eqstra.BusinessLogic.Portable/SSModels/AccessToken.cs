@@ -14,5 +14,7 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 
         public string Token_Type { get; set; }
 
+        public DateTime ExpirationDate  { get; set; }
+
     }
 }

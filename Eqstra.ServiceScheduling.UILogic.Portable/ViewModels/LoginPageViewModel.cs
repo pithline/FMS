@@ -38,7 +38,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                             var userInfo = await userService.GetUserInfoAsync(this.UserName);
                             if (userInfo != null)
                             {
-                                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(userInfo);
+                                ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO] = JsonConvert.SerializeObject(userInfo);
                                 navigationService.Navigate("Main", userInfo);
                             }
                         }
@@ -56,7 +56,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
                 },
 
-                 () => { return true || !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return  !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
         public DelegateCommand LoginCommand { get; private set; }
