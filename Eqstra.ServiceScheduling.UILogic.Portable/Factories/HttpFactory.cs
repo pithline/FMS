@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
                     httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("Content-Type: application/x-www-form-urlencoded"));
-                    var token = ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN] as AccessToken;
+                    var token = JsonConvert.DeserializeObject<AccessToken>(ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN].ToString());
                     httpClient.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Bearer", token.Access_Token);
 
                     return await httpClient.PostAsync(new Uri(Constants.APIURL), data);

@@ -38,7 +38,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                             var userInfo = await userService.GetUserInfoAsync(this.UserName);
                             if (userInfo != null)
                             {
-                                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(token);
+                                ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo] = JsonConvert.SerializeObject(userInfo);
                                 navigationService.Navigate("Main", userInfo);
                             }
                         }
