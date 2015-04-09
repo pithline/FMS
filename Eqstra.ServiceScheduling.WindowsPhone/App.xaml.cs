@@ -76,6 +76,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             _container.RegisterType<ISupplierService, SupplierService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IServiceDetailService, ServiceDetailService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ILocationService, LocationService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IUserService, UserService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IHttpFactory, HttpFactory>(new ContainerControlledLifetimeManager());
 
 

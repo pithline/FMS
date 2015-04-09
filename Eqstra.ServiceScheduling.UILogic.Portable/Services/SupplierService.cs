@@ -26,10 +26,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
+                
             return JsonConvert.DeserializeObject<ObservableCollection<Supplier>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
 
@@ -42,10 +43,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
+                
+            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
             }
 
-            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+            return false;
+
 
         }
 
@@ -56,9 +59,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
+              
             return JsonConvert.DeserializeObject<ObservableCollection<Supplier>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
         }
 
 

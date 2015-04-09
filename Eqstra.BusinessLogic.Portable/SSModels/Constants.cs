@@ -9,9 +9,10 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
     public class Constants
     {
         public const string UserInfo = "UserInfo";
-        public const string APIURL = "https://eqstraapi.mazikglobal.com/api/da";
-        //public const string APIURL = "http://172.22.3.84/Eqstra.CrossPlatform.API//api/da";
+        //public const string APIURL = "https://eqstraapi.mazikglobal.com/api/da";
+        public const string APIURL = "http://192.168.1.10/Eqstra.CrossPlatform.API/api/da";
+        public const string TOKENURL = "http://192.168.1.10/Eqstra.CrossPlatform.API/token";
         //TODO: To be removed 
-        public const string TOKEN = "KFTao_kpXuzCh8v2XWD5uyrE4fe9y7kgAjD6iWIUBC0XTuhhgfdjaVLKZ0HP6VXGH8-hrA57pxAN7iJeW5EqBRm9Uf0I1PsTujKCz3l5CJM_1awTeTRcXpfMHWsAUEXnin_fTLr3Cl2r2_-sdwhQnJhhAgX_nK37XdMZZ8JH9JA2VJgrRTOuZOvCM49GDkXYXhgjobRwccMeOsPPLy5JZt1_OkdnP0QtsWMu8UsBPuWQJvmuy49Jl9mXnJhFLL2n";
+        public const string TOKEN = "t-U_j7JUXwm-YykYl7FcWZEfwxhwls_0Bz8CDNvnFXvdvPXX7NrDyKBqG2iHBA7SyoAWLXZ23iek6TGwFAIECHz8MvPkr7bPJO4AaBNd3vdu_nItMCiIOkw3FI8nBoRjkfUfxx4QiB0T0bXY0lUgk6fWloLUBK8jRqd7Tn4x_PRNjTb8P3T-76DcFFKntvN9Suh9nYgAUHofStjX-03vFGuPht2vnVI-AOb3UUEAU7hMqT-zemkamcKNKUmU5NZC";
     }
 }

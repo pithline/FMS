@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="ImageCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSModels\AccessToken.cs" />
     <Compile Include="SSModels\Address.cs" />
     <Compile Include="SSModels\CaseStatus.cs" />
     <Compile Include="SSModels\City.cs" />

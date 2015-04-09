@@ -466,17 +466,17 @@
 
         <!-- Back button and page title -->
         <Grid Grid.Row="1"
-              Background="#FF1e8ac2">
+              Background="{ThemeResource CommandBarBackgroundThemeBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <ProgressBar IsIndeterminate="True"
-                         Foreground="White"
+                         Foreground="{ThemeResource PhoneAccentBrush}"
                          VerticalAlignment="Top"
                          Style="{StaticResource ProgressBarStyle1}" />
             <TextBlock Grid.Row="1"
-                       Foreground="White"
+                       Foreground="{ThemeResource PhoneForegroundBrush}"
                        Text="Please wait, logging in..."
                        HorizontalAlignment="Center"
                        Style="{StaticResource GroupHeaderStyle}" />

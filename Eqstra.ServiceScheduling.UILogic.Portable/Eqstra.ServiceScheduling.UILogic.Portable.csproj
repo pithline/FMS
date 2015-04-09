@@ -57,10 +57,12 @@
     <Compile Include="Services\IServiceDetailService.cs" />
     <Compile Include="Services\ISupplierService.cs" />
     <Compile Include="Services\ITaskService.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\ServiceDetailService.cs" />
     <Compile Include="Services\SupplierService.cs" />
     <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\CameraCapturePageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
