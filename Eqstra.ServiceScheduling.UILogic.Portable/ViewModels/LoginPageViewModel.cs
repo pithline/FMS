@@ -17,7 +17,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
     {
 
         private INavigationService _navigationService;
-        public LoginPageViewModel(INavigationService navigationService,IUserService userService)
+        public LoginPageViewModel(INavigationService navigationService, IUserService userService)
         {
             _navigationService = navigationService;
             ProgressDialogPopup = new ProgressDialog();
@@ -32,13 +32,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                         var token = await userService.ValidateUserAsync(this.UserName, this.Password);
 
-                        if (token!=null)
+                        if (token != null)
                         {
-                            ApplicationData.Current.RoamingSettings.Values["TokenInfo"] = JsonConvert.SerializeObject( token);
+                            ApplicationData.Current.RoamingSettings.Values["TokenInfo"] = JsonConvert.SerializeObject(token);
                             var userInfo = await userService.GetUserInfoAsync(this.UserName);
-                            navigationService.Navigate("Main",userInfo); 
+                            if (userInfo != null)
+                            {
+                                ApplicationData.Current.RoamingSettings.Values["UserInfo"] = JsonConvert.SerializeObject(token);
+                                navigationService.Navigate("Main", userInfo);
+                            }
                         }
-                     
+
                         ProgressDialogPopup.Close();
 
                     }

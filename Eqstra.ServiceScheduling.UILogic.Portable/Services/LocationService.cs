@@ -24,10 +24,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
+                
             return JsonConvert.DeserializeObject<ObservableCollection<BusinessLogic.Portable.SSModels.Country>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
        async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.Province>> GetProvinceList(string countryId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -37,10 +38,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
             return JsonConvert.DeserializeObject<ObservableCollection<BusinessLogic.Portable.SSModels.Province>>(await response.Content.ReadAsStringAsync());
+                
+            }
+            return null; 
+
         }
 
        async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.City>> GetCityList(string countryId, string stateId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -50,10 +52,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
+               
             return JsonConvert.DeserializeObject<ObservableCollection<BusinessLogic.Portable.SSModels.City>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
        async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.Suburb>> GetSuburbList(string countryId, string stateId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -63,10 +66,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
+                
             return JsonConvert.DeserializeObject<ObservableCollection<BusinessLogic.Portable.SSModels.Suburb>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
        async public Task<System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.Region>> GetRegionList(string countryId, string stateId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -76,10 +80,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
+               
             return JsonConvert.DeserializeObject<ObservableCollection<BusinessLogic.Portable.SSModels.Region>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+
         }
 
        async public Task<System.Collections.ObjectModel.ObservableCollection<string>> GetZipcodeList(string countryId, string stateId, BusinessLogic.Portable.SSModels.UserInfo userInfo)
@@ -89,10 +94,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                var tasks = await response.Content.ReadAsStringAsync();
-            }
-
             return JsonConvert.DeserializeObject<ObservableCollection<string>>(await response.Content.ReadAsStringAsync());
+               
+            }
+            return null;
+
         }
     }
 }

@@ -40,19 +40,27 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
         {
             var postData = "grant_type=password&username=" + userName + "&password=" + password;
 
-            using (var httpClient = new HttpClient())
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
+                    httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("Content-Type: application/x-www-form-urlencoded"));
+                    var response = await httpClient.PostAsync(new Uri(Constants.TOKENURL), new HttpStringContent(postData, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return JsonConvert.DeserializeObject<AccessToken>(await response.Content.ReadAsStringAsync());
+                      
+                    }
+                }
+            }
+            catch (Exception)
             {
 
-                httpClient.DefaultRequestHeaders.Accept.Clear();
-                httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("application/json"));
-                httpClient.DefaultRequestHeaders.Accept.Add(new Windows.Web.Http.Headers.HttpMediaTypeWithQualityHeaderValue("Content-Type: application/x-www-form-urlencoded"));
-                var response = await httpClient.PostAsync(new Uri(Constants.TOKENURL), new HttpStringContent(postData, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-                response.EnsureSuccessStatusCode();
-                if (response.IsSuccessStatusCode)
-                {
-                    var accessToken = JsonConvert.DeserializeObject<AccessToken>(await response.Content.ReadAsStringAsync());
-                    accessToken.UserName = userName;
-                }
+                return null ;
             }
 
 

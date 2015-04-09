@@ -14,6 +14,5 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 
         public string Token_Type { get; set; }
 
-        public string UserName { get; set; }
     }
 }
