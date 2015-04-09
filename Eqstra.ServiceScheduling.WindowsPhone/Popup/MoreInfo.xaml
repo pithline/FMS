@@ -18,7 +18,7 @@
     </Page.BottomAppBar>
 
     <Grid>
-        <Pivot Title="Tasks"
+        <Pivot Title="DETAIL"
                Grid.Row="1">
             <PivotItem Header="Task Detail">
                 <ScrollViewer>
