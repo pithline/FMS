@@ -8,8 +8,8 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
 {
     public class Constants
     {
-        public const string UserInfo = "UserInfo";
-        public const string SelectedTask = "SelectedTask";
+        public const string USERINFO = "UserInfo";
+        public const string SELECTEDTASK = "SelectedTask";
         public const string SSDCameraCapture = "SSDCameraCapture";
         
         public const string APIURL = "https://eqstraapi.mazikglobal.com/api/da";

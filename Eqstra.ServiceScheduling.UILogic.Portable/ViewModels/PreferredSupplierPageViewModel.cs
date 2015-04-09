@@ -74,14 +74,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 this.TaskProgressBar = Visibility.Visible;
 
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SelectedTask))
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
                 {
-                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask].ToString());
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
 
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
                 {
-                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
                 if (PersistentData.Instance.PoolofSupplier!= null)
