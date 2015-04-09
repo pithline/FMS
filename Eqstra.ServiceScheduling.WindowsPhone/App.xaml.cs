@@ -5,6 +5,7 @@ using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -98,9 +99,18 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
 
         protected override System.Threading.Tasks.Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+           
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.ACCESSTOKEN))
             {
-                NavigationService.Navigate("Main", string.Empty);
+                var accessToken = JsonConvert.DeserializeObject<AccessToken>(ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN].ToString());
+                if (accessToken.ExpirationDate > DateTime.Now)
+                {
+                    NavigationService.Navigate("Main", string.Empty);
+                }
+                else
+                {
+                    NavigationService.Navigate("Login", args.Arguments);
+                }
             }
             else
             {

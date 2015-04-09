@@ -56,7 +56,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
                 },
 
-                 () => { return true || !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return  !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
         public DelegateCommand LoginCommand { get; private set; }

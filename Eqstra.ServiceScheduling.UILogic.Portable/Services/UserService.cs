@@ -52,8 +52,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Services
                     response.EnsureSuccessStatusCode();
                     if (response.IsSuccessStatusCode)
                     {
-                        return JsonConvert.DeserializeObject<AccessToken>(await response.Content.ReadAsStringAsync());
-                      
+                        var accessToken = JsonConvert.DeserializeObject<AccessToken>(await response.Content.ReadAsStringAsync());
+                        accessToken.ExpirationDate = DateTime.Now.AddSeconds(accessToken.Expires_In);
+                        return accessToken;
                     }
                 }
             }
