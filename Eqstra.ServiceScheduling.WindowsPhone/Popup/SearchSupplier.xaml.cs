@@ -34,9 +34,9 @@ namespace Eqstra.ServiceScheduling
             this.SupplierFilter = new SupplierFilter();
             this.DataContext = this.SupplierFilter;
             this.SupplierFilter.ProgressVisibility = Visibility.Visible;
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
             {
-                this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
             }
             this.SupplierFilter.Countries = await _locationService.GetCountryList(this.UserInfo);
             this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;

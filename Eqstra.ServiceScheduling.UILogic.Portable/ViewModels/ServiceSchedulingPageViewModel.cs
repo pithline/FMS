@@ -97,8 +97,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
-              ApplicationData.Current.RoamingSettings.Values[Constants.SSDCameraCapture] = JsonConvert.SerializeObject(this.Model);
-              _navigationService.Navigate("CameraCapture", string.Empty);
+              var camCap =
+              new CameraCaptureDialog();
+              camCap.Tag = this.Model;
+              await camCap.ShowAsync();
+
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
@@ -190,17 +193,17 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             try
             {
                 _busyIndicator.Open();
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
                 {
-                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SelectedTask))
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
                 {
-                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask].ToString());
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.SSModels.Task>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
 
-                this.Model = await _serviceDetailService.GetServiceDetailAsync(SelectedTask.CaseNumber, SelectedTask.CaseServiceRecID, SelectedTask.ServiceRecID,this.UserInfo);
+                this.Model = await _serviceDetailService.GetServiceDetailAsync(SelectedTask.CaseNumber, SelectedTask.CaseServiceRecID, SelectedTask.ServiceRecID, this.UserInfo);
                 this.PoolofSupplier = await this._supplierService.GetSuppliersByClassAsync(SelectedTask.VehicleClassId, this.UserInfo);
                 if (string.IsNullOrEmpty(this.Model.ODOReadingSnapshot))
                 {

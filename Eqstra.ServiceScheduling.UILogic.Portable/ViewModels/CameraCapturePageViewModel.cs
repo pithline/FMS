@@ -78,9 +78,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.ImageVisibility = Visibility.Collapsed;
             base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SSDCameraCapture))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SSDCAMERACAPTURE))
             {
-                _serviceDetail = JsonConvert.DeserializeObject<ServiceSchedulingDetail>(ApplicationData.Current.RoamingSettings.Values[Constants.SSDCameraCapture].ToString());
+                _serviceDetail = JsonConvert.DeserializeObject<ServiceSchedulingDetail>(ApplicationData.Current.RoamingSettings.Values[Constants.SSDCAMERACAPTURE].ToString());
             }
       
             //await this.MediaCapture.InitializeAsync();

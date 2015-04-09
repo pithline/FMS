@@ -32,7 +32,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
              {
                  try
                  {
-                     ApplicationData.Current.RoamingSettings.Values[Constants.SelectedTask] = JsonConvert.SerializeObject(task);
+                     ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = JsonConvert.SerializeObject(task);
                      if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                      {
                          navigationService.Navigate("ServiceScheduling", String.Empty);
@@ -150,9 +150,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
 
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
                 {
-                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
                 if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))

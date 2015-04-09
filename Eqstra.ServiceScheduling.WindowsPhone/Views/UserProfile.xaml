@@ -64,12 +64,12 @@
                 <TextBlock Text="{Binding CompanyName}"
                            Style="{StaticResource InfoBoxTitleStyle}" />
             </StackPanel>
-            <AppBarButton HorizontalAlignment="Center"
+            <Button HorizontalAlignment="Center"
                           VerticalAlignment="Top"
                           Grid.Row="2"
                           Click="Logout_Click"
-                          Style="{StaticResource LogoutAppBarButtonStyle}">
-            </AppBarButton>
+                          Content="Logout">
+            </Button>
         </Grid>
     </Grid>
 </ContentDialog>

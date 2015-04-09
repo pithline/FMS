@@ -30,18 +30,18 @@ namespace Eqstra.ServiceScheduling.Views
         {
             this._navigationService = navigationService;
             this.InitializeComponent();
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
             {
-                this.DataContext = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                this.DataContext = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
             }
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             ApplicationData.Current.RoamingSettings.Values.Remove(Constants.ACCESSTOKEN);
-            ApplicationData.Current.RoamingSettings.Values.Remove(Constants.UserInfo);
-            _navigationService.ClearHistory();
+            ApplicationData.Current.RoamingSettings.Values.Remove(Constants.USERINFO);
             this._navigationService.Navigate("Login", string.Empty);
+            _navigationService.ClearHistory();
             this.Hide();
         }
 
