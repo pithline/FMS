@@ -1,10 +1,12 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Factories;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
@@ -44,23 +46,39 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
 
         protected override System.Threading.Tasks.Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            SessionStateService.RegisterKnownType(typeof(Country));
+            SessionStateService.RegisterKnownType(typeof(Province));
+            SessionStateService.RegisterKnownType(typeof(City));
+            SessionStateService.RegisterKnownType(typeof(Suburb));
+            SessionStateService.RegisterKnownType(typeof(Region));
+
+            SessionStateService.RegisterKnownType(typeof(Task));
+            SessionStateService.RegisterKnownType(typeof(ServiceSchedulingDetail));
+            SessionStateService.RegisterKnownType(typeof(Supplier));
+            SessionStateService.RegisterKnownType(typeof(DestinationType));
+            SessionStateService.RegisterKnownType(typeof(LocationType));
+            SessionStateService.RegisterKnownType(typeof(SupplierFilter));
+
+            SessionStateService.RegisterKnownType(typeof(UserInfo));
+            SessionStateService.RegisterKnownType(typeof(ImageCapture));
+
             EventAggregator = new EventAggregator();
 
 
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
             _container.RegisterInstance(SessionStateService);
-          
+
 
             //Register Services
 
             _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ISupplierService,SupplierService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ISupplierService, SupplierService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IServiceDetailService, ServiceDetailService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ILocationService, LocationService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IHttpFactory, HttpFactory>(new ContainerControlledLifetimeManager());
 
-          
+
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral", viewType.Name);
@@ -75,12 +93,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
         {
             return _container.Resolve(type);
         }
-        
+
 
         protected override System.Threading.Tasks.Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.UserInfo))
-            { 
+            {
                 NavigationService.Navigate("Main", string.Empty);
             }
             else
