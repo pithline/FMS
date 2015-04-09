@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -61,7 +62,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                {
                    if (this.Validate())
                    {
-                       _busyIndicator.Open();
+                       _busyIndicator.Open("Please wait, Saving ...");
+
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
@@ -192,7 +194,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             try
             {
-                _busyIndicator.Open();
+                _busyIndicator.Open("Please wait, loading ...");
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
                 {
                     this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
