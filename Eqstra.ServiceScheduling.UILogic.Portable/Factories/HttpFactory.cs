@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.Web.Http;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
 {
-   public class HttpFactory : IHttpFactory
+    public class HttpFactory : IHttpFactory
     {
-       async public Task<Windows.Web.Http.HttpResponseMessage> PostAsync(Windows.Web.Http.HttpStringContent data)
+        async public Task<Windows.Web.Http.HttpResponseMessage> PostAsync(Windows.Web.Http.HttpStringContent data)
         {
             try
             {
@@ -28,10 +29,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
                     return await httpClient.PostAsync(new Uri(Constants.APIURL), data);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                new MessageDialog(ex.Message).ShowAsync();
+                return null;
             }
         }
     }
