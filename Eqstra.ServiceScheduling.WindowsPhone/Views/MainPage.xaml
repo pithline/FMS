@@ -14,9 +14,10 @@
         <Flyout x:Key="FilterFlyout"
                 Closed="Flyout_Closed">
             <StackPanel>
-                <TextBox FontSize="25"
-                         Margin="10,0"
-                         TextChanged="Filter_TextChanged" />
+                    <TextBox FontSize="25" 
+                             Height="40"
+                             Margin="20,0"
+                             TextChanged="Filter_TextChanged" />
             </StackPanel>
         </Flyout>
 
@@ -629,7 +630,7 @@
                      VerticalAlignment="Top" />
 
 
-        <Pivot Title="Tasks"
+        <Pivot Title="TASKS"
                SelectionChanged="TasksPivot_SelectionChanged"
                Grid.Row="1"
                Name="TasksPivot">

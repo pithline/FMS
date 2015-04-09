@@ -12,6 +12,6 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         public const string APIURL = "https://eqstraapi.mazikglobal.com/api/da";
         //public const string APIURL = "http://172.22.3.84/Eqstra.CrossPlatform.API//api/da";
         //TODO: To be removed 
-        public const string TOKEN = "apgH8CVtHkB_Chz673crfQqrVvsLj2BIh9pHYYqGK2ISNtQoeIxqRRZn5yd7Bd7D95UmPi3qNIGlawgatm5ySN6qzPn36L2g7wryOW_0diuV9scP6c4CIr8rsvAw2mX-yXW2VyFLaQskc2PH4e4O1-GUUgRPqz0EMqJntmCWIP9UXZQ3M86eMwJn-orrdWDxTsZBuur5oWoO3q5dpz0iDVO_W-xn1zUaSE1ypb4kbAY";
+        public const string TOKEN = "KFTao_kpXuzCh8v2XWD5uyrE4fe9y7kgAjD6iWIUBC0XTuhhgfdjaVLKZ0HP6VXGH8-hrA57pxAN7iJeW5EqBRm9Uf0I1PsTujKCz3l5CJM_1awTeTRcXpfMHWsAUEXnin_fTLr3Cl2r2_-sdwhQnJhhAgX_nK37XdMZZ8JH9JA2VJgrRTOuZOvCM49GDkXYXhgjobRwccMeOsPPLy5JZt1_OkdnP0QtsWMu8UsBPuWQJvmuy49Jl9mXnJhFLL2n";
     }
 }

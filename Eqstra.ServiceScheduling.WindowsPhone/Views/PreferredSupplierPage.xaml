@@ -25,7 +25,8 @@
                             <StackPanel>
                                 <TextBox FontSize="25"
                                          TextAlignment="Center"
-                                         Margin="10,0"
+                                         Height="40"
+                                         Margin="20,0"
                                          TextChanged="filter_TextChanged" />
                             </StackPanel>
                         </Flyout>
@@ -54,7 +55,7 @@
         <Hub x:Name="Hub"
              x:Uid="Hub">
 
-            <HubSection Header="preferred suppliers">
+            <HubSection Header="PREFERRED SUPPLIERS">
                 <DataTemplate>
                     <Grid>
                         <ProgressBar IsIndeterminate="True"
