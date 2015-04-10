@@ -3,6 +3,7 @@ using Eqstra.ServiceScheduling.UILogic;
 using Eqstra.ServiceScheduling.UILogic.Portable;
 using Eqstra.ServiceScheduling.Views;
 using Microsoft.Practices.Prism.StoreApps;
+using ShakeGestures;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,26 +36,20 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     /// </summary>
     public sealed partial class MainPage : VisualStateAwarePage
     {
-        Accelerometer accelerometer;
         MainPageViewModel vm;
         public MainPage()
         {
             this.InitializeComponent();
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
+            ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
+            ShakeGesturesHelper.Instance.Active = true;
         }
-
-        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            e.Handled = true;
-            vm._navigationService.ClearHistory();
-        }
-
-        async void accelerometer_Shaken(Accelerometer sender, AccelerometerShakenEventArgs args)
+        private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-           {
-               await vm.FetchTasks();
-           });
+         {
+             await vm.FetchTasks();
+         });
         }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
@@ -64,12 +59,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             vm = ((MainPageViewModel)this.DataContext);
-            accelerometer = Accelerometer.GetDefault();
             base.OnNavigatedTo(e);
-            accelerometer.Shaken += accelerometer_Shaken;
         }
-
-
 
         async private void Message_Click(object sender, RoutedEventArgs e)
         {
