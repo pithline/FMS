@@ -53,6 +53,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                  }
              }
                    );
+            this.RefreshTaskCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+
+                await this.FetchTasks();
+            });
 
 
             this.MakeCallCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -122,6 +127,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
 
+
         private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> poolofTasks;
         public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> PoolofTasks
         {
@@ -145,7 +151,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-       
+
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
@@ -224,6 +230,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
         }
         public UserInfo UserInfo { get; set; }
+        public DelegateCommand RefreshTaskCommand { get; set; }
 
         public DelegateCommand MailToCommand { get; set; }
 

@@ -609,6 +609,9 @@
                               Name="filter"
                               FlyoutBase.AttachedFlyout="{StaticResource ResourceKey=FilterFlyout}" />
 
+                <AppBarButton Label="Refresh"
+                              Icon="Refresh"
+                              Command="{Binding RefreshTaskCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments "

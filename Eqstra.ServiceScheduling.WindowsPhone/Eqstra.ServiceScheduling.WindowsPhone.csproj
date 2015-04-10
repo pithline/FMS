@@ -256,6 +256,10 @@
       <Project>{8bcc54e1-4586-4a35-9ac9-43e81540b05c}</Project>
       <Name>Eqstra.ServiceScheduling.UILogic.Portable</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.Controls.WindowsPhone\Eqstra.WinRT.Components.Controls.WindowsPhone.csproj">
+      <Project>{529b5041-022f-4445-a118-d64fbdbabfc4}</Project>
+      <Name>Eqstra.WinRT.Components.Controls.WindowsPhone</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
