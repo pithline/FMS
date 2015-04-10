@@ -1,0 +1,131 @@
+﻿<ContentDialog x:Class="Eqstra.ServiceScheduling.AddressDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:Eqstra.ServiceScheduling"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d"
+               Title="ADDRESS"
+               PrimaryButtonText="OK"
+               SecondaryButtonText="cancel"
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Visibility="{Binding ProgressbarVisiblity}"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Stretch">
+            <TextBlock Text="{Binding ProgressbarMessage}"
+                       VerticalAlignment="Center"
+                       FontSize="15" />
+            <ProgressBar Width="700"
+                         Height="15"
+                         IsIndeterminate="True" />
+        </StackPanel>
+
+
+        <ComboBox  Height="70"
+                   Header="Country"
+                   Width="310"
+                   ItemsSource="{Binding Countries}"
+                   SelectedItem="{Binding SelectedCountry,Mode=TwoWay}"
+                   Margin="2"
+                   DisplayMemberPath="Name"
+                   SelectionChanged="country_SelectionChanged"
+                   x:Name="country"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Header="Province"
+                   Grid.Row="1"
+                   Width="310"
+                   ItemsSource="{Binding Provinces}"
+                   SelectedItem="{Binding Selectedprovince,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Margin="2"
+                   Name="Provinces"
+                   SelectionChanged="Provinces_SelectionChanged"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Grid.Row="2"
+                   Header="City"
+                   Width="310"
+                   ItemsSource="{Binding Cities}"
+                   SelectedItem="{Binding SelectedCity,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Margin="2"
+                   x:Name="City"
+                   SelectionChanged="City_SelectionChanged"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Grid.Row="3"
+                   Header="Suburb"
+                   Width="310"
+                   ItemsSource="{Binding Suburbs}"
+                   SelectedItem="{Binding SelectedSuburb,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   x:Name="suburb"
+                   SelectionChanged="suburb_SelectionChanged"
+                   Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Header="Region"
+                   Grid.Row="4"
+                   Width="310"
+                   ItemsSource="{Binding Region}"
+                   SelectedItem="{Binding SelectedRegion,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Name="region"
+                   SelectionChanged="region_SelectionChanged"
+                   Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <TextBox Header="Street/Post Box :"
+                 Text="{Binding Model.Street,Mode=TwoWay}"
+                 Grid.Row="5"
+                 AcceptsReturn="True"
+                 IsSpellCheckEnabled="True"
+                 IsTextPredictionEnabled="True"
+                 Height="200"
+                 Margin="0 10" />
+
+        <TextBox Header="Zip"
+                 Text="{Binding Model.Zip,Mode=TwoWay}"
+                 Grid.Row="6"
+                 AcceptsReturn="True"
+                 IsSpellCheckEnabled="True"
+                 IsTextPredictionEnabled="True"
+                 Height="200"
+                 Margin="0 10" />
+
+
+    </Grid>
+</ContentDialog>

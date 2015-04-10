@@ -251,21 +251,35 @@
 
 
 
-                        <TextBox  Width="330"
-                                  Height="120"
-                                  Header="Address"
-                                  Grid.Row="12"
-                                  TextWrapping="Wrap"
-                                  Visibility="{Binding IsReqVisibility}"
-                                  BorderBrush="{Binding AdBorderBrush}"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Text="{Binding Model.Address,Mode=TwoWay}"
-                                  Margin="0,2"
-                                  Style="{StaticResource TextBoxContentStyle}"
-                                  IsSpellCheckEnabled="True"
-                                  IsTextPredictionEnabled="True"
-                                  AcceptsReturn="True" />
+                        <StackPanel Grid.Row="12"
+                                    Orientation="Vertical"
+                                    Visibility="{Binding IsReqVisibility}">
+                            <TextBox  Width="330"
+                                      Height="120"
+                                      Header="Address"
+                                      TextWrapping="Wrap"
+                                      BorderBrush="{Binding AdBorderBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Text="{Binding Model.Address,Mode=TwoWay}"
+                                      Margin="0,2"
+                                      Style="{StaticResource TextBoxContentStyle}"
+                                      IsSpellCheckEnabled="True"
+                                      IsTextPredictionEnabled="True"
+                                      AcceptsReturn="True" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <AppBarButton Icon="Add"
+                                              HorizontalAlignment="Left"
+                                              Label="Add"
+                                              Command="{Binding AddCommand}" />
+
+                                <AppBarButton Icon="Clear"
+                                              HorizontalAlignment="Right"
+                                              Label="Clear"
+                                              Command="{Binding ClearCommand}" />
+                            </StackPanel>
+                        </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
                                     Grid.Row="16"

@@ -36,7 +36,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public IEventAggregator _eventAggregator;
         public ILocationService _locationService;
         public ISupplierService _supplierService;
-
+        private AddressDialog _addressDialog;
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
         private IServiceDetailService _serviceDetailService;
@@ -165,10 +165,23 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             });
 
+
+            this.AddCommand = new DelegateCommand(async () => {
+                _addressDialog = new AddressDialog();
+                _addressDialog.ShowAsync();
+            });
+
+            this.ClearCommand = new DelegateCommand(async () =>
+            {
+
+            });
+
+
             _eventAggregator.GetEvent<SupplierFilterEvent>().Subscribe(poolofSupplier =>
             {
                 this.PoolofSupplier = poolofSupplier;
             });
+
 
 
         }
@@ -328,6 +341,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand OpenImageViewerCommand { get; set; }
         public DelegateCommand SupplierFilterCommand { get; set; }
         public DelegateCommand VoiceCommand { get; set; }
+        public DelegateCommand AddCommand { get; set; }
+        public DelegateCommand ClearCommand { get; set; }
 
         private Boolean isLiftRequired;
         public Boolean IsLiftRequired

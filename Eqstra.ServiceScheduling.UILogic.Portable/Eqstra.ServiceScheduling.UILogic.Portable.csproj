@@ -39,6 +39,9 @@
     <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />
+    <Compile Include="Popup\AddressDialog.xaml.cs">
+      <DependentUpon>AddressDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popup\CameraCaptureDialog.xaml.cs">
       <DependentUpon>CameraCaptureDialog.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Popup\AddressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Popup\CameraCaptureDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
