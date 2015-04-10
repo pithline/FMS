@@ -72,35 +72,22 @@ namespace Eqstra.ServiceScheduling.UILogic
 
         async private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            args.Cancel = true;
-            var imageEncodingProps = ImageEncodingProperties.CreatePng();
-            using (var stream = new InMemoryRandomAccessStream())
+            if (Img.Visibility == Windows.UI.Xaml.Visibility.Visible)
             {
-
-                await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
-                _bytes = new byte[stream.Size];
-                var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
-                _bytes = buffer.ToArray(0, (int)stream.Size);
-                var bitmap = new BitmapImage();
-                stream.Seek(0);
-                await bitmap.SetSourceAsync(stream);
-                var model = this.Tag as ServiceSchedulingDetail;
-                if (model.OdoReadingImageCapture==null)
-                {
-                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
-                }
-                model.OdoReadingImageCapture.ImageBitmap = bitmap;
-                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
-                Img.Source = bitmap;
-
+                args.Cancel = false;
             }
-            args.Cancel = false;
-         
+            else
+            {
+                args.Cancel = true;
+            }
+
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-
+            args.Cancel = true;
+            Img.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
         }
 
@@ -135,6 +122,36 @@ namespace Eqstra.ServiceScheduling.UILogic
 
             PreviewElement.Source = _mediaCapture;
             await _mediaCapture.StartPreviewAsync();
+        }
+
+        async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            var bi = new BusyIndicator();
+            bi.Open();
+            var imageEncodingProps = ImageEncodingProperties.CreatePng();
+            using (var stream = new InMemoryRandomAccessStream())
+            {
+
+                await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
+                _bytes = new byte[stream.Size];
+                var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
+                _bytes = buffer.ToArray(0, (int)stream.Size);
+                var bitmap = new BitmapImage();
+                stream.Seek(0);
+                await bitmap.SetSourceAsync(stream);
+                var model = this.Tag as ServiceSchedulingDetail;
+                if (model.OdoReadingImageCapture == null)
+                {
+                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+                }
+                model.OdoReadingImageCapture.ImageBitmap = bitmap;
+                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
+                PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                this.IsSecondaryButtonEnabled = true;
+                Img.Source = bitmap;
+            }
+            bi.Close();
         }
 
 
