@@ -467,6 +467,7 @@
       <Name>Eqstra.VehicleInspection.UILogic</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Eqstra.TechnicalInspection.Shared\Eqstra.TechnicalInspection.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
