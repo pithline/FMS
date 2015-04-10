@@ -158,6 +158,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.StBorderBrush = null;
             }
 
+            if (this.SelectedSupplier==null)
+            {
+                this.SpBorderBrush = new SolidColorBrush(Colors.Red);
+                resp = false;
+            }
+            else
+            {
+                this.SpBorderBrush = null;
+            }
+
             if (this.IsLiftRequired)
             {
                 if (this.Model.SelectedLocationType == null)
@@ -377,5 +387,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref adBorderBrush, value); }
         }
 
+        private Brush spBorderBrush;
+
+        public Brush SpBorderBrush
+        {
+            get { return spBorderBrush; }
+            set { SetProperty(ref spBorderBrush, value); }
+        }
+        
     }
 }

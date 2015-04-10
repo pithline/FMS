@@ -249,6 +249,7 @@
                                     Grid.Row="20">
                             <ComboBox  Width="290"
                                        Header="Select Supplier"
+                                       BorderBrush="{Binding SpBorderBrush}"
                                        ItemsSource="{Binding PoolofSupplier}"
                                        SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
                                        Margin="0,2"
