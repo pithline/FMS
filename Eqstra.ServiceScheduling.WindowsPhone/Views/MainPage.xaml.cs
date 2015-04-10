@@ -40,8 +40,6 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
-
-            ShakeGestures.ShakeGesturesHelper.Instance.ShakeGesture += Instance_ShakeGesture;
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;

@@ -25,7 +25,7 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
-                           Foreground="White"
+                           Foreground="White" TextWrapping="Wrap"
                            Style="{StaticResource TextContentStyle}"
                            TextAlignment="Left"
                            FontSize="17"
@@ -33,6 +33,7 @@
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
+                           TextWrapping="Wrap"
                            Style="{StaticResource TextContentStyle}"
                            Foreground="White"
                            TextAlignment="Left"
@@ -43,6 +44,7 @@
                              HorizontalAlignment="Left"
                              Foreground="White"
                              FontSize="17"
+                             TextWrapping="Wrap"
                              TextAlignment="Left"
                              Margin="2,5"
                              Text="{Binding ContactName}" />
@@ -51,6 +53,7 @@
                            Margin="2,5"
                            Style="{StaticResource TextContentStyle}"
                            Foreground="White"
+                           TextWrapping="Wrap"
                            TextAlignment="Left"
                            FontSize="17"
                            Text="{Binding CustomerName}" />
