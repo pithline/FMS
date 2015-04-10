@@ -20,16 +20,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public LoginPageViewModel(INavigationService navigationService, IUserService userService)
         {
             _navigationService = navigationService;
-        
+
             ProgressDialogPopup = new ProgressDialog();
             LoginCommand = DelegateCommand.FromAsyncHandler(
                 async () =>
                 {
                     try
                     {
-
                         ProgressDialogPopup.Open(this);
-
 
                         var token = await userService.ValidateUserAsync(this.UserName, this.Password);
 
@@ -58,7 +56,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
                 },
 
-                 () => { return  !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
         }
         public DelegateCommand LoginCommand { get; private set; }
@@ -117,6 +115,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref progressDialogPopup, value); }
         }
 
-           
+
     }
 }
