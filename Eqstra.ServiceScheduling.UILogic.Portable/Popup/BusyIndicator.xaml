@@ -24,9 +24,11 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
+            
             <ProgressBar IsIndeterminate="True"
                          Foreground="White"
                          VerticalAlignment="Top" />
+           
 
         </Grid>
     </Grid>

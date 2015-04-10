@@ -7,23 +7,25 @@
                mc:Ignorable="d"
                Title="DIALOG TITLE"
                PrimaryButtonText="accept"
-               SecondaryButtonText="cancel"
+               SecondaryButtonText="retake"
+               IsSecondaryButtonEnabled="False"
                PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
                SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
 
 
-    <Grid VerticalAlignment="Stretch">
+    <Grid >
         <CaptureElement x:Name="PreviewElement"
                         Loaded="PreviewElement_Loaded"
                         Stretch="UniformToFill"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Visibility="{Binding ElementName=Take, Path=Visibility}" />
+                        DoubleTapped="PreviewElement_DoubleTapped"
+                    />
 
         <Image x:Name="Img"
-               Source="{Binding ImageSource,Mode=TwoWay}"
-               Visibility="{Binding ElementName=Retake, Path=Visibility}"
+               
+               Visibility="Collapsed"
                Stretch="UniformToFill"
                RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
