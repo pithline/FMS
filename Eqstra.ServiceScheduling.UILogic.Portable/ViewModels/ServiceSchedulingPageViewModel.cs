@@ -17,10 +17,12 @@ using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
+using Windows.Media.SpeechRecognition;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
@@ -52,9 +54,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.Model = new ServiceSchedulingDetail();
             _busyIndicator = new BusyIndicator();
             this.Address = new BusinessLogic.Portable.SSModels.Address();
-
+            this.applicationTheme= Application.Current.RequestedTheme;
+            this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+            this.LtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+            this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.IsLiftRequired = false;
-
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
            async () =>
            {
@@ -139,10 +143,33 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                 });
 
+
+            this.VoiceCommand = new DelegateCommand(async () =>
+            {
+                SpeechRecognizer recognizer = new SpeechRecognizer();
+
+                SpeechRecognitionTopicConstraint topicConstraint
+                        = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
+                recognizer.Constraints.Add(topicConstraint);
+                await recognizer.CompileConstraintsAsync();
+
+                var results = await recognizer.RecognizeWithUIAsync();
+                if (results.Confidence != SpeechRecognitionConfidence.Rejected)
+                {
+                    this.Model.AdditionalWork = results.Text;
+                }
+                else
+                {
+                    await new MessageDialog("Sorry, I did not get that.").ShowAsync();
+                }
+
+            });
+
             _eventAggregator.GetEvent<SupplierFilterEvent>().Subscribe(poolofSupplier =>
             {
                 this.PoolofSupplier = poolofSupplier;
             });
+
 
         }
         private bool Validate()
@@ -158,14 +185,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 this.StBorderBrush = null;
             }
 
-            if (this.SelectedSupplier==null)
+            if (this.SelectedSupplier == null)
             {
                 this.SpBorderBrush = new SolidColorBrush(Colors.Red);
                 resp = false;
             }
             else
             {
-                this.SpBorderBrush = null;
+                this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black); 
             }
 
             if (this.IsLiftRequired)
@@ -177,7 +204,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
                 else
                 {
-                    this.LtBorderBrush = null;
+                    this.LtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
                 }
                 if (this.Model.SelectedDestinationType == null)
                 {
@@ -186,7 +213,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
                 else
                 {
-                    this.DtBorderBrush = null;
+                    this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
                 }
                 if (String.IsNullOrEmpty(this.Model.Address))
                 {
@@ -245,6 +272,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
                 }
+                if (!String.IsNullOrEmpty(this.Model.ConfirmedDate))
+                {
+                    this.Model.ConfirmedDateDt = DateTime.Parse(this.Model.ConfirmedDate);
+                }
                 if (!String.IsNullOrEmpty(this.Model.ODOReadingDate))
                 {
                     this.Model.ODOReadingDt = DateTime.Parse(this.Model.ODOReadingDate);
@@ -296,6 +327,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand<ImageCapture> TakePictureCommand { get; set; }
         public DelegateCommand OpenImageViewerCommand { get; set; }
         public DelegateCommand SupplierFilterCommand { get; set; }
+        public DelegateCommand VoiceCommand { get; set; }
 
         private Boolean isLiftRequired;
         public Boolean IsLiftRequired
@@ -394,6 +426,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return spBorderBrush; }
             set { SetProperty(ref spBorderBrush, value); }
         }
-        
+
+        public ApplicationTheme applicationTheme { get; set; }
     }
 }

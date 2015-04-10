@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -127,7 +128,7 @@ namespace Eqstra.ServiceScheduling.UILogic
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var bi = new BusyIndicator();
-            bi.Open();
+            bi.Open("");
             var imageEncodingProps = ImageEncodingProperties.CreatePng();
             using (var stream = new InMemoryRandomAccessStream())
             {

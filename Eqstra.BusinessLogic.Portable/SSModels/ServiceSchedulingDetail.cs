@@ -234,6 +234,6 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
             get { return serviceDateOpt2; }
             set { SetProperty(ref serviceDateOpt2, value); }
         }
-
+        
     }
 }
