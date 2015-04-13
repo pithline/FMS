@@ -8,12 +8,12 @@ namespace Eqstra.TechnicalInspection.UILogic
     {
         private static PersistentData _instance = new PersistentData();
         public static PersistentData Instance { get { return _instance; } }
-        public ObservableCollection<BusinessLogic.Portable.SSModels.Task> Tasks { get; set; }
+        public ObservableCollection<BusinessLogic.Portable.TIModels.Task> Tasks { get; set; }
         public static void RefreshInstance()
         {
             _instance = new PersistentData();
         }
-        public ObservableCollection<BusinessLogic.Portable.SSModels.Task> PoolofTasks { get; set; }
+        public ObservableCollection<BusinessLogic.Portable.TIModels.Task> PoolofTasks { get; set; }
         public ObservableCollection<Supplier> PoolofSupplier { get; set; }
     }
 }

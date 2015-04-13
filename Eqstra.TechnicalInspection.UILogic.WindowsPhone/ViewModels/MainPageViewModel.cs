@@ -1,5 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -19,16 +21,16 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
     public class MainPageViewModel : ViewModel
     {
         public INavigationService _navigationService;
-       // private ITaskService _taskService;
-        public MainPageViewModel(INavigationService navigationService )
+        private ITaskService _taskService;
+        public MainPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
             this._navigationService = navigationService;
-          //  this._taskService = taskService;
+            this._taskService = taskService;
 
-            this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
-            this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
+            this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.TIModels.Task>();
+            this.Tasks = new ObservableCollection<BusinessLogic.Portable.TIModels.Task>();
 
-            this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.SSModels.Task>((task) =>
+            this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.TIModels.Task>((task) =>
             {
                 try
                 {
@@ -75,17 +77,17 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
             });
 
-            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
-            {
-                if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
-                {
-                    await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
-                }
-                else
-                {
-                    await new MessageDialog("No mail id exist").ShowAsync();
-                }
-            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
+            //this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
+            //{
+            //    if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
+            //    {
+            //        await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
+            //    }
+            //    else
+            //    {
+            //        await new MessageDialog("No mail id exist").ShowAsync();
+            //    }
+            //}, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -114,8 +116,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private Eqstra.BusinessLogic.Portable.SSModels.Task task;
-        public Eqstra.BusinessLogic.Portable.SSModels.Task InspectionTask
+        private Eqstra.BusinessLogic.Portable.TIModels.Task task;
+        public Eqstra.BusinessLogic.Portable.TIModels.Task InspectionTask
         {
             get { return task; }
             set
@@ -127,8 +129,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> poolofTasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> PoolofTasks
+        private ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> poolofTasks;
+        public ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> PoolofTasks
         {
             get { return poolofTasks; }
             set
@@ -137,8 +139,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> Tasks
+        private ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> tasks;
+        public ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> Tasks
         {
             get { return tasks; }
             set
@@ -157,7 +159,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
                 {
-                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
+                    this.UserInfo = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
                 if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))
@@ -178,9 +180,9 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             this.TaskProgressBar = Visibility.Visible;
 
-            var tasksResult = new ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> ();//await this._taskService.GetTasksAsync(this.UserInfo);
-            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task>();
-            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task>();
+            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId,this.UserInfo.CompanyId);
+            ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> pooltask = new ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task>();
+            ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> tasks = new ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task>();
             foreach (var task in tasksResult)
             {
                 task.Address = Regex.Replace(task.Address, ",", "\n");
@@ -202,33 +204,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             PersistentData.Instance.Tasks = this.Tasks;
 
         }
-        private void GetAppointments(Eqstra.BusinessLogic.Portable.SSModels.Task task)
-        {
-            try
-            {
-
-                var appointment = new Windows.ApplicationModel.Appointments.Appointment();
-
-                var date = task.AppointmentStart.Date;
-                var time = task.AppointmentEnd.TimeOfDay - task.AppointmentStart.TimeOfDay;
-                var timeZoneOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.Now);
-                var startTime = new DateTimeOffset(date.Year, date.Month, date.Day, time.Hours,
-                    time.Minutes, 0, timeZoneOffset);
-                appointment.StartTime = startTime;
-                appointment.Subject = task.CaseNumber;
-                appointment.Location = task.Address;
-                appointment.Details = task.Description;
-                appointment.Duration = TimeSpan.FromHours(1);
-                appointment.Reminder = TimeSpan.FromMinutes(15);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public UserInfo UserInfo { get; set; }
+        public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand RefreshTaskCommand { get; set; }
 
         public DelegateCommand MailToCommand { get; set; }

@@ -1,27 +1,16 @@
 ﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Factories;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -54,10 +43,13 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
 
         protected override System.Threading.Tasks.Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            
+
+            SessionStateService.RegisterKnownType(typeof(Task));
+
+            SessionStateService.RegisterKnownType(typeof(UserInfo));
+            SessionStateService.RegisterKnownType(typeof(ImageCapture));
 
             EventAggregator = new EventAggregator();
-
 
             _container.RegisterInstance(NavigationService);
             _container.RegisterInstance(EventAggregator);
@@ -66,12 +58,14 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
 
             //Register Services
 
-           
+            _container.RegisterType<ITaskService, TaskService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IUserService, UserService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IHttpFactory, HttpFactory>(new ContainerControlledLifetimeManager());
 
 
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels.{0}ViewModel,Eqstra.TechnicalInspection.UILogic.WindowsPhone, Version=1.0.0.0, Culture=neutral", viewType.Name);
+                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.ServiceScheduling.UILogic.Portable.{0}ViewModel,Eqstra.ServiceScheduling.UILogic.Portable, Version=1.0.0.0, Culture=neutral", viewType.Name);
 
                 return Type.GetType(viewModelTypeName);
             });

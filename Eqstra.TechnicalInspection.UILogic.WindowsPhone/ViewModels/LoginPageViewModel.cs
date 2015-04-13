@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -17,48 +18,48 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
     {
 
         private INavigationService _navigationService;
-        //public LoginPageViewModel(INavigationService navigationService, IUserService userService)
-        //{
-        //    _navigationService = navigationService;
+        public LoginPageViewModel(INavigationService navigationService, IUserService userService)
+        {
+            _navigationService = navigationService;
 
-        //    ProgressDialogPopup = new ProgressDialog();
-        //    LoginCommand = DelegateCommand.FromAsyncHandler(
-        //        async () =>
-        //        {
-        //            try
-        //            {
-        //                ProgressDialogPopup.Open(this);
+            ProgressDialogPopup = new ProgressDialog();
+            LoginCommand = DelegateCommand.FromAsyncHandler(
+                async () =>
+                {
+                    try
+                    {
+                        ProgressDialogPopup.Open(this);
 
-        //                var token = await userService.ValidateUserAsync(this.UserName, this.Password);
+                        var token = await userService.ValidateUserAsync(this.UserName, this.Password);
 
-        //                if (token != null)
-        //                {
-        //                    ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN] = JsonConvert.SerializeObject(token);
-        //                    var userInfo = await userService.GetUserInfoAsync(this.UserName);
-        //                    if (userInfo != null)
-        //                    {
-        //                        ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO] = JsonConvert.SerializeObject(userInfo);
-        //                        navigationService.ClearHistory();
-        //                        navigationService.Navigate("Main", string.Empty);
-        //                    }
-        //                }
+                        if (token != null)
+                        {
+                            ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN] = JsonConvert.SerializeObject(token);
+                            var userInfo = await userService.GetUserInfoAsync(this.UserName);
+                            if (userInfo != null)
+                            {
+                                ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO] = JsonConvert.SerializeObject(userInfo);
+                                navigationService.ClearHistory();
+                                navigationService.Navigate("Main", string.Empty);
+                            }
+                        }
 
-        //                ProgressDialogPopup.Close();
+                        ProgressDialogPopup.Close();
 
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                ProgressDialogPopup.Close();
-        //            }
-        //            finally
-        //            {
-        //                IsLoggingIn = false;
-        //            }
-        //        },
+                    }
+                    catch (Exception ex)
+                    {
+                        ProgressDialogPopup.Close();
+                    }
+                    finally
+                    {
+                        IsLoggingIn = false;
+                    }
+                },
 
-        //         () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
+                 () => { return !string.IsNullOrEmpty(this.username) && !string.IsNullOrEmpty(this.password); });
 
-        //}
+        }
         public DelegateCommand LoginCommand { get; private set; }
 
         private string username;
