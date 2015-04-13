@@ -1,5 +1,9 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Portable.TIModels
@@ -12,7 +16,7 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         {
             get { return causeOfDamage; }
             set { causeOfDamage = value; }
-        }
+        }        
 
         private string remedy;
 
