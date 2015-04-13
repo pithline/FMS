@@ -27,7 +27,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
         SearchSupplierPopup sp;
-        MoreInfo moreInfo;
+        DetailsDialog moreInfo;
         public PreferredSupplierPage()
         {
             this.InitializeComponent();
@@ -54,7 +54,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public PreferredSupplierPageViewModel vm { get; set; }
         private void More_Click(object sender, RoutedEventArgs e)
         {
-            moreInfo = new MoreInfo();
+            moreInfo = new DetailsDialog();
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
             moreInfo.Open(vm.SelectedTask);
         }

@@ -179,7 +179,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private void Details_Click(object sender, RoutedEventArgs e)
         {
-            MoreInfo m = new MoreInfo();
+            DetailsDialog m = new DetailsDialog();
             m.Open(vm.InspectionTask);
         }
 
