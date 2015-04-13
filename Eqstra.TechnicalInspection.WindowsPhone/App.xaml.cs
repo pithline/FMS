@@ -65,7 +65,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
 
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels.{0}ViewModel,Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels, Version=1.0.0.0, Culture=neutral", viewType.Name);
+                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels.{0}ViewModel,Eqstra.TechnicalInspection.UILogic.WindowsPhone, Version=1.0.0.0, Culture=neutral", viewType.Name);
 
                 return Type.GetType(viewModelTypeName);
             });

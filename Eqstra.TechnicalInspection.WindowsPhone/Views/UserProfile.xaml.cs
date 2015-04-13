@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace Eqstra.TechnicalInspection.WindowsPhone.Views
+namespace Eqstra.TechnicalInspection.Views
 {
     public sealed partial class UserProfile : ContentDialog
     {

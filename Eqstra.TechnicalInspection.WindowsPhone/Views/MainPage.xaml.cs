@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels;
+using Eqstra.TechnicalInspection.Views;
 using Microsoft.Practices.Prism.StoreApps;
 using ShakeGestures;
 using System;
@@ -69,19 +70,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         private void Filter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var index = TasksPivot.SelectedIndex;
+
             var text = ((TextBox)sender).Text;
             if (!String.IsNullOrEmpty(text))
             {
                 ObservableCollection<TITask> currentTasks;
-                if (index == 0)
-                {
-                   currentTasks = PersistentData.Instance.PoolofTasks;
-                }
-                else
-                {
-                    currentTasks = PersistentData.Instance.Tasks;
-                }
+
+                currentTasks = PersistentData.Instance.PoolofTasks;
+
+
 
                 ObservableCollection<TITask> filterResult = new ObservableCollection<TITask>();
                 foreach (var task in currentTasks)
@@ -95,22 +92,13 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
                     }
                 }
 
-                if (index == 0)
-                {
-                  //  vm.PoolofTasks = filterResult;
 
-                }
-                else
-                {
-                  //  vm.Tasks = filterResult;
+                vm.PoolofTasks = filterResult;
 
-                }
             }
             else
             {
                 vm.PoolofTasks = PersistentData.Instance.PoolofTasks;
-
-                vm.Tasks = PersistentData.Instance.Tasks;
 
             }
         }
@@ -162,15 +150,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         async private void Details_Click(object sender, RoutedEventArgs e)
         {
-            //DetailsDialog m = new DetailsDialog();
-            //m.DataContext = this.vm.InspectionTask;
-            //await m.ShowAsync();
+            DetailsDialog m = new DetailsDialog();
+            m.DataContext = this.vm.InspectionTask;
+            await m.ShowAsync();
         }
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-            //UserProfile contentDialog = new UserProfile(vm._navigationService);
-            //await contentDialog.ShowAsync();
+            UserProfile contentDialog = new UserProfile(vm._navigationService);
+            await contentDialog.ShowAsync();
 
         }
     }

@@ -28,7 +28,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._taskService = taskService;
 
             this.PoolofTasks = new ObservableCollection<TITask>();
-            this.Tasks = new ObservableCollection<TITask>();
 
             this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.TIModels.Task>((task) =>
             {
@@ -37,12 +36,12 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = JsonConvert.SerializeObject(task);
                     if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
                     {
-                        navigationService.Navigate("ServiceScheduling", String.Empty);
+                       // navigationService.Navigate("ServiceScheduling", String.Empty);
                     }
                     else
                     {
 
-                        navigationService.Navigate("PreferredSupplier", String.Empty);
+                       // navigationService.Navigate("PreferredSupplier", String.Empty);
 
                     }
                 }
@@ -139,20 +138,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<TITask> tasks;
-        public ObservableCollection<TITask> Tasks
-        {
-            get { return tasks; }
-            set
-            {
-                SetProperty(ref tasks, value);
-            }
-        }
-
-
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
@@ -162,10 +149,9 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     this.UserInfo = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
-                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))
+                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()))
                 {
                     this.PoolofTasks = PersistentData.Instance.PoolofTasks;
-                    this.Tasks = PersistentData.Instance.Tasks;
                 }
                 await FetchTasks();
             }
@@ -181,28 +167,15 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this.TaskProgressBar = Visibility.Visible;
 
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId,this.UserInfo.CompanyId);
-           var pooltask = new ObservableCollection<TITask>();
-           var tasks = new ObservableCollection<TITask>();
             foreach (var task in tasksResult)
             {
                 task.Address = Regex.Replace(task.Address, ",", "\n");
-                if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
-                {
-                    pooltask.Add(task);
-                }
-                else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
-                {
-                    tasks.Add(task);
-                }
+                this.PoolofTasks.Add(task);
             }
-            this.PoolofTasks = pooltask;
-            this.Tasks = tasks;
-
+         
             this.TaskProgressBar = Visibility.Collapsed;
 
             PersistentData.Instance.PoolofTasks = this.PoolofTasks;
-            PersistentData.Instance.Tasks = this.Tasks;
-
         }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand RefreshTaskCommand { get; set; }

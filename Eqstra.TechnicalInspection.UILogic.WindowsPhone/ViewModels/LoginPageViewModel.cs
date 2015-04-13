@@ -86,21 +86,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private bool shouldSaveCredential;
-        [RestorableState]
-        public bool ShouldSaveCredential
-        {
-            get { return shouldSaveCredential; }
-            set { SetProperty(ref shouldSaveCredential, value); }
-        }
-
-        private string errorMessage;
-        [RestorableState]
-        public string ErrorMessage
-        {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
-        }
 
         private bool isLoggingIn;
         public bool IsLoggingIn

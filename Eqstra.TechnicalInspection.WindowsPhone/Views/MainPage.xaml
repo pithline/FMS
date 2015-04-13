@@ -1,15 +1,14 @@
-﻿<prism:VisualStateAwarePage
-    x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-    mvvm:ViewModelLocator.AutoWireViewModel="True"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<prism:VisualStateAwarePage x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.MainPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+                            xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            mvvm:ViewModelLocator.AutoWireViewModel="True"
+                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.Resources>
         <Flyout x:Key="FilterFlyout"
@@ -638,49 +637,18 @@
                      VerticalAlignment="Top" />
 
 
-        <Pivot Title="TASKS"
-               SelectionChanged="TasksPivot_SelectionChanged"
-               Grid.Row="1"
-               Name="TasksPivot">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="40"
-                               Text="{Binding }" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <PivotItem Header="booking detail">
-                <Grid>
-                    <GridView HorizontalAlignment="Center"
-                              ItemTemplate="{StaticResource TasksTemplate}"
-                              ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Center"
-                              SelectionMode="None"
-                              IsHoldingEnabled="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick"
-                              SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
-                              ItemsSource="{Binding PoolofTasks}">
-                    </GridView>
-                </Grid>
-            </PivotItem>
 
-            <PivotItem Header="supplier selection">
-                <Grid>
-                    <GridView HorizontalAlignment="Center"
-                              ItemTemplate="{StaticResource TasksTemplate}"
-                              ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Center"
-                              SelectionMode="None"
-                              IsHoldingEnabled="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick"
-                              SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
-                              ItemsSource="{Binding Tasks}">
-
-                    </GridView>
-                </Grid>
-            </PivotItem>
-        </Pivot>
+        <GridView HorizontalAlignment="Center"
+                  ItemTemplate="{StaticResource TasksTemplate}"
+                  ItemContainerStyle="{StaticResource GridViewItemStyle1}"
+                  VerticalAlignment="Top"
+                  SelectionMode="None"
+                  IsHoldingEnabled="True"
+                  IsItemClickEnabled="True"
+                  ItemClick="GridView_ItemClick"
+                  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
+                  ItemsSource="{Binding PoolofTasks}">
+        </GridView>
     </Grid>
 
 </prism:VisualStateAwarePage>
