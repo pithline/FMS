@@ -27,5 +27,6 @@
     <Capability Name="internetClientServer" />
     <m3:Capability Name="appointments" />
     <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>

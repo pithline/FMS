@@ -27,8 +27,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._navigationService = navigationService;
             this._taskService = taskService;
 
-            this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.TIModels.Task>();
-            this.Tasks = new ObservableCollection<BusinessLogic.Portable.TIModels.Task>();
+            this.PoolofTasks = new ObservableCollection<TITask>();
+            this.Tasks = new ObservableCollection<TITask>();
 
             this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.TIModels.Task>((task) =>
             {
@@ -129,8 +129,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> poolofTasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> PoolofTasks
+        private ObservableCollection<TITask> poolofTasks;
+        public ObservableCollection<TITask> PoolofTasks
         {
             get { return poolofTasks; }
             set
@@ -139,8 +139,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> tasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> Tasks
+        private ObservableCollection<TITask> tasks;
+        public ObservableCollection<TITask> Tasks
         {
             get { return tasks; }
             set
@@ -181,8 +181,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this.TaskProgressBar = Visibility.Visible;
 
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId,this.UserInfo.CompanyId);
-            ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> pooltask = new ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task>();
-            ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task> tasks = new ObservableCollection<Eqstra.BusinessLogic.Portable.TIModels.Task>();
+           var pooltask = new ObservableCollection<TITask>();
+           var tasks = new ObservableCollection<TITask>();
             foreach (var task in tasksResult)
             {
                 task.Address = Regex.Replace(task.Address, ",", "\n");

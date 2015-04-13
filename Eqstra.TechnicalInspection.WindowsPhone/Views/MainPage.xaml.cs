@@ -1,4 +1,5 @@
-﻿using Eqstra.TechnicalInspection.UILogic;
+﻿using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using ShakeGestures;
@@ -72,17 +73,17 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             var text = ((TextBox)sender).Text;
             if (!String.IsNullOrEmpty(text))
             {
-                ObservableCollection<BusinessLogic.Portable.SSModels.Task> currentTasks;
+                ObservableCollection<TITask> currentTasks;
                 if (index == 0)
                 {
-                    currentTasks = PersistentData.Instance.PoolofTasks;
+                   currentTasks = PersistentData.Instance.PoolofTasks;
                 }
                 else
                 {
                     currentTasks = PersistentData.Instance.Tasks;
                 }
 
-                ObservableCollection<BusinessLogic.Portable.SSModels.Task> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
+                ObservableCollection<TITask> filterResult = new ObservableCollection<TITask>();
                 foreach (var task in currentTasks)
                 {
                     if (task.ContactName.ToLower().Contains(text.ToLower()) ||
@@ -96,12 +97,12 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
                 if (index == 0)
                 {
-                    vm.PoolofTasks = filterResult;
+                  //  vm.PoolofTasks = filterResult;
 
                 }
                 else
                 {
-                    vm.Tasks = filterResult;
+                  //  vm.Tasks = filterResult;
 
                 }
             }
@@ -132,7 +133,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         private void contextmenu_Holding(object sender, HoldingRoutedEventArgs e)
         {
             FrameworkElement senderElement = sender as FrameworkElement;
-            vm.InspectionTask = (Eqstra.BusinessLogic.Portable.SSModels.Task)senderElement.DataContext;
+            vm.InspectionTask = (TITask)senderElement.DataContext;
             FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
             flyoutBase.ShowAt(senderElement);
         }
@@ -161,15 +162,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         async private void Details_Click(object sender, RoutedEventArgs e)
         {
-            DetailsDialog m = new DetailsDialog();
-            m.DataContext = this.vm.InspectionTask;
-            await m.ShowAsync();
+            //DetailsDialog m = new DetailsDialog();
+            //m.DataContext = this.vm.InspectionTask;
+            //await m.ShowAsync();
         }
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile contentDialog = new UserProfile(vm._navigationService);
-            await contentDialog.ShowAsync();
+            //UserProfile contentDialog = new UserProfile(vm._navigationService);
+            //await contentDialog.ShowAsync();
 
         }
     }
