@@ -14,5 +14,6 @@ namespace Eqstra.TechnicalInspection.UILogic
             _instance = new PersistentData();
         }
         public ObservableCollection<BusinessLogic.Portable.SSModels.Task> PoolofTasks { get; set; }
+        public ObservableCollection<Supplier> PoolofSupplier { get; set; }
     }
 }
