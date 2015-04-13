@@ -30,7 +30,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     /// </summary>
     public sealed partial class ServiceSchedulingPage : VisualStateAwarePage
     {
-        DetailsDialog moreInfo;
+        MoreInfo moreInfo;
         SearchSupplierPopup sp;
         public ServiceSchedulingPage()
         {
@@ -61,7 +61,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         private void More_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
-            moreInfo = new DetailsDialog();
+            moreInfo = new MoreInfo();
             moreInfo.Open(vm.SelectedTask);
         }
         private async void Calendar_Click(object sender, RoutedEventArgs e)

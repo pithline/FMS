@@ -94,6 +94,15 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
+    <Compile Include="Popup\ImageViewerPopup.xaml.cs">
+      <DependentUpon>ImageViewerPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popup\MoreInfo.xaml.cs">
+      <DependentUpon>MoreInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popup\SearchSupplier.xaml.cs">
+      <DependentUpon>SearchSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\TopBanner.xaml.cs">
       <DependentUpon>TopBanner.xaml</DependentUpon>
@@ -152,6 +161,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Popup\ImageViewerPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popup\MoreInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Popup\SearchSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\CustomStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

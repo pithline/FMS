@@ -19,10 +19,10 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.ServiceScheduling
 {
-    public sealed partial class DetailsDialog : Page
+    public sealed partial class MoreInfo : Page
     {
         private Popup _popup;
-        public DetailsDialog()
+        public MoreInfo()
         {
             this.InitializeComponent();
             this.Loaded += MoreInfo_Loaded;

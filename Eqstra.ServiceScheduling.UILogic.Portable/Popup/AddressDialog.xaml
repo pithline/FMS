@@ -8,129 +8,124 @@
                Title="ADDRESS"
                PrimaryButtonText="OK"
                SecondaryButtonText="cancel"
-               PrimaryButtonClick="OK_PrimaryButtonClick"
-               SecondaryButtonClick="Cancel_SecondaryButtonClick">
-    <ScrollViewer ZoomMode="Disabled"
-                  VerticalScrollBarVisibility="Visible">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
-            <StackPanel Visibility="{Binding ProgressbarVisiblity}"
-                        HorizontalAlignment="Left"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Stretch">
-                <TextBlock Text="{Binding ProgressbarMessage}"
-                           VerticalAlignment="Center"
-                           FontSize="15" />
-                <ProgressBar Width="700"
-                             Height="15"
-                             IsIndeterminate="True" />
-            </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-
-            <ComboBox  Height="70"
-                       Header="Country"
-                       Width="310"
-                       ItemsSource="{Binding Countries}"
-                       SelectedItem="{Binding SelectedCountry,Mode=TwoWay}"
-                       Margin="2"
-                       DisplayMemberPath="Name"
-                       SelectionChanged="country_SelectionChanged"
-                       x:Name="country"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <ComboBox  Height="70"
-                       Header="Province"
-                       Grid.Row="1"
-                       Width="310"
-                       ItemsSource="{Binding Provinces}"
-                       SelectedItem="{Binding Selectedprovince,Mode=TwoWay}"
-                       DisplayMemberPath="Name"
-                       Margin="2"
-                       Name="Provinces"
-                       SelectionChanged="Provinces_SelectionChanged"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <ComboBox  Height="70"
-                       Grid.Row="2"
-                       Header="City"
-                       Width="310"
-                       ItemsSource="{Binding Cities}"
-                       SelectedItem="{Binding SelectedCity,Mode=TwoWay}"
-                       DisplayMemberPath="Name"
-                       Margin="2"
-                       x:Name="City"
-                       SelectionChanged="City_SelectionChanged"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <ComboBox  Height="70"
-                       Grid.Row="3"
-                       Header="Suburb"
-                       Width="310"
-                       ItemsSource="{Binding Suburbs}"
-                       SelectedItem="{Binding SelectedSuburb,Mode=TwoWay}"
-                       DisplayMemberPath="Name"
-                       x:Name="suburb"
-                       SelectionChanged="suburb_SelectionChanged"
-                       Margin="2"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <ComboBox  Height="70"
-                       Header="Region"
-                       Grid.Row="4"
-                       Width="310"
-                       ItemsSource="{Binding Region}"
-                       SelectedItem="{Binding SelectedRegion,Mode=TwoWay}"
-                       DisplayMemberPath="Name"
-                       Name="region"
-                       SelectionChanged="region_SelectionChanged"
-                       Margin="2"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <TextBox Header="Street/Post Box :"
-                     Text="{Binding Street,Mode=TwoWay}"
-                     Grid.Row="5"
-                     AcceptsReturn="True"
-                     IsSpellCheckEnabled="True"
-                     IsTextPredictionEnabled="True"
-                     Height="200"
-                     Margin="0 10" />
-
-            <ComboBox  Height="70"
-                       Header="Zip"
-                       Grid.Row="6"
-                       Width="310"
-                       ItemsSource="{Binding Postcodes}"
-                       SelectedItem="{Binding SelectedZip,Mode=TwoWay}"
-                       Name="zip"
-                       Margin="2"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+        <StackPanel Visibility="{Binding ProgressbarVisiblity}"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Stretch">
+            <TextBlock Text="{Binding ProgressbarMessage}"
+                       VerticalAlignment="Center"
+                       FontSize="15" />
+            <ProgressBar Width="700"
+                         Height="15"
+                         IsIndeterminate="True" />
+        </StackPanel>
 
 
-        </Grid>
-    </ScrollViewer>
+        <ComboBox  Height="70"
+                   Header="Country"
+                   Width="310"
+                   ItemsSource="{Binding Countries}"
+                   SelectedItem="{Binding SelectedCountry,Mode=TwoWay}"
+                   Margin="2"
+                   DisplayMemberPath="Name"
+                   SelectionChanged="country_SelectionChanged"
+                   x:Name="country"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
 
+        <ComboBox  Height="70"
+                   Header="Province"
+                   Grid.Row="1"
+                   Width="310"
+                   ItemsSource="{Binding Provinces}"
+                   SelectedItem="{Binding Selectedprovince,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Margin="2"
+                   Name="Provinces"
+                   SelectionChanged="Provinces_SelectionChanged"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Grid.Row="2"
+                   Header="City"
+                   Width="310"
+                   ItemsSource="{Binding Cities}"
+                   SelectedItem="{Binding SelectedCity,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Margin="2"
+                   x:Name="City"
+                   SelectionChanged="City_SelectionChanged"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Grid.Row="3"
+                   Header="Suburb"
+                   Width="310"
+                   ItemsSource="{Binding Suburbs}"
+                   SelectedItem="{Binding SelectedSuburb,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   x:Name="suburb"
+                   SelectionChanged="suburb_SelectionChanged"
+                   Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <ComboBox  Height="70"
+                   Header="Region"
+                   Grid.Row="4"
+                   Width="310"
+                   ItemsSource="{Binding Region}"
+                   SelectedItem="{Binding SelectedRegion,Mode=TwoWay}"
+                   DisplayMemberPath="Name"
+                   Name="region"
+                   SelectionChanged="region_SelectionChanged"
+                   Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <TextBox Header="Street/Post Box :"
+                 Text="{Binding Model.Street,Mode=TwoWay}"
+                 Grid.Row="5"
+                 AcceptsReturn="True"
+                 IsSpellCheckEnabled="True"
+                 IsTextPredictionEnabled="True"
+                 Height="200"
+                 Margin="0 10" />
+
+        <TextBox Header="Zip"
+                 Text="{Binding Model.Zip,Mode=TwoWay}"
+                 Grid.Row="6"
+                 AcceptsReturn="True"
+                 IsSpellCheckEnabled="True"
+                 IsTextPredictionEnabled="True"
+                 Height="200"
+                 Margin="0 10" />
+
+
+    </Grid>
 </ContentDialog>
