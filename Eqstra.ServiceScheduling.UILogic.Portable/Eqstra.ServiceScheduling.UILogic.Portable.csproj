@@ -54,8 +54,8 @@
     <Compile Include="Popup\ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Popup\SearchSupplier.xaml.cs">
-      <DependentUpon>SearchSupplier.xaml</DependentUpon>
+    <Compile Include="Popup\SearchSupplierDialog.xaml.cs">
+      <DependentUpon>SearchSupplierDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILocationService.cs" />
@@ -126,7 +126,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Popup\SearchSupplier.xaml">
+    <Page Include="Popup\SearchSupplierDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

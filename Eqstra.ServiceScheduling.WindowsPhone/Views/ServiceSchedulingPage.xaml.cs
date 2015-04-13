@@ -31,7 +31,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     public sealed partial class ServiceSchedulingPage : VisualStateAwarePage
     {
         DetailsDialog moreInfo;
-        SearchSupplierPopup sp;
+        SearchSupplierDialog sp;
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
@@ -43,7 +43,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ((ServiceSchedulingPageViewModel)this.DataContext)._busyIndicator.Close();
             if (sp!=null)
             {
-                sp.Close(); 
+                sp.Hide(); 
             }
             if (moreInfo!=null)
             {
@@ -70,14 +70,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             await AppointmentManager.ShowTimeFrameAsync(DateTime.Today, TimeSpan.FromDays(7));
         }
 
-        private void filterSup_Click(object sender, RoutedEventArgs e)
+       async private void filterSup_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             if (vm != null)
             {
-                sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
-                sp.Open();
-
+                sp = new SearchSupplierDialog(vm._locationService, vm._eventAggregator, vm._supplierService);
+                sp.ShowAsync();
               
             }
         }
