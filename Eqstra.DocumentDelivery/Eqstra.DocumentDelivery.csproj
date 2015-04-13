@@ -117,7 +117,7 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.8.3">
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.9">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24">

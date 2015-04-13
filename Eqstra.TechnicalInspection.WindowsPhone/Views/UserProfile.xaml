@@ -1,0 +1,74 @@
+﻿<ContentDialog x:Class=" Eqstra.TechnicalInspection.WindowsPhone.Views.UserProfile"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d"
+              
+               Height="250">
+    <ContentDialog.Resources>
+        <Style x:Key="LogoutAppBarButtonStyle"
+               TargetType="ButtonBase">
+            <Setter Property="AutomationProperties.AutomationId"
+                    Value="LogoutAppBarButton" />
+            <Setter Property="AutomationProperties.Name"
+                    Value="Logout" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Viewbox RenderTransformOrigin="0.47,0.47">
+                                <Viewbox.RenderTransform>
+                                    <TransformGroup>
+                                        <CompositeTransform Rotation="0"
+                                                            ScaleX="0.551720260135184"
+                                                            ScaleY="0.551720260135184" />
+                                    </TransformGroup>
+                                </Viewbox.RenderTransform>
+                                <Path Stretch="Uniform"
+                                      Fill="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      Data="F1 M 0,71.4297C -0.0207825,54.2669 7.09511,41.2825 13.974,33.0403C 20.8893,24.7292 27.6055,20.7252 28.2083,20.3522C 32.6992,17.6946 38.4714,19.2199 41.0976,23.7583C 43.7188,28.2812 42.2317,34.0878 37.7787,36.7583L 37.7604,36.7707L 37.7044,36.8053L 37.2148,37.1308L 35.1185,38.6797C 33.3203,40.1106 30.849,42.3333 28.414,45.2734C 23.5221,51.2292 18.8593,59.6705 18.8385,71.427C 18.8424,83.2799 23.5678,93.9374 31.2579,101.724C 38.9648,109.497 49.5065,114.279 61.2304,114.281C 72.9544,114.279 83.4961,109.497 91.2019,101.724C 98.8932,93.9374 103.619,83.2799 103.622,71.427C 103.602,60.0305 99.2304,51.7707 94.5065,45.8346C 90.0091,40.207 85.1979,37.0722 84.7188,36.7799L 84.7031,36.7721L 84.6888,36.7642L 84.6784,36.7597C 80.2304,34.0865 78.7435,28.2799 81.362,23.7571C 83.9909,19.2187 89.7618,17.6933 94.2514,20.3509C 94.8568,20.7226 101.573,24.7265 108.488,33.0384C 115.371,41.2825 122.483,54.2655 122.464,71.427C 122.457,105.611 95.0443,133.322 61.2317,133.333C 27.4205,133.322 0.00785828,105.611 0,71.4297 Z M 51.8125,66.668L 51.8125,38.0944L 51.8125,9.52411C 51.8125,4.26556 56.03,-3.05176e-005 61.233,-3.05176e-005C 66.4323,-3.05176e-005 70.6497,4.26556 70.6497,9.52411L 70.6497,38.0944L 70.6497,66.668L 70.6524,66.668C 70.6524,71.9218 66.4323,76.1901 61.233,76.1901C 56.03,76.1901 51.8125,71.9218 51.8125,66.668 Z " />
+                            </Viewbox>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentDialog.Resources>
+
+    <Grid x:Name="profileGrid">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        Margin="2">
+                <TextBlock Text="User Name"
+                           Style="{StaticResource TextContentStyle}" />
+                <TextBlock Text="{Binding UserId}"
+                           Style="{StaticResource InfoBoxTitleStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Margin="2">
+                <TextBlock Text="Company Name"
+                           Style="{StaticResource TextContentStyle}" />
+                <TextBlock Text="{Binding CompanyName}"
+                           Style="{StaticResource InfoBoxTitleStyle}" />
+            </StackPanel>
+            <Button HorizontalAlignment="Center"
+                          VerticalAlignment="Top"
+                          Grid.Row="2"
+                          Click="Logout_Click"
+                          Content="Logout">
+            </Button>
+        </Grid>
+    </Grid>
+</ContentDialog>

@@ -95,9 +95,6 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\TopBanner.xaml.cs">
-      <DependentUpon>TopBanner.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CameraCapturePage.xaml.cs">
       <DependentUpon>CameraCapturePage.xaml</DependentUpon>
     </Compile>
@@ -160,10 +157,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="UserControls\TopBanner.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CameraCapturePage.xaml">
       <SubType>Designer</SubType>

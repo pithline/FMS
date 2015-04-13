@@ -1,35 +1,34 @@
-﻿using System.ComponentModel;
-using Windows.UI.Core;
+﻿using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Eqstra.WinRT.Components.Controls.WindowsPhone
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BusyIndicator : Page, INotifyPropertyChanged
+    public sealed partial class ProgressDialog : Page
     {
         private Popup _popup;
-        public BusyIndicator()
+        public ProgressDialog()
         {
             this.InitializeComponent();
-            this.DataContext = this;
         }
-        public void Open(string message)
+
+        public void Open(object CurrentVewModel)
         {
             CoreWindow currentWindow = Window.Current.CoreWindow;
             if (_popup == null)
             {
                 _popup = new Popup();
             }
-            _popup.VerticalOffset = 0;
             _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-            this.Message = message;
+
+            this.DataContext = CurrentVewModel;
             this.Tag = _popup;
             this.Height = currentWindow.Bounds.Height;
             this.Width = currentWindow.Bounds.Width;
@@ -42,25 +41,5 @@ namespace Eqstra.WinRT.Components.Controls.WindowsPhone
             ((Popup)this.Tag).IsOpen = false;
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private string _message;
-        public string Message
-        {
-            get { return _message; }
-            set
-            {
-                _message = value;
-                OnPropertyChanged("Message");
-            }
-        }
-        private void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
     }
 }

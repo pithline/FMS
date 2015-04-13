@@ -84,6 +84,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +128,10 @@
     <ProjectReference Include="..\Eqstra.BusinessLogic.Portable\Eqstra.BusinessLogic.Portable.csproj">
       <Project>{a9300e19-216b-413f-aecb-7e02d8fb22ad}</Project>
       <Name>Eqstra.BusinessLogic.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.Controls.WindowsPhone\Eqstra.WinRT.Components.Controls.WindowsPhone.csproj">
+      <Project>{529b5041-022f-4445-a118-d64fbdbabfc4}</Project>
+      <Name>Eqstra.WinRT.Components.Controls.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
