@@ -38,12 +38,12 @@
   <ItemGroup>
     <Compile Include="ImageCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SSModels\AccessToken.cs" />
+    <Compile Include="AccessToken.cs" />
     <Compile Include="SSModels\Address.cs" />
     <Compile Include="SSModels\CaseStatus.cs" />
     <Compile Include="SSModels\City.cs" />
     <Compile Include="SSModels\ConfirmationServiceScheduling.cs" />
-    <Compile Include="SSModels\Constants.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="SSModels\Country.cs" />
     <Compile Include="SSModels\DestinationType.cs" />
     <Compile Include="SSModels\DriverTaskStatus.cs" />

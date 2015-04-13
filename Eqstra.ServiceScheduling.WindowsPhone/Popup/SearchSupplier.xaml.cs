@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
