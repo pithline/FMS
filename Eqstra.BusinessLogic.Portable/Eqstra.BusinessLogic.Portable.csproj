@@ -57,6 +57,14 @@
     <Compile Include="SSModels\SupplierSelection.cs" />
     <Compile Include="SSModels\Task.cs" />
     <Compile Include="SSModels\UserInfo.cs" />
+    <Compile Include="TIModels\CustomerDetails.cs" />
+    <Compile Include="TIModels\ImageCapture.cs" />
+    <Compile Include="TIModels\MaintenanceRepair.cs" />
+    <Compile Include="TIModels\Task.cs" />
+    <Compile Include="TIModels\TIData.cs" />
+    <Compile Include="TIModels\TITask.cs" />
+    <Compile Include="TIModels\UserInfo.cs" />
+    <Compile Include="TIModels\VehicleDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">

@@ -14,6 +14,7 @@ using System.Linq;
 using Windows.Storage;
 using Newtonsoft.Json;
 using Windows.UI.Popups;
+using Eqstra.BusinessLogic.Portable;
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
     public class MainPageViewModel : ViewModel

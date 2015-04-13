@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;

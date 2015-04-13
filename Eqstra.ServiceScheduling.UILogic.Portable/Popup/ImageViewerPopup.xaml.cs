@@ -33,5 +33,11 @@ namespace Eqstra.ServiceScheduling
             var popup = this.Tag as Popup;
             popup.IsOpen = false;
         }
+
+        private void ScrollViewer_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            var popup = this.Tag as Popup;
+            popup.IsOpen = false;
+        }
     }
 }

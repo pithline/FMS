@@ -10,7 +10,7 @@ using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.Web.Http;
 
-namespace Eqstra.ServiceScheduling.UILogic.Portable.Factories
+namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.Factories
 {
     public class HttpFactory : IHttpFactory
     {
