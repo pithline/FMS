@@ -59,6 +59,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.LtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+            this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.IsLiftRequired = false;
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
            async () =>
@@ -235,7 +236,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
             else
             {
-                this.StBorderBrush = null;
+                this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             }
 
             if (this.SelectedSupplier == null)
