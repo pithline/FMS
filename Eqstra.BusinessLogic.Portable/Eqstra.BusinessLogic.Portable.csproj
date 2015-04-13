@@ -39,7 +39,6 @@
     <Compile Include="ImageCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSModels\AccessToken.cs" />
-    <Compile Include="SSModels\Address.cs" />
     <Compile Include="SSModels\CaseStatus.cs" />
     <Compile Include="SSModels\City.cs" />
     <Compile Include="SSModels\ConfirmationServiceScheduling.cs" />
@@ -53,7 +52,7 @@
     <Compile Include="SSModels\ServiceSchedulingDetail.cs" />
     <Compile Include="SSModels\Suburb.cs" />
     <Compile Include="SSModels\Supplier.cs" />
-    <Compile Include="SSModels\SupplierFilter.cs" />
+    <Compile Include="SSModels\Address.cs" />
     <Compile Include="SSModels\SupplierSelection.cs" />
     <Compile Include="SSModels\Task.cs" />
     <Compile Include="SSModels\UserInfo.cs" />

@@ -17,7 +17,7 @@ namespace Eqstra.ServiceScheduling
     public sealed partial class SearchSupplierPopup : Page
     {
         private Popup _popup;
-        IEventAggregator _eventAggregator;
+         private IEventAggregator _eventAggregator;
         private ILocationService _locationService;
         public ISupplierService _supplierService;
         public ObservableCollection<Supplier> PoolofSupplier;
@@ -32,7 +32,7 @@ namespace Eqstra.ServiceScheduling
 
         async void SearchSupplierPopup_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SupplierFilter = new SupplierFilter();
+            this.SupplierFilter = new Address();
             this.DataContext = this.SupplierFilter;
             this.SupplierFilter.ProgressVisibility = Visibility.Visible;
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
@@ -145,7 +145,7 @@ namespace Eqstra.ServiceScheduling
 
         }
 
-        public SupplierFilter SupplierFilter { get; set; }
+        public Address SupplierFilter { get; set; }
         public UserInfo UserInfo { get; set; }
     }
 
