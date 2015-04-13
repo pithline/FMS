@@ -54,7 +54,7 @@ namespace Eqstra.WinRT.Components.Controls.WindowsPhone
                 OnPropertyChanged("Message");
             }
         }
-        protected void OnPropertyChanged(string name)
+        private void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
