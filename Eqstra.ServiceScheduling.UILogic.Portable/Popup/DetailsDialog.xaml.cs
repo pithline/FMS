@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.ServiceScheduling
 {
-    public sealed partial class DetailsDialog : Page
+    public sealed partial class DetailsDialog : ContentDialog
     {
         private Popup _popup;
         public DetailsDialog()
@@ -33,33 +33,10 @@ namespace Eqstra.ServiceScheduling
         {
             //profileGrid.DataContext = PersistentData.Instance.UserInfo;
         }
-        public void Open(object dataContext)
+
+        private void home_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            CoreWindow currentWindow = Window.Current.CoreWindow;
-            if (_popup == null)
-            {
-                _popup = new Popup();
-            }
-            _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-            _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-
-            this.DataContext = dataContext;
-            this.Tag = _popup;
-            this.Height = currentWindow.Bounds.Height;
-            this.Width = currentWindow.Bounds.Width;
-
-            _popup.Child = this;
-            _popup.IsOpen = true;
-        }
-        public void Close()
-        {
-            ((Popup)this.Tag).IsOpen = false;
-        }
-
-        private void home_Click(object sender, RoutedEventArgs e)
-        {
-
-            ((Popup)this.Tag).IsOpen = false;
+            this.Hide();
         }
 
     }

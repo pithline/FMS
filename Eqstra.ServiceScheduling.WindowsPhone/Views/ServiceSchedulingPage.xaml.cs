@@ -47,7 +47,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             }
             if (moreInfo!=null)
             {
-                moreInfo.Close(); 
+                moreInfo.Hide(); 
             }
         }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
@@ -58,11 +58,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
         }
-        private void More_Click(object sender, RoutedEventArgs e)
+      async  private void More_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             moreInfo = new DetailsDialog();
-            moreInfo.Open(vm.SelectedTask);
+            moreInfo.DataContext = vm.SelectedTask;
+           await moreInfo.ShowAsync();
         }
         private async void Calendar_Click(object sender, RoutedEventArgs e)
         {

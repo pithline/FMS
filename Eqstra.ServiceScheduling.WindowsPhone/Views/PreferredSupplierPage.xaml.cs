@@ -43,7 +43,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             }
             if (moreInfo != null)
             {
-                moreInfo.Close();
+                moreInfo.Hide();
             }
         }
 
@@ -52,11 +52,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
         }
         public PreferredSupplierPageViewModel vm { get; set; }
-        private void More_Click(object sender, RoutedEventArgs e)
+       async private void More_Click(object sender, RoutedEventArgs e)
         {
             moreInfo = new DetailsDialog();
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
-            moreInfo.Open(vm.SelectedTask);
+            moreInfo.DataContext = vm.SelectedTask;
+           await moreInfo.ShowAsync();
         }
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage;
 using Newtonsoft.Json;
+using Eqstra.BusinessLogic.Portable;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {

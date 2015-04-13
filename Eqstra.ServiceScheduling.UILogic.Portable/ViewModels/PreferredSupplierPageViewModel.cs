@@ -15,6 +15,7 @@ using Windows.UI.Xaml;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Windows.Storage;
 using Newtonsoft.Json;
+using Eqstra.BusinessLogic.Portable;
 
 namespace Eqstra.ServiceScheduling.UILogic.Portable
 {
