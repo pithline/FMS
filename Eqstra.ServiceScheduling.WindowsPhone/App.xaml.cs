@@ -8,7 +8,6 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
