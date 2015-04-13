@@ -1,17 +1,40 @@
-﻿<prism:VisualStateAwarePage
-    x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.LoginPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
-    xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
-   mvvm:ViewModelLocator.AutoWireViewModel="True"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<prism:VisualStateAwarePage x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.LoginPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+                            xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            mvvm:ViewModelLocator.AutoWireViewModel="True">
+    <prism:VisualStateAwarePage.Background>
+    <ImageBrush ImageSource="ms-appx:///Assets/login_bg.jpg"
+                Stretch="UniformToFill"/>
+    </prism:VisualStateAwarePage.Background>
 
     <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,60,0,0">
+            <Image Source="ms-appx:///Assets/Eqstra_headerlogo.png"
+                   Stretch="None" />
+            <TextBox PlaceholderText="user name"
+                     Height="45"
+                     VerticalContentAlignment="Center"
+                     Width="350"
+                     Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox PlaceholderText="password"
+                         Height="95"
+                         VerticalContentAlignment="Center"
+                         Visibility="Visible"
+                         IsPasswordRevealButtonEnabled="True"
+                         Width="350"
+                         Password="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+            <Button HorizontalAlignment="Center"
+                    Content="login"
+                    Command="{Binding LoginCommand}"/>
+        </StackPanel>
     </Grid>
 </prism:VisualStateAwarePage>

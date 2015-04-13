@@ -51,9 +51,6 @@
     <Compile Include="Popup\DetailsDialog.xaml.cs">
       <DependentUpon>DetailsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Popup\ProgressDialog.xaml.cs">
-      <DependentUpon>ProgressDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Popup\SearchSupplierDialog.xaml.cs">
       <DependentUpon>SearchSupplierDialog.xaml</DependentUpon>
     </Compile>
@@ -119,10 +116,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Popup\DetailsDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Popup\ProgressDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

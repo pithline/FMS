@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
+using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;

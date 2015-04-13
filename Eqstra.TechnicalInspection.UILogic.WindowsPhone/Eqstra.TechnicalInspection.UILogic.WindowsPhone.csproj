@@ -82,8 +82,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="Popup\DetailsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\PersistentData.cs" />
+    <Compile Include="Popup\DetailsDialog.xaml.cs">
+      <DependentUpon>DetailsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -97,6 +105,9 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\wpa81\Microsoft.Practices.Prism.Mvvm.Phone.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
+      <HintPath>..\packages\Prism.PubSubEvents.1.1.2\lib\portable-sl5+windowsphone8+windows8+net40+wpa81\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\wpa81\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +120,9 @@
       <HintPath>..\packages\Prism.StoreApps.2.0.0\lib\wpa81\Microsoft.Practices.Prism.StoreApps.Phone.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -117,6 +131,10 @@
     <ProjectReference Include="..\Eqstra.BusinessLogic.Portable\Eqstra.BusinessLogic.Portable.csproj">
       <Project>{a9300e19-216b-413f-aecb-7e02d8fb22ad}</Project>
       <Name>Eqstra.BusinessLogic.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.Controls.WindowsPhone\Eqstra.WinRT.Components.Controls.WindowsPhone.csproj">
+      <Project>{529b5041-022f-4445-a118-d64fbdbabfc4}</Project>
+      <Name>Eqstra.WinRT.Components.Controls.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

@@ -152,11 +152,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                 SpeechRecognitionTopicConstraint topicConstraint
                         = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
+
                 recognizer.Constraints.Add(topicConstraint);
                 await recognizer.CompileConstraintsAsync();
 
                 var results = await recognizer.RecognizeWithUIAsync();
-                if (results.Confidence != SpeechRecognitionConfidence.Rejected)
+                if (results!=null &(results.Confidence != SpeechRecognitionConfidence.Rejected))
                 {
                     this.Model.AdditionalWork = results.Text;
                 }
@@ -175,10 +176,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.ClearCommand = new DelegateCommand(async () =>
             {
-
+                this.Model.Address = String.Empty;
             });
-
-
 
             this._eventAggregator.GetEvent<AddressFilterEvent>().Subscribe((address) =>
             {
