@@ -1,7 +1,9 @@
-﻿<Application
-    x:Class="Eqstra.TechnicalInspection.App"
+﻿<mvvm:MvvmAppBase
+    x:Class="Eqstra.TechnicalInspection.WindowsPhone.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Eqstra.TechnicalInspection">
+    
+             xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+             xmlns:local="using:Eqstra.TechnicalInspection">
 
-</Application>
+</mvvm:MvvmAppBase>

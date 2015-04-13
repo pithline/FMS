@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.SSModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

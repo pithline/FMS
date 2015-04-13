@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eqstra.BusinessLogic.Portable.SSModels
+namespace Eqstra.BusinessLogic.Portable
 {
     public class AccessToken
     {

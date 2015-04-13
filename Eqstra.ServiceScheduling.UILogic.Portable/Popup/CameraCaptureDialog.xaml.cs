@@ -117,8 +117,8 @@ namespace Eqstra.ServiceScheduling.UILogic
             _mediaCapture.VideoDeviceController.FocusControl.Configure(focusSettings);
             await _mediaCapture.VideoDeviceController.ExposureControl.SetAutoAsync(true);
 
-            _mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
-            _mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
+            //_mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
+            //_mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
 
 
             PreviewElement.Source = _mediaCapture;
@@ -128,7 +128,7 @@ namespace Eqstra.ServiceScheduling.UILogic
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var bi = new BusyIndicator();
-            bi.Open("");
+            bi.Open("Please wait");
             var imageEncodingProps = ImageEncodingProperties.CreatePng();
             using (var stream = new InMemoryRandomAccessStream())
             {

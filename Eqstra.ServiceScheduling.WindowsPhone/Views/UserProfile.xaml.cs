@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.ServiceScheduling.UILogic;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Newtonsoft.Json;
