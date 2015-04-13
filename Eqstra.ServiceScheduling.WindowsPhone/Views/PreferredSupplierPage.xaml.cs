@@ -26,8 +26,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 {
     public sealed partial class PreferredSupplierPage : VisualStateAwarePage
     {
-        SearchSupplierPopup sp;
-        MoreInfo moreInfo;
+        SearchSupplierDialog sp;
+        DetailsDialog moreInfo;
         public PreferredSupplierPage()
         {
             this.InitializeComponent();
@@ -39,11 +39,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             if (sp != null)
             {
-                sp.Close();
+                sp.Hide();
             }
             if (moreInfo != null)
             {
-                moreInfo.Close();
+                moreInfo.Hide();
             }
         }
 
@@ -52,11 +52,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
         }
         public PreferredSupplierPageViewModel vm { get; set; }
-        private void More_Click(object sender, RoutedEventArgs e)
+        async private void More_Click(object sender, RoutedEventArgs e)
         {
-            moreInfo = new MoreInfo();
+            moreInfo = new DetailsDialog();
             this.vm = this.DataContext as PreferredSupplierPageViewModel;
-            moreInfo.Open(vm.SelectedTask);
+            moreInfo.DataContext = vm.SelectedTask;
+            await moreInfo.ShowAsync();
         }
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
@@ -81,13 +82,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             }
         }
 
-        private void filter_Click(object sender, RoutedEventArgs e)
+        async private void filter_Click(object sender, RoutedEventArgs e)
         {
 
             if (vm != null)
             {
-                sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
-                sp.Open();
+                sp = new SearchSupplierDialog(vm._locationService, vm._eventAggregator, vm._supplierService);
+                await sp.ShowAsync();
             }
         }
     }

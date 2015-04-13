@@ -252,7 +252,7 @@
                         <StackPanel Grid.Row="12"
                                     Orientation="Vertical"
                                     Visibility="{Binding IsReqVisibility}">
-                            <TextBox  Width="330"
+                            <TextBox  Width="330" IsHitTestVisible="False"
                                       Height="120"
                                       Header="Address"
                                       TextWrapping="Wrap"

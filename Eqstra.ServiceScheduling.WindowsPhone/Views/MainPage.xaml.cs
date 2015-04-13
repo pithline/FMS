@@ -177,10 +177,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             vm.LocateCommand.Execute();
         }
 
-        private void Details_Click(object sender, RoutedEventArgs e)
+       async private void Details_Click(object sender, RoutedEventArgs e)
         {
-            MoreInfo m = new MoreInfo();
-            m.Open(vm.InspectionTask);
+            DetailsDialog m = new DetailsDialog();
+            m.DataContext = this.vm.InspectionTask;
+          await  m.ShowAsync();
         }
 
         private async void Profile_Click(object sender, RoutedEventArgs e)

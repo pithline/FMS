@@ -59,7 +59,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
             SessionStateService.RegisterKnownType(typeof(Supplier));
             SessionStateService.RegisterKnownType(typeof(DestinationType));
             SessionStateService.RegisterKnownType(typeof(LocationType));
-            SessionStateService.RegisterKnownType(typeof(SupplierFilter));
+            SessionStateService.RegisterKnownType(typeof(Address));
 
             SessionStateService.RegisterKnownType(typeof(UserInfo));
             SessionStateService.RegisterKnownType(typeof(ImageCapture));

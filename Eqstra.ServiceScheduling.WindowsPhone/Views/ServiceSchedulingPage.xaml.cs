@@ -30,8 +30,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     /// </summary>
     public sealed partial class ServiceSchedulingPage : VisualStateAwarePage
     {
-        MoreInfo moreInfo;
-        SearchSupplierPopup sp;
+        DetailsDialog moreInfo;
+        SearchSupplierDialog sp;
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
@@ -43,11 +43,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ((ServiceSchedulingPageViewModel)this.DataContext)._busyIndicator.Close();
             if (sp!=null)
             {
-                sp.Close(); 
+                sp.Hide(); 
             }
             if (moreInfo!=null)
             {
-                moreInfo.Close(); 
+                moreInfo.Hide(); 
             }
         }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
@@ -58,25 +58,25 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
         }
-        private void More_Click(object sender, RoutedEventArgs e)
+      async  private void More_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
-            moreInfo = new MoreInfo();
-            moreInfo.Open(vm.SelectedTask);
+            moreInfo = new DetailsDialog();
+            moreInfo.DataContext = vm.SelectedTask;
+           await moreInfo.ShowAsync();
         }
         private async void Calendar_Click(object sender, RoutedEventArgs e)
         {
             await AppointmentManager.ShowTimeFrameAsync(DateTime.Today, TimeSpan.FromDays(7));
         }
 
-        private void filterSup_Click(object sender, RoutedEventArgs e)
+       async private void filterSup_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             if (vm != null)
             {
-                sp = new SearchSupplierPopup(vm._locationService, vm._eventAggregator, vm._supplierService);
-                sp.Open();
-
+                sp = new SearchSupplierDialog(vm._locationService, vm._eventAggregator, vm._supplierService);
+                sp.ShowAsync();
               
             }
         }

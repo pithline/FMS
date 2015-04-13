@@ -14,14 +14,13 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Eqstra.ServiceScheduling
 {
 
-    public sealed partial class SearchSupplierPopup : Page
+    public sealed partial class SearchSupplierDialog : ContentDialog
     {
-        private Popup _popup;
-        IEventAggregator _eventAggregator;
+        private IEventAggregator _eventAggregator;
         private ILocationService _locationService;
         public ISupplierService _supplierService;
         public ObservableCollection<Supplier> PoolofSupplier;
-        public SearchSupplierPopup(ILocationService locationService, IEventAggregator eventAggregator, ISupplierService supplierService)
+        public SearchSupplierDialog(ILocationService locationService, IEventAggregator eventAggregator, ISupplierService supplierService)
         {
             this._eventAggregator = eventAggregator;
             this.InitializeComponent();
@@ -32,7 +31,7 @@ namespace Eqstra.ServiceScheduling
 
         async void SearchSupplierPopup_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SupplierFilter = new SupplierFilter();
+            this.SupplierFilter = new Address();
             this.DataContext = this.SupplierFilter;
             this.SupplierFilter.ProgressVisibility = Visibility.Visible;
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
@@ -43,59 +42,6 @@ namespace Eqstra.ServiceScheduling
             this.SupplierFilter.ProgressVisibility = Visibility.Collapsed;
         }
 
-        public void Open()
-        {
-            CoreWindow currentWindow = Window.Current.CoreWindow;
-            if (_popup == null)
-            {
-                _popup = new Popup();
-            }
-            _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-            _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-
-            this.Tag = _popup;
-            this.Height = currentWindow.Bounds.Height;
-            this.Width = currentWindow.Bounds.Width;
-
-            _popup.Child = this;
-            _popup.IsOpen = true;
-
-        }
-        public void Close()
-        {
-            ((Popup)this.Tag).IsOpen = false;
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private async void Accept_Click(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-
-                string countryId = this.SupplierFilter.SelectedCountry != null ? this.SupplierFilter.SelectedCountry.Id : string.Empty;
-                string provinceId = this.SupplierFilter.Selectedprovince != null ? this.SupplierFilter.Selectedprovince.Id : string.Empty;
-                string cityId = this.SupplierFilter.SelectedCity != null ? this.SupplierFilter.SelectedCity.Id : string.Empty;
-                string suburbId = this.SupplierFilter.SelectedSuburb != null ? this.SupplierFilter.SelectedSuburb.Id : string.Empty;
-                string regionId = this.SupplierFilter.SelectedRegion != null ? this.SupplierFilter.SelectedRegion.Id : string.Empty;
-                this.PoolofSupplier = await this._supplierService.SearchSupplierByLocationAsync(countryId, provinceId, cityId, suburbId, regionId, this.UserInfo);
-
-                _eventAggregator.GetEvent<SupplierFilterEvent>().Publish(this.PoolofSupplier);
-
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-
-            this.Close();
-        }
 
 
         private async void country_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,10 +91,35 @@ namespace Eqstra.ServiceScheduling
 
         }
 
-        public SupplierFilter SupplierFilter { get; set; }
+        public Address SupplierFilter { get; set; }
         public UserInfo UserInfo { get; set; }
-    }
 
+
+        async private void Accept_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            try
+            {
+                string countryId = this.SupplierFilter.SelectedCountry != null ? this.SupplierFilter.SelectedCountry.Id : string.Empty;
+                string provinceId = this.SupplierFilter.Selectedprovince != null ? this.SupplierFilter.Selectedprovince.Id : string.Empty;
+                string cityId = this.SupplierFilter.SelectedCity != null ? this.SupplierFilter.SelectedCity.Id : string.Empty;
+                string suburbId = this.SupplierFilter.SelectedSuburb != null ? this.SupplierFilter.SelectedSuburb.Id : string.Empty;
+                string regionId = this.SupplierFilter.SelectedRegion != null ? this.SupplierFilter.SelectedRegion.Id : string.Empty;
+                this.PoolofSupplier = await this._supplierService.SearchSupplierByLocationAsync(countryId, provinceId, cityId, suburbId, regionId, this.UserInfo);
+
+                _eventAggregator.GetEvent<SupplierFilterEvent>().Publish(this.PoolofSupplier);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cancel_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+    }
 
 
 }

@@ -59,6 +59,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.LtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+            this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.IsLiftRequired = false;
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
            async () =>
@@ -168,7 +169,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
 
             this.AddCommand = new DelegateCommand(async () => {
-                _addressDialog = new AddressDialog();
+                _addressDialog = new AddressDialog(this._locationService,this._eventAggregator);
                 _addressDialog.ShowAsync();
             });
 
@@ -177,6 +178,45 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             });
 
+
+
+            this._eventAggregator.GetEvent<AddressFilterEvent>().Subscribe((address) =>
+            {
+                if (address != null)
+                {
+                    this.Address = address;
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.Append(address.Street).Append(",").Append(Environment.NewLine);
+
+                    if ((address.SelectedSuburb != null) && !String.IsNullOrEmpty(address.SelectedSuburb.Name))
+                    {
+                        sb.Append(address.SelectedSuburb.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if (address.SelectedRegion != null)
+                    {
+                        sb.Append(address.SelectedRegion.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if ((address.SelectedCity != null) && !String.IsNullOrEmpty(address.SelectedCity.Name))
+                    {
+                        sb.Append(address.SelectedCity.Name).Append(",").Append(Environment.NewLine);
+                    }
+                    if ((address.Selectedprovince != null) && !String.IsNullOrEmpty(address.Selectedprovince.Name))
+                    {
+                        sb.Append(address.Selectedprovince.Name).Append(",").Append(Environment.NewLine);
+                    }
+
+                    if ((address.SelectedCountry != null) && !String.IsNullOrEmpty(address.SelectedCountry.Name))
+                    {
+                        sb.Append(address.SelectedCountry.Name).Append(",").Append(Environment.NewLine);
+                    }
+
+                    sb.Append(address.SelectedZip);
+
+
+                    this.Model.Address = sb.ToString();
+                }
+            });
 
             _eventAggregator.GetEvent<SupplierFilterEvent>().Subscribe(poolofSupplier =>
             {
@@ -196,7 +236,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
             else
             {
-                this.StBorderBrush = null;
+                this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             }
 
             if (this.SelectedSupplier == null)
