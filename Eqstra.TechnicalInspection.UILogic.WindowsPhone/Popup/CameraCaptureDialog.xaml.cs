@@ -1,29 +1,21 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Media.Devices;
 using Windows.Media.MediaProperties;
 using Windows.Phone.UI.Input;
-using Windows.Storage.Pickers.Provider;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -140,17 +132,19 @@ namespace Eqstra.TechnicalInspection.UILogic
                 var bitmap = new BitmapImage();
                 stream.Seek(0);
                 await bitmap.SetSourceAsync(stream);
-                var model = this.Tag as ServiceSchedulingDetail;
-                if (model.OdoReadingImageCapture == null)
+                var model = this.Tag as ObservableCollection<ImageCapture>;
+                if (model == null)
                 {
-                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+                    model = new ObservableCollection<ImageCapture>();
                 }
-                model.OdoReadingImageCapture.ImageBitmap = bitmap;
-                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
+                model.Add(new ImageCapture
+                {
+                    ImageBitmap = bitmap
+                });
+
                 PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 this.IsSecondaryButtonEnabled = true;
-                Img.Source = bitmap;
             }
             bi.Close();
         }

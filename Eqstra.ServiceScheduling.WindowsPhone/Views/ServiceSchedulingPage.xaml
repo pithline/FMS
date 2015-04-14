@@ -88,9 +88,9 @@
                                      Date="{Binding Model.ODOReadingDt,Mode=TwoWay}"
                                      Grid.Row="1"
                                      Margin="0,2" />
+                        
                         <StackPanel Grid.Row="2"
                                     Orientation="Horizontal">
-
 
                             <Image Source="{Binding Model.OdoReadingImageCapture.ImageBitmap}"
                                    Stretch="UniformToFill"

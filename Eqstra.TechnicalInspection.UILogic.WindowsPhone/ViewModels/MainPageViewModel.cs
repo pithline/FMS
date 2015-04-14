@@ -33,16 +33,11 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 try
                 {
-                    ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = JsonConvert.SerializeObject(task);
-                    if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    string serializedTask = JsonConvert.SerializeObject(task);
+                    ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = serializedTask;
+                    if (task != null)
                     {
-                       // navigationService.Navigate("ServiceScheduling", String.Empty);
-                    }
-                    else
-                    {
-
-                       // navigationService.Navigate("PreferredSupplier", String.Empty);
-
+                        _navigationService.Navigate("TechnicalInspection", serializedTask);
                     }
                 }
                 catch (Exception ex)
@@ -52,8 +47,12 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
 
                 }
+            }, (task) =>
+            {
+                return (this.InspectionTask != null);
             }
-                   );
+             );
+
             this.RefreshTaskCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
 
@@ -166,13 +165,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             this.TaskProgressBar = Visibility.Visible;
 
-            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId,this.UserInfo.CompanyId);
+            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
             foreach (var task in tasksResult)
             {
                 task.Address = Regex.Replace(task.Address, ",", "\n");
                 this.PoolofTasks.Add(task);
             }
-         
+
             this.TaskProgressBar = Visibility.Collapsed;
 
             PersistentData.Instance.PoolofTasks = this.PoolofTasks;

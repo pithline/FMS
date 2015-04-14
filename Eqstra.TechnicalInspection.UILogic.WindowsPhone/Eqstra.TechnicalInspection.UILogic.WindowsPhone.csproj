@@ -96,6 +96,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\MaintenanceRepairAdapter.cs" />
     <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\TechnicalInspectionPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
