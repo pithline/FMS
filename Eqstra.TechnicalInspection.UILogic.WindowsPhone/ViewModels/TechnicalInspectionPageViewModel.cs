@@ -1,14 +1,17 @@
-﻿using Eqstra.BusinessLogic.Portable.TIModels;
+﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.TIModels;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -23,9 +26,20 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             _navigationService = navigationService;
             this._eventAggregator = eventAggregator;
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
-            this.MaintenanceRepairAdpList = new ObservableCollection<MaintenanceRepairAdapter>();
-            
+            //this.MaintenanceRepairAdpList = new ObservableCollection<MaintenanceRepairAdapter>();
             this.Model = new TIData();
+
+            this.CompleteCommand = new DelegateCommand(async () =>
+            {
+                try
+                {
+                    this.SelectedTask.Status = Eqstra.BusinessLogic.Portable.SSModels.DriverTaskStatus.Completed;
+                }
+                catch (Exception ex)
+                {
+                }
+            });
+
         }
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
@@ -33,18 +47,35 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                this.MaintenanceRepairAdpList.Add(new MaintenanceRepairAdapter() { });
-                this.MaintenanceRepairAdpList.Add(new MaintenanceRepairAdapter() { });
-                this.MaintenanceRepairAdpList.Add(new MaintenanceRepairAdapter() { });
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
+                {
+                    this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
+                }
+
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
+                {
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
+                }
+
+                //foreach (var item in this.SelectedTask.ComponentList)
+                //{
+                //    this.MaintenanceRepairAdpList.Add(new MaintenanceRepairAdapter()
+                //    {
+                //        Action = item.Action,
+                //        MajorComponent = item.MajorComponent,
+                //        SubComponent = item.SubComponent,
+                //        Repairid = item.Repairid,
+                //        CaseServiceRecId = item.CaseServiceRecId,
+                //        Cause = item.Cause
+                //    });
+                //}
+
             }
-            catch(Exception )
+            catch (Exception)
             {
 
             }
         }
-
-
-
 
         private ObservableCollection<MaintenanceRepair> maintenanceRepairList;
         public ObservableCollection<MaintenanceRepair> MaintenanceRepairList
@@ -53,12 +84,12 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             set { SetProperty(ref maintenanceRepairList, value); }
         }
 
-        private ObservableCollection<MaintenanceRepairAdapter> maintenanceRepairAdpList;
-        public ObservableCollection<MaintenanceRepairAdapter> MaintenanceRepairAdpList
-        {
-            get { return maintenanceRepairAdpList; }
-            set { SetProperty(ref maintenanceRepairAdpList, value); }
-        }
+        //private ObservableCollection<MaintenanceRepairAdapter> maintenanceRepairAdpList;
+        //public ObservableCollection<MaintenanceRepairAdapter> MaintenanceRepairAdpList
+        //{
+        //    get { return maintenanceRepairAdpList; }
+        //    set { SetProperty(ref maintenanceRepairAdpList, value); }
+        //}
 
         private TIData model;
 
@@ -67,7 +98,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
-
-        public DelegateCommand NextCommand { get; set; }
+        public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
+        public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
+        public DelegateCommand CompleteCommand { get; set; }
     }
 }

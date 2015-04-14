@@ -1,16 +1,38 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Eqstra.BusinessLogic.Portable.TIModels
 {
-    public class MaintenanceRepair
+    public class MaintenanceRepair : BindableBase
     {
         public MaintenanceRepair()
         {
-
+            this.IsMajorPivot = true;
+            this.MajorComponentImgList = new ObservableCollection<ImageCapture>();
+            this.SubComponentImgList = new ObservableCollection<ImageCapture>();
         }
 
+        private ObservableCollection<ImageCapture> majorComponentImgList;
+        public ObservableCollection<ImageCapture> MajorComponentImgList
+        {
+            get { return majorComponentImgList; }
+            set { SetProperty(ref majorComponentImgList, value); }
+        }
+
+        private ObservableCollection<ImageCapture> subComponentImgList;
+        public ObservableCollection<ImageCapture> SubComponentImgList
+        {
+            get { return subComponentImgList; }
+            set { SetProperty(ref subComponentImgList, value); }
+        }
+        private bool isMajorPivot;
+        public bool IsMajorPivot
+        {
+            get { return isMajorPivot; }
+            set { SetProperty(ref isMajorPivot, value); }
+        }
 
         private long repairid;
 
@@ -61,7 +83,6 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
             get { return action; }
             set { action = value; }
         }
-
 
     }
 }

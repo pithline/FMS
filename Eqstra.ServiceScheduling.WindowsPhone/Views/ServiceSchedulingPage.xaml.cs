@@ -49,6 +49,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             {
                 moreInfo.Hide(); 
             }
+
         }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {

@@ -17,132 +17,31 @@
     <prism:VisualStateAwarePage.Resources>
 
         <conv:CommandParameterConverter x:Key="CPConverter" />
-        <DataTemplate x:Key="ComponentHeaderTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Major Component"
-                           HorizontalAlignment="Left"
-                           Style="{StaticResource FormTextStyle}" Margin="0,0,40,0" />
-                <TextBlock Text="Sub Component"
-                           HorizontalAlignment="Right" Margin="40,0,0,0"
-                           Style="{StaticResource FormTextStyle}" />
-            </StackPanel>
-        </DataTemplate>
         <DataTemplate x:Key="ComponentTemplate">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="AUTO" />
-                    <RowDefinition Height="AUTO" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="AUTO" />
-                    <ColumnDefinition Width="AUTO" />
-                </Grid.ColumnDefinitions>
-
-                <AppBarButton HorizontalAlignment="Left"
-                              VerticalAlignment="Center"
-                              Icon="Camera"
-                              Command="{Binding TakeSnapshotCommand}"
-                              CommandParameter="{Binding ItemsSource, ElementName=MajorComponentImgGrid, 
-                    Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=MajorComponent}">
-                </AppBarButton>
-
-
-                <AppBarButton HorizontalAlignment="Right"
-                              Grid.Column="1"
-                              VerticalAlignment="Center"
-                              Icon="Camera"
-                              Command="{Binding TakeSnapshotCommand}"
-                              CommandParameter="{Binding ItemsSource, ElementName=SubComponentImgGrid,
-                    Converter={StaticResource ResourceKey=CPConverter}, ConverterParameter=SubComponent}">
-                </AppBarButton>
-
-
-                <GridView  Grid.Row="1"
-                           Name="MajorComponentImgGrid"
-                           common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
-                           IsItemClickEnabled="True"
-                           ItemsSource="{Binding Path=MajorComponentImgList}"
-                           Margin="5 0"
-                           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                           Height="40"
-                           Width="140"
-                           Padding="0 0 0 0"
-                           HorizontalAlignment="Left"
-                           SelectionMode="None">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="#FFA6A6A6"
-                                    BorderThickness="1"
-                                    CornerRadius="1">
-                                <Image Source="{Binding ImageBitmap}"
-                                       Stretch="Uniform"
-                                       Margin="1" />
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-
-                <GridView  Grid.Column="1"
-                           Grid.Row="1"
-                           Name="SubComponentImgGrid"
-                           common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
-                           IsItemClickEnabled="True"
-                           ItemsSource="{Binding Path=SubComponentImgList}"
-                           Margin="20 0"
-                           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                           Height="40"
-                           Width="140"
-                           Padding="0 0 0 0"
-                           HorizontalAlignment="Left"
-                           SelectionMode="None">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="#FFA6A6A6"
-                                    BorderThickness="1"
-                                    CornerRadius="1">
-                                <Image Source="{Binding ImageBitmap}"
-                                       Stretch="Uniform"
-                                       Margin="1" />
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </Grid>
-
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding MajorComponent}"
+                           Margin="5"
+                           FontSize="25"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="{Binding SubComponent}"
+                           Margin="5"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center" />
+            </StackPanel>
         </DataTemplate>
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="find"
-                              Icon="Find"
-                              Name="Find">
-                    <AppBarButton.Flyout>
-                        <Flyout>
-                            <StackPanel>
-                                <TextBox FontSize="25"
-                                         TextAlignment="Center"
-                                         Height="40"
-                                         Margin="20,0"
-                                         TextChanged="filter_TextChanged" />
-                            </StackPanel>
-                        </Flyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-                <AppBarButton Label="submit"
+                <AppBarButton Icon="ViewAll"
+                              Name="ViewAll"
+                              Label="ViewAll"
+                              Click="ViewAll_Click" />
+                <AppBarButton Label="Complete"
                               Icon="Accept"
-                              Command="{Binding NextPageCommand}" />
+                              Command="{Binding CompleteCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments"
@@ -151,10 +50,6 @@
                               Icon="NewWindow"
                               Name="Profile"
                               Click="More_Click" />
-                <AppBarButton Icon="Filter"
-                              Label="filter"
-                              IsCompact="True"
-                              Click="filter_Click" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
@@ -174,10 +69,11 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                                   VerticalAlignment="Top"
                                   ItemTemplate="{StaticResource ComponentTemplate}"
-                                  SelectionMode="None"
-                                  HeaderTemplate="{StaticResource ComponentHeaderTemplate}"
+                                  SelectionMode="Single"
+                                  
+                                  ItemClick="ListView_ItemClick"
                                   ItemContainerStyle="{StaticResource ListViewItemStyle1}"
-                                  ItemsSource="{Binding MaintenanceRepairAdpList}" />
+                                  ItemsSource="{Binding SelectedTask.ComponentList}" />
 
                     </Grid>
                 </DataTemplate>
