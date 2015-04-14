@@ -43,7 +43,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
-              
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
