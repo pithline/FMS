@@ -280,6 +280,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
             return resp;
         }
+
+        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
+        {
+            this._busyIndicator.Close();
+            base.OnNavigatedFrom(viewModelState, suspending);
+        }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try

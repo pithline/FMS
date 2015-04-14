@@ -68,7 +68,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             });
 
         }
-
+      
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
