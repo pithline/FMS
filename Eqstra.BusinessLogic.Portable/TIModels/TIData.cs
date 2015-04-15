@@ -10,13 +10,18 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
 {
     public class TIData
     {
+
+        public TIData()
+        {
+            this.CompletionDate = DateTime.Today;
+        }
         private string causeOfDamage;
 
         public string CauseOfDamage
         {
             get { return causeOfDamage; }
             set { causeOfDamage = value; }
-        }        
+        }
 
         private string remedy;
 

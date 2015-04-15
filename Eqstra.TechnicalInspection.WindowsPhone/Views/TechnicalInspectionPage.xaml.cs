@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels;
 using Eqstra.TechnicalInspection.WindowsPhone.Common;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
@@ -67,6 +68,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         async private void More_Click(object sender, RoutedEventArgs e)
         {
             dd = new DetailsDialog();
+            dd.DataContext = ((TechnicalInspectionPageViewModel)this.DataContext).SelectedTask;
             await dd.ShowAsync();
 
         }

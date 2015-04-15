@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -20,11 +21,12 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         private TITask _task;
         private INavigationService _navigationService;
         private IEventAggregator _eventAggregator;
-
-        public TechnicalInspectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
+        private ITaskService _taskService;
+        public TechnicalInspectionPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, ITaskService taskService)
         {
             _navigationService = navigationService;
             this._eventAggregator = eventAggregator;
+            this._taskService = taskService;
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
             //this.MaintenanceRepairAdpList = new ObservableCollection<MaintenanceRepairAdapter>();
             this.Model = new TIData();
@@ -34,6 +36,24 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 try
                 {
                     this.SelectedTask.Status = Eqstra.BusinessLogic.Portable.SSModels.DriverTaskStatus.Completed;
+
+                    List<ImageCapture> imageCaptureList = new List<ImageCapture>();
+                    foreach (var item in this.MaintenanceRepairList)
+                    {
+                        if (item.MajorComponentImgList.Any())
+                        {
+                            imageCaptureList.AddRange(item.MajorComponentImgList);
+                        }
+                        if (item.SubComponentImgList.Any())
+                        {
+                            imageCaptureList.AddRange(item.SubComponentImgList);
+                        }
+                    }
+                    var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
+                    if (resp)
+                    {
+                        _navigationService.Navigate("Main", string.Empty);
+                    }
                 }
                 catch (Exception ex)
                 {

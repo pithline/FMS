@@ -59,7 +59,8 @@
         <Hub x:Name="Hub"
              x:Uid="Hub">
 
-            <HubSection Header="COMPONENTS">
+            <HubSection Header="COMPONENTS"
+                        Margin="0,15,0,0">
                 <DataTemplate>
                     <Grid>
                         <ProgressBar IsIndeterminate="True"

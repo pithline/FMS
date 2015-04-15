@@ -75,17 +75,17 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
             });
 
-            //this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
-            //{
-            //    if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
-            //    {
-            //        await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
-            //    }
-            //    else
-            //    {
-            //        await new MessageDialog("No mail id exist").ShowAsync();
-            //    }
-            //}, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
+            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+                if (!String.IsNullOrEmpty(this.InspectionTask.CustEmailId))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CustEmailId));
+                }
+                else
+                {
+                    await new MessageDialog("No mail id exist").ShowAsync();
+                }
+            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustEmailId)); });
 
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -114,8 +114,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private Eqstra.BusinessLogic.Portable.TIModels.Task task;
-        public Eqstra.BusinessLogic.Portable.TIModels.Task InspectionTask
+        private Eqstra.BusinessLogic.Portable.TIModels.TITask task;
+        public Eqstra.BusinessLogic.Portable.TIModels.TITask InspectionTask
         {
             get { return task; }
             set

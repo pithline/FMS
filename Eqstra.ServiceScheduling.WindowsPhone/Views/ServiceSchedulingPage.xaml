@@ -40,7 +40,8 @@
     </prism:VisualStateAwarePage.Resources>
 
     <Hub>
-        <HubSection Header="SERVICE SCHEDULING DETAIL">
+        <HubSection Header="SERVICE SCHEDULING DETAIL"
+                    Margin="0,15,0,0">
             <DataTemplate>
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
                               HorizontalAlignment="Stretch"

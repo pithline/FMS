@@ -629,7 +629,7 @@
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
     <Hub>
-        <HubSection Header="TASKS">
+        <HubSection Header="TASKS" Margin="0,15,0,0">
             <DataTemplate>
                 <Grid>
                     <ProgressBar IsIndeterminate="True"

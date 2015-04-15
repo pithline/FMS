@@ -19,7 +19,8 @@
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
     <Hub>
-        <HubSection Header="SUBMITTED DETAIL">
+        <HubSection Header="SUBMITTED DETAIL"
+                    Margin="0,15,0,0">
             <DataTemplate>
                 <ScrollViewer>
                     <Grid x:Name="LayoutRoot"
