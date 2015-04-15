@@ -1,7 +1,6 @@
 ﻿using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using System;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -31,6 +30,7 @@ namespace Eqstra.TechnicalInspection.UILogic
             this.Loaded += CameraCaptureDialog_Loaded;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             this.Closing += CameraCaptureDialog_Closing;
+
         }
 
         async void CameraCaptureDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
@@ -76,13 +76,13 @@ namespace Eqstra.TechnicalInspection.UILogic
             if (Img.Visibility == Windows.UI.Xaml.Visibility.Visible)
             {
                 args.Cancel = false;
-                this.Hide();
+
             }
             else
             {
                 args.Cancel = true;
             }
-
+            this.Hide();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -143,11 +143,10 @@ namespace Eqstra.TechnicalInspection.UILogic
 
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            var bi = new BusyIndicator();
             try
             {
-
-                var bi = new BusyIndicator();
-                bi.Open("Please wait");
+               // bi.Open("Please wait");
                 var imageEncodingProps = ImageEncodingProperties.CreatePng();
                 using (var stream = new InMemoryRandomAccessStream())
                 {
@@ -187,7 +186,7 @@ namespace Eqstra.TechnicalInspection.UILogic
             }
             catch (Exception)
             {
-
+                bi.Close();
 
             }
         }

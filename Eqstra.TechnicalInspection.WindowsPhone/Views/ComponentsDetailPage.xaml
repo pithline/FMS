@@ -544,7 +544,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Camera"
                               Label="Camera"
-                              Command="{Binding TakeSnapshotCommand}" Click="AppBarButton_Click"/>
+                              Command="{Binding TakeSnapshotCommand}"/>
 
             </CommandBar.PrimaryCommands>
         </CommandBar>

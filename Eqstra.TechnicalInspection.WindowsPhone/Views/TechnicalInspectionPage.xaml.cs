@@ -1,9 +1,11 @@
 ﻿using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.WindowsPhone.Common;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,17 +30,16 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     /// </summary>
     public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
+        ComponentsDetailPage cdp;
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
         }
         async private void ViewAll_Click(object sender, RoutedEventArgs e)
         {
-            //InspectionDetailDialog insp = new InspectionDetailDialog();
-            //insp.DataContext = this.DataContext;
-            //await insp.ShowAsync();
-            ComponentsDetailPage CP = new ComponentsDetailPage();
-            CP.Open(this.DataContext);
+            InspectionDetailDialog insp = new InspectionDetailDialog();
+            insp.DataContext = this.DataContext;
+            await insp.ShowAsync();
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -47,9 +48,12 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             Frame.Navigate(typeof(ComponentsDetailPage), JsonConvert.SerializeObject(item));
         }
 
-        private void More_Click(object sender, RoutedEventArgs e)
+        async private void More_Click(object sender, RoutedEventArgs e)
         {
+            DetailsDialog dd = new DetailsDialog();
+            await dd.ShowAsync();
 
         }
     }
+
 }

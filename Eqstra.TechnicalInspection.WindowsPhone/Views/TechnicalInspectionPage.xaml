@@ -39,6 +39,7 @@
                               Name="ViewAll"
                               Label="ViewAll"
                               Click="ViewAll_Click" />
+                
                 <AppBarButton Label="Complete"
                               Icon="Accept"
                               Command="{Binding CompleteCommand}" />
@@ -70,7 +71,7 @@
                                   VerticalAlignment="Top"
                                   ItemTemplate="{StaticResource ComponentTemplate}"
                                   SelectionMode="Single"
-                                  
+                                  IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick"
                                   ItemContainerStyle="{StaticResource ListViewItemStyle1}"
                                   ItemsSource="{Binding SelectedTask.ComponentList}" />
