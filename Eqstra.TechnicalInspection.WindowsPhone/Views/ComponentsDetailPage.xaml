@@ -544,7 +544,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Camera"
                               Label="Camera"
-                              Command="{Binding TakeSnapshotCommand}"/>
+                              Command="{Binding TakeSnapshotCommand}" />
 
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -581,13 +581,10 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="#FFA6A6A6"
-                                        BorderThickness="1"
-                                        CornerRadius="1">
-                                    <Image Source="{Binding ImageBitmap}"
-                                           Stretch="Uniform"
-                                           Margin="1" />
-                                </Border>
+
+                                <Image Source="{Binding ImageBitmap}"
+                                       Stretch="UniformToFill" />
+
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -608,13 +605,10 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="#FFA6A6A6"
-                                        BorderThickness="1"
-                                        CornerRadius="1">
-                                    <Image Source="{Binding ImageBitmap}"
-                                           Stretch="Uniform"
-                                           Margin="1" />
-                                </Border>
+
+                                <Image Source="{Binding ImageBitmap}"
+                                       Stretch="UniformToFill" />
+
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

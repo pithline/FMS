@@ -96,7 +96,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\MaintenanceRepairAdapter.cs" />
     <Compile Include="Common\PersistentData.cs" />
     <Compile Include="Factories\HttpFactory.cs" />
     <Compile Include="Factories\IHttpFactory.cs" />

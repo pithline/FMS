@@ -28,7 +28,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._eventAggregator = eventAggregator;
             this._taskService = taskService;
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
-            //this.MaintenanceRepairAdpList = new ObservableCollection<MaintenanceRepairAdapter>();
+          
             this.Model = new TIData();
 
             this.CompleteCommand = new DelegateCommand(async () =>
@@ -48,6 +48,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                         {
                             imageCaptureList.AddRange(item.SubComponentImgList);
                         }
+                  
                     }
                     var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
                     if (resp)

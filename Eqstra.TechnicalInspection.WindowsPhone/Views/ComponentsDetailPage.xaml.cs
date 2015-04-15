@@ -6,6 +6,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -34,6 +35,10 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
                 this.vm.SelectedMaintenanceRepair.IsMajorPivot = true;
             }
 
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
         }
 
     }

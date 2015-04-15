@@ -10,6 +10,7 @@ using Windows.Media.Capture;
 using Windows.Media.Devices;
 using Windows.Media.MediaProperties;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -141,12 +142,32 @@ namespace Eqstra.TechnicalInspection.UILogic
             }
         }
 
+        private async static System.Threading.Tasks.Task ByteArrayToBitmapImage(byte[] imageBytes)
+        {
+            try
+            {
+                if (imageBytes.Any())
+                {
+                    var filename ="test" + ".png";
+
+                    var sampleFile = await KnownFolders.PicturesLibrary.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteBytesAsync(sampleFile, imageBytes);
+                }
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+
+
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var bi = new BusyIndicator();
             try
             {
-               // bi.Open("Please wait");
+                bi.Open("Please wait");
                 var imageEncodingProps = ImageEncodingProperties.CreatePng();
                 using (var stream = new InMemoryRandomAccessStream())
                 {
@@ -155,6 +176,7 @@ namespace Eqstra.TechnicalInspection.UILogic
                     _bytes = new byte[stream.Size];
                     var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
                     _bytes = buffer.ToArray(0, (int)stream.Size);
+                    await ByteArrayToBitmapImage(_bytes);
                     var bitmap = new BitmapImage();
                     stream.Seek(0);
                     await bitmap.SetSourceAsync(stream);

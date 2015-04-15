@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -83,6 +84,13 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
             get { return action; }
             set { action = value; }
         }
+
+    }
+
+
+
+    public class MaintenanceRepairEvent : PubSubEvent<MaintenanceRepair>
+    {
 
     }
 }

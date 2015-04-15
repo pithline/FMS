@@ -11,7 +11,10 @@ using System.Globalization;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Xaml;
-
+using System.Linq;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
+using Eqstra.TechnicalInspection.UILogic;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Eqstra.TechnicalInspection.WindowsPhone
@@ -29,8 +32,74 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
         {
             this.InitializeComponent();
             this.UnhandledException += App_UnhandledException;
+            Window.Current.Activated += Current_Activated;
         }
 
+        void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+
+        }
+
+        async protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args != null)
+            {
+                switch (args.Kind)
+                {
+                    case ActivationKind.PickFileContinuation:
+                        var arguments = (FileOpenPickerContinuationEventArgs)args;
+                        //var selectedMaintenanceRepair = (MaintenanceRepair)arguments.ContinuationData["SelectedMaintenanceRepair"];
+                        var selectedMaintenanceRepair = PersistentData.Instance.SelectedMaintenanceRepair;
+                        StorageFile file = arguments.Files.FirstOrDefault(); // your picked file
+                        if (file != null)
+                        {
+                            await ReadFile(file, selectedMaintenanceRepair);
+                        }
+
+                        break;
+                }
+            }
+        }
+
+        public async System.Threading.Tasks.Task ReadFile(StorageFile file, MaintenanceRepair selectedMaintenanceRepair)
+        {
+            byte[] fileBytes = null;
+            using (IRandomAccessStreamWithContentType stream = await file.OpenReadAsync())
+            {
+                fileBytes = new byte[stream.Size];
+                using (DataReader reader = new DataReader(stream))
+                {
+                    await reader.LoadAsync((uint)stream.Size);
+                    reader.ReadBytes(fileBytes);
+
+
+                    var bitmap = new BitmapImage();
+                    stream.Seek(0);
+                    await bitmap.SetSourceAsync(stream);
+
+                    if (selectedMaintenanceRepair == null)
+                    {
+                        selectedMaintenanceRepair = new MaintenanceRepair();
+                    }
+                    if (selectedMaintenanceRepair.IsMajorPivot)
+                    {
+                        selectedMaintenanceRepair.MajorComponentImgList.Add(new ImageCapture
+                         {
+                             ImageBitmap = bitmap
+                         });
+                    }
+                    else
+                    {
+                        selectedMaintenanceRepair.SubComponentImgList.Add(new ImageCapture
+                          {
+                              ImageBitmap = bitmap
+                          });
+                    }
+                }
+            }
+
+            EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);
+        }
         void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
