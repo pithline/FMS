@@ -31,13 +31,29 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
         ComponentsDetailPage cdp;
+        InspectionDetailDialog insp;
+        DetailsDialog dd;
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (insp != null)
+            {
+                insp.Hide();
+            }
+            if (dd != null)
+            {
+                dd.Hide();
+            }
+
+        }
         async private void ViewAll_Click(object sender, RoutedEventArgs e)
         {
-            InspectionDetailDialog insp = new InspectionDetailDialog();
+            insp = new InspectionDetailDialog();
             insp.DataContext = this.DataContext;
             await insp.ShowAsync();
         }
@@ -50,7 +66,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         async private void More_Click(object sender, RoutedEventArgs e)
         {
-            DetailsDialog dd = new DetailsDialog();
+            dd = new DetailsDialog();
             await dd.ShowAsync();
 
         }
