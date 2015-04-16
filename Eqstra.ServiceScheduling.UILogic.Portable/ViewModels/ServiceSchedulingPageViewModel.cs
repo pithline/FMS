@@ -20,6 +20,7 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Media.SpeechRecognition;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Core;
@@ -105,10 +106,26 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.TakePictureCommand = DelegateCommand<ImageCapture>.FromAsyncHandler(async (param) =>
           {
-              var camCap =
-              new CameraCaptureDialog();
-              camCap.Tag = this.Model;
-              await camCap.ShowAsync();
+
+              FileOpenPicker openPicker = new FileOpenPicker();
+              openPicker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+              openPicker.FileTypeFilter.Add(".bmp");
+              openPicker.FileTypeFilter.Add(".png");
+              openPicker.FileTypeFilter.Add(".jpeg");
+              openPicker.FileTypeFilter.Add(".jpg");
+              PersistentData.Instance.ServiceSchedulingDetail = this.Model;
+
+              openPicker.PickSingleFileAndContinue();
+
+              this._eventAggregator.GetEvent<ServiceSchedulingDetailEvent>().Subscribe(model =>
+              {
+                  this.Model = model;
+              });
+
+              //var camCap =
+              //new CameraCaptureDialog();
+              //camCap.Tag = this.Model;
+              //await camCap.ShowAsync();
 
 
           });

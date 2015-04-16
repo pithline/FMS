@@ -48,9 +48,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                 {
                     case ActivationKind.PickFileContinuation:
                         var arguments = (FileOpenPickerContinuationEventArgs)args;
-                        //var selectedMaintenanceRepair = (MaintenanceRepair)arguments.ContinuationData["SelectedMaintenanceRepair"];
                         var selectedMaintenanceRepair = PersistentData.Instance.SelectedMaintenanceRepair;
-                        StorageFile file = arguments.Files.FirstOrDefault(); // your picked file
+                        StorageFile file = arguments.Files.FirstOrDefault(); 
                         if (file != null)
                         {
                             await ReadFile(file, selectedMaintenanceRepair);
