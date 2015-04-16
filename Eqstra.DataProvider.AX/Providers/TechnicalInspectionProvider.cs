@@ -139,7 +139,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 };
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
                 _client = new TIProxy.MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
                 _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "erpsetup";
                 _client.ClientCredentials.UserName.Password = "AXrocks100";

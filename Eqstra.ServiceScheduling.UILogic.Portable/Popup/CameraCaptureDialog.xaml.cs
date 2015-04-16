@@ -127,32 +127,41 @@ namespace Eqstra.ServiceScheduling.UILogic
 
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            var bi = new BusyIndicator();
-            bi.Open("Please wait");
-            var imageEncodingProps = ImageEncodingProperties.CreatePng();
-            using (var stream = new InMemoryRandomAccessStream())
+                var bi = new BusyIndicator();
+            try
             {
-
-                await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
-                _bytes = new byte[stream.Size];
-                var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
-                _bytes = buffer.ToArray(0, (int)stream.Size);
-                var bitmap = new BitmapImage();
-                stream.Seek(0);
-                await bitmap.SetSourceAsync(stream);
-                var model = this.Tag as ServiceSchedulingDetail;
-                if (model.OdoReadingImageCapture == null)
+                bi.Open("Please wait");
+                var imageEncodingProps = ImageEncodingProperties.CreatePng();
+                using (var stream = new InMemoryRandomAccessStream())
                 {
-                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+
+                    await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
+                    _bytes = new byte[stream.Size];
+                    var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
+                    _bytes = buffer.ToArray(0, (int)stream.Size);
+                    var bitmap = new BitmapImage();
+                    stream.Seek(0);
+                    await bitmap.SetSourceAsync(stream);
+                    var model = this.Tag as ServiceSchedulingDetail;
+                    if (model.OdoReadingImageCapture == null)
+                    {
+                        model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+                    }
+                    model.OdoReadingImageCapture.ImageBitmap = bitmap;
+                    model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
+                    PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    this.IsSecondaryButtonEnabled = true;
+                    Img.Source = bitmap;
                 }
-                model.OdoReadingImageCapture.ImageBitmap = bitmap;
-                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
-                PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                this.IsSecondaryButtonEnabled = true;
-                Img.Source = bitmap;
+                bi.Close();
             }
-            bi.Close();
+            catch (Exception)
+            {
+                bi.Close();
+
+                throw;
+            }
         }
 
 
