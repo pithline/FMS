@@ -50,8 +50,8 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 };
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxdev01.lfmd.co.za/MicrosoftDynamicsAXAif60/ServiceSchedulingService/xppservice.svc?wsdl http://srfmlaxtest01/MicrosoftDynamicsAXAif60/SSService/xppservice.svc
-                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/SSService/xppservice.svchttp://SRFMLAXTEST01/MicrosoftDynamicsAXAif60/SSService/xppservice.svc
+                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress(" http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
@@ -164,7 +164,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                     }
                 }
-                return driverTaskList.OrderByDescending(x=>x.CaseNumber).ToList();
+                return driverTaskList.OrderByDescending(x => x.CaseNumber).ToList();
             }
             catch (Exception ex)
             {
@@ -377,7 +377,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                             SupplierName = mzk.parmSupplierName,
                             EventDesc = mzk.parmEventDesc,
                             ContactPersonName = mzk.parmContactPersonName,
-                            ContactPersonPhone = string.IsNullOrEmpty(mzk.parmContactPersonPhone) ? "" : "+" + mzk.parmContactPersonPhone,                            
+                            ContactPersonPhone = string.IsNullOrEmpty(mzk.parmContactPersonPhone) ? "" : "+" + mzk.parmContactPersonPhone,
                             SupplierDateTime = DateTime.Now,// need to add in service
                             SelectedLocRecId = mzk.parmLiftLocationRecId,
                             ODOReadingSnapshot = await GetOdoReadingImageAsync(mzk.parmODOReadingImage),

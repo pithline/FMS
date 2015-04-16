@@ -65,7 +65,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 basicHttpBinding.ReaderQuotas.MaxNameTableCharCount = int.MaxValue;
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc  http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
                 client = new TIService.MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;

@@ -70,10 +70,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                    {
                        _busyIndicator.Open("Please wait, Saving ...");
 
-                       this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy");
-                       this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy");
-                       this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy");
-                       this.Model.ConfirmedDate = this.Model.ConfirmedDateDt.ToString("MM/dd/yyyy");
+                       this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy HH:mm");
+                       this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy HH:mm");
+                       this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy HH:mm");
+                       
                        bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, this.UserInfo);
                        if (response)
                        {

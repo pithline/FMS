@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="Eqstra.DocumentDelivery" Publisher="CN=Syed.Noor" Version="1.0.0.21" />
+  <Identity Name="Eqstra.DocumentDelivery" Publisher="CN=noor syed" Version="1.0.0.23" />
   <Properties>
     <DisplayName>Eqstra.DocumentDelivery</DisplayName>
     <PublisherDisplayName>Syed.Noor</PublisherDisplayName>

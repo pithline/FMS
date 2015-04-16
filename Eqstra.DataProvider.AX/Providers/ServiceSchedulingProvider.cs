@@ -174,7 +174,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 };
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+                basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://SRFMLAXTEST01/MicrosoftDynamicsAXAif60/SSService/xppservice.svc
                 _client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl"));
                 _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "erpsetup";
                 _client.ClientCredentials.UserName.Password = "AXrocks100";
@@ -435,10 +435,10 @@ namespace Eqstra.DataProvider.AX.Providers
                         {
                             Address = mzk.parmAddress,
                             AdditionalWork = mzk.parmAdditionalWork,
-                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateFirstOption.ToString("MM/dd/yyyy"),
-                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateSecondOption.ToString("MM/dd/yyyy"),
+                            ServiceDateOption1 = mzk.parmPreferredDateFirstOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateFirstOption.ToString("MM/dd/yyyy HH:mm"),
+                            ServiceDateOption2 = mzk.parmPreferredDateSecondOption.Year == 1900 ? string.Empty : mzk.parmPreferredDateSecondOption.ToString("MM/dd/yyyy HH:mm"),
                             ODOReading = Int64.Parse(mzk.parmODOReading.ToString()),
-                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? string.Empty : mzk.parmODOReadingDate.ToString("MM/dd/yyyy"),
+                            ODOReadingDate = mzk.parmODOReadingDate.Year == 1900 ? string.Empty : mzk.parmODOReadingDate.ToString("MM/dd/yyyy HH:mm"),
                             ServiceType = GetServiceTypes(caseNumber, userInfo.CompanyId),
                             LocationTypes = GetLocationType(serviceRecId, userInfo.CompanyId),
                             SupplierName = mzk.parmSupplierName,
@@ -453,8 +453,8 @@ namespace Eqstra.DataProvider.AX.Providers
                             SelectedServiceType = mzk.parmServiceType,
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
                             AccountNumber = mzk.parmSupplierId,
-                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy")
-
+                            ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy HH:mm")
+                            
                         });
                         detailServiceScheduling.SelectedLocType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
                     }
