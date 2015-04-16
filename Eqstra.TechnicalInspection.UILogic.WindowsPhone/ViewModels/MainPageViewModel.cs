@@ -166,10 +166,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this.TaskProgressBar = Visibility.Visible;
 
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
-            foreach (var task in tasksResult)
+            if (tasksResult!=null)
             {
-                task.Address = Regex.Replace(task.Address, ",", "\n");
-                this.PoolofTasks.Add(task);
+                foreach (var task in tasksResult)
+                {
+                    task.Address = Regex.Replace(task.Address, ",", "\n");
+                    this.PoolofTasks.Add(task);
+                } 
             }
 
             this.TaskProgressBar = Visibility.Collapsed;
