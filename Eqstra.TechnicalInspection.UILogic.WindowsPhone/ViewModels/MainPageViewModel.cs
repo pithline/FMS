@@ -33,16 +33,11 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 try
                 {
-                    ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = JsonConvert.SerializeObject(task);
-                    if (task != null && task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    string serializedTask = JsonConvert.SerializeObject(task);
+                    ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = serializedTask;
+                    if (task != null)
                     {
-                       // navigationService.Navigate("ServiceScheduling", String.Empty);
-                    }
-                    else
-                    {
-
-                       // navigationService.Navigate("PreferredSupplier", String.Empty);
-
+                        _navigationService.Navigate("TechnicalInspection", serializedTask);
                     }
                 }
                 catch (Exception ex)
@@ -52,8 +47,12 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
 
                 }
+            }, (task) =>
+            {
+                return (this.InspectionTask != null);
             }
-                   );
+             );
+
             this.RefreshTaskCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
 
@@ -76,17 +75,17 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustPhone));
             });
 
-            //this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
-            //{
-            //    if (!String.IsNullOrEmpty(this.InspectionTask.CusEmailId))
-            //    {
-            //        await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CusEmailId));
-            //    }
-            //    else
-            //    {
-            //        await new MessageDialog("No mail id exist").ShowAsync();
-            //    }
-            //}, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
+            this.MailToCommand = DelegateCommand.FromAsyncHandler(async () =>
+            {
+                if (!String.IsNullOrEmpty(this.InspectionTask.CustEmailId))
+                {
+                    await Launcher.LaunchUriAsync(new Uri("mailto:" + this.InspectionTask.CustEmailId));
+                }
+                else
+                {
+                    await new MessageDialog("No mail id exist").ShowAsync();
+                }
+            }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustEmailId)); });
 
 
             this.LocateCommand = DelegateCommand.FromAsyncHandler(async () =>
@@ -115,8 +114,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private Eqstra.BusinessLogic.Portable.TIModels.Task task;
-        public Eqstra.BusinessLogic.Portable.TIModels.Task InspectionTask
+        private Eqstra.BusinessLogic.Portable.TIModels.TITask task;
+        public Eqstra.BusinessLogic.Portable.TIModels.TITask InspectionTask
         {
             get { return task; }
             set
@@ -166,13 +165,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             this.TaskProgressBar = Visibility.Visible;
 
-            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId,this.UserInfo.CompanyId);
+            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
             foreach (var task in tasksResult)
             {
                 task.Address = Regex.Replace(task.Address, ",", "\n");
                 this.PoolofTasks.Add(task);
             }
-         
+
             this.TaskProgressBar = Visibility.Collapsed;
 
             PersistentData.Instance.PoolofTasks = this.PoolofTasks;

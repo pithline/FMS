@@ -72,8 +72,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
         }
 
-
-
+    
         async public override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             this.ImageVisibility = Visibility.Collapsed;

@@ -51,5 +51,6 @@ namespace Eqstra.ServiceScheduling.Views
             this.Hide();
         }
 
+        
     }
 }

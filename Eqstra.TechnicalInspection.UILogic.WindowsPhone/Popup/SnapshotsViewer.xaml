@@ -1,0 +1,39 @@
+﻿<Page x:Name="pageRoot"
+      x:Class="Eqstra.TechnicalInspection.UILogic.SnapshotsViewer"
+      DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Eqstra.TechnicalInspection.UILogic"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+
+    </Page.Resources>
+
+    <Grid x:Name="accentGrid"
+          Background="Transparent"
+          Grid.Row="1">
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Viewbox>
+                <FlipView x:Name="fvSnaps"
+                          ItemsSource="{Binding Snapshots,Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" />
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+            </Viewbox>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

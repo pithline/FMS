@@ -1,5 +1,6 @@
 ﻿using Eqstra.BusinessLogic;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -236,4 +237,11 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         }
         
     }
+    public class ServiceSchedulingDetailEvent : PubSubEvent<ServiceSchedulingDetail>
+    {
+
+    }
+
+
 }
+

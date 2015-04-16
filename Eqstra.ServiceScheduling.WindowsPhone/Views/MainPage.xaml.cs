@@ -37,13 +37,15 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
     public sealed partial class MainPage : VisualStateAwarePage
     {
         MainPageViewModel vm;
+        UserProfile contentDialog;
+        DetailsDialog dd;
         public MainPage()
         {
             this.InitializeComponent();
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
-              
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
@@ -56,6 +58,14 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            if (dd != null)
+            {
+                dd.Hide();
+            }
+            if (contentDialog != null)
+            {
+                contentDialog.Hide();
+            }
         }
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
@@ -177,16 +187,17 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             vm.LocateCommand.Execute();
         }
 
-       async private void Details_Click(object sender, RoutedEventArgs e)
+        async private void Details_Click(object sender, RoutedEventArgs e)
         {
-            DetailsDialog m = new DetailsDialog();
-            m.DataContext = this.vm.InspectionTask;
-          await  m.ShowAsync();
+            dd = new DetailsDialog();
+            dd.DataContext = this.vm.InspectionTask;
+            await dd.ShowAsync();
         }
+    
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile contentDialog = new UserProfile(vm._navigationService);
+            contentDialog = new UserProfile(vm._navigationService);
             await contentDialog.ShowAsync();
 
         }

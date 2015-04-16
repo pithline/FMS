@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.ServiceScheduling.UILogic;
 using Eqstra.ServiceScheduling.UILogic.Portable.Factories;
 using Eqstra.ServiceScheduling.UILogic.Portable.Services;
 using Microsoft.Practices.Prism.Mvvm;
@@ -11,8 +12,10 @@ using System;
 using System.Globalization;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
-
+using Windows.UI.Xaml.Media.Imaging;
+using System.Linq;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Eqstra.ServiceScheduling.WindowsPhone
@@ -38,6 +41,57 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
         void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
+        }
+
+        async protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args != null)
+            {
+                switch (args.Kind)
+                {
+                    case ActivationKind.PickFileContinuation:
+                        var arguments = (FileOpenPickerContinuationEventArgs)args;
+
+                        var serviceSchedulingDetail = PersistentData.Instance.ServiceSchedulingDetail;
+                        StorageFile file = arguments.Files.FirstOrDefault(); 
+                        if (file != null)
+                        {
+                            await ReadFile(file, serviceSchedulingDetail);
+                        }
+                        break;
+                }
+            }
+        }
+
+        public async System.Threading.Tasks.Task ReadFile(StorageFile file, ServiceSchedulingDetail serviceSchedulingDetail)
+        {
+            byte[] fileBytes = null;
+            using (IRandomAccessStreamWithContentType stream = await file.OpenReadAsync())
+            {
+                fileBytes = new byte[stream.Size];
+                using (DataReader reader = new DataReader(stream))
+                {
+                    await reader.LoadAsync((uint)stream.Size);
+                    reader.ReadBytes(fileBytes);
+
+                    var bitmap = new BitmapImage();
+                    stream.Seek(0);
+                    await bitmap.SetSourceAsync(stream);
+
+                    if (serviceSchedulingDetail == null)
+                    {
+                        serviceSchedulingDetail = new ServiceSchedulingDetail();
+                    }
+
+                    serviceSchedulingDetail.OdoReadingImageCapture = new ImageCapture
+                        {
+                            ImageBitmap = bitmap,
+                            ImageBinary = Convert.ToBase64String(fileBytes)
+                        };
+                }
+            }
+
+            EventAggregator.GetEvent<ServiceSchedulingDetailEvent>().Publish(serviceSchedulingDetail);
         }
 
         protected override void OnRegisterKnownTypesForSerialization()

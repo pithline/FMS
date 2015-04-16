@@ -13,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -21,6 +22,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     public sealed partial class MainPage : VisualStateAwarePage
     {
         MainPageViewModel vm;
+        DetailsDialog dd;
+        UserProfile contentDialog;
         public MainPage()
         {
             this.InitializeComponent();
@@ -40,6 +43,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            if (contentDialog != null)
+            {
+                contentDialog.Hide();
+            }
+
+            if (dd != null)
+            {
+                dd.Hide();
+            }
         }
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
@@ -78,8 +90,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
                 currentTasks = PersistentData.Instance.PoolofTasks;
 
-
-
                 ObservableCollection<TITask> filterResult = new ObservableCollection<TITask>();
                 foreach (var task in currentTasks)
                 {
@@ -91,7 +101,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
                         filterResult.Add(task);
                     }
                 }
-
 
                 vm.PoolofTasks = filterResult;
 
@@ -134,14 +143,12 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         private void phone_Click(object sender, RoutedEventArgs e)
         {
             vm.MakeCallCommand.Execute();
-
         }
 
         private void mail_Click(object sender, RoutedEventArgs e)
         {
             vm.MailToCommand.Execute();
         }
-
 
         private void map_Click(object sender, RoutedEventArgs e)
         {
@@ -150,16 +157,17 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         async private void Details_Click(object sender, RoutedEventArgs e)
         {
-            DetailsDialog m = new DetailsDialog();
-            m.DataContext = this.vm.InspectionTask;
-            await m.ShowAsync();
+            dd = new DetailsDialog();
+            dd.DataContext = this.vm.InspectionTask;
+            await dd.ShowAsync();
         }
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile contentDialog = new UserProfile(vm._navigationService);
+            contentDialog = new UserProfile(vm._navigationService);
             await contentDialog.ShowAsync();
 
         }
+
     }
 }

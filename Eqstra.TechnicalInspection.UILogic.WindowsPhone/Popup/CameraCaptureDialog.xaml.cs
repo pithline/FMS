@@ -1,29 +1,21 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Media.Devices;
 using Windows.Media.MediaProperties;
 using Windows.Phone.UI.Input;
-using Windows.Storage.Pickers.Provider;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -39,6 +31,7 @@ namespace Eqstra.TechnicalInspection.UILogic
             this.Loaded += CameraCaptureDialog_Loaded;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             this.Closing += CameraCaptureDialog_Closing;
+
         }
 
         async void CameraCaptureDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
@@ -61,14 +54,22 @@ namespace Eqstra.TechnicalInspection.UILogic
         private static async Task<DeviceInformation> GetCameraDeviceInfoAsync(Windows.Devices.Enumeration.Panel desiredPanel)
         {
 
-            DeviceInformation device = (await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture))
-                .FirstOrDefault(d => d.EnclosureLocation != null && d.EnclosureLocation.Panel == desiredPanel);
-
-            if (device == null)
+            try
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "No suitable devices found for the camera of type {0}.", desiredPanel));
+                DeviceInformation device = (await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture))
+                       .FirstOrDefault(d => d.EnclosureLocation != null && d.EnclosureLocation.Panel == desiredPanel);
+
+                if (device == null)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "No suitable devices found for the camera of type {0}.", desiredPanel));
+                }
+                return device;
             }
-            return device;
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         async private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -76,83 +77,140 @@ namespace Eqstra.TechnicalInspection.UILogic
             if (Img.Visibility == Windows.UI.Xaml.Visibility.Visible)
             {
                 args.Cancel = false;
+
             }
             else
             {
                 args.Cancel = true;
             }
-
+            this.Hide();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            args.Cancel = true;
-            Img.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            try
+            {
+                args.Cancel = true;
+                Img.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         async private void PreviewElement_Loaded(object sender, RoutedEventArgs e)
         {
-            _mediaCapture = new MediaCapture();
+            try
+            {
+
+                _mediaCapture = new MediaCapture();
 
 
-            var _deviceInformation = await GetCameraDeviceInfoAsync(Windows.Devices.Enumeration.Panel.Back);
+                var _deviceInformation = await GetCameraDeviceInfoAsync(Windows.Devices.Enumeration.Panel.Back);
 
-            var settings = new MediaCaptureInitializationSettings();
-            //settings.StreamingCaptureMode = StreamingCaptureMode.Video;
-            settings.PhotoCaptureSource = PhotoCaptureSource.Photo;
-            settings.AudioDeviceId = "";
-            if (_deviceInformation != null)
-                settings.VideoDeviceId = _deviceInformation.Id;
+                var settings = new MediaCaptureInitializationSettings();
+                //settings.StreamingCaptureMode = StreamingCaptureMode.Video;
+                settings.PhotoCaptureSource = PhotoCaptureSource.Photo;
+                settings.AudioDeviceId = "";
+                if (_deviceInformation != null)
+                    settings.VideoDeviceId = _deviceInformation.Id;
 
-            await _mediaCapture.InitializeAsync(settings);
+                await _mediaCapture.InitializeAsync(settings);
 
-            var focusSettings = new FocusSettings();
-            focusSettings.AutoFocusRange = AutoFocusRange.FullRange;
-            focusSettings.Mode = FocusMode.Auto;
-            focusSettings.WaitForFocus = true;
-            focusSettings.DisableDriverFallback = false;
+                var focusSettings = new FocusSettings();
+                focusSettings.AutoFocusRange = AutoFocusRange.FullRange;
+                focusSettings.Mode = FocusMode.Auto;
+                focusSettings.WaitForFocus = true;
+                focusSettings.DisableDriverFallback = false;
 
-            _mediaCapture.VideoDeviceController.FocusControl.Configure(focusSettings);
-            await _mediaCapture.VideoDeviceController.ExposureControl.SetAutoAsync(true);
+                _mediaCapture.VideoDeviceController.FocusControl.Configure(focusSettings);
+                await _mediaCapture.VideoDeviceController.ExposureControl.SetAutoAsync(true);
 
-            //_mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
-            //_mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
+                //_mediaCapture.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
+                //_mediaCapture.SetRecordRotation(VideoRotation.Clockwise90Degrees);
 
 
-            PreviewElement.Source = _mediaCapture;
-            await _mediaCapture.StartPreviewAsync();
+                PreviewElement.Source = _mediaCapture;
+                await _mediaCapture.StartPreviewAsync();
+            }
+            catch (Exception)
+            {
+
+            }
         }
+
+        private async static System.Threading.Tasks.Task ByteArrayToBitmapImage(byte[] imageBytes)
+        {
+            try
+            {
+                if (imageBytes.Any())
+                {
+                    var filename ="test" + ".png";
+
+                    var sampleFile = await KnownFolders.PicturesLibrary.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteBytesAsync(sampleFile, imageBytes);
+                }
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+
 
         async private void PreviewElement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var bi = new BusyIndicator();
-            bi.Open("Please wait");
-            var imageEncodingProps = ImageEncodingProperties.CreatePng();
-            using (var stream = new InMemoryRandomAccessStream())
+            try
             {
-
-                await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
-                _bytes = new byte[stream.Size];
-                var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
-                _bytes = buffer.ToArray(0, (int)stream.Size);
-                var bitmap = new BitmapImage();
-                stream.Seek(0);
-                await bitmap.SetSourceAsync(stream);
-                var model = this.Tag as ServiceSchedulingDetail;
-                if (model.OdoReadingImageCapture == null)
+                bi.Open("Please wait");
+                var imageEncodingProps = ImageEncodingProperties.CreatePng();
+                using (var stream = new InMemoryRandomAccessStream())
                 {
-                    model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+
+                    await _mediaCapture.CapturePhotoToStreamAsync(imageEncodingProps, stream);
+                    _bytes = new byte[stream.Size];
+                    var buffer = await stream.ReadAsync(_bytes.AsBuffer(), (uint)stream.Size, InputStreamOptions.None);
+                    _bytes = buffer.ToArray(0, (int)stream.Size);
+                    await ByteArrayToBitmapImage(_bytes);
+                    var bitmap = new BitmapImage();
+                    stream.Seek(0);
+                    await bitmap.SetSourceAsync(stream);
+                    var model = this.Tag as MaintenanceRepair;
+                    if (model == null)
+                    {
+                        model = new MaintenanceRepair();
+                    }
+                    if (model.IsMajorPivot)
+                    {
+                        model.MajorComponentImgList.Add(new ImageCapture
+                               {
+                                   ImageBitmap = bitmap
+                               });
+                    }
+                    else
+                    {
+                        model.SubComponentImgList.Add(new ImageCapture
+                        {
+                            ImageBitmap = bitmap
+                        });
+                    }
+
+                    PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    this.IsSecondaryButtonEnabled = true;
                 }
-                model.OdoReadingImageCapture.ImageBitmap = bitmap;
-                model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);
-                PreviewElement.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                Img.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                this.IsSecondaryButtonEnabled = true;
-                Img.Source = bitmap;
+                bi.Close();
             }
-            bi.Close();
+            catch (Exception)
+            {
+                bi.Close();
+
+            }
         }
 
 

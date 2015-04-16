@@ -14,5 +14,6 @@ namespace Eqstra.ServiceScheduling.UILogic
         }
         public ObservableCollection<BusinessLogic.Portable.SSModels.Task> PoolofTasks { get; set; }
         public ObservableCollection<Supplier> PoolofSupplier { get; set; }
+        public ServiceSchedulingDetail ServiceSchedulingDetail { get; set; }
     }
 }

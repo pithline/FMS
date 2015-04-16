@@ -1,0 +1,74 @@
+﻿<ContentDialog x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.InspectionDetailDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d"
+               xmlns:conv="using:Eqstra.TechnicalInspection.Converters"
+               Title="INSPECTION DETAIL"
+               PrimaryButtonText="ok"
+               SecondaryButtonText="cancel"
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    <ContentDialog.Resources>
+        <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter" />
+    </ContentDialog.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Inspection Completion Date"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource FormTextStyle}"
+                           VerticalAlignment="Center" />
+                <DatePicker Grid.Column="1"
+                            IsHitTestVisible="False"
+                            HorizontalAlignment="Left"
+                            Margin="5"
+                            Date="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" />
+            </StackPanel>
+
+            <TextBox AcceptsReturn="True"
+                     Grid.Row="1"
+                     Header="Cause of Damage Details"
+                     Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
+                     IsTextPredictionEnabled="True"
+                     HorizontalAlignment="Left"
+                     Width="400"
+                     Height="150"
+                     Margin="10"
+                     VerticalAlignment="Center" />
+
+
+            <TextBox AcceptsReturn="True"
+                     Header="Remedy Details"
+                     Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
+                     IsTextPredictionEnabled="True"
+                     Grid.Row="2"
+                     HorizontalAlignment="Left"
+                     Width="400"
+                     Height="150"
+                     Margin="10"
+                     VerticalAlignment="Center" />
+
+
+            <TextBox AcceptsReturn="True"
+                     Header="Recommendation"
+                     Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
+                     IsTextPredictionEnabled="True"
+                     Grid.Row="3"
+                     HorizontalAlignment="Left"
+                     Width="400"
+                     Height="150"
+                     Margin="10"
+                     VerticalAlignment="Center" />
+        </Grid>
+    </ScrollViewer>
+</ContentDialog>
