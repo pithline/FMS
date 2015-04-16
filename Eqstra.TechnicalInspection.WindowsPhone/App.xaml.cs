@@ -85,14 +85,16 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                     {
                         selectedMaintenanceRepair.MajorComponentImgList.Add(new ImageCapture
                          {
-                             ImageBitmap = bitmap
+                             ImageBitmap = bitmap,
+                             ImageData = Convert.ToBase64String(fileBytes)
                          });
                     }
                     else
                     {
                         selectedMaintenanceRepair.SubComponentImgList.Add(new ImageCapture
                           {
-                              ImageBitmap = bitmap
+                              ImageBitmap = bitmap,
+                              ImageData = Convert.ToBase64String(fileBytes)
                           });
                     }
                 }

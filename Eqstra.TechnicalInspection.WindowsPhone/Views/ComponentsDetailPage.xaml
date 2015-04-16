@@ -21,8 +21,6 @@
                     Value="{StaticResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize"
                     Value="{StaticResource ControlContentThemeFontSize}" />
-            <Setter Property="Background"
-                    Value="{StaticResource PhoneAccentBrush}" />
             <Setter Property="TabNavigation"
                     Value="Local" />
             <Setter Property="IsHoldingEnabled"
@@ -30,9 +28,9 @@
             <Setter Property="Margin"
                     Value="5" />
             <Setter Property="Height"
-                    Value="300" />
+                    Value="170" />
             <Setter Property="Width"
-                    Value="300" />
+                    Value="170" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewItem">
@@ -571,6 +569,7 @@
                     <GridView HorizontalAlignment="Center"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
                               VerticalAlignment="Center"
+                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               SelectionMode="None"
                               ItemsSource="{Binding SelectedMaintenanceRepair.MajorComponentImgList}">
 
@@ -581,10 +580,8 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-
                                 <Image Source="{Binding ImageBitmap}"
                                        Stretch="UniformToFill" />
-
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -595,6 +592,7 @@
                 <Grid>
                     <GridView HorizontalAlignment="Center"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
+                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               VerticalAlignment="Center"
                               SelectionMode="None"
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
@@ -605,10 +603,8 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-
                                 <Image Source="{Binding ImageBitmap}"
                                        Stretch="UniformToFill" />
-
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

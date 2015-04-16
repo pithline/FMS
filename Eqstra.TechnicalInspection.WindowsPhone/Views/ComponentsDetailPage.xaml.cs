@@ -41,5 +41,29 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             base.OnNavigatedTo(e);
         }
 
+        private void Image_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            ((Image)sender).Height = 600;
+            ((Image)sender).Width = 600;
+        }
+
+        private void Image_Tapped_1(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            ((Image)sender).Height = 600;
+            ((Image)sender).Width = 600;
+        }
+
+        private void Image_Holding(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs e)
+        {
+            ((Image)sender).Height = 120;
+            ((Image)sender).Width = 120;
+        }
+
+        private void Image_Holding_1(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs e)
+        {
+            ((Image)sender).Height = 120;
+            ((Image)sender).Width = 120;
+        }
+
     }
 }

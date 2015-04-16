@@ -90,7 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Popup\ImageViewerPopup.xaml">
+    <Page Include="Popup\SnapshotsViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -105,8 +105,8 @@
     <Compile Include="Popup\DetailsDialog.xaml.cs">
       <DependentUpon>DetailsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Popup\ImageViewerPopup.xaml.cs">
-      <DependentUpon>ImageViewerPopup.xaml</DependentUpon>
+    <Compile Include="Popup\SnapshotsViewer.xaml.cs">
+      <DependentUpon>SnapshotsViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITaskService.cs" />

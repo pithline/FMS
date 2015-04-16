@@ -6,20 +6,14 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
     public class ComponentsDetailPageViewModel : ViewModel
     {
+        private SnapshotsViewer _snapShotsPopup;
         public INavigationService _navigationService;
         public IEventAggregator _eventAggregator;
         public ComponentsDetailPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
@@ -35,7 +29,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 openPicker.FileTypeFilter.Add(".jpeg");
                 openPicker.FileTypeFilter.Add(".jpg");
                 PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
-                //openPicker.ContinuationData["SelectedMaintenanceRepair"] = this.SelectedMaintenanceRepair;
 
                 openPicker.PickSingleFileAndContinue();
 
@@ -57,8 +50,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 navigationService.Navigate("TechnicalInspection", string.Empty);
             });
 
+            this.OpenSnapshotViewerCommand = new DelegateCommand(() =>
+          {
+              _snapShotsPopup = new SnapshotsViewer();
+              _snapShotsPopup.Open(this.SelectedMaintenanceRepair);
+          });
         }
-     
+
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -82,5 +80,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         public ICommand TakeSnapshotCommand { get; set; }
 
         public ICommand PreviousCommand { get; set; }
+
+        public ICommand OpenSnapshotViewerCommand { get; set; }
     }
 }
