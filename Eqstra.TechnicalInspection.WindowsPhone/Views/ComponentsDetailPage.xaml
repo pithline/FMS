@@ -567,6 +567,7 @@
                               VerticalAlignment="Center"
                               common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               SelectionMode="None"
+                              IsItemClickEnabled="True"
                               ItemsSource="{Binding SelectedMaintenanceRepair.MajorComponentImgList}">
 
                         <GridView.ItemsPanel>
@@ -591,6 +592,7 @@
                               common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               VerticalAlignment="Center"
                               SelectionMode="None"
+                              IsItemClickEnabled="True"
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

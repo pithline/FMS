@@ -18,6 +18,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     public sealed partial class ComponentsDetailPage : VisualStateAwarePage
     {
         ComponentsDetailPageViewModel vm;
+        private SnapshotsViewer _snapShotsPopup;
         public ComponentsDetailPage()
         {
             this.InitializeComponent();
@@ -63,6 +64,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         {
             ((Image)sender).Height = 120;
             ((Image)sender).Width = 120;
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (this.vm!=null)
+            {
+                _snapShotsPopup = new SnapshotsViewer();
+                _snapShotsPopup.Open(this.vm.SelectedMaintenanceRepair); 
+            }
         }
 
     }

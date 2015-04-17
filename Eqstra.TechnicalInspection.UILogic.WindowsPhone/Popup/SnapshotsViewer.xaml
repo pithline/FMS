@@ -8,26 +8,35 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
-    <Page.Resources>
-
-    </Page.Resources>
-
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Delete"
+                              Label="Delete"
+                              Click="DeletePic_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid x:Name="accentGrid"
-          Background="Transparent"
+          Background="Black"
           Grid.Row="1">
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
-
             <Viewbox>
                 <FlipView x:Name="fvSnaps"
-                          ItemsSource="{Binding Snapshots,Mode=TwoWay}"
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
                     <FlipView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImagePath}" />
+                            <Image Source="{Binding ImageBitmap}"
+                                   ManipulationDelta="OnManipulationDelta"
+                                   SizeChanged="Image_SizeChanged"
+                                   Stretch="UniformToFill">
+                                <Image.RenderTransform>
+                                    <CompositeTransform />
+                                </Image.RenderTransform>
+                            </Image>
                         </DataTemplate>
                     </FlipView.ItemTemplate>
                 </FlipView>
