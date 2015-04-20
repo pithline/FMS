@@ -155,7 +155,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                        await      this.InsertDocumentDetailsCollectedByCustomerToSvcAsync();
                        await      this.GetDriverListFromSvcAsync();
                        await      this.GetCourierListFromSvcAsync();
-                       await      this.InsertDocumentCollectedByDriverOrCourierToSvcAsync();
+                       //await      this.InsertDocumentCollectedByDriverOrCourierToSvcAsync();
                        await this.InsertDocumentDeliveredByDriverOrCourierToSvcAsync();
                        await      this.UpdateTaskStatusAsync();
                        await      this.GetCollectedFromSvcAsync();
@@ -448,6 +448,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
+
         //async public System.Threading.Tasks.Task GetCollectedFromAddressSvcAsync()
         //{
         //    try
@@ -480,7 +481,9 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Customer)
+                //if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Customer)
+
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess )
                     return;
 
                 if (_userInfo == null)
@@ -531,64 +534,64 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 this.SendMessageToUIThread(ex.Message);
             }
         }
-        async public System.Threading.Tasks.Task InsertDocumentCollectedByDriverOrCourierToSvcAsync()
-        {
-            try
-            {
-                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType == CDUserType.Customer)
-                    return;
+        //async public System.Threading.Tasks.Task InsertDocumentCollectedByDriverOrCourierToSvcAsync()
+        //{
+        //    try
+        //    {
+        //        var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+        //        if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType == CDUserType.Customer)
+        //            return;
 
-                if (_userInfo == null)
-                {
-                    _userInfo = PersistentData.Instance.UserInfo;
-                }
-                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>());
-                ObservableCollection<MZKCourierCollectionDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKCourierCollectionDetailsContract>();
+        //        if (_userInfo == null)
+        //        {
+        //            _userInfo = PersistentData.Instance.UserInfo;
+        //        }
+        //        var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>());
+        //        ObservableCollection<MZKCourierCollectionDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKCourierCollectionDetailsContract>();
                
-                    foreach (var doc in cdDataList)
-                    {
-                        mzkDocumentCollectedDetailsContractColl.Add(new MZKCourierCollectionDetailsContract()
-                        {
-                            parmCaseId = doc.CaseNumber,
-                            parmCollectedFrom = doc.SelectedCollectedFrom,
-                            parmComment = doc.Comment,
-                            parmEmail = doc.Email,
-                            parmCaseServiceRecId = doc.CaseServiceRecId,
-                            parmContactPerson = doc.ReceivedBy,
-                            parmCollectedBy = doc.ReceivedBy,
-                            parmPosition = doc.Position,
-                            parmTelePhone = doc.Phone,
-                            // parmContactNumber
-                            // parmCourierSignature = doc.CRSignature.,
-                            parmReceivedBy = doc.ReceivedBy,
-                            parmDateTime = doc.ReceivedDate,
-                            parmContactNumber = doc.Phone
+        //            foreach (var doc in cdDataList)
+        //            {
+        //                mzkDocumentCollectedDetailsContractColl.Add(new MZKCourierCollectionDetailsContract()
+        //                {
+        //                    parmCaseId = doc.CaseNumber,
+        //                    parmCollectedFrom = doc.SelectedCollectedFrom,
+        //                    parmComment = doc.Comment,
+        //                    parmEmail = doc.Email,
+        //                    parmCaseServiceRecId = doc.CaseServiceRecId,
+        //                    parmContactPerson = doc.ReceivedBy,
+        //                    parmCollectedBy = doc.ReceivedBy,
+        //                    parmPosition = doc.Position,
+        //                    parmTelePhone = doc.Phone,
+        //                    // parmContactNumber
+        //                    // parmCourierSignature = doc.CRSignature.,
+        //                    parmReceivedBy = doc.ReceivedBy,
+        //                    parmDateTime = doc.ReceivedDate,
+        //                    parmContactNumber = doc.Phone
 
-                        });
-                    }
-                    if (mzkDocumentCollectedDetailsContractColl.Count>0)
-                    {
+        //                });
+        //            }
+        //            if (mzkDocumentCollectedDetailsContractColl.Count>0)
+        //            {
 
-                        var res = await _client.insertDocumentDriverCourierDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
-                        if (res != null && res.response.Any())
-                        {
-                            foreach (var cdData in cdDataList)
-                            {
-                                if (res.response.Any(a => a.parmCaseId == cdData.CaseNumber && a.parmCaseServiceRecId == cdData.CaseServiceRecId))
-                                {
-                                    await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumentCollectDetail>(cdData);
-                                }
-                            }
-                        } 
-                    }
+        //                var res = await _client.insertDocumentDriverCourierDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
+        //                if (res != null && res.response.Any())
+        //                {
+        //                    foreach (var cdData in cdDataList)
+        //                    {
+        //                        if (res.response.Any(a => a.parmCaseId == cdData.CaseNumber && a.parmCaseServiceRecId == cdData.CaseServiceRecId))
+        //                        {
+        //                            await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumentCollectDetail>(cdData);
+        //                        }
+        //                    }
+        //                } 
+        //            }
 
-            }
-            catch (Exception ex)
-            {
-                this.SendMessageToUIThread(ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.SendMessageToUIThread(ex.Message);
+        //    }
+        //}
         async public System.Threading.Tasks.Task InsertDocumentDeliveredByDriverOrCourierToSvcAsync()
         {
             try

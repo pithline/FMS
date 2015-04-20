@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="675502bd-f87c-436b-a5b6-a9fd161f0e06" Publisher="CN=mazikuser" Version="1.0.0.6" />
+  <Identity Name="675502bd-f87c-436b-a5b6-a9fd161f0e06" Publisher="CN=mazikuser" Version="1.0.0.7" />
   <mp:PhoneIdentity PhoneProductId="675502bd-f87c-436b-a5b6-a9fd161f0e06" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Eqstra.ServiceScheduling.WindowsPhone</DisplayName>
