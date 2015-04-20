@@ -20,7 +20,7 @@ namespace Eqstra.ServiceScheduling
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ImageViewerPopup : Page
+    public sealed partial class ImageViewerPopup : ContentDialog
     {
 
         public ImageViewerPopup()
@@ -28,16 +28,6 @@ namespace Eqstra.ServiceScheduling
             this.InitializeComponent();
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            var popup = this.Tag as Popup;
-            popup.IsOpen = false;
-        }
-
-        private void ScrollViewer_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            var popup = this.Tag as Popup;
-            popup.IsOpen = false;
-        }
+              
     }
 }

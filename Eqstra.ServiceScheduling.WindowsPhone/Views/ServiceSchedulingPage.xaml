@@ -89,7 +89,7 @@
                                      Date="{Binding Model.ODOReadingDt,Mode=TwoWay}"
                                      Grid.Row="1"
                                      Margin="0,2" />
-                        
+
                         <StackPanel Grid.Row="2"
                                     Orientation="Horizontal">
 
@@ -99,17 +99,17 @@
                                    Width="90"
                                    Margin="5"
                                    HorizontalAlignment="Right"
-                                  
                                    VerticalAlignment="Top">
                                 <Interactivity:Interaction.Behaviors>
                                     <Core:EventTriggerBehavior EventName="Tapped">
                                         <Core:InvokeCommandAction  Command="{Binding OpenImageViewerCommand}" />
                                     </Core:EventTriggerBehavior>
                                 </Interactivity:Interaction.Behaviors>
-                               
+
                             </Image>
                             <AppBarButton HorizontalAlignment="Left"
                                           VerticalAlignment="Center"
+                                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
                                           Icon="Camera"
                                           Command="{Binding TakePictureCommand}"
                                           CommandParameter="{Binding Model.OdoReadingImageCapture}">
@@ -253,7 +253,8 @@
                         <StackPanel Grid.Row="12"
                                     Orientation="Vertical"
                                     Visibility="{Binding IsReqVisibility}">
-                            <TextBox  Width="330" IsHitTestVisible="False"
+                            <TextBox  Width="330"
+                                      IsHitTestVisible="False"
                                       Height="120"
                                       Header="Address"
                                       TextWrapping="Wrap"

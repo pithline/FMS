@@ -130,13 +130,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-                () =>
+              async  () =>
                 {
 
-                    CoreWindow currentWindow = Window.Current.CoreWindow;
-                    Popup popup = new Popup();
-                    popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-                    popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+                  //  CoreWindow currentWindow = Window.Current.CoreWindow;
+                  //  Popup popup = new Popup();
+                  //  popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+                  //  popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
 
                     if (_imageViewer == null)
                     {
@@ -150,15 +150,16 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     }
 
                     _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
-                    popup.Child = _imageViewer;
-                    this._imageViewer.Tag = popup;
+                   // popup.Child = _imageViewer;
+                   // this._imageViewer.Tag = popup;
 
 
-                    this._imageViewer.Height = currentWindow.Bounds.Height;
-                    this._imageViewer.Width = currentWindow.Bounds.Width;
+                  //  this._imageViewer.Height = currentWindow.Bounds.Height;
+                  //  this._imageViewer.Width = currentWindow.Bounds.Width;
 
-                    popup.IsOpen = true;
+                   // popup.IsOpen = true;
 
+                    await _imageViewer.ShowAsync();
 
                 });
 
