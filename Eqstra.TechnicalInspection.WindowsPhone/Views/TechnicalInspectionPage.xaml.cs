@@ -31,8 +31,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     /// </summary>
     public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
-        ComponentsDetailPage cdp;
-
         DetailsDialog dd;
         public TechnicalInspectionPage()
         {

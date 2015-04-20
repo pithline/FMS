@@ -26,7 +26,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
-
       
     }
 }

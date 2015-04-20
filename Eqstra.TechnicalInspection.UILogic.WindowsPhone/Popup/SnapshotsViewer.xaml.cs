@@ -16,12 +16,12 @@ namespace Eqstra.TechnicalInspection.UILogic
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class SnapshotsViewer : Page
+    public sealed partial class SnapshotsViewer : ContentDialog
     {
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
-        private Popup _popup;
+
         private double ImageSize;
         public SnapshotsViewer()
         {
@@ -30,23 +30,8 @@ namespace Eqstra.TechnicalInspection.UILogic
             gestureRecognizer.CrossSliding += gestureRecognizer_CrossSliding;
 
         }
-        public void Open(MaintenanceRepair selectedMaintenanceRepair)
+        async public void Open(MaintenanceRepair selectedMaintenanceRepair)
         {
-            CoreWindow currentWindow = Window.Current.CoreWindow;
-            if (_popup == null)
-            {
-                _popup = new Popup();
-            }
-            _popup.VerticalOffset = 0;
-            _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-            _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-
-            this.Tag = _popup;
-            this.Height = currentWindow.Bounds.Height;
-            this.Width = currentWindow.Bounds.Width;
-
-            _popup.Child = this;
-            _popup.IsOpen = true;
             this.DataContext = selectedMaintenanceRepair;
             if (selectedMaintenanceRepair.IsMajorPivot)
             {
@@ -59,6 +44,7 @@ namespace Eqstra.TechnicalInspection.UILogic
                 fvSnaps.ItemsSource = selectedMaintenanceRepair.SubComponentImgList;
 
             }
+            await this.ShowAsync();
         }
         void gestureRecognizer_CrossSliding(GestureRecognizer sender, CrossSlidingEventArgs args)
         {
@@ -70,7 +56,7 @@ namespace Eqstra.TechnicalInspection.UILogic
 
                 if (((ObservableCollection<ImageCapture>)fvSnaps.ItemsSource).Any())
                 {
-                    this.Close();
+                    this.Hide();
                 }
             }
             catch (Exception ex)
@@ -79,20 +65,7 @@ namespace Eqstra.TechnicalInspection.UILogic
             }
         }
 
-        public void Close()
-        {
-            var popup = this.Tag as Popup;
-            popup.IsOpen = false;
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            var popup = this.Tag as Popup;
-            popup.IsOpen = false;
-        }
-
-
-        private void DeletePic_Click(object sender, RoutedEventArgs e)
+        private void DeletePic_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             try
             {
@@ -105,7 +78,6 @@ namespace Eqstra.TechnicalInspection.UILogic
 
             }
         }
-
         private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             try

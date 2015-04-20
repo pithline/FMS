@@ -67,7 +67,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             if (this._snapShotsPopup != null)
             {
-                this._snapShotsPopup.Close();
+                this._snapShotsPopup.Hide();
             }
             PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
             if (!PersistentData.Instance.MaintenanceRepairKVPair.ContainsKey(this.SelectedMaintenanceRepair.Repairid))

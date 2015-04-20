@@ -25,7 +25,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             _navigationService = navigationService;
             this._taskService = taskService;
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
-
+          
             this.NextCommand = new DelegateCommand(async () =>
             {
                 try
@@ -71,13 +71,16 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
 
-                ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
-                foreach (var repair in PersistentData.Instance.MaintenanceRepairKVPair.Values)
+                if (PersistentData.Instance.MaintenanceRepairKVPair!=null)
                 {
-                    mRepairList.Add(repair);
+                    ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
+                    foreach (var repair in PersistentData.Instance.MaintenanceRepairKVPair.Values)
+                    {
+                        mRepairList.Add(repair);
 
+                    }
+                    this.MaintenanceRepairList = mRepairList; 
                 }
-                this.MaintenanceRepairList = mRepairList;
             }
             catch (Exception)
             {
