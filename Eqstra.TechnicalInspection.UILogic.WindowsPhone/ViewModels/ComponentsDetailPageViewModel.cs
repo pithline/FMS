@@ -57,7 +57,14 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
           });
         }
 
-
+        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
+        {
+            if (this._snapShotsPopup != null)
+            {
+                this._snapShotsPopup.Close();
+            }
+            base.OnNavigatedFrom(viewModelState, suspending);
+        }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try

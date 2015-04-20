@@ -549,10 +549,6 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
-        <ProgressBar IsIndeterminate="True"
-                     Visibility="{Binding TaskProgressBar}"
-                     Foreground="White"
-                     VerticalAlignment="Top" />
 
         <Pivot Title="COMPONENTS DETAIL"
                SelectionChanged="TasksPivot_SelectionChanged"
@@ -571,6 +567,7 @@
                               VerticalAlignment="Center"
                               common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               SelectionMode="None"
+                              IsItemClickEnabled="True"
                               ItemsSource="{Binding SelectedMaintenanceRepair.MajorComponentImgList}">
 
                         <GridView.ItemsPanel>
@@ -595,6 +592,7 @@
                               common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
                               VerticalAlignment="Center"
                               SelectionMode="None"
+                              IsItemClickEnabled="True"
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

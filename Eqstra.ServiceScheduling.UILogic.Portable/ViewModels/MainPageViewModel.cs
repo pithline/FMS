@@ -183,17 +183,20 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo);
             ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
             ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
-            foreach (var task in tasksResult)
+            if (tasksResult!=null)
             {
-                task.Address = Regex.Replace(task.Address, ",", "\n");
-                if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                foreach (var task in tasksResult)
                 {
-                    pooltask.Add(task);
-                }
-                else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
-                {
-                    tasks.Add(task);
-                }
+                    task.Address = Regex.Replace(task.Address, ",", "\n");
+                    if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    {
+                        pooltask.Add(task);
+                    }
+                    else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
+                    {
+                        tasks.Add(task);
+                    }
+                } 
             }
             this.PoolofTasks = pooltask;
             this.Tasks = tasks;
