@@ -15,6 +15,7 @@ using System.Linq;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Eqstra.TechnicalInspection.UILogic;
+using Windows.Storage.Pickers;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Eqstra.TechnicalInspection.WindowsPhone
@@ -49,7 +50,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                     case ActivationKind.PickFileContinuation:
                         var arguments = (FileOpenPickerContinuationEventArgs)args;
                         var selectedMaintenanceRepair = PersistentData.Instance.SelectedMaintenanceRepair;
-                        StorageFile file = arguments.Files.FirstOrDefault(); 
+                        StorageFile file = arguments.Files.FirstOrDefault();
                         if (file != null)
                         {
                             await ReadFile(file, selectedMaintenanceRepair);
@@ -97,6 +98,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                           });
                     }
                 }
+
+             
             }
 
             EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);

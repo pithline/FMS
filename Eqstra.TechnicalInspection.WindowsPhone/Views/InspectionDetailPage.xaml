@@ -1,19 +1,32 @@
-﻿<ContentDialog x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.InspectionDetailDialog"
-               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-               xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
-               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-               mc:Ignorable="d"
-               xmlns:conv="using:Eqstra.TechnicalInspection.Converters"
-               Title="INSPECTION DETAIL"
-               PrimaryButtonText="ok"
-               SecondaryButtonText="cancel"
-               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-               SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
-    <ContentDialog.Resources>
+﻿<prism:VisualStateAwarePage x:Class="Eqstra.TechnicalInspection.WindowsPhone.Views.InspectionDetailPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:local="using:Eqstra.TechnicalInspection.WindowsPhone.Views"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
+                            xmlns:conv="using:Eqstra.TechnicalInspection.Converters"
+                            xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
+                            xmlns:common="using:Eqstra.TechnicalInspection.Common"
+                            xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+                            xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+                            mvvm:ViewModelLocator.AutoWireViewModel="True">
+    <prism:VisualStateAwarePage.Resources>
         <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter" />
-    </ContentDialog.Resources>
+    </prism:VisualStateAwarePage.Resources>
+    <prism:VisualStateAwarePage.BottomAppBar>
+        <CommandBar Visibility="{Binding AppBarVisibility}">
+            <CommandBar.PrimaryCommands>
+
+                <AppBarButton Label="Complete"
+                              Icon="Accept"
+                              Command="{Binding CompleteCommand}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </prism:VisualStateAwarePage.BottomAppBar>
+
+
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <Grid>
             <Grid.RowDefinitions>
@@ -71,4 +84,4 @@
                      VerticalAlignment="Center" />
         </Grid>
     </ScrollViewer>
-</ContentDialog>
+</prism:VisualStateAwarePage>

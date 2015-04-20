@@ -15,5 +15,7 @@ namespace Eqstra.TechnicalInspection.UILogic
         }
         public ObservableCollection<TITask> PoolofTasks { get; set; }
         public MaintenanceRepair SelectedMaintenanceRepair { get; set; }
+
+        public System.Collections.Generic.List<ImageCapture> ImageCaptureList { get; set; }
     }
 }

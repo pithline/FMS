@@ -35,14 +35,10 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="ViewAll"
-                              Name="ViewAll"
-                              Label="ViewAll"
-                              Click="ViewAll_Click" />
                 
-                <AppBarButton Label="Complete"
-                              Icon="Accept"
-                              Command="{Binding CompleteCommand}" />
+                <AppBarButton Label="Next"
+                              Icon="Next"
+                              Command="{Binding NextCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments"

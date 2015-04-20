@@ -8,50 +8,41 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Storage;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
-    public class TechnicalInspectionPageViewModel : ViewModel
+    public class InspectionDetailPageViewModel : ViewModel
     {
+
+        private TITask _task;
         private INavigationService _navigationService;
         private ITaskService _taskService;
-        public TechnicalInspectionPageViewModel(INavigationService navigationService, ITaskService taskService)
+        public InspectionDetailPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
-            _navigationService = navigationService;
+            this._navigationService = navigationService;
             this._taskService = taskService;
-            this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
-
-            this.NextCommand = new DelegateCommand(async () =>
+            this.Model = new TIData();
+            CompleteCommand = new DelegateCommand(async () =>
             {
                 try
                 {
+                    this.SelectedTask.Status = Eqstra.BusinessLogic.Portable.SSModels.DriverTaskStatus.Completed;
 
-                    List<ImageCapture> imageCaptureList = new List<ImageCapture>();
-                    foreach (var item in this.MaintenanceRepairList)
-                    {
-                        if (item.MajorComponentImgList.Any())
-                        {
-                            imageCaptureList.AddRange(item.MajorComponentImgList);
-                        }
-                        if (item.SubComponentImgList.Any())
-                        {
-                            imageCaptureList.AddRange(item.SubComponentImgList);
-                        }
-
-                    }
-                    PersistentData.Instance.ImageCaptureList = imageCaptureList;
-
-                    _navigationService.Navigate("InspectionDetail", string.Empty);
-
+                    var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, PersistentData.Instance.ImageCaptureList, UserInfo.CompanyId);
                 }
                 catch (Exception ex)
                 {
                 }
+                finally
+                {
+                    _navigationService.Navigate("Main", string.Empty);
+                }
+
             });
 
         }
@@ -78,15 +69,15 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-        private ObservableCollection<MaintenanceRepair> maintenanceRepairList;
-        public ObservableCollection<MaintenanceRepair> MaintenanceRepairList
-        {
-            get { return maintenanceRepairList; }
-            set { SetProperty(ref maintenanceRepairList, value); }
-        }
-
         public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
+        private TIData model;
+
+        public TIData Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
-        public DelegateCommand NextCommand { get; set; }
+        public DelegateCommand CompleteCommand { get; set; }
     }
 }

@@ -164,17 +164,18 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         public async System.Threading.Tasks.Task FetchTasks()
         {
             this.TaskProgressBar = Visibility.Visible;
-
+            ObservableCollection<TITask> poolofTask = new ObservableCollection<TITask>();
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
-            if (tasksResult!=null)
+            if (tasksResult != null)
             {
                 foreach (var task in tasksResult)
                 {
                     task.Address = Regex.Replace(task.Address, ",", "\n");
-                    this.PoolofTasks.Add(task);
-                } 
+                    poolofTask.Add(task);
+                }
             }
 
+            this.PoolofTasks = poolofTask;
             this.TaskProgressBar = Visibility.Collapsed;
 
             PersistentData.Instance.PoolofTasks = this.PoolofTasks;

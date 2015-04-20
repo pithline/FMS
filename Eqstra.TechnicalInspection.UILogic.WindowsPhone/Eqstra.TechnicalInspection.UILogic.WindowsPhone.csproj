@@ -114,6 +114,7 @@
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\ComponentsDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\InspectionDetailPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\TechnicalInspectionPageViewModel.cs" />

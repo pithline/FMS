@@ -103,8 +103,8 @@
     <Compile Include="Views\ComponentsDetailPage.xaml.cs">
       <DependentUpon>ComponentsDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InspectionDetailDialog.xaml.cs">
-      <DependentUpon>InspectionDetailDialog.xaml</DependentUpon>
+    <Compile Include="Views\InspectionDetailPage.xaml.cs">
+      <DependentUpon>InspectionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -232,7 +232,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\InspectionDetailDialog.xaml">
+    <Page Include="Views\InspectionDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

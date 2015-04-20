@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Windows.ApplicationModel.Activation;
 using Windows.Storage.Pickers;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
@@ -23,6 +24,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             TakeSnapshotCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 FileOpenPicker openPicker = new FileOpenPicker();
+                openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
                 openPicker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
                 openPicker.FileTypeFilter.Add(".bmp");
                 openPicker.FileTypeFilter.Add(".png");
@@ -56,7 +58,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
               _snapShotsPopup.Open(this.SelectedMaintenanceRepair);
           });
         }
-
+  
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
         {
             if (this._snapShotsPopup != null)

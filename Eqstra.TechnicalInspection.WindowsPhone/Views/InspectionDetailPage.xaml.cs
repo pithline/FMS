@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.StoreApps;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,19 +19,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 {
-    public sealed partial class InspectionDetailDialog : ContentDialog
+    public sealed partial class InspectionDetailPage : VisualStateAwarePage
     {
-        public InspectionDetailDialog()
+        public InspectionDetailPage()
         {
             this.InitializeComponent();
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-        }
+      
     }
 }
