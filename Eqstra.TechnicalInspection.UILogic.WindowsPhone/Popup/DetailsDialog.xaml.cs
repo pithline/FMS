@@ -9,11 +9,7 @@ namespace Eqstra.TechnicalInspection
         public DetailsDialog()
         {
             this.InitializeComponent();
-        }
-        private void home_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            this.Hide();
-        }
+        }     
 
     }
 }

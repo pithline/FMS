@@ -306,7 +306,7 @@
 
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"
-                                    Grid.Row="20">
+                                    Grid.Row="20" >
 
                             <ComboBox  Width="290"
                                        Header="Select Supplier"
