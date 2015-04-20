@@ -22,6 +22,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public ComponentsDetailPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.vm = (ComponentsDetailPageViewModel)this.DataContext;
         }
 

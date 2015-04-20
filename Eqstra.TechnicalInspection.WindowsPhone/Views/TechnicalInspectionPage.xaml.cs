@@ -37,6 +37,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

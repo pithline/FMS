@@ -6,9 +6,11 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage.Pickers;
+using System.Linq;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -21,6 +23,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
+            PersistentData.Instance.MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
             TakeSnapshotCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 FileOpenPicker openPicker = new FileOpenPicker();
@@ -41,6 +44,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(repair =>
                 {
                     this.SelectedMaintenanceRepair = repair;
+
                 });
 
 
@@ -58,12 +62,21 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
               _snapShotsPopup.Open(this.SelectedMaintenanceRepair);
           });
         }
-  
+
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
         {
             if (this._snapShotsPopup != null)
             {
                 this._snapShotsPopup.Close();
+            }
+            PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
+            if (!PersistentData.Instance.MaintenanceRepairKVPair.ContainsKey(this.SelectedMaintenanceRepair.Repairid))
+            {
+                PersistentData.Instance.MaintenanceRepairKVPair.Add(this.SelectedMaintenanceRepair.Repairid, this.SelectedMaintenanceRepair);
+            }
+            else
+            {
+                PersistentData.Instance.MaintenanceRepairKVPair[this.SelectedMaintenanceRepair.Repairid] = this.SelectedMaintenanceRepair;
             }
             base.OnNavigatedFrom(viewModelState, suspending);
         }
@@ -73,6 +86,10 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.SelectedMaintenanceRepair = JsonConvert.DeserializeObject<MaintenanceRepair>(navigationParameter.ToString());
+                if (PersistentData.Instance.MaintenanceRepairKVPair != null && PersistentData.Instance.MaintenanceRepairKVPair.Any())
+                {
+                    this.SelectedMaintenanceRepair = PersistentData.Instance.MaintenanceRepairKVPair.Values.FirstOrDefault(f => f.Repairid == this.SelectedMaintenanceRepair.Repairid);
+                }
             }
             catch (Exception ex)
             {

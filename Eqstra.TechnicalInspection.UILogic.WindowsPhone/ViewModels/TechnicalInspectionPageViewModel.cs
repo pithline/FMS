@@ -71,6 +71,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
 
+                ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
+                foreach (var repair in PersistentData.Instance.MaintenanceRepairKVPair.Values)
+                {
+                    mRepairList.Add(repair);
+
+                }
+                this.MaintenanceRepairList = mRepairList;
             }
             catch (Exception)
             {

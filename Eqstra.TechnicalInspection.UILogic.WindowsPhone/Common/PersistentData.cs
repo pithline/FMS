@@ -1,6 +1,7 @@
 ﻿
 using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.BusinessLogic.Portable.TIModels;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Eqstra.TechnicalInspection.UILogic
@@ -15,7 +16,7 @@ namespace Eqstra.TechnicalInspection.UILogic
         }
         public ObservableCollection<TITask> PoolofTasks { get; set; }
         public MaintenanceRepair SelectedMaintenanceRepair { get; set; }
-
+        public Dictionary<long, MaintenanceRepair> MaintenanceRepairKVPair { get; set; }
         public System.Collections.Generic.List<ImageCapture> ImageCaptureList { get; set; }
     }
 }
