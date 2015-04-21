@@ -37,7 +37,7 @@
             <CommandBar.PrimaryCommands>
                 
                 <AppBarButton Label="Next"
-                              Icon="Next"
+                              Icon="Forward"
                               Command="{Binding NextCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>

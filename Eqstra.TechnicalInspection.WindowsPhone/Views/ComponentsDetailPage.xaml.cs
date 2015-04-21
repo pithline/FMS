@@ -22,8 +22,16 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public ComponentsDetailPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.vm = (ComponentsDetailPageViewModel)this.DataContext;
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            var b = Window.Current.Bounds;
+            ImagesPivot.Width = b.Width;
         }
 
         private void TasksPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)

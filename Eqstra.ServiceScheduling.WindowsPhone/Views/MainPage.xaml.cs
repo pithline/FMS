@@ -46,6 +46,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            var b = Window.Current.Bounds;
+            TasksPivot.Width = b.Width;
         }
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
@@ -193,7 +200,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             dd.DataContext = this.vm.InspectionTask;
             await dd.ShowAsync();
         }
-    
+
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
         {

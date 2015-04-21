@@ -79,9 +79,9 @@
             <Setter Property="Margin"
                     Value="5" />
             <Setter Property="Height"
-                    Value="150" />
+                    Value="170" />
             <Setter Property="Width"
-                    Value="150" />
+                    Value="170" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewItem">
@@ -628,33 +628,32 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
-    <Hub>
-        <HubSection Header="TASKS" Margin="0,15,0,0">
-            <DataTemplate>
-                <Grid>
-                    <ProgressBar IsIndeterminate="True"
-                                 Visibility="{Binding TaskProgressBar}"
-                                 Foreground="White"
-                                 VerticalAlignment="Top" />
+    <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="TASKS"
+                   FontSize="40" />
 
+        <ProgressBar IsIndeterminate="True"
+                     Visibility="{Binding TaskProgressBar}"
+                     Foreground="White"
+                     VerticalAlignment="Top" />
 
-                    <GridView HorizontalAlignment="Center"
-                              ItemTemplate="{StaticResource TasksTemplate}"
-                              ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Top"
-                              SelectionMode="None"
-                              IsHoldingEnabled="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick"
-                              SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
-                              ItemsSource="{Binding PoolofTasks}">
-                    </GridView>
-                </Grid>
-
-            </DataTemplate>
-        </HubSection>
-    </Hub>
-
+        <GridView HorizontalAlignment="Center"
+                  Grid.Row="1"
+                  ItemTemplate="{StaticResource TasksTemplate}"
+                  ItemContainerStyle="{StaticResource GridViewItemStyle1}"
+                  VerticalAlignment="Top"
+                  SelectionMode="None"
+                  IsHoldingEnabled="True"
+                  IsItemClickEnabled="True"
+                  ItemClick="GridView_ItemClick"
+                  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
+                  ItemsSource="{Binding PoolofTasks}">
+        </GridView>
+    </Grid>
 
 </prism:VisualStateAwarePage>
