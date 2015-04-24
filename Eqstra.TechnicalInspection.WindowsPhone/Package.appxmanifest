@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="68fe721c-eb3d-4f9f-82c3-321f1c3eece6" Publisher="CN=mazikuser" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="68fe721c-eb3d-4f9f-82c3-321f1c3eece6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="AACE4B69.EqstraTechnicalInspection" Publisher="CN=280C52B9-43DE-43B0-AD89-373310221C44" Version="1.1.0.4" />
+  <mp:PhoneIdentity PhoneProductId="b539fdc0-8e76-44ed-a562-831fb184d450" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Eqstra.TechnicalInspection.WindowsPhone</DisplayName>
-    <PublisherDisplayName>mazikuser</PublisherDisplayName>
+    <DisplayName>Eqstra Technical Inspection</DisplayName>
+    <PublisherDisplayName>Mazik Global Inc.</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,8 +15,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.TechnicalInspection.WindowsPhone.App">
-      <m3:VisualElements DisplayName="Technical Inspection" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Eqstra.TechnicalInspection.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.TI">
+      <m3:VisualElements DisplayName="Technical Inspection" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Eqstra.TI" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />

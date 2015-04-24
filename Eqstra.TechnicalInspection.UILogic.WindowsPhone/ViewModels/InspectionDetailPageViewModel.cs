@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable;
+﻿using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
@@ -31,9 +32,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 try
                 {
-                    this.SelectedTask.Status = Eqstra.BusinessLogic.Portable.SSModels.DriverTaskStatus.Completed;
-
-                    var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, PersistentData.Instance.ImageCaptureList, UserInfo.CompanyId);
+                    var imageCaptureList = await Util.ReadFromDiskAsync<List<ImageCapture>>("ImageCaptureList");
+                    var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
                 }
                 catch (Exception ex)
                 {

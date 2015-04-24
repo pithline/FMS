@@ -55,12 +55,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
                 navigationService.Navigate("TechnicalInspection", string.Empty);
             });
-
-            this.OpenSnapshotViewerCommand = new DelegateCommand(() =>
-          {
-              _snapShotsPopup = new SnapshotsViewer();
-              _snapShotsPopup.Open(this.SelectedMaintenanceRepair);
-          });
+          
         }
 
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)

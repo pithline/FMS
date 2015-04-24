@@ -6,8 +6,6 @@
                xmlns:local="using:Eqstra.TechnicalInspection.UILogic"
                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-               PrimaryButtonClick="DeletePic_Click"
-               PrimaryButtonText="Delete"
                mc:Ignorable="d">
 
     <Grid x:Name="accentGrid"
@@ -19,14 +17,20 @@
             <Viewbox>
                 <FlipView x:Name="fvSnaps"
                           VerticalAlignment="Stretch"
+                          UseTouchAnimationsForAllNavigation="True"
                           HorizontalAlignment="Stretch">
                     <FlipView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImageBitmap}"
-                                   Stretch="UniformToFill">
+                            <Image ManipulationMode="TranslateX,TranslateY"
+                                   Source="{Binding ImageBitmap}"
+                                   Stretch="UniformToFill"
+                                   ManipulationStarting="Image_ManipulationStarting"
+                                   ManipulationCompleted="Image_ManipulationCompleted"
+                                   ManipulationDelta="Image_ManipulationDelta">
                                 <Image.RenderTransform>
-                                    <CompositeTransform />
+                                    <TranslateTransform />
                                 </Image.RenderTransform>
+
                             </Image>
                         </DataTemplate>
                     </FlipView.ItemTemplate>

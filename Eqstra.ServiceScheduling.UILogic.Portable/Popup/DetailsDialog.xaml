@@ -10,279 +10,333 @@
     <Grid>
         <Pivot Title="DETAIL"
                Grid.Row="1">
-            <PivotItem Header="Task Detail">
-                <ScrollViewer>
-                    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+            <PivotItem Header="task detail">
 
-                        <StackPanel Orientation="Vertical"
-                                    Margin="2">
-                            <TextBlock Text="Regi. Number"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding RegistrationNumber}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                <ScrollViewer  ScrollViewer.IsScrollInertiaEnabled="True"
+                               x:Name="scrlViewTask"
+                               ScrollViewer.IsVerticalRailEnabled="True"
+                               ScrollViewer.IsDeferredScrollingEnabled="False"
+                               ScrollViewer.VerticalScrollMode="Enabled"
+                               ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Made By"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Make}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            </Grid.RowDefinitions>
 
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Regi. Number"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding RegistrationNumber}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="1"
-                                    Margin="2">
-                            <TextBlock Text="Model"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Model}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Description"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Description}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="1"
+                                        Margin="2">
+                                <TextBlock Text="Made By"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Make}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="2"
-                                    Margin="2">
-                            <TextBlock Text="Model Year"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock  Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="2"
+                                        Margin="2">
+                                <TextBlock Text="Model"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Model}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Driver Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding DriverFirstName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="3"
-                                    Margin="2">
-                            <TextBlock Text="Status Due Date"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding StatusDueDate}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Confirmed Date"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding ConfirmedDate}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="3"
+                                        Margin="2">
+                                <TextBlock Text="Description"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Description}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="4"
-                                    Margin="2">
-                            <TextBlock Text="Customer Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CustomerName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="4"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Model Year"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock  Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Contact Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CustomerName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="5"
+                                        Margin="2">
+                                <TextBlock Text="Driver Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding DriverFirstName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="5"
-                                    Margin="2">
-                            <TextBlock Text="Address"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Address}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="6"
+                                        Margin="2">
+                                <TextBlock Text="Status Due Date"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding StatusDueDate}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Status"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Status}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="7"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Confirmed Date"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding ConfirmedDate}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="6"
-                                    Margin="2">
-                            <TextBlock Text="Email"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CusEmailId}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Case Number"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CaseNumber}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-                    </Grid>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="8"
+                                        Margin="2">
+                                <TextBlock Text="Customer Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CustomerName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="9"
+                                        Margin="2">
+                                <TextBlock Text="Contact Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CustomerName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="10"
+                                        Margin="2">
+                                <TextBlock Text="Address"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Address}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="11"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Status"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Status}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="12"
+                                        Margin="2">
+                                <TextBlock Text="Email"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CusEmailId}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="13"
+                                        Margin="2">
+                                <TextBlock Text="Case Number"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CaseNumber}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
                 </ScrollViewer>
+
             </PivotItem>
 
-            <PivotItem Header="Customer Detail">
-                <ScrollViewer>
+            <PivotItem Header="customer detail">
 
-                    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <ScrollViewer ScrollViewer.IsScrollInertiaEnabled="True"
+                              x:Name="scrlViewCust"
+                              ScrollViewer.IsDeferredScrollingEnabled="False"
+                              ScrollViewer.IsVerticalRailEnabled="True"
+                              ScrollViewer.VerticalScrollMode="Enabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
 
-                        <StackPanel Orientation="Vertical"
-                                    Margin="2">
-                            <TextBlock Text="Case Number"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CaseNumber}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Customer Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CustomerName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Case Number"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CaseNumber}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="1"
-                                    Margin="2">
-                            <TextBlock Text="Case Type"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding CaseType}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Contact Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding ContactName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="2"
-                                    Margin="2">
-                            <TextBlock Text="Address"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Address}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Contact Number"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Contact Number}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="3"
-                                    Margin="2">
-                            <TextBlock Text="Status Due Date"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding StatusDueDate}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Confirmed Date"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding ConfirmedDate}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="1"
+                                        Margin="2">
+                                <TextBlock Text="Customer Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CustomerName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="4"
-                                    Margin="2">
-                            <TextBlock Text="Status"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding Status}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="2"
+                                        Margin="2">
+                                <TextBlock Text="Case Type"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CaseType}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Margin="2">
-                            <TextBlock Text="Contact Name"
-                                       Style="{StaticResource TextContentStyle}" />
-                            <TextBlock Text="{Binding ContactName}"
-                                       Style="{StaticResource InfoBoxTitleStyle}" />
-                        </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="3"
+                                        Margin="2">
+                                <TextBlock Text="Contact Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding ContactName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="4"
+                                        Margin="2">
+                                <TextBlock Text="Address"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Address}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="5"
+                                        Margin="2">
+                                <TextBlock Text="Contact Number"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CustPhone}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="6"
+                                        Margin="2">
+                                <TextBlock Text="Status Due Date"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding StatusDueDate}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="7"
+                                        Margin="2">
+                                <TextBlock Text="Confirmed Date"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding ConfirmedDate}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
 
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="8"
+                                        Margin="2">
+                                <TextBlock Text="Status"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding Status}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
-                    </Grid>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="9"
+                                        HorizontalAlignment="Center"
+                                        Margin="2">
+                                <TextBlock Text="Contact Name"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding ContactName}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
 
+                        </Grid>
+                    </StackPanel>
                 </ScrollViewer>
 
             </PivotItem>

@@ -23,10 +23,10 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services
         }
 
 
-    
-async public Task<ObservableCollection<TITask>> GetTasksAsync(string userId, string companyId)
-{
-  try
+
+        async public Task<ObservableCollection<TITask>> GetTasksAsync(string userId, string companyId)
+        {
+            try
             {
 
                 var postData = new { target = "TechnicalInspection", parameters = new[] { "GetTasks", userId, companyId } };
@@ -44,29 +44,29 @@ async public Task<ObservableCollection<TITask>> GetTasksAsync(string userId, str
                 new MessageDialog(ex.Message).ShowAsync();
                 return null;
             }
-}
-
-async public Task<bool> InsertInspectionDataAsync(List<TIData> tiData, BusinessLogic.Portable.TIModels.Task task, List<ImageCapture> imageCaptureList, string companyId)
-{
-    try
-    {
-        var postData = new { target = "TechnicalInspection", method = "save", parameters = new[] { "InsertInspectionData", JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(tiData), Newtonsoft.Json.JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(imageCaptureList), companyId } };
-        var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-        response.EnsureSuccessStatusCode();
-        if (response.IsSuccessStatusCode)
-        {
-
-            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
 
-    }
-    catch (Exception ex)
-    {
-        new MessageDialog(ex.Message).ShowAsync();
+        async public Task<bool> InsertInspectionDataAsync(List<TIData> tiData, BusinessLogic.Portable.TIModels.Task task, List<ImageCapture> imageCaptureList, string companyId)
+        {
+            try
+            {
+                var postData = new { target = "TechnicalInspection", method = "save", parameters = new[] { "InsertInspectionData", JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(tiData), Newtonsoft.Json.JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(imageCaptureList), companyId } };
+                var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
 
+                    return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                new MessageDialog(ex.Message).ShowAsync();
+
+            }
+            return false;
+        }
     }
-    return false;
-}
-}
 
 }

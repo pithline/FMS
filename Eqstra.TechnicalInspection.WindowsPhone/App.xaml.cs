@@ -55,7 +55,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                         {
                             await ReadFile(file, selectedMaintenanceRepair);
                         }
-
                         break;
                 }
             }
@@ -86,7 +85,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                         selectedMaintenanceRepair.MajorComponentImgList.Add(new ImageCapture
                          {
                              ImageBitmap = bitmap,
-                             ImageData = Convert.ToBase64String(fileBytes)
+                             ImageData = Convert.ToBase64String(fileBytes),
+                             guid = Guid.NewGuid()
                          });
                     }
                     else
@@ -94,7 +94,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                         selectedMaintenanceRepair.SubComponentImgList.Add(new ImageCapture
                           {
                               ImageBitmap = bitmap,
-                              ImageData = Convert.ToBase64String(fileBytes)
+                              ImageData = Convert.ToBase64String(fileBytes),
+                              guid = Guid.NewGuid()
                           });
                     }
                 }

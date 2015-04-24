@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable;
+﻿using Eqstra.BusinessLogic.Helpers;
+using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
@@ -25,7 +26,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             _navigationService = navigationService;
             this._taskService = taskService;
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
-          
+
             this.NextCommand = new DelegateCommand(async () =>
             {
                 try
@@ -44,7 +45,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                         }
 
                     }
-                    PersistentData.Instance.ImageCaptureList = imageCaptureList;
+                    await Util.WriteToDiskAsync<List<ImageCapture>>(imageCaptureList, "ImageCaptureList");
+
 
                     _navigationService.Navigate("InspectionDetail", string.Empty);
 
@@ -71,7 +73,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
 
-                if (PersistentData.Instance.MaintenanceRepairKVPair!=null)
+                if (PersistentData.Instance.MaintenanceRepairKVPair != null)
                 {
                     ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
                     foreach (var repair in PersistentData.Instance.MaintenanceRepairKVPair.Values)
@@ -79,7 +81,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                         mRepairList.Add(repair);
 
                     }
-                    this.MaintenanceRepairList = mRepairList; 
+                    this.MaintenanceRepairList = mRepairList;
                 }
             }
             catch (Exception)

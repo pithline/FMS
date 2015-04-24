@@ -41,13 +41,13 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             ((ServiceSchedulingPageViewModel)this.DataContext)._busyIndicator.Close();
-            if (sp!=null)
+            if (sp != null)
             {
-                sp.Hide(); 
+                sp.Hide();
             }
-            if (moreInfo!=null)
+            if (moreInfo != null)
             {
-                moreInfo.Hide(); 
+                moreInfo.Hide();
             }
 
         }
@@ -68,27 +68,49 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
         }
-      async  private void More_Click(object sender, RoutedEventArgs e)
+        async private void More_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             moreInfo = new DetailsDialog();
             moreInfo.DataContext = vm.SelectedTask;
-           await moreInfo.ShowAsync();
+            await moreInfo.ShowAsync();
         }
         private async void Calendar_Click(object sender, RoutedEventArgs e)
         {
             await AppointmentManager.ShowTimeFrameAsync(DateTime.Today, TimeSpan.FromDays(7));
         }
 
-       async private void filterSup_Click(object sender, RoutedEventArgs e)
+        async private void filterSup_Click(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
             if (vm != null)
             {
                 sp = new SearchSupplierDialog(vm._locationService, vm._eventAggregator, vm._supplierService);
                 sp.ShowAsync();
-              
+
             }
+        }
+
+        async private void ddLocationType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var vm = this.DataContext as ServiceSchedulingPageViewModel;
+            if (vm != null)
+            {
+                if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
+                {
+                    vm.DestinationTypes = await vm._serviceDetailService.GetDestinationTypeList(vm.Model.SelectedLocationType.LocType, vm.SelectedTask.CustomerId, vm.UserInfo);
+                }
+            }
+        }
+
+        private void ddDestinationTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var vm = this.DataContext as ServiceSchedulingPageViewModel;
+            if (vm != null)
+            {
+                vm.Model.Address = vm.Model.SelectedDestinationType.Address;
+            }
+
         }
 
     }

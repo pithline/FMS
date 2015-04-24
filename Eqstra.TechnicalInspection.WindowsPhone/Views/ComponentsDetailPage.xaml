@@ -567,7 +567,7 @@
                               HorizontalContentAlignment="Stretch"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
                               VerticalAlignment="Top"
-                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
+                              ItemClick="GridView_ItemClick"
                               SelectionMode="None"
                               IsItemClickEnabled="True"
                               ItemsSource="{Binding SelectedMaintenanceRepair.MajorComponentImgList}">
@@ -587,7 +587,7 @@
                     <GridView HorizontalAlignment="Stretch"
                               HorizontalContentAlignment="Stretch"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
+                              ItemClick="GridView_ItemClick"
                               VerticalAlignment="Top"
                               SelectionMode="None"
                               IsItemClickEnabled="True"

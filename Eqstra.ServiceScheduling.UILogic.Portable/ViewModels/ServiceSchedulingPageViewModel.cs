@@ -41,7 +41,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private AddressDialog _addressDialog;
         private ImageViewerPopup _imageViewer;
         private INavigationService _navigationService;
-        private IServiceDetailService _serviceDetailService;
+        public IServiceDetailService _serviceDetailService;
         public BusyIndicator _busyIndicator;
 
         private ITaskService _taskService;
@@ -189,6 +189,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.AddCommand = new DelegateCommand(async () => {
                 _addressDialog = new AddressDialog(this._locationService,this._eventAggregator);
+                this.Model.SelectedDestinationType=new DestinationType();
                 _addressDialog.ShowAsync();
             });
 
@@ -331,11 +332,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
                     this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
                 }
-                if (SelectedTask != null)
-                {
-                    this.DestinationTypes = await _serviceDetailService.GetDestinationTypeList("Vendor", SelectedTask.CustomerId, this.UserInfo);
-                }
-
+             
 
                 if (this.Model == null)
                 {

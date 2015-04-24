@@ -8,6 +8,10 @@ namespace Eqstra.TechnicalInspection.UILogic
 {
     public class PersistentData
     {
+        private PersistentData()
+        {
+
+        }
         private static PersistentData _instance = new PersistentData();
         public static PersistentData Instance { get { return _instance; } }
         public static void RefreshInstance()
@@ -17,6 +21,5 @@ namespace Eqstra.TechnicalInspection.UILogic
         public ObservableCollection<TITask> PoolofTasks { get; set; }
         public MaintenanceRepair SelectedMaintenanceRepair { get; set; }
         public Dictionary<long, MaintenanceRepair> MaintenanceRepairKVPair { get; set; }
-        public System.Collections.Generic.List<ImageCapture> ImageCaptureList { get; set; }
     }
 }

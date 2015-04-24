@@ -25,7 +25,6 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         public String ContactName { get; set; }
 
         public string ConfirmedDate { get; set; }
-
         public Int64 VehicleInsRecId { get; set; }
 
         public string StatusDueDate { get; set; }
