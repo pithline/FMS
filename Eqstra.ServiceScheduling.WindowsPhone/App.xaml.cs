@@ -53,7 +53,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
                         var arguments = (FileOpenPickerContinuationEventArgs)args;
 
                         var serviceSchedulingDetail = PersistentData.Instance.ServiceSchedulingDetail;
-                        StorageFile file = arguments.Files.FirstOrDefault(); 
+                        StorageFile file = arguments.Files.FirstOrDefault();
                         if (file != null)
                         {
                             await ReadFile(file, serviceSchedulingDetail);
@@ -82,12 +82,12 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
                     {
                         serviceSchedulingDetail = new ServiceSchedulingDetail();
                     }
-
                     serviceSchedulingDetail.OdoReadingImageCapture = new ImageCapture
                         {
                             ImageBitmap = bitmap,
                             ImageBinary = Convert.ToBase64String(fileBytes),
                         };
+                    serviceSchedulingDetail.ODOReadingSnapshot = Convert.ToBase64String(fileBytes);
                 }
             }
 
@@ -153,7 +153,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
 
         protected override System.Threading.Tasks.Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-           
+
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.ACCESSTOKEN))
             {
                 var accessToken = JsonConvert.DeserializeObject<AccessToken>(ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN].ToString());

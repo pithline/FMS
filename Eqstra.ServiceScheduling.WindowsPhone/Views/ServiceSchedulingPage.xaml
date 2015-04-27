@@ -219,7 +219,8 @@
 
                         <ComboBox ItemsSource="{Binding Model.LocationTypes}"
                                   Grid.Row="10"
-                                  BorderBrush="{Binding LtBorderBrush}" SelectionChanged="ddLocationType_SelectionChanged"
+                                  BorderBrush="{Binding LtBorderBrush}"
+                                  SelectionChanged="ddLocationType_SelectionChanged"
                                   Header="Location Types"
                                   DisplayMemberPath="LocationName"
                                   Visibility="{Binding IsReqVisibility}"
@@ -234,8 +235,9 @@
 
 
 
-                        <ComboBox Grid.Row="11" 
-                                  Header="Destination Types" SelectionChanged="ddDestinationTypes_SelectionChanged"
+                        <ComboBox Grid.Row="11"
+                                  Header="Destination Types"
+                                  SelectionChanged="ddDestinationTypes_SelectionChanged"
                                   Visibility="{Binding IsReqVisibility}"
                                   ItemsSource="{Binding DestinationTypes}"
                                   BorderBrush="{Binding DtBorderBrush}"
@@ -251,9 +253,9 @@
 
 
                         <StackPanel Grid.Row="12"
-                                    Orientation="Vertical"
+                                    Orientation="Horizontal"
                                     Visibility="{Binding IsReqVisibility}">
-                            <TextBox  Width="330"
+                            <TextBox  Width="290"
                                       IsHitTestVisible="False"
                                       Height="120"
                                       Header="Address"
@@ -268,23 +270,19 @@
                                       IsTextPredictionEnabled="True"
                                       AcceptsReturn="True" />
 
-                            <StackPanel Orientation="Horizontal">
-                                <AppBarButton Icon="Add"
-                                              HorizontalAlignment="Left"
-                                              Label="Add"
-                                              Command="{Binding AddCommand}" />
+                            <AppBarButton Icon="Add"
+                                          IsCompact="True"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Label="Add"
+                                          Command="{Binding AddCommand}" />
 
-                                <AppBarButton Icon="Clear"
-                                              HorizontalAlignment="Right"
-                                              Label="Clear"
-                                              Command="{Binding ClearCommand}" />
-                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
                                     Grid.Row="16"
                                     Grid.RowSpan="2">
-                            <TextBox  Width="280"
+                            <TextBox  Width="290"
                                       Header="Additional Work"
                                       Height="120"
                                       Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
@@ -302,8 +300,6 @@
                                           Label="Microphone"
                                           Command="{Binding VoiceCommand}" />
                         </StackPanel>
-
-
 
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"

@@ -24,10 +24,10 @@ namespace Eqstra.ServiceScheduling
         private double originalY;
         private double originalX;
         private Image img;
-     
+        private ServiceSchedulingDetail _model;
         private IEventAggregator _eventAggregator;
 
-        public ImageViewerPopup(IEventAggregator eventAggregator)
+        public ImageViewerPopup(IEventAggregator eventAggregator, ServiceSchedulingDetail model)
         {
             this.InitializeComponent();
             this._eventAggregator = eventAggregator;
@@ -47,6 +47,7 @@ namespace Eqstra.ServiceScheduling
             {
                 datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
                 isImageDeleted = true;
+                _model.ODOReadingSnapshot = string.Empty;
                 this.Hide();
                 this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
             }
@@ -54,8 +55,9 @@ namespace Eqstra.ServiceScheduling
             {
                 datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
                 isImageDeleted = true;
+                _model.ODOReadingSnapshot = string.Empty;
                 this.Hide();
-                this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
+                this._eventAggregator.GetEvent<ServiceSchedulingDetailEvent>().Publish(_model);
             }
 
         }
@@ -66,7 +68,6 @@ namespace Eqstra.ServiceScheduling
             {
                 ct.X = originalX;
                 ct.Y = originalY;
-
                 e.Handled = true;
             }
         }
@@ -75,7 +76,6 @@ namespace Eqstra.ServiceScheduling
         {
             Image img = sender as Image;
             ct = img.RenderTransform as TranslateTransform;
-
             originalX = ct.X;
             originalY = ct.Y;
 

@@ -94,12 +94,23 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         async private void ddLocationType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var vm = this.DataContext as ServiceSchedulingPageViewModel;
-            if (vm != null)
+            try
             {
-                if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
+
+                vm._busyIndicator.Open("Please wait,loading destination types ...");
+                if (vm != null)
                 {
-                    vm.DestinationTypes = await vm._serviceDetailService.GetDestinationTypeList(vm.Model.SelectedLocationType.LocType, vm.SelectedTask.CustomerId, vm.UserInfo);
+                    if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
+                    {
+                        vm.DestinationTypes = await vm._serviceDetailService.GetDestinationTypeList(vm.Model.SelectedLocationType.LocType, vm.SelectedTask.CustomerId, vm.UserInfo);
+                    }
                 }
+                vm._busyIndicator.Close();
+            }
+            catch (Exception)
+            {
+                vm._busyIndicator.Close();
+
             }
         }
 

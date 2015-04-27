@@ -74,7 +74,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy HH:mm");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy HH:mm");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy HH:mm");
-
                        bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, this.UserInfo);
                        if (response)
                        {
@@ -145,13 +144,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                   if (_imageViewer == null)
                   {
-                      _imageViewer = new ImageViewerPopup(this._eventAggregator);
+                      _imageViewer = new ImageViewerPopup(this._eventAggregator,this.Model);
 
                   }
                   else
                   {
                       _imageViewer = null;
-                      this._imageViewer = new ImageViewerPopup(this._eventAggregator);
+                      this._imageViewer = new ImageViewerPopup(this._eventAggregator,this.Model);
                   }
 
                   _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
