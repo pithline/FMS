@@ -490,7 +490,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     _userInfo = PersistentData.Instance.UserInfo;
                 }
-                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>()).Where(x => x.IsColletedByCustomer);
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>());
                 ObservableCollection<MZKDocumentCollectedDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
                
                     foreach (var doc in cdDataList)
@@ -597,7 +597,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType == CDUserType.Customer)
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return;
 
                 if (_userInfo == null)
