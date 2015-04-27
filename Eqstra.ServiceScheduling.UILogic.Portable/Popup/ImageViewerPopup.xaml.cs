@@ -48,15 +48,15 @@ namespace Eqstra.ServiceScheduling
                 datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
                 isImageDeleted = true;
                 this.Hide();
+                this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
             }
             else if (ct.Y < -400)
             {
                 datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
                 isImageDeleted = true;
                 this.Hide();
+                this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
             }
-
-            this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
 
         }
 

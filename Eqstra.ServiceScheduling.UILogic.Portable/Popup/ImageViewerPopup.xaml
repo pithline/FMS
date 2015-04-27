@@ -7,32 +7,20 @@
                mc:Ignorable="d">
 
     <Grid Background="#77666666">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition />
-            <RowDefinition Height="50" />
-        </Grid.RowDefinitions>
 
+        <Image ManipulationMode="TranslateY,TranslateInertia"
+               Stretch="UniformToFill"
+               Margin="10" 
+               Source="{Binding ImageBitmap,Mode=TwoWay}"
+               ManipulationStarting="Image_ManipulationStarting"
+               ManipulationCompleted="Image_ManipulationCompleted"
+               ManipulationDelta="Image_ManipulationDelta">
+            <Image.RenderTransform>
+                <TranslateTransform />
+            </Image.RenderTransform>
 
-        <ScrollViewer Grid.Row="1"
-                      HorizontalScrollMode="Auto"
-                      VerticalScrollMode="Auto"
-                      ZoomMode="Enabled">
-            <Image ManipulationMode="TranslateY,TranslateInertia" 
-                   Stretch="UniformToFill"
-                   Margin="10"
-                   Source="{Binding ImageBitmap,Mode=TwoWay}"
-                   ManipulationStarting="Image_ManipulationStarting"
-                   ManipulationCompleted="Image_ManipulationCompleted"
-                   ManipulationDelta="Image_ManipulationDelta">
-                <Image.RenderTransform>
-                    <TranslateTransform />
-                </Image.RenderTransform>
-
-            </Image>
-        </ScrollViewer>
+        </Image>
 
     </Grid>
-
 
 </ContentDialog>

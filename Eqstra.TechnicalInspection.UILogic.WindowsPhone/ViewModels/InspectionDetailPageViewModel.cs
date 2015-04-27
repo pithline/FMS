@@ -7,7 +7,10 @@ using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
+using Windows.Media.SpeechRecognition;
 using Windows.Storage;
+using Windows.UI.Popups;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -38,6 +41,38 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 }
 
             });
+            this.VoiceCommand = new DelegateCommand<string>(async(param) =>
+            {
+                SpeechRecognizer recognizer = new SpeechRecognizer();
+
+                SpeechRecognitionTopicConstraint topicConstraint
+                        = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
+
+                recognizer.Constraints.Add(topicConstraint);
+                await recognizer.CompileConstraintsAsync();
+
+                var results = await recognizer.RecognizeWithUIAsync();
+                if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
+                {
+                    if (param == "Remedy")
+                    {
+                        this.Model.Remedy = results.Text; 
+                    }
+                    if (param == "Recommendation")
+                    {
+                        this.Model.Recommendation = results.Text;
+                    }
+                    if (param == "CauseOfDamage")
+                    {
+                        this.Model.CauseOfDamage = results.Text;
+                    }
+                }
+                else
+                {
+                    await new MessageDialog("Sorry, I did not get that.").ShowAsync();
+                }
+
+            });
 
         }
 
@@ -64,8 +99,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         }
 
         public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
-        private TIData model;
 
+        private TIData model;
         public TIData Model
         {
             get { return model; }
@@ -73,5 +108,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand CompleteCommand { get; set; }
+
+        public DelegateCommand<string> VoiceCommand { get; set; }
     }
 }

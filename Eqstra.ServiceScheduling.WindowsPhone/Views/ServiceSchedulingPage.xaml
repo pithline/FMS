@@ -297,6 +297,7 @@
                                       VerticalAlignment="Center" />
 
                             <AppBarButton Icon="Microphone"
+                                          IsCompact="True"
                                           VerticalAlignment="Center"
                                           Label="Microphone"
                                           Command="{Binding VoiceCommand}" />
