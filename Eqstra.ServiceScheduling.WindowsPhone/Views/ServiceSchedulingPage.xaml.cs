@@ -103,7 +103,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     if (vm.Model.SelectedLocationType.LocType == "Other")
                     {
                         vm.IsEnabledDesType = false;
-                        vm.AddVisibility = Visibility.Collapsed;
+                        vm.AddVisibility = Visibility.Visible;
                     }
                     else
                     {
