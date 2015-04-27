@@ -321,7 +321,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                     {
                         parmFileName = txtFilenName,
-                        parmCaseNumber = imageCaptureList.First().CaseNumber,
+                        parmCaseNumber = task.CaseNumber,
                         parmImageData = Convert.ToBase64String(contentBytes)
 
                     });

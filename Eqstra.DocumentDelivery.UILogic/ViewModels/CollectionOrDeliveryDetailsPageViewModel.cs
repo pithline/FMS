@@ -51,37 +51,51 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 try
                 {
                     this.IsBusy = true;
-                    var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>();
-                    if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Driver || PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
+                   
+                    switch (PersistentData.Instance.UserInfo.CDUserType)
                     {
-                        foreach (var task in this.SelectedTaskBucket)
-                        {
-                            if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
+                        case CDUserType.Driver:
+                            foreach (var task in this.SelectedTaskBucket)
                             {
-                                task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
-                                task.TaskType =CDTaskType.Delivery;
-                                task.IsNotSyncedWithAX = true;
-                                await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
-                                CollectedDocumnetsFromTaskBucket(task, markedDoc, false);
+                                if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
+                                {
+                                    task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
+                                    task.TaskType = CDTaskType.Delivery;
+                                    task.IsNotSyncedWithAX = true;
+                                    await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                    await CollectedDocumnetsFromTaskBucket(task, false);
+                                }
                             }
-                        }
-
-                    }
-                    if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Customer)
-                    {
-                        foreach (var task in this.SelectedTaskBucket)
-                        {
-                            if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
+                            break;
+                        case CDUserType.Courier:
+                            foreach (var task in this.SelectedTaskBucket)
                             {
-                                task.Status = CDTaskStatus.Completed;
-                                task.TaskType =CDTaskType.None;
-                                task.IsNotSyncedWithAX = true;
-                                await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
-                                CollectedDocumnetsFromTaskBucket(task, markedDoc, true);
+                                if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
+                                {
+                                    task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
+                                    task.TaskType = CDTaskType.Delivery;
+                                    task.IsNotSyncedWithAX = true;
+                                    await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                    await DeliveredDocumentsFromTaskBucket(task);
+                                }
                             }
-                        }
-
+                            break;
+                        case CDUserType.Customer: foreach (var task in this.SelectedTaskBucket)
+                            {
+                                if (this.DocumentList.Any(a => a.CaseNumber == task.CaseNumber && a.IsMarked))
+                                {
+                                    task.Status = CDTaskStatus.Completed;
+                                    task.TaskType = CDTaskType.None;
+                                    task.IsNotSyncedWithAX = true;
+                                    await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
+                                    await CollectedDocumnetsFromTaskBucket(task, true);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
                     }
+                   
                     await DDServiceProxyHelper.Instance.SynchronizeAllAsync();
                     this.IsBusy = false;
                     _navigationService.Navigate("InspectionDetails", string.Empty);
@@ -104,7 +118,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     try
                     {
                         this.IsBusy = true;
-                        var markedDoc = await SqliteHelper.Storage.LoadTableAsync<DocumnetDeliverDetail>();
+                       
                         if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
                         {
                             foreach (var task in this.SelectedTaskBucket)
@@ -115,7 +129,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                     task.TaskType = CDTaskType.None;
                                     task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
-                                    DeliveredDocumentsFromTaskBucket(task, markedDoc);
+                                    DeliveredDocumentsFromTaskBucket(task);
                                 }
                             }
                         }
@@ -129,7 +143,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                     task.TaskType = CDTaskType.None;
                                     task.IsNotSyncedWithAX = true;
                                     await SqliteHelper.Storage.UpdateSingleRecordAsync(task);
-                                    DeliveredDocumentsFromTaskBucket(task, markedDoc);
+                                    DeliveredDocumentsFromTaskBucket(task);
                                 }
                             }
                         }
@@ -174,14 +188,15 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
 
-        async private void CollectedDocumnetsFromTaskBucket(CollectDeliveryTask task, List<DocumentCollectDetail> markedDocDeliDetails, bool iscollectedByCustomer)
+        async private System.Threading.Tasks.Task CollectedDocumnetsFromTaskBucket(CollectDeliveryTask task, bool iscollectedByCustomer)
         {
             try
             {
+                var collectDetailTable = await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>();
                 this.DocumentCollectDetail.Comment = this.DocuDeliveryDetails.Comment;
                 this.DocumentCollectDetail.ReceivedDate = this.DocuDeliveryDetails.ReceivedDate;
                 this.DocumentCollectDetail.IsColletedByCustomer = iscollectedByCustomer;
-           
+
                 this.DocumentCollectDetail.CollectedAt = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.Address : string.Empty;
                 this.DocumentCollectDetail.SelectedCollectedFrom = this.SelectedCollectedFrom != null ? this.SelectedCollectedFrom.UserName : string.Empty;
 
@@ -203,7 +218,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.DocumentCollectDetail.CaseNumber = task.CaseNumber;
                 this.DocumentCollectDetail.CaseServiceRecId = task.CaseServiceRecID;
 
-                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocumentCollectDetail.CaseNumber))
+                if (collectDetailTable.Any(a => a.CaseNumber == this.DocumentCollectDetail.CaseNumber))
                 {
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumentCollectDetail>(this.DocumentCollectDetail);
                 }
@@ -220,10 +235,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
 
-        async private void DeliveredDocumentsFromTaskBucket(CollectDeliveryTask task, List<DocumnetDeliverDetail> markedDocDeliDetails)
+        async private System.Threading.Tasks.Task DeliveredDocumentsFromTaskBucket(CollectDeliveryTask task)
         {
             try
             {
+                var deliveryDetailTable = await SqliteHelper.Storage.LoadTableAsync<DocumnetDeliverDetail>();
                 this.DocumnetDeliverDetail.Comment = this.DocuDeliveryDetails.Comment;
                 this.DocumnetDeliverDetail.DeliveryDate = this.DocuDeliveryDetails.DeliveryDate;
 
@@ -244,7 +260,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.DocumnetDeliverDetail.CaseNumber = task.CaseNumber;
                 this.DocumnetDeliverDetail.CaseServiceRecId = task.CaseServiceRecID;
 
-                if (markedDocDeliDetails.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
+                if (deliveryDetailTable.Any(a => a.CaseNumber == this.DocuDeliveryDetails.CaseNumber))
                 {
                     await SqliteHelper.Storage.UpdateSingleRecordAsync<DocumnetDeliverDetail>(this.DocumnetDeliverDetail);
                 }
@@ -266,7 +282,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.IsBusy = true;
                 this.IsDelSignatureDate = Visibility.Collapsed;
                 this.IsCollSignatureDate = Visibility.Collapsed;
-               
+
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
@@ -301,8 +317,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                         DocumentName = d.DocumentName,
                         //ActionDate=d.DeliveryDate,
                         //ActionTime = d.DeliveryDate,
-                        Status=d.Status,
-                        StatusDueDate=d.StatusDueDate
+                        Status = d.Status,
+                        StatusDueDate = d.StatusDueDate
                     });
                 }
 
