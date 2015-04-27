@@ -26,14 +26,14 @@ namespace Eqstra.WinRT.Components.Controls.WindowsPhone
             {
                 _popup = new Popup();
             }
-            _popup.VerticalOffset = 0;
+
             _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
             _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+
             this.Message = message;
             this.Tag = _popup;
             this.Height = currentWindow.Bounds.Height;
             this.Width = currentWindow.Bounds.Width;
-
             _popup.Child = this;
             _popup.IsOpen = true;
         }

@@ -100,9 +100,21 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                 vm._busyIndicator.Open("Please wait,loading destination types ...");
                 if (vm != null)
                 {
-                    if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
+                    if (vm.Model.SelectedLocationType.LocType == "Other")
                     {
-                        vm.DestinationTypes = await vm._serviceDetailService.GetDestinationTypeList(vm.Model.SelectedLocationType.LocType, vm.SelectedTask.CustomerId, vm.UserInfo);
+                        vm.IsEnabledDesType = false;
+                        vm.AddVisibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        vm.IsEnabledDesType = false;
+                        vm.AddVisibility = Visibility.Collapsed;
+
+                        if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
+                        {
+                            vm.DestinationTypes = await vm._serviceDetailService.GetDestinationTypeList(vm.Model.SelectedLocationType.LocType, vm.SelectedTask.CustomerId, vm.UserInfo);
+                        }
+
                     }
                 }
                 vm._busyIndicator.Close();

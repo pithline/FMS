@@ -55,6 +55,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this._supplierService = supplierService;
             this.Model = new ServiceSchedulingDetail();
             _busyIndicator = new BusyIndicator();
+            IsEnabledDesType = true;
             this.Address = new BusinessLogic.Portable.SSModels.Address();
             this.applicationTheme = Application.Current.RequestedTheme;
             this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
@@ -62,6 +63,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.IsLiftRequired = false;
+            this.AddVisibility = Visibility.Collapsed;
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
            async () =>
            {
@@ -144,13 +146,13 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
                   if (_imageViewer == null)
                   {
-                      _imageViewer = new ImageViewerPopup(this._eventAggregator,this.Model);
+                      _imageViewer = new ImageViewerPopup(this._eventAggregator, this.Model);
 
                   }
                   else
                   {
                       _imageViewer = null;
-                      this._imageViewer = new ImageViewerPopup(this._eventAggregator,this.Model);
+                      this._imageViewer = new ImageViewerPopup(this._eventAggregator, this.Model);
                   }
 
                   _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
@@ -509,6 +511,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set { SetProperty(ref spBorderBrush, value); }
         }
 
+        private bool isEnabledDesType;
+
+        public bool IsEnabledDesType
+        {
+            get { return isEnabledDesType; }
+            set { SetProperty(ref isEnabledDesType, value); }
+        }
+
+        private Visibility addVisibility;
+        public Visibility AddVisibility
+        {
+            get { return addVisibility; }
+            set { SetProperty(ref addVisibility, value); }
+        }
+        
         public ApplicationTheme applicationTheme { get; set; }
     }
 }
