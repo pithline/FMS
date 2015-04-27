@@ -1,18 +1,12 @@
-﻿using Eqstra.BusinessLogic.Helpers;
-using Eqstra.BusinessLogic.Portable;
+﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
-using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Storage;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
@@ -32,7 +26,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 try
                 {
-                    var imageCaptureList = await Util.ReadFromDiskAsync<List<ImageCapture>>("ImageCaptureList");
+                    var imageCaptureList = await Util.ReadFromDiskAsync<List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>>("ImageCaptureList");
                     var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
                 }
                 catch (Exception ex)

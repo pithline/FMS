@@ -82,25 +82,29 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                     }
                     if (selectedMaintenanceRepair.IsMajorPivot)
                     {
-                        selectedMaintenanceRepair.MajorComponentImgList.Add(new ImageCapture
+                        selectedMaintenanceRepair.MajorComponentImgList.Add(new Eqstra.BusinessLogic.Portable.TIModels.ImageCapture
                          {
                              ImageBitmap = bitmap,
                              ImageData = Convert.ToBase64String(fileBytes),
+                             Component = selectedMaintenanceRepair.MajorComponent,
+                             RepairId = selectedMaintenanceRepair.Repairid,
                              guid = Guid.NewGuid()
                          });
                     }
                     else
                     {
-                        selectedMaintenanceRepair.SubComponentImgList.Add(new ImageCapture
+                        selectedMaintenanceRepair.SubComponentImgList.Add(new Eqstra.BusinessLogic.Portable.TIModels.ImageCapture
                           {
                               ImageBitmap = bitmap,
                               ImageData = Convert.ToBase64String(fileBytes),
+                              Component = selectedMaintenanceRepair.MajorComponent,
+                              RepairId = selectedMaintenanceRepair.Repairid,
                               guid = Guid.NewGuid()
                           });
                     }
                 }
 
-             
+
             }
 
             EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);
@@ -121,7 +125,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
             SessionStateService.RegisterKnownType(typeof(Task));
             SessionStateService.RegisterKnownType(typeof(UserInfo));
             SessionStateService.RegisterKnownType(typeof(UserInfo));
-            SessionStateService.RegisterKnownType(typeof(ImageCapture));
+            SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Portable.TIModels.ImageCapture));
 
             EventAggregator = new EventAggregator();
 

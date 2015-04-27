@@ -56,7 +56,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.Model = new ServiceSchedulingDetail();
             _busyIndicator = new BusyIndicator();
             this.Address = new BusinessLogic.Portable.SSModels.Address();
-            this.applicationTheme= Application.Current.RequestedTheme;
+            this.applicationTheme = Application.Current.RequestedTheme;
             this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.LtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.DtBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
@@ -74,7 +74,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                        this.Model.ServiceDateOption1 = this.Model.ServiceDateOpt1.ToString("MM/dd/yyyy HH:mm");
                        this.Model.ServiceDateOption2 = this.Model.ServiceDateOpt2.ToString("MM/dd/yyyy HH:mm");
                        this.Model.ODOReadingDate = this.Model.ODOReadingDt.ToString("MM/dd/yyyy HH:mm");
-                       
+
                        bool response = await _serviceDetailService.InsertServiceDetailsAsync(this.Model, this.Address, this.UserInfo);
                        if (response)
                        {
@@ -121,6 +121,11 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
               {
                   this.Model = model;
               });
+              this._eventAggregator.GetEvent<ImageCaptureEvent>().Subscribe(imageCapture =>
+              {
+                  this.Model.OdoReadingImageCapture = imageCapture;
+              });
+
 
               //var camCap =
               //new CameraCaptureDialog();
@@ -130,38 +135,38 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
           });
             this.OpenImageViewerCommand = new DelegateCommand(
-              async  () =>
-                {
+              async () =>
+              {
 
                   //  CoreWindow currentWindow = Window.Current.CoreWindow;
                   //  Popup popup = new Popup();
                   //  popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
                   //  popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
 
-                    if (_imageViewer == null)
-                    {
-                        _imageViewer = new ImageViewerPopup();
+                  if (_imageViewer == null)
+                  {
+                      _imageViewer = new ImageViewerPopup(this._eventAggregator);
 
-                    }
-                    else
-                    {
-                        _imageViewer = null;
-                        this._imageViewer = new ImageViewerPopup();
-                    }
+                  }
+                  else
+                  {
+                      _imageViewer = null;
+                      this._imageViewer = new ImageViewerPopup(this._eventAggregator);
+                  }
 
-                    _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
-                   // popup.Child = _imageViewer;
-                   // this._imageViewer.Tag = popup;
+                  _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
+                  // popup.Child = _imageViewer;
+                  // this._imageViewer.Tag = popup;
 
 
                   //  this._imageViewer.Height = currentWindow.Bounds.Height;
                   //  this._imageViewer.Width = currentWindow.Bounds.Width;
 
-                   // popup.IsOpen = true;
+                  // popup.IsOpen = true;
 
-                    await _imageViewer.ShowAsync();
+                  await _imageViewer.ShowAsync();
 
-                });
+              });
 
 
             this.VoiceCommand = new DelegateCommand(async () =>
@@ -175,7 +180,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 await recognizer.CompileConstraintsAsync();
 
                 var results = await recognizer.RecognizeWithUIAsync();
-                if (results!=null &(results.Confidence != SpeechRecognitionConfidence.Rejected))
+                if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
                 {
                     this.Model.AdditionalWork = results.Text;
                 }
@@ -187,9 +192,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             });
 
 
-            this.AddCommand = new DelegateCommand(async () => {
-                _addressDialog = new AddressDialog(this._locationService,this._eventAggregator);
-                this.Model.SelectedDestinationType=new DestinationType();
+            this.AddCommand = new DelegateCommand(async () =>
+            {
+                _addressDialog = new AddressDialog(this._locationService, this._eventAggregator);
+                this.Model.SelectedDestinationType = new DestinationType();
                 _addressDialog.ShowAsync();
             });
 
@@ -264,7 +270,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             }
             else
             {
-                this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black); 
+                this.SpBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             }
 
             if (this.IsLiftRequired)
@@ -332,7 +338,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     await bitmap.SetSourceAsync(await this.ConvertToRandomAccessStreamAsync(Convert.FromBase64String(this.Model.ODOReadingSnapshot)));
                     this.Model.OdoReadingImageCapture = new ImageCapture() { ImageBitmap = bitmap };
                 }
-             
+
 
                 if (this.Model == null)
                 {
@@ -359,6 +365,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.IsLiftRequired = this.Model.IsLiftRequired;
                 }
+                this.Model.CaseNumber = this.SelectedTask.CaseNumber;
                 _busyIndicator.Close();
             }
             catch (Exception)

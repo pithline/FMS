@@ -1,4 +1,5 @@
-﻿using Eqstra.BusinessLogic.Portable.SSModels;
+﻿using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.SSModels;
 using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using System;
 using System.Collections.Generic;
@@ -145,7 +146,7 @@ namespace Eqstra.ServiceScheduling.UILogic
                     var model = this.Tag as ServiceSchedulingDetail;
                     if (model.OdoReadingImageCapture == null)
                     {
-                        model.OdoReadingImageCapture = new BusinessLogic.ImageCapture();
+                        model.OdoReadingImageCapture = new ImageCapture();
                     }
                     model.OdoReadingImageCapture.ImageBitmap = bitmap;
                     model.ODOReadingSnapshot = Convert.ToBase64String(_bytes);

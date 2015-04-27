@@ -12,12 +12,15 @@ namespace Eqstra.TechnicalInspection
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
+            var b = Window.Current.Bounds;
+            this.scrlViewTask.MaxHeight = b.Height - 100;
+            this.scrlViewCust.MaxHeight = b.Height - 100;
         }
         void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
             var b = Window.Current.Bounds;
-            this.scrlViewTask.Height = b.Height - 50;
-            this.scrlViewCust.Height = b.Height - 50;
+            this.scrlViewTask.MaxHeight = b.Height - 100;
+            this.scrlViewCust.MaxHeight = b.Height - 100;
         }
     }
 }

@@ -1,18 +1,14 @@
-﻿using Eqstra.BusinessLogic.Helpers;
-using Eqstra.BusinessLogic.Portable;
+﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
-using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
@@ -32,7 +28,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 try
                 {
 
-                    List<ImageCapture> imageCaptureList = new List<ImageCapture>();
+                    List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture> imageCaptureList = new List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>();
                     foreach (var item in this.MaintenanceRepairList)
                     {
                         if (item.MajorComponentImgList.Any())
@@ -45,7 +41,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                         }
 
                     }
-                    await Util.WriteToDiskAsync<List<ImageCapture>>(imageCaptureList, "ImageCaptureList");
+                    await Util.WriteToDiskAsync<List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>>(imageCaptureList, "ImageCaptureList");
 
 
                     _navigationService.Navigate("InspectionDetail", string.Empty);

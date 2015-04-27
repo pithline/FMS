@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using System.Linq;
-namespace Eqstra.BusinessLogic.Helpers
+namespace Eqstra.BusinessLogic.Portable
 {
     public static class Util
     {

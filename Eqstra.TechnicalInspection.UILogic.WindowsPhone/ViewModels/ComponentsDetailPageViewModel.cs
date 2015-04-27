@@ -11,6 +11,8 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage.Pickers;
 using System.Linq;
+using Windows.Storage;
+using Eqstra.BusinessLogic.Portable;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -33,6 +35,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 openPicker.FileTypeFilter.Add(".png");
                 openPicker.FileTypeFilter.Add(".jpeg");
                 openPicker.FileTypeFilter.Add(".jpg");
+             
                 PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
 
                 openPicker.PickSingleFileAndContinue();
@@ -85,6 +88,10 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     this.SelectedMaintenanceRepair = PersistentData.Instance.MaintenanceRepairKVPair.Values.FirstOrDefault(f => f.Repairid == this.SelectedMaintenanceRepair.Repairid);
                 }
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
+                {
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -98,6 +105,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             get { return selectedMaintenanceRepair; }
             set { SetProperty(ref selectedMaintenanceRepair, value); }
         }
+        public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
         public ICommand TakeSnapshotCommand { get; set; }
 
         public ICommand PreviousCommand { get; set; }

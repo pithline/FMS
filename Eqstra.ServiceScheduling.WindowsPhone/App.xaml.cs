@@ -86,7 +86,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
                     serviceSchedulingDetail.OdoReadingImageCapture = new ImageCapture
                         {
                             ImageBitmap = bitmap,
-                            ImageBinary = Convert.ToBase64String(fileBytes)
+                            ImageBinary = Convert.ToBase64String(fileBytes),
                         };
                 }
             }
