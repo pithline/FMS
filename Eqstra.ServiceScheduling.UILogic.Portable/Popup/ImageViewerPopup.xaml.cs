@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.Portable;
+using Eqstra.BusinessLogic.Portable.SSModels;
+using Eqstra.BusinessLogic.Portable.TIModels;
+using Microsoft.Practices.Prism.PubSubEvents;
+using System;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,12 +19,66 @@ namespace Eqstra.ServiceScheduling
     /// </summary>
     public sealed partial class ImageViewerPopup : ContentDialog
     {
+        private TranslateTransform ct;
+        private bool isImageDeleted;
+        private double originalY;
+        private double originalX;
+        private Image img;
+     
+        private IEventAggregator _eventAggregator;
 
-        public ImageViewerPopup()
+        public ImageViewerPopup(IEventAggregator eventAggregator)
         {
             this.InitializeComponent();
+            this._eventAggregator = eventAggregator;
+        }
+        private void Image_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            var datacontext = this.DataContext as Eqstra.BusinessLogic.Portable.ImageCapture;
+
+            img = sender as Image;
+            ct = img.RenderTransform as TranslateTransform;
+
+            if (ct == null) return;
+
+            ct.Y += e.Delta.Translation.Y;
+
+            if (ct.Y > 400)
+            {
+                datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
+                isImageDeleted = true;
+                this.Hide();
+            }
+            else if (ct.Y < -400)
+            {
+                datacontext = new Eqstra.BusinessLogic.Portable.ImageCapture { ImagePath = "ms-appx:///Assets/ODO_meter.png", ImageBitmap = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/ODO_meter.png")) }; ;
+                isImageDeleted = true;
+                this.Hide();
+            }
+
+            this._eventAggregator.GetEvent<ImageCaptureEvent>().Publish(datacontext);
+
         }
 
-              
+        private void Image_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (!isImageDeleted)
+            {
+                ct.X = originalX;
+                ct.Y = originalY;
+
+                e.Handled = true;
+            }
+        }
+
+        private void Image_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
+        {
+            Image img = sender as Image;
+            ct = img.RenderTransform as TranslateTransform;
+
+            originalX = ct.X;
+            originalY = ct.Y;
+
+        }
     }
 }

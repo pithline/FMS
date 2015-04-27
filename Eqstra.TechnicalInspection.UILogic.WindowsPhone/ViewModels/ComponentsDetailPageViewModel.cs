@@ -6,9 +6,13 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage.Pickers;
+using System.Linq;
+using Windows.Storage;
+using Eqstra.BusinessLogic.Portable;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -21,6 +25,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
+            PersistentData.Instance.MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
             TakeSnapshotCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 FileOpenPicker openPicker = new FileOpenPicker();
@@ -30,6 +35,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 openPicker.FileTypeFilter.Add(".png");
                 openPicker.FileTypeFilter.Add(".jpeg");
                 openPicker.FileTypeFilter.Add(".jpg");
+             
                 PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
 
                 openPicker.PickSingleFileAndContinue();
@@ -41,6 +47,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(repair =>
                 {
                     this.SelectedMaintenanceRepair = repair;
+
                 });
 
 
@@ -51,19 +58,23 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
                 navigationService.Navigate("TechnicalInspection", string.Empty);
             });
-
-            this.OpenSnapshotViewerCommand = new DelegateCommand(() =>
-          {
-              _snapShotsPopup = new SnapshotsViewer();
-              _snapShotsPopup.Open(this.SelectedMaintenanceRepair);
-          });
+          
         }
-  
+
         public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
         {
             if (this._snapShotsPopup != null)
             {
-                this._snapShotsPopup.Close();
+                this._snapShotsPopup.Hide();
+            }
+            PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
+            if (!PersistentData.Instance.MaintenanceRepairKVPair.ContainsKey(this.SelectedMaintenanceRepair.Repairid))
+            {
+                PersistentData.Instance.MaintenanceRepairKVPair.Add(this.SelectedMaintenanceRepair.Repairid, this.SelectedMaintenanceRepair);
+            }
+            else
+            {
+                PersistentData.Instance.MaintenanceRepairKVPair[this.SelectedMaintenanceRepair.Repairid] = this.SelectedMaintenanceRepair;
             }
             base.OnNavigatedFrom(viewModelState, suspending);
         }
@@ -73,6 +84,14 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 this.SelectedMaintenanceRepair = JsonConvert.DeserializeObject<MaintenanceRepair>(navigationParameter.ToString());
+                if (PersistentData.Instance.MaintenanceRepairKVPair != null && PersistentData.Instance.MaintenanceRepairKVPair.Any())
+                {
+                    this.SelectedMaintenanceRepair = PersistentData.Instance.MaintenanceRepairKVPair.Values.FirstOrDefault(f => f.Repairid == this.SelectedMaintenanceRepair.Repairid);
+                }
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
+                {
+                    this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -86,6 +105,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             get { return selectedMaintenanceRepair; }
             set { SetProperty(ref selectedMaintenanceRepair, value); }
         }
+        public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
         public ICommand TakeSnapshotCommand { get; set; }
 
         public ICommand PreviousCommand { get; set; }

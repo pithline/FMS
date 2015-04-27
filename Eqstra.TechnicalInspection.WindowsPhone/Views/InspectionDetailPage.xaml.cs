@@ -24,8 +24,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public InspectionDetailPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
-
       
     }
 }

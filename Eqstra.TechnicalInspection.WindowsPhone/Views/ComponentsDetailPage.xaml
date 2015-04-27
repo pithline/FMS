@@ -551,9 +551,10 @@
     <Grid>
 
         <Pivot Title="COMPONENTS DETAIL"
+               HorizontalAlignment="Stretch"
+               HorizontalContentAlignment="Stretch"
                SelectionChanged="TasksPivot_SelectionChanged"
-               Grid.Row="1"
-               Name="TasksPivot">
+               Name="ImagesPivot">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock FontSize="40"
@@ -562,19 +563,15 @@
             </Pivot.HeaderTemplate>
             <PivotItem Header="major component">
                 <Grid>
-                    <GridView HorizontalAlignment="Center"
+                    <GridView HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Center"
-                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
+                              VerticalAlignment="Top"
+                              ItemClick="GridView_ItemClick"
                               SelectionMode="None"
                               IsItemClickEnabled="True"
                               ItemsSource="{Binding SelectedMaintenanceRepair.MajorComponentImgList}">
 
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding ImageBitmap}"
@@ -587,18 +584,14 @@
 
             <PivotItem Header="sub component">
                 <Grid>
-                    <GridView HorizontalAlignment="Center"
+                    <GridView HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
                               ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              common:GridViewItemClickCommand.Command="{Binding OpenSnapshotViewerCommand}"
-                              VerticalAlignment="Center"
+                              ItemClick="GridView_ItemClick"
+                              VerticalAlignment="Top"
                               SelectionMode="None"
                               IsItemClickEnabled="True"
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding ImageBitmap}"

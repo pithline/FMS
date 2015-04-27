@@ -21,6 +21,7 @@
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Never</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -124,6 +125,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-240.png" />
     <Content Include="Assets\camera.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\loginIcon.png" />
@@ -142,6 +145,7 @@
     <Content Include="Assets\user_profile.png" />
     <Content Include="Assets\WideLogo.scale-100.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>

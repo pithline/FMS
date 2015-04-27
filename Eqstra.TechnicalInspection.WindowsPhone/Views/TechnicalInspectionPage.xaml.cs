@@ -31,12 +31,11 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     /// </summary>
     public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
-        ComponentsDetailPage cdp;
-
         DetailsDialog dd;
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

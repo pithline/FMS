@@ -1,22 +1,13 @@
-﻿<Page x:Name="pageRoot"
-      x:Class="Eqstra.TechnicalInspection.UILogic.SnapshotsViewer"
-      DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:local="using:Eqstra.TechnicalInspection.UILogic"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d">
+﻿<ContentDialog x:Name="pageRoot"
+               x:Class="Eqstra.TechnicalInspection.UILogic.SnapshotsViewer"
+               DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:Eqstra.TechnicalInspection.UILogic"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d">
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Delete"
-                              Label="Delete"
-                              Click="DeletePic_Click" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
     <Grid x:Name="accentGrid"
           Background="Black"
           Grid.Row="1">
@@ -26,23 +17,25 @@
             <Viewbox>
                 <FlipView x:Name="fvSnaps"
                           VerticalAlignment="Stretch"
+                          UseTouchAnimationsForAllNavigation="True"
                           HorizontalAlignment="Stretch">
                     <FlipView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImageBitmap}"
-                                   ManipulationDelta="OnManipulationDelta"
-                                   SizeChanged="Image_SizeChanged"
-                                   Stretch="UniformToFill">
+                            <Image ManipulationMode="TranslateX,TranslateY"
+                                   Source="{Binding ImageBitmap}"
+                                   Stretch="UniformToFill"
+                                   ManipulationStarting="Image_ManipulationStarting"
+                                   ManipulationCompleted="Image_ManipulationCompleted"
+                                   ManipulationDelta="Image_ManipulationDelta">
                                 <Image.RenderTransform>
-                                    <CompositeTransform />
+                                    <TranslateTransform />
                                 </Image.RenderTransform>
+
                             </Image>
                         </DataTemplate>
                     </FlipView.ItemTemplate>
                 </FlipView>
             </Viewbox>
-
         </StackPanel>
-
     </Grid>
-</Page>
+</ContentDialog>

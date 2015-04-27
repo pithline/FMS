@@ -19,7 +19,7 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public string Component { get; set; }
 
         public string ImagePath { get; set; }
-   
+
         public string FileName { get; set; }
 
         public string ImageData { get; set; }
@@ -30,5 +30,6 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
             get { return imageBitmap; }
             set { SetProperty(ref imageBitmap, value); }
         }
+        public Guid guid { get; set; }
     }
 }

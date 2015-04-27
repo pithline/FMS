@@ -82,6 +82,7 @@
     <Compile Include="TIModels\TITask.cs" />
     <Compile Include="TIModels\UserInfo.cs" />
     <Compile Include="TIModels\VehicleDetails.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">

@@ -1,4 +1,5 @@
-﻿using Eqstra.TechnicalInspection.UILogic;
+﻿using Eqstra.BusinessLogic.Portable.TIModels;
+using Eqstra.TechnicalInspection.UILogic;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
@@ -23,6 +24,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         {
             this.InitializeComponent();
             this.vm = (ComponentsDetailPageViewModel)this.DataContext;
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            var b = Window.Current.Bounds;
+            ImagesPivot.Width = b.Width;
         }
 
         private void TasksPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,10 +78,11 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (this.vm!=null)
+            if (this.vm != null)
             {
                 _snapShotsPopup = new SnapshotsViewer();
-                _snapShotsPopup.Open(this.vm.SelectedMaintenanceRepair); 
+                var item = e.ClickedItem as ImageCapture;
+                _snapShotsPopup.Open(this.vm.SelectedMaintenanceRepair, item.guid);
             }
         }
 

@@ -185,7 +185,12 @@ namespace Eqstra.BusinessLogic.Portable.SSModels
         public LocationType SelectedLocationType
         {
             get { return selectedLocationType; }
-            set { SetProperty(ref selectedLocationType, value); }
+            set { 
+                
+                SetProperty(ref selectedLocationType, value);
+             
+
+            }
         }
 
 

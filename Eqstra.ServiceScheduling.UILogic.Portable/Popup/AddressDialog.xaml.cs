@@ -85,6 +85,7 @@ namespace Eqstra.ServiceScheduling
             {
                 this.Address.ProgressVisibility = Visibility.Visible;
                 this.Address.Cities = await _locationService.GetCityList(this.Address.SelectedCountry.Id, this.Address.Selectedprovince.Id, this.UserInfo);
+                this.Address.Postcodes = await _locationService.GetZipcodeList(this.Address.SelectedCountry.Id, this.Address.Selectedprovince.Id, this.UserInfo);
                 this.Address.ProgressVisibility = Visibility.Collapsed;
             }
         }
@@ -106,6 +107,7 @@ namespace Eqstra.ServiceScheduling
             {
                 this.Address.ProgressVisibility = Visibility.Visible;
                 this.Address.Region = await _locationService.GetRegionList(this.Address.SelectedCountry.Id, this.Address.Selectedprovince.Id, this.UserInfo);
+
                 this.Address.ProgressVisibility = Visibility.Collapsed;
             }
         }

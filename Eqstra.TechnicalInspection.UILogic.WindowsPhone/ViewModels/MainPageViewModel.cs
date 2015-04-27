@@ -29,7 +29,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
             this.PoolofTasks = new ObservableCollection<TITask>();
 
-            this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.TIModels.Task>((task) =>
+            this.NextPageCommand = new DelegateCommand<Eqstra.BusinessLogic.Portable.TIModels.TITask>((task) =>
             {
                 try
                 {
@@ -168,9 +168,17 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
             if (tasksResult != null)
             {
-                foreach (var task in tasksResult)
+                foreach (var task in tasksResult.Where(w => w.Status != DriverTaskStatus.Completed))
                 {
                     task.Address = Regex.Replace(task.Address, ",", "\n");
+                    if (task.ConfirmedDate.Year<DateTime.Today.Year-5)
+                    {
+                        task.StringifyConfirmedDate = task.ConfirmedDate.ToString(); 
+                    }
+                    else
+                    {
+                        task.StringifyConfirmedDate = string.Empty;
+                    }
                     poolofTask.Add(task);
                 }
             }

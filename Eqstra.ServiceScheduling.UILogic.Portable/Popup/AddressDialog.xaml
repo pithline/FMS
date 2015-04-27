@@ -12,7 +12,7 @@
                SecondaryButtonClick="Cancel_SecondaryButtonClick">
     <ScrollViewer ZoomMode="Disabled"
                   VerticalScrollBarVisibility="Visible">
-        <Grid>
+        <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -24,12 +24,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+
             </Grid.RowDefinitions>
 
             <StackPanel Visibility="{Binding ProgressbarVisiblity}"
@@ -109,18 +104,9 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <TextBox Header="Street/Post Box :"
-                     Text="{Binding Street,Mode=TwoWay}"
-                     Grid.Row="5"
-                     AcceptsReturn="True"
-                     IsSpellCheckEnabled="True"
-                     IsTextPredictionEnabled="True"
-                     Height="200"
-                     Margin="0 10" />
-
             <ComboBox  Height="70"
                        Header="Zip"
-                       Grid.Row="6"
+                       Grid.Row="5"
                        Width="310"
                        ItemsSource="{Binding Postcodes}"
                        SelectedItem="{Binding SelectedZip,Mode=TwoWay}"
@@ -128,6 +114,17 @@
                        Margin="2"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
+
+            <TextBox Header="Street :"
+                     Text="{Binding Street,Mode=TwoWay}"
+                     Grid.Row="6"
+                     Grid.RowSpan="8"
+                     Width="310"
+                     Height="200"
+                     AcceptsReturn="True"
+                     IsSpellCheckEnabled="True"
+                     IsTextPredictionEnabled="True"
+                     Margin="0 10" />
 
 
         </Grid>

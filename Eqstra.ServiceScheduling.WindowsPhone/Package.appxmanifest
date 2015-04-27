@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="675502bd-f87c-436b-a5b6-a9fd161f0e06" Publisher="CN=mazikuser" Version="1.0.0.7" />
-  <mp:PhoneIdentity PhoneProductId="675502bd-f87c-436b-a5b6-a9fd161f0e06" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="AACE4B69.EqstraServiceScheduling" Publisher="CN=280C52B9-43DE-43B0-AD89-373310221C44" Version="1.1.0.1" />
+  <mp:PhoneIdentity PhoneProductId="97f6ffb7-21df-45d6-8ec8-f8a85204d3c1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Eqstra.ServiceScheduling.WindowsPhone</DisplayName>
-    <PublisherDisplayName>mazikuser</PublisherDisplayName>
+    <DisplayName>Eqstra Service Scheduling</DisplayName>
+    <PublisherDisplayName>Mazik Global Inc.</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,8 +15,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.ServiceScheduling.WindowsPhone.App">
-      <m3:VisualElements DisplayName="Service Scheduling" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Eqstra.ServiceScheduling.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.SS">
+      <m3:VisualElements DisplayName="Service Scheduling" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Eqstra.SS" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <m3:ShowNameOnTiles>
             <m3:ShowOn Tile="square150x150Logo" />

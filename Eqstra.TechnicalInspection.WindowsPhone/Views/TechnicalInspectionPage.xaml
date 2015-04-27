@@ -37,7 +37,7 @@
             <CommandBar.PrimaryCommands>
                 
                 <AppBarButton Label="Next"
-                              Icon="Next"
+                              Icon="Forward"
                               Command="{Binding NextCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
@@ -59,10 +59,6 @@
                         Margin="0,15,0,0">
                 <DataTemplate>
                     <Grid>
-                        <ProgressBar IsIndeterminate="True"
-                                     Visibility="{Binding TaskProgressBar}"
-                                     Foreground="White"
-                                     VerticalAlignment="Top" />
                         <ListView HorizontalAlignment="Center"
                                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                                   VerticalAlignment="Top"

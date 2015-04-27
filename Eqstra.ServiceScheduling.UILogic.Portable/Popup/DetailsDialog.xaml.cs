@@ -24,10 +24,18 @@ namespace Eqstra.ServiceScheduling
         public DetailsDialog()
         {
             this.InitializeComponent();
+            this.SizeChanged += DetailsDialog_SizeChanged;
+
+            var b = Window.Current.Bounds;
+            this.scrlViewTask.MaxHeight = b.Height - 100;
+            this.scrlViewCust.MaxHeight = b.Height - 100;
         }
-        private void home_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+
+        void DetailsDialog_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            this.Hide();
+            var b = Window.Current.Bounds;
+            this.scrlViewTask.MaxHeight = b.Height - 100;
+            this.scrlViewCust.MaxHeight = b.Height - 100;
         }
 
     }

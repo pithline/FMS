@@ -8,6 +8,7 @@
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
                             mvvm:ViewModelLocator.AutoWireViewModel="True"
+                           HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.Resources>
@@ -636,9 +637,9 @@
                      VerticalAlignment="Top" />
 
 
-        <Pivot Title="TASKS"
+        <Pivot Title="TASKS" 
                SelectionChanged="TasksPivot_SelectionChanged"
-               Grid.Row="1"
+               Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                Name="TasksPivot">
             <Pivot.HeaderTemplate>
                 <DataTemplate>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,13 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
 
-namespace Eqstra.BusinessLogic
+namespace Eqstra.BusinessLogic.Portable
 {
+    public class ImageCaptureEvent : PubSubEvent<ImageCapture>
+    {
 
-    public class ImageCapture :  BindableBase
+    }
+    public class ImageCapture : BindableBase
     {
         public int Id { get; set; }
 
