@@ -50,6 +50,9 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 catch (Exception ex)
                 {
                 }
+            }, () => { 
+                return this.SelectedTask.ComponentList!=null && this.SelectedTask.ComponentList.Any();
+           
             });
 
         }

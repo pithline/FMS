@@ -67,7 +67,7 @@
                           VerticalAlignment="Top"
                           Grid.Row="2"
                           Click="Logout_Click"
-                          Content="Logout">
+                          Content="logout">
             </Button>
         </Grid>
     </Grid>

@@ -12,7 +12,8 @@
                Grid.Row="1">
             <PivotItem Header="task detail">
 
-                <ScrollViewer  ScrollViewer.IsScrollInertiaEnabled="True" x:Name="scrlViewTask"
+                <ScrollViewer  ScrollViewer.IsScrollInertiaEnabled="True"
+                               x:Name="scrlViewTask"
                                ScrollViewer.IsVerticalRailEnabled="True"
                                ScrollViewer.IsDeferredScrollingEnabled="False"
                                ScrollViewer.VerticalScrollMode="Enabled"
@@ -33,7 +34,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <StackPanel Orientation="Vertical"
@@ -45,10 +46,20 @@
                                            Text="{Binding RegistrationNumber}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
-
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
                                         Grid.Row="1"
+                                        Margin="2">
+                                <TextBlock Text="Case Number"
+                                           Style="{StaticResource TextContentStyle}" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding CaseNumber}"
+                                           Style="{StaticResource InfoBoxTitleStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="2"
                                         Margin="2">
                                 <TextBlock Text="Made By"
                                            Style="{StaticResource TextContentStyle}" />
@@ -60,7 +71,7 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="2"
+                                        Grid.Row="3"
                                         Margin="2">
                                 <TextBlock Text="Model"
                                            Style="{StaticResource TextContentStyle}" />
@@ -71,40 +82,18 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="3"
+                                        Grid.Row="4"
                                         Margin="2">
-                                <TextBlock Text="Description"
+                                <TextBlock Text="Engine Number"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding Description}"
+                                           Text="{Binding EngineNumber}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
-                            </StackPanel>
-
-
-                            <StackPanel Orientation="Vertical"
-                                        Grid.Row="4"
-                                        HorizontalAlignment="Center"
-                                        Margin="2">
-                                <TextBlock Text="Model Year"
-                                           Style="{StaticResource TextContentStyle}" />
-                                <TextBlock  Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
                                         Grid.Row="5"
-                                        Margin="2">
-                                <TextBlock Text="Driver Name"
-                                           Style="{StaticResource TextContentStyle}" />
-                                <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding DriverFirstName}"
-                                           Style="{StaticResource InfoBoxTitleStyle}" />
-                            </StackPanel>
-
-
-                            <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Center"
-                                        Grid.Row="6"
                                         Margin="2">
                                 <TextBlock Text="Status Due Date"
                                            Style="{StaticResource TextContentStyle}" />
@@ -114,7 +103,7 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical"
-                                        Grid.Row="7"
+                                        Grid.Row="6"
                                         HorizontalAlignment="Center"
                                         Margin="2">
                                 <TextBlock Text="Confirmed Date"
@@ -127,7 +116,7 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="8"
+                                        Grid.Row="7"
                                         Margin="2">
                                 <TextBlock Text="Customer Name"
                                            Style="{StaticResource TextContentStyle}" />
@@ -138,19 +127,19 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="9"
+                                        Grid.Row="8"
                                         Margin="2">
                                 <TextBlock Text="Contact Name"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding CustomerName}"
+                                           Text="{Binding ContactName}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="10"
+                                        Grid.Row="9"
                                         Margin="2">
                                 <TextBlock Text="Address"
                                            Style="{StaticResource TextContentStyle}" />
@@ -160,10 +149,11 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical"
-                                        Grid.Row="11"
+                                        Grid.Row="10"
                                         HorizontalAlignment="Center"
                                         Margin="2">
                                 <TextBlock Text="Status"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Status}"
@@ -172,7 +162,7 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="12"
+                                        Grid.Row="11"
                                         Margin="2">
                                 <TextBlock Text="Email"
                                            Style="{StaticResource TextContentStyle}" />
@@ -181,16 +171,7 @@
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Center"
-                                        Grid.Row="13"
-                                        Margin="2">
-                                <TextBlock Text="Case Number"
-                                           Style="{StaticResource TextContentStyle}" />
-                                <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding CaseNumber}"
-                                           Style="{StaticResource InfoBoxTitleStyle}" />
-                            </StackPanel>
+
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
@@ -248,17 +229,6 @@
 
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="2"
-                                        Margin="2">
-                                <TextBlock Text="Case Type"
-                                           Style="{StaticResource TextContentStyle}" />
-                                <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding CaseType}"
-                                           Style="{StaticResource InfoBoxTitleStyle}" />
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Center"
                                         Grid.Row="3"
                                         Margin="2">
                                 <TextBlock Text="Contact Name"
@@ -307,7 +277,7 @@
                                 <TextBlock Text="Confirmed Date"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding ConfirmedDate}"
+                                           Text="{Binding StringifyConfirmedDate}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -317,20 +287,10 @@
                                         Grid.Row="8"
                                         Margin="2">
                                 <TextBlock Text="Status"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Status}"
-                                           Style="{StaticResource InfoBoxTitleStyle}" />
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical"
-                                        Grid.Row="9"
-                                        HorizontalAlignment="Center"
-                                        Margin="2">
-                                <TextBlock Text="Contact Name"
-                                           Style="{StaticResource TextContentStyle}" />
-                                <TextBlock TextWrapping="Wrap"
-                                           Text="{Binding ContactName}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace Eqstra.BusinessLogic.Portable.TIModels
 {
-    public class TIData
+    public class TIData : BindableBase
     {
-
         public TIData()
         {
             this.CompletionDate = DateTime.Today;
@@ -20,7 +20,8 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public string CauseOfDamage
         {
             get { return causeOfDamage; }
-            set { causeOfDamage = value; }
+
+            set { SetProperty(ref causeOfDamage, value); }
         }
 
         private string remedy;
@@ -28,7 +29,8 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public string Remedy
         {
             get { return remedy; }
-            set { remedy = value; }
+
+            set { SetProperty(ref remedy, value); }
         }
 
         private string recommendation;
@@ -36,7 +38,8 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public string Recommendation
         {
             get { return recommendation; }
-            set { recommendation = value; }
+
+            set { SetProperty(ref recommendation, value); }
         }
 
         private DateTime completionDate;
@@ -44,14 +47,16 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public DateTime CompletionDate
         {
             get { return completionDate; }
-            set { completionDate = value; }
+
+            set { SetProperty(ref completionDate, value); }
         }
         private long caseServiceRecID;
 
         public long CaseServiceRecID
         {
             get { return caseServiceRecID; }
-            set { caseServiceRecID = value; }
+
+            set { SetProperty(ref caseServiceRecID, value); }
         }
 
         private ObservableCollection<object> caseCategoryAuthList;
@@ -59,7 +64,8 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public ObservableCollection<object> CaseCategoryAuthList
         {
             get { return caseCategoryAuthList; }
-            set { caseCategoryAuthList = value; }
+
+            set { SetProperty(ref caseCategoryAuthList, value); }
         }
 
         private bool shouldSave;
@@ -67,7 +73,9 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public bool ShouldSave
         {
             get { return shouldSave; }
-            set { shouldSave = value; }
+
+            set { SetProperty(ref shouldSave, value); }
         }
+
     }
 }
