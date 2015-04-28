@@ -117,6 +117,7 @@
     <Compile Include="Common\StampPersistData.cs" />
     <Compile Include="DataStamp.cs" />
     <Compile Include="DocumentDelivery\CDTaskDetail.cs" />
+    <Compile Include="DocumentDelivery\CollectDeliverServices.cs" />
     <Compile Include="DocumentDelivery\CollectDeliveryTask.cs" />
     <Compile Include="Commercial\CAccessories.cs" />
     <Compile Include="Commercial\CCabTrimInter.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="DocumentDelivery\CollectDeliveryDetail.cs" />
     <Compile Include="DocumentDelivery\Document.cs" />
     <Compile Include="DocumentDelivery\CollectedFromData.cs" />
+    <Compile Include="DocumentDelivery\DocumentDeliveryUpdateDetail.cs" />
     <Compile Include="DocumentDelivery\DocumentsCollector.cs" />
     <Compile Include="DocumentDelivery\DocumnetDeliverDetail.cs" />
     <Compile Include="DocumentDelivery\Driver.cs" />

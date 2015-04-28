@@ -152,13 +152,14 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                        });
 
 
-                       await      this.InsertDocumentDetailsCollectedByCustomerToSvcAsync();
-                       await      this.GetDriverListFromSvcAsync();
-                       await      this.GetCourierListFromSvcAsync();
+                       await this.InsertDocumentDetailsCollectedByCustomerToSvcAsync();
+                       await this.GetDriverListFromSvcAsync();
+                       await this.GetCourierListFromSvcAsync();
                        //await      this.InsertDocumentCollectedByDriverOrCourierToSvcAsync();
+                       await this.UpdateDeliveryDetailAsync();
                        await this.InsertDocumentDeliveredByDriverOrCourierToSvcAsync();
-                       await      this.UpdateTaskStatusAsync();
-                       await      this.GetCollectedFromSvcAsync();
+                       await this.UpdateTaskStatusAsync();
+                       await this.GetCollectedFromSvcAsync();
 
                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                        {
@@ -167,6 +168,63 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
 
                    });
 
+            }
+            catch (Exception ex)
+            {
+                this.SendMessageToUIThread(ex.Message);
+            }
+        }
+
+        async private System.Threading.Tasks.Task UpdateDeliveryDetailAsync()
+        {
+            try
+            {
+                var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                    return;
+
+                if (_userInfo == null)
+                {
+                    _userInfo = PersistentData.Instance.UserInfo;
+                }
+                var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentDeliveryUpdateDetail>());
+                ObservableCollection<MZKCourierCollectionDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKCourierCollectionDetailsContract>();
+
+                foreach (var doc in cdDataList)
+                {
+                    mzkDocumentCollectedDetailsContractColl.Add(new MZKCourierCollectionDetailsContract()
+                    {
+                        parmCaseId = doc.CaseNumber,
+                        parmCollectedFrom = doc.SelectedCollectedFrom,
+                        parmComment = doc.Comment,
+                        parmEmail = doc.Email,
+                        parmCaseServiceRecId = doc.CaseServiceRecId,
+                        parmContactPerson = doc.DeliveryPersonName,
+                        parmCollectedBy = doc.DeliveryPersonName,
+                        parmPosition = doc.Position,
+                        parmTelePhone = doc.Phone,
+                        // parmContactNumber
+                        // parmCourierSignature = doc.CRSignature.,
+                        parmReceivedBy = doc.DeliveryPersonName,
+                        parmDateTime = doc.DeliveryDate,
+                        parmContactNumber = doc.Phone
+                    });
+
+                }
+                if (mzkDocumentCollectedDetailsContractColl.Count > 0)
+                {
+                    var res = await _client.updateDeliveryDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
+                    if (res != null && res.response.Any())
+                    {
+                        foreach (var cdData in cdDataList)
+                        {
+                            if (res.response.Any(a => a.parmCaseId == cdData.CaseNumber && a.parmCaseServiceRecId == cdData.CaseServiceRecId))
+                            {
+                                await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumentDeliveryUpdateDetail>(cdData);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -219,9 +277,11 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
 
                         //    }
                         //}
-
-                        singleTask.taskdata.DocumentCount = singleTask.count;
-                        tasks.Add(singleTask.taskdata);
+                        if (singleTask.taskdata.TaskType != CDTaskType.None)
+                        {
+                            singleTask.taskdata.DocumentCount = singleTask.count;
+                            tasks.Add(singleTask.taskdata);
+                        }
                     }
                 }
                 return tasks;
@@ -483,7 +543,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 //if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess || _userInfo.CDUserType != CDUserType.Customer)
 
-                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess )
+                if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
                     return;
 
                 if (_userInfo == null)
@@ -492,42 +552,42 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 }
                 var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>());
                 ObservableCollection<MZKDocumentCollectedDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKDocumentCollectedDetailsContract>();
-               
-                    foreach (var doc in cdDataList)
+
+                foreach (var doc in cdDataList)
+                {
+                    mzkDocumentCollectedDetailsContractColl.Add(new MZKDocumentCollectedDetailsContract()
                     {
-                        mzkDocumentCollectedDetailsContractColl.Add(new MZKDocumentCollectedDetailsContract()
-                        {
-                            parmCaseId = doc.CaseNumber,
-                            parmCollectedFrom = doc.SelectedCollectedFrom,
-                            parmComment = doc.Comment,
-                            parmEmail = doc.Email,
-                            parmPosition = doc.Position,
-                            parmReceivedBy = doc.ReceivedBy,
-                            parmReceivedDate = doc.ReceivedDate,
-                            parmReferenceNo = doc.ReferenceNo,
-                            parmCaseServiceRecId = doc.CaseServiceRecId,
-                            // parmSignature = doc.CRSignature,
-                            parmTelePhone = doc.Phone
+                        parmCaseId = doc.CaseNumber,
+                        parmCollectedFrom = doc.SelectedCollectedFrom,
+                        parmComment = doc.Comment,
+                        parmEmail = doc.Email,
+                        parmPosition = doc.Position,
+                        parmReceivedBy = doc.ReceivedBy,
+                        parmReceivedDate = doc.ReceivedDate,
+                        parmReferenceNo = doc.ReferenceNo,
+                        parmCaseServiceRecId = doc.CaseServiceRecId,
+                        // parmSignature = doc.CRSignature,
+                        parmTelePhone = doc.Phone
 
-                        });
-                    }
+                    });
+                }
 
-                    if (mzkDocumentCollectedDetailsContractColl.Count>0)
+                if (mzkDocumentCollectedDetailsContractColl.Count > 0)
+                {
+                    var res = await _client.insertDocumentCustomerDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
+
+                    if (res != null && res.response.Any())
                     {
-                        var res = await _client.insertDocumentCustomerDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
 
-                        if (res != null && res.response.Any())
+                        foreach (var cdData in cdDataList)
                         {
-
-                            foreach (var cdData in cdDataList)
+                            if (res.response.Any(a => a.parmCaseId == cdData.CaseNumber && a.parmCaseServiceRecId == cdData.CaseServiceRecId))
                             {
-                                if (res.response.Any(a => a.parmCaseId == cdData.CaseNumber && a.parmCaseServiceRecId == cdData.CaseServiceRecId))
-                                {
-                                    await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumentCollectDetail>(cdData);
-                                }
+                                await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumentCollectDetail>(cdData);
                             }
-                        } 
+                        }
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -548,7 +608,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
         //        }
         //        var cdDataList = (await SqliteHelper.Storage.LoadTableAsync<DocumentCollectDetail>());
         //        ObservableCollection<MZKCourierCollectionDetailsContract> mzkDocumentCollectedDetailsContractColl = new ObservableCollection<MZKCourierCollectionDetailsContract>();
-               
+
         //            foreach (var doc in cdDataList)
         //            {
         //                mzkDocumentCollectedDetailsContractColl.Add(new MZKCourierCollectionDetailsContract()
@@ -628,7 +688,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                     });
 
                 }
-                if (mzkDocumentCollectedDetailsContractColl.Count>0)
+                if (mzkDocumentCollectedDetailsContractColl.Count > 0)
                 {
                     var res = await _client.insertDocumentDriverCourierDetailsAsync(mzkDocumentCollectedDetailsContractColl, _userInfo.CompanyId);
                     if (res != null && res.response.Any())
@@ -640,7 +700,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                                 await SqliteHelper.Storage.DeleteSingleRecordAsync<DocumnetDeliverDetail>(cdData);
                             }
                         }
-                    } 
+                    }
                 }
 
             }
@@ -671,16 +731,18 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 switch (_userInfo.CDUserType)
                 {
                     case CDUserType.Driver:
-
+                        
                         actionStepMapping.Add(CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitDriverCollection);
+                        actionStepMapping[CDTaskStatus.AwaitInvoice] = EEPActionStep.AwaitDriverCollectionLicenseDisc;
                         actionStepMapping.Add(CDTaskStatus.Completed, EEPActionStep.AwaitDeliveryConfirmation);
-                        tasks = tasks.Where(w => w.Status == CDTaskStatus.AwaitDeliveryConfirmation || w.Status == CDTaskStatus.Completed);
+                        tasks = tasks.Where(w => w.Status == CDTaskStatus.AwaitDeliveryConfirmation || w.Status == CDTaskStatus.Completed ||
+                            w.Status == CDTaskStatus.AwaitInvoice);
                         break;
 
                     case CDUserType.Courier:
 
                         actionStepMapping.Add(CDTaskStatus.AwaitDeliveryConfirmation, EEPActionStep.AwaitCourierCollection);
-                        actionStepMapping.Add(CDTaskStatus.AwaitInvoice, EEPActionStep.AwaitDeliveryConfirmation);
+                        actionStepMapping.Add(CDTaskStatus.AwaitInvoice, EEPActionStep.AwaitDeliveryConfirmationCourier);
                         tasks = tasks.Where(w => w.Status == CDTaskStatus.AwaitDeliveryConfirmation || w.Status == CDTaskStatus.AwaitInvoice);
                         break;
 
@@ -695,6 +757,10 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 {
                     foreach (var task in tasks)
                     {
+                        //if (task.ServiceId == "Licence Dup")
+                        //{
+                        //    actionStepMapping[CDTaskStatus.AwaitInvoice] = EEPActionStep.AwaitDriverCollectionLicenseDisc;
+                        //}
                         mzkTasks.Add(
                             new MZKCollectDeliverTasksContract
                             {
