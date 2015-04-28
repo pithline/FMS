@@ -11,9 +11,9 @@ namespace Eqstra.WinRT.Components.Controls.WindowsPhone
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BusyIndicator : Page, INotifyPropertyChanged
+    public sealed partial class BusyIndicator : ContentDialog, INotifyPropertyChanged
     {
-        private Popup _popup;
+       // private Popup _popup;
         public BusyIndicator()
         {
             this.InitializeComponent();
@@ -22,24 +22,28 @@ namespace Eqstra.WinRT.Components.Controls.WindowsPhone
         public void Open(string message)
         {
             CoreWindow currentWindow = Window.Current.CoreWindow;
-            if (_popup == null)
-            {
-                _popup = new Popup();
-            }
-            _popup.VerticalOffset = 0;
-            _popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-            _popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+            //if (_popup == null)
+            //{
+            //    _popup = new Popup();
+            //}
+
+            //_popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+            //_popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+
             this.Message = message;
-            this.Tag = _popup;
+           // this.Tag = _popup;
             this.Height = currentWindow.Bounds.Height;
             this.Width = currentWindow.Bounds.Width;
+            //_popup.Child = this;
+            //_popup.IsOpen = true;
+            //_popup.VerticalOffset = 0;
+            this.ShowAsync();
 
-            _popup.Child = this;
-            _popup.IsOpen = true;
         }
         public void Close()
         {
-            ((Popup)this.Tag).IsOpen = false;
+           // ((Popup)this.Tag).IsOpen = false;
+            this.Hide();
         }
 
 

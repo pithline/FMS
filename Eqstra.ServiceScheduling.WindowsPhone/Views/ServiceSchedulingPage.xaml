@@ -221,7 +221,7 @@
                                   Grid.Row="10"
                                   BorderBrush="{Binding LtBorderBrush}"
                                   SelectionChanged="ddLocationType_SelectionChanged"
-                                  Header="Location Types"
+                                  Header="Location Type"
                                   DisplayMemberPath="LocationName"
                                   Visibility="{Binding IsReqVisibility}"
                                   SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
@@ -233,10 +233,8 @@
                                   VerticalAlignment="Center" />
 
 
-
-
                         <ComboBox Grid.Row="11"
-                                  Header="Destination Types"
+                                  Header="Destination Type"
                                   SelectionChanged="ddDestinationTypes_SelectionChanged"
                                   Visibility="{Binding IsReqVisibility}"
                                   ItemsSource="{Binding DestinationTypes}"
@@ -244,6 +242,7 @@
                                   DisplayMemberPath="ContactName"
                                   SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
                                   x:Name="ddDestinationTypes"
+                                  IsEnabled="{Binding IsEnabledDesType}"
                                   Margin="0,2"
                                   Width="330"
                                   Style="{StaticResource ComboContentStyle}"
@@ -270,11 +269,12 @@
                                       IsTextPredictionEnabled="True"
                                       AcceptsReturn="True" />
 
-                            <AppBarButton Icon="Add"
-                                          IsCompact="True"
+                            <AppBarButton Icon="Add" x:Name="addBtn"
+                                          IsCompact="True" 
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Right"
                                           Label="Add"
+                                          Visibility="{Binding AddVisibility}"
                                           Command="{Binding AddCommand}" />
 
                         </StackPanel>
