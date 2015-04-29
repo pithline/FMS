@@ -780,7 +780,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                         {
                             foreach (var task in tasks)
                             {
-                                if (res.response.Any(a => a.parmCaseId == task.CaseNumber && a.parmStatus == task.Status && a.parmCollectDeliverType.ToString().Equals(task.TaskType.ToString())))
+                                if (res.response.Any(a => a.parmCaseId == task.CaseNumber ))
                                 {
                                     if (task.TaskType == CDTaskType.None)
                                     {
