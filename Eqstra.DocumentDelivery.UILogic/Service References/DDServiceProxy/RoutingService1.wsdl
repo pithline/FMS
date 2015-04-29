@@ -24,13 +24,26 @@
   <wsdl:binding name="BasicHttpBinding_MzkCollectDeliveryService" type="i1:MzkCollectDeliveryService">
     <wsp:PolicyReference URI="#BasicHttpBinding_MzkCollectDeliveryService_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="getCollectedFromAddress">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddress" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceGetCollectedFromAddressRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceGetCollectedFromAddressRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getDrivers">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getDrivers" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceGetDriversRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceGetDriversRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceGetCollectedFromAddressResponse">
+      <wsdl:output name="MzkCollectDeliveryServiceGetDriversResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateStatusList">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/updateStatusList" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceUpdateStatusListRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceUpdateStatusListRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkCollectDeliveryServiceUpdateStatusListResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -50,39 +63,13 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="getCourierList">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCourierList" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceGetCourierListRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceGetCourierListRequest_Headers" part="context" use="literal" />
+    <wsdl:operation name="getCustomerInfo">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfo" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceGetCustomerInfoRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceGetCustomerInfoRequest_Headers" part="context" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceGetCourierListResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="validateUser">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/validateUser" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceValidateUserRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceValidateUserRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceValidateUserResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="updateStatusList">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/updateStatusList" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceUpdateStatusListRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceUpdateStatusListRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceUpdateStatusListResponse">
+      <wsdl:output name="MzkCollectDeliveryServiceGetCustomerInfoResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
@@ -115,6 +102,58 @@
         <soap:fault use="literal" name="AifFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="validateUser">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/validateUser" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceValidateUserRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceValidateUserRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkCollectDeliveryServiceValidateUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCourierList">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCourierList" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceGetCourierListRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceGetCourierListRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkCollectDeliveryServiceGetCourierListResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCollectedFromAddress">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCollectedFromAddress" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceGetCollectedFromAddressRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceGetCollectedFromAddressRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkCollectDeliveryServiceGetCollectedFromAddressResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateDeliveryDetails">
+      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/updateDeliveryDetails" style="document" />
+      <wsdl:input name="MzkCollectDeliveryServiceUpdateDeliveryDetailsRequest">
+        <soap:header message="i1:MzkCollectDeliveryServiceUpdateDeliveryDetailsRequest_Headers" part="context" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="MzkCollectDeliveryServiceUpdateDeliveryDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AifFaultFault">
+        <soap:fault use="literal" name="AifFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getTasks">
       <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getTasks" style="document" />
       <wsdl:input name="MzkCollectDeliveryServiceGetTasksRequest">
@@ -122,32 +161,6 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="MzkCollectDeliveryServiceGetTasksResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getDrivers">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getDrivers" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceGetDriversRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceGetDriversRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceGetDriversResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="AifFaultFault">
-        <soap:fault use="literal" name="AifFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getCustomerInfo">
-      <soap:operation soapAction="http://tempuri.org/MzkCollectDeliveryService/getCustomerInfo" style="document" />
-      <wsdl:input name="MzkCollectDeliveryServiceGetCustomerInfoRequest">
-        <soap:header message="i1:MzkCollectDeliveryServiceGetCustomerInfoRequest_Headers" part="context" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="MzkCollectDeliveryServiceGetCustomerInfoResponse">
         <soap:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="AifFaultFault">
