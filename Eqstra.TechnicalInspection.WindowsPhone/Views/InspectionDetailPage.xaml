@@ -55,7 +55,7 @@
                          Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
                          IsTextPredictionEnabled="True"
                          HorizontalAlignment="Left"
-                         Width="330"
+                         Width="{Binding BoundWidth}"
                          Height="150"
                          Margin="5"
                          VerticalAlignment="Center" />
@@ -74,7 +74,7 @@
                          Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
                          IsTextPredictionEnabled="True"
                          HorizontalAlignment="Left"
-                         Width="330"
+                         Width="{Binding BoundWidth}"
                          Height="150"
                          Margin="5"
                          VerticalAlignment="Center" />
@@ -94,7 +94,7 @@
                          Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
                          IsTextPredictionEnabled="True"
                          HorizontalAlignment="Left"
-                         Width="330"
+                         Width="{Binding BoundWidth}"
                          Height="150"
                          Margin="5"
                          VerticalAlignment="Center" />

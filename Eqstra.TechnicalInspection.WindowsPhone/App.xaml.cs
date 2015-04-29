@@ -16,6 +16,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Eqstra.TechnicalInspection.UILogic;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml.Controls;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Eqstra.TechnicalInspection.WindowsPhone
@@ -61,7 +62,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
         public async System.Threading.Tasks.Task ReadFile(StorageFile file)
         {
             byte[] fileBytes = null;
-          
+
             Eqstra.BusinessLogic.Portable.TIModels.ImageCapture imageCapture;
             using (IRandomAccessStreamWithContentType stream = await file.OpenReadAsync())
             {
@@ -147,6 +148,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                 var accessToken = JsonConvert.DeserializeObject<AccessToken>(ApplicationData.Current.RoamingSettings.Values[Constants.ACCESSTOKEN].ToString());
                 if (accessToken.ExpirationDate > DateTime.Now)
                 {
+                   
+
                     NavigationService.Navigate("Main", string.Empty);
                 }
                 else

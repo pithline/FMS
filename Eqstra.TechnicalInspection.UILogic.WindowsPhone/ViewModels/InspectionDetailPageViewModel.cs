@@ -12,6 +12,7 @@ using System.Windows.Input;
 using Windows.Media.SpeechRecognition;
 using Windows.Storage;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -28,6 +29,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._taskService = taskService;
             this.Model = new TIData();
             _busyIndicator = new BusyIndicator();
+            BoundWidth = Window.Current.Bounds.Width - 60;
             CompleteCommand = new DelegateCommand(async () =>
             {
                 try
@@ -116,6 +118,14 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
+
+        private double boundWidth;
+        public double BoundWidth
+        {
+            get { return boundWidth; }
+            set { SetProperty(ref boundWidth, value); }
+        }
+
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand CompleteCommand { get; set; }
         public DelegateCommand<string> VoiceCommand { get; set; }

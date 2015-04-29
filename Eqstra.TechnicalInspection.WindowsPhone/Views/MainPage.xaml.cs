@@ -30,6 +30,10 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
+            var w = (Window.Current.Bounds.Width / 2) - 15;
+            Style style = this.Resources["GridViewItemStyle1"] as Style;
+            style.Setters.Add(new Setter(GridViewItem.WidthProperty, w));
+            style.Setters.Add(new Setter(GridViewItem.HeightProperty, w));
 
         }
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
