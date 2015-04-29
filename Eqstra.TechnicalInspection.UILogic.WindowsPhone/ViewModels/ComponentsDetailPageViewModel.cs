@@ -21,72 +21,96 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         private SnapshotsViewer _snapShotsPopup;
         public INavigationService _navigationService;
         public IEventAggregator _eventAggregator;
+        private Dictionary<long, MaintenanceRepair> MaintenanceRepairKVPair;
         public ComponentsDetailPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
-            PersistentData.Instance.MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
+            MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
             TakeSnapshotCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
                 FileOpenPicker openPicker = new FileOpenPicker();
+
                 openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
                 openPicker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+
                 openPicker.FileTypeFilter.Add(".bmp");
                 openPicker.FileTypeFilter.Add(".png");
                 openPicker.FileTypeFilter.Add(".jpeg");
                 openPicker.FileTypeFilter.Add(".jpg");
-             
-                PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
+
+                await Util.WriteToDiskAsync<MaintenanceRepair>(this.SelectedMaintenanceRepair, "SelectedMaintenanceRepair");
 
                 openPicker.PickSingleFileAndContinue();
 
-                // var camCap = new CameraCaptureDialog();
-                //camCap.Tag = this.SelectedMaintenanceRepair;
-                //await camCap.ShowAsync();
-
-                this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(repair =>
+                this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(async (repair) =>
                 {
+                    await CacheImagesOnNavigationAsync();
+
                     this.SelectedMaintenanceRepair = repair;
-
                 });
-
-
             });
 
             PreviousCommand = new DelegateCommand(() =>
             {
-
                 navigationService.Navigate("TechnicalInspection", string.Empty);
             });
-          
+
         }
 
-        public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
+
+        async public override void OnNavigatedFrom(Dictionary<string, object> viewModelState, bool suspending)
         {
             if (this._snapShotsPopup != null)
             {
                 this._snapShotsPopup.Hide();
             }
-            PersistentData.Instance.SelectedMaintenanceRepair = this.SelectedMaintenanceRepair;
-            if (!PersistentData.Instance.MaintenanceRepairKVPair.ContainsKey(this.SelectedMaintenanceRepair.Repairid))
-            {
-                PersistentData.Instance.MaintenanceRepairKVPair.Add(this.SelectedMaintenanceRepair.Repairid, this.SelectedMaintenanceRepair);
-            }
-            else
-            {
-                PersistentData.Instance.MaintenanceRepairKVPair[this.SelectedMaintenanceRepair.Repairid] = this.SelectedMaintenanceRepair;
-            }
+            await CacheImagesOnNavigationAsync();
             base.OnNavigatedFrom(viewModelState, suspending);
+        }
+
+        async public System.Threading.Tasks.Task CacheImagesOnNavigationAsync()
+        {
+            try
+            {
+                await Util.WriteToDiskAsync<MaintenanceRepair>(this.SelectedMaintenanceRepair, "SelectedMaintenanceRepair");
+
+                MaintenanceRepairKVPair = await Util.ReadFromDiskAsync<Dictionary<long, MaintenanceRepair>>("MaintenanceRepairKVPair");
+                if (MaintenanceRepairKVPair == null)
+                {
+                    MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
+                }
+
+                if (!MaintenanceRepairKVPair.ContainsKey(this.SelectedMaintenanceRepair.Repairid))
+                {
+                    MaintenanceRepairKVPair.Add(this.SelectedMaintenanceRepair.Repairid, this.SelectedMaintenanceRepair);
+                }
+                else
+                {
+                    MaintenanceRepairKVPair[this.SelectedMaintenanceRepair.Repairid] = this.SelectedMaintenanceRepair;
+                }
+
+                await Util.WriteToDiskAsync<Dictionary<long, MaintenanceRepair>>(this.MaintenanceRepairKVPair, "MaintenanceRepairKVPair");
+
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
             try
             {
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+
                 this.SelectedMaintenanceRepair = JsonConvert.DeserializeObject<MaintenanceRepair>(navigationParameter.ToString());
-                if (PersistentData.Instance.MaintenanceRepairKVPair != null && PersistentData.Instance.MaintenanceRepairKVPair.Any())
+
+                MaintenanceRepairKVPair = await Util.ReadFromDiskAsync<Dictionary<long, MaintenanceRepair>>("MaintenanceRepairKVPair");
+                if (MaintenanceRepairKVPair != null && MaintenanceRepairKVPair.Any())
                 {
-                    this.SelectedMaintenanceRepair = PersistentData.Instance.MaintenanceRepairKVPair.Values.FirstOrDefault(f => f.Repairid == this.SelectedMaintenanceRepair.Repairid);
+                    this.SelectedMaintenanceRepair = MaintenanceRepairKVPair.Values.FirstOrDefault(f => f.Repairid == this.SelectedMaintenanceRepair.Repairid);
                 }
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
                 {
@@ -95,7 +119,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
             catch (Exception ex)
             {
-
             }
         }
 

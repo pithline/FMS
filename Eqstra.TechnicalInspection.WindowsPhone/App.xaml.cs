@@ -35,7 +35,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
             this.UnhandledException += App_UnhandledException;
             Window.Current.Activated += Current_Activated;
         }
-
         void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
         {
 
@@ -49,20 +48,20 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                 {
                     case ActivationKind.PickFileContinuation:
                         var arguments = (FileOpenPickerContinuationEventArgs)args;
-                        var selectedMaintenanceRepair = PersistentData.Instance.SelectedMaintenanceRepair;
                         StorageFile file = arguments.Files.FirstOrDefault();
                         if (file != null)
                         {
-                            await ReadFile(file, selectedMaintenanceRepair);
+                            await ReadFile(file);
                         }
                         break;
                 }
             }
         }
 
-        public async System.Threading.Tasks.Task ReadFile(StorageFile file, MaintenanceRepair selectedMaintenanceRepair)
+        public async System.Threading.Tasks.Task ReadFile(StorageFile file)
         {
             byte[] fileBytes = null;
+            MaintenanceRepair selectedMaintenanceRepair = await Util.ReadFromDiskAsync<MaintenanceRepair>("SelectedMaintenanceRepair");
             using (IRandomAccessStreamWithContentType stream = await file.OpenReadAsync())
             {
                 fileBytes = new byte[stream.Size];
@@ -88,7 +87,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                              ImageData = Convert.ToBase64String(fileBytes),
                              Component = selectedMaintenanceRepair.MajorComponent,
                              RepairId = selectedMaintenanceRepair.Repairid,
-                             guid = Guid.NewGuid()
+                             guid = Guid.NewGuid(),
                          });
                     }
                     else
@@ -106,9 +105,10 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
 
 
             }
-
             EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);
         }
+
+
         void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
@@ -123,8 +123,10 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
         {
 
             SessionStateService.RegisterKnownType(typeof(Task));
+            SessionStateService.RegisterKnownType(typeof(TITask));
             SessionStateService.RegisterKnownType(typeof(UserInfo));
-            SessionStateService.RegisterKnownType(typeof(UserInfo));
+            SessionStateService.RegisterKnownType(typeof(TIData));
+            SessionStateService.RegisterKnownType(typeof(MaintenanceRepair));
             SessionStateService.RegisterKnownType(typeof(Eqstra.BusinessLogic.Portable.TIModels.ImageCapture));
 
             EventAggregator = new EventAggregator();

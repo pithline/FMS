@@ -36,7 +36,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                await vm.FetchTasks();
+                await vm.FetchTasksAsync();
             });
         }
 
@@ -120,11 +120,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         private void filter_Click(object sender, RoutedEventArgs e)
         {
             FlyoutBase.ShowAttachedFlyout(filter);
-        }
-
-        private void TasksPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            vm.InspectionTask = null;
         }
 
         private void contextmenu_Holding(object sender, HoldingRoutedEventArgs e)

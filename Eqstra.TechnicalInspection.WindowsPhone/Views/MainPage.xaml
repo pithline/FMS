@@ -48,7 +48,7 @@
                              TextWrapping="Wrap"
                              TextAlignment="Left"
                              Margin="2,5"
-                             Text="{Binding ContactName}" />
+                             Text="{Binding Status}" />
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
@@ -57,7 +57,7 @@
                            TextWrapping="Wrap"
                            TextAlignment="Left"
                            FontSize="17"
-                           Text="{Binding CustomerName}" />
+                           Text="{Binding Model}" />
 
 
             </StackPanel>

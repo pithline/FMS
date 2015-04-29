@@ -31,22 +31,15 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
     /// </summary>
     public sealed partial class TechnicalInspectionPage : VisualStateAwarePage
     {
-        DetailsDialog dd;
+       
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-
-            if (dd != null)
-            {
-                dd.Hide();
-            }
-
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -54,14 +47,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             var item = (MaintenanceRepair)e.ClickedItem;
             Frame.Navigate(typeof(ComponentsDetailPage), JsonConvert.SerializeObject(item));
         }
-
-        async private void More_Click(object sender, RoutedEventArgs e)
-        {
-            dd = new DetailsDialog();
-            dd.DataContext = ((TechnicalInspectionPageViewModel)this.DataContext).SelectedTask;
-            await dd.ShowAsync();
-
-        }
+     
     }
 
 }

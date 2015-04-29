@@ -43,8 +43,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         private INavigationService _navigationService;
         public IServiceDetailService _serviceDetailService;
         public BusyIndicator _busyIndicator;
-
+        private DetailsDialog moreInfo;
         private ITaskService _taskService;
+        private SearchSupplierDialog sp;
         public ServiceSchedulingPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, ILocationService locationService, IServiceDetailService serviceDetailService, ISupplierService supplierService, ITaskService taskService)
         {
             this._navigationService = navigationService;
@@ -127,22 +128,10 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                   this.Model.OdoReadingImageCapture = imageCapture;
               });
 
-
-              //var camCap =
-              //new CameraCaptureDialog();
-              //camCap.Tag = this.Model;
-              //await camCap.ShowAsync();
-
-
           });
             this.OpenImageViewerCommand = new DelegateCommand(
               async () =>
               {
-
-                  //  CoreWindow currentWindow = Window.Current.CoreWindow;
-                  //  Popup popup = new Popup();
-                  //  popup.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-                  //  popup.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
 
                   if (_imageViewer == null)
                   {
@@ -156,15 +145,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                   }
 
                   _imageViewer.DataContext = this.Model.OdoReadingImageCapture;
-                  // popup.Child = _imageViewer;
-                  // this._imageViewer.Tag = popup;
-
-
-                  //  this._imageViewer.Height = currentWindow.Bounds.Height;
-                  //  this._imageViewer.Width = currentWindow.Bounds.Width;
-
-                  // popup.IsOpen = true;
-
                   await _imageViewer.ShowAsync();
 
               });
@@ -172,22 +152,28 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.VoiceCommand = new DelegateCommand(async () =>
             {
-                SpeechRecognizer recognizer = new SpeechRecognizer();
-
-                SpeechRecognitionTopicConstraint topicConstraint
-                        = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
-
-                recognizer.Constraints.Add(topicConstraint);
-                await recognizer.CompileConstraintsAsync();
-
-                var results = await recognizer.RecognizeWithUIAsync();
-                if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
+                try
                 {
-                    this.Model.AdditionalWork = results.Text;
+                    SpeechRecognizer recognizer = new SpeechRecognizer();
+
+                    SpeechRecognitionTopicConstraint topicConstraint = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
+
+                    recognizer.Constraints.Add(topicConstraint);
+                    await recognizer.CompileConstraintsAsync();
+
+                    var results = await recognizer.RecognizeWithUIAsync();
+                    if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
+                    {
+                        this.Model.AdditionalWork = results.Text;
+                    }
+                    else
+                    {
+                        await new MessageDialog("Sorry, I did not get that.").ShowAsync();
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    await new MessageDialog("Sorry, I did not get that.").ShowAsync();
+
                 }
 
             });
@@ -197,12 +183,21 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 _addressDialog = new AddressDialog(this._locationService, this._eventAggregator);
                 this.Model.SelectedDestinationType = new DestinationType();
-                _addressDialog.ShowAsync();
+                await _addressDialog.ShowAsync();
             });
 
-            this.ClearCommand = new DelegateCommand(async () =>
+            this.DetailCommand = new DelegateCommand(async () =>
             {
-                this.Model.Address = String.Empty;
+                moreInfo = new DetailsDialog();
+                moreInfo.DataContext = this.SelectedTask;
+                await moreInfo.ShowAsync();
+            });
+
+            this.SupplierFilterCommand = new DelegateCommand(async () =>
+            {
+                sp = new SearchSupplierDialog(this._locationService, this._eventAggregator, this._supplierService);
+                await sp.ShowAsync();
+
             });
 
             this._eventAggregator.GetEvent<AddressFilterEvent>().Subscribe((address) =>
@@ -247,9 +242,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             {
                 this.PoolofSupplier = poolofSupplier;
             });
-
-
-
         }
         private bool Validate()
         {
@@ -311,6 +303,14 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         {
             this._busyIndicator.Close();
             base.OnNavigatedFrom(viewModelState, suspending);
+            if (moreInfo != null)
+            {
+                moreInfo.Hide();
+            }
+            if (sp != null)
+            {
+                sp.Hide();
+            }
         }
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -353,10 +353,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.Model.ServiceDateOpt2 = DateTime.Parse(this.Model.ServiceDateOption2);
                 }
-                if (!String.IsNullOrEmpty(this.Model.ConfirmedDate))
-                {
-                    this.Model.ConfirmedDateDt = DateTime.Parse(this.Model.ConfirmedDate);
-                }
+
                 if (!String.IsNullOrEmpty(this.Model.ODOReadingDate))
                 {
                     this.Model.ODOReadingDt = DateTime.Parse(this.Model.ODOReadingDate);
@@ -411,7 +408,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         public DelegateCommand SupplierFilterCommand { get; set; }
         public DelegateCommand VoiceCommand { get; set; }
         public DelegateCommand AddCommand { get; set; }
-        public DelegateCommand ClearCommand { get; set; }
 
         private Boolean isLiftRequired;
         public Boolean IsLiftRequired
@@ -525,7 +521,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return addVisibility; }
             set { SetProperty(ref addVisibility, value); }
         }
-        
+
         public ApplicationTheme applicationTheme { get; set; }
+
+        public DelegateCommand DetailCommand { get; set; }
     }
 }

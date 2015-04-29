@@ -7,7 +7,6 @@ namespace Eqstra.ServiceScheduling.UILogic
     {
         private static PersistentData _instance = new PersistentData();
         public static PersistentData Instance { get { return _instance; } }
-        public ObservableCollection<BusinessLogic.Portable.SSModels.Task> Tasks { get; set; }
         public static void RefreshInstance()
         {
             _instance = new PersistentData();

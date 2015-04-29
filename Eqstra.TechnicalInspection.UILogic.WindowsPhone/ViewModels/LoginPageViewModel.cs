@@ -45,7 +45,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                         }
 
                         ProgressDialogPopup.Close();
-
                     }
                     catch (Exception ex)
                     {
@@ -86,7 +85,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             }
         }
 
-
         private bool isLoggingIn;
         public bool IsLoggingIn
         {
@@ -94,7 +92,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             set { SetProperty(ref isLoggingIn, value); }
         }
         private ProgressDialog progressDialogPopup;
-
         public ProgressDialog ProgressDialogPopup
         {
             get { return progressDialogPopup; }

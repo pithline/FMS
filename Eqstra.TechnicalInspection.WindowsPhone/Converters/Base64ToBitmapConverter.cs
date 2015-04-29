@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eqstra.BusinessLogic.Portable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,12 @@ using Windows.UI.Xaml.Data;
 
 namespace Eqstra.TechnicalInspection.Converters
 {
-    public class CommandParameterConverter : IValueConverter
+    public class Base64ToBitmapConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new Tuple<object, object>(value, parameter);
+            var ImageBitmap = Util.FromBase64(value.ToString());
+            return ImageBitmap;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

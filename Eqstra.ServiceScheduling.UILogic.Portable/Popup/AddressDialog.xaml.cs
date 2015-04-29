@@ -35,6 +35,9 @@ namespace Eqstra.ServiceScheduling
             this.Address = new Address();
             this.InitializeComponent();
             this.Loaded += AddressDialog_Loaded;
+
+            var b = Window.Current.Bounds;
+            this.scrlAdd.MaxHeight = b.Height - 100;
         }
 
         async private void AddressDialog_Loaded(object sender, RoutedEventArgs e)

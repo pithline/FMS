@@ -27,8 +27,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this._taskService = taskService;
 
             this.PoolofTasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
-            this.Tasks = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
-
             this.NextPageCommand = new DelegateCommand<Task>((task) =>
              {
                  try
@@ -56,7 +54,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                    );
             this.RefreshTaskCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-
                 await this.FetchTasks();
             });
 
@@ -69,7 +66,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
                 else
                 {
-                    await new MessageDialog("No phone number exist").ShowAsync();
+                    await new MessageDialog("no phone number exist").ShowAsync();
                 }
             }, () =>
             {
@@ -84,7 +81,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
                 else
                 {
-                    await new MessageDialog("No mail id exist").ShowAsync();
+                    await new MessageDialog("no mail id exist").ShowAsync();
                 }
             }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CusEmailId)); });
 
@@ -97,7 +94,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 }
                 else
                 {
-                    await new MessageDialog("No address exist").ShowAsync();
+                    await new MessageDialog("no address exist").ShowAsync();
                 }
             }, () =>
             {
@@ -114,7 +111,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 SetProperty(ref taskProgressBar, value);
             }
         }
-
         private Eqstra.BusinessLogic.Portable.SSModels.Task task;
         public Eqstra.BusinessLogic.Portable.SSModels.Task InspectionTask
         {
@@ -122,12 +118,8 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             set
             {
                 SetProperty(ref task, value);
-
-
-
             }
         }
-
 
         private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> poolofTasks;
         public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> PoolofTasks
@@ -138,17 +130,6 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 SetProperty(ref poolofTasks, value);
             }
         }
-
-        private ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks;
-        public ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> Tasks
-        {
-            get { return tasks; }
-            set
-            {
-                SetProperty(ref tasks, value);
-            }
-        }
-
 
         public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
@@ -162,10 +143,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     this.UserInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
                 }
 
-                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()) || (PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.Tasks.Any()))
+                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()))
                 {
                     this.PoolofTasks = PersistentData.Instance.PoolofTasks;
-                    this.Tasks = PersistentData.Instance.Tasks;
                 }
                 await FetchTasks();
             }
@@ -178,33 +158,33 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
         }
         public async System.Threading.Tasks.Task FetchTasks()
         {
-            this.TaskProgressBar = Visibility.Visible;
-
-            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo);
-            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
-            ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> tasks = new ObservableCollection<Task>();
-            if (tasksResult!=null)
+            try
             {
-                foreach (var task in tasksResult)
+                this.TaskProgressBar = Visibility.Visible;
+
+                var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo);
+                ObservableCollection<Eqstra.BusinessLogic.Portable.SSModels.Task> pooltask = new ObservableCollection<Task>();
+                if (tasksResult != null)
                 {
-                    task.Address = Regex.Replace(task.Address, ",", "\n");
-                    if (task.Status == DriverTaskStatus.AwaitServiceBookingDetail)
+                    foreach (var task in tasksResult)
                     {
-                        pooltask.Add(task);
+                        if (task.Status==DriverTaskStatus.AwaitServiceBookingDetail)
+                        {
+                            task.Address = Regex.Replace(task.Address, ",", "\n");
+                            pooltask.Add(task); 
+                        }
                     }
-                    else if (task.Status == DriverTaskStatus.AwaitSupplierSelection)
-                    {
-                        tasks.Add(task);
-                    }
-                } 
+                }
+                this.PoolofTasks = pooltask;
+                this.TaskProgressBar = Visibility.Collapsed;
+
+                PersistentData.Instance.PoolofTasks = this.PoolofTasks;
             }
-            this.PoolofTasks = pooltask;
-            this.Tasks = tasks;
+            catch (Exception)
+            {
+                this.TaskProgressBar = Visibility.Collapsed;
 
-            this.TaskProgressBar = Visibility.Collapsed;
-
-            PersistentData.Instance.PoolofTasks = this.PoolofTasks;
-            PersistentData.Instance.Tasks = this.Tasks;
+            }
 
         }
         private void GetAppointments(Eqstra.BusinessLogic.Portable.SSModels.Task task)

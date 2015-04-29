@@ -37,6 +37,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                     ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK] = serializedTask;
                     if (task != null)
                     {
+                        deletefile();
                         _navigationService.Navigate("TechnicalInspection", serializedTask);
                     }
                 }
@@ -55,8 +56,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
             this.RefreshTaskCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-
-                await this.FetchTasks();
+                await this.FetchTasksAsync();
             });
 
 
@@ -68,7 +68,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 }
                 else
                 {
-                    await new MessageDialog("No phone number exist").ShowAsync();
+                    await new MessageDialog("no phone number exist").ShowAsync();
                 }
             }, () =>
             {
@@ -83,7 +83,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 }
                 else
                 {
-                    await new MessageDialog("No mail id exist").ShowAsync();
+                    await new MessageDialog("no mail id exist").ShowAsync();
                 }
             }, () => { return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.CustEmailId)); });
 
@@ -96,13 +96,79 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 }
                 else
                 {
-                    await new MessageDialog("No address exist").ShowAsync();
+                    await new MessageDialog("no address exist").ShowAsync();
                 }
             }, () =>
             {
                 return (this.InspectionTask != null && !string.IsNullOrEmpty(this.InspectionTask.Address));
             });
         }
+        public async void deletefile()
+        {
+            StorageFolder sourceFolder = ApplicationData.Current.TemporaryFolder;
+            IReadOnlyList<StorageFile> folderList = await sourceFolder.GetFilesAsync();
+            if (folderList != null && folderList.Any())
+            {
+                foreach (StorageFile f1 in folderList)
+                {
+                    await f1.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                }
+            }
+        }
+
+
+        public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
+        {
+            try
+            {
+                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
+
+                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
+                {
+                    this.UserInfo = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
+                }
+
+                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()))
+                {
+                    this.PoolofTasks = PersistentData.Instance.PoolofTasks;
+                }
+                await FetchTasksAsync();
+
+            }
+            catch (Exception)
+            {
+                this.TaskProgressBar = Visibility.Collapsed;
+            }
+        }
+        public async System.Threading.Tasks.Task FetchTasksAsync()
+        {
+            this.TaskProgressBar = Visibility.Visible;
+            ObservableCollection<TITask> poolofTask = new ObservableCollection<TITask>();
+            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
+            if (tasksResult != null)
+            {
+                foreach (var task in tasksResult.Where(w => w.Status != DriverTaskStatus.Completed))
+                {
+                    task.Address = Regex.Replace(task.Address, ",", "\n");
+
+                    if (task.ConfirmedDate.Equals(default(DateTime)))
+                    {
+                        task.StringifyConfirmedDate = string.Empty;
+                    }
+                    else
+                    {
+                        task.StringifyConfirmedDate = task.ConfirmedDate.ToString();
+                    }
+                    poolofTask.Add(task);
+                }
+            }
+
+            this.PoolofTasks = poolofTask;
+            this.TaskProgressBar = Visibility.Collapsed;
+
+            PersistentData.Instance.PoolofTasks = this.PoolofTasks;
+        }
+
 
         private Visibility taskProgressBar;
         public Visibility TaskProgressBar
@@ -121,9 +187,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             set
             {
                 SetProperty(ref task, value);
-
-
-
             }
         }
 
@@ -135,58 +198,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 SetProperty(ref poolofTasks, value);
             }
-        }
-
-        public async override void OnNavigatedTo(object navigationParameter, Windows.UI.Xaml.Navigation.NavigationMode navigationMode, Dictionary<string, object> viewModelState)
-        {
-            try
-            {
-                base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-
-                if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
-                {
-                    this.UserInfo = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());
-                }
-
-                if ((PersistentData.Instance.PoolofTasks != null && PersistentData.Instance.PoolofTasks.Any()))
-                {
-                    this.PoolofTasks = PersistentData.Instance.PoolofTasks;
-                }
-                await FetchTasks();
-            }
-            catch (Exception)
-            {
-                this.TaskProgressBar = Visibility.Collapsed;
-
-            }
-
-        }
-        public async System.Threading.Tasks.Task FetchTasks()
-        {
-            this.TaskProgressBar = Visibility.Visible;
-            ObservableCollection<TITask> poolofTask = new ObservableCollection<TITask>();
-            var tasksResult = await this._taskService.GetTasksAsync(this.UserInfo.UserId, this.UserInfo.CompanyId);
-            if (tasksResult != null)
-            {
-                foreach (var task in tasksResult.Where(w => w.Status != DriverTaskStatus.Completed))
-                {
-                    task.Address = Regex.Replace(task.Address, ",", "\n");
-                    if (task.ConfirmedDate.Year<DateTime.Today.Year-5)
-                    {
-                        task.StringifyConfirmedDate = task.ConfirmedDate.ToString(); 
-                    }
-                    else
-                    {
-                        task.StringifyConfirmedDate = string.Empty;
-                    }
-                    poolofTask.Add(task);
-                }
-            }
-
-            this.PoolofTasks = poolofTask;
-            this.TaskProgressBar = Visibility.Collapsed;
-
-            PersistentData.Instance.PoolofTasks = this.PoolofTasks;
         }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand RefreshTaskCommand { get; set; }

@@ -17,17 +17,19 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
     {
         private INavigationService _navigationService;
         private ITaskService _taskService;
+        private Dictionary<long, MaintenanceRepair> MaintenanceRepairKVPair;
+        private DetailsDialog dd;
         public TechnicalInspectionPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
             _navigationService = navigationService;
             this._taskService = taskService;
+            MaintenanceRepairKVPair = new Dictionary<long, MaintenanceRepair>();
             this.MaintenanceRepairList = new ObservableCollection<MaintenanceRepair>();
 
             this.NextCommand = new DelegateCommand(async () =>
             {
                 try
                 {
-
                     List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture> imageCaptureList = new List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>();
                     foreach (var item in this.MaintenanceRepairList)
                     {
@@ -50,10 +52,19 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 catch (Exception ex)
                 {
                 }
-            }, () => { 
-                return this.SelectedTask.ComponentList!=null && this.SelectedTask.ComponentList.Any();
-           
+            }, () =>
+            {
+                return this.SelectedTask.ComponentList != null && this.SelectedTask.ComponentList.Any();
+
             });
+
+            this.DetailCommand = new DelegateCommand(async () =>
+            {
+                dd = new DetailsDialog();
+                dd.DataContext = this.SelectedTask;
+                await dd.ShowAsync();
+            });
+
 
         }
 
@@ -71,11 +82,11 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
-
-                if (PersistentData.Instance.MaintenanceRepairKVPair != null)
+                MaintenanceRepairKVPair = await Util.ReadFromDiskAsync<Dictionary<long, MaintenanceRepair>>("MaintenanceRepairKVPair");
+                if (MaintenanceRepairKVPair != null)
                 {
                     ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
-                    foreach (var repair in PersistentData.Instance.MaintenanceRepairKVPair.Values)
+                    foreach (var repair in MaintenanceRepairKVPair.Values)
                     {
                         mRepairList.Add(repair);
 
@@ -99,5 +110,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         public Eqstra.BusinessLogic.Portable.TIModels.TITask SelectedTask { get; set; }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand NextCommand { get; set; }
+
+        public DelegateCommand DetailCommand { get; set; }
     }
 }

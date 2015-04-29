@@ -6,32 +6,20 @@
                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                mc:Ignorable="d">
 
-    <Grid Background="#44e8edf1">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <PopupThemeTransition />
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
+    <Grid Background="#44e8edf1" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="0.5*" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <ProgressBar IsIndeterminate="True"
+                     Foreground="White"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+        <TextBlock Grid.Row="1"
+                   Foreground="White"
+                   Text="{Binding Message}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
 
-        <!-- Back button and page title -->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <ProgressBar IsIndeterminate="True"
-                         Foreground="White"
-                         VerticalAlignment="Top" />
-            <TextBlock Grid.Row="1"
-                       Foreground="White"
-                       Text="{Binding Message}"
-                       HorizontalAlignment="Center" />
-
-        </Grid>
     </Grid>
 </ContentDialog>
