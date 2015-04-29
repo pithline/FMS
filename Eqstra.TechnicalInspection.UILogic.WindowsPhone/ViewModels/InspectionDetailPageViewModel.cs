@@ -1,6 +1,7 @@
 ﻿using Eqstra.BusinessLogic.Portable;
 using Eqstra.BusinessLogic.Portable.TIModels;
 using Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services;
+using Eqstra.WinRT.Components.Controls.WindowsPhone;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
@@ -20,28 +21,37 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         private TITask _task;
         private INavigationService _navigationService;
         private ITaskService _taskService;
+        private BusyIndicator _busyIndicator;
         public InspectionDetailPageViewModel(INavigationService navigationService, ITaskService taskService)
         {
             this._navigationService = navigationService;
             this._taskService = taskService;
             this.Model = new TIData();
+            _busyIndicator = new BusyIndicator();
             CompleteCommand = new DelegateCommand(async () =>
             {
                 try
                 {
+                    _busyIndicator.Open("Please wait, Saving ...");
                     var imageCaptureList = await Util.ReadFromDiskAsync<List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>>("ImageCaptureList");
                     var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
+
+                    if (resp)
+                    {
+                        _navigationService.Navigate("Main", string.Empty);
+                    }
                 }
                 catch (Exception ex)
                 {
                 }
                 finally
                 {
-                    _navigationService.Navigate("Main", string.Empty);
+                    _busyIndicator.Close();
+
                 }
 
             });
-            this.VoiceCommand = new DelegateCommand<string>(async(param) =>
+            this.VoiceCommand = new DelegateCommand<string>(async (param) =>
             {
                 SpeechRecognizer recognizer = new SpeechRecognizer();
 
@@ -56,7 +66,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     if (param == "Remedy")
                     {
-                        this.Model.Remedy = results.Text; 
+                        this.Model.Remedy = results.Text;
                     }
                     if (param == "Recommendation")
                     {
@@ -108,7 +118,6 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         }
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
         public DelegateCommand CompleteCommand { get; set; }
-
         public DelegateCommand<string> VoiceCommand { get; set; }
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Converters\Base64ToBitmapConverter.cs" />
     <Compile Include="Converters\CommandParameterConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter .cs" />
     <Compile Include="Converters\InvertOpacityConverter.cs" />

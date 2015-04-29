@@ -23,7 +23,7 @@
                 <AppBarButton Label="details"
                               Icon="NewWindow"
                               x:Name="Profile"
-                              Click="More_Click" />
+                              Command="{Binding DetailCommand}" />
             </CommandBar.SecondaryCommands>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Accept"
@@ -269,8 +269,9 @@
                                       IsTextPredictionEnabled="True"
                                       AcceptsReturn="True" />
 
-                            <AppBarButton Icon="Add" x:Name="addBtn"
-                                          IsCompact="True" 
+                            <AppBarButton Icon="Add"
+                                          x:Name="addBtn"
+                                          IsCompact="True"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Right"
                                           Label="Add"
@@ -322,7 +323,7 @@
                                           VerticalAlignment="Center"
                                           IsCompact="True"
                                           Name="filterSup"
-                                          Click="filterSup_Click" />
+                                          Command="{Binding SupplierFilterCommand}"/>
 
                         </StackPanel>
 

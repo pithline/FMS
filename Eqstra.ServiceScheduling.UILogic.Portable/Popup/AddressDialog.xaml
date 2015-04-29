@@ -6,13 +6,17 @@
                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                mc:Ignorable="d"
                Title="ADDRESS"
-               PrimaryButtonText="OK"
+               PrimaryButtonText="ok"
                SecondaryButtonText="cancel"
                PrimaryButtonClick="OK_PrimaryButtonClick"
                SecondaryButtonClick="Cancel_SecondaryButtonClick">
     <ScrollViewer ZoomMode="Disabled"
-                  VerticalScrollBarVisibility="Visible">
-        <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                  x:Name="scrlAdd"
+                  ScrollViewer.IsScrollInertiaEnabled="True"
+                  ScrollViewer.IsVerticalRailEnabled="True"
+                  ScrollViewer.VerticalScrollMode="Enabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -20,11 +24,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-
             </Grid.RowDefinitions>
 
             <StackPanel Visibility="{Binding ProgressbarVisiblity}"
@@ -52,9 +51,19 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
+            <TextBox Header="Street :"
+                     Text="{Binding Street,Mode=TwoWay}"
+                     Grid.Row="1"
+                     Width="310"
+                     Height="150"
+                     AcceptsReturn="True"
+                     IsSpellCheckEnabled="True"
+                     IsTextPredictionEnabled="True"
+                     Margin="0 10" />
+
             <ComboBox  Height="70"
                        Header="Province"
-                       Grid.Row="1"
+                       Grid.Row="2"
                        Width="310"
                        ItemsSource="{Binding Provinces}"
                        SelectedItem="{Binding Selectedprovince,Mode=TwoWay}"
@@ -66,7 +75,7 @@
                        VerticalAlignment="Center" />
 
             <ComboBox  Height="70"
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Header="City"
                        Width="310"
                        ItemsSource="{Binding Cities}"
@@ -79,7 +88,7 @@
                        VerticalAlignment="Center" />
 
             <ComboBox  Height="70"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        Header="Suburb"
                        Width="310"
                        ItemsSource="{Binding Suburbs}"
@@ -91,18 +100,6 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <ComboBox  Height="70"
-                       Header="Region"
-                       Grid.Row="4"
-                       Width="310"
-                       ItemsSource="{Binding Region}"
-                       SelectedItem="{Binding SelectedRegion,Mode=TwoWay}"
-                       DisplayMemberPath="Name"
-                       Name="region"
-                       SelectionChanged="region_SelectionChanged"
-                       Margin="2"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
 
             <ComboBox  Height="70"
                        Header="Zip"
@@ -115,16 +112,6 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <TextBox Header="Street :"
-                     Text="{Binding Street,Mode=TwoWay}"
-                     Grid.Row="6"
-                     Grid.RowSpan="8"
-                     Width="310"
-                     Height="200"
-                     AcceptsReturn="True"
-                     IsSpellCheckEnabled="True"
-                     IsTextPredictionEnabled="True"
-                     Margin="0 10" />
 
 
         </Grid>

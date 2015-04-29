@@ -46,7 +46,7 @@
                 <AppBarButton Label="details"
                               Icon="NewWindow"
                               Name="Profile"
-                              Click="More_Click" />
+                              Command="{Binding DetailCommand}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>

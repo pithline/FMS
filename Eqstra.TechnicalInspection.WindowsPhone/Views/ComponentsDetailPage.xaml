@@ -15,6 +15,7 @@
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.Resources>
+        <conv:Base64ToBitmapConverter x:Key="Base64ToBitmapConverter" />
         <Style x:Key="GridViewItemStyle1"
                TargetType="GridViewItem">
             <Setter Property="FontFamily"
@@ -574,7 +575,7 @@
 
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageBitmap}"
+                                <Image Source="{Binding ImageData,Converter={StaticResource Base64ToBitmapConverter}}"
                                        Stretch="UniformToFill" />
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -594,7 +595,7 @@
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageBitmap}"
+                                <Image Source="{Binding ImageData,Converter={StaticResource Base64ToBitmapConverter}}"
                                        Stretch="UniformToFill" />
                             </DataTemplate>
                         </GridView.ItemTemplate>

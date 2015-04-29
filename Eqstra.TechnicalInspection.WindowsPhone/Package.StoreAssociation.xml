@@ -195,8 +195,15 @@
     <MainPackageIdentityName>AACE4B69.MazikAX</MainPackageIdentityName>
     <MainPackageIdentityName>AACE4B69.MazikAXCashier</MainPackageIdentityName>
     <MainPackageIdentityName>AACE4B69.MazikAXShopFloor</MainPackageIdentityName>
+    <MainPackageIdentityName>AACE4B69.MazikAXmnm</MainPackageIdentityName>
     <MainPackageIdentityName>AACE4B69.MazikCareMaterialManager</MainPackageIdentityName>
     <MainPackageIdentityName>AACE4B69.MazikEdMobile</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=af406d71-f0b1-464b-82df-8d6aece96252" />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=af406d71-f0b1-464b-82df-8d6aece96252">
+    <PackageInfo>
+      <OsMinVersion>6.3.0.0</OsMinVersion>
+      <PackageArchitecture>neutral</PackageArchitecture>
+      <PackageMaxArchitectureVersion>1.1.0.4</PackageMaxArchitectureVersion>
+    </PackageInfo>
+  </PackageInfoList>
 </StoreAssociation>

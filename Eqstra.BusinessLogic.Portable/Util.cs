@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using System.Linq;
+using Windows.UI.Xaml.Media;
+using System.IO;
+using Windows.Graphics.Imaging;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Storage.Streams;
 namespace Eqstra.BusinessLogic.Portable
 {
     public static class Util
@@ -17,7 +23,14 @@ namespace Eqstra.BusinessLogic.Portable
             await FileIO.WriteTextAsync(itemsSourceFile, content);
 
         }
-
+        public static BitmapImage FromBase64(string base64)
+        {
+            var bytes = Convert.FromBase64String(base64);
+            var image = bytes.AsBuffer().AsStream().AsRandomAccessStream();
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.SetSourceAsync(image);
+            return bitmapImage;
+        }
         async public static System.Threading.Tasks.Task<T> ReadFromDiskAsync<T>(string fileName)
         {
             try
@@ -36,7 +49,5 @@ namespace Eqstra.BusinessLogic.Portable
                 return default(T);
             }
         }
-
-
     }
 }

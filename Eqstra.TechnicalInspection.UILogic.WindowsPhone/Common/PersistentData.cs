@@ -19,7 +19,5 @@ namespace Eqstra.TechnicalInspection.UILogic
             _instance = new PersistentData();
         }
         public ObservableCollection<TITask> PoolofTasks { get; set; }
-        public MaintenanceRepair SelectedMaintenanceRepair { get; set; }
-        public Dictionary<long, MaintenanceRepair> MaintenanceRepairKVPair { get; set; }
     }
 }

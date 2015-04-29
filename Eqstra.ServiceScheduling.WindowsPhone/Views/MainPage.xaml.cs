@@ -46,14 +46,9 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            Window.Current.SizeChanged += Current_SizeChanged;
         }
 
-        void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
-        {
-            var b = Window.Current.Bounds;
-            TasksPivot.Width = b.Width;
-        }
+
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -103,25 +98,17 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
         private void Filter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var index = TasksPivot.SelectedIndex;
             var text = ((TextBox)sender).Text;
             if (!String.IsNullOrEmpty(text))
             {
                 ObservableCollection<BusinessLogic.Portable.SSModels.Task> currentTasks;
-                if (index == 0)
-                {
-                    currentTasks = PersistentData.Instance.PoolofTasks;
-                }
-                else
-                {
-                    currentTasks = PersistentData.Instance.Tasks;
-                }
+                currentTasks = PersistentData.Instance.PoolofTasks;
 
                 ObservableCollection<BusinessLogic.Portable.SSModels.Task> filterResult = new ObservableCollection<BusinessLogic.Portable.SSModels.Task>();
                 foreach (var task in currentTasks)
                 {
-                    if (task.ContactName.ToLower().Contains(text.ToLower()) ||
-                        task.CustomerName.ToLower().Contains(text.ToLower()) ||
+                    if (task.Model.ToLower().Contains(text.ToLower()) ||
+                        task.Status.ToLower().Contains(text.ToLower()) ||
                         task.RegistrationNumber.ToLower().Contains(text.ToLower()) ||
                         task.CaseNumber.ToLower().Contains(text.ToLower()))
                     {
@@ -129,23 +116,11 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     }
                 }
 
-                if (index == 0)
-                {
-                    vm.PoolofTasks = filterResult;
-
-                }
-                else
-                {
-                    vm.Tasks = filterResult;
-
-                }
+                vm.PoolofTasks = filterResult;
             }
             else
             {
                 vm.PoolofTasks = PersistentData.Instance.PoolofTasks;
-
-                vm.Tasks = PersistentData.Instance.Tasks;
-
             }
         }
 

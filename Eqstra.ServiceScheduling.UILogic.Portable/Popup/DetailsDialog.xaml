@@ -15,6 +15,7 @@
                 <StackPanel>
                     <ScrollViewer  ScrollViewer.IsScrollInertiaEnabled="True"
                                    x:Name="scrlViewTask"
+                                   ZoomMode="Disabled"
                                    ScrollViewer.IsVerticalRailEnabled="True"
                                    ScrollViewer.VerticalScrollMode="Enabled"
                                    ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -198,6 +199,7 @@
 
                 <ScrollViewer ScrollViewer.IsScrollInertiaEnabled="True"
                               x:Name="scrlViewCust"
+                              ZoomMode="Disabled"
                               ScrollViewer.IsDeferredScrollingEnabled="False"
                               ScrollViewer.IsVerticalRailEnabled="True"
                               ScrollViewer.VerticalScrollMode="Enabled"

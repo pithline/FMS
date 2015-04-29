@@ -8,17 +8,19 @@
                             xmlns:prism="using:Microsoft.Practices.Prism.StoreApps"
                             xmlns:mvvm="using:Microsoft.Practices.Prism.Mvvm"
                             mvvm:ViewModelLocator.AutoWireViewModel="True"
-                           HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"
+                            HorizontalContentAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            VariableSizedWrapGrid.ColumnSpan="2"
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.Resources>
         <Flyout x:Key="FilterFlyout"
                 Closed="Flyout_Closed">
             <StackPanel>
-                    <TextBox FontSize="25" 
-                             Height="40"
-                             Margin="20,0"
-                             TextChanged="Filter_TextChanged" />
+                <TextBox FontSize="25"
+                         Height="40"
+                         Margin="20,0"
+                         TextChanged="Filter_TextChanged" />
             </StackPanel>
         </Flyout>
 
@@ -26,7 +28,8 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
-                           Foreground="White" TextWrapping="Wrap"
+                           Foreground="White"
+                           TextWrapping="Wrap"
                            Style="{StaticResource TextContentStyle}"
                            TextAlignment="Left"
                            FontSize="17"
@@ -48,7 +51,7 @@
                              TextWrapping="Wrap"
                              TextAlignment="Left"
                              Margin="2,5"
-                             Text="{Binding ContactName}" />
+                             Text="{Binding Status}" />
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
@@ -57,7 +60,7 @@
                            TextWrapping="Wrap"
                            TextAlignment="Left"
                            FontSize="17"
-                           Text="{Binding CustomerName}" />
+                           Text="{Binding Model}" />
 
 
             </StackPanel>
@@ -615,7 +618,7 @@
 
                 <AppBarButton Label="Sync"
                               Icon="Sync"
-                              Command="{Binding RefreshTaskCommand}"/>
+                              Command="{Binding RefreshTaskCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments "
@@ -628,58 +631,33 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
-
-
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="TASKS"
+                   FontSize="40" />
         <ProgressBar IsIndeterminate="True"
                      Visibility="{Binding TaskProgressBar}"
                      Foreground="White"
                      VerticalAlignment="Top" />
 
+        <GridView HorizontalAlignment="Center"
+                  Grid.Row="1"
+                  ItemTemplate="{StaticResource TasksTemplate}"
+                  ItemContainerStyle="{StaticResource GridViewItemStyle1}"
+                  VerticalAlignment="Center"
+                  SelectionMode="None"
+                  IsHoldingEnabled="True"
+                  IsItemClickEnabled="True"
+                  ItemClick="GridView_ItemClick"
+                  SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
+                  ItemsSource="{Binding PoolofTasks}">
 
-        <Pivot Title="TASKS" 
-               SelectionChanged="TasksPivot_SelectionChanged"
-               Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-               Name="TasksPivot">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="40"
-                               Text="{Binding }" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <PivotItem Header="booking detail">
-                <Grid>
-                    <GridView HorizontalAlignment="Center"
-                              ItemTemplate="{StaticResource TasksTemplate}"
-                              ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Center"
-                              SelectionMode="None"
-                              IsHoldingEnabled="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick"
-                              SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
-                              ItemsSource="{Binding PoolofTasks}">
-                    </GridView>
-                </Grid>
-            </PivotItem>
+        </GridView>
 
-            <PivotItem Header="supplier selection">
-                <Grid>
-                    <GridView HorizontalAlignment="Center"
-                              ItemTemplate="{StaticResource TasksTemplate}"
-                              ItemContainerStyle="{StaticResource GridViewItemStyle1}"
-                              VerticalAlignment="Center"
-                              SelectionMode="None"
-                              IsHoldingEnabled="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick"
-                              SelectedItem="{Binding InspectionTask,Mode=TwoWay}"
-                              ItemsSource="{Binding Tasks}">
-
-                    </GridView>
-                </Grid>
-            </PivotItem>
-        </Pivot>
     </Grid>
 
 </prism:VisualStateAwarePage>
