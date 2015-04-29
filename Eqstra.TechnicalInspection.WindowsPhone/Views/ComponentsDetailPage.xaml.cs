@@ -24,8 +24,6 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         {
             this.InitializeComponent();
             this.vm = (ComponentsDetailPageViewModel)this.DataContext;
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-
             Window.Current.SizeChanged += Current_SizeChanged;
         }
 

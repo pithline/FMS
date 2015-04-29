@@ -575,7 +575,7 @@
 
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageData,Converter={StaticResource Base64ToBitmapConverter}}"
+                                <Image Source="{Binding ImageBitmap}"
                                        Stretch="UniformToFill" />
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -595,7 +595,7 @@
                               ItemsSource="{Binding Path=SelectedMaintenanceRepair.SubComponentImgList}">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageData,Converter={StaticResource Base64ToBitmapConverter}}"
+                                <Image Source="{Binding ImageBitmap}"
                                        Stretch="UniformToFill" />
                             </DataTemplate>
                         </GridView.ItemTemplate>

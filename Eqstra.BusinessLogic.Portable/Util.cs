@@ -25,11 +25,20 @@ namespace Eqstra.BusinessLogic.Portable
         }
         public static BitmapImage FromBase64(string base64)
         {
-            var bytes = Convert.FromBase64String(base64);
-            var image = bytes.AsBuffer().AsStream().AsRandomAccessStream();
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.SetSourceAsync(image);
-            return bitmapImage;
+            try
+            {
+                var bytes = Convert.FromBase64String(base64);
+                var imageStream = bytes.AsBuffer().AsStream().AsRandomAccessStream();
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.DecodePixelHeight = 100;
+                bitmapImage.DecodePixelWidth = 56;
+                bitmapImage.SetSource(imageStream);
+                return bitmapImage;
+            }
+            catch (Exception)
+            {
+                return default(BitmapImage);
+            }
         }
         async public static System.Threading.Tasks.Task<T> ReadFromDiskAsync<T>(string fileName)
         {

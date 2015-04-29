@@ -13,6 +13,7 @@ using Windows.Storage.Pickers;
 using System.Linq;
 using Windows.Storage;
 using Eqstra.BusinessLogic.Portable;
+using System.Runtime.Serialization;
 
 namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 {
@@ -40,12 +41,20 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 openPicker.FileTypeFilter.Add(".jpg");
 
                 await Util.WriteToDiskAsync<MaintenanceRepair>(this.SelectedMaintenanceRepair, "SelectedMaintenanceRepair");
-
+                  
                 openPicker.PickSingleFileAndContinue();
 
                 this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(async (repair) =>
                 {
-                    await CacheImagesOnNavigationAsync();
+
+                    foreach (var item in repair.MajorComponentImgList)
+                    {
+                        item.ImageBitmap = Util.FromBase64(item.ImageData);
+                    }
+                    foreach (var item in repair.SubComponentImgList)
+                    {
+                        item.ImageBitmap = Util.FromBase64(item.ImageData);
+                    }
 
                     this.SelectedMaintenanceRepair = repair;
                 });
@@ -115,6 +124,15 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
                 {
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
+                }
+
+                foreach (var item in this.SelectedMaintenanceRepair.MajorComponentImgList)
+                {
+                    item.ImageBitmap = Util.FromBase64(item.ImageData);
+                }
+                foreach (var item in this.SelectedMaintenanceRepair.SubComponentImgList)
+                {
+                    item.ImageBitmap = Util.FromBase64(item.ImageData);
                 }
             }
             catch (Exception ex)

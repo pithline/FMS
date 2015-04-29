@@ -105,6 +105,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
 
 
             }
+
+        
             EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);
         }
 
