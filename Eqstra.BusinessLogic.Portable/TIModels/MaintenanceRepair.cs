@@ -89,8 +89,5 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
 
 
 
-    public class MaintenanceRepairEvent : PubSubEvent<MaintenanceRepair>
-    {
-
-    }
+  
 }

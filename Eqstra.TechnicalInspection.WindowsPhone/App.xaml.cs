@@ -61,7 +61,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
         public async System.Threading.Tasks.Task ReadFile(StorageFile file)
         {
             byte[] fileBytes = null;
-            MaintenanceRepair selectedMaintenanceRepair = await Util.ReadFromDiskAsync<MaintenanceRepair>("SelectedMaintenanceRepair");
+          
+            Eqstra.BusinessLogic.Portable.TIModels.ImageCapture imageCapture;
             using (IRandomAccessStreamWithContentType stream = await file.OpenReadAsync())
             {
                 fileBytes = new byte[stream.Size];
@@ -69,45 +70,22 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                 {
                     await reader.LoadAsync((uint)stream.Size);
                     reader.ReadBytes(fileBytes);
-
-
                     var bitmap = new BitmapImage();
                     stream.Seek(0);
                     await bitmap.SetSourceAsync(stream);
 
-                    if (selectedMaintenanceRepair == null)
-                    {
-                        selectedMaintenanceRepair = new MaintenanceRepair();
-                    }
-                    if (selectedMaintenanceRepair.IsMajorPivot)
-                    {
-                        selectedMaintenanceRepair.MajorComponentImgList.Add(new Eqstra.BusinessLogic.Portable.TIModels.ImageCapture
-                         {
-                             ImageBitmap = bitmap,
-                             ImageData = Convert.ToBase64String(fileBytes),
-                             Component = selectedMaintenanceRepair.MajorComponent,
-                             RepairId = selectedMaintenanceRepair.Repairid,
-                             guid = Guid.NewGuid(),
-                         });
-                    }
-                    else
-                    {
-                        selectedMaintenanceRepair.SubComponentImgList.Add(new Eqstra.BusinessLogic.Portable.TIModels.ImageCapture
+                    imageCapture = new Eqstra.BusinessLogic.Portable.TIModels.ImageCapture
                           {
                               ImageBitmap = bitmap,
                               ImageData = Convert.ToBase64String(fileBytes),
-                              Component = selectedMaintenanceRepair.MajorComponent,
-                              RepairId = selectedMaintenanceRepair.Repairid,
-                              guid = Guid.NewGuid()
-                          });
-                    }
-                }
+                              guid = Guid.NewGuid(),
+                          };
 
+                }
 
             }
 
-        
-            EventAggregator.GetEvent<MaintenanceRepairEvent>().Publish(selectedMaintenanceRepair);
+            EventAggregator.GetEvent<ImageCaptureTranEvent>().Publish(imageCapture);
         }
 
 

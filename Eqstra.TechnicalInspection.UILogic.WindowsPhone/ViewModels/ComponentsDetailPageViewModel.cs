@@ -41,22 +41,37 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 openPicker.FileTypeFilter.Add(".jpg");
 
                 await Util.WriteToDiskAsync<MaintenanceRepair>(this.SelectedMaintenanceRepair, "SelectedMaintenanceRepair");
-                  
+
                 openPicker.PickSingleFileAndContinue();
 
-                this._eventAggregator.GetEvent<MaintenanceRepairEvent>().Subscribe(async (repair) =>
+                this._eventAggregator.GetEvent<ImageCaptureTranEvent>().Subscribe(async (imageCaptured) =>
                 {
+                    this.SelectedMaintenanceRepair = await Util.ReadFromDiskAsync<MaintenanceRepair>("SelectedMaintenanceRepair");
 
-                    foreach (var item in repair.MajorComponentImgList)
+                    if (selectedMaintenanceRepair.IsMajorPivot)
+                    {
+                        imageCaptured.Component = this.SelectedMaintenanceRepair.MajorComponent;
+                        imageCaptured.RepairId = this.SelectedMaintenanceRepair.Repairid;
+
+                        this.SelectedMaintenanceRepair.MajorComponentImgList.Add(imageCaptured);
+                    }
+                    else
+                    {
+                        imageCaptured.Component = this.SelectedMaintenanceRepair.SubComponent;
+                        imageCaptured.RepairId = this.SelectedMaintenanceRepair.Repairid;
+
+                        this.SelectedMaintenanceRepair.SubComponentImgList.Add(imageCaptured);
+                    }
+
+                    foreach (var item in this.SelectedMaintenanceRepair.MajorComponentImgList)
                     {
                         item.ImageBitmap = Util.FromBase64(item.ImageData);
                     }
-                    foreach (var item in repair.SubComponentImgList)
+                    foreach (var item in this.SelectedMaintenanceRepair.SubComponentImgList)
                     {
                         item.ImageBitmap = Util.FromBase64(item.ImageData);
                     }
 
-                    this.SelectedMaintenanceRepair = repair;
                 });
             });
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,18 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
             set { SetProperty(ref imageBitmap, value); }
         }
         public Guid guid { get; set; }
+
+        private bool isMajorPivot;
+        public bool IsMajorPivot
+        {
+            get { return isMajorPivot; }
+            set { SetProperty(ref isMajorPivot, value); }
+        }
+    }
+
+    public class ImageCaptureTranEvent : PubSubEvent<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>
+    {
+
     }
 }
+
