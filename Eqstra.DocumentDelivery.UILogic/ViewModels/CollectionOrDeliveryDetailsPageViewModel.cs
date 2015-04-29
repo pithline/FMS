@@ -80,6 +80,27 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                                             task.TaskType = CDTaskType.None;
                                             break;
 
+                                        case CollectDeliverServices.FINESRTA:
+                                            task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
+                                            task.TaskType = CDTaskType.None;
+                                            break;
+                                       
+                                        case CollectDeliverServices.PNP:
+                                            task.Status = CDTaskStatus.AwaitInvoice;
+                                            task.TaskType = CDTaskType.None;
+                                            break;
+                                        case CollectDeliverServices.REQUESTCOF:
+                                            task.Status = CDTaskStatus.AwaitInvoice;
+                                            task.TaskType = CDTaskType.None;
+                                            break;
+                                        case CollectDeliverServices.FINESRTC:
+                                            task.Status = CDTaskStatus.AwaitDeliveryConfirmation;
+                                            task.TaskType = CDTaskType.None;
+                                            break;
+                                        case CollectDeliverServices.LICENCERENEWAL:
+                                            task.Status = CDTaskStatus.AwaitInvoice;
+                                            task.TaskType = CDTaskType.None;
+                                            break;
 
                                         default:
 
