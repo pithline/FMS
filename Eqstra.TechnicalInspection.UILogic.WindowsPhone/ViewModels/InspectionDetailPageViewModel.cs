@@ -41,6 +41,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
 
                     if (resp)
                     {
+                        PersistentData.RefreshInstance();
                         _navigationService.Navigate("Main", string.Empty);
                     }
                 }

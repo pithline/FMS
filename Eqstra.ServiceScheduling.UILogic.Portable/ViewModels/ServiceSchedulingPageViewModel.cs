@@ -90,6 +90,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                            {
                                this.SelectedTask.Status = caseStatus.Status;
                                await this._taskService.UpdateStatusListAsync(this.SelectedTask, this.UserInfo);
+                               PersistentData.RefreshInstance();
                                navigationService.Navigate("Main", string.Empty);
                            }
 
@@ -298,6 +299,12 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                 {
                     this.AdBorderBrush = null;
                 }
+            }
+            else
+            {
+                this.Model.SelectedLocationType = null;
+                this.Model.SelectedDestinationType = null;
+                this.Model.Address=string.Empty;
             }
             return resp;
         }

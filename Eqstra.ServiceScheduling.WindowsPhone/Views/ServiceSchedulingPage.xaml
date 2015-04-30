@@ -105,7 +105,7 @@
                            Stretch="UniformToFill"
                            Height="80"
                            Width="80"
-                           Margin="50,5,220,5"
+                           Margin="50,5,150,5"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top">
                         <Interactivity:Interaction.Behaviors>
@@ -144,7 +144,7 @@
                     <TextBlock Text="preferred service details"
                                TextAlignment="Justify"
                                Style="{StaticResource TextContentStyle}"
-                               HorizontalAlignment="Stretch"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontSize="25"
                                Foreground="White" />
@@ -207,7 +207,7 @@
                                TextAlignment="Justify"
                                FontSize="25"
                                Style="{StaticResource TextContentStyle}"
-                               HorizontalAlignment="Stretch"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Foreground="White" />
 
@@ -264,7 +264,7 @@
                             Visibility="{Binding IsReqVisibility}">
                     <TextBox   Width="{Binding BoundMinWidth}"
                                IsHitTestVisible="False"
-                               Height="120"
+                               Height="160"
                                Header="Address"
                                TextWrapping="Wrap"
                                BorderBrush="{Binding AdBorderBrush}"

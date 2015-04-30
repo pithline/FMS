@@ -57,10 +57,12 @@
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center"
                                         Margin="2">
-                                <TextBlock Text="Regi. Number"
+                                <TextBlock Text="Registration Number"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding RegistrationNumber}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -69,9 +71,11 @@
                                         Grid.Row="1"
                                         Margin="2">
                                 <TextBlock Text="Case Number"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding CaseNumber}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -79,10 +83,12 @@
                                         HorizontalAlignment="Center"
                                         Grid.Row="2"
                                         Margin="2">
-                                <TextBlock Text="Made By"
+                                <TextBlock Text="Made"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Make}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -92,9 +98,11 @@
                                         Grid.Row="3"
                                         Margin="2">
                                 <TextBlock Text="Model"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Model}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -107,6 +115,7 @@
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Description}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -115,9 +124,11 @@
                                         Grid.Row="6"
                                         Margin="2">
                                 <TextBlock Text="Driver Name"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding DriverFirstName}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -127,8 +138,10 @@
                                         Grid.Row="7"
                                         Margin="2">
                                 <TextBlock Text="Status Due Date"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
+                                           HorizontalAlignment="Center"
                                            Text="{Binding StatusDueDate}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
@@ -138,9 +151,11 @@
                                         HorizontalAlignment="Center"
                                         Margin="2">
                                 <TextBlock Text="Confirmed Date"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding ConfirmedDate}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -152,6 +167,7 @@
                                            HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
+                                           HorizontalAlignment="Center"
                                            Text="{Binding Status}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
@@ -161,9 +177,11 @@
                                         Grid.Row="10"
                                         Margin="2">
                                 <TextBlock Text="Customer Name"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding CustomerName}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -172,9 +190,11 @@
                                         Grid.Row="11"
                                         Margin="2">
                                 <TextBlock Text="Contact Name"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding ContactName}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -185,9 +205,11 @@
                                         Grid.Row="12"
                                         Margin="2">
                                 <TextBlock Text="Address"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Address}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -197,8 +219,10 @@
                                         Margin="2">
                                 <TextBlock Text="Email"
                                            HorizontalAlignment="Center"
+                                        
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
+                                           HorizontalAlignment="Center"
                                            Text="{Binding CusEmailId}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
@@ -239,9 +263,11 @@
                                         HorizontalAlignment="Center"
                                         Margin="2">
                                 <TextBlock Text="Case Number"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding CaseNumber}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -250,9 +276,11 @@
                                         Grid.Row="1"
                                         Margin="2">
                                 <TextBlock Text="Customer Name"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding CustomerName}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -263,9 +291,11 @@
                                         Grid.Row="2"
                                         Margin="2">
                                 <TextBlock Text="Contact Name"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding ContactName}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -275,9 +305,11 @@
                                         Grid.Row="3"
                                         Margin="2">
                                 <TextBlock Text="Contact Number"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding CustPhone}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -286,9 +318,11 @@
                                         Grid.Row="4"
                                         Margin="2">
                                 <TextBlock Text="Status Due Date"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding StatusDueDate}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -297,9 +331,11 @@
                                         Grid.Row="5"
                                         Margin="2">
                                 <TextBlock Text="Confirmed Date"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding ConfirmedDate}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -313,6 +349,7 @@
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Status}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
@@ -321,9 +358,11 @@
                                         Grid.Row="7"
                                         Margin="2">
                                 <TextBlock Text="Address"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock TextWrapping="Wrap"
                                            Text="{Binding Address}"
+                                           HorizontalAlignment="Center"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 

@@ -27,9 +27,9 @@
             </Grid.RowDefinitions>
 
             <StackPanel Visibility="{Binding ProgressbarVisiblity}"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
                         Orientation="Horizontal"
-                        VerticalAlignment="Stretch">
+                        >
                 <TextBlock Text="{Binding ProgressbarMessage}"
                            VerticalAlignment="Center"
                            FontSize="15" />

@@ -170,6 +170,18 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
                     {
                         if (task.Status==DriverTaskStatus.AwaitServiceBookingDetail)
                         {
+                            if(!task.CustPhone.Contains("+"))
+                            {
+                                task.CustPhone = "+" + task.CustPhone;
+                            }
+                            if (!task.DriverPhone.Contains("+"))
+                            {
+                                task.DriverPhone = "+" + task.DriverPhone;
+                            }
+                            if (task.ConfirmedDate.Contains("1900"))
+                            {
+                                task.ConfirmedDate = string.Empty;
+                            }
                             task.Address = Regex.Replace(task.Address, ",", "\n");
                             pooltask.Add(task); 
                         }

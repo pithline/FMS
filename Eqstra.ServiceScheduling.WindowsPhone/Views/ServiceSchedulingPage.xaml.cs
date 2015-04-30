@@ -83,12 +83,16 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     if (vm.Model.SelectedLocationType.LocType == "Other")
                     {
                         vm.IsEnabledDesType = false;
+                        vm.DestinationTypes = new System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.DestinationType>();
                         vm.AddVisibility = Visibility.Visible;
+                        vm.Model.Address = string.Empty;
                     }
                     else
                     {
-                        vm.IsEnabledDesType = false;
+                        vm.IsEnabledDesType = true;
                         vm.AddVisibility = Visibility.Collapsed;
+                        vm.DestinationTypes = new System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.DestinationType>();
+                        vm.Model.Address = string.Empty;
 
                         if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
                         {

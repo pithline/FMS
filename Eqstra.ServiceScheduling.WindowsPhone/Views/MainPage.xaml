@@ -595,12 +595,14 @@
                                     <MenuFlyoutItem Text="Phone"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
+                                                    BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="phone_Click" />
                                     <MenuFlyoutItem Text="Message"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
+                                                    BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="Message_Click" />
@@ -609,6 +611,7 @@
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     BorderThickness="1"
+                                                    BorderBrush="Black"
                                                     Click="mail_Click" />
                                     <MenuFlyoutItem Text="Map"
                                                     Background="{ThemeResource PhoneAccentBrush}"
@@ -619,6 +622,7 @@
                                     <MenuFlyoutItem Text="Details"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
+                                                    BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="Details_Click" />
