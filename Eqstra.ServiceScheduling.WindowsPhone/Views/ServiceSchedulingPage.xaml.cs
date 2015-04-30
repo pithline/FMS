@@ -35,8 +35,29 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
         public ServiceSchedulingPage()
         {
             this.InitializeComponent();
+
+            this.SizeChanged += ServiceSchedulingPage_SizeChanged;
         }
 
+        void ServiceSchedulingPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            if (DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.Landscape ||
+
+                DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.LandscapeFlipped)
+            {
+
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 120;
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundMinWidth = Window.Current.Bounds.Width - 200;
+            }
+            else
+            {
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 30;
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundMinWidth = Window.Current.Bounds.Width - 70;
+
+            }
+
+        }
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);

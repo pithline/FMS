@@ -9,6 +9,22 @@
 
     <Grid>
         <Pivot Title="DETAIL">
+
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="25"
+                               Style="{StaticResource TextContentStyle}"
+                               Text="{Binding }" />
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="55"
+                               Style="{StaticResource TextContentStyle}"
+                               Text="{Binding }" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
             <PivotItem Header="task detail"
                        VerticalAlignment="Stretch"
                        HorizontalAlignment="Stretch">

@@ -15,6 +15,7 @@ using Windows.ApplicationModel.Appointments;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Core;
@@ -45,9 +46,20 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-        }
+            double w;
+            if (Window.Current.Bounds.Width < Window.Current.Bounds.Height)
+            {
+                 w = (Window.Current.Bounds.Width / 2.2) - 10;
+            }
+            else
+            {
+                 w = (Window.Current.Bounds.Height / 2.2) - 10;
+            }
 
+            Style style = this.Resources["GridViewItemStyle1"] as Style;
+            style.Setters.Add(new Setter(GridViewItem.WidthProperty, w));
+            style.Setters.Add(new Setter(GridViewItem.HeightProperty, w));
+        }
 
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {

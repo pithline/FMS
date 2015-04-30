@@ -65,6 +65,9 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             this.StBorderBrush = this.applicationTheme == ApplicationTheme.Dark ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
             this.IsLiftRequired = false;
             this.AddVisibility = Visibility.Collapsed;
+            BoundWidth = Window.Current.Bounds.Width - 30;
+            BoundMinWidth = Window.Current.Bounds.Width - 80;
+
             this.NextPageCommand = DelegateCommand.FromAsyncHandler(
            async () =>
            {
@@ -521,7 +524,19 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
             get { return addVisibility; }
             set { SetProperty(ref addVisibility, value); }
         }
+        private double boundWidth;
+        public double BoundWidth
+        {
+            get { return boundWidth; }
+            set { SetProperty(ref boundWidth, value); }
+        }
 
+        private double boundMinWidth;
+        public double BoundMinWidth
+        {
+            get { return boundMinWidth; }
+            set { SetProperty(ref boundMinWidth, value); }
+        }
         public ApplicationTheme applicationTheme { get; set; }
 
         public DelegateCommand DetailCommand { get; set; }

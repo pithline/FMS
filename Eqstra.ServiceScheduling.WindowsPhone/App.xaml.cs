@@ -35,6 +35,7 @@ namespace Eqstra.ServiceScheduling.WindowsPhone
         public App()
         {
             this.InitializeComponent();
+            this.RequestedTheme = ApplicationTheme.Light;
             this.UnhandledException += App_UnhandledException;
         }
 

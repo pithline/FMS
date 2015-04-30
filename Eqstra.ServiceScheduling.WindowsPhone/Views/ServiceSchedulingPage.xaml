@@ -38,300 +38,310 @@
 
 
     </prism:VisualStateAwarePage.Resources>
+    <Grid>
 
-    <Hub>
-        <HubSection Header="SERVICE SCHEDULING DETAIL"
-                    Margin="0,15,0,0">
-            <DataTemplate>
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
-                              HorizontalAlignment="Stretch"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ZoomMode="Disabled">
-                    <Grid x:Name="LayoutRoot">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-
-                        <TextBox  Width="330"
-                                  Header="ODO Reading"
-                                  Margin="0,2"
-                                  Style="{StaticResource TextBoxContentStyle}"
-                                  Text="{Binding Model.ODOReading,Mode=TwoWay}"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center">
-                        </TextBox>
-
-                        <DatePicker  Width="330"
-                                     Header="ODO Reading Date"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Center"
-                                     Date="{Binding Model.ODOReadingDt,Mode=TwoWay}"
-                                     Grid.Row="1"
-                                     Margin="0,2" />
-
-                        <StackPanel Grid.Row="2"
-                                    Orientation="Horizontal">
-
-                            <Image Source="{Binding Model.OdoReadingImageCapture.ImageBitmap}"
-                                   Stretch="UniformToFill"
-                                   Height="70"
-                                   Width="90"
-                                   Margin="5"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Top">
-                                <Interactivity:Interaction.Behaviors>
-                                    <Core:EventTriggerBehavior EventName="Tapped">
-                                        <Core:InvokeCommandAction  Command="{Binding OpenImageViewerCommand}" />
-                                    </Core:EventTriggerBehavior>
-                                </Interactivity:Interaction.Behaviors>
-
-                            </Image>
-                            <AppBarButton HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
-                                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
-                                          Icon="Camera"
-                                          Command="{Binding TakePictureCommand}"
-                                          CommandParameter="{Binding Model.OdoReadingImageCapture}">
-                            </AppBarButton>
-                        </StackPanel>
-
-                        <ComboBox  Width="330"
-                                   BorderBrush="{Binding StBorderBrush}"
-                                   Grid.Row="3"
-                                   Header="Service Type"
-                                   ItemsSource="{Binding Model.ServiceType}"
-                                   SelectedItem="{Binding Model.SelectedServiceType,Mode=TwoWay}"
-                                   Margin="0,2"
-                                   Style="{StaticResource ComboContentStyle}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="SERVICE SCHEDULING DETAIL"
+                   Style="{StaticResource GroupHeaderStyle}" />
 
 
 
-                        <StackPanel Grid.Row="4"
-                                    Background="{ThemeResource PhoneAccentBrush}">
-                            <TextBlock Text="Preferred Service Details"
-                                       TextAlignment="Center"
-                                       Style="{StaticResource TextContentStyle}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Margin="0,2"
-                                       FontSize="25"
-                                       Foreground="White" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="5">
-                            <DatePicker  Width="330"
-                                         Header="Service Date (Option 1)"
-                                         Date="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
-                                         Margin="0,2"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center" />
-
-                            <TimePicker  Width="330"
-                                         VerticalAlignment="Center"
-                                         Margin="0,2"
-                                         HorizontalAlignment="Center"
-                                         Time="{Binding Model.ServiceDateOpt1.TimeOfDay,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="6">
-                            <DatePicker  Width="330"
-                                         Header="Service Date (Option 2)"
-                                         Date="{Binding Model.ServiceDateOpt2,Mode=TwoWay}"
-                                         Margin="0,2"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center" />
-
-                            <TimePicker Width="330"
-                                        VerticalAlignment="Center"
-                                        Margin="0,2"
-                                        HorizontalAlignment="Center"
-                                        Time="{Binding Model.ServiceDateOpt2.TimeOfDay,Mode=TwoWay}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical"
-                                    Grid.Row="7">
-                            <TextBlock  Width="330"
-                                        Style="{StaticResource TextContentStyle}"
-                                        Text="Confirmed/Prefered Date"
-                                        Margin="0,2"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-
-                            <TextBlock  Width="330"
-                                        Style="{StaticResource TextContentStyle}"
-                                        Text="{Binding Model.ConfirmedDate}"
-                                        Margin="0,2"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-
-                        </StackPanel>
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ZoomMode="Disabled">
+            <Grid x:Name="LayoutRoot"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
 
-                        <StackPanel Grid.Row="8"
-                                    Background="{ThemeResource PhoneAccentBrush}">
-                            <TextBlock Text="Delivery Requirements"
-                                       TextAlignment="Center"
-                                       FontSize="25"
-                                       Style="{StaticResource TextContentStyle}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Margin="0,2"
-                                       Foreground="White" />
+                <TextBox  Width="{Binding BoundWidth}"
+                          Header="ODO Reading"
+                          Margin="0,2"
+                          Style="{StaticResource TextBoxContentStyle}"
+                          Text="{Binding Model.ODOReading,Mode=TwoWay}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Center">
+                </TextBox>
 
-                        </StackPanel>
+                <DatePicker  Width="{Binding BoundWidth}"
+                             Header="ODO Reading Date"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Center"
+                             Date="{Binding Model.ODOReadingDt,Mode=TwoWay}"
+                             Grid.Row="1"
+                             Margin="0,2" />
 
-                        <ToggleSwitch Grid.Row="9"
-                                      OffContent="No"
-                                      OnContent="Yes"
-                                      Header="Lift Required"
-                                      x:Name="liftRequired"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      IsOn="{Binding IsLiftRequired,Mode=TwoWay}"
-                                      Margin="0,2"
-                                      Style="{StaticResource DamagedToggleSwitch}" />
+                <StackPanel Grid.Row="2"
+                            Orientation="Horizontal">
 
+                    <Image Source="{Binding Model.OdoReadingImageCapture.ImageBitmap}"
+                           Stretch="UniformToFill"
+                           Height="80"
+                           Width="80"
+                           Margin="50,5,220,5"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top">
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Tapped">
+                                <Core:InvokeCommandAction  Command="{Binding OpenImageViewerCommand}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
 
-                        <ComboBox ItemsSource="{Binding Model.LocationTypes}"
-                                  Grid.Row="10"
-                                  BorderBrush="{Binding LtBorderBrush}"
-                                  SelectionChanged="ddLocationType_SelectionChanged"
-                                  Header="Location Type"
-                                  DisplayMemberPath="LocationName"
-                                  Visibility="{Binding IsReqVisibility}"
-                                  SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
-                                  x:Name="ddLocationType"
-                                  Margin="0,2"
-                                  Width="330"
-                                  Style="{StaticResource ComboContentStyle}"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
+                    </Image>
+                    <AppBarButton HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                                  Icon="Camera"
+                                  IsCompact="True"
+                                  RequestedTheme="Light"
+                                  Command="{Binding TakePictureCommand}"
+                                  CommandParameter="{Binding Model.OdoReadingImageCapture}">
+                    </AppBarButton>
+                </StackPanel>
 
-
-                        <ComboBox Grid.Row="11"
-                                  Header="Destination Type"
-                                  SelectionChanged="ddDestinationTypes_SelectionChanged"
-                                  Visibility="{Binding IsReqVisibility}"
-                                  ItemsSource="{Binding DestinationTypes}"
-                                  BorderBrush="{Binding DtBorderBrush}"
-                                  DisplayMemberPath="ContactName"
-                                  SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
-                                  x:Name="ddDestinationTypes"
-                                  IsEnabled="{Binding IsEnabledDesType}"
-                                  Margin="0,2"
-                                  Width="330"
-                                  Style="{StaticResource ComboContentStyle}"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
+                <ComboBox  Width="{Binding BoundWidth}"
+                           BorderBrush="{Binding StBorderBrush}"
+                           Grid.Row="3"
+                           Header="Service Type"
+                           ItemsSource="{Binding Model.ServiceType}"
+                           SelectedItem="{Binding Model.SelectedServiceType,Mode=TwoWay}"
+                           Margin="0,2"
+                           Style="{StaticResource ComboContentStyle}"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center" />
 
 
 
-                        <StackPanel Grid.Row="12"
-                                    Orientation="Horizontal"
-                                    Visibility="{Binding IsReqVisibility}">
-                            <TextBox  Width="290"
-                                      IsHitTestVisible="False"
-                                      Height="120"
-                                      Header="Address"
-                                      TextWrapping="Wrap"
-                                      BorderBrush="{Binding AdBorderBrush}"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Text="{Binding Model.Address,Mode=TwoWay}"
-                                      Margin="0,2"
-                                      Style="{StaticResource TextBoxContentStyle}"
-                                      IsSpellCheckEnabled="True"
-                                      IsTextPredictionEnabled="True"
-                                      AcceptsReturn="True" />
+                <StackPanel Grid.Row="4"
+                            Background="{ThemeResource PhoneAccentBrush}">
+                    <TextBlock Text="preferred service details"
+                               TextAlignment="Justify"
+                               Style="{StaticResource TextContentStyle}"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center"
+                               FontSize="25"
+                               Foreground="White" />
+                </StackPanel>
 
-                            <AppBarButton Icon="Add"
-                                          x:Name="addBtn"
-                                          IsCompact="True"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Right"
-                                          Label="Add"
-                                          Visibility="{Binding AddVisibility}"
-                                          Command="{Binding AddCommand}" />
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="5">
+                    <DatePicker  Width="{Binding BoundWidth}"
+                                 Header="Service Date (Option 1)"
+                                 Date="{Binding Model.ServiceDateOpt1,Mode=TwoWay}"
+                                 Margin="0,2"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center" />
 
-                        </StackPanel>
+                    <TimePicker  Width="{Binding BoundWidth}"
+                                 VerticalAlignment="Center"
+                                 Margin="0,2"
+                                 HorizontalAlignment="Stretch"
+                                 Time="{Binding Model.ServiceDateOpt1.TimeOfDay,Mode=TwoWay}" />
+                </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="16"
-                                    Grid.RowSpan="2">
-                            <TextBox  Width="290"
-                                      Header="Additional Work"
-                                      Height="120"
-                                      Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
-                                      Margin="0,2"
-                                      Style="{StaticResource TextBoxContentStyle}"
-                                      IsSpellCheckEnabled="True"
-                                      IsTextPredictionEnabled="True"
-                                      AcceptsReturn="True"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="6">
+                    <DatePicker  Width="{Binding BoundWidth}"
+                                 Header="Service Date (Option 2)"
+                                 Date="{Binding Model.ServiceDateOpt2,Mode=TwoWay}"
+                                 Margin="0,2"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center" />
 
-                            <AppBarButton Icon="Microphone"
-                                          IsCompact="True"
-                                          VerticalAlignment="Center"
-                                          Label="Microphone"
-                                          Command="{Binding VoiceCommand}" />
-                        </StackPanel>
+                    <TimePicker Width="{Binding BoundWidth}"
+                                VerticalAlignment="Center"
+                                Margin="0,2"
+                                HorizontalAlignment="Stretch"
+                                Time="{Binding Model.ServiceDateOpt2.TimeOfDay,Mode=TwoWay}" />
+                </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="20">
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="7">
+                    <TextBlock  Width="{Binding BoundWidth}"
+                                Style="{StaticResource TextContentStyle}"
+                                Text="Confirmed/Prefered Date"
+                                Margin="0,2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center" />
 
-                            <ComboBox  Width="290"
-                                       Header="Select Supplier"
-                                       BorderBrush="{Binding SpBorderBrush}"
-                                       ItemsSource="{Binding PoolofSupplier}"
-                                       SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
-                                       Margin="0,2"
-                                       DisplayMemberPath="SupplierName"
-                                       Style="{StaticResource ComboContentStyle}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center" />
+                    <TextBlock  Width="{Binding BoundWidth}"
+                                Style="{StaticResource TextContentStyle}"
+                                Text="{Binding Model.ConfirmedDate}"
+                                Margin="0,2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center" />
 
-                            <AppBarButton Icon="Filter"
-                                          Label="Filter"
-                                          HorizontalAlignment="Right"
-                                          VerticalAlignment="Center"
-                                          IsCompact="True"
-                                          Name="filterSup"
-                                          Command="{Binding SupplierFilterCommand}"/>
+                </StackPanel>
 
-                        </StackPanel>
 
-                    </Grid>
-                </ScrollViewer>
-            </DataTemplate>
-        </HubSection>
-    </Hub>
+                <StackPanel Grid.Row="8"
+                            Background="{ThemeResource PhoneAccentBrush}">
+                    <TextBlock Text="delivery requirements"
+                               TextAlignment="Justify"
+                               FontSize="25"
+                               Style="{StaticResource TextContentStyle}"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center"
+                               Foreground="White" />
 
+                </StackPanel>
+
+                <ToggleSwitch Grid.Row="9"
+                              OffContent="No"
+                              OnContent="Yes"
+                              Header="Lift Required"
+                              x:Name="liftRequired"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              IsOn="{Binding IsLiftRequired,Mode=TwoWay}"
+                              Margin="0,2"
+                              Style="{StaticResource DamagedToggleSwitch}" />
+
+
+                <ComboBox ItemsSource="{Binding Model.LocationTypes}"
+                          Grid.Row="10"
+                          BorderBrush="{Binding LtBorderBrush}"
+                          SelectionChanged="ddLocationType_SelectionChanged"
+                          Header="Location Type"
+                          DisplayMemberPath="LocationName"
+                          Visibility="{Binding IsReqVisibility}"
+                          SelectedItem="{Binding Model.SelectedLocationType,Mode=TwoWay}"
+                          x:Name="ddLocationType"
+                          Margin="0,2"
+                          Width="{Binding BoundWidth}"
+                          Style="{StaticResource ComboContentStyle}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Center" />
+
+
+                <ComboBox Grid.Row="11"
+                          Header="Destination Type"
+                          SelectionChanged="ddDestinationTypes_SelectionChanged"
+                          Visibility="{Binding IsReqVisibility}"
+                          ItemsSource="{Binding DestinationTypes}"
+                          BorderBrush="{Binding DtBorderBrush}"
+                          DisplayMemberPath="ContactName"
+                          SelectedItem="{Binding Model.SelectedDestinationType,Mode=TwoWay}"
+                          x:Name="ddDestinationTypes"
+                          IsEnabled="{Binding IsEnabledDesType}"
+                          Margin="0,2"
+                          Width="{Binding BoundWidth}"
+                          Style="{StaticResource ComboContentStyle}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Center" />
+
+
+
+                <StackPanel Grid.Row="12"
+                            Orientation="Horizontal"
+                            Visibility="{Binding IsReqVisibility}">
+                    <TextBox   Width="{Binding BoundMinWidth}"
+                               IsHitTestVisible="False"
+                               Height="120"
+                               Header="Address"
+                               TextWrapping="Wrap"
+                               BorderBrush="{Binding AdBorderBrush}"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center"
+                               Text="{Binding Model.Address,Mode=TwoWay}"
+                               Margin="13,2,2,2"
+                               Style="{StaticResource TextBoxContentStyle}"
+                               IsSpellCheckEnabled="True"
+                               IsTextPredictionEnabled="True"
+                               AcceptsReturn="True" />
+
+                    <AppBarButton Icon="Add"
+                                  x:Name="addBtn"
+                                  IsCompact="True"
+                                  RequestedTheme="Light"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Label="Add"
+                                  Visibility="{Binding AddVisibility}"
+                                  Command="{Binding AddCommand}" />
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="16"
+                            Grid.RowSpan="2">
+                    <TextBox    Width="{Binding BoundMinWidth}"
+                                Header="Additional Work"
+                                Height="120"
+                                Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
+                                Margin="13,2,2,2"
+                                Style="{StaticResource TextBoxContentStyle}"
+                                IsSpellCheckEnabled="True"
+                                IsTextPredictionEnabled="True"
+                                AcceptsReturn="True"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center" />
+
+                    <AppBarButton Icon="Microphone"
+                                  IsCompact="True"
+                                  RequestedTheme="Light"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Center"
+                                  Label="Microphone"
+                                  Command="{Binding VoiceCommand}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Stretch"
+                            Grid.Row="20">
+
+                    <ComboBox    Width="{Binding BoundMinWidth}"
+                                 Header="Select Supplier"
+                                 BorderBrush="{Binding SpBorderBrush}"
+                                 ItemsSource="{Binding PoolofSupplier}"
+                                 SelectedItem="{Binding SelectedSupplier,Mode=TwoWay}"
+                                 Margin="13,2,2,2"
+                                 DisplayMemberPath="SupplierName"
+                                 Style="{StaticResource ComboContentStyle}"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center" />
+
+                    <AppBarButton Icon="Filter"
+                                  Label="Filter"
+                                  HorizontalAlignment="Right"
+                                  RequestedTheme="Light"
+                                  VerticalAlignment="Center"
+                                  IsCompact="True"
+                                  Name="filterSup"
+                                  Command="{Binding SupplierFilterCommand}" />
+
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
 
 </prism:VisualStateAwarePage>
