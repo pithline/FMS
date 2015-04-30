@@ -11,7 +11,8 @@
                             xmlns:common="using:Eqstra.TechnicalInspection.Common"
                             xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
                             xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-                            mvvm:ViewModelLocator.AutoWireViewModel="True">
+                            mvvm:ViewModelLocator.AutoWireViewModel="True"
+                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <prism:VisualStateAwarePage.Resources>
         <conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter" />
     </prism:VisualStateAwarePage.Resources>
@@ -27,84 +28,107 @@
     </prism:VisualStateAwarePage.BottomAppBar>
 
 
-    <ScrollViewer VerticalScrollBarVisibility="Visible">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Inspection Completion Date"
-                           HorizontalAlignment="Left"
-                           Style="{StaticResource FormTextStyle}"
-                           VerticalAlignment="Center" />
-                <DatePicker Grid.Column="1"
-                            IsHitTestVisible="False"
-                            HorizontalAlignment="Left"
-                            Margin="5"
-                            Date="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" />
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="INSPECTION"
+                   Style="{StaticResource GroupHeaderStyle}" />
 
-            <StackPanel Grid.Row="1"
-                        Orientation="Horizontal">
-                <TextBox AcceptsReturn="True"
-                         Header="Cause of Damage Details"
-                         Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
-                         IsTextPredictionEnabled="True"
-                         HorizontalAlignment="Left"
-                         Width="{Binding BoundWidth}"
-                         Height="150"
-                         Margin="5"
-                         VerticalAlignment="Center" />
-                <AppBarButton Icon="Microphone"
-                              VerticalAlignment="Center"
-                              Label="Microphone"
-                              IsCompact="True"
-                              CommandParameter="CauseOfDamage"
-                              Command="{Binding VoiceCommand}" />
-            </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Visible"
+                      Grid.Row="1">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal">
-                <TextBox AcceptsReturn="True"
-                         Header="Remedy Details"
-                         Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
-                         IsTextPredictionEnabled="True"
-                         HorizontalAlignment="Left"
-                         Width="{Binding BoundWidth}"
-                         Height="150"
-                         Margin="5"
-                         VerticalAlignment="Center" />
-                <AppBarButton Icon="Microphone"
-                              VerticalAlignment="Center"
-                              Label="Microphone"
-                              IsCompact="True"
-                              CommandParameter="Remedy"
-                              Command="{Binding VoiceCommand}" />
-            </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Inspection Completion Date"
+                               HorizontalAlignment="Left"
+                               Margin="5"
+                               Style="{StaticResource FormTextStyle}"
+                               VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="1"
+                                IsHitTestVisible="False"
+                                BorderThickness="0"
+                                HorizontalAlignment="Left"
+                                Margin="5"
+                                Date="{Binding Model.CompletionDate,Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <TextBox AcceptsReturn="True"
+                             Header="Cause of Damage Details"
+                             Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
+                             IsTextPredictionEnabled="True"
+                             HorizontalAlignment="Stretch"
+                             Width="{Binding BoundWidth}"
+                             Height="{Binding BoundHeight}"
+                             Style="{StaticResource TextBoxContentStyle}"
+                             Margin="5"
+                             VerticalAlignment="Center" />
+                    <AppBarButton Icon="Microphone"
+                                  VerticalAlignment="Center"
+                                  Label="Microphone"
+                                  RequestedTheme="Light"
+                                  HorizontalAlignment="Stretch"
+                                  IsCompact="True"
+                                  CommandParameter="CauseOfDamage"
+                                  Command="{Binding VoiceCommand}" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2"
+                            Orientation="Horizontal">
+                    <TextBox AcceptsReturn="True"
+                             Header="Remedy Details"
+                             Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
+                             IsTextPredictionEnabled="True"
+                             HorizontalAlignment="Stretch"
+                             Width="{Binding BoundWidth}"
+                             Height="{Binding BoundHeight}"
+                             Style="{StaticResource TextBoxContentStyle}"
+                             Margin="5"
+                             VerticalAlignment="Center" />
+                    <AppBarButton Icon="Microphone"
+                                  VerticalAlignment="Center"
+                                  Label="Microphone"
+                                  RequestedTheme="Light"
+                                  HorizontalAlignment="Stretch"
+                                  IsCompact="True"
+                                  CommandParameter="Remedy"
+                                  Command="{Binding VoiceCommand}" />
+                </StackPanel>
 
 
-            <StackPanel Grid.Row="3"
-                        Orientation="Horizontal">
-                <TextBox AcceptsReturn="True"
-                         Header="Recommendation"
-                         Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
-                         IsTextPredictionEnabled="True"
-                         HorizontalAlignment="Left"
-                         Width="{Binding BoundWidth}"
-                         Height="150"
-                         Margin="5"
-                         VerticalAlignment="Center" />
-                <AppBarButton Icon="Microphone"
-                              VerticalAlignment="Center"
-                              Label="Microphone"
-                              IsCompact="True"
-                              CommandParameter="Recommendation"
-                              Command="{Binding VoiceCommand}" />
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal">
+                    <TextBox AcceptsReturn="True"
+                             Header="Recommendation"
+                             Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
+                             IsTextPredictionEnabled="True"
+                             HorizontalAlignment="Stretch"
+                             Width="{Binding BoundWidth}"
+                             Height="{Binding BoundHeight}"
+                             Style="{StaticResource TextBoxContentStyle}"
+                             Margin="5"
+                             VerticalAlignment="Center" />
+                    <AppBarButton Icon="Microphone"
+                                  VerticalAlignment="Center"
+                                  Label="Microphone"
+                                  RequestedTheme="Light"
+                                  HorizontalAlignment="Stretch"
+                                  IsCompact="True"
+                                  CommandParameter="Recommendation"
+                                  Command="{Binding VoiceCommand}" />
+                </StackPanel>
+            </Grid>
+
+        </ScrollViewer>
+    </Grid>
 </prism:VisualStateAwarePage>

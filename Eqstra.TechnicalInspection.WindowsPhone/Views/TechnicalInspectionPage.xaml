@@ -22,10 +22,14 @@
                 <TextBlock Text="{Binding MajorComponent}"
                            Margin="5"
                            FontSize="25"
+                           HorizontalAlignment="Stretch"
                            TextWrapping="Wrap"
+                           Style="{StaticResource TextContentStyle}"
                            VerticalAlignment="Center" />
                 <TextBlock Text="{Binding SubComponent}"
                            Margin="5"
+                           HorizontalAlignment="Stretch"
+                           Style="{StaticResource TextContentStyle}"
                            TextWrapping="Wrap"
                            VerticalAlignment="Center" />
             </StackPanel>
@@ -35,7 +39,7 @@
     <prism:VisualStateAwarePage.BottomAppBar>
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
-                
+
                 <AppBarButton Label="Next"
                               Icon="Forward"
                               Command="{Binding NextCommand}" />
@@ -46,33 +50,31 @@
                 <AppBarButton Label="details"
                               Icon="NewWindow"
                               Name="Profile"
-                              Command="{Binding DetailCommand}"/>
+                              Command="{Binding DetailCommand}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </prism:VisualStateAwarePage.BottomAppBar>
 
     <Grid>
-        <Hub x:Name="Hub"
-             x:Uid="Hub">
 
-            <HubSection Header="COMPONENTS"
-                        Margin="0,15,0,0">
-                <DataTemplate>
-                    <Grid>
-                        <ListView HorizontalAlignment="Center"
-                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                  VerticalAlignment="Top"
-                                  ItemTemplate="{StaticResource ComponentTemplate}"
-                                  SelectionMode="Single"
-                                  IsItemClickEnabled="True"
-                                  ItemClick="ListView_ItemClick"
-                                  ItemContainerStyle="{StaticResource ListViewItemStyle1}"
-                                  ItemsSource="{Binding SelectedTask.ComponentList}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="COMPONENTS"
+                   Style="{StaticResource GroupHeaderStyle}"
+                  />
 
-                    </Grid>
-                </DataTemplate>
-            </HubSection>
-        </Hub>
+        <ListView HorizontalAlignment="Center"
+                  Grid.Row="1"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  VerticalAlignment="Top"
+                  ItemTemplate="{StaticResource ComponentTemplate}"
+                  SelectionMode="Single"
+                  IsItemClickEnabled="True"
+                  ItemClick="ListView_ItemClick"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}"
+                  ItemsSource="{Binding SelectedTask.ComponentList}" />
 
     </Grid>
 

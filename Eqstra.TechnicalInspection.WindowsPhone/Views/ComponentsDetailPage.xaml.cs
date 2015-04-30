@@ -23,6 +23,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public ComponentsDetailPage()
         {
             this.InitializeComponent();
+           
             this.vm = (ComponentsDetailPageViewModel)this.DataContext;
             Window.Current.SizeChanged += Current_SizeChanged;
         }

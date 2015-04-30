@@ -35,6 +35,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public TechnicalInspectionPage()
         {
             this.InitializeComponent();
+        
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

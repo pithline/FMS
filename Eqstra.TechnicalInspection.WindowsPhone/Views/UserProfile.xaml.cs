@@ -17,6 +17,7 @@ namespace Eqstra.TechnicalInspection.Views
         {
             this._navigationService = navigationService;
             this.InitializeComponent();
+       
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.USERINFO))
             {
                 this.DataContext = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.USERINFO].ToString());

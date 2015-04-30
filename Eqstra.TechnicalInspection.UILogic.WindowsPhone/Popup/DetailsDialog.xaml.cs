@@ -11,6 +11,7 @@ namespace Eqstra.TechnicalInspection
         public DetailsDialog()
         {
             this.InitializeComponent();
+           
             Window.Current.SizeChanged += Current_SizeChanged;
             var b = Window.Current.Bounds;
             this.scrlViewTask.MaxHeight = b.Height - 100;

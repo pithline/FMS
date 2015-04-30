@@ -26,6 +26,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public LoginPage()
         {
             this.InitializeComponent();
+           
         }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)

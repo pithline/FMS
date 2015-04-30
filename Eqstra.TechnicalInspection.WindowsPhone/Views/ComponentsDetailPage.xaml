@@ -556,12 +556,20 @@
                HorizontalContentAlignment="Stretch"
                SelectionChanged="TasksPivot_SelectionChanged"
                Name="ImagesPivot">
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{StaticResource GroupHeaderStyle}"
+                               Text="{Binding }" />
+                </DataTemplate>
+            </Pivot.TitleTemplate>
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock FontSize="40"
+                               Style="{StaticResource TextContentStyle}"
                                Text="{Binding }" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
+
             <PivotItem Header="major component">
                 <Grid>
                     <GridView HorizontalAlignment="Stretch"

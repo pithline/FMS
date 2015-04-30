@@ -10,6 +10,22 @@
     <Grid>
         <Pivot Title="DETAIL"
                Grid.Row="1">
+
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="25"
+                               Style="{StaticResource TextContentStyle}"
+                               Text="{Binding }" />
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="55"
+                               Style="{StaticResource TextContentStyle}"
+                               Text="{Binding }" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
             <PivotItem Header="task detail">
 
                 <ScrollViewer  ScrollViewer.IsScrollInertiaEnabled="True"

@@ -7,6 +7,7 @@ using ShakeGestures;
 using System;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Appointments;
+using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -27,13 +28,21 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
+         
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
-            var w = (Window.Current.Bounds.Width / 2) - 15;
+
+            var w = (Window.Current.Bounds.Width / 2.2) - 10;
             Style style = this.Resources["GridViewItemStyle1"] as Style;
             style.Setters.Add(new Setter(GridViewItem.WidthProperty, w));
             style.Setters.Add(new Setter(GridViewItem.HeightProperty, w));
+
+            this.SizeChanged += MainPage_SizeChanged;
+        }
+
+        void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
 
         }
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)

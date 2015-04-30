@@ -35,7 +35,6 @@ namespace Eqstra.TechnicalInspection.UILogic
         public SnapshotsViewer()
         {
             this.InitializeComponent();
-
             //CrossSlideThresholds cst = new CrossSlideThresholds();
             //cst.RearrangeStart = 10;
             //cst.SelectionStart = 12;

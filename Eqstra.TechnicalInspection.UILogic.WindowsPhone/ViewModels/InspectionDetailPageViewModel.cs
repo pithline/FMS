@@ -30,6 +30,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this.Model = new TIData();
             _busyIndicator = new BusyIndicator();
             BoundWidth = Window.Current.Bounds.Width - 60;
+            BoundHeight = (Window.Current.Bounds.Height- 100)/3;
             CompleteCommand = new DelegateCommand(async () =>
             {
                 try
@@ -124,6 +125,13 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
         {
             get { return boundWidth; }
             set { SetProperty(ref boundWidth, value); }
+        }
+
+        private double boundHeight;
+        public double BoundHeight
+        {
+            get { return boundHeight; }
+            set { SetProperty(ref boundHeight, value); }
         }
 
         public Eqstra.BusinessLogic.Portable.TIModels.UserInfo UserInfo { get; set; }
