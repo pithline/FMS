@@ -46,9 +46,8 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
 
                 DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.LandscapeFlipped)
             {
-
-                ((ServiceSchedulingPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 120;
-                ((ServiceSchedulingPageViewModel)this.DataContext).BoundMinWidth = Window.Current.Bounds.Width - 200;
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 180;
+                ((ServiceSchedulingPageViewModel)this.DataContext).BoundMinWidth = Window.Current.Bounds.Width - 240;
             }
             else
             {

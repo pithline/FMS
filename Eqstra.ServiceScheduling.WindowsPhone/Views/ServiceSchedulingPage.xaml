@@ -13,8 +13,8 @@
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar IsSticky="False"
-                    ClosedDisplayMode="Compact">
+        <CommandBar ClosedDisplayMode="Minimal"
+                   >
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments"
                               Icon="Calendar"

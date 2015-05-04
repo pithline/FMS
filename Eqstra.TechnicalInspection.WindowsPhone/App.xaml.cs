@@ -34,6 +34,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
         {
             this.InitializeComponent();
             this.RequestedTheme = ApplicationTheme.Light;
+          
             this.UnhandledException += App_UnhandledException;
             Window.Current.Activated += Current_Activated;
         }

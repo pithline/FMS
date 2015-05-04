@@ -28,10 +28,10 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._navigationService = navigationService;
             this._taskService = taskService;
             this.Model = new TIData();
-          
+
             _busyIndicator = new BusyIndicator();
             BoundWidth = Window.Current.Bounds.Width - 60;
-            BoundHeight = (Window.Current.Bounds.Height- 100)/3;
+            BoundHeight = (Window.Current.Bounds.Height - 100) / 3;
             CompleteCommand = new DelegateCommand(async () =>
             {
                 try
@@ -59,33 +59,37 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             });
             this.VoiceCommand = new DelegateCommand<string>(async (param) =>
             {
-                SpeechRecognizer recognizer = new SpeechRecognizer();
 
-                SpeechRecognitionTopicConstraint topicConstraint
-                        = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
-
-                recognizer.Constraints.Add(topicConstraint);
-                await recognizer.CompileConstraintsAsync();
-
-                var results = await recognizer.RecognizeWithUIAsync();
-                if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
+                using (SpeechRecognizer recognizer = new SpeechRecognizer())
                 {
-                    if (param == "Remedy")
+                    SpeechRecognitionTopicConstraint topicConstraint
+                     = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "Development");
+
+                    recognizer.Constraints.Add(topicConstraint);
+                    await recognizer.CompileConstraintsAsync();
+
+                    var results = await recognizer.RecognizeWithUIAsync();
+
+                    if (results != null & (results.Confidence != SpeechRecognitionConfidence.Rejected))
                     {
-                        this.Model.Remedy = results.Text;
+                        if (param == "Remedy")
+                        {
+                            this.Model.Remedy = results.Text;
+                        }
+                        if (param == "Recommendation")
+                        {
+                            this.Model.Recommendation = results.Text;
+                        }
+                        if (param == "CauseOfDamage")
+                        {
+                            this.Model.CauseOfDamage = results.Text;
+                        }
                     }
-                    if (param == "Recommendation")
+
+                    else
                     {
-                        this.Model.Recommendation = results.Text;
+                        await new MessageDialog("Sorry, I did not get that.").ShowAsync();
                     }
-                    if (param == "CauseOfDamage")
-                    {
-                        this.Model.CauseOfDamage = results.Text;
-                    }
-                }
-                else
-                {
-                    await new MessageDialog("Sorry, I did not get that.").ShowAsync();
                 }
 
             });
@@ -106,9 +110,9 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
-                if (this.SelectedTask!=null)
+                if (this.SelectedTask != null)
                 {
-                    this.Model.CaseServiceRecID = this.SelectedTask.CaseServiceRecID; 
+                    this.Model.CaseServiceRecID = this.SelectedTask.CaseServiceRecID;
                 }
 
             }

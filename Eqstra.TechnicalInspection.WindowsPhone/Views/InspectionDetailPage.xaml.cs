@@ -37,7 +37,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
 
                 DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.LandscapeFlipped)
             {
-                ((InspectionDetailPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 170;
+                ((InspectionDetailPageViewModel)this.DataContext).BoundWidth = Window.Current.Bounds.Width - 230;
             }
             else
             {

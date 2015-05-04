@@ -37,7 +37,8 @@
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar Visibility="{Binding AppBarVisibility}">
+        <CommandBar Visibility="{Binding AppBarVisibility}"
+                    ClosedDisplayMode="Minimal">
             <CommandBar.PrimaryCommands>
 
                 <AppBarButton Label="next"
