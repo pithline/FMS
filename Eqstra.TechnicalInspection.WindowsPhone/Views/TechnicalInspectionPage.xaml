@@ -40,14 +40,14 @@
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
 
-                <AppBarButton Label="Next"
+                <AppBarButton Label="next"
                               Icon="Forward"
                               Command="{Binding NextCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="appointments"
                               Icon="Calendar" />
-                <AppBarButton Label="details"
+                <AppBarButton Label="detail"
                               Icon="NewWindow"
                               Name="Profile"
                               Command="{Binding DetailCommand}" />

@@ -10,7 +10,12 @@
                SecondaryButtonText="cancel"
                SecondaryButtonClick="cancel_SecondaryButtonClick"
                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Text="SUPPLIERS"
+                       Style="{StaticResource GroupHeaderStyle}" />
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
 
     <Grid>
         <Grid.RowDefinitions>

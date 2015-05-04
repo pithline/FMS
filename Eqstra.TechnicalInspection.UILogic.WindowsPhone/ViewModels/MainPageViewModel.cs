@@ -151,13 +151,18 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     task.Address = Regex.Replace(task.Address, ",", "\n");
 
-                    if (task.ConfirmedDate.Equals(default(DateTime)))
+                    if (!task.CustPhone.Contains("+"))
                     {
-                        task.StringifyConfirmedDate = string.Empty;
+                        task.CustPhone = "+" + task.CustPhone;
+                    }
+
+                    if (task.ConfirmedDate.ToString().Contains("1900"))
+                    {
+                        task.ConfirmedStDate = string.Empty;
                     }
                     else
                     {
-                        task.StringifyConfirmedDate = task.ConfirmedDate.ToString();
+                        task.ConfirmedStDate = task.ConfirmedDate.ToString();
                     }
                     poolofTask.Add(task);
                 }

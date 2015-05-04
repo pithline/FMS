@@ -28,6 +28,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             this._navigationService = navigationService;
             this._taskService = taskService;
             this.Model = new TIData();
+          
             _busyIndicator = new BusyIndicator();
             BoundWidth = Window.Current.Bounds.Width - 60;
             BoundHeight = (Window.Current.Bounds.Height- 100)/3;
@@ -36,6 +37,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 try
                 {
                     _busyIndicator.Open("Please wait, Saving ...");
+                    this.SelectedTask.Status = Eqstra.BusinessLogic.Portable.SSModels.DriverTaskStatus.Completed;
                     var imageCaptureList = await Util.ReadFromDiskAsync<List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>>("ImageCaptureList");
                     var resp = await this._taskService.InsertInspectionDataAsync(new List<TIData> { this.Model }, this.SelectedTask, imageCaptureList, UserInfo.CompanyId);
 
@@ -103,6 +105,10 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.SELECTEDTASK))
                 {
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
+                }
+                if (this.SelectedTask!=null)
+                {
+                    this.Model.CaseServiceRecID = this.SelectedTask.CaseServiceRecID; 
                 }
 
             }

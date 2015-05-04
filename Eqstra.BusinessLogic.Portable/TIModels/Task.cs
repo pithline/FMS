@@ -12,7 +12,7 @@ namespace Eqstra.BusinessLogic.Portable.TIModels
         public String Status { get; set; }
         public String AllocatedTo { get; set; }
         public DateTime ConfirmedDate { get; set; }
-        public string StringifyConfirmedDate { get; set; }
+        public string ConfirmedStDate { get; set; }
         public String CustomerId { get; set; }
         public String RegistrationNumber { get; set; }
         public String CustomerName { get; set; }

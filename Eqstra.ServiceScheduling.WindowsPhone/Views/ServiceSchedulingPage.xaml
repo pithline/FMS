@@ -20,7 +20,7 @@
                               Icon="Calendar"
                               x:Name="Calendar"
                               Click="Calendar_Click" />
-                <AppBarButton Label="details"
+                <AppBarButton Label="detail"
                               Icon="NewWindow"
                               x:Name="Profile"
                               Command="{Binding DetailCommand}" />
@@ -295,6 +295,7 @@
                     <TextBox    Width="{Binding BoundMinWidth}"
                                 Header="Additional Work"
                                 Height="120"
+                                TextWrapping="Wrap"
                                 Text="{Binding Model.AdditionalWork,Mode=TwoWay}"
                                 Margin="13,2,2,2"
                                 Style="{StaticResource TextBoxContentStyle}"

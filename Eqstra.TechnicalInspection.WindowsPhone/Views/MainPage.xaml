@@ -22,9 +22,10 @@
         </Flyout>
 
         <DataTemplate x:Key="TasksTemplate">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
+                           VerticalAlignment="Stretch"
                            Foreground="White"
                            TextWrapping="Wrap"
                            Style="{StaticResource TextContentStyle}"
@@ -34,6 +35,7 @@
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
+                           VerticalAlignment="Stretch"
                            TextWrapping="Wrap"
                            Style="{StaticResource TextContentStyle}"
                            Foreground="White"
@@ -45,6 +47,7 @@
                              HorizontalAlignment="Left"
                              Foreground="White"
                              FontSize="17"
+                             VerticalAlignment="Stretch"
                              TextWrapping="Wrap"
                              TextAlignment="Left"
                              Margin="2,5"
@@ -52,6 +55,7 @@
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
+                           VerticalAlignment="Stretch"
                            Style="{StaticResource TextContentStyle}"
                            Foreground="White"
                            TextWrapping="Wrap"
@@ -586,34 +590,34 @@
                                                     Value="Transparent" />
                                         </Style>
                                     </MenuFlyout.MenuFlyoutPresenterStyle>
-                                    <MenuFlyoutItem Text="Phone"
+                                    <MenuFlyoutItem Text="phone"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="phone_Click" />
-                                    <MenuFlyoutItem Text="Message"
+                                    <MenuFlyoutItem Text="message"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="Message_Click" />
-                                    <MenuFlyoutItem Text="Mail"
+                                    <MenuFlyoutItem Text="mail"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     Click="mail_Click" />
-                                    <MenuFlyoutItem Text="Map"
+                                    <MenuFlyoutItem Text="map"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="map_Click" />
-                                    <MenuFlyoutItem Text="Details"
+                                    <MenuFlyoutItem Text="detail"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
@@ -641,7 +645,7 @@
                               Name="filter"
                               FlyoutBase.AttachedFlyout="{StaticResource ResourceKey=FilterFlyout}" />
 
-                <AppBarButton Label="Sync"
+                <AppBarButton Label="sync"
                               Icon="Sync"
                               Command="{Binding RefreshTaskCommand}" />
             </CommandBar.PrimaryCommands>

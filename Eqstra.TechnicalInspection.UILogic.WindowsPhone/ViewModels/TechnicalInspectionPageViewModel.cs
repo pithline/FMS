@@ -30,6 +30,8 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 try
                 {
+                    await UpdateCacheOnCaptureImageAsync();
+
                     List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture> imageCaptureList = new List<Eqstra.BusinessLogic.Portable.TIModels.ImageCapture>();
                     foreach (var item in this.MaintenanceRepairList)
                     {
@@ -82,21 +84,26 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
                 {
                     this.SelectedTask = JsonConvert.DeserializeObject<Eqstra.BusinessLogic.Portable.TIModels.TITask>(ApplicationData.Current.RoamingSettings.Values[Constants.SELECTEDTASK].ToString());
                 }
-                MaintenanceRepairKVPair = await Util.ReadFromDiskAsync<Dictionary<long, MaintenanceRepair>>("MaintenanceRepairKVPair");
-                if (MaintenanceRepairKVPair != null)
-                {
-                    ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
-                    foreach (var repair in MaintenanceRepairKVPair.Values)
-                    {
-                        mRepairList.Add(repair);
-
-                    }
-                    this.MaintenanceRepairList = mRepairList;
-                }
+                await UpdateCacheOnCaptureImageAsync();
             }
             catch (Exception)
             {
 
+            }
+        }
+
+        async private System.Threading.Tasks.Task UpdateCacheOnCaptureImageAsync()
+        {
+            MaintenanceRepairKVPair = await Util.ReadFromDiskAsync<Dictionary<long, MaintenanceRepair>>("MaintenanceRepairKVPair");
+            if (MaintenanceRepairKVPair != null)
+            {
+                ObservableCollection<MaintenanceRepair> mRepairList = new ObservableCollection<MaintenanceRepair>();
+                foreach (var repair in MaintenanceRepairKVPair.Values)
+                {
+                    mRepairList.Add(repair);
+
+                }
+                this.MaintenanceRepairList = mRepairList;
             }
         }
 

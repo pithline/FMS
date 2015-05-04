@@ -5,11 +5,17 @@
                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                mc:Ignorable="d"
-               Title="ADDRESS"
                PrimaryButtonText="ok"
                SecondaryButtonText="cancel"
                PrimaryButtonClick="OK_PrimaryButtonClick"
                SecondaryButtonClick="Cancel_SecondaryButtonClick">
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Text="ADDRESS"
+                       Style="{StaticResource GroupHeaderStyle}" />
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+
     <ScrollViewer ZoomMode="Disabled"
                   x:Name="scrlAdd"
                   ScrollViewer.IsScrollInertiaEnabled="True"
@@ -27,15 +33,15 @@
             </Grid.RowDefinitions>
 
             <StackPanel Visibility="{Binding ProgressbarVisiblity}"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Orientation="Horizontal"
-                        >
-                <TextBlock Text="{Binding ProgressbarMessage}"
-                           VerticalAlignment="Center"
-                           FontSize="15" />
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
                 <ProgressBar Width="700"
                              Height="15"
                              IsIndeterminate="True" />
+                <TextBlock Text="{Binding ProgressbarMessage}"
+                           VerticalAlignment="Center"
+                           FontSize="15" />
             </StackPanel>
 
 

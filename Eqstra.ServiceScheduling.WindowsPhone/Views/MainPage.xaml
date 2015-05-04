@@ -592,34 +592,34 @@
                                                     Value="Transparent" />
                                         </Style>
                                     </MenuFlyout.MenuFlyoutPresenterStyle>
-                                    <MenuFlyoutItem Text="Phone"
+                                    <MenuFlyoutItem Text="phone"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="phone_Click" />
-                                    <MenuFlyoutItem Text="Message"
+                                    <MenuFlyoutItem Text="message"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="Message_Click" />
-                                    <MenuFlyoutItem Text="Mail"
+                                    <MenuFlyoutItem Text="mail"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
                                                     Click="mail_Click" />
-                                    <MenuFlyoutItem Text="Map"
+                                    <MenuFlyoutItem Text="map"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
                                                     Click="map_Click" />
-                                    <MenuFlyoutItem Text="Details"
+                                    <MenuFlyoutItem Text="detail"
                                                     Background="{ThemeResource PhoneAccentBrush}"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"
@@ -669,8 +669,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="TASKS"
-                   Style="{StaticResource GroupHeaderStyle}"
-                  />
+                   Style="{StaticResource GroupHeaderStyle}" />
         <ProgressBar IsIndeterminate="True"
                      Visibility="{Binding TaskProgressBar}"
                      Foreground="White"

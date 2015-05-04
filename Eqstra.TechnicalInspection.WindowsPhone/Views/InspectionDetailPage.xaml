@@ -20,7 +20,7 @@
         <CommandBar Visibility="{Binding AppBarVisibility}">
             <CommandBar.PrimaryCommands>
 
-                <AppBarButton Label="Complete"
+                <AppBarButton Label="complete"
                               Icon="Accept"
                               Command="{Binding CompleteCommand}" />
             </CommandBar.PrimaryCommands>
@@ -64,9 +64,11 @@
                 <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
                     <TextBox AcceptsReturn="True"
+                             IsSpellCheckEnabled="True"
+                             IsTextPredictionEnabled="True"
+                             TextWrapping="Wrap"
                              Header="Cause of Damage Details"
                              Text="{Binding Path=Model.CauseOfDamage,Mode=TwoWay}"
-                             IsTextPredictionEnabled="True"
                              HorizontalAlignment="Stretch"
                              Width="{Binding BoundWidth}"
                              Height="{Binding BoundHeight}"
@@ -87,8 +89,10 @@
                             Orientation="Horizontal">
                     <TextBox AcceptsReturn="True"
                              Header="Remedy Details"
-                             Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
+                             IsSpellCheckEnabled="True"
                              IsTextPredictionEnabled="True"
+                             TextWrapping="Wrap"
+                             Text="{Binding Path=Model.Remedy,Mode=TwoWay}"
                              HorizontalAlignment="Stretch"
                              Width="{Binding BoundWidth}"
                              Height="{Binding BoundHeight}"
@@ -111,7 +115,9 @@
                     <TextBox AcceptsReturn="True"
                              Header="Recommendation"
                              Text="{Binding Path=Model.Recommendation,Mode=TwoWay}"
+                             IsSpellCheckEnabled="True"
                              IsTextPredictionEnabled="True"
+                             TextWrapping="Wrap"
                              HorizontalAlignment="Stretch"
                              Width="{Binding BoundWidth}"
                              Height="{Binding BoundHeight}"

@@ -12,14 +12,16 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <ProgressBar IsIndeterminate="True" Background="Transparent"
+        <ProgressBar IsIndeterminate="True"
                      HorizontalAlignment="Stretch"
+                     Background="#DDDDDD"
                      VerticalAlignment="Top" />
-        <TextBlock Grid.Row="1"
-                   Foreground="Black"
-                   Text="{Binding Message}"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Bottom" />
+        <ContentControl Grid.Row="1"
+                        Background="#DDDDDD"
+                        Foreground="Black"
+                        Content="{Binding Message}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom" />
 
     </Grid>
 </ContentDialog>
