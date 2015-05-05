@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
-  <Publisher>CN=280C52B9-43DE-43B0-AD89-373310221C44</Publisher>
-  <PublisherDisplayName>Mazik Global Inc.</PublisherDisplayName>
+  <Publisher>CN=A7EB6412-04A3-4130-A5DC-3AA70D4085D0</Publisher>
+  <PublisherDisplayName>Eqstra Corporation</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />
@@ -184,26 +184,11 @@
     <Language Code="vi-vn" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>AACE4B69.EqstraTechnicalInspection</MainPackageIdentityName>
+    <MainPackageIdentityName>EqstraCorporation.TechnicalInspection</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>Eqstra Technical Inspection</ReservedName>
+      <ReservedName>Technical Inspection</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames>
-    <MainPackageIdentityName>AACE4B69.EqstraServiceScheduling</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MaiyasOrderingApp</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikAX</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikAXCashier</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikAXShopFloor</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikAXmnm</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikCareMaterialManager</MainPackageIdentityName>
-    <MainPackageIdentityName>AACE4B69.MazikEdMobile</MainPackageIdentityName>
-  </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=af406d71-f0b1-464b-82df-8d6aece96252">
-    <PackageInfo>
-      <OsMinVersion>6.3.0.0</OsMinVersion>
-      <PackageArchitecture>neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>1.1.0.5</PackageMaxArchitectureVersion>
-    </PackageInfo>
-  </PackageInfoList>
+  <AccountPackageIdentityNames />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=28ad9ac2-cdbf-4d1d-8288-94602c863568" />
 </StoreAssociation>
