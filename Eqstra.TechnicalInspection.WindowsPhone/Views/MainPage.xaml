@@ -22,7 +22,8 @@
         </Flyout>
 
         <DataTemplate x:Key="TasksTemplate">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Stretch">
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
                            VerticalAlignment="Stretch"
@@ -43,6 +44,16 @@
                            FontSize="17"
                            Text="{Binding RegistrationNumber}" />
 
+                <TextBlock HorizontalAlignment="Left"
+                           Margin="2,5"
+                           VerticalAlignment="Stretch"
+                           Style="{StaticResource TextContentStyle}"
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           TextAlignment="Left"
+                           FontSize="17"
+                           Text="{Binding Model}" />
+
                 <TextBlock   Style="{StaticResource TextContentStyle}"
                              HorizontalAlignment="Left"
                              Foreground="White"
@@ -53,15 +64,6 @@
                              Margin="2,5"
                              Text="{Binding Status}" />
 
-                <TextBlock HorizontalAlignment="Left"
-                           Margin="2,5"
-                           VerticalAlignment="Stretch"
-                           Style="{StaticResource TextContentStyle}"
-                           Foreground="White"
-                           TextWrapping="Wrap"
-                           TextAlignment="Left"
-                           FontSize="17"
-                           Text="{Binding Model}" />
 
 
             </StackPanel>

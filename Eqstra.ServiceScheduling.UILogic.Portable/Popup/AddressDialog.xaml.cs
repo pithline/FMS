@@ -28,11 +28,11 @@ namespace Eqstra.ServiceScheduling
     {
         private ILocationService _locationService;
         private IEventAggregator _eventAggregator;
-        public AddressDialog(ILocationService locationService, IEventAggregator eventAggregator)
+        public AddressDialog(ILocationService locationService, IEventAggregator eventAggregator, Address address)
         {
             this._locationService = locationService;
             this._eventAggregator = eventAggregator;
-            this.Address = new Address();
+            this.Address = address;
             this.InitializeComponent();
             this.Loaded += AddressDialog_Loaded;
 

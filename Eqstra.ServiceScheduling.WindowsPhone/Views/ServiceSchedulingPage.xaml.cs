@@ -90,7 +90,19 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
                     {
                         vm.IsEnabledDesType = true;
                         vm.AddVisibility = Visibility.Collapsed;
-                        vm.DestinationTypes = new System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.DestinationType>();
+
+                        if (vm.DestinationTypes != null)
+                        {
+                            try
+                            {
+                                vm.Model.SelectedDestinationType = new BusinessLogic.Portable.SSModels.DestinationType();
+                                vm.DestinationTypes = new System.Collections.ObjectModel.ObservableCollection<BusinessLogic.Portable.SSModels.DestinationType>();
+                            }
+                            catch (Exception)
+                            {
+                             
+                            }
+                        }
                         vm.Model.Address = string.Empty;
 
                         if (vm.SelectedTask != null && vm.Model.SelectedLocationType != null)
