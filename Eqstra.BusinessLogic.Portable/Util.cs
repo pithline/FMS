@@ -1,16 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI.Notifications;
-using System.Linq;
-using Windows.UI.Xaml.Media;
 using System.IO;
-using Windows.Graphics.Imaging;
-using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Storage.Streams;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 namespace Eqstra.BusinessLogic.Portable
 {
     public static class Util
@@ -30,8 +23,6 @@ namespace Eqstra.BusinessLogic.Portable
                 var bytes = Convert.FromBase64String(base64);
                 var imageStream = bytes.AsBuffer().AsStream().AsRandomAccessStream();
                 BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.DecodePixelHeight = 100;
-                bitmapImage.DecodePixelWidth = 56;
                 bitmapImage.SetSource(imageStream);
                 return bitmapImage;
             }
