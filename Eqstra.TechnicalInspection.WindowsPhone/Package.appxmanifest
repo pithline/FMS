@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="AACE4B69.EqstraTechnicalInspection" Publisher="CN=280C52B9-43DE-43B0-AD89-373310221C44" Version="1.1.0.6" />
-  <mp:PhoneIdentity PhoneProductId="b539fdc0-8e76-44ed-a562-831fb184d450" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="EqstraCorporation.TechnicalInspection" Publisher="CN=A7EB6412-04A3-4130-A5DC-3AA70D4085D0" Version="1.1.0.1" />
+  <mp:PhoneIdentity PhoneProductId="88d649a7-039f-4f2d-a5f1-9be83e78a1c6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Eqstra Technical Inspection</DisplayName>
-    <PublisherDisplayName>Mazik Global Inc.</PublisherDisplayName>
+    <DisplayName>Technical Inspection</DisplayName>
+    <PublisherDisplayName>Eqstra Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
