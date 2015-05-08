@@ -177,6 +177,8 @@
     <None Include="Eqstra.DocumentDelivery_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <Content Include="Assets\add_icon.png" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-140.png" />
     <Content Include="Assets\bing_blue.png" />
     <Content Include="Assets\calendar_blue.png" />
     <Content Include="Assets\camera_icon.png" />
@@ -202,11 +204,13 @@
     <Content Include="Assets\odo_meter.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
     <Content Include="Assets\truck_front.png" />
     <Content Include="Assets\truck_left.png" />
     <Content Include="Assets\truck_marks.png" />
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="SqliteDB\eqstramobility.sqlite" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +309,10 @@
     <ProjectReference Include="..\Eqstra.DocumentDelivery.UILogic\Eqstra.DocumentDelivery.UILogic.csproj">
       <Project>{a729bbb4-dbbb-46b0-9198-fb757b68af3b}</Project>
       <Name>Eqstra.DocumentDelivery.UILogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.BackgroundTasks\Eqstra.WinRT.Components.BackgroundTasks.csproj">
+      <Project>{a268d6e5-5a0c-46a7-9285-372caf007edf}</Project>
+      <Name>Eqstra.WinRT.Components.BackgroundTasks</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

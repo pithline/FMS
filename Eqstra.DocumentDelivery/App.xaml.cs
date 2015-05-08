@@ -83,14 +83,12 @@ namespace Eqstra.DocumentDelivery
             SqliteHelper.Storage.ConnectionDatabaseAsync();
             var accountService = _container.Resolve<IAccountService>();
             var cred = accountService.VerifyUserCredentialsAsync();
-  
+
             if (cred != null && ApplicationData.Current.RoamingSettings.Values.ContainsKey(Eqstra.BusinessLogic.Helpers.Constants.UserInfo))
             {
                 DDServiceProxyHelper.Instance.ConnectAsync(cred.Item1, cred.Item2, EventAggregator);
-                var userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Eqstra.BusinessLogic.Helpers.Constants.UserInfo].ToString());
+
                 PersistentData.RefreshInstance();//Here only setting data in new instance, and  getting data in every page.
-                PersistentData.Instance.UserInfo = userInfo;
-              
                 NavigationService.Navigate("InspectionDetails", string.Empty);
             }
             else

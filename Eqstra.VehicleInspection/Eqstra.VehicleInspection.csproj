@@ -241,7 +241,7 @@
     <Content Include="Assets\car_right.png" />
     <Content Include="Assets\car_top.png" />
     <Content Include="Assets\details_image.png" />
-    <Content Include="Assets\eqstra_badge_logo.png" />
+    <Content Include="Assets\eqstra_badge_logo.scale-100.png" />
     <Content Include="Assets\eqstra_badge_logo.scale-140.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
@@ -254,6 +254,7 @@
     <Content Include="Assets\Save.png" />
     <Content Include="Assets\skype_blue.png" />
     <Content Include="Assets\skype_gray.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
     <Content Include="Assets\trailer_back.png" />
     <Content Include="Assets\trailer_front.png" />
     <Content Include="Assets\trailer_left.png" />
@@ -264,6 +265,7 @@
     <Content Include="Assets\truck_marks.png" />
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="default.rd.xml" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <Content Include="ImageMeta\VI_Commercial_ImageMetadata.txt">
@@ -490,6 +492,10 @@
     <ProjectReference Include="..\Eqstra.VehicleInspection.UILogic\Eqstra.VehicleInspection.UILogic.csproj">
       <Project>{76be6c92-ebdd-45f0-89f1-8d32a2c816b2}</Project>
       <Name>Eqstra.VehicleInspection.UILogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.BackgroundTasks\Eqstra.WinRT.Components.BackgroundTasks.csproj">
+      <Project>{a268d6e5-5a0c-46a7-9285-372caf007edf}</Project>
+      <Name>Eqstra.WinRT.Components.BackgroundTasks</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

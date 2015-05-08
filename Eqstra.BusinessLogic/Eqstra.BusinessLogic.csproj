@@ -112,6 +112,7 @@
     <Compile Include="Base\ValidationError.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
+    <Compile Include="Common\IEnumerableExtensions.cs" />
     <Compile Include="Common\MemoryRandomAccessStream.cs" />
     <Compile Include="Common\RenderDataStampOnSnap.cs" />
     <Compile Include="Common\StampPersistData.cs" />

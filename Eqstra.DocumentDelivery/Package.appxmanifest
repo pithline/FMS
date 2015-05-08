@@ -15,7 +15,15 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Eqstra.DocumentDelivery.App">
-      <m2:VisualElements DisplayName="Eqstra.DocumentDelivery" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Eqstra.DocumentDelivery" ForegroundText="light" BackgroundColor="#FFFFFF" ToastCapable="true">
+      <m2:VisualElements DisplayName="Eqstra.DocumentDelivery" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Eqstra.DocumentDelivery" ForegroundText="light" BackgroundColor="#000000" ToastCapable="true">
+        <m2:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" ShortName="Document Delivery">
+          <m2:ShowNameOnTiles>
+            <m2:ShowOn Tile="square150x150Logo" />
+            <m2:ShowOn Tile="wide310x150Logo" />
+            <m2:ShowOn Tile="square310x310Logo" />
+          </m2:ShowNameOnTiles>
+        </m2:DefaultTile>
+        <m2:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FFFFFF" />
         <m2:InitialRotationPreference>
           <m2:Rotation Preference="portrait" />
@@ -24,6 +32,13 @@
           <m2:Rotation Preference="landscapeFlipped" />
         </m2:InitialRotationPreference>
       </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Eqstra.WinRT.Components.BackgroundTasks.CDBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

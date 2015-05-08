@@ -108,17 +108,17 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 AppSettings.Instance.IsSynchronizing = 1;
 
 
-               await Synchronize(async () =>
-                   {
+                await Synchronize(async () =>
+                    {
 
-                       await InsertTechnicalInspectionAsync();
-                       await UpdateTaskStatusAsync();
+                        await InsertTechnicalInspectionAsync();
+                        await UpdateTaskStatusAsync();
 
-                       await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                       {
-                           AppSettings.Instance.IsSynchronizing = 0;
-                       });
-                   });
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            AppSettings.Instance.IsSynchronizing = 0;
+                        });
+                    });
 
             }
             catch (Exception ex)
@@ -144,12 +144,12 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                     var imageTable = await SqliteHelper.Storage.LoadTableAsync<ImageCapture>();
                     var imageCaptureList = imageTable.Where(x => x.CaseServiceRecId == task.CaseServiceRecID);
 
-                    foreach (var item in imageCaptureList.Where(x=>!x.IsSynced))
+                    foreach (var item in imageCaptureList.Where(x => !x.IsSynced))
                     {
                         mzk_ImageContractList.Add(new Mzk_ImageContract
                         {
                             parmCaseNumber = task.CaseNumber,
-                            parmFileName =string.Format("{0}{1}", item.FileName,".png"),
+                            parmFileName = string.Format("{0}{1}", item.FileName, ".png"),
                             parmImageData = item.ImageBinary,
                         });
 
@@ -207,7 +207,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                     mzk_ImageContractList.Add(new Mzk_ImageContract
                         {
                             parmCaseNumber = task.CaseNumber,
-                            parmFileName =string.Format("{0}{1}", item.FileName,".png"),
+                            parmFileName = string.Format("{0}{1}", item.FileName, ".png"),
                             parmImageData = item.ImageBinary,
                         });
 
@@ -296,21 +296,20 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                 });
             }
         }
-        public async System.Threading.Tasks.Task GetTasksAsync()
+
+
+        public async System.Threading.Tasks.Task<List<Eqstra.BusinessLogic.TITask>> SyncTasksFromAXAsync()
         {
+            var insertList = new List<Eqstra.BusinessLogic.TITask>();
             try
             {
                 if (_userInfo == null)
                 {
                     _userInfo = JsonConvert.DeserializeObject<UserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
                 }
-                var updateList = new List<Eqstra.BusinessLogic.TITask>();
-                var insertList = new List<Eqstra.BusinessLogic.TITask>();
 
                 var subCompUpdateList = new List<MaintenanceRepair>();
                 var subCompInsertList = new List<MaintenanceRepair>();
-
-                var allTasks = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.TITask>();
 
                 var result = await client.getTasksAsync(_userInfo.UserId, _userInfo.CompanyId);
                 if (result != null)
@@ -374,6 +373,8 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                     await SqliteHelper.Storage.InsertAllAsync(insertList);
 
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -384,7 +385,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
                                       AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                                   });
             }
-
+            return insertList;
 
         }
         public async System.Threading.Tasks.Task InsertTechnicalInspectionAsync()

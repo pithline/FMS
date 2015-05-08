@@ -18,6 +18,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media;
@@ -74,7 +75,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-                this.UserInfo = PersistentData.Instance.UserInfo;
+                if (this.UserInfo == null)
+                {
+                    this.UserInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
                 await GetTasksFromDbAsync();
                 GetAllCount();
                 GetAppointments();
