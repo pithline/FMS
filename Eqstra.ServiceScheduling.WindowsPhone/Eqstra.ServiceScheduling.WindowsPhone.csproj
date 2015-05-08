@@ -242,6 +242,10 @@
       <Project>{8bcc54e1-4586-4a35-9ac9-43e81540b05c}</Project>
       <Name>Eqstra.ServiceScheduling.UILogic.Portable</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone\Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone.csproj">
+      <Project>{44813026-7c80-4170-af06-c71e2879e7c3}</Project>
+      <Name>Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eqstra.WinRT.Components.Controls.WindowsPhone\Eqstra.WinRT.Components.Controls.WindowsPhone.csproj">
       <Project>{529b5041-022f-4445-a118-d64fbdbabfc4}</Project>
       <Name>Eqstra.WinRT.Components.Controls.WindowsPhone</Name>

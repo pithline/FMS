@@ -130,6 +130,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\camera.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\loginIcon.png" />
@@ -225,6 +226,10 @@
     <ProjectReference Include="..\Eqstra.TechnicalInspection.UILogic.WindowsPhone\Eqstra.TechnicalInspection.UILogic.WindowsPhone.csproj">
       <Project>{7a8a6a29-c647-4567-b8ac-eb97827b431d}</Project>
       <Name>Eqstra.TechnicalInspection.UILogic.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone\Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone.csproj">
+      <Project>{44813026-7c80-4170-af06-c71e2879e7c3}</Project>
+      <Name>Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone</Name>
     </ProjectReference>
     <ProjectReference Include="..\Eqstra.WinRT.Components.Controls.WindowsPhone\Eqstra.WinRT.Components.Controls.WindowsPhone.csproj">
       <Project>{529b5041-022f-4445-a118-d64fbdbabfc4}</Project>

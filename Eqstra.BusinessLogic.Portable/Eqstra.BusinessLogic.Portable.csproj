@@ -54,6 +54,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="ImageCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSModels\AccessToken.cs" />

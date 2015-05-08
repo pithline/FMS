@@ -7,6 +7,7 @@ using ShakeGestures;
 using System;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Appointments;
+using Windows.ApplicationModel.Background;
 using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -28,7 +29,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         public MainPage()
         {
             this.InitializeComponent();
-         
+
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
             ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 2;
             ShakeGesturesHelper.Instance.Active = true;
@@ -47,7 +48,7 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
             style.Setters.Add(new Setter(GridViewItem.WidthProperty, w));
             style.Setters.Add(new Setter(GridViewItem.HeightProperty, w));
         }
-      
+
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -73,7 +74,33 @@ namespace Eqstra.TechnicalInspection.WindowsPhone.Views
         {
             vm = ((MainPageViewModel)this.DataContext);
             base.OnNavigatedTo(e);
+            RegisterBackgroundTask();
         }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "TIBackgroundTask";
+        private const string taskEntryPoint = "Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone.TIBackgroundTask";
 
         async private void Message_Click(object sender, RoutedEventArgs e)
         {
