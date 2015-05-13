@@ -153,8 +153,17 @@
     </AppxManifest>
     <None Include="Eqstra.ServiceScheduling_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\eqstraLiveTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Logo.scale-100 - Copy %282%29.png" />
+    <Content Include="Assets\Logo.scale-100 - Copy.png" />
     <Content Include="Assets\NetConnected.png" />
     <Content Include="Assets\NetDisconnected.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-100 - Copy.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Common\ReadMe.txt" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -285,6 +294,10 @@
     <ProjectReference Include="..\Eqstra.ServiceScheduling.UILogic\Eqstra.ServiceScheduling.UILogic.csproj">
       <Project>{4641b43d-ac24-4c3a-97e2-1dde5950c0a2}</Project>
       <Name>Eqstra.ServiceScheduling.UILogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Eqstra.WinRT.Components.BackgroundTasks\Eqstra.WinRT.Components.BackgroundTasks.csproj">
+      <Project>{a268d6e5-5a0c-46a7-9285-372caf007edf}</Project>
+      <Name>Eqstra.WinRT.Components.BackgroundTasks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

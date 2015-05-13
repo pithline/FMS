@@ -86,7 +86,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                                 AppSettings.Instance.IsSynchronizing = 1;
                             });
 
-                            await TIServiceHelper.Instance.GetTasksAsync();
+                            await TIServiceHelper.Instance.SyncTasksFromAXAsync();
 
 
                             TIServiceHelper.Instance.Synchronize();
@@ -145,7 +145,7 @@ namespace Eqstra.TechnicalInspection.UILogic.ViewModels
                             AppSettings.Instance.IsSynchronizing = 1;
                         });
 
-                        await TIServiceHelper.Instance.GetTasksAsync();
+                        await TIServiceHelper.Instance.SyncTasksFromAXAsync();
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {

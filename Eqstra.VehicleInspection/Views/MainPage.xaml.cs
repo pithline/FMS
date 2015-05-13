@@ -26,6 +26,7 @@ using Windows.UI.ViewManagement;
 using System.Collections;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.VehicleInspection.UILogic;
+using Windows.ApplicationModel.Background;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -54,6 +55,39 @@ namespace Eqstra.VehicleInspection.Views
             suggestLookup.Add("ContactName");
             suggestLookup.Add("ContactNumber");
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            RegisterBackgroundTask();
+        }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "VIBackgroundTask";
+        private const string taskEntryPoint = "Eqstra.WinRT.Components.BackgroundTasks.VIBackgroundTask";
+
+
         private void UpdateVisualState()
         {
             //VisualStateManager.GoToState(this, ApplicationView.GetForCurrentView().Orientation.ToString(), true);

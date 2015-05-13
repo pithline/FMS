@@ -44,14 +44,6 @@
                            FontSize="17"
                            Text="{Binding RegistrationNumber}" />
 
-                <TextBlock   Style="{StaticResource TextContentStyle}"
-                             HorizontalAlignment="Left"
-                             Foreground="White"
-                             FontSize="17"
-                             TextWrapping="Wrap"
-                             TextAlignment="Left"
-                             Margin="2,5"
-                             Text="{Binding Status}" />
 
                 <TextBlock HorizontalAlignment="Left"
                            Margin="2,5"
@@ -61,7 +53,15 @@
                            TextAlignment="Left"
                            FontSize="17"
                            Text="{Binding Model}" />
-
+                
+                <TextBlock   Style="{StaticResource TextContentStyle}"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             FontSize="17"
+                             TextWrapping="Wrap"
+                             TextAlignment="Left"
+                             Margin="2,5"
+                             Text="{Binding Status}" />
 
             </StackPanel>
 

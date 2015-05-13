@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using Eqstra.DocumentDelivery.UILogic;
 using Eqstra.BusinessLogic.DocumentDelivery;
+using Windows.ApplicationModel.Background;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Eqstra.DocumentDelivery.Views
@@ -48,6 +49,38 @@ namespace Eqstra.DocumentDelivery.Views
             suggestLookup.Add("CustomerNumber");
 
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            RegisterBackgroundTask();
+        }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "CDBackgroundTask";
+        private const string taskEntryPoint = "Eqstra.WinRT.Components.BackgroundTasks.CDBackgroundTask";
+
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             try

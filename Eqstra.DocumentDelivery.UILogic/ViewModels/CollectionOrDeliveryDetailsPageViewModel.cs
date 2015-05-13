@@ -1,4 +1,5 @@
 ﻿using Eqstra.BusinessLogic;
+using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
@@ -15,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -52,7 +54,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     this.IsBusy = true;
 
-                    switch (PersistentData.Instance.UserInfo.CDUserType)
+                    switch (this._userInfo.CDUserType)
                     {
                         case CDUserType.Driver:
                             foreach (var task in this.SelectedTaskBucket)
@@ -171,7 +173,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     {
                         this.IsBusy = true;
 
-                        if (PersistentData.Instance.UserInfo.CDUserType == CDUserType.Courier)
+                        if (this._userInfo.CDUserType == CDUserType.Courier)
                         {
                             foreach (var task in this.SelectedTaskBucket)
                             {
@@ -378,6 +380,12 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 this.IsDelSignatureDate = Visibility.Collapsed;
                 this.IsCollSignatureDate = Visibility.Collapsed;
 
+                if (_userInfo == null)
+                {
+                    this._userInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+
+
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
                 if (_task.TaskType == BusinessLogic.Enums.CDTaskType.Collect)
                 {
@@ -398,7 +406,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 this.SelectedTaskBucket = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this._task.CustomerId &&
-                    d.ContactPersonAddress == this._task.ContactPersonAddress && d.TaskType == this._task.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
+                    d.ContactPersonAddress == this._task.ContactPersonAddress && d.TaskType == this._task.TaskType && d.UserID == this._userInfo.UserId).ToList();
                 foreach (var d in this.SelectedTaskBucket)
                 {
                     this.DocumentList.Add(new Document
@@ -417,7 +425,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                     });
                 }
 
-                switch (PersistentData.Instance.UserInfo.CDUserType)
+                switch (this._userInfo.CDUserType)
                 {
                     case CDUserType.Courier:
                         this.ContactPersons = await SqliteHelper.Storage.LoadTableAsync<Courier>();
@@ -435,7 +443,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 }
 
                 this.CollectedFrom = await SqliteHelper.Storage.LoadTableAsync<CollectedFromData>();
-                this.AlternateContactPersons = (await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>()).Where(u => u.UserId == PersistentData.Instance.UserInfo.UserId);
+                this.AlternateContactPersons = (await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>()).Where(u => u.UserId ==  this._userInfo.UserId);
                 this.IsBusy = false;
             }
             catch (Exception ex)
@@ -713,5 +721,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
         //}
 
 
+
+        public CDUserInfo _userInfo { get; set; }
     }
 }

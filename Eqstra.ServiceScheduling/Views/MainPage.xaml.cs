@@ -22,6 +22,7 @@ using Eqstra.ServiceScheduling.UILogic;
 using System.Collections.ObjectModel;
 using Windows.UI.Core;
 using Eqstra.ServiceScheduling.UILogic.Helpers;
+using Windows.ApplicationModel.Background;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Eqstra.ServiceScheduling.Views
@@ -46,9 +47,7 @@ namespace Eqstra.ServiceScheduling.Views
             suggestLookup.Add("ContactName");
             suggestLookup.Add("CustPhone");
         }
-        private void WeatherInfo_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-        }
+
         async private void filterBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             try
@@ -130,5 +129,41 @@ namespace Eqstra.ServiceScheduling.Views
             }
 
         }
+
+
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            RegisterBackgroundTask();
+
+        }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "SSBackgroundTask";
+        private const string taskEntryPoint = "Eqstra.WinRT.Components.BackgroundTasks.SSBackgroundTask";
+
     }
 }

@@ -8,6 +8,7 @@ using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
+using Newtonsoft.Json;
 using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this.CDTaskList = new ObservableCollection<CollectDeliveryTask>();
             this.SelectedTaskList = new ObservableCollection<CollectDeliveryTask>();
             this.BriefDetailsUserControlViewModel = new BriefDetailsUserControlViewModel();
-            this.CDUserInfo = PersistentData.Instance.UserInfo;
+            if (this.CDUserInfo == null)
+            {
+                this.CDUserInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+            }
             this.SaveVisibility = Visibility.Collapsed;
             this.NextStepVisibility = Visibility.Collapsed;
             this.CustomerDetails = new CDCustomerDetails();
@@ -45,7 +49,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
                 {
                     this.IsBusy = true;
                     var taskList = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(w => w.TaskType == this.CDTask.TaskType && w.CustomerId == this.CDTask.CustomerId  &&
-                        w.ContactPersonAddress == this.CDTask.ContactPersonAddress && w.Status != CDTaskStatus.Completed && w.UserID == PersistentData.Instance.UserInfo.UserId);
+                        w.ContactPersonAddress == this.CDTask.ContactPersonAddress && w.Status != CDTaskStatus.Completed && w.UserID == this.CDUserInfo.UserId);
                     foreach (var item in taskList)
                     {
                         item.IsAssignTask = true;
@@ -135,7 +139,10 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             {
                 this.IsBusy = true;
                 base.OnNavigatedTo(navigationParameter, navigationMode, viewModelState);
-
+                if (this.CDUserInfo == null)
+                {
+                    this.CDUserInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
                 await GetTasksFromDbAsync();
 
                 if (AppSettings.Instance.IsSynchronizing == 0 && !AppSettings.Instance.Synced)
@@ -301,7 +308,7 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             if (this.CDTask != null)
             {
                 var allTaskOfCustomer = (await SqliteHelper.Storage.LoadTableAsync<CollectDeliveryTask>()).Where(d => d.Status != CDTaskStatus.Completed && d.CustomerId == this.CDTask.CustomerId &&
-                    d.ContactPersonAddress == this.CDTask.ContactPersonAddress && d.TaskType == this.CDTask.TaskType && d.UserID == PersistentData.Instance.UserInfo.UserId).ToList();
+                    d.ContactPersonAddress == this.CDTask.ContactPersonAddress && d.TaskType == this.CDTask.TaskType && d.UserID == this.CDUserInfo.UserId).ToList();
                 this.BriefDetailsUserControlViewModel.DocumentsBriefs = new ObservableCollection<Document>();
 
                 foreach (var d in allTaskOfCustomer)
@@ -341,5 +348,6 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
 
         }
         #endregion
+
     }
 }

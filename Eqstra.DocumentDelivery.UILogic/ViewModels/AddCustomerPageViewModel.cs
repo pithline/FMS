@@ -1,9 +1,11 @@
 ﻿
+using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.StoreApps;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,11 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             this._eventAggregator = eventAggregator;
             this.AddCustomerCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                this.Model.UserId = PersistentData.Instance.UserInfo.UserId;
+                if (this.CDUserInfo == null)
+                {
+                    this.CDUserInfo = JsonConvert.DeserializeObject<CDUserInfo>(ApplicationData.Current.RoamingSettings.Values[Constants.UserInfo].ToString());
+                }
+                this.Model.UserId = this.CDUserInfo.UserId;
                 var alternateData = await SqliteHelper.Storage.LoadTableAsync<AlternateContactPerson>();
                 if (alternateData != null && alternateData.Any(a => a.FirstName == this.Model.FirstName && a.Surname == this.Model.Surname))
                 {
@@ -52,6 +58,8 @@ namespace Eqstra.DocumentDelivery.UILogic.ViewModels
             get { return model; }
             set { SetProperty(ref model, value); }
         }
+
+        public CDUserInfo CDUserInfo { get; set; }
     }
 
 }

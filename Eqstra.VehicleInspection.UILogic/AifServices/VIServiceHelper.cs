@@ -308,13 +308,14 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 });
             }
         }
-        async public System.Threading.Tasks.Task SyncTasksFromSvcAsync()
+        async public System.Threading.Tasks.Task<List<BusinessLogic.Task>> SyncTasksFromSvcAsync()
         {
+            List<Eqstra.BusinessLogic.Task> taskInsertList = new List<BusinessLogic.Task>();
             try
             {
                 var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
                 if (connectionProfile == null || connectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-                    return;
+                    return null;
 
                 if (_userInfo == null)
                 {
@@ -324,8 +325,6 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                 var taskData = await SqliteHelper.Storage.LoadTableAsync<Eqstra.BusinessLogic.Task>();
                 if (result.response != null)
                 {
-                    List<Eqstra.BusinessLogic.Task> taskInsertList = new List<BusinessLogic.Task>();
-                    List<Eqstra.BusinessLogic.Task> taskUpdateList = new List<BusinessLogic.Task>();
                     foreach (var mzkTask in result.response)
                     {
                         var taskTosave = new Eqstra.BusinessLogic.Task
@@ -368,22 +367,12 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                         {
                             GetTVehicleDetailsAsync(mzkTask.parmCaseID, mzkTask.parmRecID);
                         }
-                        if (taskData.Any(s => s.CaseNumber == mzkTask.parmCaseID))
-                        {
-                            taskUpdateList.Add(taskTosave);
-                        }
-                        else
-                        {
-                            taskInsertList.Add(taskTosave);
-                        }
+                        taskInsertList.Add(taskTosave);
                     }
 
-                    if (taskUpdateList.Any())
-                        await SqliteHelper.Storage.UpdateAllAsync<BusinessLogic.Task>(taskUpdateList);
+                    await SqliteHelper.Storage.DropnCreateTableAsync<Eqstra.BusinessLogic.Task>();
 
-
-                    if (taskInsertList.Any())
-                        await SqliteHelper.Storage.InsertAllAsync<BusinessLogic.Task>(taskInsertList);
+                    await SqliteHelper.Storage.InsertAllAsync(taskInsertList);
                 }
             }
             catch (Exception ex)
@@ -395,6 +384,7 @@ namespace Eqstra.VehicleInspection.UILogic.AifServices
                               AppSettings.Instance.ErrorMessage = ex.Message + ex.InnerException;
                           });
             }
+            return taskInsertList;
         }
 
         async public System.Threading.Tasks.Task SyncPassengerAsync()

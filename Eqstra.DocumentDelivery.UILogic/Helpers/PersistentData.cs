@@ -14,9 +14,7 @@ namespace Eqstra.DocumentDelivery.UILogic.Helpers
     {
         private static PersistentData _instance = new PersistentData();
         public static PersistentData Instance { get { return _instance; } }
-        public CDUserInfo UserInfo { get; set; }
         public CDCustomerDetails CustomerDetails { get; set; }
-
         public ScheduleAppointmentCollection Appointments { get; set; }
         public CollectDeliveryTask CollectDeliveryTask { get; set; }
         public static void RefreshInstance()

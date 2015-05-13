@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Appointments;
+using Windows.ApplicationModel.Background;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -50,17 +51,46 @@ namespace Eqstra.ServiceScheduling.WindowsPhone.Views
             double w;
             if (Window.Current.Bounds.Width < Window.Current.Bounds.Height)
             {
-                 w = (Window.Current.Bounds.Width / 2.2) - 10;
+                w = (Window.Current.Bounds.Width / 2.2) - 10;
             }
             else
             {
-                 w = (Window.Current.Bounds.Height / 2.2) - 10;
+                w = (Window.Current.Bounds.Height / 2.2) - 10;
             }
 
             Style style = this.Resources["GridViewItemStyle1"] as Style;
             style.Setters.Add(new Setter(GridViewItem.WidthProperty, w));
             style.Setters.Add(new Setter(GridViewItem.HeightProperty, w));
+
+            RegisterBackgroundTask();
         }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "SSBackgroundTask";
+        private const string taskEntryPoint = "Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone.SSBackgroundTask";
+
+
 
         private async void Instance_ShakeGesture(object sender, ShakeGestures.ShakeGestureEventArgs e)
         {

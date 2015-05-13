@@ -330,7 +330,7 @@
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            TextWrapping="Wrap"
-                                           Text="{Binding StringifyConfirmedDate}"
+                                           Text="{Binding ConfirmedStDate}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 

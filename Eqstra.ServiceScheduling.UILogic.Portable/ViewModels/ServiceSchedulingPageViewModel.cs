@@ -185,7 +185,7 @@ namespace Eqstra.ServiceScheduling.UILogic.Portable
 
             this.AddCommand = new DelegateCommand(async () =>
             {
-                _addressDialog = new AddressDialog(this._locationService, this._eventAggregator);
+                _addressDialog = new AddressDialog(this._locationService, this._eventAggregator,this.Address);
                 this.Model.SelectedDestinationType = new DestinationType();
                 await _addressDialog.ShowAsync();
             });
