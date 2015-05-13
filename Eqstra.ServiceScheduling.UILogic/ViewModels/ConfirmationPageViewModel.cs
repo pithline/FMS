@@ -27,12 +27,12 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 {
                     this.IsBusy = true;
 
-                    bool isInserted = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
-                    if (isInserted)
-                    {
+                    //bool isInserted = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
+                    //if (isInserted)
+                    //{
                         PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                         PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                    }
+                   // }
                     navigationService.Navigate("Main", string.Empty);
                     this.IsBusy = false;
                 }
@@ -48,14 +48,14 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                     this.IsBusy = true;
                     this.ServiceSchedulingDetail.ServiceDateOption1 = this.ServiceDateOption1;
                     this.ServiceSchedulingDetail.ServiceDateOption2 = this.ServiceDateOption2;
-                    bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
-                    if (IsUpdated)
-                    {
+                  // bool IsUpdated = await SSProxyHelper.Instance.UpdateConfirmationDatesToSvcAsync(this.DriverTask.CaseServiceRecID, this.ServiceSchedulingDetail);
+                    //if (IsUpdated)
+                    //{
                         this.ConfirmationDatesCommand.RaiseCanExecuteChanged();
                         this.SubmitCommand.RaiseCanExecuteChanged();
                         PersistentData.Instance.CustomerDetails.Status = await SSProxyHelper.Instance.UpdateStatusListToSvcAsync(this.DriverTask);
                         PersistentData.Instance.DriverTask.Status = PersistentData.Instance.CustomerDetails.Status;
-                    }
+                   // }
                     navigationService.Navigate("Main", string.Empty);
                     this.IsBusy = false;
 

@@ -32,6 +32,11 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
                 _navigationService.Navigate("Login", string.Empty);
                 _navigationService.ClearHistory();
             });
+
+            ClearErrorMessageCommand = new DelegateCommand(() =>
+            {
+                AppSettings.Instance.ErrorMessage = string.Empty;
+            });
         }
 
         private string networkIcon;
@@ -41,6 +46,8 @@ namespace Eqstra.ServiceScheduling.UILogic.ViewModels
             set { SetProperty(ref networkIcon, value); }
         }
         public ICommand LogoutCommand { get; private set; }
+
+        public ICommand ClearErrorMessageCommand { get; set; }
 
         private UserInfo userInfo;
         public UserInfo UserInfo

@@ -47,10 +47,10 @@
                 <Button.Flyout>
                     <Flyout>
 
-                        <Grid>
+                        <Grid Width="300" Height="100">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
                                 <TextBlock Foreground="Crimson"

@@ -711,7 +711,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                        parmLiftRequired = serviceSchedulingDetail.IsLiftRequired == true ? NoYes.Yes : NoYes.No
 
                    };
-                if (serviceSchedulingDetail.SelectedDestinationType != null)
+                if (serviceSchedulingDetail.IsLiftRequired && serviceSchedulingDetail.SelectedLocationType !=null)
                 {
                     mzkServiceDetailsContract.parmLocationType = new MzkLocationTypeContract
                     {

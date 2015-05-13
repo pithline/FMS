@@ -14,12 +14,12 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Eqstra.TechnicalInspection_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Eqstra.TechnicalInspection_StoreKey.pfx</PackageCertificateKeyFile>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>433BCB3248F4A23494BFE9E16EF3F1B7695F5CEB</PackageCertificateThumbprint>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>74D242EFC4286934286E1E98FBF78C9628C8B779</PackageCertificateThumbprint>
     <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -236,6 +236,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Eqstra.TechnicalInspection_StoreKey.pfx" />
     <None Include="Eqstra.TechnicalInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -250,7 +251,7 @@
     <Content Include="Assets\car_right.png" />
     <Content Include="Assets\car_top.png" />
     <Content Include="Assets\details_image.png" />
-    <Content Include="Assets\eqstra_badge_logo.png" />
+    <Content Include="Assets\eqstra_badge_logo.scale-100.png" />
     <Content Include="Assets\eqstra_badge_logo.scale-140.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
@@ -272,6 +273,7 @@
     <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
