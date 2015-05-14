@@ -31,6 +31,17 @@ namespace Eqstra.WinRT.Components.BackgroundTasks
         {
             try
             {
+
+                var updaterWide = TileUpdateManager.CreateTileUpdaterForApplication();
+                var updaterSqure = TileUpdateManager.CreateTileUpdaterForApplication();
+                var updaterBadge = BadgeUpdateManager.CreateBadgeUpdaterForApplication();
+                updaterWide.EnableNotificationQueue(true);
+                updaterSqure.EnableNotificationQueue(true);
+                updaterWide.Clear();
+                updaterSqure.Clear();
+                updaterBadge.Clear();
+                int counter = 0;
+
                 var crd = _credentialStore.GetSavedCredentials(PasswordVaultResourceName);
 
                 SSProxyHelper.Instance.ConnectAsync(crd.UserName, crd.Password);
@@ -38,16 +49,6 @@ namespace Eqstra.WinRT.Components.BackgroundTasks
 
                 if (allTasks != null)
                 {
-                    var updaterWide = TileUpdateManager.CreateTileUpdaterForApplication();
-                    var updaterSqure = TileUpdateManager.CreateTileUpdaterForApplication();
-                    var updaterBadge = BadgeUpdateManager.CreateBadgeUpdaterForApplication();
-                    updaterWide.EnableNotificationQueue(true);
-                    updaterSqure.EnableNotificationQueue(true);
-                    updaterWide.Clear();
-                    updaterSqure.Clear();
-                    updaterBadge.Clear();
-                    int counter = 0;
-
                     foreach (var collection in allTasks.InSetsOf(3))
                     {
                         int index = 0;
