@@ -123,38 +123,6 @@
     <Compile Include="ViewModels\TechnicalInspectionPageViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Commercial\CabTrimInterUserControl.xaml.cs">
-      <DependentUpon>CabTrimInterUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CAccessoriesUserControl.xaml.cs">
-      <DependentUpon>CAccessoriesUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CGlassUserControl.xaml.cs">
-      <DependentUpon>CGlassUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\ChassisBodyUserControl.xaml.cs">
-      <DependentUpon>ChassisBodyUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CMechanicalCondUserControl.xaml.cs">
-      <DependentUpon>CMechanicalCondUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CPOIUserControl.xaml.cs">
-      <DependentUpon>CPOIUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CTyresUserControl.xaml.cs">
-      <DependentUpon>CTyresUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Commercial\CVehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>CVehicleDetailsUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Views\CustomerDetailUserControl.xaml.cs">
       <DependentUpon>CustomerDetailUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -177,38 +145,6 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\AccessoriesUserControl.xaml.cs">
-      <DependentUpon>AccessoriesUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\BodyworkUserControl.xaml.cs">
-      <DependentUpon>BodyworkUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\GlassUserControl.xaml.cs">
-      <DependentUpon>GlassUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\InspectionProofUserControl.xaml.cs">
-      <DependentUpon>InspectionProofUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\MechanicalCondUserControl.xaml.cs">
-      <DependentUpon>MechanicalCondUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\PVehicleDetailsUserControl.xaml.cs">
-      <DependentUpon>PVehicleDetailsUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\TrimIntUserControl.xaml.cs">
-      <DependentUpon>TrimIntUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Passenger\TyreConditionUserControl.xaml.cs">
-      <DependentUpon>TyreConditionUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\ProfileUserControl.xaml.cs">
@@ -300,38 +236,6 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Commercial\CabTrimInterUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CAccessoriesUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CGlassUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\ChassisBodyUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CMechanicalCondUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CPOIUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CTyresUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Commercial\CVehicleDetailsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\CustomerDetailUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,38 +257,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\AccessoriesUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\BodyworkUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\GlassUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\InspectionProofUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\MechanicalCondUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\PVehicleDetailsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\TrimIntUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Passenger\TyreConditionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

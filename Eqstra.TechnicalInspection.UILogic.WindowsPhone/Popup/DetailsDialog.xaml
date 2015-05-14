@@ -206,7 +206,7 @@
                                            Style="{StaticResource TextContentStyle}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            TextWrapping="Wrap"
-                                           Text="{Binding CusEmailId}"
+                                           Text="{Binding CustEmailId}"
                                            Style="{StaticResource InfoBoxTitleStyle}" />
                             </StackPanel>
 
