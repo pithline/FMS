@@ -32,9 +32,8 @@
         <m2:ApplicationView MinWidth="default" />
       </m2:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Eqstra.TechnicalInspection.BackgroundTask.SilentSync">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Eqstra.WinRT.Components.BackgroundTasks.TIBackgroundTask">
           <BackgroundTasks>
-            <Task Type="systemEvent" />
             <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
