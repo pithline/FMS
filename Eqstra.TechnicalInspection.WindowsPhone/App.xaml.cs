@@ -82,6 +82,8 @@ namespace Eqstra.TechnicalInspection.WindowsPhone
                               ImageBitmap = bitmap,
                               ImageData = Convert.ToBase64String(fileBytes),
                               guid = Guid.NewGuid(),
+                              RepairId = 0,
+                              Component = ""
                           };
 
                 }

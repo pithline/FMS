@@ -50,7 +50,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.Services
         {
             try
             {
-                var postData = new { target = "TechnicalInspection", method = "save", parameters = new[] { "InsertInspectionData", JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(tiData), Newtonsoft.Json.JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(imageCaptureList), companyId } };
+                var postData = new { target = "TechnicalInspection", method = "save", parameters = new[] { "InsertInspectionData", Newtonsoft.Json.JsonConvert.SerializeObject(tiData), JsonConvert.SerializeObject(task), Newtonsoft.Json.JsonConvert.SerializeObject(imageCaptureList), companyId } };
                 var response = await _httpFactory.PostAsync(new HttpStringContent(JsonConvert.SerializeObject(postData), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)

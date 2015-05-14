@@ -639,7 +639,7 @@
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="search"
                               Icon="Find"

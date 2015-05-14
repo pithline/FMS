@@ -539,7 +539,7 @@
     </prism:VisualStateAwarePage.Resources>
 
     <prism:VisualStateAwarePage.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar >
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Camera"
                               Label="camera"

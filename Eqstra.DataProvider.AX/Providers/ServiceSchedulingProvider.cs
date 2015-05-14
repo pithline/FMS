@@ -454,7 +454,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             IsLiftRequired = mzk.parmLiftRequired == NoYes.Yes ? true : false,
                             AccountNumber = mzk.parmSupplierId,
                             ConfirmedDate = mzk.parmConfirmedDate.Year == 1900 ? "" : mzk.parmConfirmedDate.ToString("MM/dd/yyyy HH:mm")
-                            
+
                         });
                         detailServiceScheduling.SelectedLocType = detailServiceScheduling.LocationTypes.Find(x => x.RecID == mzk.parmLocationType.parmRecID);
                     }

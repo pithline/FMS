@@ -14,12 +14,12 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Eqstra.TechnicalInspection_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Eqstra.TechnicalInspection_StoreKey.pfx</PackageCertificateKeyFile>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>433BCB3248F4A23494BFE9E16EF3F1B7695F5CEB</PackageCertificateThumbprint>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>74D242EFC4286934286E1E98FBF78C9628C8B779</PackageCertificateThumbprint>
     <EnableProjectNCompatibleProfile>false</EnableProjectNCompatibleProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -236,6 +236,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Eqstra.TechnicalInspection_StoreKey.pfx" />
     <None Include="Eqstra.TechnicalInspection_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -274,6 +275,7 @@
     <Content Include="default.rd.xml" />
     <Content Include="Images\images.png" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="SqliteDB\eqstramobility.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -445,8 +447,8 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
-    <SDKReference Include="SQLite.WinRT81, Version=3.8.9">
-      <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.10">
+      <Name>SQLite for Windows Runtime %28Windows 8.1%291</Name>
     </SDKReference>
     <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24">
       <Name>Syncfusion 8.1 Controls for WinRT XAML %28Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24%29</Name>
