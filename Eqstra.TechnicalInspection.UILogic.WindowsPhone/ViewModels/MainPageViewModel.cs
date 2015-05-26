@@ -139,6 +139,7 @@ namespace Eqstra.TechnicalInspection.UILogic.WindowsPhone.ViewModels
             {
                 this.TaskProgressBar = Visibility.Collapsed;
             }
+           
         }
         public async System.Threading.Tasks.Task FetchTasksAsync()
         {
