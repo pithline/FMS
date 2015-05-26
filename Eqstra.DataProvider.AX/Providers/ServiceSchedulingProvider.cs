@@ -257,7 +257,7 @@ namespace Eqstra.DataProvider.AX.Providers
                             Make = mzkTask.parmMake,
                             Model = mzkTask.parmModel,
                             Description = mzkTask.parmVehicleDescription,
-                            CusEmailId = mzkTask.parmEmail,
+                            CustEmailId = mzkTask.parmEmail,
                             ServiceRecID = mzkTask.parmServiceRecID,
                             CustomerId = mzkTask.parmCustAccount,
                             ConfirmedDate = mzkTask.parmConfirmationDate.ToShortDateString(),
@@ -265,12 +265,14 @@ namespace Eqstra.DataProvider.AX.Providers
                             AppointmentStart = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime : DateTime.MinValue,
                             AppointmentEnd = mzkTask.parmStatus == Eqstra.DataProvider.AX.Helpers.TaskStatus.Completed ? startTime.AddHours(24) : DateTime.MinValue,
                             VehicleClassId = mzkTask.parmVehicleClassId,
-                            VehicleSubClassId = mzkTask.parmVehicleSubClassId
+                            VehicleSubClassId = mzkTask.parmVehicleSubClassId,
+                            
+                            
                         });
                     }
                 }
-
-                return driverTaskList.OrderByDescending(x => x.CaseNumber).ToList();
+               
+                return driverTaskList.OrderByDescending(x => x.CaseNumber).Where(x=>x.Status != TaskStatus.AwaitServiceConfirmation).ToList();
 
             }
             catch (Exception)

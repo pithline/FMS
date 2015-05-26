@@ -260,31 +260,31 @@
     <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkZipCodeContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\RoutingService1.wsdl" />
-    <None Include="Service References\SSProxy\xppservice2.wsdl" />
-    <None Include="Service References\SSProxy\xppservice21.wsdl" />
-    <None Include="Service References\SSProxy\xppservice8.xsd">
+    <None Include="Service References\SSProxy\RoutingService.wsdl" />
+    <None Include="Service References\SSProxy\xppservice.wsdl" />
+    <None Include="Service References\SSProxy\xppservice.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice81.xsd">
+    <None Include="Service References\SSProxy\xppservice1.wsdl" />
+    <None Include="Service References\SSProxy\xppservice1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice82.xsd">
+    <None Include="Service References\SSProxy\xppservice2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice83.xsd">
+    <None Include="Service References\SSProxy\xppservice3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice84.xsd">
+    <None Include="Service References\SSProxy\xppservice4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice85.xsd">
+    <None Include="Service References\SSProxy\xppservice5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice86.xsd">
+    <None Include="Service References\SSProxy\xppservice6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SSProxy\xppservice87.xsd">
+    <None Include="Service References\SSProxy\xppservice7.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract.datasource">
@@ -359,18 +359,6 @@
     <WCFMetadataStorage Include="Service References\TIProxy\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SSProxy\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SSProxy\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SSProxy\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\TIProxy\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +372,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TIProxy\xppservice1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SSProxy\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SSProxy\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SSProxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

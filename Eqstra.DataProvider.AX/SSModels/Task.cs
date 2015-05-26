@@ -11,7 +11,7 @@ namespace Eqstra.DataProvider.AX.SSModels
 
         public String CaseNumber { get; set; }
 
-        public String CusEmailId { get; set; }
+        public String CustEmailId { get; set; }
 
         public String CaseCategory { get; set; }
 
@@ -66,6 +66,8 @@ namespace Eqstra.DataProvider.AX.SSModels
         public string VehicleClassId { get; set; }
 
         public string VehicleSubClassId { get; set; }
+
+        public string EngineNumber { get; set; }
        
     }
 }
