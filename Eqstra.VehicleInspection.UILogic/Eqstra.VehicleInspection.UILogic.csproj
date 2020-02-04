@@ -189,6 +189,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Data.WinRT">
+      <HintPath>..\packages\Syncfusion.Data.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.Data.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.GridCommon.WinRT">
+      <HintPath>..\packages\Syncfusion.GridCommon.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.GridCommon.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WinRT">
+      <HintPath>..\packages\Syncfusion.SfGrid.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfGrid.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGridBase.WinRT">
+      <HintPath>..\packages\Syncfusion.SfGridBase.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfGridBase.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfInput.WinRT">
+      <HintPath>..\packages\Syncfusion.SfInput.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfInput.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfRadialMenu.WinRT">
+      <HintPath>..\packages\Syncfusion.SfRadialMenu.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfRadialMenu.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfSchedule.WinRT">
+      <HintPath>..\packages\Syncfusion.SfSchedule.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfSchedule.WinRT.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfShared.WinRT">
+      <HintPath>..\packages\Syncfusion.SfShared.WinRT451.13.1.0.21\lib\netcore451\Syncfusion.SfShared.WinRT.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -323,9 +347,6 @@
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
-    </SDKReference>
-    <SDKReference Include="Syncfusion 8.1 controls for WinRT XAML, Version=12.4.0.24">
-      <Name>Syncfusion 8.1 Controls for WinRT XAML</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>

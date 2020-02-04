@@ -7,7 +7,7 @@ using SharpDX.DXGI;
 using SharpDX.IO;
 using SharpDX.WIC;
 using System;
-using System.Drawing;
+//using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;

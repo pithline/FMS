@@ -24,12 +24,14 @@ namespace Eqstra.VehicleInspection.UILogic.Services
         {
             try
             {
-                VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(), _eventAggregator);
-                var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
+               // VIServiceHelper.Instance.ConnectAsync(userId.Trim(), password.Trim(), _eventAggregator);
+               // var result = await VIServiceHelper.Instance.ValidateUser(userId.Trim(), password.Trim());
 
-                if (result.response)
+                if (true)
                 {
-                    var ui = await VIServiceHelper.Instance.GetUserInfoAsync(userId.Trim());
+                    // TODO : uncommnet
+                   // var ui = await VIServiceHelper.Instance.GetUserInfoAsync(userId.Trim());
+                    var ui = new { response = new { parmUserID = "Peterson", parmCompany = "USMF", parmCompanyName = "Contoso", parmUserName="Peterson"} };
                     if (ui.response != null)
                     {
                         var userInfo = new UserInfo

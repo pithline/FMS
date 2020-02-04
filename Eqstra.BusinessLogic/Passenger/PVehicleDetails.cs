@@ -2,7 +2,7 @@
 using Eqstra.BusinessLogic.Helpers;
 using Microsoft.Practices.Prism.StoreApps;
 using SQLite;
-using Syncfusion.CompoundFile.XlsIO.Native;
+//using Syncfusion.CompoundFile.XlsIO.Native;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
