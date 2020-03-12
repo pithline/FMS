@@ -3,30 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection", "Eqstra.VehicleInspection\Pithline.FMS.VehicleInspection.csproj", "{8CAD1A1E-727E-49B9-A530-1B3A1F12E8F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection", "Pithline.FMS.VehicleInspection\Pithline.FMS.VehicleInspection.csproj", "{8CAD1A1E-727E-49B9-A530-1B3A1F12E8F1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{790AD967-F93D-402A-8857-E4C0B64D00E7} = {790AD967-F93D-402A-8857-E4C0B64D00E7}
 		{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2} = {76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}
 		{F71B8AC9-5305-402F-ADA8-C75FFE09EE24} = {F71B8AC9-5305-402F-ADA8-C75FFE09EE24}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection.UILogic", "Eqstra.VehicleInspection.UILogic\Pithline.FMS.VehicleInspection.UILogic.csproj", "{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection.UILogic", "Pithline.FMS.VehicleInspection.UILogic\Pithline.FMS.VehicleInspection.UILogic.csproj", "{76BE6C92-EBDD-45F0-89F1-8D32A2C816B2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{790AD967-F93D-402A-8857-E4C0B64D00E7} = {790AD967-F93D-402A-8857-E4C0B64D00E7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.BusinessLogic", "Eqstra.BusinessLogic\Pithline.FMS.BusinessLogic.csproj", "{790AD967-F93D-402A-8857-E4C0B64D00E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.BusinessLogic", "Pithline.FMS.BusinessLogic\Pithline.FMS.BusinessLogic.csproj", "{790AD967-F93D-402A-8857-E4C0B64D00E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.UILogic", "Eqstra.ServiceScheduling.UILogic\Pithline.FMS.ServiceScheduling.UILogic.csproj", "{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.UILogic", "Pithline.FMS.ServiceScheduling.UILogic\Pithline.FMS.ServiceScheduling.UILogic.csproj", "{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection.BackgroundTask", "Eqstra.VehicleInspection.BackgroundTask\Pithline.FMS.VehicleInspection.BackgroundTask.csproj", "{F71B8AC9-5305-402F-ADA8-C75FFE09EE24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.VehicleInspection.BackgroundTask", "Pithline.FMS.VehicleInspection.BackgroundTask\Pithline.FMS.VehicleInspection.BackgroundTask.csproj", "{F71B8AC9-5305-402F-ADA8-C75FFE09EE24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DocumentDelivery", "Eqstra.DocumentDelivery\Pithline.FMS.DocumentDelivery.csproj", "{E1946A10-CD58-4AC4-9EB9-83E84784111C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DocumentDelivery", "Pithline.FMS.DocumentDelivery\Pithline.FMS.DocumentDelivery.csproj", "{E1946A10-CD58-4AC4-9EB9-83E84784111C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A729BBB4-DBBB-46B0-9198-FB757B68AF3B} = {A729BBB4-DBBB-46B0-9198-FB757B68AF3B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DocumentDelivery.UILogic", "Eqstra.DocumentDelivery.UILogic\Pithline.FMS.DocumentDelivery.UILogic.csproj", "{A729BBB4-DBBB-46B0-9198-FB757B68AF3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DocumentDelivery.UILogic", "Pithline.FMS.DocumentDelivery.UILogic\Pithline.FMS.DocumentDelivery.UILogic.csproj", "{A729BBB4-DBBB-46B0-9198-FB757B68AF3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5E32160B-EFE3-4249-9EF0-4F3480F4F792}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,39 +35,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5E3216
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.Framework.Web", "Eqstra.Framework.Web\Pithline.FMS.Framework.Web.csproj", "{36A2BAD0-6B8F-41AF-97EE-83EF34B5D42C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.Framework.Web", "Pithline.FMS.Framework.Web\Pithline.FMS.Framework.Web.csproj", "{36A2BAD0-6B8F-41AF-97EE-83EF34B5D42C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DataProvider.AX", "Eqstra.DataProvider.AX\Pithline.FMS.DataProvider.AX.csproj", "{958D702A-E873-45C2-9CB1-E5FA35C98F6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.DataProvider.AX", "Pithline.FMS.DataProvider.AX\Pithline.FMS.DataProvider.AX.csproj", "{958D702A-E873-45C2-9CB1-E5FA35C98F6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqstra.CrossPlatform.API", "Eqstra.CrossPlatform.API\Eqstra.CrossPlatform.API.csproj", "{4AEFCB91-3790-4B81-A55B-646071D37268}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.CrossPlatform.API", "Pithline.FMS.CrossPlatform.API\Pithline.FMS.CrossPlatform.API.csproj", "{4AEFCB91-3790-4B81-A55B-646071D37268}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection", "Eqstra.TechnicalInspection\Pithline.FMS.TechnicalInspection.csproj", "{C0CECD78-6BC6-49E9-BD8A-3FCE5E600350}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection", "Pithline.FMS.TechnicalInspection\Pithline.FMS.TechnicalInspection.csproj", "{C0CECD78-6BC6-49E9-BD8A-3FCE5E600350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.Controls", "Eqstra.WinRT.Components.Controls\Pithline.FMS.WinRT.Components.Controls.csproj", "{567F62B5-9CDE-4241-8675-C92A3E9546A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.Controls", "Pithline.FMS.WinRT.Components.Controls\Pithline.FMS.WinRT.Components.Controls.csproj", "{567F62B5-9CDE-4241-8675-C92A3E9546A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.UILogic", "Eqstra.TechnicalInspection.UILogic\Pithline.FMS.TechnicalInspection.UILogic.csproj", "{181EECDC-99D9-433A-BA67-CE3821684C2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.UILogic", "Pithline.FMS.TechnicalInspection.UILogic\Pithline.FMS.TechnicalInspection.UILogic.csproj", "{181EECDC-99D9-433A-BA67-CE3821684C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.BusinessLogic.Portable", "Eqstra.BusinessLogic.Portable\Pithline.FMS.BusinessLogic.Portable.csproj", "{A9300E19-216B-413F-AECB-7E02D8FB22AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.BusinessLogic.Portable", "Pithline.FMS.BusinessLogic.Portable\Pithline.FMS.BusinessLogic.Portable.csproj", "{A9300E19-216B-413F-AECB-7E02D8FB22AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.UILogic.Portable", "Eqstra.ServiceScheduling.UILogic.Portable\Pithline.FMS.ServiceScheduling.UILogic.Portable.csproj", "{8BCC54E1-4586-4A35-9AC9-43E81540B05C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.UILogic.Portable", "Pithline.FMS.ServiceScheduling.UILogic.Portable\Pithline.FMS.ServiceScheduling.UILogic.Portable.csproj", "{8BCC54E1-4586-4A35-9AC9-43E81540B05C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling", "Eqstra.ServiceScheduling\Pithline.FMS.ServiceScheduling.csproj", "{1DCF6F96-5004-45F0-B422-302184AD60B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling", "Pithline.FMS.ServiceScheduling\Pithline.FMS.ServiceScheduling.csproj", "{1DCF6F96-5004-45F0-B422-302184AD60B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pithilne.FMS.ServiceScheduling", "Pithilne.FMS.ServiceScheduling", "{1B864322-C8D7-4523-B488-268354F61C09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.WindowsPhone", "Eqstra.ServiceScheduling.WindowsPhone\Pithline.FMS.ServiceScheduling.WindowsPhone.csproj", "{9F629F44-C762-4A11-BC3D-9D3B7DE926B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.ServiceScheduling.WindowsPhone", "Pithline.FMS.ServiceScheduling.WindowsPhone\Pithline.FMS.ServiceScheduling.WindowsPhone.csproj", "{9F629F44-C762-4A11-BC3D-9D3B7DE926B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.Controls.WindowsPhone", "Eqstra.WinRT.Components.Controls.WindowsPhone\Pithline.FMS.WinRT.Components.Controls.WindowsPhone.csproj", "{529B5041-022F-4445-A118-D64FBDBABFC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.Controls.WindowsPhone", "Pithline.FMS.WinRT.Components.Controls.WindowsPhone\Pithline.FMS.WinRT.Components.Controls.WindowsPhone.csproj", "{529B5041-022F-4445-A118-D64FBDBABFC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pithilne.FMS.TechnicalInspection", "Pithilne.FMS.TechnicalInspection", "{E1030AFC-D0B2-4C20-97F8-95077E02A952}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.WindowsPhone", "Eqstra.TechnicalInspection.WindowsPhone\Pithline.FMS.TechnicalInspection.WindowsPhone.csproj", "{1C542AE9-D6BD-480C-85F2-C6255F8BAD12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.WindowsPhone", "Pithline.FMS.TechnicalInspection.WindowsPhone\Pithline.FMS.TechnicalInspection.WindowsPhone.csproj", "{1C542AE9-D6BD-480C-85F2-C6255F8BAD12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone", "Eqstra.TechnicalInspection.UILogic.WindowsPhone\Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone.csproj", "{7A8A6A29-C647-4567-B8AC-EB97827B431D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone", "Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone\Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone.csproj", "{7A8A6A29-C647-4567-B8AC-EB97827B431D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.BackgroundTasks", "Eqstra.WinRT.Components.BackgroundTasks\Pithline.FMS.WinRT.Components.BackgroundTasks.csproj", "{A268D6E5-5A0C-46A7-9285-372CAF007EDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.BackgroundTasks", "Pithline.FMS.WinRT.Components.BackgroundTasks\Pithline.FMS.WinRT.Components.BackgroundTasks.csproj", "{A268D6E5-5A0C-46A7-9285-372CAF007EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.BackgroundTasks.WindowsPhone", "Eqstra.WinRT.Components.BackgroundTasks.WindowsPhone\Pithline.FMS.WinRT.Components.BackgroundTasks.WindowsPhone.csproj", "{44813026-7C80-4170-AF06-C71E2879E7C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pithline.FMS.WinRT.Components.BackgroundTasks.WindowsPhone", "Pithline.FMS.WinRT.Components.BackgroundTasks.WindowsPhone\Pithline.FMS.WinRT.Components.BackgroundTasks.WindowsPhone.csproj", "{44813026-7C80-4170-AF06-C71E2879E7C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
