@@ -9,8 +9,8 @@
     <ProjectGuid>{A729BBB4-DBBB-46B0-9198-FB757B68AF3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.DocumentDelivery.UILogic</RootNamespace>
-    <AssemblyName>Eqstra.DocumentDelivery.UILogic</AssemblyName>
+    <RootNamespace>Pithline.FMS.DocumentDelivery.UILogic</RootNamespace>
+    <AssemblyName>Pithline.FMS.DocumentDelivery.UILogic</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -161,37 +161,37 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCollectedFromResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCourierListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetCustomerInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetDriversResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCustomerDetailsResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentCustomerDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceInsertDocumentDriverCourierDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateDeliveryDetailsResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateDeliveryDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateStatusListResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DDServiceProxy\Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse.datasource">
+    <None Include="Service References\DDServiceProxy\Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DDServiceProxy\RoutingService1.wsdl" />

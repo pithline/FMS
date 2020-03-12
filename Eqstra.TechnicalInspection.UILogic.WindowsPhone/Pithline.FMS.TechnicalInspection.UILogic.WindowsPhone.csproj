@@ -9,8 +9,8 @@
     <ProjectGuid>{7A8A6A29-C647-4567-B8AC-EB97827B431D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.TechnicalInspection.UILogic.WindowsPhone</RootNamespace>
-    <AssemblyName>Eqstra.TechnicalInspection.UILogic.WindowsPhone</AssemblyName>
+    <RootNamespace>Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone</RootNamespace>
+    <AssemblyName>Pithline.FMS.TechnicalInspection.UILogic.WindowsPhone</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

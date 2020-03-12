@@ -7,8 +7,8 @@
     <ProjectGuid>{1C542AE9-D6BD-480C-85F2-C6255F8BAD12}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.TechnicalInspection.WindowsPhone</RootNamespace>
-    <AssemblyName>Eqstra.TechnicalInspection.WindowsPhone</AssemblyName>
+    <RootNamespace>Pithline.FMS.TechnicalInspection.WindowsPhone</RootNamespace>
+    <AssemblyName>Pithline.FMS.TechnicalInspection.WindowsPhone</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

@@ -7,8 +7,8 @@
     <ProjectGuid>{C0CECD78-6BC6-49E9-BD8A-3FCE5E600350}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.TechnicalInspection</RootNamespace>
-    <AssemblyName>Eqstra.TechnicalInspection</AssemblyName>
+    <RootNamespace>Pithline.FMS.TechnicalInspection</RootNamespace>
+    <AssemblyName>Pithline.FMS.TechnicalInspection</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

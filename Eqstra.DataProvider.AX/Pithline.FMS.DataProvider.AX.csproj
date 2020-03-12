@@ -7,8 +7,8 @@
     <ProjectGuid>{958D702A-E873-45C2-9CB1-E5FA35C98F6C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.DataProvider.AX</RootNamespace>
-    <AssemblyName>Eqstra.DataProvider.AX</AssemblyName>
+    <RootNamespace>Pithline.FMS.DataProvider.AX</RootNamespace>
+    <AssemblyName>Pithline.FMS.DataProvider.AX</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -137,127 +137,127 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkAccountContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkAccountContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkCityContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkCityContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkCountryRegionContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkCountryRegionContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkCountyContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkCountyContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkDriverContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkDriverContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkLocationTypeContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkLocationTypeContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkProvinceContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkProvinceContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkRegionContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkRegionContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceDetailsContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceDetailsContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchdTasksContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchdTasksContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCityListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCityListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCustomerAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCustomerAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetDriverAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetDriverAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetDriversResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetDriversResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetUserDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorsByClassResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendorsByClassResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceSaveImageResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceSaveImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceValidateUserResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkServiceSchedulingServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkValidateUserContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkValidateUserContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkVendorAccountContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkVendorAccountContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.DataProvider.AX.SSProxy.MzkZipCodeContract.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.DataProvider.AX.SSProxy.MzkZipCodeContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\RoutingService.wsdl" />
@@ -287,37 +287,37 @@
     <None Include="Service References\SSProxy\xppservice7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkCaseCategoryAuthorizationContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkCaseServiceAuthorizationContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionSaveImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalInspectionValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkTechnicalTasksContract.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkTechnicalTasksContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIProxy\Eqstra.DataProvider.AX.TIProxy.MzkValidateUserContract.datasource">
+    <None Include="Service References\TIProxy\Pithline.FMS.DataProvider.AX.TIProxy.MzkValidateUserContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TIProxy\RoutingService1.wsdl" />

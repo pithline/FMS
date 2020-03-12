@@ -7,8 +7,8 @@
     <ProjectGuid>{E1946A10-CD58-4AC4-9EB9-83E84784111C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.DocumentDelivery</RootNamespace>
-    <AssemblyName>Eqstra.DocumentDelivery</AssemblyName>
+    <RootNamespace>Pithline.FMS.DocumentDelivery</RootNamespace>
+    <AssemblyName>Pithline.FMS.DocumentDelivery</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

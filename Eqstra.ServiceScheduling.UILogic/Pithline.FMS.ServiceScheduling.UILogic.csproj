@@ -9,8 +9,8 @@
     <ProjectGuid>{4641B43D-AC24-4C3A-97E2-1DDE5950C0A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.ServiceScheduling.UILogic</RootNamespace>
-    <AssemblyName>Eqstra.ServiceScheduling.UILogic</AssemblyName>
+    <RootNamespace>Pithline.FMS.ServiceScheduling.UILogic</RootNamespace>
+    <AssemblyName>Pithline.FMS.ServiceScheduling.UILogic</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -160,88 +160,88 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCityListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCityListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCountryRegionListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomerAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomerAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetCustomersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriverAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriverAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriversResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetDriversResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetLocationTypeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetODOReadingDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetProvinceListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetRegionsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetServiceTypesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetSuburbListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetUserDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorAddressResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorByNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorBySelectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsByClassResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendorsByClassResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetVendSupplirerNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceGetZipcodeListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertSerDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertServiceDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceInsertVendDetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceSaveImageResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceSaveImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateConfirmationDatesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SSProxy\Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse.datasource">
+    <None Include="Service References\SSProxy\Pithline.FMS.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SSProxy\RoutingService1.wsdl" />

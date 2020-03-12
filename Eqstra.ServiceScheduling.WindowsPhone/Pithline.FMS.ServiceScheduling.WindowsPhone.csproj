@@ -7,8 +7,8 @@
     <ProjectGuid>{9F629F44-C762-4A11-BC3D-9D3B7DE926B6}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.ServiceScheduling</RootNamespace>
-    <AssemblyName>Eqstra.ServiceScheduling.WindowsPhone</AssemblyName>
+    <RootNamespace>Pithline.FMS.ServiceScheduling</RootNamespace>
+    <AssemblyName>Pithline.FMS.ServiceScheduling.WindowsPhone</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

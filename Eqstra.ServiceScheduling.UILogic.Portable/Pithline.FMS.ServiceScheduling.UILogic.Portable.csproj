@@ -8,8 +8,8 @@
     <ProjectGuid>{8BCC54E1-4586-4A35-9AC9-43E81540B05C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.ServiceScheduling.UILogic.Portable</RootNamespace>
-    <AssemblyName>Eqstra.ServiceScheduling.UILogic.Portable</AssemblyName>
+    <RootNamespace>Pithline.FMS.ServiceScheduling.UILogic.Portable</RootNamespace>
+    <AssemblyName>Pithline.FMS.ServiceScheduling.UILogic.Portable</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

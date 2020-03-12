@@ -7,8 +7,8 @@
     <ProjectGuid>{1DCF6F96-5004-45F0-B422-302184AD60B9}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.ServiceScheduling</RootNamespace>
-    <AssemblyName>Eqstra.ServiceScheduling</AssemblyName>
+    <RootNamespace>Pithline.FMS.ServiceScheduling</RootNamespace>
+    <AssemblyName>Pithline.FMS.ServiceScheduling</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

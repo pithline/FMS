@@ -9,8 +9,8 @@
     <ProjectGuid>{181EECDC-99D9-433A-BA67-CE3821684C2F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eqstra.TechnicalInspection.UILogic</RootNamespace>
-    <AssemblyName>Eqstra.TechnicalInspection.UILogic</AssemblyName>
+    <RootNamespace>Pithline.FMS.TechnicalInspection.UILogic</RootNamespace>
+    <AssemblyName>Pithline.FMS.TechnicalInspection.UILogic</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -180,25 +180,25 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetSubComponentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetTasksResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionGetUserDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionInsertTechnicalInspectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionSaveImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionUpdateStatusListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TIService\Eqstra.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse.datasource">
+    <None Include="Service References\TIService\Pithline.FMS.TechnicalInspection.UILogic.TIService.MzkTechnicalInspectionValidateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TIService\RoutingService.wsdl" />
