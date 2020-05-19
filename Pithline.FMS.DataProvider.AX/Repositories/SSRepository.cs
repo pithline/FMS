@@ -1,4 +1,4 @@
-﻿using Eqstra.DataProvider.AX.SSProxy;
+﻿using Pithline.FMS.DataProvider.AX.SSProxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +32,7 @@ namespace Eqstra.DataProvider.AX.Repositories
 
         }
 
-        public SSProxy.MzkServiceSchedulingServiceClient GetServiceClient()
+        public MzkServiceSchedulingServiceClient GetServiceClient()
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Eqstra.DataProvider.AX.Repositories
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-                client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
+                client = new MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "axbcsvc";
                 client.ClientCredentials.UserName.Password = "AXrocks100";
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;

@@ -1,7 +1,7 @@
 ﻿using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.ServiceSchedule;
-using Eqstra.ServiceScheduling.UILogic.SSProxy;
+using Pithline.FMS.ServiceScheduling.UILogic.SSProxy;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
     public class SSProxyHelper
     {
         private static readonly SSProxyHelper instance = new SSProxyHelper();
-        private Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient client;
+        private MzkServiceSchedulingServiceClient client;
         ConnectionProfile _connectionProfile;
         Action _syncExecute;
         private UserInfo _userInfo;
@@ -34,7 +34,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
                 return instance;
             }
         }
-        public Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient ConnectAsync(string userName, string password, string domain = "lfmd")
+        public MzkServiceSchedulingServiceClient ConnectAsync(string userName, string password, string domain = "lfmd")
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Eqstra.ServiceScheduling.UILogic.AifServices
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/SSService/xppservice.svchttp://SRFMLAXTEST01/MicrosoftDynamicsAXAif60/SSService/xppservice.svc
-                client = new Eqstra.ServiceScheduling.UILogic.SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress(" http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
+                client = new MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress(" http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;

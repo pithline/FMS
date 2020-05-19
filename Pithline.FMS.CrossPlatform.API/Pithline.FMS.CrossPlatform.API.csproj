@@ -23,6 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -246,11 +247,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eqstra.DataProvider.AX\Eqstra.DataProvider.AX.csproj">
+    <ProjectReference Include="..\Pithline.FMS.DataProvider.AX\Pithline.FMS.DataProvider.AX.csproj">
       <Project>{958d702a-e873-45c2-9cb1-e5fa35c98f6c}</Project>
       <Name>Eqstra.DataProvider.AX</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Eqstra.Framework.Web\Eqstra.Framework.Web.csproj">
+    <ProjectReference Include="..\Pithline.FMS.Framework.Web\Pithline.FMS.Framework.Web.csproj">
       <Project>{36a2bad0-6b8f-41af-97ee-83ef34b5d42c}</Project>
       <Name>Eqstra.Framework.Web</Name>
     </ProjectReference>

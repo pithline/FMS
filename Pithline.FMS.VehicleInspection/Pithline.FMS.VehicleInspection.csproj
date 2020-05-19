@@ -243,6 +243,7 @@
     <Content Include="Assets\details_image.png" />
     <Content Include="Assets\eqstra_badge_logo.scale-100.png" />
     <Content Include="Assets\eqstra_badge_logo.scale-140.png" />
+    <Content Include="Assets\Eqstra_headerlogo copy.png" />
     <Content Include="Assets\Eqstra_headerlogo.png" />
     <Content Include="Assets\grayBG.png" />
     <Content Include="Assets\license_disc.png" />
@@ -266,6 +267,7 @@
     <Content Include="Assets\truck_right.png" />
     <Content Include="Assets\user_profile.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\WideLogo.scale-100.png" />
     <Content Include="default.rd.xml" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <Content Include="ImageMeta\VI_Commercial_ImageMetadata.txt">

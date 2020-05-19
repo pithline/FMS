@@ -3,7 +3,7 @@ using Eqstra.BusinessLogic.DeliveryModel;
 using Eqstra.BusinessLogic.DocumentDelivery;
 using Eqstra.BusinessLogic.Enums;
 using Eqstra.BusinessLogic.Helpers;
-using Eqstra.DocumentDelivery.UILogic.DDServiceProxy;
+using Pithline.FMS.DocumentDelivery.UILogic.DDServiceProxy;
 using Eqstra.DocumentDelivery.UILogic.Helpers;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
@@ -24,7 +24,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
     public class DDServiceProxyHelper
     {
         private static readonly DDServiceProxyHelper instance = new DDServiceProxyHelper();
-        private Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient _client;
+        private MzkCollectDeliveryServiceClient _client;
         IEventAggregator _eventAggregator;
         ConnectionProfile _connectionProfile;
         Action _syncExecute;
@@ -36,7 +36,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
                 return instance;
             }
         }
-        public async System.Threading.Tasks.Task<Eqstra.DocumentDelivery.UILogic.DDServiceProxy.MzkCollectDeliveryServiceClient> ConnectAsync(string userName, string password, IEventAggregator eventAggregator, string domain = "lfmd")
+        public async System.Threading.Tasks.Task<MzkCollectDeliveryServiceClient> ConnectAsync(string userName, string password, IEventAggregator eventAggregator, string domain = "lfmd")
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Eqstra.DocumentDelivery.UILogic.AifServices
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://SRFMLAXTEST01/MicrosoftDynamicsAXAif60/CollectDeliveryService/xppservice.svc
-                _client = new DDServiceProxy.MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliverService/xppservice.svc"));
+                _client = new MzkCollectDeliveryServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/CollectDeliverService/xppservice.svc"));
                 _client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 _client.ClientCredentials.UserName.Password = password;
                 _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;

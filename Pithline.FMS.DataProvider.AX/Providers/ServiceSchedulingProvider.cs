@@ -1,6 +1,6 @@
 ﻿using Eqstra.DataProvider.AX.Helpers;
 using Eqstra.DataProvider.AX.SSModels;
-using Eqstra.DataProvider.AX.SSProxy;
+using Pithline.FMS.DataProvider.AX.SSProxy;
 using Eqstra.Framework.Web.DataAccess;
 using Newtonsoft.Json;
 using System;
@@ -17,7 +17,7 @@ namespace Eqstra.DataProvider.AX.Providers
     [DataProvider(Name = "ServiceScheduling")]
     public class ServiceSchedulingProvider : IDataProvider
     {
-        SSProxy.MzkServiceSchedulingServiceClient _client;
+        MzkServiceSchedulingServiceClient _client;
 
         public System.Collections.IList GetDataList(object[] criterias)
         {
@@ -158,7 +158,7 @@ namespace Eqstra.DataProvider.AX.Providers
             return GetServiceClient();
         }
 
-        private SSProxy.MzkServiceSchedulingServiceClient GetServiceClient()
+        private MzkServiceSchedulingServiceClient GetServiceClient()
         {
             try
             {
@@ -175,7 +175,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://SRFMLAXTEST01/MicrosoftDynamicsAXAif60/SSService/xppservice.svc
-                _client = new SSProxy.MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl"));
+                _client = new MzkServiceSchedulingServiceClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/SSService/xppservice.svc?wsdl"));
                 _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "erpsetup";
                 _client.ClientCredentials.UserName.Password = "AXrocks100";
                 _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
@@ -193,7 +193,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                return !_client.validateUser(new SSProxy.CallContext() { }, userId, password);
+                return !_client.validateUser(new CallContext() { }, userId, password);
             }
             catch (Exception)
             {
@@ -205,7 +205,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = _client.getUserDetails(new SSProxy.CallContext() { }, userId);
+                var result = _client.getUserDetails(new CallContext() { }, userId);
                 if (result != null)
                 {
                     return new UserInfo
@@ -229,7 +229,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getTasks(new SSProxy.CallContext() { }, userInfo.UserId, userInfo.CompanyId);
+                var result = _client.getTasks(new CallContext() { }, userInfo.UserId, userInfo.CompanyId);
                 List<Eqstra.DataProvider.AX.SSModels.Task> driverTaskList = new List<Eqstra.DataProvider.AX.SSModels.Task>();
                 if (result != null)
                 {
@@ -286,7 +286,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getCountryRegionList(new SSProxy.CallContext() { }, userInfo.CompanyId);
+                var result = _client.getCountryRegionList(new CallContext() { }, userInfo.CompanyId);
                 List<Country> countryList = new List<Country>();
                 if (result != null)
                 {
@@ -316,7 +316,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getProvinceList(new SSProxy.CallContext() { }, countryId, userInfo.CompanyId);
+                var result = _client.getProvinceList(new CallContext() { }, countryId, userInfo.CompanyId);
                 List<Province> provinceList = new List<Province>();
                 if (result != null)
                 {
@@ -338,7 +338,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getCityList(new SSProxy.CallContext() { }, countryId, stateId, userInfo.CompanyId);
+                var result = _client.getCityList(new CallContext() { }, countryId, stateId, userInfo.CompanyId);
                 List<City> cityList = new List<City>();
                 if (result != null)
                 {
@@ -360,7 +360,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getSuburbList(new SSProxy.CallContext() { }, countryId, stateId, userInfo.CompanyId);
+                var result = _client.getSuburbList(new CallContext() { }, countryId, stateId, userInfo.CompanyId);
                 List<Suburb> suburbList = new List<Suburb>();
                 if (result != null)
                 {
@@ -382,7 +382,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getRegions(new SSProxy.CallContext() { }, countryId, stateId, userInfo.CompanyId);
+                var result = _client.getRegions(new CallContext() { }, countryId, stateId, userInfo.CompanyId);
                 List<Region> regionList = new List<Region>();
                 if (result != null)
                 {
@@ -404,7 +404,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getZipcodeList(new SSProxy.CallContext() { }, countryId, stateId, userInfo.CompanyId);
+                var result = _client.getZipcodeList(new CallContext() { }, countryId, stateId, userInfo.CompanyId);
                 List<string> zipcodeList = new List<string>();
                 if (result != null)
                 {
@@ -426,7 +426,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.getServiceDetails(new SSProxy.CallContext() { }, caseNumber, caseServiceRecId, userInfo.CompanyId);
+                var result = _client.getServiceDetails(new CallContext() { }, caseNumber, caseServiceRecId, userInfo.CompanyId);
                 ServiceSchedulingDetail detailServiceScheduling = null;
                 if (result != null)
                 {
@@ -474,7 +474,7 @@ namespace Eqstra.DataProvider.AX.Providers
         private List<string> GetServiceTypes(string caseNumber, string companyId)
         {
 
-            var result = _client.getServiceTypes(new SSProxy.CallContext() { }, caseNumber, companyId);
+            var result = _client.getServiceTypes(new CallContext() { }, caseNumber, companyId);
             List<string> results = new List<string>();
             if (result.IndexOf("~") > 1)
             {
@@ -492,7 +492,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = _client.getLocationType(new SSProxy.CallContext() { }, serviceRecId, companyId);
+                var result = _client.getLocationType(new CallContext() { }, serviceRecId, companyId);
                 List<LocationType> locationTypes = new List<LocationType>();
                 if (result != null)
                 {
@@ -523,7 +523,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 List<DestinationType> destinationTypes = new List<DestinationType>();
                 if (callerKey.Contains("Customer"))
                 {
-                    var result = _client.getCustomers(new SSProxy.CallContext() { }, cusId, userInfo.CompanyId);
+                    var result = _client.getCustomers(new CallContext() { }, cusId, userInfo.CompanyId);
 
                     if (result != null)
                     {
@@ -545,7 +545,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 if (callerKey.Contains("Supplier") || callerKey.Contains("Vendor"))
                 {
-                    var result = _client.getVendSupplirerName(new SSProxy.CallContext() { }, userInfo.CompanyId);
+                    var result = _client.getVendSupplirerName(new CallContext() { }, userInfo.CompanyId);
 
                     if (result != null)
                     {
@@ -567,7 +567,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 if (callerKey.Contains("Driver"))
                 {
-                    var result = _client.getDrivers(new SSProxy.CallContext() { }, cusId, userInfo.CompanyId);
+                    var result = _client.getDrivers(new CallContext() { }, cusId, userInfo.CompanyId);
 
                     if (result != null)
                     {
@@ -600,7 +600,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.updateConfirmationDates(new SSProxy.CallContext() { }, caseServiceRecId, new MzkServiceDetailsContract
+                var result = _client.updateConfirmationDates(new CallContext() { }, caseServiceRecId, new MzkServiceDetailsContract
                 {
                     parmPreferredDateFirstOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption1),
                     parmPreferredDateSecondOption = DateTime.Parse(serviceSchedulingDetail.ServiceDateOption2)
@@ -657,7 +657,7 @@ namespace Eqstra.DataProvider.AX.Providers
                 }
                 var recID = serviceSchedulingDetail.SelectedDestinationType == null ? default(long) : serviceSchedulingDetail.SelectedDestinationType.RecID;
 
-                var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
+                var result = _client.insertServiceDetails(new CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, recID, mzkServiceDetailsContract
                       , mzkAddressContract, userInfo.CompanyId);
 
                 if (!string.IsNullOrEmpty(serviceSchedulingDetail.ODOReadingSnapshot))
@@ -685,7 +685,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = _client.getVendorByName(new SSProxy.CallContext() { }, countryName, cityName, userInfo.CompanyId);
+                var result = _client.getVendorByName(new CallContext() { }, countryName, cityName, userInfo.CompanyId);
 
                 List<Supplier> suppliers = new List<Supplier>();
 
@@ -725,7 +725,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
             try
             {
-                var result = _client.getVendorBySelection(new SSProxy.CallContext() { }, userInfo.CompanyId, countryId, provinceId, suburbId, cityId, regionId);
+                var result = _client.getVendorBySelection(new CallContext() { }, userInfo.CompanyId, countryId, provinceId, suburbId, cityId, regionId);
 
                 List<Supplier> suppliers = new List<Supplier>();
 
@@ -799,7 +799,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                _client.insertVendDet(new SSProxy.CallContext() { }, supplierSelection.CaseNumber, supplierSelection.CaseServiceRecID, default(long), new MzkServiceDetailsContract
+                _client.insertVendDet(new CallContext() { }, supplierSelection.CaseNumber, supplierSelection.CaseServiceRecID, default(long), new MzkServiceDetailsContract
                 {
                     parmContactPersonName = supplierSelection.SelectedSupplier.SupplierContactName,
                     parmSupplierName = supplierSelection.SelectedSupplier.SupplierName,
@@ -821,7 +821,7 @@ namespace Eqstra.DataProvider.AX.Providers
             try
             {
 
-                var result = _client.insertServiceDetails(new SSProxy.CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, default(long), new MzkServiceDetailsContract
+                var result = _client.insertServiceDetails(new CallContext() { }, serviceSchedulingDetail.CaseNumber, serviceSchedulingDetail.CaseServiceRecID, default(long), new MzkServiceDetailsContract
                 {
                     parmAdditionalWork = serviceSchedulingDetail.AdditionalWork,
                     parmAddress = serviceSchedulingDetail.Address,
@@ -875,7 +875,7 @@ namespace Eqstra.DataProvider.AX.Providers
                     parmStatusDueDate = DateTime.Parse(task.StatusDueDate),
                     parmEEPActionStep = actionStepMapping[task.Status]
                 });
-                var result = _client.updateStatusList(new SSProxy.CallContext() { }, mzkTasks.ToArray(), userInfo.CompanyId);
+                var result = _client.updateStatusList(new CallContext() { }, mzkTasks.ToArray(), userInfo.CompanyId);
 
                 return new CaseStatus { Status = result.FirstOrDefault().parmStatus };
 

@@ -4,7 +4,7 @@ using Eqstra.DataProvider.AX.TI;
 using Eqstra.DataProvider.AX.TIModels;
 using Eqstra.DataProvider.AX.TIModels.CVehicle;
 using Eqstra.DataProvider.AX.TIModels.PVehicle;
-using Eqstra.DataProvider.AX.TIProxy;
+using Pithline.FMS.DataProvider.AX.TIProxy;
 using Eqstra.Framework.Web.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Eqstra.DataProvider.AX.Providers
     public class TechnicalInspectionProvider : IDataProvider
     {
 
-        TIProxy.MzkTechnicalInspectionClient _client;
+        MzkTechnicalInspectionClient _client;
         public System.Collections.IList GetDataList(object[] criterias)
         {
             try
@@ -123,7 +123,7 @@ namespace Eqstra.DataProvider.AX.Providers
             return GetServiceClient();
         }
 
-        public TIProxy.MzkTechnicalInspectionClient GetServiceClient()
+        public MzkTechnicalInspectionClient GetServiceClient()
         {
             try
             {
@@ -140,7 +140,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
-                _client = new TIProxy.MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
+                _client = new MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
                 _client.ClientCredentials.UserName.UserName = "lfmd" + "\"" + "erpsetup";
                 _client.ClientCredentials.UserName.Password = "AXrocks100";
                 _client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Identification;
@@ -211,7 +211,7 @@ namespace Eqstra.DataProvider.AX.Providers
 
             try
             {
-                var result = await _client.validateUserAsync(new TIProxy.CallContext() { Company = "1000" }, userId, password);
+                var result = await _client.validateUserAsync(new CallContext() { Company = "1000" }, userId, password);
                 return result.response;
 
             }
@@ -228,7 +228,7 @@ namespace Eqstra.DataProvider.AX.Providers
         {
             try
             {
-                var result = _client.getUserDetails(new TIProxy.CallContext() { Company = "1000" }, userId);
+                var result = _client.getUserDetails(new CallContext() { Company = "1000" }, userId);
                 if (result != null)
                 {
                     return new UserInfo

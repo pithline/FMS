@@ -3,7 +3,7 @@ using Eqstra.BusinessLogic;
 using Eqstra.BusinessLogic.Base;
 using Eqstra.BusinessLogic.Helpers;
 using Eqstra.BusinessLogic.TI;
-using Eqstra.TechnicalInspection.UILogic.TIService;
+using Pithline.FMS.TechnicalInspection.UILogic.TIService;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Newtonsoft.Json;
 using System;
@@ -24,7 +24,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
     public class TIServiceHelper
     {
         private static readonly TIServiceHelper instance = new TIServiceHelper();
-        private TIService.MzkTechnicalInspectionClient client;
+        private MzkTechnicalInspectionClient client;
         ConnectionProfile _connectionProfile;
         IEventAggregator _eventAggregator;
         Action _syncExecute;
@@ -66,7 +66,7 @@ namespace Eqstra.TechnicalInspection.UILogic.AifServices
 
                 basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
                 basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;//http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc  http://srfmlaxtest01/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc
-                client = new TIService.MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
+                client = new MzkTechnicalInspectionClient(basicHttpBinding, new EndpointAddress("http://srfmlbispstg01.lfmd.co.za/MicrosoftDynamicsAXAif60/TechnicalInspection/xppservice.svc"));
                 client.ClientCredentials.UserName.UserName = domain + "\"" + userName;
                 client.ClientCredentials.UserName.Password = password;
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
